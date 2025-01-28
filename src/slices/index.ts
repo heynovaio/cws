@@ -3,10 +3,16 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  accordion: dynamic(() => import("./Accordion")),
   call_to_action: dynamic(() => import("./CallToAction")),
   image_text: dynamic(() => import("./ImageText")),
   logo_list: dynamic(() => import("./LogoList")),
+  menu_panel: dynamic(() => import("./MenuPanel")),
+  multi_link_column: dynamic(() => import("./MultiLinkColumn")),
   rich_text: dynamic(() => import("./RichText")),
   simple_text: dynamic(() => import("./SimpleText")),
+  single_link: dynamic(() => import("./SingleLink")),
+  team_list: dynamic(() => import("./TeamList")),
   testimonials: dynamic(() => import("./Testimonials")),
+  tile_grid: dynamic(() => import("./TileGrid")),
 };

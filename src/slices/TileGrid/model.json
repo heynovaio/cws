@@ -1,0 +1,344 @@
+{
+  "id": "tile_grid",
+  "type": "SharedSlice",
+  "name": "TileGrid",
+  "description": "TileGrid",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "White",
+              "Light",
+              "Dark"
+            ],
+            "default_value": "White"
+          }
+        },
+        "columns": {
+          "type": "Select",
+          "config": {
+            "label": "Columns",
+            "placeholder": "",
+            "options": [
+              "2",
+              "3",
+              "4"
+            ],
+            "default_value": "2"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2,heading3,heading4"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item,image"
+          }
+        },
+        "tiles": {
+          "type": "Group",
+          "config": {
+            "label": "Tiles",
+            "repeat": true,
+            "fields": {
+              "tile_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Tile Icon",
+                  "constraint": {
+                    "width": 800,
+                    "height": 800
+                  },
+                  "thumbnails": []
+                }
+              },
+              "tile_title": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Tile Title",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading2,heading3,heading4"
+                }
+              },
+              "tile_body": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Tile Body",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "strong,em,paragraph,image,list-item,o-list-item,hyperlink"
+                }
+              },
+              "tile_button": {
+                "type": "Link",
+                "config": {
+                  "label": "Tile Button",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
+                }
+              }
+            }
+          }
+        },
+        "button": {
+          "type": "Link",
+          "config": {
+            "label": "Button",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "iconTile",
+      "name": "IconTile",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "White",
+              "Light",
+              "Dark"
+            ],
+            "default_value": "White"
+          }
+        },
+        "columns": {
+          "type": "Select",
+          "config": {
+            "label": "Columns",
+            "placeholder": "",
+            "options": [
+              "2",
+              "3",
+              "4"
+            ],
+            "default_value": "2"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2,heading3,heading4"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item,image"
+          }
+        },
+        "tiles": {
+          "type": "Group",
+          "config": {
+            "label": "Tiles",
+            "repeat": true,
+            "fields": {
+              "tile_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Tile Icon",
+                  "constraint": {
+                    "width": 800,
+                    "height": 800
+                  },
+                  "thumbnails": []
+                }
+              },
+              "tile_title": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Tile Title",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading2,heading3,heading4"
+                }
+              },
+              "tile_button": {
+                "type": "Link",
+                "config": {
+                  "label": "Tile Button",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
+                }
+              }
+            }
+          }
+        },
+        "button": {
+          "type": "Link",
+          "config": {
+            "label": "Button",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "imageTile",
+      "name": "ImageTile",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "White",
+              "Light",
+              "Dark"
+            ],
+            "default_value": "White"
+          }
+        },
+        "columns": {
+          "type": "Select",
+          "config": {
+            "label": "Columns",
+            "placeholder": "",
+            "options": [
+              "2",
+              "3",
+              "4"
+            ],
+            "default_value": "2"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2,heading3,heading4"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item,image"
+          }
+        },
+        "tiles": {
+          "type": "Group",
+          "config": {
+            "label": "Tiles",
+            "repeat": true,
+            "fields": {
+              "tile_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Tile Icon",
+                  "constraint": {
+                    "width": 800,
+                    "height": 800
+                  },
+                  "thumbnails": []
+                }
+              },
+              "tile_title": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Tile Title",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading2,heading3,heading4"
+                }
+              },
+              "tile_body": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Tile Body",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "strong,em,paragraph,image,list-item,o-list-item,hyperlink"
+                }
+              },
+              "tile_button": {
+                "type": "Link",
+                "config": {
+                  "label": "Tile Button",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
+                }
+              }
+            }
+          }
+        },
+        "button": {
+          "type": "Link",
+          "config": {
+            "label": "Button",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

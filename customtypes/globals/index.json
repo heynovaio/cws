@@ -1,0 +1,59 @@
+{
+  "format": "custom",
+  "id": "globals",
+  "label": "Globals",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "site_logo": {
+        "type": "Image",
+        "config": {
+          "label": "Site Logo",
+          "constraint": {
+            "width": 1200,
+            "height": 1200
+          },
+          "thumbnails": []
+        }
+      },
+      "site_title": {
+        "type": "Text",
+        "config": {
+          "label": "Site Title",
+          "placeholder": ""
+        }
+      }
+    },
+    "Contact": {
+      "address": {
+        "type": "Text",
+        "config": {
+          "label": "Address",
+          "placeholder": ""
+        }
+      },
+      "email": {
+        "type": "Text",
+        "config": {
+          "label": "Email",
+          "placeholder": ""
+        }
+      },
+      "phone": {
+        "type": "Text",
+        "config": {
+          "label": "Phone",
+          "placeholder": ""
+        }
+      },
+      "fax_number": {
+        "type": "Text",
+        "config": {
+          "label": "Fax Number",
+          "placeholder": ""
+        }
+      }
+    }
+  }
+}
