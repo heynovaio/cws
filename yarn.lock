@@ -407,7 +407,7 @@
     tslib "^2.5.0"
     uuid "^9.0.0"
 
-"@prismicio/client@^7.1.0", "@prismicio/client@^7.11.0", "@prismicio/client@^7.13.1":
+"@prismicio/client@^7.1.0", "@prismicio/client@^7.11.0", "@prismicio/client@^7.15.1":
   version "7.15.1"
   resolved "https://registry.yarnpkg.com/@prismicio/client/-/client-7.15.1.tgz#ea7d125b47d215c6ccb42cc8e4ec13451a064df1"
   integrity sha512-GjOMRxoXm4zux9NolcCQJITwhj5nsWZz+bewO7zA2g1wdAM8rgAPlr0T0+bC/CcXnhznBF/gdfpGOXiHsjJ1WQ==
@@ -575,7 +575,7 @@
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
-"@slicemachine/adapter-next@^0.3.61":
+"@slicemachine/adapter-next@^0.3.65":
   version "0.3.65"
   resolved "https://registry.yarnpkg.com/@slicemachine/adapter-next/-/adapter-next-0.3.65.tgz#931b60bf2f5062416639997c2343d5311b4c34c8"
   integrity sha512-m5CuIu+Bi7YWJv0B85AwTqucwA20pGX37PXakfVK5LiEjePatmzOtQ1Ydnr+aTUGT4jaDOeUEpdzEE6B6aRwIg==
@@ -3959,7 +3959,7 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-slice-machine-ui@^2.11.1:
+slice-machine-ui@^2.12.2:
   version "2.12.2"
   resolved "https://registry.yarnpkg.com/slice-machine-ui/-/slice-machine-ui-2.12.2.tgz#3866903dc6649b8d42e9de2d2dfb09a7735f08fe"
   integrity sha512-mfAv4pwGqQatyrBkoCo6Eyu9ldl+2MiCNUFyDTWLkNOVxKj3PRblM1N1GnrpNVEqRMspRPwIOorREUZDGYiSGA==
