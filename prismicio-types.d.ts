@@ -1109,7 +1109,7 @@ export interface MenuPanelSliceDefaultPrimaryLinkGroupItem {
  */
 export interface MenuPanelSliceDefaultPrimaryLinkWithParagraphItem {
   /**
-   * Link field in *MenuPanel → Default → Primary → Link with Paragraph*
+   * Link Title field in *MenuPanel → Default → Primary → Link with Paragraph*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -1134,14 +1134,14 @@ export interface MenuPanelSliceDefaultPrimaryLinkWithParagraphItem {
  */
 export interface MenuPanelSliceMenuPanelAccordionPrimaryAccordionItem {
   /**
-   * Title field in *MenuPanel → MenuPanel - Accordion → Primary → Accordion*
+   * Menu Panel Title field in *MenuPanel → MenuPanel - Accordion → Primary → Accordion*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.Accordion[].title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.Accordion[].menu_panel_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  title: prismic.RichTextField;
+  menu_panel_title: prismic.KeyTextField;
 
   /**
    * Body field in *MenuPanel → MenuPanel - Accordion → Primary → Accordion*

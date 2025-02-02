@@ -84,7 +84,7 @@
               "link": {
                 "type": "Link",
                 "config": {
-                  "label": "Link",
+                  "label": "Link Title",
                   "placeholder": "",
                   "select": null,
                   "allowTargetBlank": true,
@@ -137,13 +137,11 @@
             "label": "Accordion",
             "repeat": true,
             "fields": {
-              "title": {
-                "type": "StructuredText",
+              "menu_panel_title": {
+                "type": "Text",
                 "config": {
-                  "label": "Title",
-                  "placeholder": "",
-                  "allowTargetBlank": true,
-                  "multi": "heading2,heading3,heading4,heading6,heading5"
+                  "label": "Menu Panel Title",
+                  "placeholder": ""
                 }
               },
               "body": {

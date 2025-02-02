@@ -76,12 +76,12 @@
 							[
 								"link",
 								{
-									"key": "9dad6f26-55b6-4397-bf58-1e9efead7443",
+									"key": "09686eb0-1f92-422e-8762-00ddd2bf7215",
 									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "ExternalLink",
 										"url": "https://prismic.io",
-										"text": "upward"
+										"text": "sea"
 									}
 								}
 							],
@@ -137,20 +137,6 @@
 						"__TYPE__": "GroupItemContent",
 						"value": [
 							[
-								"title",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "heading2",
-											"content": {
-												"text": "Queen"
-											}
-										}
-									]
-								}
-							],
-							[
 								"link",
 								{
 									"__TYPE__": "RepeatableContent",
@@ -198,6 +184,14 @@
 											}
 										}
 									]
+								}
+							],
+							[
+								"menu_panel_title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "vowel",
+									"type": "Text"
 								}
 							]
 						]
