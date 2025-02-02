@@ -1183,6 +1183,16 @@ export interface MenuPanelSliceMenuPanelAccordionPrimaryAccordionItem {
  */
 export interface MenuPanelSliceDefaultPrimary {
   /**
+   * Menu Display field in *MenuPanel → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menu_panel.default.primary.menu_display
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  menu_display: prismic.KeyTextField;
+
+  /**
    * Title field in *MenuPanel → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -1201,18 +1211,6 @@ export interface MenuPanelSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   body: prismic.RichTextField;
-
-  /**
-   * Button field in *MenuPanel → Default → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.default.primary.button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
 
   /**
    * Columns field in *MenuPanel → Default → Primary*
@@ -1267,6 +1265,16 @@ export type MenuPanelSliceDefault = prismic.SharedSliceVariation<
  * Primary content in *MenuPanel → MenuPanel - Accordion → Primary*
  */
 export interface MenuPanelSliceMenuPanelAccordionPrimary {
+  /**
+   * Menu_Display field in *MenuPanel → MenuPanel - Accordion → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.menu_display
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  menu_display: prismic.KeyTextField;
+
   /**
    * Title field in *MenuPanel → MenuPanel - Accordion → Primary*
    *

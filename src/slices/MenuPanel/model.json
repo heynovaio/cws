@@ -12,6 +12,13 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "menu_display": {
+          "type": "Text",
+          "config": {
+            "label": "Menu Display",
+            "placeholder": ""
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -28,17 +35,6 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "button": {
-          "type": "Link",
-          "config": {
-            "label": "Button",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": true
           }
         },
         "columns": {
@@ -119,6 +115,13 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "menu_display": {
+          "type": "Text",
+          "config": {
+            "label": "Menu_Display",
+            "placeholder": ""
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {
