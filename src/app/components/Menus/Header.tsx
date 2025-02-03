@@ -1,6 +1,6 @@
 "use client";
 import { components } from "@/slices";
-import { ImageField, PrismicDocument } from "@prismicio/client";
+import { ImageField } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { SliceZone } from "@prismicio/react";
 import React, { Fragment } from "react";
@@ -16,7 +16,7 @@ import { HiBars3 } from "react-icons/hi2";
 interface HeaderProps {
   logo: ImageField;
   slices: MenusDocumentDataSlicesSlice[];
-  locales?: (PrismicDocument<Record<string, string>, string, string> & { lang_name: string; })[];
+  locales?: unknown;
 }
 
 // TODO: Change the menu colors and add from themeing file

@@ -15,10 +15,11 @@ import { Layout } from "./components";
  */
 
 export async function generateMetadata({
-  params: { lang },
+  params,
 }: {
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
+  const { lang } = await params;
   const client = createClient();
   const page = await client
     .getByUID("page", "home", { lang })
@@ -42,10 +43,11 @@ export async function generateMetadata({
 }
 
 export default async function Page({
-  params: { lang },
+  params,
 }: {
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
+  const { lang } = await params;
   const client = createClient();
 
   const page = await client.getByUID("page", "home", { lang });
