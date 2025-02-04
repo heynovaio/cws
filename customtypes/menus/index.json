@@ -1,0 +1,91 @@
+{
+  "format": "custom",
+  "id": "menus",
+  "label": "Menus",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Header": {
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "single_link": {
+              "type": "SharedSlice"
+            },
+            "menu_panel": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "Footer": {
+      "policy_link": {
+        "type": "Link",
+        "config": {
+          "label": "Policy Link",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true
+        }
+      },
+      "partner_links": {
+        "type": "Group",
+        "config": {
+          "label": "Partner Links",
+          "repeat": true,
+          "fields": {
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Link",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": true
+              }
+            },
+            "image": {
+              "type": "Image",
+              "config": {
+                "label": "Image",
+                "constraint": {
+                  "width": 800,
+                  "height": 800
+                },
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      },
+      "slices1": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "multi_link_column": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "Announcement": {
+      "banner_text": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Banner Text",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink,preformatted"
+        }
+      }
+    }
+  }
+}
