@@ -1,5 +1,10 @@
 import { PrismicPreview } from "@prismicio/next";
 import { repositoryName } from "@/prismicio";
+import { Outfit } from 'next/font/google'
+const outfit = Outfit ({
+  variable: '--font-outfit',
+  subsets: ['latin'],
+})
 import "./globals.css";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
@@ -9,10 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        {/* TODO: Add custom fonts */}
-      </head>
+    <html lang="en" className={`${outfit.variable} font-sans`}>
+      <head></head>
       <body>
         <ReactQueryProvider>{children}</ReactQueryProvider>
         <PrismicPreview repositoryName={repositoryName} />
