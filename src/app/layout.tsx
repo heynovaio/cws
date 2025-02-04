@@ -3,6 +3,7 @@ import { repositoryName } from "@/prismicio";
 import { Outfit } from 'next/font/google'
 const outfit = Outfit ({
   variable: '--font-outfit',
+  subsets: ['latin'],
 })
 import "./globals.css";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";

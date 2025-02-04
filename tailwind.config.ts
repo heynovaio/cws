@@ -22,6 +22,10 @@ export default {
     colors: {
       primary: colors.ultraPink,
       secondary: colors.neonViolet,
+      transparent: 'transparent',
+      current: 'currentColor',
+      dark: colors.midnight,
+
       'white': '#FFFFFF',
       'dove-grey': '#6D00FF',
       'ultra-pink': '#FF005C',
@@ -33,6 +37,7 @@ export default {
     fontWeight: {
       normal: "400",
       medium: "500",
+      bold: "600",
     },
     fontSize: {
       base: "1em",
@@ -40,6 +45,7 @@ export default {
       h2: "2.8rem",
       h3: "2.25rem",
       h4: "1.375rem",
+      button: '1.1em',
     },
     extend: {},
   },
