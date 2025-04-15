@@ -69,6 +69,9 @@ export default {
       backdropBlur: {
         DEFAULT: "8px",
       },
+      maxWidth: {
+        content: "700px",
+      },
     },
   },
   plugins: [],
