@@ -59,7 +59,17 @@ export default {
       p: "1.5",
     },
 
-    extend: {},
+    extend: {
+      borderRadius: {
+        DEFAULT: "1.25rem",
+      },
+      boxShadow: {
+        DEFAULT: "0px 0px 30px 0px rgba(99, 15, 249, 0.60)",
+      },
+      backdropBlur: {
+        DEFAULT: "8px",
+      },
+    },
   },
   plugins: [],
 } satisfies Config;

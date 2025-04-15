@@ -29,6 +29,12 @@
       @apply text-ultra-pink;
     }
   }
+  ul {
+    @apply list-disc pl-6 space-y-2 text-bodyLarge;
+  }
+  ol {
+    @apply list-decimal pl-6 space-y-2 text-bodyLarge;
+  }
   .btn {
     @apply inline-block
       rounded-full 
@@ -87,6 +93,19 @@
 }
 
 @layer utilities {
+  img {
+    @apply rounded;
+  }
+  .backdrop-blur-default {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .card-white {
+    @apply bg-white text-midnight p-6 rounded shadow;
+  }
+  .card-gradient {
+    @apply bg-gradient-primary text-white p-6 rounded shadow backdrop-blur;
+  }
   .card-overlay {
     @apply border-2
     border-ultra-pink
