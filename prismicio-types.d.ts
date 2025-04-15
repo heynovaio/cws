@@ -257,6 +257,108 @@ interface MenusDocumentData {
 export type MenusDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenusDocumentData>, "menus", Lang>;
 
+/**
+ * Item in *Offerings Category → Keywords*
+ */
+export interface OfferingsCategoryDocumentDataKeywordsItem {
+  /**
+   * Keyword field in *Offerings Category → Keywords*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: offerings_category.keywords[].keyword
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  keyword: prismic.KeyTextField;
+}
+
+/**
+ * Content for Offerings Category documents
+ */
+interface OfferingsCategoryDocumentData {
+  /**
+   * Icon field in *Offerings Category*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: offerings_category.icon
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Name field in *Offerings Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: offerings_category.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Body field in *Offerings Category*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: offerings_category.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField /**
+   * Title field in *Offerings Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: offerings_category.title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Offerings Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: offerings_category.description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Keywords field in *Offerings Category*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: offerings_category.keywords[]
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  keywords: prismic.GroupField<
+    Simplify<OfferingsCategoryDocumentDataKeywordsItem>
+  >;
+}
+
+/**
+ * Offerings Category document from Prismic
+ *
+ * - **API ID**: `offerings_category`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type OfferingsCategoryDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<OfferingsCategoryDocumentData>,
+    "offerings_category",
+    Lang
+  >;
+
 type PageDocumentDataSlicesSlice =
   | AccordionSlice
   | LogoListSlice
@@ -383,6 +485,173 @@ interface PageDocumentData {
  */
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
+
+/**
+ * Item in *Resource Category → Keywords*
+ */
+export interface ResourceCategoryDocumentDataKeywordsItem {
+  /**
+   * Keyword field in *Resource Category → Keywords*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_category.keywords[].keyword
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  keyword: prismic.KeyTextField;
+}
+
+/**
+ * Content for Resource Category documents
+ */
+interface ResourceCategoryDocumentData {
+  /**
+   * Icon field in *Resource Category*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_category.icon
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Name field in *Resource Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_category.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Body field in *Resource Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_category.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  body: prismic.KeyTextField /**
+   * Title field in *Resource Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_category.title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Resource Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_category.description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Keywords field in *Resource Category*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_category.keywords[]
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  keywords: prismic.GroupField<
+    Simplify<ResourceCategoryDocumentDataKeywordsItem>
+  >;
+}
+
+/**
+ * Resource Category document from Prismic
+ *
+ * - **API ID**: `resource_category`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ResourceCategoryDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ResourceCategoryDocumentData>,
+    "resource_category",
+    Lang
+  >;
+
+type ResourcePageDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Resource Page documents
+ */
+interface ResourcePageDocumentData {
+  /**
+   * Slice Zone field in *Resource Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ResourcePageDocumentDataSlicesSlice> /**
+   * Meta Title field in *Resource Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: resource_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Resource Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: resource_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Resource Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Resource Page document from Prismic
+ *
+ * - **API ID**: `resource_page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ResourcePageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ResourcePageDocumentData>,
+    "resource_page",
+    Lang
+  >;
 
 type TeamMembersDocumentDataSlicesSlice = never;
 
@@ -511,7 +780,10 @@ export type AllDocumentTypes =
   | ContactPageDocument
   | GlobalsDocument
   | MenusDocument
+  | OfferingsCategoryDocument
   | PageDocument
+  | ResourceCategoryDocument
+  | ResourcePageDocument
   | TeamMembersDocument;
 
 /**
@@ -1644,6 +1916,179 @@ export type SingleLinkSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+ */
+export interface TabbedCarouselSliceDefaultPrimaryTabItem {
+  /**
+   * Tab Label field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].tab_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tab_label: prismic.KeyTextField;
+
+  /**
+   * Card Title field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].card_title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_title: prismic.RichTextField;
+
+  /**
+   * Card Description field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].card_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_description: prismic.RichTextField;
+
+  /**
+   * Card Image field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].card_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  card_image: prismic.ImageField<never>;
+
+  /**
+   * Card Link field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].card_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Audio Media (Optional) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].audio_media
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  audio_media: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
+   * Audio Media Alt Text (Optional) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].audio_media_alt_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  audio_media_alt_text: prismic.KeyTextField;
+
+  /**
+   * Image Media (Campaign Variant) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].image_media
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_media: prismic.ImageField<never>;
+
+  /**
+   * Rich Text (Campaign Variant) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].rich_text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  rich_text: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *TabbedCarousel → TabbedCarousel → Primary*
+ */
+export interface TabbedCarouselSliceDefaultPrimary {
+  /**
+   * TItle field in *TabbedCarousel → TabbedCarousel → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *TabbedCarousel → TabbedCarousel → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Variant field in *TabbedCarousel → TabbedCarousel → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Short Card
+   * - **API ID Path**: tabbed_carousel.default.primary.variant
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  variant: prismic.SelectField<"Short Card" | "Campaign Card", "filled">;
+
+  /**
+   * Tab field in *TabbedCarousel → TabbedCarousel → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tab: prismic.GroupField<Simplify<TabbedCarouselSliceDefaultPrimaryTabItem>>;
+}
+
+/**
+ * TabbedCarousel variation for TabbedCarousel Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabbedCarouselSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TabbedCarouselSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TabbedCarousel*
+ */
+type TabbedCarouselSliceVariation = TabbedCarouselSliceDefault;
+
+/**
+ * TabbedCarousel Shared Slice
+ *
+ * - **API ID**: `tabbed_carousel`
+ * - **Description**: TabbedCarousel
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabbedCarouselSlice = prismic.SharedSlice<
+  "tabbed_carousel",
+  TabbedCarouselSliceVariation
+>;
+
+/**
  * Item in *TeamList → Default → Primary → Team Member*
  */
 export interface TeamListSliceDefaultPrimaryTeamMemberItem {
@@ -2282,9 +2727,18 @@ declare module "@prismicio/client" {
       MenusDocumentDataSlicesSlice,
       MenusDocumentDataPartnerLinksItem,
       MenusDocumentDataSlices1Slice,
+      OfferingsCategoryDocument,
+      OfferingsCategoryDocumentData,
+      OfferingsCategoryDocumentDataKeywordsItem,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
+      ResourceCategoryDocument,
+      ResourceCategoryDocumentData,
+      ResourceCategoryDocumentDataKeywordsItem,
+      ResourcePageDocument,
+      ResourcePageDocumentData,
+      ResourcePageDocumentDataSlicesSlice,
       TeamMembersDocument,
       TeamMembersDocumentData,
       TeamMembersDocumentDataSlicesSlice,
@@ -2338,6 +2792,11 @@ declare module "@prismicio/client" {
       SingleLinkSliceVariation,
       SingleLinkSliceDefault,
       SingleLinkSliceSingleLinkButtonIcon,
+      TabbedCarouselSlice,
+      TabbedCarouselSliceDefaultPrimaryTabItem,
+      TabbedCarouselSliceDefaultPrimary,
+      TabbedCarouselSliceVariation,
+      TabbedCarouselSliceDefault,
       TeamListSlice,
       TeamListSliceDefaultPrimaryTeamMemberItem,
       TeamListSliceDefaultPrimary,

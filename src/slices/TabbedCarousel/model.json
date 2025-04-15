@@ -1,0 +1,137 @@
+{
+  "id": "tabbed_carousel",
+  "type": "SharedSlice",
+  "name": "TabbedCarousel",
+  "description": "TabbedCarousel",
+  "variations": [
+    {
+      "id": "default",
+      "name": "TabbedCarousel",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "TItle",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2,heading3,heading4,heading5,heading6"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,image,embed"
+          }
+        },
+        "variant": {
+          "type": "Select",
+          "config": {
+            "label": "Variant",
+            "placeholder": "",
+            "options": [
+              "Short Card",
+              "Campaign Card"
+            ],
+            "default_value": "Short Card"
+          }
+        },
+        "tab": {
+          "type": "Group",
+          "config": {
+            "label": "Tab",
+            "repeat": true,
+            "fields": {
+              "tab_label": {
+                "type": "Text",
+                "config": {
+                  "label": "Tab Label",
+                  "placeholder": ""
+                }
+              },
+              "card_title": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Card Title",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading2,heading3,heading4,heading5,heading6"
+                }
+              },
+              "card_description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Card Description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "card_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Card Image",
+                  "constraint": {
+                    "width": null
+                  },
+                  "thumbnails": []
+                }
+              },
+              "card_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Card Link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
+                }
+              },
+              "audio_media": {
+                "type": "Link",
+                "config": {
+                  "label": "Audio Media (Optional)",
+                  "placeholder": "",
+                  "select": "media",
+                  "allowText": true
+                }
+              },
+              "audio_media_alt_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Audio Media Alt Text (Optional)",
+                  "placeholder": ""
+                }
+              },
+              "image_media": {
+                "type": "Image",
+                "config": {
+                  "label": "Image Media (Campaign Variant)",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "rich_text": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Rich Text (Campaign Variant)",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
