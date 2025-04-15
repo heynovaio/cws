@@ -3,87 +3,84 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-      @apply text-midnight bg-white 
-      /* dark:text-white dark:bg-midnight */
-      ;
-    }
-    .btn {
-      @apply 
-      inline-block
+  body {
+    @apply text-white bg-navy-background font-body 
+      /* dark:text-white dark:bg-midnight */;
+  }
+  h1 {
+    @apply font-title md:text-h1 font-extraBold;
+  }
+  h2 {
+    @apply font-title md:text-h2 font-extraBold;
+  }
+  h3 {
+    @apply font-title md:text-h3 font-extraBold;
+  }
+  p {
+    @apply text-bodyLarge font-body;
+  }
+  .btn {
+    @apply inline-block
       rounded-full 
       leading-none
       text-button	
       font-bold
       px-8 py-4
       border-[3px]
-      relative
-      ;
-    }
-    
-    .btn-primary {
-      @apply 
-      text-white
+      relative;
+  }
+
+  .btn-primary {
+    @apply text-white
       bg-neon-violet
-      border-neon-violet
-      ;
-      &:hover {
-        @apply 
-        bg-midnight
-        border-midnight
-        ;
-      }
-      &:active, &:focus {
-        @apply 
-        border-ultra-pink
-        outline-0
-        bg-neon-violet
-        ;
-      }
+      border-neon-violet;
+    &:hover {
+      @apply bg-midnight
+        border-midnight;
     }
-    .btn-outline {
-      @apply
-        bg-transparent
-        border-ultra-pink
-      ;
-      &:hover {
-        @apply 
-        border-aqua
-        ;
-      }
-      &:active, &:focus {
-        @apply 
-        border-ultra-pink
+    &:active,
+    &:focus {
+      @apply border-ultra-pink
         outline-0
-        ;
-      }
+        bg-neon-violet;
     }
-    .btn-text {
-      @apply
-      text-midnight
+  }
+  .btn-outline {
+    @apply bg-transparent
+        border-ultra-pink;
+    &:hover {
+      @apply border-aqua;
+    }
+    &:active,
+    &:focus {
+      @apply border-ultra-pink
+        outline-0;
+    }
+  }
+  .btn-text {
+    @apply text-midnight
       border-0
-      p-0
-      ;
-    }
+      p-0;
+  }
 }
 
 @layer utilities {
   .card-overlay {
-    @apply
-    border-2
+    @apply border-2
     border-ultra-pink
-    relative
-    ;
+    relative;
     &::after {
-      @apply 
-      absolute
-      top-0 bottom-0 left-0 right-0
-      ;
-      content: '';
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(3, 0, 233, 0.5) 61.5%);
+      @apply absolute
+      top-0 bottom-0 left-0 right-0;
+      content: "";
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(3, 0, 233, 0.5) 61.5%
+      );
     }
   }
   .bg-gradient-primary {
-    background: linear-gradient(90deg, #3802A7 0%, #3C1253 98.73%);
-  }  
+    background: linear-gradient(90deg, #3802a7 0%, #3c1253 98.73%);
+  }
 }
