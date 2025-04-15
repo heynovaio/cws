@@ -4,34 +4,37 @@
 
 @layer base {
   body {
-    @apply text-white bg-navy-background font-body 
-      /* dark:text-white dark:bg-midnight */;
+    @apply text-white bg-navy-background font-body;
+
+    /* dark:text-white dark:bg-midnight */
   }
   h1 {
-    @apply font-title md:text-h1 font-extraBold;
+    @apply font-title md:text-h1 font-extraBold leading-h1;
   }
   h2 {
-    @apply font-title md:text-h2 font-extraBold;
+    @apply font-title md:text-h2 font-extraBold leading-h2;
   }
   h3 {
-    @apply font-title md:text-h3 font-extraBold;
+    @apply font-title md:text-h3 font-extraBold leading-h3;
   }
   h4 {
-    @apply font-title md:text-h4 font-extraBold;
+    @apply font-title md:text-h4 font-bold leading-h4;
   }
   p {
     @apply text-bodyLarge font-body;
   }
   a {
     @apply underline text-bodyLarge;
+    &:hover {
+      @apply text-ultra-pink;
+    }
   }
   .btn {
     @apply inline-block
       rounded-full 
-      leading-none
       text-button	
       font-bold
-      px-8 py-4
+      px-8 py-2
       border-[3px]
       no-underline
       relative;
@@ -42,14 +45,26 @@
       bg-neon-violet
       border-neon-violet;
     &:hover {
-      @apply bg-midnight
-        border-midnight;
+      @apply bg-neon-violet/80 border-neon-violet/80 text-white;
     }
     &:active,
     &:focus {
-      @apply border-ultra-pink
-        outline-0
-        bg-neon-violet;
+      @apply border-aqua
+      outline-0;
+    }
+  }
+  .btn-secondary {
+    @apply text-white
+      bg-ultra-pink
+      border-ultra-pink;
+    &:hover {
+      @apply bg-ultra-pink/80 text-white
+        border-ultra-pink;
+    }
+    &:active,
+    &:focus {
+      @apply border-aqua
+        outline-0;
     }
   }
   .btn-outline {
