@@ -1,14 +1,15 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
+import { JSX } from "react";
 
 /**
  * Props for `MenuPanel`.
  */
 export type MenuPanelProps = SliceComponentProps<Content.MenuPanelSlice>;
-
 /**
  * Component for "MenuPanel" Slices.
  */
+
 const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
   return (
     <section
@@ -19,5 +20,4 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
     </section>
   );
 };
-
 export default MenuPanel;

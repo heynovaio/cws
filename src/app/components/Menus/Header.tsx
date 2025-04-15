@@ -1,0 +1,76 @@
+"use client";
+import { components } from "@/slices";
+import { ImageField } from "@prismicio/client";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { SliceZone } from "@prismicio/react";
+import React, { Fragment } from "react";
+import {
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  Transition,
+} from "@headlessui/react";
+import { MenusDocumentDataSlicesSlice } from "../../../../prismicio-types";
+import { HiBars3 } from "react-icons/hi2";
+
+interface HeaderProps {
+  logo: ImageField;
+  slices: MenusDocumentDataSlicesSlice[];
+  locales?: unknown;
+}
+
+// TODO: Change the menu colors and add from themeing file
+export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
+  return (
+    <header>
+      <nav
+        aria-label="Main Nav"
+        className="flex bg-[#6D00FF] justify-between items-center px-5 lg:py-2 py-1"
+      >
+        <PrismicNextLink
+          className="flex "
+          aria-label="homepage link"
+          prefetch={true}
+          href={`/`}
+        >
+          <PrismicNextImage field={logo} fallbackAlt="" className="pr-4" />
+        </PrismicNextLink>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center xl:gap-10 gap-3 z-50">
+          <SliceZone slices={slices} components={components} />
+        </div>
+
+        {/* Mobile Menu */}
+        <div className="md:hidden">
+          <Popover className="relative">
+            <PopoverButton
+              className="inline-flex justify-center w-full p-2 relative"
+              aria-label="Main Menu"
+            >
+              <HiBars3 className="h-8 w-8 text-white" />
+            </PopoverButton>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-200"
+              enterFrom="transform opacity-0 translate-x-full"
+              enterTo="transform opacity-100 translate-x-0"
+              leave="transition ease-in duration-150"
+              leaveFrom="transform opacity-100 translate-x-0"
+              leaveTo="transform opacity-0 translate-x-full"
+            >
+              <PopoverPanel
+                anchor="bottom"
+                className="w-screen h-screen bg-purple mt-0 pb-10 z-40"
+              >
+                <div className="flex flex-col items-center gap-10 mt-10">
+                  <SliceZone slices={slices} components={components} />
+                </div>
+              </PopoverPanel>
+            </Transition>
+          </Popover>
+        </div>
+      </nav>
+    </header>
+  );
+};

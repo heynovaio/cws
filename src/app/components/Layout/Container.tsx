@@ -1,9 +1,9 @@
-import React from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
 
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
+  children: ReactNode;
   containerClassName?: string;
-  props?: React.HTMLAttributes<HTMLDivElement>;
+  props?: HTMLAttributes<HTMLDivElement>;
 }
 export const Container: React.FC<ContainerProps> = ({
   children,
