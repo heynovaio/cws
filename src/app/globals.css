@@ -16,8 +16,14 @@
   h3 {
     @apply font-title md:text-h3 font-extraBold;
   }
+  h4 {
+    @apply font-title md:text-h4 font-extraBold;
+  }
   p {
     @apply text-bodyLarge font-body;
+  }
+  a {
+    @apply underline text-bodyLarge;
   }
   .btn {
     @apply inline-block
@@ -27,6 +33,7 @@
       font-bold
       px-8 py-4
       border-[3px]
+      no-underline
       relative;
   }
 
