@@ -3,87 +3,125 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-      @apply text-midnight bg-white 
-      /* dark:text-white dark:bg-midnight */
-      ;
+  body {
+    @apply text-white bg-navy-background font-body;
+
+    /* dark:text-white dark:bg-midnight */
+  }
+  h1 {
+    @apply font-title md:text-h1 font-extraBold leading-h1;
+  }
+  h2 {
+    @apply font-title md:text-h2 font-extraBold leading-h2;
+  }
+  h3 {
+    @apply font-title md:text-h3 font-extraBold leading-h3;
+  }
+  h4 {
+    @apply font-title md:text-h4 font-bold leading-h4;
+  }
+  p {
+    @apply text-bodyLarge font-body;
+  }
+  a {
+    @apply underline text-bodyLarge;
+    &:hover {
+      @apply text-ultra-pink;
     }
-    .btn {
-      @apply 
-      inline-block
+  }
+  ul {
+    @apply list-disc pl-6 space-y-2 text-bodyLarge;
+  }
+  ol {
+    @apply list-decimal pl-6 space-y-2 text-bodyLarge;
+  }
+  .btn {
+    @apply inline-block
       rounded-full 
-      leading-none
       text-button	
       font-bold
-      px-8 py-4
+      px-8 py-2
       border-[3px]
-      relative
-      ;
-    }
-    
-    .btn-primary {
-      @apply 
-      text-white
+      no-underline
+      relative;
+  }
+
+  .btn-primary {
+    @apply text-white
       bg-neon-violet
-      border-neon-violet
-      ;
-      &:hover {
-        @apply 
-        bg-midnight
-        border-midnight
-        ;
-      }
-      &:active, &:focus {
-        @apply 
-        border-ultra-pink
-        outline-0
-        bg-neon-violet
-        ;
-      }
+      border-neon-violet;
+    &:hover {
+      @apply bg-neon-violet/80 border-neon-violet/80 text-white;
     }
-    .btn-outline {
-      @apply
-        bg-transparent
-        border-ultra-pink
-      ;
-      &:hover {
-        @apply 
-        border-aqua
-        ;
-      }
-      &:active, &:focus {
-        @apply 
-        border-ultra-pink
-        outline-0
-        ;
-      }
+    &:active,
+    &:focus {
+      @apply border-aqua
+      outline-0;
     }
-    .btn-text {
-      @apply
-      text-midnight
+  }
+  .btn-secondary {
+    @apply text-white
+      bg-ultra-pink
+      border-ultra-pink;
+    &:hover {
+      @apply bg-ultra-pink/80 text-white
+        border-ultra-pink;
+    }
+    &:active,
+    &:focus {
+      @apply border-aqua
+        outline-0;
+    }
+  }
+  .btn-outline {
+    @apply bg-transparent
+        border-ultra-pink;
+    &:hover {
+      @apply border-aqua;
+    }
+    &:active,
+    &:focus {
+      @apply border-ultra-pink
+        outline-0;
+    }
+  }
+  .btn-text {
+    @apply text-midnight
       border-0
-      p-0
-      ;
-    }
+      p-0;
+  }
 }
 
 @layer utilities {
+  img {
+    @apply rounded;
+  }
+  .backdrop-blur-default {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .card-white {
+    @apply bg-white text-midnight p-6 rounded shadow;
+  }
+  .card-gradient {
+    @apply bg-gradient-primary text-white p-6 rounded shadow backdrop-blur;
+  }
   .card-overlay {
-    @apply
-    border-2
+    @apply border-2
     border-ultra-pink
-    relative
-    ;
+    relative;
     &::after {
-      @apply 
-      absolute
-      top-0 bottom-0 left-0 right-0
-      ;
-      content: '';
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(3, 0, 233, 0.5) 61.5%);
+      @apply absolute
+      top-0 bottom-0 left-0 right-0;
+      content: "";
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(3, 0, 233, 0.5) 61.5%
+      );
     }
   }
   .bg-gradient-primary {
-    background: linear-gradient(90deg, #3802A7 0%, #3C1253 98.73%);
-  }  
+    background: linear-gradient(90deg, #3802a7 0%, #3c1253 98.73%);
+  }
 }
