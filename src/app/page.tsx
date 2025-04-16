@@ -9,6 +9,7 @@ import { components } from "@/slices";
 import { getLocales } from "./utils";
 import React from "react";
 import { Layout } from "./components";
+import { Button } from "./components/Button";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -63,6 +64,16 @@ export default async function Page({
         components={components}
         context={{ lang }}
       />
+      <div className="m-16">
+        <Button buttonType="primary" label="Primary" />
+        <Button buttonType="secondary" label="Secondary" />
+        <Button buttonType="outline" label="Outline" />
+        <Button
+          buttonType="link"
+          label="Link"
+          linkButtonColorClass="text-neon-violet"
+        />
+      </div>
     </Layout>
   );
 }
