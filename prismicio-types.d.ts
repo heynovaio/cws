@@ -487,6 +487,104 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 /**
+ * Item in *Partners → Logos*
+ */
+export interface PartnersDocumentDataLogosItem {
+  /**
+   * Logo Image field in *Partners → Logos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partners.logos[].logo_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo_image: prismic.ImageField<never>;
+
+  /**
+   * Logo Link field in *Partners → Logos*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partners.logos[].logo_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  logo_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
+
+/**
+ * Content for Partners documents
+ */
+interface PartnersDocumentData {
+  /**
+   * Title field in *Partners*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partners.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *Partners*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partners.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Button field in *Partners*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partners.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Logos field in *Partners*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partners.logos[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  logos: prismic.GroupField<Simplify<PartnersDocumentDataLogosItem>>;
+}
+
+/**
+ * Partners document from Prismic
+ *
+ * - **API ID**: `partners`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PartnersDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<PartnersDocumentData>,
+    "partners",
+    Lang
+  >;
+
+/**
  * Item in *Resource Category → Keywords*
  */
 export interface ResourceCategoryDocumentDataKeywordsItem {
@@ -782,6 +880,7 @@ export type AllDocumentTypes =
   | MenusDocument
   | OfferingsCategoryDocument
   | PageDocument
+  | PartnersDocument
   | ResourceCategoryDocument
   | ResourcePageDocument
   | TeamMembersDocument;
@@ -1003,6 +1102,31 @@ export type CallToActionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *ImageText → Stats → Primary → Stats*
+ */
+export interface ImageTextSliceStatsPrimaryStatsItem {
+  /**
+   * number field in *ImageText → Stats → Primary → Stats*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.stats[].number
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  number: prismic.KeyTextField;
+
+  /**
+   * description field in *ImageText → Stats → Primary → Stats*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.stats[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
  * Primary content in *ImageText → Default → Primary*
  */
 export interface ImageTextSliceDefaultPrimary {
@@ -1085,9 +1209,186 @@ export type ImageTextSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *ImageText → Stats → Primary*
+ */
+export interface ImageTextSliceStatsPrimary {
+  /**
+   * Background Color field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: White
+   * - **API ID Path**: image_text.stats.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
+
+  /**
+   * Image Side field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_text.stats.primary.image_side
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  image_side: prismic.BooleanField;
+
+  /**
+   * Title field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Button field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Image field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Stats field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.stats[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  stats: prismic.GroupField<Simplify<ImageTextSliceStatsPrimaryStatsItem>>;
+}
+
+/**
+ * Stats variation for ImageText Slice
+ *
+ * - **API ID**: `stats`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageTextSliceStats = prismic.SharedSliceVariation<
+  "stats",
+  Simplify<ImageTextSliceStatsPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ImageText → Video → Primary*
+ */
+export interface ImageTextSliceVideoPrimary {
+  /**
+   * Background Color field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: White
+   * - **API ID Path**: image_text.video.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
+
+  /**
+   * Image Side field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_text.video.primary.image_side
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  image_side: prismic.BooleanField;
+
+  /**
+   * Title field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.video.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.video.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Button field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.video.primary.button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Video field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.video.primary.video
+   * - **Documentation**: https://prismic.io/docs/field#embed
+   */
+  video: prismic.EmbedField;
+}
+
+/**
+ * Video variation for ImageText Slice
+ *
+ * - **API ID**: `video`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageTextSliceVideo = prismic.SharedSliceVariation<
+  "video",
+  Simplify<ImageTextSliceVideoPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *ImageText*
  */
-type ImageTextSliceVariation = ImageTextSliceDefault;
+type ImageTextSliceVariation =
+  | ImageTextSliceDefault
+  | ImageTextSliceStats
+  | ImageTextSliceVideo;
 
 /**
  * ImageText Shared Slice
@@ -2201,6 +2502,51 @@ export type TeamListSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Testimonials → Default → Primary → Testimonials*
+ */
+export interface TestimonialsSliceDefaultPrimaryTestimonialsItem {
+  /**
+   * Image field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Quote field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].quote
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  quote: prismic.RichTextField;
+
+  /**
+   * Author field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].author
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  author: prismic.KeyTextField;
+
+  /**
+   * Author Title field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].author_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  author_title: prismic.KeyTextField;
+}
+
+/**
  * Primary content in *Testimonials → Default → Primary*
  */
 export interface TestimonialsSliceDefaultPrimary {
@@ -2266,6 +2612,18 @@ export interface TestimonialsSliceDefaultPrimary {
    */
   button: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Testimonials field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  testimonials: prismic.GroupField<
+    Simplify<TestimonialsSliceDefaultPrimaryTestimonialsItem>
   >;
 }
 
@@ -2733,6 +3091,9 @@ declare module "@prismicio/client" {
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
+      PartnersDocument,
+      PartnersDocumentData,
+      PartnersDocumentDataLogosItem,
       ResourceCategoryDocument,
       ResourceCategoryDocumentData,
       ResourceCategoryDocumentDataKeywordsItem,
@@ -2755,8 +3116,13 @@ declare module "@prismicio/client" {
       CallToActionSliceDefault,
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
+      ImageTextSliceStatsPrimaryStatsItem,
+      ImageTextSliceStatsPrimary,
+      ImageTextSliceVideoPrimary,
       ImageTextSliceVariation,
       ImageTextSliceDefault,
+      ImageTextSliceStats,
+      ImageTextSliceVideo,
       LogoListSlice,
       LogoListSliceDefaultPrimaryLogosItem,
       LogoListSliceDefaultPrimary,
@@ -2803,6 +3169,7 @@ declare module "@prismicio/client" {
       TeamListSliceVariation,
       TeamListSliceDefault,
       TestimonialsSlice,
+      TestimonialsSliceDefaultPrimaryTestimonialsItem,
       TestimonialsSliceDefaultPrimary,
       TestimonialsSliceVariation,
       TestimonialsSliceDefault,
