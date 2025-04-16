@@ -1,9 +1,12 @@
-import { KeyTextField, RichTextField } from "@prismicio/client";
+import { KeyTextField, LinkField, RichTextField } from "@prismicio/client";
+import { PrismicNextLink } from "@prismicio/next";
+import { ReactNode } from "react";
 
 interface ButtonProps {
   buttonType: "primary" | "secondary" | "outline" | "link";
-  label: string | RichTextField | KeyTextField;
-  linkButtonColorClass: string;
+  label: ReactNode;
+  linkButtonColorClass?: string;
+  buttonLink: LinkField;
 }
 
 const arrowIcon = (
@@ -27,6 +30,7 @@ export const Button = ({
   buttonType = "primary",
   label,
   linkButtonColorClass = "",
+  buttonLink,
 }: ButtonProps) => {
   let buttonStyle = "";
 
@@ -46,12 +50,14 @@ export const Button = ({
     default:
       buttonStyle = "btn btn-primary";
   }
+
   return (
-    <button
-      className={`flex flex-row w-fit items-center gap-2 ${buttonStyle} ${linkButtonColorClass}`}
+    <PrismicNextLink
+      field={buttonLink}
+      className={`flex flex-row w-fit items-center gap-2 hover:gap-4 ${buttonStyle} ${linkButtonColorClass}`}
     >
       {label}
       {buttonType == "link" && arrowIcon}
-    </button>
+    </PrismicNextLink>
   );
 };
