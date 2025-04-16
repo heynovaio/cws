@@ -81,7 +81,7 @@
     border-[3px]
         border-white;
     &:hover {
-      @apply -translate-y-1;
+      @apply text-white -translate-y-1;
       box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
     &:active,
@@ -95,7 +95,7 @@
     @apply border-0 p-0 bg-transparent inline-block;
 
     &:hover {
-      @apply underline;
+      @apply underline text-current;
     }
 
     &:active,
