@@ -71,7 +71,7 @@ export default async function Page({
         <Button
           buttonType="link"
           label="Link"
-          linkButtonColorClass="text-neon-violet"
+          linkButtonColorClass="text-white"
         />
       </div>
     </Layout>
