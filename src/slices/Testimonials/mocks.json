@@ -12,10 +12,12 @@
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"type": "heading1",
+						"type": "heading2",
 						"content": {
-							"text": "Journey"
-						}
+							"text": "A quote from...",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -25,8 +27,16 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Laborum et cillum adipisicing fugiat. Qui ullamco nulla aliquip mollit mollit et aliquip. Eiusmod irure nulla ut deserunt id id sint qui."
-						}
+							"text": "“The investments being made in women’s professional sport are coming from a variety of industries and from across the country. It’s an incredibly exciting time to be able to expand programming for WNBA fans in Canada.”\n\nLeah MacNab\nSenior Vice President and Managing Director NBA Canada",
+							"spans": [
+								{
+									"type": "strong",
+									"start": 220,
+									"end": 231
+								}
+							]
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -67,7 +77,7 @@
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "https://prismic.io",
-							"text": "express"
+							"text": "All Stories"
 						}
 					}
 				]
