@@ -1,0 +1,90 @@
+"use client";
+import { Container } from "@/components";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { ImageField, LinkField, RichTextField } from "@prismicio/client";
+import { PrismicRichText } from "@prismicio/react";
+
+interface IndividualLogo {
+  logo_image: ImageField;
+  logo_link: LinkField;
+}
+
+interface PartnersProps {
+  title: RichTextField;
+  body: RichTextField;
+  buttons?: LinkField[];
+  logos: IndividualLogo[];
+}
+
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 1,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 600 },
+    items: 1,
+  },
+  mobile: {
+    breakpoint: { max: 600, min: 0 },
+    items: 1,
+  },
+};
+
+export const Partners = ({ title, body, buttons, logos }: PartnersProps) => {
+  const logoTiles = Array.from(
+    { length: Math.ceil(logos.length / 6) },
+    (_, i) => logos.slice(i * 6, i * 6 + 6)
+  );
+
+  return (
+    <section>
+      <Container className="flex flex-col md:flex-row items-center gap-6">
+        <div className="w-full md:w-1/3">
+          <PrismicRichText field={title} />
+          <PrismicRichText field={body} />
+          {buttons &&
+            buttons.map((button, i) => (
+              <PrismicNextLink
+                key={i}
+                field={button}
+                className="btn btn-secondary mt-4"
+              />
+            ))}
+        </div>
+
+        <div className="w-full md:w-2/3">
+          <Carousel
+            responsive={responsive}
+            infinite
+            arrows
+            containerClass="w-full"
+            itemClass="p-4"
+          >
+            {logoTiles.map((tile, index) => (
+              <div key={index} className="grid grid-cols-3 grid-rows-2 gap-16">
+                {tile.map((logo, i) => (
+                  <PrismicNextLink
+                    key={i}
+                    field={logo.logo_link}
+                    className="flex items-center justify-center bg-white rounded-2xl shadow-md p-4 h-40"
+                  >
+                    <PrismicNextImage
+                      field={logo.logo_image}
+                      className="max-h-full w-full object-contain"
+                      alt=""
+                    />
+                  </PrismicNextLink>
+                ))}
+              </div>
+            ))}
+          </Carousel>
+        </div>
+      </Container>
+    </section>
+  );
+};
+
+export default Partners;
