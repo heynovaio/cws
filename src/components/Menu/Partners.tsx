@@ -1,10 +1,12 @@
 "use client";
 import { Container } from "@/components";
-import Carousel from "react-multi-carousel";
+import Carousel, { CarouselInternalState } from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { ImageField, LinkField, RichTextField } from "@prismicio/client";
 import { PrismicRichText } from "@prismicio/react";
+import { useRef, useState } from "react";
+import { LongRightArrow, LongLeftArrow } from "../Icons/Arrows";
 
 interface IndividualLogo {
   logo_image: ImageField;
@@ -33,14 +35,50 @@ const responsive = {
   },
 };
 
+const CustomArrowBox = ({
+  currentSlide,
+  totalSlides,
+  onNext,
+  onPrev,
+}: {
+  currentSlide: number;
+  totalSlides: number;
+  onNext: () => void;
+  onPrev: () => void;
+}) => {
+  return (
+    <div className="mb-4 flex justify-end">
+      <button
+        onClick={currentSlide === totalSlides - 1 ? onPrev : onNext}
+        className="carousel-button"
+      >
+        {currentSlide === totalSlides - 1 && (
+          <LongLeftArrow color="currentColor" />
+        )}
+        {currentSlide + 1} / {totalSlides}
+        {currentSlide !== totalSlides - 1 && (
+          <LongRightArrow color="currentColor" />
+        )}
+      </button>
+    </div>
+  );
+};
+
 export const Partners = ({ title, body, buttons, logos }: PartnersProps) => {
   const logoTiles = Array.from(
     { length: Math.ceil(logos.length / 6) },
     (_, i) => logos.slice(i * 6, i * 6 + 6)
   );
 
+  const carouselRef = useRef<any>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handleSlideChange = (_: any, state: CarouselInternalState) => {
+    setCurrentSlide(state.currentSlide);
+  };
+
   return (
-    <section>
+    <section className="my-16">
       <Container className="flex flex-col md:flex-row items-center gap-6">
         <div className="w-full md:w-1/3">
           <div className="mb-10">
@@ -58,12 +96,21 @@ export const Partners = ({ title, body, buttons, logos }: PartnersProps) => {
         </div>
 
         <div className="w-full md:w-2/3">
+          <CustomArrowBox
+            currentSlide={currentSlide}
+            totalSlides={logoTiles.length}
+            onNext={() => carouselRef.current?.next()}
+            onPrev={() => carouselRef.current?.previous()}
+          />
+
           <Carousel
+            ref={carouselRef}
             responsive={responsive}
-            infinite
-            arrows
+            infinite={false}
+            arrows={false}
+            slidesToSlide={1}
+            afterChange={handleSlideChange}
             containerClass="w-full"
-            itemClass="p-4"
           >
             {logoTiles.map((tile, index) => (
               <div
@@ -74,7 +121,7 @@ export const Partners = ({ title, body, buttons, logos }: PartnersProps) => {
                   <PrismicNextLink
                     key={i}
                     field={logo.logo_link}
-                    className="flex items-center justify-center bg-white rounded-2xl shadow-md p-4 h-40"
+                    className="logo-carousel-tile"
                   >
                     <PrismicNextImage
                       field={logo.logo_image}
