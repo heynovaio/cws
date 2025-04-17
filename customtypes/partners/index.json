@@ -12,7 +12,7 @@
           "label": "Title",
           "placeholder": "",
           "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "multi": "heading2"
         }
       },
       "body": {
@@ -35,6 +35,13 @@
           "repeat": true
         }
       },
+      "cta_text": {
+        "type": "Text",
+        "config": {
+          "label": "CTA text",
+          "placeholder": ""
+        }
+      },
       "logos": {
         "type": "Group",
         "config": {
@@ -46,8 +53,8 @@
               "config": {
                 "label": "Logo Image",
                 "constraint": {
-                  "width": 800,
-                  "height": 800
+                  "width": null,
+                  "height": null
                 },
                 "thumbnails": []
               }
