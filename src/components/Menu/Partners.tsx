@@ -43,8 +43,10 @@ export const Partners = ({ title, body, buttons, logos }: PartnersProps) => {
     <section>
       <Container className="flex flex-col md:flex-row items-center gap-6">
         <div className="w-full md:w-1/3">
-          <PrismicRichText field={title} />
-          <PrismicRichText field={body} />
+          <div className="mb-10">
+            <PrismicRichText field={title} />
+            <PrismicRichText field={body} />
+          </div>
           {buttons &&
             buttons.map((button, i) => (
               <PrismicNextLink
@@ -64,7 +66,10 @@ export const Partners = ({ title, body, buttons, logos }: PartnersProps) => {
             itemClass="p-4"
           >
             {logoTiles.map((tile, index) => (
-              <div key={index} className="grid grid-cols-3 grid-rows-2 gap-16">
+              <div
+                key={index}
+                className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16"
+              >
                 {tile.map((logo, i) => (
                   <PrismicNextLink
                     key={i}
