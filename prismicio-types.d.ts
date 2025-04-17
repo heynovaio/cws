@@ -557,6 +557,17 @@ interface PartnersDocumentData {
   >;
 
   /**
+   * CTA text field in *Partners*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partners.cta_text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_text: prismic.KeyTextField;
+
+  /**
    * Logos field in *Partners*
    *
    * - **Field Type**: Group
