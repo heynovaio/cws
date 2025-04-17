@@ -15,10 +15,13 @@ export type TestimonialsProps = SliceComponentProps<Content.TestimonialsSlice>;
 const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
   const isImageRight = slice.primary.image_side == false;
   const imageSide = isImageRight ? "md:flex-row" : "md:flex-row-reverse";
+  const backgroundImageSide = !isImageRight
+    ? "right -145spx center"
+    : "left -40px center";
   const allTestimonials = slice.primary.testimonials;
   const displayedTestimonial =
     allTestimonials[Math.floor(Math.random() * allTestimonials.length)];
-  console.log(displayedTestimonial);
+
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -27,14 +30,14 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
     >
       <Container className="flex flex-col gap-12 items-center">
         <div
-          className="bg-neon-violet shadow rounded py-4 px-6 md:py-16 md:px-28  bg-no-repeat"
+          className="bg-neon-violet shadow rounded py-4 px-6 md:py-16 md:px-28  bg-no-repeat "
           style={{
             backgroundImage: "url('/LogoBig.png')",
-            backgroundPosition: "left -40px center",
+            backgroundPosition: backgroundImageSide,
           }}
         >
           <div
-            className={`flex flex-col ${imageSide} gap-4 md:gap-10 md:items-center`}
+            className={`flex flex-col ${imageSide} gap-4 md:gap-12 md:items-center`}
           >
             <div className="w-full md:w-1/3 aspect-square flex-shrink-0 max-h-60 md:max-h-none">
               <PrismicNextImage
