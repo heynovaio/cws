@@ -1113,6 +1113,90 @@ export type CallToActionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *ContentCarousel → Default → Primary → Content Card*
+ */
+export interface ContentCarouselSliceDefaultPrimaryContentCardItem {
+  /**
+   * Content field in *ContentCarousel → Default → Primary → Content Card*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.default.primary.content_card[].content
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  content: prismic.ContentRelationshipField<
+    "resource_category" | "offerings_category"
+  >;
+}
+
+/**
+ * Primary content in *ContentCarousel → Default → Primary*
+ */
+export interface ContentCarouselSliceDefaultPrimary {
+  /**
+   * Title field in *ContentCarousel → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Title
+   * - **API ID Path**: content_carousel.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Content Card field in *ContentCarousel → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.default.primary.content_card[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  content_card: prismic.GroupField<
+    Simplify<ContentCarouselSliceDefaultPrimaryContentCardItem>
+  >;
+
+  /**
+   * All Link field in *ContentCarousel → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.default.primary.all_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  all_link: prismic.ContentRelationshipField<"page">;
+}
+
+/**
+ * Default variation for ContentCarousel Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentCarouselSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContentCarouselSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContentCarousel*
+ */
+type ContentCarouselSliceVariation = ContentCarouselSliceDefault;
+
+/**
+ * ContentCarousel Shared Slice
+ *
+ * - **API ID**: `content_carousel`
+ * - **Description**: ContentCarousel
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentCarouselSlice = prismic.SharedSlice<
+  "content_carousel",
+  ContentCarouselSliceVariation
+>;
+
+/**
  * Item in *ImageText → Stats → Primary → Stats*
  */
 export interface ImageTextSliceStatsPrimaryStatsItem {
@@ -3125,6 +3209,11 @@ declare module "@prismicio/client" {
       CallToActionSliceDefaultPrimary,
       CallToActionSliceVariation,
       CallToActionSliceDefault,
+      ContentCarouselSlice,
+      ContentCarouselSliceDefaultPrimaryContentCardItem,
+      ContentCarouselSliceDefaultPrimary,
+      ContentCarouselSliceVariation,
+      ContentCarouselSliceDefault,
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
       ImageTextSliceStatsPrimaryStatsItem,
