@@ -169,4 +169,21 @@
     flex: 1 1 auto;
     margin: 0 !important;
   }
+
+  .carousel-button {
+    @apply flex flex-row items-center gap-2 bg-white text-bodyLarge text-midnight border border-midnight rounded-md px-4 py-2 shadow transition;
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+
+  .logo-carousel-tile {
+    @apply flex items-center justify-center bg-white rounded-2xl p-4 h-40;
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
 }
