@@ -15,6 +15,10 @@ export type TestimonialsProps = SliceComponentProps<Content.TestimonialsSlice>;
 const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
   const isImageRight = slice.primary.image_side == false;
   const imageSide = isImageRight ? "md:flex-row" : "md:flex-row-reverse";
+  const allTestimonials = slice.primary.testimonials;
+  const displayedTestimonial =
+    allTestimonials[Math.floor(Math.random() * allTestimonials.length)];
+  console.log(displayedTestimonial);
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -32,14 +36,20 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
           <div className={`flex flex-col ${imageSide} gap-4 md:gap-10 `}>
             <div className="w-full md:w-1/3 aspect-square flex-shrink-0 ">
               <PrismicNextImage
-                field={slice.primary.image}
+                field={displayedTestimonial.image}
                 className="w-full h-full object-contain "
                 alt=""
               />
             </div>
-            <div>
+            <div className="flex flex-col gap-4">
               <PrismicRichText field={slice.primary.title} />
-              <PrismicRichText field={slice.primary.body} />
+              <PrismicRichText field={displayedTestimonial.quote} />
+              <div className="flex flex-col">
+                <p className="text-base">{displayedTestimonial.author}</p>
+                <p className="text-[1.375rem] font-bold">
+                  {displayedTestimonial.author_title}
+                </p>
+              </div>
             </div>
           </div>
         </div>
