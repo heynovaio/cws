@@ -33,11 +33,13 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
             backgroundPosition: "left -40px center",
           }}
         >
-          <div className={`flex flex-col ${imageSide} gap-4 md:gap-10 `}>
-            <div className="w-full md:w-1/3 aspect-square flex-shrink-0 ">
+          <div
+            className={`flex flex-col ${imageSide} gap-4 md:gap-10 md:items-center`}
+          >
+            <div className="w-full md:w-1/3 aspect-square flex-shrink-0 max-h-60 md:max-h-none">
               <PrismicNextImage
                 field={displayedTestimonial.image}
-                className="w-full h-full object-contain "
+                className="w-full h-full object-cover rounded"
                 alt=""
               />
             </div>
