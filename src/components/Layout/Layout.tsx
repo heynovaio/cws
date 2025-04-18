@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
-import { Header } from "../Menus";
 import {
   GlobalsDocumentData,
   MenusDocumentData,
-} from "../../../../prismicio-types";
+} from "../../../prismicio-types";
+import { Header } from "../Menu/Header";
 
 interface LayoutProps {
   locales?: unknown;

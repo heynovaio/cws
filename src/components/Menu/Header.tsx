@@ -10,8 +10,8 @@ import {
   PopoverPanel,
   Transition,
 } from "@headlessui/react";
-import { MenusDocumentDataSlicesSlice } from "../../../../prismicio-types";
 import { HiBars3 } from "react-icons/hi2";
+import { MenusDocumentDataSlicesSlice } from "../../../prismicio-types";
 
 interface HeaderProps {
   logo: ImageField;
