@@ -163,18 +163,6 @@
 										}
 									]
 								}
-							],
-							[
-								"card_button",
-								{
-									"__TYPE__": "LinkContent",
-									"key": "4a672aa9-be9d-47ad-8f2d-acc239a6bee9",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "http://twitter.com",
-										"text": "do"
-									}
-								}
 							]
 						]
 					}
@@ -182,7 +170,7 @@
 			},
 			"variant": {
 				"__TYPE__": "FieldContent",
-				"value": "Short Card",
+				"value": "Long Card",
 				"type": "Select"
 			},
 			"body": {

@@ -2407,22 +2407,6 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   rich_text: prismic.RichTextField;
-
-  /**
-   * Card Button field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: Learn More
-   * - **API ID Path**: tabbed_carousel.default.primary.tab[].card_button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  card_button: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
 }
 
 /**
@@ -2454,11 +2438,11 @@ export interface TabbedCarouselSliceDefaultPrimary {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **Default Value**: Short Card
+   * - **Default Value**: Long Card
    * - **API ID Path**: tabbed_carousel.default.primary.variant
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  variant: prismic.SelectField<"Short Card" | "Campaign Card", "filled">;
+  variant: prismic.SelectField<"Long Card" | "Campaign Card", "filled">;
 
   /**
    * Tab field in *TabbedCarousel → TabbedCarousel → Primary*

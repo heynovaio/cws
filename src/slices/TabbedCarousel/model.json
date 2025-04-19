@@ -36,10 +36,10 @@
             "label": "Variant",
             "placeholder": "",
             "options": [
-              "Short Card",
+              "Long Card",
               "Campaign Card"
             ],
-            "default_value": "Short Card"
+            "default_value": "Long Card"
           }
         },
         "tab": {
@@ -125,17 +125,6 @@
                   "placeholder": "",
                   "allowTargetBlank": true,
                   "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-                }
-              },
-              "card_button": {
-                "type": "Link",
-                "config": {
-                  "label": "Card Button",
-                  "placeholder": "Learn More",
-                  "select": null,
-                  "allowTargetBlank": true,
-                  "allowText": true,
-                  "repeat": false
                 }
               }
             }
