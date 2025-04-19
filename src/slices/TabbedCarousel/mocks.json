@@ -163,6 +163,18 @@
 										}
 									]
 								}
+							],
+							[
+								"card_button",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "4a672aa9-be9d-47ad-8f2d-acc239a6bee9",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://twitter.com",
+										"text": "do"
+									}
+								}
 							]
 						]
 					}
@@ -179,8 +191,10 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Fugiat qui nisi mollit velit tempor ut veniam non. Deserunt dolor reprehenderit tempor sunt."
-						}
+							"text": "Through our programs, we empower sport organizations and leaders to drive gender equity, building a stronger, more inclusive sport system for all.",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			}

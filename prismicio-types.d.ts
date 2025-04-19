@@ -360,6 +360,7 @@ export type OfferingsCategoryDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | TabbedCarouselSlice
   | AccordionSlice
   | LogoListSlice
   | RichTextSlice
@@ -2406,6 +2407,22 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   rich_text: prismic.RichTextField;
+
+  /**
+   * Card Button field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Learn More
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].card_button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_button: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
 }
 
 /**
