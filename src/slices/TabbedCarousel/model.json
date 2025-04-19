@@ -83,6 +83,17 @@
                   "thumbnails": []
                 }
               },
+              "card_button": {
+                "type": "Link",
+                "config": {
+                  "label": "Card Button",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
+                }
+              },
               "card_link": {
                 "type": "Link",
                 "config": {

@@ -2357,6 +2357,18 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   card_image: prismic.ImageField<never>;
 
   /**
+   * Card Button field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.tab[].card_button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
    * Card Link field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
    *
    * - **Field Type**: Link
