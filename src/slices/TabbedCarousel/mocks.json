@@ -9,8 +9,10 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "Piece"
-						}
+							"text": "Our Support Pathways",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -171,12 +173,21 @@
 									"type": "Link",
 									"value": [
 										{
-											"key": "47f6fab6-4f5f-4194-80e1-4293d9f4f206",
 											"__TYPE__": "LinkContent",
+											"key": "58e3f369-1085-4c98-a35c-83e3e06a3379",
 											"value": {
-												"__TYPE__": "ExternalLink",
-												"url": "https://slicemachine.dev",
-												"text": "fastened"
+												"__TYPE__": "AnyLink",
+												"kind": "any",
+												"text": "Button 1"
+											}
+										},
+										{
+											"__TYPE__": "LinkContent",
+											"key": "fc594f6a-b0d9-4b09-91be-d2e827ecb93e",
+											"value": {
+												"__TYPE__": "AnyLink",
+												"kind": "any",
+												"text": "Button 2"
 											}
 										}
 									]
@@ -188,8 +199,8 @@
 			},
 			"variant": {
 				"__TYPE__": "FieldContent",
-				"value": "Long Card",
-				"type": "Select"
+				"type": "Select",
+				"value": "Long Card"
 			},
 			"body": {
 				"__TYPE__": "StructuredTextContent",
