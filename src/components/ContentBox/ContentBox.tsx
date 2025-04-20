@@ -7,6 +7,7 @@ import { RichTextField } from "@prismicio/client";
 interface ContentBoxProps {
   children?: ReactNode;
   title: string | RichTextField;
+  titleClassName?: string;
   content?: ReactNode;
   titleGap?: string;
   buttons?: ReactNode[];
@@ -16,7 +17,7 @@ interface ContentBoxProps {
 export const ContentBox: React.FC<ContentBoxProps> = ({
   children,
   title,
-  titleGap = "gap-2",
+  titleClassName,
   content,
   buttons,
   width = "full",
@@ -30,16 +31,18 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
       className={clsx(
         "flex flex-col gap-7 contentBox",
         widthClassName,
-        containerClassName,
+        containerClassName
       )}
       {...props}
     >
-      <div className={`flex flex-col w-full ${titleGap}`}>
-        {typeof title === "string" ? (
-          <h2>{title}</h2>
-        ) : (
-          <PrismicRichText field={title} />
-        )}
+      <div className={`flex flex-col w-full gap-2`}>
+        <div className={titleClassName}>
+          {typeof title === "string" ? (
+            <h2 className={titleClassName}>{title}</h2>
+          ) : (
+            <PrismicRichText field={title} />
+          )}
+        </div>
         {content && <div>{content}</div>}
       </div>
       {buttons && buttons.length > 0 && <div className="w-full">{buttons}</div>}

@@ -101,6 +101,10 @@
       outline-none;
     }
   }
+  .text-link {
+    @apply underline underline-offset-2
+      hover:text-ultra-pink;
+  }
 }
 
 @layer utilities {

@@ -1,13 +1,9 @@
 import type { Config } from "tailwindcss";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const colors = require("tailwindcss/colors");
 
 export default {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/slices/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     screens: {
       xs: "400px",
@@ -72,6 +68,9 @@ export default {
       },
       maxWidth: {
         content: "700px",
+        wide: "782px",
+        standard: "685px",
+        narrow: "452px",
       },
     },
   },
