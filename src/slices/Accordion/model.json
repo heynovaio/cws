@@ -18,11 +18,10 @@
             "label": "Background Color",
             "placeholder": "",
             "options": [
-              "White",
-              "Light",
-              "Dark"
+              "No Background",
+              "Darker"
             ],
-            "default_value": "White"
+            "default_value": "No Background"
           }
         },
         "title": {

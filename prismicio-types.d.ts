@@ -1130,11 +1130,11 @@ export interface AccordionSliceDefaultPrimary {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **Default Value**: White
+   * - **Default Value**: No Background
    * - **API ID Path**: accordion.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
 
   /**
    * Title field in *Accordion → Default → Primary*
