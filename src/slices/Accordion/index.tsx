@@ -37,25 +37,42 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
           <PrismicRichText field={slice.primary.body} />
         </div>
 
-        {slice.primary.accordion_group.map((accordion, index) => (
-          <Disclosure key={index}>
-            {({ open }) => (
-              <div className="shadow rounded border border-neon-violet my-4 p-4 bg-white text-midnight ">
-                <DisclosureButton className="py-2 w-full text-left font-semibold flex flex-row justify-between items-center font-extraBold">
-                  <PrismicRichText field={accordion.title} />
-                  {open ? (
-                    <MinusIcon color="#6D00FF" />
-                  ) : (
-                    <PlusIcon color="#6D00FF" />
-                  )}
-                </DisclosureButton>
-                <DisclosurePanel>
-                  <PrismicRichText field={accordion.body} />
-                </DisclosurePanel>
-              </div>
-            )}
-          </Disclosure>
-        ))}
+        {slice.primary.accordion_group.map((accordion, index) => {
+          const buttonId = `accordion-button-${index}`;
+          const panelId = `accordion-panel-${index}`;
+
+          return (
+            <Disclosure key={index}>
+              {({ open }) => (
+                <div className="shadow rounded border border-neon-violet my-4 p-4 bg-white text-midnight ">
+                  <DisclosureButton
+                    className="py-2 w-full text-left font-semibold flex flex-row justify-between items-center font-extraBold"
+                    aria-expanded={open}
+                    aria-controls={panelId}
+                    id={buttonId}
+                    role="button"
+                  >
+                    <PrismicRichText field={accordion.title} />
+                    {open ? (
+                      <MinusIcon color="#6D00FF" />
+                    ) : (
+                      <PlusIcon color="#6D00FF" />
+                    )}
+                  </DisclosureButton>
+
+                  <DisclosurePanel
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    className="mt-2"
+                  >
+                    <PrismicRichText field={accordion.body} />
+                  </DisclosurePanel>
+                </div>
+              )}
+            </Disclosure>
+          );
+        })}
       </Container>
     </section>
   );
