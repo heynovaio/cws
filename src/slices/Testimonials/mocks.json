@@ -3,11 +3,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "White",
-				"type": "Select"
-			},
 			"title": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
@@ -20,48 +15,6 @@
 						"direction": "ltr"
 					}
 				]
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "“The investments being made in women’s professional sport are coming from a variety of industries and from across the country. It’s an incredibly exciting time to be able to expand programming for WNBA fans in Canada.”\n\nLeah MacNab\nSenior Vice President and Managing Director NBA Canada",
-							"spans": [
-								{
-									"type": "strong",
-									"start": 220,
-									"end": 231
-								}
-							]
-						},
-						"direction": "ltr"
-					}
-				]
-			},
-			"image": {
-				"origin": {
-					"id": "main",
-					"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88",
-					"width": 3168,
-					"height": 4752
-				},
-				"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88?rect=0%2C792%2C3168%2C3168&w=800&h=800",
-				"width": 800,
-				"height": 800,
-				"edit": {
-					"zoom": 1,
-					"crop": {
-						"x": 0,
-						"y": 792
-					},
-					"background": "transparent"
-				},
-				"credits": null,
-				"alt": null,
-				"__TYPE__": "ImageContent",
-				"thumbnails": {}
 			},
 			"image_side": {
 				"__TYPE__": "BooleanContent",
@@ -219,7 +172,6 @@
 							[
 								"image",
 								{
-									"__TYPE__": "ImageContent",
 									"provider": "imgix",
 									"url": "https://images.unsplash.com/photo-1517260739337-6799d239ce83?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw1fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3NDQ4MjUyMTN8MA&ixlib=rb-4.0.3&q=85",
 									"alt": "sliced fruit on white surface",
@@ -239,6 +191,8 @@
 											"y": 0
 										}
 									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
 									"thumbnails": {}
 								}
 							],

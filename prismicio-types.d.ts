@@ -2659,17 +2659,6 @@ export interface TestimonialsSliceDefaultPrimaryTestimonialsItem {
  */
 export interface TestimonialsSliceDefaultPrimary {
   /**
-   * Background Color field in *Testimonials → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: White
-   * - **API ID Path**: testimonials.default.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
-
-  /**
    * Image Side field in *Testimonials → Default → Primary*
    *
    * - **Field Type**: Boolean
@@ -2681,16 +2670,6 @@ export interface TestimonialsSliceDefaultPrimary {
   image_side: prismic.BooleanField;
 
   /**
-   * Image field in *Testimonials → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
    * Title field in *Testimonials → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -2699,16 +2678,6 @@ export interface TestimonialsSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   title: prismic.RichTextField;
-
-  /**
-   * Body field in *Testimonials → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
 
   /**
    * Button field in *Testimonials → Default → Primary*

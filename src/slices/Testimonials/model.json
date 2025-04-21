@@ -12,19 +12,6 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "background_color": {
-          "type": "Select",
-          "config": {
-            "label": "Background Color",
-            "placeholder": "",
-            "options": [
-              "White",
-              "Light",
-              "Dark"
-            ],
-            "default_value": "White"
-          }
-        },
         "image_side": {
           "type": "Boolean",
           "config": {
@@ -34,17 +21,6 @@
             "default_value": false
           }
         },
-        "image": {
-          "type": "Image",
-          "config": {
-            "label": "Image",
-            "constraint": {
-              "width": 800,
-              "height": 800
-            },
-            "thumbnails": []
-          }
-        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -52,15 +28,6 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "heading1,heading2,heading3,heading4,heading5,heading6"
-          }
-        },
-        "body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em,paragraph,hyperlink,list-item,o-list-item,image"
           }
         },
         "button": {
