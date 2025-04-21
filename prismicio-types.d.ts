@@ -1220,11 +1220,11 @@ export interface CallToActionSliceDefaultPrimary {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **Default Value**: White
+   * - **Default Value**: No Background
    * - **API ID Path**: call_to_action.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
 
   /**
    * Text Alignment field in *CallToAction → Default → Primary*
