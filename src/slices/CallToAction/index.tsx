@@ -19,17 +19,19 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
     : "items-center text-center";
 
   const darkerBackground = slice.primary.background_color == "Darker";
-  const bgColor = darkerBackground ? "bg-[#180451]" : "bg-midnight";
+  const bgColor = darkerBackground
+    ? "bg-dark-purple-background"
+    : "bg-midnight";
 
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={`${bgColor}`}
+      className={`${bgColor} py-10`}
     >
       <Container>
         <div
-          className={`rounded bg-gradient-primary p-24 ${textAlignment} flex flex-col gap-6`}
+          className={`rounded bg-gradient-dark p-6 md:p-24 ${textAlignment} flex flex-col gap-6`}
         >
           <PrismicRichText field={slice.primary.title} />
           <PrismicRichText field={slice.primary.body} />
