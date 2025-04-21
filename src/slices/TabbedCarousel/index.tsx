@@ -34,6 +34,28 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps): JSX.Element => {
     a === "Other" ? 1 : b === "Other" ? -1 : 0
   );
 
+  // Define carousel settings
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+      slidesToSlide: 1,
+      partialVisibilityGutter: 100,
+    },
+    tablet: {
+      breakpoint: { max: 1023, min: 640 },
+      items: 1,
+      slidesToSlide: 1,
+      partialVisibilityGutter: 20,
+    },
+    mobile: {
+      breakpoint: { max: 639, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+      partialVisibilityGutter: 20,
+    },
+  };
+
   return (
     <Section
       data-slice-type={slice.slice_type}
@@ -71,19 +93,27 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps): JSX.Element => {
             ))}
           </TabList>
 
-          <TabPanels className="py-12 max-w-screen-lg">
+          <TabPanels className="py-12 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm max-w-screen-xs w-full">
             {tabLabels.map((label) => (
-              <TabPanel key={label} className="flex gap-2">
-                {groupedTabs[label].map((item, index) => (
-                  <LongCard
-                    key={index}
-                    image={item?.card_image}
-                    title={item?.card_title || "Untitled"}
-                    content={item?.card_description}
-                    buttons={item?.card_button}
-                    links={item?.card_link}
-                  />
-                ))}
+              <TabPanel key={label}>
+                <Carousel
+                  responsive={responsive}
+                  partialVisible
+                  keyBoardControl
+                  itemClass="react-multi-carousel-item"
+                >
+                  {groupedTabs[label].map((item, index) => (
+                    <div key={index}>
+                      <LongCard
+                        image={item?.card_image}
+                        title={item?.card_title || "Untitled"}
+                        content={item?.card_description}
+                        buttons={item?.card_button}
+                        links={item?.card_link}
+                      />
+                    </div>
+                  ))}
+                </Carousel>
               </TabPanel>
             ))}
           </TabPanels>
