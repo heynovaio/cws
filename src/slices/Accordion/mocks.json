@@ -14,8 +14,10 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "Exactly"
-						}
+							"text": "Exactly",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -57,9 +59,9 @@
 									"__TYPE__": "StructuredTextContent",
 									"value": [
 										{
-											"type": "heading2",
+											"type": "paragraph",
 											"content": {
-												"text": "Education"
+												"text": "Sit exercitation anim esse sunt do tempor anim Lorem laborum et exercitation. Nulla anim veniam pariatur et veniam aliquip dolore est eu est qui quis culpa. Incididunt duis laboris amet eu minim."
 											}
 										}
 									]
@@ -93,6 +95,41 @@
 												"url": "http://google.com",
 												"text": "talk"
 											}
+										}
+									]
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Incididunt est amet occaecat sit consequat non est commodo nisi irure commodo non ad in. Do ullamco non nostrud eu Lorem laborum ut excepteur."
+											}
+										}
+									]
+								}
+							],
+							[
+								"body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Minim irure sit mollit laborum esse cupidatat irure officia Lorem dolore dolore voluptate laborum.",
+												"spans": []
+											},
+											"direction": "ltr"
 										}
 									]
 								}

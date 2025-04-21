@@ -66,7 +66,7 @@
                   "label": "Accordion Title",
                   "placeholder": "",
                   "allowTargetBlank": true,
-                  "multi": "heading2,heading3,heading4"
+                  "multi": "paragraph"
                 }
               },
               "body": {
