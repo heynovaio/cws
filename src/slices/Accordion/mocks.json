@@ -5,8 +5,8 @@
 		"primary": {
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "White",
-				"type": "Select"
+				"type": "Select",
+				"value": "No Background"
 			},
 			"title": {
 				"__TYPE__": "StructuredTextContent",
@@ -61,8 +61,10 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Sit exercitation anim esse sunt do tempor anim Lorem laborum et exercitation. Nulla anim veniam pariatur et veniam aliquip dolore est eu est qui quis culpa. Incididunt duis laboris amet eu minim."
-											}
+												"text": "Sit exercitation anim esse sunt do tempor anim ",
+												"spans": []
+											},
+											"direction": "ltr"
 										}
 									]
 								}
@@ -75,8 +77,10 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Minim irure sit mollit laborum esse cupidatat irure officia Lorem dolore dolore voluptate laborum."
-											}
+												"text": "Minim irure sit mollit laborum esse cupidatat irure officia Lorem dolore dolore voluptate laborum.",
+												"spans": []
+											},
+											"direction": "ltr"
 										}
 									]
 								}
@@ -112,8 +116,10 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Incididunt est amet occaecat sit consequat non est commodo nisi irure commodo non ad in. Do ullamco non nostrud eu Lorem laborum ut excepteur."
-											}
+												"text": "Incididunt est amet occaecat sit consequat non est commodo nisi irure commodo ",
+												"spans": []
+											},
+											"direction": "ltr"
 										}
 									]
 								}

@@ -21,14 +21,18 @@ export type AccordionProps = SliceComponentProps<Content.AccordionSlice>;
  */
 
 const Accordion = ({ slice }: AccordionProps): JSX.Element => {
+  const darkerBackground = slice.primary.background_color == "Darker";
+  const bgColor = darkerBackground
+    ? "bg-dark-purple-background"
+    : "bg-midnight";
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="text-midnight"
+      className={`${bgColor} py-10`}
     >
       <Container>
-        <div className="md:max-w-[50%] flex flex-col gap-4 mb-8">
+        <div className="md:max-w-[50%] flex flex-col gap-4 mb-8 ">
           <PrismicRichText field={slice.primary.title} />
           <PrismicRichText field={slice.primary.body} />
         </div>
@@ -36,8 +40,8 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
         {slice.primary.accordion_group.map((accordion, index) => (
           <Disclosure key={index}>
             {({ open }) => (
-              <div className="text-midnight shadow rounded border border-neon-violet my-4 p-4">
-                <DisclosureButton className="py-2 w-full text-left font-semibold flex flex-row justify-between items-center">
+              <div className="shadow rounded border border-neon-violet my-4 p-4 bg-white text-midnight ">
+                <DisclosureButton className="py-2 w-full text-left font-semibold flex flex-row justify-between items-center font-extraBold">
                   <PrismicRichText field={accordion.title} />
                   {open ? (
                     <MinusIcon color="#6D00FF" />
