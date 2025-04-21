@@ -36,6 +36,7 @@ export default {
       midnight: "#00002D",
       "neon-violet": "#6D00FF",
       "navy-background": "#00002D",
+      "dark-purple-background": "#180451",
     },
     fontWeight: {
       normal: "400",
