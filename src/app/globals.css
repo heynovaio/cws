@@ -139,14 +139,20 @@
   .bg-gradient-primary {
     background: linear-gradient(90deg, #3802a7 0%, #3c1253 98.73%);
   }
-  
-  .react-multi-carousel-item.react-multi-carousel-item--active {
+
+  /* Carousel Styling Below - Helps with making sure the cards are the same size */
+  .tabbed-carousel .react-multi-carousel-item {
     align-content: center;
     justify-content: center;
   }
-  .react-multi-carousel-item {
-    padding-right: 40px;
+
+  .tabbed-carousel .react-multi-carousel-item {
+    padding: 0 20px;
     height: auto !important;
     display: flex !important;
+  }
+
+  .tabbed-carousel .react-multi-carousel-list {
+    overflow: visible;
   }
 }
