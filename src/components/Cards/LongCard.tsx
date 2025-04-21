@@ -29,11 +29,10 @@ export const LongCard = ({
     <div className="card-white flex flex-col md:flex-row items-center !p-2 gap-12 shadow text-midnight">
       <ResponsiveImage
         image={image}
-        imageHeightClassName="aspect-square"
-        containerClassName="w-full max-w-[300px]"
+        imageHeightClassName="aspect-square h-full object-cover"
+        containerClassName="w-full md:w-[300px] h-full"
       />
-
-      <div className="flex flex-col md:flex-row md:justify-between gap-8">
+      <div className="flex flex-col md:flex-row md:justify-between gap-8 flex-1">
         <ContentBox
           title={title}
           content={<PrismicRichText field={content} components={components} />}
@@ -63,6 +62,7 @@ export const LongCard = ({
           }
           width="full"
           titleClassName="text-neon-violet"
+          containerClassName="flex-1"
         />
         {/* Link Fields */}
         <div className="flex flex-col w-full md:w-1/3 items-center gap-2 md:gap-4 justify-around">
