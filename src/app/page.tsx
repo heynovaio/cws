@@ -8,7 +8,7 @@ import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import { getLocales } from "./utils";
 import React from "react";
-import { Layout } from "./components";
+import { Layout } from "@/components";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.

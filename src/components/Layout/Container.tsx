@@ -1,9 +1,9 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import React from "react";
 
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
+  children: React.ReactNode;
   containerClassName?: string;
-  props?: HTMLAttributes<HTMLDivElement>;
+  props?: React.HTMLAttributes<HTMLDivElement>;
 }
 export const Container: React.FC<ContainerProps> = ({
   children,
@@ -11,6 +11,7 @@ export const Container: React.FC<ContainerProps> = ({
   ...props
 }) => {
   return (
+    // Horizontal padding
     <div
       className={`px-5 mx-auto max-w-screen-xl w-full ${containerClassName}`}
       {...props}
