@@ -1,4 +1,4 @@
-import { Container } from "@/app/components";
+import { Container } from "@/components";
 import { Button } from "@/app/components/Button";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";

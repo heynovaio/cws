@@ -5,7 +5,7 @@
 		"primary": {
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "White",
+				"value": "No Background",
 				"type": "Select"
 			},
 			"text_alignment": {
