@@ -139,14 +139,13 @@
   .bg-gradient-primary {
     background: linear-gradient(90deg, #3802a7 0%, #3c1253 98.73%);
   }
-  .react-multi-carousel-item {
-    padding-right: 40px;
-  }
+  
   .react-multi-carousel-item.react-multi-carousel-item--active {
     align-content: center;
     justify-content: center;
   }
   .react-multi-carousel-item {
+    padding-right: 40px;
     height: auto !important;
     display: flex !important;
   }
