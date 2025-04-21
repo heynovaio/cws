@@ -1,4 +1,5 @@
 import { Container } from "@/app/components";
+import { Button } from "@/app/components/Button";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
@@ -62,10 +63,11 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
         </div>
         {slice.primary.button &&
           slice.primary.button.map((link) => (
-            <PrismicNextLink
+            <Button
+              buttonType="primary"
+              label={link.text}
               key={link.key}
-              field={link}
-              className="btn btn-secondary w-fit"
+              buttonLink={link}
             />
           ))}
       </Container>
