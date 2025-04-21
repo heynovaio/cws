@@ -2821,6 +2821,11 @@ hasown@^2.0.0, hasown@^2.0.2:
   dependencies:
     function-bind "^1.1.2"
 
+heroicons@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/heroicons/-/heroicons-2.2.0.tgz#f1f554155152b4ec4d1b7165363d7c583690f77d"
+  integrity sha512-yOwvztmNiBWqR946t+JdgZmyzEmnRMC2nxvHFC90bF1SUttwB6yJKYeme1JeEcBfobdOs827nCyiWBS2z/brog==
+
 hosted-git-info@^4.0.1:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-4.1.0.tgz#827b82867e9ff1c8d0c4d9d53880397d2c86d224"
