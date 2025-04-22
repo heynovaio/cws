@@ -2717,6 +2717,16 @@ export interface TeamListSliceDefaultPrimaryTeamMemberItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   position: prismic.KeyTextField;
+
+  /**
+   * link field in *TeamList → Default → Primary → Team Member*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_list.default.primary.team_member[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
 
 /**
