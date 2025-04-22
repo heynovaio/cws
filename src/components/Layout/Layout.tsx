@@ -23,8 +23,6 @@ export const Layout = ({
   partners,
   children,
 }: LayoutProps) => {
-  console.log(partners);
-
   return (
     <div>
       <Header logo={global.site_logo} slices={menus.slices} locales={locales} />
@@ -37,6 +35,7 @@ export const Layout = ({
           body={partners.body}
           buttons={partners.button}
           logos={partners.logos}
+          ctaText={partners.cta_text}
         />
       </Container>
     </div>
