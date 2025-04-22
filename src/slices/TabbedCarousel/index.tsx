@@ -1,6 +1,5 @@
 "use client";
-import { ContentBox, Section, Container } from "@/components";
-import { LongCard } from "@/components/Cards";
+import { ContentBox, Section, Container, LongCard } from "@/components";
 import { components } from "@/utils";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Content } from "@prismicio/client";
