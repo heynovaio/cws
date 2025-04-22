@@ -2731,7 +2731,7 @@ export interface TeamListSliceDefaultPrimary {
    * - **API ID Path**: team_list.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark">;
+  background_color: prismic.SelectField<"No Background" | "Darker">;
 
   /**
    * Title field in *TeamList → Default → Primary*
