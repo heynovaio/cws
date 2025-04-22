@@ -98,7 +98,6 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      styling="bg-midnight"
     >
       <Container containerClassName="flex flex-col items-center">
         <ContentBox
@@ -173,7 +172,10 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
 
           <TabPanels className="py-12 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm max-w-screen-xs xl:min-w-screen-xl lg:min-w-screen-lg md:min-w-screen-md sm:min-w-screen-sm min-w-screen-xs w-full">
             {tabLabels.map((label) => (
-              <TabPanel key={label} className="tabbed-carousel m-0 rounded-xl focus:focus focus:outline-offset-8">
+              <TabPanel
+                key={label}
+                className="tabbed-carousel m-0 rounded-xl focus:focus focus:outline-offset-8"
+              >
                 <Carousel
                   responsive={responsive}
                   partialVisible
