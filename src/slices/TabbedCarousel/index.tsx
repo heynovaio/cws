@@ -117,7 +117,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
                 onClick={() => handleSlideChange("prev")}
                 disabled={currentSlide === 1}
                 aria-label="Previous slide"
-                className={`${currentSlide === 1 ? "opacity-50" : "hover:text-neon-violet"}`}
+                className={`${currentSlide === 1 ? "opacity-0 " : "hover:text-neon-violet"}`}
               >
                 <HiOutlineArrowLeft className="h-5 w-5" />
               </button>
@@ -128,7 +128,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
                 onClick={() => handleSlideChange("next")}
                 disabled={currentSlide === totalSlides}
                 aria-label="Next slide"
-                className={`${currentSlide === totalSlides ? "opacity-50" : "hover:text-neon-violet"}`}
+                className={`${currentSlide === totalSlides ? "opacity-0" : "hover:text-neon-violet"}`}
               >
                 <HiOutlineArrowLeft className="h-5 w-5 rotate-180" />
               </button>
