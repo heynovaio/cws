@@ -6,7 +6,7 @@ import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { ImageField, LinkField, RichTextField } from "@prismicio/client";
 import { PrismicRichText } from "@prismicio/react";
 import { useRef, useState } from "react";
-import { LongRightArrow, LongLeftArrow } from "../Icons/Arrows";
+import { LongLeftArrow, LongRightArrow } from "@/app/components/Icons/Arrows";
 
 interface IndividualLogo {
   logo_image: ImageField;
