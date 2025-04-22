@@ -1,12 +1,12 @@
 "use client";
 import { ContentBox, Section, Container } from "@/components";
-import { LongCard } from "@/components/Cards/LongCard";
+import { LongCard } from "@/components/Cards";
 import { components } from "@/utils";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { HiOutlineArrowLeft } from "react-icons/hi2";
+import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -147,7 +147,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
                     : "hover:text-neon-violet rounded-md"
                 }`}
               >
-                <HiOutlineArrowLeft className="h-5 w-5" />
+                <HiOutlineArrowLongRight className="h-5 w-5 rotate-180" />
               </button>
               <span aria-live="polite" aria-atomic="true">
                 {currentSlide}/{totalSlides}
@@ -165,7 +165,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
                     : "hover:text-neon-violet"
                 }`}
               >
-                <HiOutlineArrowLeft className="h-5 w-5 rotate-180" />
+                <HiOutlineArrowLongRight className="h-5 w-5" />
               </button>
             </div>
           </div>
