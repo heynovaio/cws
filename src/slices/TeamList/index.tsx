@@ -3,6 +3,7 @@ import { TeamMemberTile } from "@/components/Tiles/TeamMemberTile";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
+import { Section } from "@/components";
 
 /**
  * Props for `TeamList`.
@@ -18,7 +19,7 @@ const TeamList = ({ slice }: TeamListProps): JSX.Element => {
     ? "bg-dark-purple-background"
     : "bg-midnight";
   return (
-    <section
+    <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className={`${bgColor} py-10`}
@@ -36,9 +37,9 @@ const TeamList = ({ slice }: TeamListProps): JSX.Element => {
         )}
 
         <div className="grid gap-10 sm:grid-cols-3 lg:grid-cols-4">
-          {slice.primary.team_member.map((team_member) => (
+          {slice.primary.team_member.map((team_member, index) => (
             <TeamMemberTile
-              key={team_member.name}
+              key={index}
               name={team_member.name}
               position={team_member.position}
               image={team_member.image}
@@ -46,7 +47,7 @@ const TeamList = ({ slice }: TeamListProps): JSX.Element => {
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 };
 

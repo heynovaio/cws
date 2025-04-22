@@ -52,8 +52,8 @@
                 "config": {
                   "label": "Image",
                   "constraint": {
-                    "width": 800,
-                    "height": 800
+                    "width": null,
+                    "height": null
                   },
                   "thumbnails": []
                 }
@@ -70,6 +70,17 @@
                 "config": {
                   "label": "Position",
                   "placeholder": ""
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
                 }
               }
             }
