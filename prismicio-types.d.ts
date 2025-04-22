@@ -603,6 +603,17 @@ type ProgramPageDocumentDataSlicesSlice = never;
  */
 interface ProgramPageDocumentData {
   /**
+   * Image field in *Program Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
    * Title field in *Program Page*
    *
    * - **Field Type**: Rich Text
