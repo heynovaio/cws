@@ -151,8 +151,4 @@
     height: auto !important;
     display: flex !important;
   }
-
-  .tabbed-carousel .react-multi-carousel-list {
-    overflow: visible;
-  }
 }
