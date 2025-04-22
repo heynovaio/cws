@@ -53,6 +53,7 @@ export const DefaultCard = ({
         imageHeightClassName="h-full object-cover"
         containerClassName="w-full max-h-[215px] h-[215px] h-full"
       />
+      {/* TODO: Turn these into links once the filter pages are made */}
       {category && (
         <div className="flex gap-2">
           {category.map((item, index) => (
