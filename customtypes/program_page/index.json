@@ -1,0 +1,132 @@
+{
+  "format": "page",
+  "id": "program_page",
+  "label": "Program Page",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Title",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "heading1,heading2"
+        }
+      },
+      "body": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Body",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl,preformatted"
+        }
+      },
+      "newsletter_sign_up": {
+        "type": "Boolean",
+        "config": {
+          "label": "Newsletter Sign Up",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
+      "newsletter_link": {
+        "type": "Link",
+        "config": {
+          "label": "Newsletter Link",
+          "placeholder": "Get Started",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
+      "time": {
+        "type": "Text",
+        "config": {
+          "label": "Time",
+          "placeholder": ""
+        }
+      },
+      "cost": {
+        "type": "Number",
+        "config": {
+          "label": "Cost",
+          "placeholder": ""
+        }
+      },
+      "certs": {
+        "type": "Boolean",
+        "config": {
+          "label": "Certs",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
+      "format": {
+        "type": "Select",
+        "config": {
+          "label": "Format",
+          "placeholder": "",
+          "options": ["Virtual", "In-Person"],
+          "default_value": "Virtual"
+        }
+      },
+      "included_resources": {
+        "type": "Link",
+        "config": {
+          "label": "Included Resources",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {}
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      }
+    }
+  }
+}
