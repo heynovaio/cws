@@ -9,6 +9,7 @@ import { components } from "@/slices";
 import { getLocales } from "./utils";
 import React from "react";
 import { Layout } from "@/components";
+import { SpecCard } from "@/components/SpecCard";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -62,6 +63,14 @@ export default async function Page({
         slices={page.data.slices}
         components={components}
         context={{ lang }}
+      />
+      <SpecCard
+        title="Details:"
+        time={"1 hr"}
+        cost={5}
+        certs
+        format="Virtual"
+        resources={<div>A</div>}
       />
     </Layout>
   );

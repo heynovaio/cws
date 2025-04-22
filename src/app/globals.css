@@ -47,6 +47,9 @@
     ring-ultra-pink;
   }
 
+  label {
+    @apply text-label font-bold;
+  }
   .btn {
     @apply inline-block
       rounded-full 
