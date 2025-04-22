@@ -1,5 +1,5 @@
 "use client";
-import { Container } from "@/components";
+import { Container, Section } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
@@ -8,8 +8,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { PlusIcon } from "@/app/components/Icons/Plus";
-import { MinusIcon } from "@/app/components/Icons/Minus";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 /**
  * Props for `Accordion`.faqver
@@ -26,10 +25,11 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
     ? "bg-dark-purple-background"
     : "bg-midnight";
   return (
-    <section
+    <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={`${bgColor} py-10`}
+      backgroundColor={slice.primary.background_color}
+      styling="py-10"
     >
       <Container>
         <div className="md:max-w-[50%] flex flex-col gap-4 mb-8 ">
@@ -54,9 +54,9 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
                   >
                     <PrismicRichText field={accordion.title} />
                     {open ? (
-                      <MinusIcon color="#6D00FF" />
+                      <FaMinus color="6D00FF" />
                     ) : (
-                      <PlusIcon color="#6D00FF" />
+                      <FaPlus color="6D00FF" />
                     )}
                   </DisclosureButton>
 
@@ -74,7 +74,7 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
           );
         })}
       </Container>
-    </section>
+    </Section>
   );
 };
 
