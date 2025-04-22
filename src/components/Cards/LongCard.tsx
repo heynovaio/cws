@@ -29,7 +29,7 @@ export const LongCard = ({
     <div className="card-white flex flex-col md:flex-row items-center !p-2 gap-12 shadow text-midnight">
       <ResponsiveImage
         image={image}
-        imageHeightClassName="aspect-square h-full object-cover"
+        imageHeightClassName="aspect-square h-full object-cover !rounded-xl"
         containerClassName="w-full md:w-[300px] h-full"
       />
       <div className="flex flex-col md:flex-row md:justify-between gap-8 flex-1">
@@ -49,7 +49,7 @@ export const LongCard = ({
                           <PrismicNextLink
                             key={index}
                             field={item}
-                            className={`btn flex items-center gap-2 btn-text text-neon-violet`}
+                            className={`btn flex items-center gap-2 px-0 btn-text text-neon-violet`}
                           >
                             {item.text}
                             <HiOutlineArrowLongRight className="h-10 w-10" />
