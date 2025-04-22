@@ -1,12 +1,18 @@
 "use client";
-import { Container } from "@/components";
+import { Container, ContentBox } from "@/components";
 import Carousel, { CarouselInternalState } from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
-import { ImageField, LinkField, RichTextField } from "@prismicio/client";
+import {
+  ImageField,
+  KeyTextField,
+  LinkField,
+  RichTextField,
+} from "@prismicio/client";
 import { PrismicRichText } from "@prismicio/react";
 import { useRef, useState } from "react";
 import { LongLeftArrow, LongRightArrow } from "@/app/components/Icons/Arrows";
+import { Button } from "@/app/components/Button";
 
 interface IndividualLogo {
   logo_image: ImageField;
@@ -16,8 +22,9 @@ interface IndividualLogo {
 interface PartnersProps {
   title: RichTextField;
   body: RichTextField;
-  buttons?: LinkField[];
+  buttons: LinkField[];
   logos: IndividualLogo[];
+  ctaText?: KeyTextField;
 }
 
 const responsive = {
@@ -55,7 +62,9 @@ const CustomArrowBox = ({
         {currentSlide === totalSlides - 1 && (
           <LongLeftArrow color="currentColor" />
         )}
-        {currentSlide + 1} / {totalSlides}
+        <span aria-live="polite" aria-atomic="true">
+          {currentSlide + 1} / {totalSlides}
+        </span>
         {currentSlide !== totalSlides - 1 && (
           <LongRightArrow color="currentColor" />
         )}
@@ -64,7 +73,13 @@ const CustomArrowBox = ({
   );
 };
 
-export const Partners = ({ title, body, buttons, logos }: PartnersProps) => {
+export const Partners = ({
+  title,
+  body,
+  buttons,
+  logos,
+  ctaText,
+}: PartnersProps) => {
   const logoTiles = Array.from(
     { length: Math.ceil(logos.length / 6) },
     (_, i) => logos.slice(i * 6, i * 6 + 6)
@@ -80,20 +95,22 @@ export const Partners = ({ title, body, buttons, logos }: PartnersProps) => {
   return (
     <section className="my-16">
       <Container className="flex flex-col md:flex-row items-center gap-6">
-        <div className="w-full md:w-1/3">
-          <div className="mb-10">
-            <PrismicRichText field={title} />
-            <PrismicRichText field={body} />
-          </div>
-          {buttons &&
-            buttons.map((button, i) => (
-              <PrismicNextLink
-                key={i}
-                field={button}
-                className="btn btn-secondary mt-4"
-              />
-            ))}
-        </div>
+        <ContentBox
+          title={title}
+          content={
+            <div className="flex flex-col gap-2">
+              <PrismicRichText field={body} />
+              <p className="font-extraBold text-[2rem] mt-6">{ctaText}</p>
+            </div>
+          }
+          buttons={buttons.map((button, i) => (
+            <Button
+              buttonType="primary"
+              label={button.text}
+              buttonLink={button}
+            />
+          ))}
+        />
 
         <div className="w-full md:w-2/3">
           <CustomArrowBox
