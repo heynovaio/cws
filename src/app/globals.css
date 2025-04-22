@@ -128,10 +128,10 @@
     -webkit-backdrop-filter: blur(8px);
   }
   .card-white {
-    @apply bg-white text-midnight p-6 rounded shadow;
+    @apply bg-white text-midnight p-4 rounded shadow;
   }
   .card-gradient {
-    @apply bg-gradient-primary text-white p-6 rounded shadow backdrop-blur;
+    @apply bg-gradient-primary text-white p-4 rounded shadow backdrop-blur border border-neon-violet;
   }
   .card-overlay {
     @apply border-2
