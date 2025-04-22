@@ -28,21 +28,25 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
       styling={`py-10`}
     >
       <Container>
-        <ContentBox
-          title={slice.primary.title}
-          content={<PrismicRichText field={slice.primary.body} />}
-          buttons={slice.primary.button.map((button) => {
-            return (
-              <Button
-                key={button.text}
-                buttonLink={button}
-                buttonType="primary"
-                label={button.text}
-              />
-            );
-          })}
-          containerClassName={textAlignment}
-        />
+        <div
+          className={`rounded bg-gradient-dark p-6 md:p-24 ${textAlignment} flex flex-col gap-6`}
+        >
+          <ContentBox
+            title={slice.primary.title}
+            content={<PrismicRichText field={slice.primary.body} />}
+            buttons={slice.primary.button.map((button) => {
+              return (
+                <Button
+                  key={button.text}
+                  buttonLink={button}
+                  buttonType="primary"
+                  label={button.text}
+                />
+              );
+            })}
+            containerClassName={textAlignment}
+          />
+        </div>
       </Container>
     </Section>
   );

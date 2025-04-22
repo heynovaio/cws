@@ -12,7 +12,6 @@ interface ContentBoxProps {
   buttons?: ReactNode[];
   width?: WidthProp;
   containerClassName?: string;
-  alignment?: string;
 }
 export const ContentBox: React.FC<ContentBoxProps> = ({
   children,
@@ -22,7 +21,6 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
   buttons,
   width = "full",
   containerClassName,
-  alignment,
   ...props
 }) => {
   const widthClassName = getWidthClassNames(width);
@@ -44,7 +42,7 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
         )}
         {content && <div>{content}</div>}
       </div>
-      {buttons && buttons.length > 0 && <div className="">{buttons}</div>}
+      {buttons && buttons.length > 0 && <div>{buttons}</div>}
       {children}
     </div>
   );

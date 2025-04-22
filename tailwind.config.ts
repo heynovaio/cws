@@ -74,6 +74,14 @@ export default {
       maxWidth: {
         content: "700px",
       },
+      backgroundImage: {
+        "gradient-primary":
+          "linear-gradient(90deg, #3802a7 0%, #3c1253 98.73%)",
+        "gradient-dark":
+          "linear-gradient(90deg, rgba(99, 15, 249, 0.8) 0%, rgba(51, 23, 153, 0.8) 100%)",
+        "gradient-overlay":
+          "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(3, 0, 233, 0.5) 61.5%)",
+      },
     },
   },
   plugins: [],
