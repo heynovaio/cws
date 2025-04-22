@@ -36,14 +36,6 @@
 								}
 							],
 							[
-								"name",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "string",
-									"type": "Text"
-								}
-							],
-							[
 								"position",
 								{
 									"__TYPE__": "FieldContent",
@@ -52,6 +44,168 @@
 								}
 							]
 						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1616679312958-a86d9539afae?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw0fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3NDUyNDk5MTd8MA&ixlib=rb-4.0.3&q=85&rect=0,504,3024,3024&w=800&h=800",
+									"alt": "orange fruit on white ceramic plate",
+									"origin": {
+										"id": "Jr7t5QviCDM",
+										"url": "https://images.unsplash.com/photo-1616679312958-a86d9539afae?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw0fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3NDUyNDk5MTd8MA&ixlib=rb-4.0.3&q=85",
+										"width": 3024,
+										"height": 4032
+									},
+									"width": 800,
+									"height": 800,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 504
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Name 2"
+								}
+							],
+							[
+								"position",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "position"
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Name 3"
+								}
+							],
+							[
+								"position",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "position"
+								}
+							],
+							[
+								"image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1581340752304-a781f821e8ce?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw4fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3NDUyNDk5MTd8MA&ixlib=rb-4.0.3&q=85&rect=0,1131,3092,3092&w=800&h=800",
+									"alt": "sliced green lime on brown wooden table",
+									"origin": {
+										"id": "UFrsHcCi21A",
+										"url": "https://images.unsplash.com/photo-1581340752304-a781f821e8ce?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw4fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3NDUyNDk5MTd8MA&ixlib=rb-4.0.3&q=85",
+										"width": 3092,
+										"height": 5353
+									},
+									"width": 800,
+									"height": 800,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 1131
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1582789760972-c8916cebe649?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxOHx8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzQ1MjQ5OTE3fDA&ixlib=rb-4.0.3&q=85&rect=740,0,2901,2901&w=800&h=800",
+									"alt": "orange fruit in water with water",
+									"origin": {
+										"id": "uYM_PQJ8VvY",
+										"url": "https://images.unsplash.com/photo-1582789760972-c8916cebe649?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxOHx8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzQ1MjQ5OTE3fDA&ixlib=rb-4.0.3&q=85",
+										"width": 4380,
+										"height": 2901
+									},
+									"width": 800,
+									"height": 800,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 740,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Name 4"
+								}
+							],
+							[
+								"position",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Position"
+								}
+							]
+						]
+					}
+				]
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Sunt sint labore ullamco nulla esse id aliqua commodo enim.",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -61,24 +215,10 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "Story"
-						}
-					}
-				]
-			},
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "White",
-				"type": "Select"
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Sunt sint labore ullamco nulla esse id aliqua commodo enim."
-						}
+							"text": "Story",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			}
