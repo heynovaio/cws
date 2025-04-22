@@ -1,5 +1,5 @@
 "use client";
-import { Container, Section } from "@/components";
+import { Container, ContentBox, Section } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
@@ -9,6 +9,7 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { Button } from "@/app/components/Button";
 
 /**
  * Props for `Accordion`.faqver
@@ -33,8 +34,20 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
     >
       <Container>
         <div className="md:max-w-[50%] flex flex-col gap-4 mb-8 ">
-          <PrismicRichText field={slice.primary.title} />
-          <PrismicRichText field={slice.primary.body} />
+          <ContentBox
+            title={slice.primary.title}
+            content={<PrismicRichText field={slice.primary.body} />}
+            buttons={slice.primary.button.map((button) => {
+              return (
+                <Button
+                  key={button.text}
+                  buttonLink={button}
+                  buttonType="primary"
+                  label={button.text}
+                />
+              );
+            })}
+          />
         </div>
 
         {slice.primary.accordion_group.map((accordion, index) => {
