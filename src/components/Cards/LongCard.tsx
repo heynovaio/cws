@@ -49,7 +49,7 @@ export const LongCard = ({
                           <PrismicNextLink
                             key={index}
                             field={item}
-                            className={`btn flex items-center gap-2 px-0 btn-text text-neon-violet`}
+                            className={`flex items-center gap-2 px-0 btn-link text-neon-violet`}
                           >
                             {item.text}
                             <HiOutlineArrowLongRight className="h-10 w-10" />
