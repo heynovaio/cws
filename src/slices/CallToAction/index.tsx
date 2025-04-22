@@ -1,5 +1,5 @@
 import { Button } from "@/app/components/Button";
-import { Container } from "@/components";
+import { Container, Section } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
@@ -18,16 +18,14 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
     ? "items-start text-left"
     : "items-center text-center";
 
-  const darkerBackground = slice.primary.background_color == "Darker";
-  const bgColor = darkerBackground
-    ? "bg-dark-purple-background"
-    : "bg-midnight";
+  console.log(slice.primary.background_color);
 
   return (
-    <section
+    <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={`${bgColor} py-10`}
+      backgroundColor={slice.primary.background_color}
+      styling={`py-10`}
     >
       <Container>
         <div
@@ -47,7 +45,7 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
           })}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 };
 
