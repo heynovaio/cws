@@ -24,6 +24,7 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
   ...props
 }) => {
   const widthClassName = getWidthClassNames(width);
+
   return (
     <div
       data-test-id="contentbox"
