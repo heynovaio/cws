@@ -18,7 +18,7 @@ export const TeamMemberTile = ({
         <div className="rounded mb-4 overflow-hidden border border-neon-violet aspect-square">
           <ResponsiveImage
             image={image}
-            className="w-full object-cover rounded"
+            className="w-full object-cover rounded aspect-square"
             imageHeightClassName="h-full"
           />
         </div>
