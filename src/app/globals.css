@@ -35,6 +35,18 @@
   ol {
     @apply list-decimal pl-6 space-y-2 text-bodyLarge;
   }
+
+  .focus,
+  button:focus {
+    @apply outline -outline-offset-1 outline-2 outline-ultra-pink
+    ring-ultra-pink;
+  }
+
+  a:focus {
+    @apply outline outline-offset-4 rounded-md outline-2 outline-ultra-pink
+    ring-ultra-pink;
+  }
+
   .btn {
     @apply inline-block
       rounded-full 
@@ -151,4 +163,5 @@
     height: auto !important;
     display: flex !important;
   }
+
 }

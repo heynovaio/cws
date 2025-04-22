@@ -5,7 +5,7 @@ import { components } from "@/utils";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi2";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -35,6 +35,7 @@ const responsive = {
 const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const carouselRef = useRef<Carousel>(null);
+  const carouselContainerRef = useRef<HTMLDivElement>(null);
 
   type TabItem = (typeof slice.primary.tab)[number];
 
@@ -63,16 +64,35 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
     setCurrentSlide(1);
   };
 
-  // Carousel button to view next slide
-  const handleSlideChange = (direction: "prev" | "next") => {
-    if (!carouselRef.current) return;
+  const handleSlideChange = useCallback(
+    (direction: "prev" | "next") => {
+      if (!carouselRef.current) return;
 
-    if (direction === "prev" && currentSlide > 1) {
-      carouselRef.current.previous(1);
-    } else if (direction === "next" && currentSlide < totalSlides) {
-      carouselRef.current.next(1);
-    }
-  };
+      if (direction === "prev" && currentSlide > 1) {
+        carouselRef.current.previous(1);
+      } else if (direction === "next" && currentSlide < totalSlides) {
+        carouselRef.current.next(1);
+      }
+    },
+    [currentSlide, totalSlides]
+  );
+
+  // Allows users to navigate via keyboard
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!carouselContainerRef.current?.contains(document.activeElement))
+        return;
+
+      if (event.key === "ArrowLeft") {
+        handleSlideChange("prev");
+      } else if (event.key === "ArrowRight") {
+        handleSlideChange("next");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentSlide, handleSlideChange, totalSlides]);
 
   return (
     <Section
@@ -112,38 +132,55 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
                 </Tab>
               ))}
             </TabList>
-            <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-white text-midnight">
+            <div
+              className="flex items-center gap-2 rounded-md bg-white text-midnight focus:bg-light-violet shadow focus:focus"
+              ref={carouselContainerRef}
+              tabIndex={0}
+            >
               <button
-                onClick={() => handleSlideChange("prev")}
-                disabled={currentSlide === 1}
+                onClick={() => currentSlide > 1 && handleSlideChange("prev")}
                 aria-label="Previous slide"
-                className={`${currentSlide === 1 ? "opacity-0 " : "hover:text-neon-violet"}`}
+                aria-disabled={currentSlide === 1}
+                tabIndex={0}
+                className={`rounded-md p-2 ${
+                  currentSlide === 1
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:text-neon-violet rounded-md"
+                }`}
               >
                 <HiOutlineArrowLeft className="h-5 w-5" />
               </button>
-              <span>
+              <span aria-live="polite" aria-atomic="true">
                 {currentSlide}/{totalSlides}
               </span>
               <button
-                onClick={() => handleSlideChange("next")}
-                disabled={currentSlide === totalSlides}
+                onClick={() =>
+                  currentSlide < totalSlides && handleSlideChange("next")
+                }
                 aria-label="Next slide"
-                className={`${currentSlide === totalSlides ? "opacity-0" : "hover:text-neon-violet"}`}
+                aria-disabled={currentSlide === totalSlides}
+                tabIndex={0}
+                className={`rounded-md p-2 ${
+                  currentSlide === totalSlides
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:text-neon-violet"
+                }`}
               >
                 <HiOutlineArrowLeft className="h-5 w-5 rotate-180" />
               </button>
             </div>
           </div>
 
-          <TabPanels className="py-12 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm max-w-screen-xs xl:min-w-screen-xl lg:min-w-screen-lg md:min-w-screen-md sm:min-w-screen-sm min-w-screen-xs  w-full">
+          <TabPanels className="py-12 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm max-w-screen-xs xl:min-w-screen-xl lg:min-w-screen-lg md:min-w-screen-md sm:min-w-screen-sm min-w-screen-xs w-full">
             {tabLabels.map((label) => (
-              <TabPanel key={label} className="tabbed-carousel">
+              <TabPanel key={label} className="tabbed-carousel m-0 rounded-xl focus:focus focus:outline-offset-8">
                 <Carousel
                   responsive={responsive}
                   partialVisible
                   keyBoardControl
                   arrows={false}
                   itemClass="react-multi-carousel-item"
+                  className="focus:focus"
                   containerClass={`lg:w-[1144px] ${groupedTabs[label].length === 1 ? "!overflow-visible" : ""}`}
                   ref={
                     activeTab === tabLabels.indexOf(label) ? carouselRef : null
