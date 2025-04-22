@@ -1,5 +1,5 @@
 import { Button } from "@/app/components/Button";
-import { Container, Section } from "@/components";
+import { Container, ContentBox, Section } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
@@ -28,12 +28,10 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
       styling={`py-10`}
     >
       <Container>
-        <div
-          className={`rounded bg-gradient-dark p-6 md:p-24 ${textAlignment} flex flex-col gap-6`}
-        >
-          <PrismicRichText field={slice.primary.title} />
-          <PrismicRichText field={slice.primary.body} />
-          {slice.primary.button.map((button) => {
+        <ContentBox
+          title={slice.primary.title}
+          content={<PrismicRichText field={slice.primary.body} />}
+          buttons={slice.primary.button.map((button) => {
             return (
               <Button
                 key={button.text}
@@ -43,7 +41,8 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
               />
             );
           })}
-        </div>
+          containerClassName={textAlignment}
+        />
       </Container>
     </Section>
   );

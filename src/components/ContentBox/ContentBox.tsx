@@ -12,6 +12,7 @@ interface ContentBoxProps {
   buttons?: ReactNode[];
   width?: WidthProp;
   containerClassName?: string;
+  alignment?: string;
 }
 export const ContentBox: React.FC<ContentBoxProps> = ({
   children,
@@ -21,6 +22,7 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
   buttons,
   width = "full",
   containerClassName,
+  alignment,
   ...props
 }) => {
   const widthClassName = getWidthClassNames(width);
@@ -28,13 +30,13 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
     <div
       data-test-id="contentbox"
       className={clsx(
-        "flex flex-col gap-7 contentBox",
+        "flex flex-col gap-7 contentBox ",
         widthClassName,
-        containerClassName,
+        containerClassName
       )}
       {...props}
     >
-      <div className={`flex flex-col w-full ${titleGap}`}>
+      <div className={`flex flex-col w-full  ${titleGap}`}>
         {typeof title === "string" ? (
           <h2>{title}</h2>
         ) : (
@@ -42,7 +44,7 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
         )}
         {content && <div>{content}</div>}
       </div>
-      {buttons && buttons.length > 0 && <div className="w-full">{buttons}</div>}
+      {buttons && buttons.length > 0 && <div className="">{buttons}</div>}
       {children}
     </div>
   );
