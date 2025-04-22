@@ -115,7 +115,7 @@ export const Partners = ({ title, body, buttons, logos }: PartnersProps) => {
             {logoTiles.map((tile, index) => (
               <div
                 key={index}
-                className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16"
+                className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16 p-1"
               >
                 {tile.map((logo, i) => (
                   <PrismicNextLink
