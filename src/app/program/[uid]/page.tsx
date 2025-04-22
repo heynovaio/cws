@@ -14,14 +14,18 @@ import { getLocales } from "@/utils";
  * This page renders a Prismic Document dynamically based on the URL.
  */
 
+type Params = { uid: string; lang: string };
+
 export async function generateMetadata({
-  params: { lang },
+  params,
 }: {
-  params: { lang: string };
+  params: Promise<Params>;
 }): Promise<Metadata> {
+  const { uid, lang } = await params;
+
   const client = createClient();
   const page = await client
-    .getByUID("page", "home", { lang })
+    .getByUID("program_page", uid, { lang })
     .catch(() => notFound());
 
   return {
@@ -41,31 +45,26 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({
-  params: { lang },
-}: {
-  params: { lang: string };
-}) {
-  const client = createClient();
+export default async function Page({ params }: { params: Promise<Params> }) {
+  const { uid, lang } = await params;
 
-  const page = await client.getByUID("page", "home", { lang });
+  const client = createClient();
+  const page = await client
+    .getByUID("program_page", uid, { lang })
+    .catch(() => notFound());
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
-  const partners = await client.getSingle("partners", { lang });
 
   const locales = await getLocales(page, client);
 
+  console.log("Resources: ", page.data.included_resources);
+
   return (
-    <Layout
-      locales={locales}
-      global={global.data}
-      menus={menus.data}
-      partners={partners.data}
-    >
+    <Layout locales={locales} global={global.data} menus={menus.data}>
       <SliceZone
         slices={page.data.slices}
         components={components}
-        context={{ lang }}
+        context={{ lang: "en-ca" }}
       />
     </Layout>
   );
@@ -73,14 +72,15 @@ export default async function Page({
 
 export async function generateStaticParams() {
   const client = createClient();
-
-  const pages = await client.getAllByType("page", {
-    lang: "*",
-    filters: [prismic.filter.at("my.page.uid", "home")],
-  });
+  const pages = await client
+    .getAllByType("program_page", {
+      lang: "*",
+    })
+    .catch(() => notFound());
 
   return pages.map((page) => {
     return {
+      uid: page.uid,
       lang: page.lang,
     };
   });
