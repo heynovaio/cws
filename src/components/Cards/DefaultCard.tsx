@@ -35,15 +35,15 @@ export const DefaultCard = ({
     case "program":
       cardBackground = "card-gradient";
       categoryChipColor =
-        "bg-light-violet text-midnight border border-midnight";
+        "bg-light-violet text-midnight border-midnight";
       break;
     case "resource":
       cardBackground = "card-white";
-      categoryChipColor = "text-dark border border-neon-violet";
+      categoryChipColor = "text-dark border-neon-violet";
       break;
     default:
       cardBackground = "card-white";
-      categoryChipColor = "text-dark border border-neon-violet";
+      categoryChipColor = "text-dark border-neon-violet";
       break;
   }
   return (
@@ -59,7 +59,7 @@ export const DefaultCard = ({
           {category.map((item, index) => (
             <span
               key={index}
-              className={`self-start rounded-full px-2 py-1 items-center ${categoryChipColor}`}
+              className={`self-start rounded-full px-2 py-1 items-center font-accent font-medium border-[1.5px] ${categoryChipColor}`}
             >
               {item}
             </span>
