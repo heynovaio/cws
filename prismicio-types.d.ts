@@ -596,6 +596,181 @@ export type PartnersDocument<Lang extends string = string> =
     Lang
   >;
 
+type ProgramPageDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Program Page documents
+ */
+interface ProgramPageDocumentData {
+  /**
+   * Title field in *Program Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *Program Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Newsletter Sign Up field in *Program Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: program_page.newsletter_sign_up
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  newsletter_sign_up: prismic.BooleanField;
+
+  /**
+   * Newsletter Link field in *Program Page*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Get Started
+   * - **API ID Path**: program_page.newsletter_link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  newsletter_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Time field in *Program Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.time
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  time: prismic.KeyTextField;
+
+  /**
+   * Cost field in *Program Page*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.cost
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  cost: prismic.NumberField;
+
+  /**
+   * Certs field in *Program Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: program_page.certs
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  certs: prismic.BooleanField;
+
+  /**
+   * Format field in *Program Page*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Virtual
+   * - **API ID Path**: program_page.format
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  format: prismic.SelectField<"Virtual" | "In-Person", "filled">;
+
+  /**
+   * Included Resources field in *Program Page*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.included_resources
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  included_resources: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Slice Zone field in *Program Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ProgramPageDocumentDataSlicesSlice> /**
+   * Meta Title field in *Program Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: program_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Program Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: program_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Program Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Program Page document from Prismic
+ *
+ * - **API ID**: `program_page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProgramPageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ProgramPageDocumentData>,
+    "program_page",
+    Lang
+  >;
+
 /**
  * Item in *Resource Category → Keywords*
  */
@@ -893,6 +1068,7 @@ export type AllDocumentTypes =
   | OfferingsCategoryDocument
   | PageDocument
   | PartnersDocument
+  | ProgramPageDocument
   | ResourceCategoryDocument
   | ResourcePageDocument
   | TeamMembersDocument;
@@ -3171,6 +3347,9 @@ declare module "@prismicio/client" {
       PartnersDocument,
       PartnersDocumentData,
       PartnersDocumentDataLogosItem,
+      ProgramPageDocument,
+      ProgramPageDocumentData,
+      ProgramPageDocumentDataSlicesSlice,
       ResourceCategoryDocument,
       ResourceCategoryDocumentData,
       ResourceCategoryDocumentDataKeywordsItem,
