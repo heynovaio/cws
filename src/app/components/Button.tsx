@@ -7,6 +7,7 @@ interface ButtonProps {
   label: ReactNode;
   linkButtonColorClass?: string;
   buttonLink: LinkField;
+  styling: string;
 }
 
 const arrowIcon = (
@@ -31,6 +32,7 @@ export const Button = ({
   label,
   linkButtonColorClass = "",
   buttonLink,
+  styling,
 }: ButtonProps) => {
   let buttonStyle = "";
 
@@ -54,7 +56,7 @@ export const Button = ({
   return (
     <PrismicNextLink
       field={buttonLink}
-      className={`flex flex-row w-fit items-center gap-2 hover:gap-4 ${buttonStyle} ${linkButtonColorClass}`}
+      className={`flex flex-row w-fit items-center gap-2 hover:gap-4 ${styling} ${buttonStyle} ${linkButtonColorClass}`}
     >
       {label}
       {buttonType == "link" && arrowIcon}

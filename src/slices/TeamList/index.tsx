@@ -43,6 +43,8 @@ const TeamList = ({ slice }: TeamListProps): JSX.Element => {
               name={team_member.name}
               position={team_member.position}
               image={team_member.image}
+              link={team_member.link}
+              linkLabel={team_member.link.text}
             />
           ))}
         </div>

@@ -50,6 +50,18 @@
 									"type": "Text",
 									"value": "Name 1"
 								}
+							],
+							[
+								"link",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "414a3443-3c37-4f41-97df-e761eb5a13de",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "https://www.google.com/",
+										"text": "View Link"
+									}
+								}
 							]
 						]
 					},
@@ -190,6 +202,18 @@
 									"__TYPE__": "FieldContent",
 									"type": "Text",
 									"value": "Position"
+								}
+							],
+							[
+								"link",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "04155ad7-3c01-4029-8f52-4c40dc887afb",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "https://www.google.com/",
+										"text": "View link"
+									}
 								}
 							]
 						]

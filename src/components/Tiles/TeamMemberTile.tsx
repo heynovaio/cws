@@ -1,16 +1,21 @@
+import { Button } from "@/app/components/Button";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
-import { ImageField, KeyTextField } from "@prismicio/client";
+import { ImageField, KeyTextField, LinkField } from "@prismicio/client";
 
 interface TeamMemberTileProps {
-  image: ImageField;
-  name: KeyTextField;
-  position: KeyTextField;
+  image?: ImageField;
+  name?: KeyTextField;
+  position?: KeyTextField;
+  link?: LinkField;
+  linkLabel?: string;
 }
 
 export const TeamMemberTile = ({
   image,
   name,
   position,
+  link,
+  linkLabel,
 }: TeamMemberTileProps) => {
   return (
     <div className="bg-white border border-neon-violet rounded p-4 text-midnight w-full flex flex-col shadow">
@@ -23,8 +28,16 @@ export const TeamMemberTile = ({
           />
         </div>
       )}
-      <p className="font-extraBold text-bodyLarge ml-1">{name}</p>
-      <p className="text-base ml-1">{position}</p>
+      {name && <p className="font-extraBold text-bodyLarge ml-1">{name}</p>}
+      {position && <p className="text-base ml-1">{position}</p>}
+      {link && linkLabel && (
+        <Button
+          buttonType="link"
+          buttonLink={link}
+          label={linkLabel}
+          styling="text-base ml-1 mt-1"
+        />
+      )}
     </div>
   );
 };
