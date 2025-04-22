@@ -14,15 +14,11 @@ export type TeamListProps = SliceComponentProps<Content.TeamListSlice>;
  * Component for "TeamList" Slices.
  */
 const TeamList = ({ slice }: TeamListProps): JSX.Element => {
-  const darkerBackground = slice.primary.background_color == "Darker";
-  const bgColor = darkerBackground
-    ? "bg-dark-purple-background"
-    : "bg-midnight";
   return (
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={`${bgColor} py-10`}
+      backgroundColor={slice.primary.background_color}
     >
       <Container>
         {(slice.primary.title || slice.primary.body) && (
