@@ -1,4 +1,10 @@
-import { LinkField, RichTextField } from "@prismicio/client";
+"use client";
+import {
+  KeyTextField,
+  LinkField,
+  NumberField,
+  RichTextField,
+} from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
 import React from "react";
@@ -6,12 +12,12 @@ import { FaLaptop, FaMedal } from "react-icons/fa";
 import { MdAccessTimeFilled, MdAttachMoney } from "react-icons/md";
 
 interface SpecCardProps {
-  title: string | RichTextField;
-  time: string;
-  cost: number;
+  title?: string | RichTextField;
+  time?: KeyTextField;
+  cost?: NumberField;
   certs?: boolean;
   format?: string;
-  resources?: LinkField[]; // Made optional to match the usage
+  resources?: LinkField[];
 }
 
 export const SpecCard = ({
@@ -22,6 +28,7 @@ export const SpecCard = ({
   format,
   resources,
 }: SpecCardProps) => {
+  console.log("Spec Card resources: ", resources);
   return (
     <div className="card-white p-5 flex gap-5 flex-col border border-neon-violet">
       {typeof title === "string" ? (
@@ -63,8 +70,8 @@ export const SpecCard = ({
           <ul className="list-disc pl-5">
             {resources.map((item, index) => (
               <li key={index}>
-                <PrismicNextLink field={item}>
-                  {item.label}
+                <PrismicNextLink field={item} className="link-no-underline">
+                  {item.text}
                 </PrismicNextLink>
               </li>
             ))}
