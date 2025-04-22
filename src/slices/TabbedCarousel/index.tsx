@@ -205,6 +205,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
             ))}
           </TabPanels>
         </TabGroup>
+        {/* TODO: Remove before merging */}
         <Grid maxColumns={3}>
           <DefaultCard
             title={slice.primary.title}
