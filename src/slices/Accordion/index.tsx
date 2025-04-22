@@ -21,10 +21,10 @@ export type AccordionProps = SliceComponentProps<Content.AccordionSlice>;
  */
 
 const Accordion = ({ slice }: AccordionProps): JSX.Element => {
-  const darkerBackground = slice.primary.background_color == "Darker";
-  const bgColor = darkerBackground
-    ? "bg-dark-purple-background"
-    : "bg-midnight";
+  const filteredButtons = slice.primary.button?.filter(
+    (button) => button.text && button
+  );
+
   return (
     <Section
       data-slice-type={slice.slice_type}
@@ -37,7 +37,7 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
           <ContentBox
             title={slice.primary.title}
             content={<PrismicRichText field={slice.primary.body} />}
-            buttons={slice.primary.button.map((button) => {
+            buttons={filteredButtons?.map((button) => {
               return (
                 <Button
                   key={button.text}
@@ -77,9 +77,20 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
                     id={panelId}
                     role="region"
                     aria-labelledby={buttonId}
-                    className="mt-2"
+                    className="mt-2 flex flex-col gap-4"
                   >
                     <PrismicRichText field={accordion.body} />
+                    {accordion.button &&
+                      accordion.button.map((button) => {
+                        return (
+                          <Button
+                            key={button.text}
+                            buttonLink={button}
+                            buttonType="primary"
+                            label={button.text}
+                          />
+                        );
+                      })}
                   </DisclosurePanel>
                 </div>
               )}

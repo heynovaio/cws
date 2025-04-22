@@ -37,12 +37,12 @@
 				"type": "Link",
 				"value": [
 					{
-						"key": "10d8e2b7-a548-43d6-8cf1-49e1ee720d1b",
 						"__TYPE__": "LinkContent",
+						"key": "10d8e2b7-a548-43d6-8cf1-49e1ee720d1b",
 						"value": {
-							"__TYPE__": "ExternalLink",
-							"url": "http://twitter.com",
-							"text": "symbol"
+							"__TYPE__": "AnyLink",
+							"kind": "any",
+							"text": ""
 						}
 					}
 				]
