@@ -1,7 +1,8 @@
 import { Container } from "@/components";
 import { Button } from "@/app/components/Button";
+import { Container } from "@/components";
 import { Content } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 
@@ -29,7 +30,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
       data-slice-variation={slice.variation}
       className="bg-midnight p-10"
     >
-      <Container className="flex flex-col gap-12 items-center">
+      <Container containerClassName="flex flex-col gap-12 items-center">
         <div
           className="bg-neon-violet shadow rounded py-4 px-6 md:py-16 md:px-28  bg-no-repeat "
           style={{
