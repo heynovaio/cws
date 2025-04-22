@@ -120,7 +120,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
                 <Tab
                   key={label}
                   className={({ selected }) =>
-                    `rounded-full px-4 py-2 font-semibold ${
+                    `rounded-full px-4 py-2 font-semibold focus ${
                       selected
                         ? "bg-neon-violet text-white"
                         : "text-midnight hover:bg-neon-violet/20"
@@ -132,7 +132,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
               ))}
             </TabList>
             <div
-              className="flex items-center gap-2 rounded-md bg-white text-midnight focus:bg-light-violet shadow focus:focus"
+              className="flex items-center gap-2 rounded-md bg-white text-midnight focus:bg-light-violet shadow focus"
               ref={carouselContainerRef}
               tabIndex={0}
             >
@@ -141,7 +141,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
                 aria-label="Previous slide"
                 aria-disabled={currentSlide === 1}
                 tabIndex={0}
-                className={`rounded-md p-2 ${
+                className={`rounded-md p-2 focus ${
                   currentSlide === 1
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:text-neon-violet rounded-md"
@@ -159,7 +159,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
                 aria-label="Next slide"
                 aria-disabled={currentSlide === totalSlides}
                 tabIndex={0}
-                className={`rounded-md p-2 ${
+                className={`rounded-md p-2 focus ${
                   currentSlide === totalSlides
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:text-neon-violet"
