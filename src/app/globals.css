@@ -36,14 +36,14 @@
     @apply list-decimal pl-6 space-y-2 text-bodyLarge;
   }
 
-  .focus,
-  button:focus {
-    @apply outline -outline-offset-1 outline-2 outline-ultra-pink
+  .focus:focus,
+  .btn:focus {
+    @apply outline -outline-offset-1 outline-4 outline-ultra-pink
     ring-ultra-pink;
   }
 
   a:focus {
-    @apply outline outline-offset-4 rounded-md outline-2 outline-ultra-pink
+    @apply outline outline-offset-2 rounded-md outline-4 outline-ultra-pink
     ring-ultra-pink;
   }
 
@@ -60,13 +60,13 @@
     @apply text-white bg-ultra-pink border border-ultra-pink transition-transform duration-200;
 
     &:hover {
-      @apply bg-ultra-pink/80 text-white border-ultra-pink -translate-y-1;
+      @apply bg-neon-violet text-white border-ultra-pink -translate-y-1;
       box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
 
     &:active,
     &:focus {
-      @apply ring-4 ring-neon-violet shadow
+      @apply ring-4 ring-ultra-pink shadow
       outline-none;
     }
   }
@@ -163,5 +163,4 @@
     height: auto !important;
     display: flex !important;
   }
-
 }
