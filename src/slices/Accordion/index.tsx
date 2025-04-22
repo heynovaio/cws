@@ -1,5 +1,5 @@
 "use client";
-import { Container } from "@/app/components";
+import { Container } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
