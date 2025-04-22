@@ -31,6 +31,7 @@ export default {
       "electric-blue": "#0300E9",
       midnight: "#00002D",
       "neon-violet": "#6D00FF",
+      "light-violet": "#E5D8FF",
       "navy-background": "#00002D",
     },
     fontWeight: {
