@@ -39,7 +39,7 @@
   .focus:focus,
   .btn:focus {
     @apply outline -outline-offset-1 outline-4 outline-ultra-pink
-    ring-ultra-pink;
+    ring-ultra-pink overflow-hidden;
   }
 
   a:focus {
