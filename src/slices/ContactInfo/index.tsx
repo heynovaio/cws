@@ -18,8 +18,8 @@ const ContactInfo = ({ slice }: ContactInfoProps): JSX.Element => {
       data-slice-variation={slice.variation}
     >
       <Container>
-        <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
-          <div className="w-full md:w-2/3 ">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-stretch">
+          <div className="w-full md:w-2/3 md:mt-10">
             <PrismicRichText field={slice.primary.title} />
             <PrismicRichText field={slice.primary.description} />
             {slice.primary.image && (
@@ -29,9 +29,13 @@ const ContactInfo = ({ slice }: ContactInfoProps): JSX.Element => {
               />
             )}
           </div>
-          {/** fixed height is just in there as the form embed placeholder */}
-          <div className="bg-white w-full h-[800px] rounded text-midnight">
-            FORM PLACEHOLDER
+          {/** white bg is just temp to show the two columns */}
+          <div className="bg-white w-full rounded text-midnight p-4">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: slice.primary.form?.html ?? "",
+              }}
+            />
           </div>
         </div>
       </Container>

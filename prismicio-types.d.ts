@@ -1392,6 +1392,16 @@ export interface ContactInfoSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
+
+  /**
+   * Form field in *ContactInfo → Default → Primary*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.form
+   * - **Documentation**: https://prismic.io/docs/field#embed
+   */
+  form: prismic.EmbedField;
 }
 
 /**

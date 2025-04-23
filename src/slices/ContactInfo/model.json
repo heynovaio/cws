@@ -37,6 +37,13 @@
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl,heading3,heading4,heading5,heading6,preformatted"
           }
+        },
+        "form": {
+          "type": "Embed",
+          "config": {
+            "label": "Form",
+            "placeholder": ""
+          }
         }
       },
       "items": {}
