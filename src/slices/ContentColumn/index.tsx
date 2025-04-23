@@ -13,18 +13,24 @@ export type ContentColumnProps =
  * Component for "ContentColumn" Slices.
  */
 const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
-  const cardBgColor =
+  const cardStyling =
     slice.primary.card_background === "Purple"
       ? "bg-neon-violet/60 text-white divide-soft-purple/25"
       : "bg-white text-midnight divide-neon-violet";
+
+  const isSingleColumn = slice.primary.column.length === 1;
   return (
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <Container>
+      <Container
+        containerClassName={isSingleColumn ? "flex justify-center" : ""}
+      >
         <div
-          className={`${cardBgColor} flex flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch divide-x `}
+          className={`${cardStyling} flex flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch divide-x ${
+            isSingleColumn ? "max-w-[860px] w-full" : "w-full"
+          }`}
         >
           {slice.primary.column.map((item) => (
             <div className="flex flex-col items-center justify-center p-10 w-full ">
@@ -34,8 +40,12 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
                   imageHeightClassName="h-[100px] w-auto"
                 />
               )}
-              <div className="mt-4 text-center">
-                <PrismicRichText field={item.title} />
+              <div className="mt-4 text-center flex flex-col gap-2">
+                {slice.variation === "stats" ? (
+                  <p className="text-h3">{item.stat_number}</p>
+                ) : (
+                  <PrismicRichText field={item.title} />
+                )}
                 <PrismicRichText field={item.description} />
               </div>
             </div>
