@@ -16,6 +16,9 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
   const imageSide =
     slice.primary.image_side === false ? "md:flex-row" : "md:flex-row-reverse";
 
+  const isVideo = slice.variation === "video";
+  const isStats = slice.variation === "stats";
+
   return (
     <Section
       data-slice-type={slice.slice_type}
@@ -26,10 +29,21 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
         containerClassName={`flex flex-col ${imageSide} gap-4 md:gap-16 w-full items-center`}
       >
         <div className="w-full md:w-1/2">
-          <ResponsiveImage
-            image={slice.primary.image}
-            className="w-full md:h-[400px] object-contain"
-          />
+          {isVideo ? (
+            <div className="w-full h-[250px] md:h-[400px] overflow-hidden rounded-xl">
+              <div
+                className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:absolute [&>iframe]:top-0 [&>iframe]:left-0 relative"
+                dangerouslySetInnerHTML={{
+                  __html: slice.primary.video?.html ?? "",
+                }}
+              />
+            </div>
+          ) : (
+            <ResponsiveImage
+              image={slice.primary.image}
+              className="w-full h-[250px] md:h-[400px] object-cover"
+            />
+          )}
         </div>
 
         <div className="w-full md:w-1/2">
