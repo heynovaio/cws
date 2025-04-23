@@ -26,11 +26,11 @@ export const LongCard = ({
   const linksExist = links && links.length > 0;
 
   return (
-    <div className="card-white flex flex-col md:flex-row items-center !p-2 gap-12 shadow text-midnight">
+    <div className="card-white flex flex-col md:flex-row items-center !p-2 gap-12 shadow text-midnight h-full">
       <ResponsiveImage
         image={image}
-        imageHeightClassName="aspect-square h-full object-cover !rounded-xl"
-        containerClassName="w-full md:w-[300px] h-full"
+        containerClassName="md:w-1/3 w-full h-full"
+        imageHeightClassName="h-full w-full"
       />
       <div className="flex flex-col md:flex-row md:justify-between gap-8 flex-1">
         <ContentBox
@@ -62,10 +62,10 @@ export const LongCard = ({
           }
           width="full"
           titleClassName="text-neon-violet"
-          containerClassName="flex-1"
+          containerClassName="flex-1 md:my-12"
         />
         {/* Link Fields */}
-        <div className="flex flex-col w-full md:w-1/3 items-center gap-2 md:gap-4 justify-around">
+        <div className="flex flex-col w-full md:w-1/3 items-center justify-center gap-4">
           {linksExist &&
             links.map((item, index) => (
               <PrismicNextLink
