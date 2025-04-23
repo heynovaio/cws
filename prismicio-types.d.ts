@@ -1452,6 +1452,71 @@ export type CallToActionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *ContactInfo → Default → Primary*
+ */
+export interface ContactInfoSliceDefaultPrimary {
+  /**
+   * Title field in *ContactInfo → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Image field in *ContactInfo → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Description field in *ContactInfo → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for ContactInfo Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactInfoSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContactInfoSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContactInfo*
+ */
+type ContactInfoSliceVariation = ContactInfoSliceDefault;
+
+/**
+ * ContactInfo Shared Slice
+ *
+ * - **API ID**: `contact_info`
+ * - **Description**: ContactInfo
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactInfoSlice = prismic.SharedSlice<
+  "contact_info",
+  ContactInfoSliceVariation
+>;
+
+/**
  * Item in *ContentCarousel → Default → Primary → Content Card*
  */
 export interface ContentCarouselSliceDefaultPrimaryContentCardItem {
@@ -3409,6 +3474,10 @@ declare module "@prismicio/client" {
       CallToActionSliceDefaultPrimary,
       CallToActionSliceVariation,
       CallToActionSliceDefault,
+      ContactInfoSlice,
+      ContactInfoSliceDefaultPrimary,
+      ContactInfoSliceVariation,
+      ContactInfoSliceDefault,
       ContentCarouselSlice,
       ContentCarouselSliceDefaultPrimaryContentCardItem,
       ContentCarouselSliceDefaultPrimary,

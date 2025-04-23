@@ -1,0 +1,83 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Contact Info",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"image": {
+				"__TYPE__": "ImageContent",
+				"provider": "imgix",
+				"url": "https://images.unsplash.com/photo-1613260976142-3e9700b7a6a0?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxNnx8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzQ1MzQ4NzEzfDA&ixlib=rb-4.0.3&q=85",
+				"alt": "orange fruits on blue ceramic bowl",
+				"origin": {
+					"id": "-QOUBSKHvAM",
+					"url": "https://images.unsplash.com/photo-1613260976142-3e9700b7a6a0?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxNnx8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzQ1MzQ4NzEzfDA&ixlib=rb-4.0.3&q=85",
+					"width": 4960,
+					"height": 3594
+				},
+				"width": 4960,
+				"height": 3594,
+				"edit": {
+					"background": "transparent",
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					}
+				},
+				"thumbnails": {}
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Address: Street at Toronto, ON, CA\nEmail: info@example.ca ",
+							"spans": [
+								{
+									"type": "strong",
+									"start": 0,
+									"end": 8
+								},
+								{
+									"type": "strong",
+									"start": 35,
+									"end": 42
+								}
+							]
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Phone or text: 555 - 555 - 5555",
+							"spans": [
+								{
+									"type": "strong",
+									"start": 0,
+									"end": 14
+								}
+							]
+						},
+						"direction": "ltr"
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]
