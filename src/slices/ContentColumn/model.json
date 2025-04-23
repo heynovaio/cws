@@ -88,13 +88,11 @@
             "label": "Column",
             "repeat": true,
             "fields": {
-              "title": {
-                "type": "StructuredText",
+              "stat_number": {
+                "type": "Number",
                 "config": {
-                  "label": "Title",
-                  "placeholder": "",
-                  "allowTargetBlank": true,
-                  "multi": "heading3"
+                  "label": "Stat Number",
+                  "placeholder": ""
                 }
               },
               "description": {
@@ -112,13 +110,6 @@
                   "label": "Icon",
                   "constraint": {},
                   "thumbnails": []
-                }
-              },
-              "stat_number": {
-                "type": "Number",
-                "config": {
-                  "label": "Stat Number",
-                  "placeholder": ""
                 }
               }
             }

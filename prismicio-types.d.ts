@@ -1483,14 +1483,14 @@ export interface ContentColumnSliceDefaultPrimaryColumnItem {
  */
 export interface ContentColumnSliceStatsPrimaryColumnItem {
   /**
-   * Title field in *ContentColumn → Stats → Primary → Column*
+   * Stat Number field in *ContentColumn → Stats → Primary → Column*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Number
    * - **Placeholder**: *None*
-   * - **API ID Path**: content_column.stats.primary.column[].title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **API ID Path**: content_column.stats.primary.column[].stat_number
+   * - **Documentation**: https://prismic.io/docs/field#number
    */
-  title: prismic.RichTextField;
+  stat_number: prismic.NumberField;
 
   /**
    * Description field in *ContentColumn → Stats → Primary → Column*
@@ -1511,16 +1511,6 @@ export interface ContentColumnSliceStatsPrimaryColumnItem {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   icon: prismic.ImageField<never>;
-
-  /**
-   * Stat Number field in *ContentColumn → Stats → Primary → Column*
-   *
-   * - **Field Type**: Number
-   * - **Placeholder**: *None*
-   * - **API ID Path**: content_column.stats.primary.column[].stat_number
-   * - **Documentation**: https://prismic.io/docs/field#number
-   */
-  stat_number: prismic.NumberField;
 }
 
 /**
