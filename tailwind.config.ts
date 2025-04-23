@@ -34,6 +34,7 @@ export default {
       "light-violet": "#E5D8FF",
       "navy-background": "#00002D",
       "dark-purple-background": "#180451",
+      "soft-purple": "#D4C6FD40",
     },
     fontWeight: {
       normal: "400",
