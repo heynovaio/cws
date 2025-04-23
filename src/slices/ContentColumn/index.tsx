@@ -28,7 +28,7 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
         containerClassName={isSingleColumn ? "flex justify-center" : ""}
       >
         <div
-          className={`${cardStyling} flex flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch divide-x ${
+          className={`${cardStyling} flex flex-col md:flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch divide-y md:divide-x ${
             isSingleColumn ? "max-w-[860px] w-full" : "w-full"
           }`}
         >
@@ -37,7 +37,7 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
               {item.icon && (
                 <ResponsiveImage
                   image={item.icon}
-                  imageHeightClassName="h-[100px] w-auto"
+                  imageHeightClassName="h-[100px] w-auto aspect-square"
                 />
               )}
               <div className="mt-4 text-center flex flex-col gap-2">
