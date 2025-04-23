@@ -1,12 +1,17 @@
 "use client";
-import { ContentBox, Section, Container, Grid } from "@/components";
+import {
+  ContentBox,
+  Section,
+  Container,
+  Grid,
+  CarouselButton,
+} from "@/components";
 import { DefaultCard, LongCard } from "@/components/Cards";
 import { components } from "@/utils";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { useState, useRef, useEffect, useCallback } from "react";
-import { HiOutlineArrowLongRight } from "react-icons/hi2";
+import { useState, useRef, useCallback } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -35,7 +40,6 @@ const responsive = {
 const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const carouselRef = useRef<Carousel>(null);
-  const carouselContainerRef = useRef<HTMLDivElement>(null);
 
   type TabItem = (typeof slice.primary.tab)[number];
 
@@ -77,23 +81,6 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
     [currentSlide, totalSlides]
   );
 
-  // Allows users to navigate via keyboard
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (!carouselContainerRef.current?.contains(document.activeElement))
-        return;
-
-      if (event.key === "ArrowLeft") {
-        handleSlideChange("prev");
-      } else if (event.key === "ArrowRight") {
-        handleSlideChange("next");
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentSlide, handleSlideChange, totalSlides]);
-
   return (
     <Section
       data-slice-type={slice.slice_type}
@@ -131,43 +118,12 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
                 </Tab>
               ))}
             </TabList>
-            <div
-              className="flex items-center gap-2 rounded-md bg-white text-midnight focus:bg-light-violet shadow focus"
-              ref={carouselContainerRef}
-              tabIndex={0}
-            >
-              <button
-                onClick={() => currentSlide > 1 && handleSlideChange("prev")}
-                aria-label="Previous slide"
-                aria-disabled={currentSlide === 1}
-                tabIndex={0}
-                className={`rounded-md p-2 focus ${
-                  currentSlide === 1
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:text-neon-violet rounded-md"
-                }`}
-              >
-                <HiOutlineArrowLongRight className="h-5 w-5 rotate-180" />
-              </button>
-              <span aria-live="polite" aria-atomic="true">
-                {currentSlide}/{totalSlides}
-              </span>
-              <button
-                onClick={() =>
-                  currentSlide < totalSlides && handleSlideChange("next")
-                }
-                aria-label="Next slide"
-                aria-disabled={currentSlide === totalSlides}
-                tabIndex={0}
-                className={`rounded-md p-2 focus ${
-                  currentSlide === totalSlides
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:text-neon-violet"
-                }`}
-              >
-                <HiOutlineArrowLongRight className="h-5 w-5" />
-              </button>
-            </div>
+            {/* Carousel Buttons */}
+            <CarouselButton
+              currentSlide={currentSlide}
+              totalSlides={totalSlides}
+              onSlideChange={handleSlideChange}
+            />
           </div>
 
           <TabPanels className="py-12 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm max-w-screen-xs xl:min-w-screen-xl lg:min-w-screen-lg md:min-w-screen-md sm:min-w-screen-sm min-w-screen-xs w-full">
