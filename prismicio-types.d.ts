@@ -1444,6 +1444,187 @@ export type ContentCarouselSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *ContentColumn → Default → Primary → Column*
+ */
+export interface ContentColumnSliceDefaultPrimaryColumnItem {
+  /**
+   * Title field in *ContentColumn → Default → Primary → Column*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.default.primary.column[].title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Description field in *ContentColumn → Default → Primary → Column*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.default.primary.column[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Icon field in *ContentColumn → Default → Primary → Column*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.default.primary.column[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+}
+
+/**
+ * Item in *ContentColumn → Stats → Primary → Column*
+ */
+export interface ContentColumnSliceStatsPrimaryColumnItem {
+  /**
+   * Title field in *ContentColumn → Stats → Primary → Column*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.stats.primary.column[].title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Description field in *ContentColumn → Stats → Primary → Column*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.stats.primary.column[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Icon field in *ContentColumn → Stats → Primary → Column*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.stats.primary.column[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Stat Number field in *ContentColumn → Stats → Primary → Column*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.stats.primary.column[].stat_number
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  stat_number: prismic.NumberField;
+}
+
+/**
+ * Primary content in *ContentColumn → Default → Primary*
+ */
+export interface ContentColumnSliceDefaultPrimary {
+  /**
+   * Card Background field in *ContentColumn → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Purple
+   * - **API ID Path**: content_column.default.primary.card_background
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  card_background: prismic.SelectField<"Purple" | "White", "filled">;
+
+  /**
+   * Column field in *ContentColumn → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.default.primary.column[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  column: prismic.GroupField<
+    Simplify<ContentColumnSliceDefaultPrimaryColumnItem>
+  >;
+}
+
+/**
+ * Default variation for ContentColumn Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentColumnSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContentColumnSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ContentColumn → Stats → Primary*
+ */
+export interface ContentColumnSliceStatsPrimary {
+  /**
+   * Card Background field in *ContentColumn → Stats → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Purple
+   * - **API ID Path**: content_column.stats.primary.card_background
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  card_background: prismic.SelectField<"Purple" | "White", "filled">;
+
+  /**
+   * Column field in *ContentColumn → Stats → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.stats.primary.column[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  column: prismic.GroupField<
+    Simplify<ContentColumnSliceStatsPrimaryColumnItem>
+  >;
+}
+
+/**
+ * Stats variation for ContentColumn Slice
+ *
+ * - **API ID**: `stats`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentColumnSliceStats = prismic.SharedSliceVariation<
+  "stats",
+  Simplify<ContentColumnSliceStatsPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContentColumn*
+ */
+type ContentColumnSliceVariation =
+  | ContentColumnSliceDefault
+  | ContentColumnSliceStats;
+
+/**
+ * ContentColumn Shared Slice
+ *
+ * - **API ID**: `content_column`
+ * - **Description**: ContentColumn
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentColumnSlice = prismic.SharedSlice<
+  "content_column",
+  ContentColumnSliceVariation
+>;
+
+/**
  * Item in *ImageText → Stats → Primary → Stats*
  */
 export interface ImageTextSliceStatsPrimaryStatsItem {
@@ -3454,6 +3635,14 @@ declare module "@prismicio/client" {
       ContentCarouselSliceDefaultPrimary,
       ContentCarouselSliceVariation,
       ContentCarouselSliceDefault,
+      ContentColumnSlice,
+      ContentColumnSliceDefaultPrimaryColumnItem,
+      ContentColumnSliceDefaultPrimary,
+      ContentColumnSliceStatsPrimaryColumnItem,
+      ContentColumnSliceStatsPrimary,
+      ContentColumnSliceVariation,
+      ContentColumnSliceDefault,
+      ContentColumnSliceStats,
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
       ImageTextSliceStatsPrimaryStatsItem,
