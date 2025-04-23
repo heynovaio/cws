@@ -1,5 +1,5 @@
 import { Container } from "@/components";
-import { Button } from "@/app/components/Button";
+import { Button } from "@/components/Buttons/Button";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";

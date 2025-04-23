@@ -3,10 +3,9 @@ import {
   ContentBox,
   Section,
   Container,
-  Grid,
   CarouselButton,
 } from "@/components";
-import { DefaultCard, LongCard } from "@/components/Cards";
+import { LongCard } from "@/components/Cards";
 import { components } from "@/utils";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Content } from "@prismicio/client";
@@ -161,56 +160,6 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
             ))}
           </TabPanels>
         </TabGroup>
-        {/* TODO: Remove before merging */}
-        <Grid maxColumns={3}>
-          <DefaultCard
-            title={slice.primary.title}
-            content={<p>Nothing here</p>}
-            buttons={slice.primary.tab[0]?.card_button}
-            image={slice.primary.tab[0]?.card_image}
-            category={["Category 1", "Category 2"]}
-            cardType="program"
-          />
-          <DefaultCard
-            title={slice.primary.title}
-            content={
-              <PrismicRichText
-                field={slice.primary.body}
-                components={components}
-              />
-            }
-            buttons={slice.primary.tab[0]?.card_button}
-            image={slice.primary.tab[0]?.card_image}
-            category={["Category Resource"]}
-            cardType="resource"
-          />
-          <DefaultCard
-            title={slice.primary.title}
-            content={
-              <PrismicRichText
-                field={slice.primary.body}
-                components={components}
-              />
-            }
-            buttons={slice.primary.tab[0]?.card_button}
-            image={slice.primary.tab[0]?.card_image}
-            category={["Category Resource"]}
-            cardType="resource"
-          />
-          <DefaultCard
-            title={slice.primary.title}
-            content={
-              <PrismicRichText
-                field={slice.primary.body}
-                components={components}
-              />
-            }
-            buttons={slice.primary.tab[0]?.card_button}
-            image={slice.primary.tab[0]?.card_image}
-            category={["Category Resource"]}
-            cardType="resource"
-          />
-        </Grid>
       </Container>
     </Section>
   );

@@ -1,4 +1,4 @@
-import { Button } from "@/app/components/Button";
+import { Button } from "@/components/Buttons/Button";
 import { Container, ContentBox, Section } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";

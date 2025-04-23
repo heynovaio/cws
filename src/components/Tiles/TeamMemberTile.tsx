@@ -1,4 +1,4 @@
-import { Button } from "@/app/components/Button";
+import { Button } from "@/components/Buttons/Button";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { ImageField, KeyTextField, LinkField } from "@prismicio/client";
 
