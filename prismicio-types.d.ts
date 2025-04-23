@@ -1648,11 +1648,11 @@ export interface ImageTextSliceDefaultPrimary {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **Default Value**: White
+   * - **Default Value**: No Background
    * - **API ID Path**: image_text.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
 
   /**
    * Image Side field in *ImageText → Default → Primary*
@@ -1722,6 +1722,88 @@ export type ImageTextSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *ImageText → Video → Primary*
+ */
+export interface ImageTextSliceVideoPrimary {
+  /**
+   * Background Color field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: image_text.video.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Image Side field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_text.video.primary.image_side
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  image_side: prismic.BooleanField;
+
+  /**
+   * Title field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.video.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.video.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Button field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.video.primary.button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Image field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.video.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Video variation for ImageText Slice
+ *
+ * - **API ID**: `video`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageTextSliceVideo = prismic.SharedSliceVariation<
+  "video",
+  Simplify<ImageTextSliceVideoPrimary>,
+  never
+>;
+
+/**
  * Primary content in *ImageText → Stats → Primary*
  */
 export interface ImageTextSliceStatsPrimary {
@@ -1730,11 +1812,11 @@ export interface ImageTextSliceStatsPrimary {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **Default Value**: White
+   * - **Default Value**: No Background
    * - **API ID Path**: image_text.stats.primary.background_color
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
 
   /**
    * Image Side field in *ImageText → Stats → Primary*
@@ -1788,16 +1870,6 @@ export interface ImageTextSliceStatsPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
-
-  /**
-   * Stats field in *ImageText → Stats → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_text.stats.primary.stats[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  stats: prismic.GroupField<Simplify<ImageTextSliceStatsPrimaryStatsItem>>;
 }
 
 /**
@@ -1814,94 +1886,12 @@ export type ImageTextSliceStats = prismic.SharedSliceVariation<
 >;
 
 /**
- * Primary content in *ImageText → Video → Primary*
- */
-export interface ImageTextSliceVideoPrimary {
-  /**
-   * Background Color field in *ImageText → Video → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: White
-   * - **API ID Path**: image_text.video.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
-
-  /**
-   * Image Side field in *ImageText → Video → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: image_text.video.primary.image_side
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  image_side: prismic.BooleanField;
-
-  /**
-   * Title field in *ImageText → Video → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_text.video.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Body field in *ImageText → Video → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_text.video.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Button field in *ImageText → Video → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_text.video.primary.button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-
-  /**
-   * Video field in *ImageText → Video → Primary*
-   *
-   * - **Field Type**: Embed
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_text.video.primary.video
-   * - **Documentation**: https://prismic.io/docs/field#embed
-   */
-  video: prismic.EmbedField;
-}
-
-/**
- * Video variation for ImageText Slice
- *
- * - **API ID**: `video`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type ImageTextSliceVideo = prismic.SharedSliceVariation<
-  "video",
-  Simplify<ImageTextSliceVideoPrimary>,
-  never
->;
-
-/**
  * Slice variation for *ImageText*
  */
 type ImageTextSliceVariation =
   | ImageTextSliceDefault
-  | ImageTextSliceStats
-  | ImageTextSliceVideo;
+  | ImageTextSliceVideo
+  | ImageTextSliceStats;
 
 /**
  * ImageText Shared Slice
@@ -3562,14 +3552,14 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig,
+      options?: prismic.ClientConfig
     ): prismic.Client<AllDocumentTypes>;
   }
 
   interface CreateWriteClient {
     (
       repositoryNameOrEndpoint: string,
-      options: prismic.WriteClientConfig,
+      options: prismic.WriteClientConfig
     ): prismic.WriteClient<AllDocumentTypes>;
   }
 
@@ -3635,13 +3625,12 @@ declare module "@prismicio/client" {
       ContentColumnSliceStats,
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
-      ImageTextSliceStatsPrimaryStatsItem,
-      ImageTextSliceStatsPrimary,
       ImageTextSliceVideoPrimary,
+      ImageTextSliceStatsPrimary,
       ImageTextSliceVariation,
       ImageTextSliceDefault,
-      ImageTextSliceStats,
       ImageTextSliceVideo,
+      ImageTextSliceStats,
       LogoListSlice,
       LogoListSliceDefaultPrimaryLogosItem,
       LogoListSliceDefaultPrimary,
