@@ -35,6 +35,18 @@
   ol {
     @apply list-decimal pl-6 space-y-2 text-bodyLarge;
   }
+
+  .focus:focus,
+  .btn:focus {
+    @apply outline -outline-offset-1 outline-4 outline-ultra-pink
+    ring-ultra-pink overflow-hidden;
+  }
+
+  a:focus {
+    @apply outline outline-offset-2 rounded-md outline-4 outline-ultra-pink
+    ring-ultra-pink;
+  }
+
   .btn {
     @apply inline-block
       rounded-full 
@@ -48,13 +60,13 @@
     @apply text-white bg-ultra-pink border border-ultra-pink transition-transform duration-200;
 
     &:hover {
-      @apply bg-ultra-pink/80 text-white border-ultra-pink -translate-y-1;
+      @apply bg-neon-violet text-white border-ultra-pink -translate-y-1;
       box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
 
     &:active,
     &:focus {
-      @apply ring-4 ring-neon-violet shadow
+      @apply ring-4 ring-ultra-pink shadow
       outline-none;
     }
   }
@@ -101,6 +113,10 @@
       outline-none;
     }
   }
+  .text-link {
+    @apply underline underline-offset-2
+      hover:text-ultra-pink;
+  }
 }
 
 @layer utilities {
@@ -112,10 +128,10 @@
     -webkit-backdrop-filter: blur(8px);
   }
   .card-white {
-    @apply bg-white text-midnight p-6 rounded shadow;
+    @apply bg-white text-midnight p-4 rounded shadow;
   }
   .card-gradient {
-    @apply bg-gradient-primary text-white p-6 rounded shadow backdrop-blur;
+    @apply bg-gradient-primary text-white p-4 rounded shadow backdrop-blur border border-neon-violet;
   }
   .card-overlay {
     @apply border-2
@@ -131,5 +147,26 @@
         rgba(3, 0, 233, 0.5) 61.5%
       );
     }
+  }
+  .bg-gradient-primary {
+    background: linear-gradient(
+      90deg,
+      rgba(99, 15, 249, 0.8) 0%,
+      rgba(51, 23, 153, 0.8) 100%
+    );
+  }
+
+  /* Carousel Styling Below - Helps with making sure the cards are the same size */
+  .tabbed-carousel .react-multi-carousel-item {
+    align-content: center;
+    justify-content: center;
+  }
+
+  .tabbed-carousel .react-multi-carousel-item {
+    padding: 0 20px;
+    height: auto !important;
+    display: flex !important;
+    flex: 1 1 auto;
+    margin: 0 !important;
   }
 }

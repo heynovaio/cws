@@ -1,4 +1,4 @@
-import { KeyTextField, LinkField, RichTextField } from "@prismicio/client";
+import { LinkField } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { ReactNode } from "react";
 
@@ -7,7 +7,7 @@ interface ButtonProps {
   label: ReactNode;
   linkButtonColorClass?: string;
   buttonLink: LinkField;
-  styling: string;
+  styling?: string;
 }
 
 const arrowIcon = (
