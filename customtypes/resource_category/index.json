@@ -1,0 +1,74 @@
+{
+  "format": "custom",
+  "id": "resource_category",
+  "label": "Resource Category",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "icon": {
+        "type": "Image",
+        "config": {
+          "label": "Icon",
+          "constraint": {
+            "width": 800,
+            "height": 800
+          },
+          "thumbnails": []
+        }
+      },
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "Name",
+          "placeholder": ""
+        }
+      },
+      "body": {
+        "type": "Text",
+        "config": {
+          "label": "Body",
+          "placeholder": ""
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "description": {
+        "type": "Text",
+        "config": {
+          "label": "Description",
+          "placeholder": ""
+        }
+      },
+      "keywords": {
+        "type": "Group",
+        "config": {
+          "label": "Keywords",
+          "repeat": true,
+          "fields": {
+            "keyword": {
+              "type": "Text",
+              "config": {
+                "label": "Keyword",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

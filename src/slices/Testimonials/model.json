@@ -12,19 +12,6 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "background_color": {
-          "type": "Select",
-          "config": {
-            "label": "Background Color",
-            "placeholder": "",
-            "options": [
-              "White",
-              "Light",
-              "Dark"
-            ],
-            "default_value": "White"
-          }
-        },
         "image_side": {
           "type": "Boolean",
           "config": {
@@ -32,17 +19,6 @@
             "placeholder_false": "Left",
             "placeholder_true": "Right",
             "default_value": false
-          }
-        },
-        "image": {
-          "type": "Image",
-          "config": {
-            "label": "Image",
-            "constraint": {
-              "width": 800,
-              "height": 800
-            },
-            "thumbnails": []
           }
         },
         "title": {
@@ -54,15 +30,6 @@
             "multi": "heading1,heading2,heading3,heading4,heading5,heading6"
           }
         },
-        "body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em,paragraph,hyperlink,list-item,o-list-item,image"
-          }
-        },
         "button": {
           "type": "Link",
           "config": {
@@ -72,6 +39,46 @@
             "allowTargetBlank": true,
             "allowText": true,
             "repeat": true
+          }
+        },
+        "testimonials": {
+          "type": "Group",
+          "config": {
+            "label": "Testimonials",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "quote": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Quote",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "author": {
+                "type": "Text",
+                "config": {
+                  "label": "Author",
+                  "placeholder": ""
+                }
+              },
+              "author_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Author Title",
+                  "placeholder": ""
+                }
+              }
+            }
           }
         }
       },

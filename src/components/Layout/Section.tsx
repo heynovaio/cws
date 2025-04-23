@@ -8,29 +8,29 @@ interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 export const Section: React.FC<SectionProps> = ({
   children,
-  backgroundColor,
   styling,
+  backgroundColor,
   ...props
 }) => {
   let background: string;
 
   switch (backgroundColor) {
-    case "Light":
-      background = "bg-secondary light-background-text dark-tile";
+    case "No Background":
+      background = "bg-midnight";
       break;
-    case "Dark":
-      background = "bg-primary text-white light-tile";
-      break;
-    case "White":
-      background = "bg-white light-background-text dark-tile";
+    case "Darker":
+      background = "bg-dark-purple-background";
       break;
     default:
-      background = "bg-white light-background-text dark-tile";
+      background = "bg-midnight";
       break;
   }
-
   return (
-    <section className={`py-14 md:py-20 ${background} ${styling}`} {...props}>
+    // Vertical Padding
+    <section
+      className={`py-8 print:py-0 print:my-0 w-full ${background} ${styling}`}
+      {...props}
+    >
       {children}
     </section>
   );

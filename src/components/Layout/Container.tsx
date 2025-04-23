@@ -11,6 +11,7 @@ export const Container: React.FC<ContainerProps> = ({
   ...props
 }) => {
   return (
+    // Horizontal padding
     <div
       className={`px-5 mx-auto max-w-screen-xl w-full ${containerClassName}`}
       {...props}

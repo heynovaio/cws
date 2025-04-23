@@ -1,5 +1,6 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
+import { JSX } from "react";
 
 /**
  * Props for `ImageText`.
@@ -15,7 +16,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      Placeholder component for image_text (variation: {slice.variation}) Slices
+      <h1>Test Title</h1>
     </section>
   );
 };

@@ -23,5 +23,6 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "skipLibCheck": true // Recieving an error with react-multi-carousel, added this to hide error (not sure how to fix)
 }

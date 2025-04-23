@@ -3,87 +3,170 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-      @apply text-midnight bg-white 
-      /* dark:text-white dark:bg-midnight */
-      ;
+  body {
+    @apply text-white bg-navy-background font-body;
+
+    /* dark:text-white dark:bg-midnight */
+  }
+  h1 {
+    @apply font-title md:text-h1 font-extraBold leading-h1;
+  }
+  h2 {
+    @apply font-title md:text-h2 font-extraBold leading-h2;
+  }
+  h3 {
+    @apply font-title md:text-h3 font-extraBold leading-h3;
+  }
+  h4 {
+    @apply font-title md:text-h4 font-bold leading-h4;
+  }
+  p {
+    @apply text-bodyLarge font-body;
+  }
+  a {
+    @apply underline text-bodyLarge;
+    &:hover {
+      @apply text-ultra-pink;
     }
-    .btn {
-      @apply 
-      inline-block
+  }
+  ul {
+    @apply list-disc pl-6 space-y-2 text-bodyLarge;
+  }
+  ol {
+    @apply list-decimal pl-6 space-y-2 text-bodyLarge;
+  }
+
+  .focus:focus,
+  .btn:focus {
+    @apply outline -outline-offset-1 outline-4 outline-ultra-pink
+    ring-ultra-pink overflow-hidden;
+  }
+
+  a:focus {
+    @apply outline outline-offset-2 rounded-md outline-4 outline-ultra-pink
+    ring-ultra-pink;
+  }
+
+  .btn {
+    @apply inline-block
       rounded-full 
-      leading-none
       text-button	
       font-bold
-      px-8 py-4
-      border-[3px]
-      relative
-      ;
+      px-8 py-2
+      no-underline
+      relative;
+  }
+  .btn-primary {
+    @apply text-white bg-ultra-pink border border-ultra-pink transition-transform duration-200;
+
+    &:hover {
+      @apply bg-neon-violet text-white border-ultra-pink -translate-y-1;
+      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
-    
-    .btn-primary {
-      @apply 
-      text-white
-      bg-neon-violet
-      border-neon-violet
-      ;
-      &:hover {
-        @apply 
-        bg-midnight
-        border-midnight
-        ;
-      }
-      &:active, &:focus {
-        @apply 
-        border-ultra-pink
-        outline-0
-        bg-neon-violet
-        ;
-      }
+
+    &:active,
+    &:focus {
+      @apply ring-4 ring-ultra-pink shadow
+      outline-none;
     }
-    .btn-outline {
-      @apply
-        bg-transparent
-        border-ultra-pink
-      ;
-      &:hover {
-        @apply 
-        border-aqua
-        ;
-      }
-      &:active, &:focus {
-        @apply 
-        border-ultra-pink
-        outline-0
-        ;
-      }
+  }
+
+  .btn-secondary {
+    @apply text-white bg-aqua border border-aqua transition-transform duration-200;
+
+    &:hover {
+      @apply bg-aqua/80 text-white border-aqua -translate-y-1;
+      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
-    .btn-text {
-      @apply
-      text-midnight
-      border-0
-      p-0
-      ;
+
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
     }
+  }
+
+  .btn-outline {
+    @apply bg-transparent
+    border-[3px]
+        border-white;
+    &:hover {
+      @apply text-white -translate-y-1;
+      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
+    }
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+  .btn-link {
+    @apply border-0 p-0 bg-transparent inline-block;
+
+    &:hover {
+      @apply underline text-current;
+    }
+
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+  .text-link {
+    @apply underline underline-offset-2
+      hover:text-ultra-pink;
+  }
 }
 
 @layer utilities {
+  img {
+    @apply rounded;
+  }
+  .backdrop-blur-default {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .card-white {
+    @apply bg-white text-midnight p-4 rounded shadow;
+  }
+  .card-gradient {
+    @apply bg-gradient-primary text-white p-4 rounded shadow backdrop-blur border border-neon-violet;
+  }
   .card-overlay {
-    @apply
-    border-2
+    @apply border-2
     border-ultra-pink
-    relative
-    ;
+    relative;
     &::after {
-      @apply 
-      absolute
-      top-0 bottom-0 left-0 right-0
-      ;
-      content: '';
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(3, 0, 233, 0.5) 61.5%);
+      @apply absolute
+      top-0 bottom-0 left-0 right-0;
+      content: "";
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(3, 0, 233, 0.5) 61.5%
+      );
     }
   }
   .bg-gradient-primary {
-    background: linear-gradient(90deg, #3802A7 0%, #3C1253 98.73%);
-  }  
+    background: linear-gradient(
+      90deg,
+      rgba(99, 15, 249, 0.8) 0%,
+      rgba(51, 23, 153, 0.8) 100%
+    );
+  }
+
+  /* Carousel Styling Below - Helps with making sure the cards are the same size */
+  .tabbed-carousel .react-multi-carousel-item {
+    align-content: center;
+    justify-content: center;
+  }
+
+  .tabbed-carousel .react-multi-carousel-item {
+    padding: 0 20px;
+    height: auto !important;
+    display: flex !important;
+    flex: 1 1 auto;
+    margin: 0 !important;
+  }
 }
