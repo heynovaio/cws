@@ -945,6 +945,17 @@ interface ResourcePageDocumentData {
   >;
 
   /**
+   * Image field in *Resource Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_page.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
    * Slice Zone field in *Resource Page*
    *
    * - **Field Type**: Slice Zone
