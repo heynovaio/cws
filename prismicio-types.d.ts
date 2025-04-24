@@ -1640,6 +1640,31 @@ export interface ImageTextSliceStatsPrimaryStatsItem {
 }
 
 /**
+ * Item in *ImageText → Stats → Primary → Stats*
+ */
+export interface ImageTextSliceStatsPrimaryStatsItem {
+  /**
+   * Statistic field in *ImageText → Stats → Primary → Stats*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.stats[].statistic
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  statistic: prismic.RichTextField;
+
+  /**
+   * Description field in *ImageText → Stats → Primary → Stats*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.stats[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
  * Primary content in *ImageText → Default → Primary*
  */
 export interface ImageTextSliceDefaultPrimary {
@@ -1880,6 +1905,16 @@ export interface ImageTextSliceStatsPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * Stats field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text.stats.primary.stats[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  stats: prismic.GroupField<Simplify<ImageTextSliceStatsPrimaryStatsItem>>;
 }
 
 /**
@@ -3636,6 +3671,7 @@ declare module "@prismicio/client" {
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
       ImageTextSliceVideoPrimary,
+      ImageTextSliceStatsPrimaryStatsItem,
       ImageTextSliceStatsPrimary,
       ImageTextSliceVariation,
       ImageTextSliceDefault,
