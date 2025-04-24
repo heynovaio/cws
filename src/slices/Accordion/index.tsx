@@ -9,7 +9,7 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { Button } from "@/app/components/Button";
+import { Button } from "@/components";
 
 /**
  * Props for `Accordion`.faqver
