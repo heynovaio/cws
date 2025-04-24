@@ -57,6 +57,20 @@ export default async function Page({
 
   const locales = await getLocales(page, client);
 
+  const resources = [
+    {
+      link_type: "web",
+      text: "Resource Guide PDF",
+      url: "/resources/guide.pdf",
+      target: "_blank",
+    },
+    {
+      link_type: "web",
+      text: "Instructional Videos",
+      url: "/videos",
+    },
+  ];
+
   return (
     <Layout locales={locales} global={global.data} menus={menus.data}>
       <SliceZone
@@ -65,12 +79,12 @@ export default async function Page({
         context={{ lang }}
       />
       <SpecCard
-        title="Details:"
-        time={"1 hr"}
-        cost={5}
-        certs
-        format="Virtual"
-        resources={<div>A</div>}
+        title="Advanced Coaching Certification"
+        time="6-8 weeks"
+        cost={299}
+        certs={true}
+        format="Online + Live Workshops"
+        resources={resources}
       />
     </Layout>
   );
