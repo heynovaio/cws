@@ -25,7 +25,7 @@ export async function generateMetadata({
 
   const client = createClient();
   const page = await client
-    .getByUID("program_page", uid, { lang })
+    .getByUID("team_members", uid, { lang })
     .catch(() => notFound());
 
   return {
@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   const client = createClient();
   const page = await client
-    .getByUID("program_page", uid, { lang })
+    .getByUID("team_members", uid, { lang })
     .catch(() => notFound());
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
@@ -71,7 +71,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 export async function generateStaticParams() {
   const client = createClient();
   const pages = await client
-    .getAllByType("program_page", {
+    .getAllByType("team_members", {
       lang: "*",
     })
     .catch(() => notFound());
