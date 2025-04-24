@@ -1,5 +1,5 @@
 "use client";
-import { Container, ContentBox } from "@/components";
+import { CarouselButton, Container, ContentBox } from "@/components";
 import Carousel, { CarouselInternalState } from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
@@ -11,7 +11,6 @@ import {
 } from "@prismicio/client";
 import { PrismicRichText } from "@prismicio/react";
 import { useRef, useState } from "react";
-import { LongLeftArrow, LongRightArrow } from "@/app/components/Icons/Arrows";
 import { Button } from "@/components";
 
 interface IndividualLogo {
@@ -40,37 +39,6 @@ const responsive = {
     breakpoint: { max: 600, min: 0 },
     items: 1,
   },
-};
-
-const CustomArrowBox = ({
-  currentSlide,
-  totalSlides,
-  onNext,
-  onPrev,
-}: {
-  currentSlide: number;
-  totalSlides: number;
-  onNext: () => void;
-  onPrev: () => void;
-}) => {
-  return (
-    <div className="mb-4 flex justify-end">
-      <button
-        onClick={currentSlide === totalSlides - 1 ? onPrev : onNext}
-        className="carousel-button"
-      >
-        {currentSlide === totalSlides - 1 && (
-          <LongLeftArrow color="currentColor" />
-        )}
-        <span aria-live="polite" aria-atomic="true">
-          {currentSlide + 1} / {totalSlides}
-        </span>
-        {currentSlide !== totalSlides - 1 && (
-          <LongRightArrow color="currentColor" />
-        )}
-      </button>
-    </div>
-  );
 };
 
 export const Partners = ({
@@ -114,12 +82,23 @@ export const Partners = ({
         />
 
         <div className="w-full md:w-2/3">
-          <CustomArrowBox
-            currentSlide={currentSlide}
-            totalSlides={logoTiles.length}
-            onNext={() => carouselRef.current?.next()}
-            onPrev={() => carouselRef.current?.previous()}
-          />
+          <div className="flex justify-end mb-4 mx-2">
+            <CarouselButton
+              currentSlide={currentSlide + 1}
+              totalSlides={logoTiles.length}
+              onSlideChange={(direction) => {
+                if (
+                  direction === "next" &&
+                  currentSlide < logoTiles.length - 1
+                ) {
+                  carouselRef.current?.next();
+                } else if (direction === "prev" && currentSlide > 0) {
+                  carouselRef.current?.previous();
+                }
+              }}
+              styling="w-fit"
+            />
+          </div>
 
           <Carousel
             ref={carouselRef}
