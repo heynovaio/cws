@@ -41,7 +41,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
           ) : (
             <ResponsiveImage
               image={slice.primary.image}
-              className="w-full h-[250px] md:h-[400px] object-cover"
+              className="w-full h-[250px] md:h-[400px] object-cover mb-4 md:mb-0"
             />
           )}
         </div>
@@ -49,7 +49,39 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
         <div className="w-full md:w-1/2">
           <ContentBox
             title={slice.primary.title}
-            content={<PrismicRichText field={slice.primary.body} />}
+            content={
+              isStats ? (
+                <div className="flex flex-col gap-4 md:mb-4">
+                  <PrismicRichText field={slice.primary.body} />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-center md:text-left">
+                    {slice.primary.stats.map((item, index) => (
+                      <div key={index}>
+                        <PrismicRichText
+                          field={item.statistic}
+                          components={{
+                            paragraph: ({ children }) => (
+                              <p className="text-[3.125rem] text-aqua font-extraBold">
+                                {children}
+                              </p>
+                            ),
+                          }}
+                        />
+                        <PrismicRichText
+                          field={item.description}
+                          components={{
+                            paragraph: ({ children }) => (
+                              <p className="text-base">{children}</p>
+                            ),
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <PrismicRichText field={slice.primary.body} />
+              )
+            }
             buttons={slice.primary.button.map((link, index) => (
               <Button
                 key={index}

@@ -20,8 +20,10 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Ut consequat cillum anim dolore."
-						}
+							"text": "Nunc facilisis pellentesque augue vitae vestibulum. Suspendisse aliquet quam arcu, eget sodales eros ullamcorper quis. Aenean rutrum at nulla vitae aliquam. Nunc ligula risus, venenatis tempor laoreet sit amet, sodales id sapien.",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -74,87 +76,6 @@
 			}
 		},
 		"items": []
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "stats",
-		"primary": {
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "Darker",
-				"type": "Select"
-			},
-			"image_side": {
-				"__TYPE__": "BooleanContent",
-				"value": true
-			},
-			"title": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Already"
-						}
-					}
-				]
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Ullamco nostrud labore aute laboris anim quis laboris ea non minim sint."
-						}
-					}
-				]
-			},
-			"button": {
-				"__TYPE__": "RepeatableContent",
-				"type": "Link",
-				"value": [
-					{
-						"key": "f94f7c1f-3d2f-4d3e-bd59-3a0de186cdf7",
-						"__TYPE__": "LinkContent",
-						"value": {
-							"__TYPE__": "ExternalLink",
-							"url": "http://google.com",
-							"text": "clothing"
-						}
-					}
-				]
-			},
-			"image": {
-				"origin": {
-					"id": "main",
-					"url": "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b",
-					"width": 3560,
-					"height": 5340
-				},
-				"url": "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b",
-				"width": 3560,
-				"height": 5340,
-				"edit": {
-					"zoom": 1,
-					"crop": {
-						"x": 0,
-						"y": 0
-					},
-					"background": "transparent"
-				},
-				"credits": null,
-				"alt": null,
-				"__TYPE__": "ImageContent",
-				"thumbnails": {}
-			}
-		},
-		"items": [
-			{
-				"__TYPE__": "GroupItemContent",
-				"value": []
-			}
-		]
 	},
 	{
 		"__TYPE__": "SharedSliceContent",
@@ -231,7 +152,6 @@
 			},
 			"video": {
 				"embed_url": "https://www.youtube.com/watch?v=G52dUQLxPzg&list=RDG52dUQLxPzg&start_radio=1",
-				"__TYPE__": "EmbedContent",
 				"type": "video",
 				"version": "1.0",
 				"title": "11 HOURS Stunning 4K Underwater footage + Music | Nature Relaxation™ Rare & Colorful Sea Life Video",
@@ -243,6 +163,7 @@
 				"thumbnail_width": 480,
 				"thumbnail_height": 360,
 				"html": "<iframe width=\"200\" height=\"113\" src=\"https://www.youtube.com/embed/G52dUQLxPzg?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen title=\"11 HOURS Stunning 4K Underwater footage + Music | Nature Relaxation™ Rare &amp; Colorful Sea Life Video\"></iframe>",
+				"__TYPE__": "EmbedContent",
 				"all": {
 					"embed_url": "https://www.youtube.com/watch?v=G52dUQLxPzg&list=RDG52dUQLxPzg&start_radio=1",
 					"type": "video",
@@ -259,6 +180,139 @@
 					"height": 113,
 					"width": 200
 				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "stats",
+		"primary": {
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"type": "Select",
+				"value": "No Background"
+			},
+			"image_side": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Already"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nunc facilisis pellentesque augue vitae vestibulum. Suspendisse aliquet quam arcu, eget sodales eros ullamcorper quis. Aenean rutrum at nulla vitae aliquam. Nunc ligula risus, venenatis tempor laoreet sit amet, sodales id sapien.",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"button": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "f94f7c1f-3d2f-4d3e-bd59-3a0de186cdf7",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "http://google.com",
+							"text": "clothing"
+						}
+					}
+				]
+			},
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b",
+					"width": 3560,
+					"height": 5340
+				},
+				"url": "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b",
+				"width": 3560,
+				"height": 5340,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"stats": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Do nisi veniam incididunt nulla aliqua ad reprehenderit labore consectetur eiusmod laboris. ",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"stat",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "24%"
+								}
+							],
+							[
+								"statistic",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "24%",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": [

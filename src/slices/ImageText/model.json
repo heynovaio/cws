@@ -214,6 +214,33 @@
             "constraint": {},
             "thumbnails": []
           }
+        },
+        "stats": {
+          "type": "Group",
+          "config": {
+            "label": "Stats",
+            "repeat": true,
+            "fields": {
+              "statistic": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Statistic",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph"
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,hyperlink,preformatted,strong,em"
+                }
+              }
+            }
+          }
         }
       },
       "items": {}
