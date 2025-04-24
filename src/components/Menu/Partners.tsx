@@ -12,7 +12,7 @@ import {
 import { PrismicRichText } from "@prismicio/react";
 import { useRef, useState } from "react";
 import { LongLeftArrow, LongRightArrow } from "@/app/components/Icons/Arrows";
-import { Button } from "@/app/components/Button";
+import { Button } from "@/components";
 
 interface IndividualLogo {
   logo_image: ImageField;
@@ -105,6 +105,7 @@ export const Partners = ({
           }
           buttons={buttons.map((button, i) => (
             <Button
+              key={i}
               buttonType="primary"
               label={button.text}
               buttonLink={button}
