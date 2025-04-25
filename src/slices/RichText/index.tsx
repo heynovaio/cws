@@ -1,5 +1,6 @@
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { Container, ContentBox, Section } from "@/components";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 
 /**
@@ -11,13 +12,25 @@ export type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
  * Component for "RichText" Slices.
  */
 const RichText = ({ slice }: RichTextProps): JSX.Element => {
+  const leftAligned = slice.primary.text_alignment === false;
+  const textAlignment = leftAligned
+    ? "items-start text-left"
+    : "items-center text-center";
+
   return (
-    <section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
-      Placeholder component for rich_text (variation: {slice.variation}) Slices
-    </section>
+     <Section
+          data-slice-type={slice.slice_type}
+          data-slice-variation={slice.variation}
+          styling={`py-10`}
+        >
+          <Container>
+            <div
+              className={`text-content ${textAlignment} max-w-[80ch] mx-auto`}
+            >
+              <PrismicRichText field={slice.primary.content} />
+            </div>
+          </Container>
+        </Section>
   );
 };
 
