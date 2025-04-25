@@ -1,15 +1,16 @@
 {
-  "format": "page",
+  "format": "custom",
   "id": "contact_page",
   "label": "Contact Page",
-  "repeatable": true,
+  "repeatable": false,
   "status": true,
   "json": {
     "Main": {
       "uid": {
         "type": "UID",
         "config": {
-          "label": "UID"
+          "label": "UID",
+          "placeholder": ""
         }
       },
       "image": {
@@ -35,42 +36,12 @@
           "label": "Body",
           "placeholder": "",
           "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,strong,em,rtl,o-list-item,list-item,embed,image,hyperlink"
+          "multi": "paragraph,strong,em,preformatted,rtl,o-list-item,list-item,embed,image,hyperlink"
         }
       },
       "slices": {
         "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": {
-          "choices": {}
-        }
-      }
-    },
-    "SEO & Metadata": {
-      "meta_title": {
-        "config": {
-          "label": "Meta Title",
-          "placeholder": "A title of the page used for social media and search engines"
-        },
-        "type": "Text"
-      },
-      "meta_description": {
-        "config": {
-          "label": "Meta Description",
-          "placeholder": "A brief summary of the page"
-        },
-        "type": "Text"
-      },
-      "meta_image": {
-        "config": {
-          "constraint": {
-            "height": 1260,
-            "width": 2400
-          },
-          "label": "Meta Image",
-          "thumbnails": []
-        },
-        "type": "Image"
+        "fieldset": "Slice Zone"
       }
     }
   }
