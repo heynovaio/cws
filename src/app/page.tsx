@@ -78,14 +78,6 @@ export default async function Page({
         components={components}
         context={{ lang }}
       />
-      <SpecCard
-        title="Advanced Coaching Certification"
-        time="6-8 weeks"
-        cost={299}
-        certs={true}
-        format="Online + Live Workshops"
-        resources={resources}
-      />
     </Layout>
   );
 }
