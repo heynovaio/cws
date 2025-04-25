@@ -11,7 +11,40 @@ type ContactPageDocumentDataSlicesSlice = never;
  */
 interface ContactPageDocumentData {
   /**
-   * Slice Zone field in *Contact Page*
+   * Image field in *Contact Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_page.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *Contact Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_page.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *Contact Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_page.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * `slices` field in *Contact Page*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
@@ -19,45 +52,14 @@ interface ContactPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<ContactPageDocumentDataSlicesSlice> /**
-   * Meta Title field in *Contact Page*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: contact_page.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_title: prismic.KeyTextField;
-
-  /**
-   * Meta Description field in *Contact Page*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: contact_page.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *Contact Page*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_page.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  meta_image: prismic.ImageField<never>;
+  slices: prismic.SliceZone<ContactPageDocumentDataSlicesSlice>;
 }
 
 /**
  * Contact Page document from Prismic
  *
  * - **API ID**: `contact_page`
- * - **Repeatable**: `true`
+ * - **Repeatable**: `false`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
@@ -256,108 +258,6 @@ interface MenusDocumentData {
  */
 export type MenusDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenusDocumentData>, "menus", Lang>;
-
-/**
- * Item in *Offerings Category → Keywords*
- */
-export interface OfferingsCategoryDocumentDataKeywordsItem {
-  /**
-   * Keyword field in *Offerings Category → Keywords*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: offerings_category.keywords[].keyword
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  keyword: prismic.KeyTextField;
-}
-
-/**
- * Content for Offerings Category documents
- */
-interface OfferingsCategoryDocumentData {
-  /**
-   * Icon field in *Offerings Category*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: offerings_category.icon
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  icon: prismic.ImageField<never>;
-
-  /**
-   * Name field in *Offerings Category*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: offerings_category.name
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  name: prismic.KeyTextField;
-
-  /**
-   * Body field in *Offerings Category*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: offerings_category.body
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField /**
-   * Title field in *Offerings Category*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: offerings_category.title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  title: prismic.KeyTextField;
-
-  /**
-   * Description field in *Offerings Category*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: offerings_category.description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-
-  /**
-   * Keywords field in *Offerings Category*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: offerings_category.keywords[]
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  keywords: prismic.GroupField<
-    Simplify<OfferingsCategoryDocumentDataKeywordsItem>
-  >;
-}
-
-/**
- * Offerings Category document from Prismic
- *
- * - **API ID**: `offerings_category`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type OfferingsCategoryDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<OfferingsCategoryDocumentData>,
-    "offerings_category",
-    Lang
-  >;
 
 type PageDocumentDataSlicesSlice =
   | TabbedCarouselSlice
@@ -596,12 +496,77 @@ export type PartnersDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for Program Category documents
+ */
+interface ProgramCategoryDocumentData {
+  /**
+   * Icon field in *Program Category*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_category.icon
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Name field in *Program Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_category.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Body field in *Program Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_category.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  body: prismic.KeyTextField;
+}
+
+/**
+ * Program Category document from Prismic
+ *
+ * - **API ID**: `program_category`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProgramCategoryDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ProgramCategoryDocumentData>,
+    "program_category",
+    Lang
+  >;
+
 type ProgramPageDocumentDataSlicesSlice = never;
 
 /**
  * Content for Program Page documents
  */
 interface ProgramPageDocumentData {
+  /**
+   * Category field in *Program Page*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField<"offerings_category">;
+
   /**
    * Image field in *Program Page*
    *
@@ -891,6 +856,75 @@ type ResourcePageDocumentDataSlicesSlice = never;
  */
 interface ResourcePageDocumentData {
   /**
+   * Category field in *Resource Page*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_page.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField<"resource_category">;
+
+  /**
+   * Title field in *Resource Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_page.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *Resource Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_page.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Newsletter Sign Up field in *Resource Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: resource_page.newsletter_sign_up
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  newsletter_sign_up: prismic.BooleanField;
+
+  /**
+   * Link field in *Resource Page*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_page.link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Image field in *Resource Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_page.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
    * Slice Zone field in *Resource Page*
    *
    * - **Field Type**: Slice Zone
@@ -1076,9 +1110,9 @@ export type AllDocumentTypes =
   | ContactPageDocument
   | GlobalsDocument
   | MenusDocument
-  | OfferingsCategoryDocument
   | PageDocument
   | PartnersDocument
+  | ProgramCategoryDocument
   | ProgramPageDocument
   | ResourceCategoryDocument
   | ResourcePageDocument
@@ -3359,15 +3393,14 @@ declare module "@prismicio/client" {
       MenusDocumentDataSlicesSlice,
       MenusDocumentDataPartnerLinksItem,
       MenusDocumentDataSlices1Slice,
-      OfferingsCategoryDocument,
-      OfferingsCategoryDocumentData,
-      OfferingsCategoryDocumentDataKeywordsItem,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       PartnersDocument,
       PartnersDocumentData,
       PartnersDocumentDataLogosItem,
+      ProgramCategoryDocument,
+      ProgramCategoryDocumentData,
       ProgramPageDocument,
       ProgramPageDocumentData,
       ProgramPageDocumentDataSlicesSlice,

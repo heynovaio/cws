@@ -1,1 +1,0 @@
-export { getLocales } from "./getLocales";

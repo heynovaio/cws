@@ -12,6 +12,15 @@
           "label": "UID"
         }
       },
+      "category": {
+        "type": "Link",
+        "config": {
+          "label": "Category",
+          "select": "document",
+          "repeat": false,
+          "customtypes": ["offerings_category"]
+        }
+      },
       "image": {
         "type": "Image",
         "config": {
