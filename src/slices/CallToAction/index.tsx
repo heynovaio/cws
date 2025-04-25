@@ -18,8 +18,6 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
     ? "items-start text-left"
     : "items-center text-center";
 
-  console.log(slice.primary.background_color);
-
   return (
     <Section
       data-slice-type={slice.slice_type}

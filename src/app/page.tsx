@@ -9,6 +9,7 @@ import { components } from "@/slices";
 import { getLocales } from "./utils";
 import React from "react";
 import { Layout } from "@/components";
+import { SpecCard } from "@/components/SpecCard";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -56,6 +57,20 @@ export default async function Page({
   const partners = await client.getSingle("partners", { lang });
 
   const locales = await getLocales(page, client);
+
+  const resources = [
+    {
+      link_type: "web",
+      text: "Resource Guide PDF",
+      url: "/resources/guide.pdf",
+      target: "_blank",
+    },
+    {
+      link_type: "web",
+      text: "Instructional Videos",
+      url: "/videos",
+    },
+  ];
 
   return (
     <Layout

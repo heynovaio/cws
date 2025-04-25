@@ -47,6 +47,7 @@ export default {
       h2: "3.5625rem",
       h3: "2.5rem",
       h4: "1.875rem",
+      label: "1.5rem",
       button: "1.25rem",
       bodyLarge: "1.25rem",
     },

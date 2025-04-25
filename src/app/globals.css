@@ -29,11 +29,17 @@
       @apply text-ultra-pink;
     }
   }
+  .link-no-underline {
+    @apply no-underline !text-base;
+    &:hover {
+      @apply text-ultra-pink underline;
+    }
+  }
   ul {
-    @apply list-disc pl-6 space-y-2 text-bodyLarge;
+    @apply list-disc pl-6 mx-4 space-y-2;
   }
   ol {
-    @apply list-decimal pl-6 space-y-2 text-bodyLarge;
+    @apply list-decimal pl-6 space-y-2;
   }
 
   .focus:focus,
@@ -47,6 +53,9 @@
     ring-ultra-pink;
   }
 
+  label {
+    @apply text-label font-bold;
+  }
   .btn {
     @apply inline-block
       rounded-full 
