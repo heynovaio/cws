@@ -30,7 +30,7 @@ const ContactInfo = ({ slice }: ContactInfoProps): JSX.Element => {
             )}
           </div>
           {/** white bg is just temp to show the two columns */}
-          <div className="bg-white w-full rounded text-midnight p-4">
+          <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center ">
             <div
               dangerouslySetInnerHTML={{
                 __html: slice.primary.form?.html ?? "",
