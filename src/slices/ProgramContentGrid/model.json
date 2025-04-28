@@ -1,0 +1,60 @@
+{
+  "id": "program_content_grid",
+  "type": "SharedSlice",
+  "name": "ProgramContentGrid",
+  "description": "ProgramContentGrid",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Darker"
+            ],
+            "default_value": "No Background"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading3,heading2,heading4"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,rtl,o-list-item,list-item,embed,image,hyperlink"
+          }
+        },
+        "category": {
+          "type": "Link",
+          "config": {
+            "label": "Category",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              "program_category"
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

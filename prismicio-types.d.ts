@@ -2866,6 +2866,158 @@ export type MultiLinkColumnSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *ProgramContentGrid → Default → Primary*
+ */
+export interface ProgramContentGridSliceDefaultPrimary {
+  /**
+   * Background Color field in *ProgramContentGrid → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: program_content_grid.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Title field in *ProgramContentGrid → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_content_grid.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ProgramContentGrid → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_content_grid.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Category field in *ProgramContentGrid → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_content_grid.default.primary.category
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField<"program_category">;
+}
+
+/**
+ * Default variation for ProgramContentGrid Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProgramContentGridSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ProgramContentGridSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ProgramContentGrid*
+ */
+type ProgramContentGridSliceVariation = ProgramContentGridSliceDefault;
+
+/**
+ * ProgramContentGrid Shared Slice
+ *
+ * - **API ID**: `program_content_grid`
+ * - **Description**: ProgramContentGrid
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProgramContentGridSlice = prismic.SharedSlice<
+  "program_content_grid",
+  ProgramContentGridSliceVariation
+>;
+
+/**
+ * Primary content in *ResourceContentGrid → Default → Primary*
+ */
+export interface ResourceContentGridSliceDefaultPrimary {
+  /**
+   * Category field in *ResourceContentGrid → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_content_grid.default.primary.category
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField<"resource_category">;
+
+  /**
+   * Background Color field in *ResourceContentGrid → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: resource_content_grid.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Title field in *ResourceContentGrid → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_content_grid.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ResourceContentGrid → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: resource_content_grid.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for ResourceContentGrid Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ResourceContentGridSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ResourceContentGridSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ResourceContentGrid*
+ */
+type ResourceContentGridSliceVariation = ResourceContentGridSliceDefault;
+
+/**
+ * ResourceContentGrid Shared Slice
+ *
+ * - **API ID**: `resource_content_grid`
+ * - **Description**: ResourceContentGrid
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ResourceContentGridSlice = prismic.SharedSlice<
+  "resource_content_grid",
+  ResourceContentGridSliceVariation
+>;
+
+/**
  * Primary content in *RichText → Default → Primary*
  */
 export interface RichTextSliceDefaultPrimary {
@@ -3820,6 +3972,14 @@ declare module "@prismicio/client" {
       MultiLinkColumnSliceDefaultPrimary,
       MultiLinkColumnSliceVariation,
       MultiLinkColumnSliceDefault,
+      ProgramContentGridSlice,
+      ProgramContentGridSliceDefaultPrimary,
+      ProgramContentGridSliceVariation,
+      ProgramContentGridSliceDefault,
+      ResourceContentGridSlice,
+      ResourceContentGridSliceDefaultPrimary,
+      ResourceContentGridSliceVariation,
+      ResourceContentGridSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
