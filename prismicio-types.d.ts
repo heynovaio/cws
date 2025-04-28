@@ -4,6 +4,74 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type CampaignPageDocumentDataSlicesSlice =
+  | ImageTextSlice
+  | HashtagBannerSlice
+  | CallToActionSlice;
+
+/**
+ * Content for Campaign Page documents
+ */
+interface CampaignPageDocumentData {
+  /**
+   * Slice Zone field in *Campaign Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: campaign_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<CampaignPageDocumentDataSlicesSlice> /**
+   * Meta Title field in *Campaign Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: campaign_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Campaign Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: campaign_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Campaign Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: campaign_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Campaign Page document from Prismic
+ *
+ * - **API ID**: `campaign_page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CampaignPageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<CampaignPageDocumentData>,
+    "campaign_page",
+    Lang
+  >;
+
 type ContactPageDocumentDataSlicesSlice = never;
 
 /**
@@ -1108,6 +1176,7 @@ export type TeamMembersDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | CampaignPageDocument
   | ContactPageDocument
   | GlobalsDocument
   | MenusDocument
@@ -3429,6 +3498,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      CampaignPageDocument,
+      CampaignPageDocumentData,
+      CampaignPageDocumentDataSlicesSlice,
       ContactPageDocument,
       ContactPageDocumentData,
       ContactPageDocumentDataSlicesSlice,
