@@ -42,7 +42,7 @@ export default {
       extraBold: "700",
     },
     fontSize: {
-      base: "1em",
+      base: "1rem",
       h1: "4.1875rem",
       h2: "3.5625rem",
       h3: "2.5rem",

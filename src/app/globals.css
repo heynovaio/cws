@@ -21,7 +21,7 @@
     @apply font-title md:text-h4 font-bold leading-h4;
   }
   p {
-    @apply text-bodyLarge font-body;
+    @apply text-bodyLarge font-body mb-2;
   }
   a {
     @apply underline text-bodyLarge;
@@ -132,6 +132,23 @@
   img {
     @apply rounded;
   }
+
+  .text-content {
+    p, h1, h2, h3, h4, h5, h6 {
+      @apply mb-4;
+    }
+    p {
+      @apply text-base;
+    }
+    a {
+      @apply text-aqua;
+    }
+    ul, ol {
+      display: inline-block;
+      text-align: left;
+    }
+  }
+
   .backdrop-blur-default {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
