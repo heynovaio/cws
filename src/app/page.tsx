@@ -6,19 +6,18 @@ import * as prismic from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
-import React from "react";
 import { Layout } from "@/components";
 import { getLocales } from "@/utils";
+import React from "react";
 
-/**
- * This page renders a Prismic Document dynamically based on the URL.
- */
+type Params = { lang: string };
 
 export async function generateMetadata({
-  params: { lang },
+  params,
 }: {
-  params: { lang: string };
+  params: Promise<Params>;
 }): Promise<Metadata> {
+  const { lang } = await params;
   const client = createClient();
   const page = await client
     .getByUID("page", "home", { lang })
@@ -41,18 +40,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({
-  params: { lang },
-}: {
-  params: { lang: string };
-}) {
+export default async function Page({ params }: { params: Promise<Params> }) {
+  const { lang } = await params;
   const client = createClient();
-
-  const page = await client.getByUID("page", "home", { lang });
+  const page = await client
+    .getByUID("page", "home", { lang })
+    .catch(() => notFound());
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
   const partners = await client.getSingle("partners", { lang });
-
   const locales = await getLocales(page, client);
 
   return (

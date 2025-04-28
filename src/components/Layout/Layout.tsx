@@ -13,7 +13,7 @@ interface LayoutProps {
   menus: MenusDocumentData;
   global: GlobalsDocumentData;
   children: ReactNode;
-  partners: PartnersDocumentData;
+  partners?: PartnersDocumentData;
 }
 
 export const Layout = ({
@@ -30,13 +30,15 @@ export const Layout = ({
         {children}
       </main>
       <Container>
-        <Partners
-          title={partners.title}
-          body={partners.body}
-          buttons={partners.button}
-          logos={partners.logos}
-          ctaText={partners.cta_text}
-        />
+        {partners && (
+          <Partners
+            title={partners.title}
+            body={partners.body}
+            buttons={partners.button}
+            logos={partners.logos}
+            ctaText={partners.cta_text}
+          />
+        )}
       </Container>
     </div>
   );
