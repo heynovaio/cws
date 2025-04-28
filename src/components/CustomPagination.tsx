@@ -45,27 +45,13 @@ export const CustomPagination = ({
         middlePagesSiblingCount={1}
         truncableText="..."
         truncableClassName="text-white px-3 py-2"
-        className="flex gap-2 items-center flex-wrap mt-4 list-none"
+        className="flex gap-2 items-center flex-wrap mt-4 list-none justify-center"
       >
-        <Pagination.PrevButton
-          className="text-midnight bg-aqua px-3 py-2 rounded-lg"
-          aria-label="Previous page"
-        >
-          <FaChevronLeft />
-        </Pagination.PrevButton>
-
         <Pagination.PageButton
-          activeClassName="bg-ultra-pink text-midnight no-underline"
-          inactiveClassName="text-midnight bg-neon-violet no-underline"
-          className="px-3 py-2 rounded-lg text-[1.1rem]"
+          activeClassName="bg-ultra-pink  border-white border-ultra-pink border-2  focus:rounded-full"
+          inactiveClassName="bg-dark-purple-background border-white border-2  focus:rounded-full"
+          className="w-10 h-10 flex items-center justify-center rounded-full  focus:outline-none focus:ring-2 focus:ring-aqua font-bold no-underline"
         />
-
-        <Pagination.NextButton
-          className="text-midnight bg-aqua px-3 py-2 rounded-lg"
-          aria-label="Next page"
-        >
-          <FaChevronRight />
-        </Pagination.NextButton>
       </Pagination>
     </div>
   );
