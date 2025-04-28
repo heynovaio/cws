@@ -30,6 +30,7 @@ export const SpecCard = ({
   format,
   resources,
 }: SpecCardProps) => {
+  console.log("Resources", resources);
   return (
     <div className="card-white p-5 flex gap-5 flex-col border border-neon-violet font-accent">
       {typeof title === "string" ? (

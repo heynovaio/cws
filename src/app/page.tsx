@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { PrismicRichText, SliceZone } from "@prismicio/react";
+import { SliceZone } from "@prismicio/react";
 import * as prismic from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
@@ -63,12 +63,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         slices={page.data.slices}
         components={components}
         context={{ lang }}
-      />
-      <Intro
-        title={page.data.title}
-        content={<PrismicRichText field={page.data.body} />}
-        image={page.data.image}
-        buttons={resources}
       />
     </Layout>
   );
