@@ -28,12 +28,19 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
         containerClassName={isSingleColumn ? "flex justify-center" : ""}
       >
         <div
-          className={`${cardStyling} flex flex-col md:flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch divide-y md:divide-x ${
+          className={`${cardStyling} flex flex-col md:flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch ${
             isSingleColumn ? "max-w-[860px] w-full" : "w-full"
           }`}
         >
-          {slice.primary.column.map((item) => (
-            <div className="flex flex-col items-center justify-center p-10 w-full ">
+          {slice.primary.column.map((item, index) => (
+            <div
+              key={index}
+              className={`flex flex-col items-center justify-center p-10 w-full ${
+                index !== 0
+                  ? "border-t md:border-t-0 md:border-l border-neon-violet"
+                  : ""
+              }`}
+            >
               {item.icon && (
                 <ResponsiveImage
                   image={item.icon}
