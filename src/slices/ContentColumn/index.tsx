@@ -48,11 +48,9 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
                 />
               )}
               <div className="mt-4 text-center flex flex-col gap-2">
-                {slice.variation === "stats" ? (
-                  <h3>{item.stat_number}</h3>
-                ) : (
-                  <PrismicRichText field={item.title} />
-                )}
+                {slice.variation === "stats"
+                  ? "stat_number" in item && <h3>{item.stat_number}</h3>
+                  : "title" in item && <PrismicRichText field={item.title} />}
                 <PrismicRichText field={item.description} />
               </div>
             </div>
