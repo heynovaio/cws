@@ -35,8 +35,8 @@ const LogoList = ({ slice }: LogoListProps): JSX.Element => {
           </div>
           <div>
             {slice.primary.logos &&
-              slice.primary.logos.map((item) => (
-                <PrismicNextLink field={item.logo_link}>
+              slice.primary.logos.map((item, index) => (
+                <PrismicNextLink field={item.logo_link} key={index}>
                   <PrismicNextImage field={item.logo_image} alt="" />
                 </PrismicNextLink>
               ))}

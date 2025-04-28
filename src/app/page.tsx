@@ -10,15 +10,18 @@ import React from "react";
 import { Layout } from "@/components";
 import { getLocales } from "@/utils";
 
+type Params = { lang: string };
+
 /**
  * This page renders a Prismic Document dynamically based on the URL.
  */
 
 export async function generateMetadata({
-  params: { lang },
+  params,
 }: {
-  params: { lang: string };
+  params: Params;
 }): Promise<Metadata> {
+  const { lang } = params;
   const client = createClient();
   const page = await client
     .getByUID("page", "home", { lang })
