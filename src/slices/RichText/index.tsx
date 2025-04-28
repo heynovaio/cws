@@ -1,7 +1,8 @@
 import { Content } from "@prismicio/client";
-import { Container, ContentBox, Section } from "@/components";
+import { Container, Section } from "@/components";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
+import { components } from "@/utils";
 
 /**
  * Props for `RichText`.
@@ -27,7 +28,7 @@ const RichText = ({ slice }: RichTextProps): JSX.Element => {
             <div
               className={`text-content ${textAlignment} max-w-[80ch] mx-auto`}
             >
-              <PrismicRichText field={slice.primary.content} />
+              <PrismicRichText field={slice.primary.content}  components={components} />
             </div>
           </Container>
         </Section>
