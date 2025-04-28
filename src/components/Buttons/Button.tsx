@@ -44,11 +44,7 @@ export const Button = ({
       className={`flex flex-row w-fit items-center gap-2 hover:gap-4 ${styling} ${buttonStyle} ${linkButtonColorClass}`}
     >
       {label}
-      {icon && (
-        <span className="flex items-center justify-center">
-          {icon}
-        </span>
-      )}
+      {icon && <span className="flex items-center justify-center">{icon}</span>}
     </PrismicNextLink>
   );
 };
