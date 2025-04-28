@@ -53,10 +53,10 @@ export const Partners = ({
     (_, i) => logos.slice(i * 6, i * 6 + 6)
   );
 
-  const carouselRef = useRef<any>(null);
+  const carouselRef = useRef<Carousel>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const handleSlideChange = (_: any, state: CarouselInternalState) => {
+  const handleSlideChange = (_: unknown, state: CarouselInternalState) => {
     setCurrentSlide(state.currentSlide);
   };
 
@@ -91,9 +91,9 @@ export const Partners = ({
                   direction === "next" &&
                   currentSlide < logoTiles.length - 1
                 ) {
-                  carouselRef.current?.next();
+                  carouselRef.current?.next(1);
                 } else if (direction === "prev" && currentSlide > 0) {
-                  carouselRef.current?.previous();
+                  carouselRef.current?.previous(1);
                 }
               }}
               styling="w-fit"
