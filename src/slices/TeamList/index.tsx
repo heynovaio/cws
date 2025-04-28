@@ -1,4 +1,4 @@
-import { Container, ResponsiveImage } from "@/components";
+import { Container } from "@/components";
 import { TeamMemberTile } from "@/components/Tiles/TeamMemberTile";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";

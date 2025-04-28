@@ -54,11 +54,17 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     .catch(() => notFound());
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
+  const partners = await client.getSingle("partners", { lang });
 
   const locales = await getLocales(page, client);
 
   return (
-    <Layout locales={locales} global={global.data} menus={menus.data}>
+    <Layout
+      locales={locales}
+      global={global.data}
+      menus={menus.data}
+      partners={partners.data}
+    >
       <SliceZone
         slices={page.data.slices}
         components={components}
