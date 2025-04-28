@@ -143,6 +143,10 @@
     a {
       @apply text-aqua;
     }
+    ul, ol {
+      display: inline-block;
+      text-align: left;
+    }
   }
 
   .backdrop-blur-default {
