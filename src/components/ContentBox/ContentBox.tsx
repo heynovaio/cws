@@ -6,9 +6,9 @@ import { RichTextField } from "@prismicio/client";
 
 interface ContentBoxProps {
   children?: ReactNode;
-  title: string | RichTextField;
+  title: string | RichTextField | undefined;
   titleClassName?: string;
-  content?: ReactNode;
+  content?: ReactNode | undefined;
   buttons?: ReactNode[];
   width?: WidthProp;
   containerClassName?: string;

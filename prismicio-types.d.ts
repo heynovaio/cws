@@ -596,7 +596,7 @@ interface ProgramPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  category: prismic.ContentRelationshipField<"offerings_category">;
+  category: prismic.ContentRelationshipField<"program_category">;
 
   /**
    * Image field in *Program Page*
@@ -648,17 +648,11 @@ interface ProgramPageDocumentData {
    *
    * - **Field Type**: Link
    * - **Placeholder**: Get Started
-   * - **API ID Path**: program_page.newsletter_link
+   * - **API ID Path**: program_page.link
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  newsletter_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
    * Time field in *Program Page*

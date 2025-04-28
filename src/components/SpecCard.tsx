@@ -20,6 +20,8 @@ interface SpecCardProps {
   resources?: LinkField[];
 }
 
+// TODO: Translations
+
 export const SpecCard = ({
   title = "Details: ",
   time,
@@ -28,6 +30,7 @@ export const SpecCard = ({
   format,
   resources,
 }: SpecCardProps) => {
+  console.log("Resources", resources);
   return (
     <div className="card-white p-5 flex gap-5 flex-col border border-neon-violet">
       {typeof title === "string" ? (
@@ -69,9 +72,13 @@ export const SpecCard = ({
           <ul className="list-disc pl-5">
             {resources.map((item, index) => (
               <li key={index}>
-                <PrismicNextLink field={item} className="link-no-underline">
-                  {item.text}
-                </PrismicNextLink>
+                {item.link_type === "Any" ? (
+                  item.text
+                ) : (
+                  <PrismicNextLink field={item} className="link-no-underline">
+                    {item.text}
+                  </PrismicNextLink>
+                )}
               </li>
             ))}
           </ul>
