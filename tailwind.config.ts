@@ -83,6 +83,9 @@ export default {
         "gradient-overlay":
           "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(3, 0, 233, 0.5) 61.5%)",
       },
+      dropShadow: {
+        glow: "0 0 30px #630FF9CC",
+      },
     },
   },
   plugins: [],
