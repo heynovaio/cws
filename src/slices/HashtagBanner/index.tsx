@@ -12,21 +12,24 @@ export type HashtagBannerProps =
 /**
  * Component for "HashtagBanner" Slices.
  */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 const HashtagBanner = ({ slice }: HashtagBannerProps) => {
   const word = slice.primary.display_word;
-  const [offsetX, setOffsetX] = useState(0);
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log("moving");
-      const scrollTop = window.scrollY; // vertical scroll position
-      setOffsetX(scrollTop * 0.5); // adjust speed here (0.5 = slower, 1 = equal)
+      const scrollTop = window.scrollY;
+      if (bannerRef.current) {
+        bannerRef.current.style.transform = `translateX(-${scrollTop * 0.5}px)`;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => requestAnimationFrame(handleScroll);
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -37,11 +40,8 @@ const HashtagBanner = ({ slice }: HashtagBannerProps) => {
     >
       <div className="neon-banner">
         <div
-          className="flex whitespace-nowrap gap-10 justify-center"
-          style={{
-            transform: `translateX(-${offsetX}px)`,
-            transition: "transform 0.1s linear",
-          }}
+          className="flex whitespace-nowrap gap-10 justify-center will-change-transform"
+          ref={bannerRef}
         >
           {Array.from({ length: 50 }).map((_, idx) => (
             <h3 key={idx} className="text-3xl font-bold text-white px-4">
