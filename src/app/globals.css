@@ -222,3 +222,7 @@
     @apply text-midnight bg-aqua px-2 py-2 rounded-full;
   }
 }
+
+.hover-ultrapink:hover {
+  color: black !important;
+}
