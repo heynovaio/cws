@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useMemo, ReactNode } from "react";
 import { Pagination } from "react-headless-pagination";
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
 interface CustomPaginationProps {
   children: ReactNode[];
