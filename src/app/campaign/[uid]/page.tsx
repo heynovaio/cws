@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { SliceZone } from "@prismicio/react";
-import * as prismic from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
@@ -29,10 +28,7 @@ export async function generateMetadata({
     .catch(() => notFound());
 
   return {
-    title:
-      page.data.meta_title ||
-      prismic.asText(page.data.title) ||
-      "Canadian Women in Sports",
+    title: page.data.meta_title || "Canadian Women in Sports",
     description: page.data.meta_description,
     openGraph: {
       title: page.data.meta_title || undefined,

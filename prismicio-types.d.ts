@@ -1514,7 +1514,6 @@ export type ContentCarouselSlice = prismic.SharedSlice<
 >;
 
 /**
-<<<<<<< HEAD
  * Primary content in *HashtagBanner → Default → Primary*
  */
 export interface HashtagBannerSliceDefaultPrimary {
@@ -1531,7 +1530,6 @@ export interface HashtagBannerSliceDefaultPrimary {
 
 /**
  * Default variation for HashtagBanner Slice
-=======
  * Item in *ContentColumn → Default → Primary → Column*
  */
 export interface ContentColumnSliceDefaultPrimaryColumnItem {
@@ -1631,41 +1629,18 @@ export interface ContentColumnSliceDefaultPrimary {
 
 /**
  * Default variation for ContentColumn Slice
->>>>>>> 569625cf0cc623b70b9f704ae68fb03f947f2a02
  *
  * - **API ID**: `default`
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slice
  */
-<<<<<<< HEAD
-export type HashtagBannerSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<HashtagBannerSliceDefaultPrimary>,
-=======
 export type ContentColumnSliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<ContentColumnSliceDefaultPrimary>,
->>>>>>> 569625cf0cc623b70b9f704ae68fb03f947f2a02
   never
 >;
 
 /**
-<<<<<<< HEAD
- * Slice variation for *HashtagBanner*
- */
-type HashtagBannerSliceVariation = HashtagBannerSliceDefault;
-
-/**
- * HashtagBanner Shared Slice
- *
- * - **API ID**: `hashtag_banner`
- * - **Description**: HashtagBanner
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type HashtagBannerSlice = prismic.SharedSlice<
-  "hashtag_banner",
-  HashtagBannerSliceVariation
-=======
  * Primary content in *ContentColumn → Stats → Primary*
  */
 export interface ContentColumnSliceStatsPrimary {
@@ -1723,7 +1698,6 @@ type ContentColumnSliceVariation =
 export type ContentColumnSlice = prismic.SharedSlice<
   "content_column",
   ContentColumnSliceVariation
->>>>>>> 569625cf0cc623b70b9f704ae68fb03f947f2a02
 >;
 
 /**
@@ -3775,12 +3749,10 @@ declare module "@prismicio/client" {
       ContentCarouselSliceDefaultPrimary,
       ContentCarouselSliceVariation,
       ContentCarouselSliceDefault,
-<<<<<<< HEAD
       HashtagBannerSlice,
       HashtagBannerSliceDefaultPrimary,
       HashtagBannerSliceVariation,
       HashtagBannerSliceDefault,
-=======
       ContentColumnSlice,
       ContentColumnSliceDefaultPrimaryColumnItem,
       ContentColumnSliceDefaultPrimary,
@@ -3789,7 +3761,6 @@ declare module "@prismicio/client" {
       ContentColumnSliceVariation,
       ContentColumnSliceDefault,
       ContentColumnSliceStats,
->>>>>>> 569625cf0cc623b70b9f704ae68fb03f947f2a02
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
       ImageTextSliceVideoPrimary,

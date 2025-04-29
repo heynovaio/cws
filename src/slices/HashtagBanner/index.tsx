@@ -14,7 +14,7 @@ export type HashtagBannerProps =
  */
 import React, { useEffect, useState } from "react";
 
-const HashtagBanner = ({ slice }) => {
+const HashtagBanner = ({ slice }: HashtagBannerProps) => {
   const word = slice.primary.display_word;
   const [offsetX, setOffsetX] = useState(0);
 
