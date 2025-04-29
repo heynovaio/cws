@@ -12,6 +12,18 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Darker"
+            ],
+            "default_value": "No Background"
+          }
+        },
         "image_side": {
           "type": "Boolean",
           "config": {

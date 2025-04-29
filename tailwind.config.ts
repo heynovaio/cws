@@ -34,6 +34,7 @@ export default {
       "light-violet": "#E5D8FF",
       "navy-background": "#00002D",
       "dark-purple-background": "#180451",
+      "soft-purple": "#D4C6FD40",
     },
     fontWeight: {
       normal: "400",
@@ -42,7 +43,7 @@ export default {
       extraBold: "700",
     },
     fontSize: {
-      base: "1em",
+      base: "1rem",
       h1: "4.1875rem",
       h2: "3.5625rem",
       h3: "2.5rem",
@@ -64,7 +65,7 @@ export default {
         DEFAULT: "1.25rem",
       },
       boxShadow: {
-        DEFAULT: "0px 0px 30px 0px rgba(99, 15, 249, 0.60)",
+        DEFAULT: "0px 0px 30px 0px rgba(99, 15, 249, 0.80)",
       },
       backdropBlur: {
         DEFAULT: "8px",
@@ -82,6 +83,9 @@ export default {
           "linear-gradient(90deg, rgba(99, 15, 249, 0.8) 0%, rgba(51, 23, 153, 0.8) 100%)",
         "gradient-overlay":
           "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(3, 0, 233, 0.5) 61.5%)",
+      },
+      dropShadow: {
+        glow: "0 0 30px #630FF9CC",
       },
     },
   },
