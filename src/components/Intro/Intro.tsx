@@ -62,19 +62,21 @@ export const Intro = ({ type, pageData }: IntroProps) => {
           <div className="md:col-span-6 flex flex-col h-full">
             <div className="flex-grow flex flex-col justify-center">
               {/* If program intro */}
-              {programCategoryData?.map((category, index) => (
-                <span key={category.id} className="tagline">
-                  {category.data.name?.toUpperCase()}
-                  {index < programCategoryData.length - 1 && ", "}
-                </span>
-              ))}
+              {isProgramPage &&
+                programCategoryData?.map((category, index) => (
+                  <span key={category.id} className="tagline">
+                    {category.data.name?.toUpperCase()}
+                    {index < programCategoryData.length - 1 && ", "}
+                  </span>
+                ))}
               {/* If resource intro */}
-              {resourceCategoryData?.map((category, index) => (
-                <span key={category.id} className="text-neon-violet tagline">
-                  {category.data.name?.toUpperCase()}
-                  {index < resourceCategoryData.length - 1 && ", "}
-                </span>
-              ))}
+              {!isProgramPage &&
+                resourceCategoryData?.map((category, index) => (
+                  <span key={category.id} className="text-neon-violet tagline">
+                    {category.data.name?.toUpperCase()}
+                    {index < resourceCategoryData.length - 1 && ", "}
+                  </span>
+                ))}
               <ContentBox
                 title={title}
                 content={
@@ -95,8 +97,8 @@ export const Intro = ({ type, pageData }: IntroProps) => {
                                   field={item}
                                   className={
                                     index === 1
-                                      ? "btn btn-primary"
-                                      : "btn btn-secondary"
+                                      ? "btn btn-secondary"
+                                      : "btn btn-primary"
                                   }
                                 >
                                   {item.text}
