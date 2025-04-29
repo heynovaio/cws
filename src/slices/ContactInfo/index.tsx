@@ -21,6 +21,7 @@ const ContactInfo = ({ slice }: ContactInfoProps): JSX.Element => {
         <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-stretch">
           <div className="w-full md:w-2/3 md:mt-10">
             <PrismicRichText field={slice.primary.title} />
+            {/*** TODO: Replace description with global from context once the context is all set up */}
             <PrismicRichText field={slice.primary.description} />
             {slice.primary.image && (
               <ResponsiveImage
