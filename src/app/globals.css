@@ -11,6 +11,9 @@
   h1 {
     @apply font-title md:text-h1 font-extraBold leading-h1;
   }
+  h1.h1-alt {
+    @apply font-title text-h3 font-extraBold leading-h3;
+  }
   h2 {
     @apply font-title md:text-h2 font-extraBold leading-h2;
   }
