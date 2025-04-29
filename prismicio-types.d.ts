@@ -1636,7 +1636,7 @@ export interface ImageTextSliceStatsPrimaryStatsItem {
    * - **API ID Path**: image_text.stats.primary.stats[].description
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  description: prismic.KeyTextField;
+  description: prismic.RichTextField;
 }
 
 /**
