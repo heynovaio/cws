@@ -1,10 +1,13 @@
 "use client";
 import { Container, ContentBox, Section } from "@/components";
 import { useCategoryFilterData } from "@/hooks";
+import { useCategoryFilter } from "@/providers";
 import { components } from "@/utils";
+import GetAllPrograms from "@/utils/useGetAllPrograms";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { JSX } from "react";
+import { JSX, useEffect, useMemo } from "react";
+import { ProgramPageDocument } from "../../../prismicio-types";
 
 /**
  * Props for `ContentGrid`.
@@ -16,9 +19,20 @@ export type ContentGridProps =
  * Component for "ContentGrid" Slices.
  */
 const ProgramContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
-  const { categories } = useCategoryFilterData("en-ca", "program");
+  const { data } = GetAllPrograms("en-ca");
+  console.log("Data: ", data);
 
-  console.log("Categories: ", categories);
+  console.log("Slice: ", slice.primary.category);
+  // const ProgramData = useMemo(() => {
+  //   return data?.filter((item) => {
+  //     return item.data.category?.some(
+  //       (categoryItem) =>
+  //         categoryItem.category &&
+  //         "id" in categoryItem.category &&
+  //         categoryItem.category.id === categoryId
+  //     );
+  //   }) as ProgramPageDocument[];
+  // }, [data, categoryId]);
 
   return (
     <Section

@@ -59,8 +59,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   const locales = await getLocales(page, client);
 
-  console.log("page", page);
-
   return (
     <CategoryFilterProvider>
       <Layout

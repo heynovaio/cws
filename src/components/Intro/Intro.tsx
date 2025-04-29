@@ -35,7 +35,6 @@ export const Intro = ({ type, pageData }: IntroProps) => {
     included_resources?: [];
   };
 
-  console.log("Page Data", pageData);
   const buttonsExist = Array.isArray(link) && link.length > 0;
 
   // TODO: Fix the lang once we have the use context provider set up (future PR for all translations as well)
