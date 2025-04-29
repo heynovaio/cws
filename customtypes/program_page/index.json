@@ -18,7 +18,7 @@
           "label": "Category",
           "select": "document",
           "repeat": false,
-          "customtypes": ["offerings_category"]
+          "customtypes": ["program_category"]
         }
       },
       "image": {
@@ -56,7 +56,7 @@
           "default_value": false
         }
       },
-      "newsletter_link": {
+      "link": {
         "type": "Link",
         "config": {
           "label": "Newsletter Link",

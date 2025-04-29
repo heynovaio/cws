@@ -6,12 +6,15 @@ import { RichTextField } from "@prismicio/client";
 
 interface ContentBoxProps {
   children?: ReactNode;
-  title: string | RichTextField;
+  title: string | RichTextField | undefined;
   titleClassName?: string;
-  content?: ReactNode;
+  content?: ReactNode | undefined;
   buttons?: ReactNode[];
   width?: WidthProp;
   containerClassName?: string;
+  titleComponents?: {
+    [key: string]: React.FC<{ children: ReactNode }>;
+  };
 }
 export const ContentBox: React.FC<ContentBoxProps> = ({
   children,
@@ -21,6 +24,7 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
   buttons,
   width = "full",
   containerClassName,
+  titleComponents,
   ...props
 }) => {
   const widthClassName = getWidthClassNames(width);
@@ -40,7 +44,7 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
           {typeof title === "string" ? (
             <h2 className={titleClassName}>{title}</h2>
           ) : (
-            <PrismicRichText field={title} />
+            <PrismicRichText field={title} components={titleComponents} />
           )}
         </div>
         {content && <div>{content}</div>}
