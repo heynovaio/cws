@@ -1,6 +1,19 @@
-import { FC } from "react";
+"use client";
+import {
+  Container,
+  ContentBox,
+  DefaultCard,
+  Grid,
+  Section,
+} from "@/components";
+import { useCategoryFilterData } from "@/hooks";
+import { useCategoryFilter } from "@/providers";
+import { components } from "@/utils";
+import GetAllPrograms from "@/utils/useGetAllPrograms";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { JSX, useEffect, useMemo } from "react";
+import { ProgramPageDocument } from "../../../prismicio-types";
 
 /**
  * Props for `ContentGrid`.
@@ -10,16 +23,96 @@ export type ContentGridProps = SliceComponentProps<Content.ContentGridSlice>;
 /**
  * Component for "ContentGrid" Slices.
  */
-const ContentGrid: FC<ContentGridProps> = ({ slice }) => {
+const ProgramContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
+  const { data } = GetAllPrograms("en-ca");
+  console.log("Data: ", data);
+
+  const categoryId =
+    slice.primary.category && "id" in slice.primary.category
+      ? slice.primary.category.id
+      : null;
+
+  const programData = useMemo(() => {
+    return (
+      data?.filter((item) => {
+        if (!item.data?.category) return false;
+
+        if ("id" in item.data.category) {
+          return item.data.category.id === categoryId;
+        }
+
+        return false;
+      }) ?? []
+    );
+  }, [data, categoryId]);
+
+  // const resourceData = useMemo(() => {
+  //   return data?.filter((item) => {
+  //     return item.data.categories?.some(
+  //       (categoryItem) =>
+  //         categoryItem.category &&
+  //         'id' in categoryItem.category &&
+  //         categoryItem.category.id === categoryId
+  //     );
+  //   }) as ResourcePageDocument[];
+  // }, [data, categoryId]);
+
+  // const ProgramData = useMemo(() => {
+  //   return data?.filter((item) => {
+  //     return item.data.category?.some(
+  //       (categoryItem) =>
+  //         categoryItem.category &&
+  //         "id" in categoryItem.category &&
+  //         categoryItem.category.id === categoryId
+  //     );
+  //   }) as ProgramPageDocument[];
+  // }, [data, categoryId]);
+
   return (
-    <section
+    <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      backgroundColor={slice.primary.background_color}
     >
-      Placeholder component for content_grid (variation: {slice.variation})
-      Slices
-    </section>
+      <Container>
+        <ContentBox
+          title={slice.primary.title}
+          content={
+            <PrismicRichText
+              field={slice.primary.body}
+              components={components}
+            />
+          }
+          width="standard"
+          containerClassName="flex mx-auto justify-center text-center"
+        />
+        {/* Insert Program Cards here */}
+        <Grid maxColumns={3}>
+          {programData.map((item, index) => (
+            <DefaultCard
+              key={index}
+              title={item.data.title}
+              content={
+                <PrismicRichText
+                  field={item.data.body}
+                  components={components}
+                />
+              }
+              image={item.data.image}
+              category={
+                item.data.category && Array.isArray(item.data.category)
+                  ? item.data.category.filter(
+                      (cat): cat is string => typeof cat === "string"
+                    )
+                  : undefined
+              }
+              cardType="program"
+            />
+          ))}
+        </Grid>
+      </Container>
+    </Section>
   );
 };
 
-export default ContentGrid;
+export default ProgramContentGrid;
