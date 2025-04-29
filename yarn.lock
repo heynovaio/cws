@@ -1776,7 +1776,7 @@ cliui@^8.0.1:
     strip-ansi "^6.0.1"
     wrap-ansi "^7.0.0"
 
-clsx@^2.0.0, clsx@^2.1.1:
+clsx@^2.0.0, clsx@^2.1.0, clsx@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.1.1.tgz#eed397c9fd8bd882bfb18deab7102049a2f32999"
   integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
@@ -2618,6 +2618,11 @@ fastq@^1.6.0:
   integrity sha512-GwLTyxkCXjXbxqIhTsMI2Nui8huMPtnxg7krajPJAjnEG/iiOS7i+zCtWGZR9G0NBKbXKh6X9m9UIsYX/N6vvQ==
   dependencies:
     reusify "^1.0.4"
+
+fdir@^6.4.4:
+  version "6.4.4"
+  resolved "https://registry.yarnpkg.com/fdir/-/fdir-6.4.4.tgz#1cfcf86f875a883e19a8fab53622cfe992e8d2f9"
+  integrity sha512-1NZP+GK4GfuAv3PqKvxQRDMjdSRZjnkq7KfhlNrCNNlZ0ygQFpebfrnfnq/W7fpUnAv9aGWmY1zKx7FYL3gwhg==
 
 fdir@^6.4.4:
   version "6.4.4"
@@ -4885,6 +4890,20 @@ react-dom@^19.0.0:
   dependencies:
     scheduler "^0.26.0"
 
+react-headless-pagination@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/react-headless-pagination/-/react-headless-pagination-1.1.6.tgz#bef03f0f901c8f63d04aadfa8f2323cf747b2d2d"
+  integrity sha512-t7L/Q4xpyZszw8iC8ALERs/G2644JESmssahUkRp65WFWvw2k9HXVmfI6VbXvTXrqy+a8fbKT6BQ6SgS2ULNOA==
+  dependencies:
+    clsx "^2.1.0"
+
+react-headless-pagination@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/react-headless-pagination/-/react-headless-pagination-1.1.6.tgz#bef03f0f901c8f63d04aadfa8f2323cf747b2d2d"
+  integrity sha512-t7L/Q4xpyZszw8iC8ALERs/G2644JESmssahUkRp65WFWvw2k9HXVmfI6VbXvTXrqy+a8fbKT6BQ6SgS2ULNOA==
+  dependencies:
+    clsx "^2.1.0"
+
 react-icons@^5.4.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-5.5.0.tgz#8aa25d3543ff84231685d3331164c00299cdfaf2"
@@ -5124,10 +5143,15 @@ semver@^6.3.1:
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.1.tgz#556d2ef8689146e46dcea4bfdd095f3434dffcb4"
   integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
-semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3, semver@^7.6.0, semver@^7.6.3, semver@^7.7.1:
+semver@^7.1.1, semver@^7.3.7, semver@^7.5.3, semver@^7.7.1:
   version "7.7.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.1.tgz#abd5098d82b18c6c81f6074ff2647fd3e7220c9f"
   integrity sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==
+
+semver@^7.3.4, semver@^7.3.5, semver@^7.3.8, semver@^7.6.0, semver@^7.6.3:
+  version "7.6.3"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.3.tgz#980f7b5550bc175fb4dc09403085627f9eb33143"
+  integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
 
 send@0.19.0:
   version "0.19.0"
