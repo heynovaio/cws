@@ -2,6 +2,7 @@ import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { Section, Container, ResponsiveImage } from "@/components";
 import { JSX } from "react";
+import { components } from "@/utils";
 
 /**
  * Props for `ContentColumn`.
@@ -51,7 +52,10 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
                 {slice.variation === "stats"
                   ? "stat_number" in item && <h3>{item.stat_number}</h3>
                   : "title" in item && <PrismicRichText field={item.title} />}
-                <PrismicRichText field={item.description} />
+                <PrismicRichText
+                  field={item.description}
+                  components={components}
+                />
               </div>
             </div>
           ))}
