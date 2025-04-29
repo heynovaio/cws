@@ -35,16 +35,7 @@ const HashtagBanner = ({ slice }: HashtagBannerProps) => {
       data-slice-variation={slice.variation}
       className="bg-navy-background pt-20 pb-20 overflow-hidden"
     >
-      <div
-        className="w-[105%] -ml-[2.5%] border-t-2 border-b-2 border-neon-violet bg-gradient-dark overflow-hidden py-10"
-        style={{
-          transform: "rotate(-2.79deg)",
-          transformOrigin: "center",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)", // for Safari
-          boxShadow: "0px 0px 30px 0px #630FF9CC",
-        }}
-      >
+      <div className="neon-banner">
         <div
           className="flex whitespace-nowrap gap-10 justify-center"
           style={{
