@@ -68,7 +68,9 @@ export const Partners = ({
           content={
             <div className="flex flex-col gap-2">
               <PrismicRichText field={body} />
-              <p className="font-extraBold text-[2rem] mt-6">{ctaText}</p>
+              <p className="font-extraBold text-[1.625rem] md:text-[2rem] mt-6">
+                {ctaText}
+              </p>
             </div>
           }
           buttons={buttons.map((button, i) => (
