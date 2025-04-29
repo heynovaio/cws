@@ -66,6 +66,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "hashtag_banner": {
+              "type": "SharedSlice"
+            },
             "tabbed_carousel": {
               "type": "SharedSlice"
             },
