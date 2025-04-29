@@ -9,7 +9,6 @@ import { components } from "@/slices";
 import { Layout } from "@/components";
 import { getLocales } from "@/utils";
 import React from "react";
-import { Intro } from "@/components/Intro/Intro";
 
 type Params = { lang: string };
 
