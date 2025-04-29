@@ -55,7 +55,7 @@ export const Intro = ({ type, pageData }: IntroProps) => {
     <Section data-test-id="intro">
       <Container>
         <div
-          className={`grid grid-cols-1 md:grid-cols-12 gap-4 rounded p-12 border border-neon-violet shadow backdrop-blur-3xl ${containerStyle}`}
+          className={`grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-4 rounded px-5 py-10 md:p-12 border border-neon-violet shadow backdrop-blur-3xl ${containerStyle}`}
         >
           <div className="order-1 md:order-2 md:col-span-3">
             <ResponsiveImage
@@ -82,7 +82,9 @@ export const Intro = ({ type, pageData }: IntroProps) => {
               ))}
               <ContentBox
                 title={title}
-                titleClassName="h1-alt"
+                titleComponents={{
+                  heading1: ({ children }) => <h1 className="h1-alt">{children}</h1>,
+                }}
                 content={
                   <PrismicRichText field={body} components={components} />
                 }

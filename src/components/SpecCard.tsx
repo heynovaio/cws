@@ -31,42 +31,52 @@ export const SpecCard = ({
   resources,
 }: SpecCardProps) => {
   return (
-    <div className="card-white p-5 flex gap-5 flex-col border border-neon-violet">
+    <div className="card-white p-5 flex gap-5 flex-col border border-neon-violet font-accent">
       {typeof title === "string" ? (
         <label>{title}</label>
       ) : (
         <PrismicRichText field={title} />
       )}
-      {time && (
-        <div className="flex gap-2 items-center">
-          <MdAccessTimeFilled className="h-6 w-6 text-neon-violet" />
-          <strong>Time: </strong>
-          {time}
-        </div>
-      )}
-      {cost && (
-        <div className="flex gap-2 items-center">
-          <MdAttachMoney className="h-6 w-6 text-neon-violet" />
-          <strong>Cost: </strong>
-          {cost}
-        </div>
-      )}
-      {certs && (
-        <div className="flex gap-2 items-center">
-          <FaMedal className="h-4 w-6 text-neon-violet" />
-          <strong>Certs: </strong>
-          NCCP PD Points
-        </div>
-      )}
-      {format && (
-        <div className="flex gap-2 items-center">
-          <FaLaptop className="h-4 w-6 text-neon-violet" />
-          <strong>Format: </strong>
-          {format}
-        </div>
-      )}
+      <div className="grid grid-cols-2 md:grid-cols-1 gap-5">
+        {time && (
+          <div className="flex flex-col md:flex-row flex-wrap gap-2 items-center text-center md:text-start">
+            <MdAccessTimeFilled className="h-6 w-6 text-neon-violet" />
+            <span>
+              <strong>Time: </strong>
+              {time}
+            </span>
+          </div>
+        )}
+        {cost && (
+          <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
+            <MdAttachMoney className="h-6 w-6 text-neon-violet" />
+            <span>
+              <strong>Cost: $</strong>
+              {cost}
+            </span>
+          </div>
+        )}
+        {certs && (
+          <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
+            <FaMedal className="h-4 w-6 text-neon-violet" />
+            <span>
+              <strong>Certs: </strong>
+              NCCP PD Points
+            </span>
+          </div>
+        )}
+        {format && (
+          <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
+            <FaLaptop className="h-4 w-6 text-neon-violet" />
+            <span>
+              <strong>Format: </strong>
+              {format}
+            </span>
+          </div>
+        )}
+      </div>
       {resources && resources.length > 0 && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col mx-auto md:mx-0 gap-2">
           <strong>This Program Includes: </strong>
           <ul className="list-disc pl-5">
             {resources.map((item, index) => (
