@@ -37,8 +37,8 @@
 				"type": "Link",
 				"value": [
 					{
-						"__TYPE__": "LinkContent",
 						"key": "10d8e2b7-a548-43d6-8cf1-49e1ee720d1b",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "AnyLink",
 							"kind": "any",

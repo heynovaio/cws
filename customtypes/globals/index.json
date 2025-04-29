@@ -11,8 +11,8 @@
         "config": {
           "label": "Site Logo",
           "constraint": {
-            "width": "",
-            "height": ""
+            "width": null,
+            "height": null
           },
           "thumbnails": []
         }

@@ -231,6 +231,11 @@
 						]
 					}
 				]
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
 			}
 		},
 		"items": []
