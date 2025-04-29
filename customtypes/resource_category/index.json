@@ -17,8 +17,8 @@
         "config": {
           "label": "Icon",
           "constraint": {
-            "width": "",
-            "height": ""
+            "width": null,
+            "height": null
           },
           "thumbnails": []
         }
