@@ -9,16 +9,19 @@
     /* dark:text-white dark:bg-midnight */
   }
   h1 {
-    @apply font-title md:text-h1 font-extraBold leading-h1;
+    @apply font-title text-[2.5rem] md:text-h1 font-extraBold leading-h1;
+  }
+  h1.h1-alt {
+    @apply font-title text-h3 font-extraBold leading-h3;
   }
   h2 {
-    @apply font-title md:text-h2 font-extraBold leading-h2;
+    @apply font-title text-[1.875rem] md:text-h2 font-extraBold leading-h2;
   }
   h3 {
-    @apply font-title md:text-h3 font-extraBold leading-h3;
+    @apply font-title text-[1.625rem] md:text-h3 font-extraBold leading-h3;
   }
   h4 {
-    @apply font-title md:text-h4 font-bold leading-h4;
+    @apply font-title text-[1.375rem] md:text-h4 font-bold leading-h4;
   }
   p {
     @apply text-bodyLarge font-body mb-2;
@@ -53,9 +56,11 @@
     ring-ultra-pink;
   }
 
-  label {
+  label,
+  .tagline {
     @apply text-label font-bold;
   }
+
   .btn {
     @apply inline-block
       rounded-full 

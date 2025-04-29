@@ -34,6 +34,7 @@ export default {
       "light-violet": "#E5D8FF",
       "navy-background": "#00002D",
       "dark-purple-background": "#180451",
+      "soft-purple": "#D4C6FD40",
     },
     fontWeight: {
       normal: "400",
@@ -64,7 +65,7 @@ export default {
         DEFAULT: "1.25rem",
       },
       boxShadow: {
-        DEFAULT: "0px 0px 30px 0px rgba(99, 15, 249, 0.60)",
+        DEFAULT: "0px 0px 30px 0px rgba(99, 15, 249, 0.80)",
       },
       backdropBlur: {
         DEFAULT: "8px",

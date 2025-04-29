@@ -1,0 +1,122 @@
+{
+  "id": "content_column",
+  "type": "SharedSlice",
+  "name": "ContentColumn",
+  "description": "ContentColumn",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "card_background": {
+          "type": "Select",
+          "config": {
+            "label": "Card Background",
+            "placeholder": "",
+            "options": [
+              "Purple",
+              "White"
+            ],
+            "default_value": "Purple"
+          }
+        },
+        "column": {
+          "type": "Group",
+          "config": {
+            "label": "Column",
+            "repeat": true,
+            "fields": {
+              "title": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Title",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading3"
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,hyperlink"
+                }
+              },
+              "icon": {
+                "type": "Image",
+                "config": {
+                  "label": "Icon",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "stats",
+      "name": "Stats",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "card_background": {
+          "type": "Select",
+          "config": {
+            "label": "Card Background",
+            "placeholder": "",
+            "options": [
+              "Purple",
+              "White"
+            ],
+            "default_value": "Purple"
+          }
+        },
+        "column": {
+          "type": "Group",
+          "config": {
+            "label": "Column",
+            "repeat": true,
+            "fields": {
+              "stat_number": {
+                "type": "Number",
+                "config": {
+                  "label": "Stat Number",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,hyperlink"
+                }
+              },
+              "icon": {
+                "type": "Image",
+                "config": {
+                  "label": "Icon",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

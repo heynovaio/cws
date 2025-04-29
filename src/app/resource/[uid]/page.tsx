@@ -7,7 +7,7 @@ import * as prismic from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import React from "react";
-import { Layout } from "@/components";
+import { Intro, Layout } from "@/components";
 import { getLocales } from "@/utils";
 
 /**
@@ -65,6 +65,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       menus={menus.data}
       partners={partners.data}
     >
+      <Intro type="resource" pageData={page.data} />
       <SliceZone
         slices={page.data.slices}
         components={components}
