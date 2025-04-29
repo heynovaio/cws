@@ -1,8 +1,9 @@
-import { Button } from "@/app/components/Button";
+import { Button } from "@/components";
 import { Section, Container, ResponsiveImage, ContentBox } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
+import { components } from "@/utils";
 
 /**
  * Props for `ImageText`.
@@ -52,7 +53,10 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
             content={
               isStats ? (
                 <div className="flex flex-col gap-4 md:mb-4">
-                  <PrismicRichText field={slice.primary.body} />
+                  <PrismicRichText
+                    field={slice.primary.body}
+                    components={components}
+                  />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-center md:text-left">
                     {slice.primary.stats.map((item, index) => (
                       <div key={index}>
@@ -79,7 +83,10 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
                   </div>
                 </div>
               ) : (
-                <PrismicRichText field={slice.primary.body} />
+                <PrismicRichText
+                  field={slice.primary.body}
+                  components={components}
+                />
               )
             }
             buttons={slice.primary.button.map((link, index) => (
