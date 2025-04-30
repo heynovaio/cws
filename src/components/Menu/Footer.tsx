@@ -20,8 +20,8 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
   return (
     <footer className="bg-gradient-dark text-white flex flex-col justify-center items-center">
       <nav className="py-14  mx-auto max-w-screen-xl w-full flex flex-col">
-        <div className="flex flex-col lg:flex-row flex-wrap justify-center lg:justify-between gap-x-8 gap-y-12 w-full">
-          <div className="flex flex-col items-center md:items-start">
+        <div className="flex flex-col md:flex-row flex-wrap justify-center md:justify-between gap-x-8 gap-y-12 w-full text-center md:text-left">
+          <div className="flex flex-col items-center lg:items-start">
             <ResponsiveImage
               image={global?.site_logo}
               containerClassName="mb-8"
@@ -47,7 +47,7 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
           <PrismicNextLink field={footerData?.helpline} />
         </div>
 
-        <p className="mt-6">{footerData?.copyright}</p>
+        <p className="mt-6 text-center">{footerData?.copyright}</p>
       </div>
     </footer>
   );
