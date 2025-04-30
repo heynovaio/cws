@@ -3298,15 +3298,19 @@ export interface TileGridSliceIconTilePrimaryTilesItem {
   tile_title: prismic.RichTextField;
 
   /**
-   * Tile Button field in *TileGrid → Icon Tile → Primary → Tiles*
+   * Tile Link field in *TileGrid → Icon Tile → Primary → Tiles*
    *
    * - **Field Type**: Link
    * - **Placeholder**: Learn More
-   * - **API ID Path**: tile_grid.iconTile.primary.tiles[].tile_button
+   * - **API ID Path**: tile_grid.iconTile.primary.tiles[].tile_link
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  tile_button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  tile_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
   >;
 }
 
@@ -3320,10 +3324,13 @@ export interface TileGridSliceIconTilePrimary {
    * - **Field Type**: Select
    * - **Placeholder**: *None*
    * - **Default Value**: No Background
-   * - **API ID Path**: tile_grid.iconTile.primary.background
+   * - **API ID Path**: tile_grid.iconTile.primary.background_color
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  background: prismic.SelectField<"No Background" | "Background", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Background",
+    "filled"
+  >;
 
   /**
    * Columns field in *TileGrid → Icon Tile → Primary*

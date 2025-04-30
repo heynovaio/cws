@@ -37,32 +37,6 @@
 						"__TYPE__": "GroupItemContent",
 						"value": [
 							[
-								"tile_image",
-								{
-									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1547082299-de196ea013d6",
-										"width": 4272,
-										"height": 2848
-									},
-									"url": "https://images.unsplash.com/photo-1547082299-de196ea013d6?rect=712%2C0%2C2848%2C2848&w=800&h=800",
-									"width": 800,
-									"height": 800,
-									"edit": {
-										"zoom": 1,
-										"crop": {
-											"x": 712,
-											"y": 0
-										},
-										"background": "transparent"
-									},
-									"credits": null,
-									"alt": null,
-									"__TYPE__": "ImageContent",
-									"thumbnails": {}
-								}
-							],
-							[
 								"tile_title",
 								{
 									"__TYPE__": "StructuredTextContent",
@@ -77,47 +51,69 @@
 								}
 							],
 							[
-								"tile_button",
-								{
-									"__TYPE__": "RepeatableContent",
-									"type": "Link",
-									"value": [
-										{
-											"key": "fc9a1e66-8bc1-4dff-905f-8fa5240a669d",
-											"__TYPE__": "LinkContent",
-											"value": {
-												"__TYPE__": "ExternalLink",
-												"url": "http://google.com",
-												"text": "man"
-											}
-										}
-									]
-								}
-							],
-							[
 								"tile_background_image",
 								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1577234286642-fc512a5f8f11?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyfHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3NDU5OTk5ODJ8MA&ixlib=rb-4.0.3&q=85",
+									"alt": "sliced grapefruits",
 									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
-										"width": 4172,
-										"height": 4000
+										"id": "ezSFnAFi9hY",
+										"url": "https://images.unsplash.com/photo-1577234286642-fc512a5f8f11?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyfHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3NDU5OTk5ODJ8MA&ixlib=rb-4.0.3&q=85",
+										"width": 3024,
+										"height": 4032
 									},
-									"url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
-									"width": 4172,
-									"height": 4000,
+									"width": 3024,
+									"height": 4032,
 									"edit": {
+										"background": "transparent",
 										"zoom": 1,
 										"crop": {
 											"x": 0,
 											"y": 0
-										},
-										"background": "transparent"
+										}
 									},
-									"alt": "whispered",
 									"credits": null,
 									"__TYPE__": "ImageContent",
 									"thumbnails": {}
+								}
+							],
+							[
+								"tile_image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1582287104445-6754664dbdb2?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxM3x8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzQ1OTk5OTgyfDA&ixlib=rb-4.0.3&q=85&rect=910,0,3640,3640&w=800&h=800",
+									"alt": "yellow lemon fruit on white surface",
+									"origin": {
+										"id": "7WAGthfGJ9w",
+										"url": "https://images.unsplash.com/photo-1582287104445-6754664dbdb2?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxM3x8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzQ1OTk5OTgyfDA&ixlib=rb-4.0.3&q=85",
+										"width": 5460,
+										"height": 3640
+									},
+									"width": 800,
+									"height": 800,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 910,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"tile_link",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "4908ff34-c4de-4a14-8dd9-05294ed1e034",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://twitter.com",
+										"text": "dear"
+									}
 								}
 							]
 						]
@@ -139,9 +135,32 @@
 					}
 				]
 			},
-			"background": {
+			"background_image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea",
+					"width": 3500,
+					"height": 2338
+				},
+				"url": "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea",
+				"width": 3500,
+				"height": 2338,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "volume",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "Background",
+				"value": "No Background",
 				"type": "Select"
 			}
 		},

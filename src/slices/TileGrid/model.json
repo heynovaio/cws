@@ -12,7 +12,7 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "background": {
+        "background_color": {
           "type": "Select",
           "config": {
             "label": "Background Color",
@@ -100,15 +100,15 @@
                   "multi": "heading2,heading3,heading4"
                 }
               },
-              "tile_button": {
+              "tile_link": {
                 "type": "Link",
                 "config": {
-                  "label": "Tile Button",
+                  "label": "Tile Link",
                   "placeholder": "Learn More",
                   "select": null,
                   "allowTargetBlank": true,
                   "allowText": true,
-                  "repeat": true
+                  "repeat": false
                 }
               }
             }
