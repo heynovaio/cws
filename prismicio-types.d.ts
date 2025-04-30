@@ -640,7 +640,7 @@ interface ProgramCategoryDocumentData {
  * Program Category document from Prismic
  *
  * - **API ID**: `program_category`
- * - **Repeatable**: `false`
+ * - **Repeatable**: `true`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
