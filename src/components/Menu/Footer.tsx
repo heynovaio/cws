@@ -24,7 +24,7 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
           <div className="flex flex-col items-center md:items-start">
             <ResponsiveImage
               image={global?.site_logo}
-              containerClassName="mb-6"
+              containerClassName="mb-8"
             />
             <div className="flex flex-col items-center md:items-start">
               <h4 className="mb-6">Follow Us</h4>
