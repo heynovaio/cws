@@ -1,3 +1,4 @@
+"use client";
 import React, { useMemo } from "react";
 import { useProgramCategoryData } from "@/hooks";
 import { components } from "@/utils";
@@ -11,15 +12,14 @@ import { Grid } from "./Grid";
 
 export type ProgramCategoryGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
-  // Add any other props you need
 };
 
 export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
   const { data } = GetAllPrograms("en-ca");
   const { programCategoryData } = useProgramCategoryData("en-ca");
 
+  console.log("Data: ", data);
   console.log("Program Category Data: ", programCategoryData);
-
   const categoryId =
     slice.primary.category && "id" in slice.primary.category
       ? slice.primary.category.id
@@ -38,6 +38,8 @@ export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
       }) ?? []
     );
   }, [data, categoryId]);
+
+  console.log("Program Data: ", programData);
 
   const matchedCategory = programCategoryData?.find(
     (category) => category.id === categoryId
@@ -64,7 +66,7 @@ export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
             <Link
               key={index}
               href={item.url ?? ""}
-              className="btn btn-link px-0"
+              className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
             >
               Learn More
               <HiOutlineArrowLongRight className="h-10 w-10" />

@@ -11,7 +11,6 @@ import GetAllResources from "@/utils/getAllResources";
 
 export type ResourceCategoryGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
-  // Add any other props you need
 };
 
 export const ResourceCategoryGrid = ({ slice }: ResourceCategoryGridProps) => {
@@ -62,10 +61,10 @@ export const ResourceCategoryGrid = ({ slice }: ResourceCategoryGridProps) => {
             <Link
               key={index}
               href={item.url ?? ""}
-              className="btn btn-link px-0 flex gap-2"
+              className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
             >
               Learn More
-              <HiOutlineArrowLongRight className="h-10 w-10 inline" />
+              <HiOutlineArrowLongRight className="h-10 w-10" />
             </Link>,
           ]}
         />

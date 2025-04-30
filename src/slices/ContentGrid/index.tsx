@@ -22,7 +22,7 @@ export type ContentGridProps = SliceComponentProps<Content.ContentGridSlice>;
 const ContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
   const isProgram = slice.variation === "default";
 
-  console.log("Slice")
+  console.log("Slice: ", slice);
 
   return (
     <Section
@@ -42,7 +42,11 @@ const ContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
           width="standard"
           containerClassName="flex mx-auto justify-center text-center"
         />
-        {isProgram ? (<ProgramCategoryGrid slice={slice} />) : (<ResourceCategoryGrid slice={slice} />)}
+        {isProgram ? (
+          <ProgramCategoryGrid slice={slice} />
+        ) : (
+          <ResourceCategoryGrid slice={slice} />
+        )}
       </Container>
     </Section>
   );

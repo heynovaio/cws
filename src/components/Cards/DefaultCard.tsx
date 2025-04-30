@@ -45,7 +45,7 @@ export const DefaultCard = ({
     <div className={`flex flex-col gap-5 ${cardBackground}`}>
       <ResponsiveImage
         image={image}
-        imageHeightClassName="h-full object-cover"
+        imageHeightClassName="h-full w-full"
         containerClassName="w-full max-h-[215px] h-full"
       />
       {/* TODO: Turn these into links once the filter pages are made */}
