@@ -22,8 +22,6 @@ export type ContentGridProps = SliceComponentProps<Content.ContentGridSlice>;
 const ContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
   const isProgram = slice.variation === "default";
 
-  console.log("Slice: ", slice);
-
   return (
     <Section
       data-slice-type={slice.slice_type}
