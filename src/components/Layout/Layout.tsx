@@ -4,12 +4,14 @@ import React, { ReactNode } from "react";
 import {
   GlobalsDocumentData,
   MenusDocumentData,
+  MultiLinkColumnSlice,
   PartnersDocumentData,
 } from "../../../prismicio-types";
 import { Header } from "../Menu/Header";
 import Partners from "../Menu/Partners";
 import NewsletterSignupBanner from "../NewsletterSignup/NewsletterSignup";
 import { Container } from "./Container";
+import { Footer } from "../Menu/Footer";
 
 interface LayoutProps {
   locales?: unknown;
@@ -50,6 +52,12 @@ export const Layout = ({
           />
         )}
       </Container>
+
+      <Footer
+        logo={global.site_logo}
+        slices={menus?.slices1}
+        locales={locales}
+      />
     </div>
   );
 };
