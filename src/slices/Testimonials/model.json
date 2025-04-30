@@ -42,15 +42,6 @@
             "multi": "heading1,heading2,heading3,heading4,heading5,heading6"
           }
         },
-        "quote": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Quote",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,strong,em,rtl,o-list-item,list-item,embed,image,hyperlink"
-          }
-        },
         "button": {
           "type": "Link",
           "config": {
@@ -62,19 +53,36 @@
             "repeat": true
           }
         },
-        "author": {
-          "type": "Text",
-          "config": {
-            "label": "Author",
-            "placeholder": ""
-          }
-        },
-        "author_titles": {
+        "testimonials": {
           "type": "Group",
           "config": {
-            "label": "Author Titles",
+            "label": "Testimonials",
             "repeat": true,
             "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "quote": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Quote",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading2,heading3,heading4,heading5,heading6,strong,em,rtl,o-list-item,list-item,embed,image,hyperlink,paragraph,preformatted"
+                }
+              },
+              "author": {
+                "type": "Text",
+                "config": {
+                  "label": "Author",
+                  "placeholder": ""
+                }
+              },
               "author_title": {
                 "type": "Text",
                 "config": {

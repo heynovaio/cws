@@ -3148,15 +3148,45 @@ export type TeamListSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *Testimonials → Default → Primary → Author Titles*
+ * Item in *Testimonials → Default → Primary → Testimonials*
  */
-export interface TestimonialsSliceDefaultPrimaryAuthorTitlesItem {
+export interface TestimonialsSliceDefaultPrimaryTestimonialsItem {
   /**
-   * Author Title field in *Testimonials → Default → Primary → Author Titles*
+   * Image field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Quote field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].quote
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  quote: prismic.RichTextField;
+
+  /**
+   * Author field in *Testimonials → Default → Primary → Testimonials*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.author_titles[].author_title
+   * - **API ID Path**: testimonials.default.primary.testimonials[].author
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  author: prismic.KeyTextField;
+
+  /**
+   * Author Title field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].author_title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   author_title: prismic.KeyTextField;
@@ -3199,16 +3229,6 @@ export interface TestimonialsSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
-   * Quote field in *Testimonials → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.quote
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  quote: prismic.RichTextField;
-
-  /**
    * Button field in *Testimonials → Default → Primary*
    *
    * - **Field Type**: Link
@@ -3221,25 +3241,15 @@ export interface TestimonialsSliceDefaultPrimary {
   >;
 
   /**
-   * Author field in *Testimonials → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.author
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  author: prismic.KeyTextField;
-
-  /**
-   * Author Titles field in *Testimonials → Default → Primary*
+   * Testimonials field in *Testimonials → Default → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.author_titles[]
+   * - **API ID Path**: testimonials.default.primary.testimonials[]
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  author_titles: prismic.GroupField<
-    Simplify<TestimonialsSliceDefaultPrimaryAuthorTitlesItem>
+  testimonials: prismic.GroupField<
+    Simplify<TestimonialsSliceDefaultPrimaryTestimonialsItem>
   >;
 }
 
@@ -3557,7 +3567,7 @@ declare module "@prismicio/client" {
       TeamListSliceVariation,
       TeamListSliceDefault,
       TestimonialsSlice,
-      TestimonialsSliceDefaultPrimaryAuthorTitlesItem,
+      TestimonialsSliceDefaultPrimaryTestimonialsItem,
       TestimonialsSliceDefaultPrimary,
       TestimonialsSliceVariation,
       TestimonialsSliceDefault,
