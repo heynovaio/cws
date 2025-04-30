@@ -18,25 +18,23 @@ export const Footer = ({ global, slices }: FooterProps) => {
 
   return (
     <footer className="bg-dark-purple-background text-white flex flex-col justify-center items-center">
-      {/* Added pl-2 for padding for links to look visually better inside ContactSection. Also in SliceZone */}
-      {/* Contact Section */}
-      {/* <ContactSection
-            contact_us={global?.contact_us}
-            phone={null} //global?.phone if needed
-            address={global?.address}
-            email={global?.email}
-          /> */}
-
       <nav className="py-14 px-5 mx-auto max-w-screen-xl w-full flex flex-col gap-20">
         <Grid
           maxColumns={numberOfSlices}
           gridClassName="!gap-12 justify-center text-center md:justify-start md:text-left"
         >
-          <div>
-            <ResponsiveImage />
-            <h4>Follow Us</h4>
-            <FaFacebook size={25} />
-            <FaInstagram size={25} />
+          <div className="flex flex-col items-center ">
+            <ResponsiveImage
+              image={global?.site_logo}
+              containerClassName="mb-6"
+            />
+            <div>
+              <h4 className="mb-6">Follow Us</h4>
+              <div className="flex flex-row justify-center items-center gap-6">
+                <FaInstagram size={40} />
+                <FaFacebook size={40} />
+              </div>
+            </div>
           </div>
           <SliceZone slices={slices} components={components} />
         </Grid>

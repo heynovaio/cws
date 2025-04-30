@@ -260,3 +260,6 @@
 .hover-ultrapink:hover {
   color: black !important;
 }
+.footer-header {
+  @apply text-base md:text-h4  font-normal md:font-bold;
+}
