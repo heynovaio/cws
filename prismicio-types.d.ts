@@ -257,33 +257,6 @@ export type GlobalsDocument<Lang extends string = string> =
 
 type MenusDocumentDataSlicesSlice = SingleLinkSlice | MenuPanelSlice;
 
-/**
- * Item in *Menus → Partner Links*
- */
-export interface MenusDocumentDataPartnerLinksItem {
-  /**
-   * Link field in *Menus → Partner Links*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menus.partner_links[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-
-  /**
-   * Image field in *Menus → Partner Links*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menus.partner_links[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
 type MenusDocumentDataSlices1Slice = MultiLinkColumnSlice;
 
 /**
@@ -313,17 +286,54 @@ interface MenusDocumentData {
   >;
 
   /**
-   * Partner Links field in *Menus*
+   * Helpline field in *Menus*
    *
-   * - **Field Type**: Group
+   * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: menus.partner_links[]
+   * - **API ID Path**: menus.helpline
    * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/field#group
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  partner_links: prismic.GroupField<
-    Simplify<MenusDocumentDataPartnerLinksItem>
+  helpline: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
   >;
+
+  /**
+   * Copyright field in *Menus*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.copyright
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  copyright: prismic.KeyTextField;
+
+  /**
+   * Instagram Handle field in *Menus*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.instagram_handle
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  instagram_handle: prismic.KeyTextField;
+
+  /**
+   * Facebook Handle field in *Menus*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.facebook_handle
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  facebook_handle: prismic.KeyTextField;
 
   /**
    * Slice Zone field in *Menus*
@@ -3441,7 +3451,6 @@ declare module "@prismicio/client" {
       MenusDocument,
       MenusDocumentData,
       MenusDocumentDataSlicesSlice,
-      MenusDocumentDataPartnerLinksItem,
       MenusDocumentDataSlices1Slice,
       PageDocument,
       PageDocumentData,

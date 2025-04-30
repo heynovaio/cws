@@ -33,35 +33,36 @@
           "repeat": true
         }
       },
-      "partner_links": {
-        "type": "Group",
+      "helpline": {
+        "type": "Link",
         "config": {
-          "label": "Partner Links",
-          "repeat": true,
-          "fields": {
-            "link": {
-              "type": "Link",
-              "config": {
-                "label": "Link",
-                "placeholder": "",
-                "select": null,
-                "allowTargetBlank": true,
-                "allowText": true,
-                "repeat": true
-              }
-            },
-            "image": {
-              "type": "Image",
-              "config": {
-                "label": "Image",
-                "constraint": {
-                  "width": 800,
-                  "height": 800
-                },
-                "thumbnails": []
-              }
-            }
-          }
+          "label": "Helpline",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
+      "copyright": {
+        "type": "Text",
+        "config": {
+          "label": "Copyright",
+          "placeholder": ""
+        }
+      },
+      "instagram_handle": {
+        "type": "Text",
+        "config": {
+          "label": "Instagram Handle",
+          "placeholder": ""
+        }
+      },
+      "facebook_handle": {
+        "type": "Text",
+        "config": {
+          "label": "Facebook Handle",
+          "placeholder": ""
         }
       },
       "slices1": {
