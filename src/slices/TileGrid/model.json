@@ -15,21 +15,13 @@
         "background": {
           "type": "Select",
           "config": {
-            "label": "Background",
+            "label": "Background Color",
             "placeholder": "",
             "options": [
               "No Background",
               "Background"
             ],
             "default_value": "No Background"
-          }
-        },
-        "background_image": {
-          "type": "Image",
-          "config": {
-            "label": "Background Image",
-            "constraint": {},
-            "thumbnails": []
           }
         },
         "columns": {
@@ -80,6 +72,14 @@
             "label": "Tiles",
             "repeat": true,
             "fields": {
+              "tile_background_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Tile Background Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
               "tile_image": {
                 "type": "Image",
                 "config": {

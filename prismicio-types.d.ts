@@ -3268,6 +3268,16 @@ export type TestimonialsSlice = prismic.SharedSlice<
  */
 export interface TileGridSliceIconTilePrimaryTilesItem {
   /**
+   * Tile Background Image field in *TileGrid → Icon Tile → Primary → Tiles*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tile_grid.iconTile.primary.tiles[].tile_background_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  tile_background_image: prismic.ImageField<never>;
+
+  /**
    * Tile Icon field in *TileGrid → Icon Tile → Primary → Tiles*
    *
    * - **Field Type**: Image
@@ -3305,7 +3315,7 @@ export interface TileGridSliceIconTilePrimaryTilesItem {
  */
 export interface TileGridSliceIconTilePrimary {
   /**
-   * Background field in *TileGrid → Icon Tile → Primary*
+   * Background Color field in *TileGrid → Icon Tile → Primary*
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
@@ -3314,16 +3324,6 @@ export interface TileGridSliceIconTilePrimary {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   background: prismic.SelectField<"No Background" | "Background", "filled">;
-
-  /**
-   * Background Image field in *TileGrid → Icon Tile → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.iconTile.primary.background_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  background_image: prismic.ImageField<never>;
 
   /**
    * Columns field in *TileGrid → Icon Tile → Primary*
