@@ -3,11 +3,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "iconTile",
 		"primary": {
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "No Background",
-				"type": "Select"
-			},
 			"columns": {
 				"__TYPE__": "FieldContent",
 				"value": "2",
@@ -140,6 +135,11 @@
 				"credits": null,
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"background": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
 			}
 		},
 		"items": [

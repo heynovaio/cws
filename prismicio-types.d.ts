@@ -3305,15 +3305,15 @@ export interface TileGridSliceIconTilePrimaryTilesItem {
  */
 export interface TileGridSliceIconTilePrimary {
   /**
-   * Background Color field in *TileGrid → Icon Tile → Primary*
+   * Background field in *TileGrid → Icon Tile → Primary*
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
    * - **Default Value**: No Background
-   * - **API ID Path**: tile_grid.iconTile.primary.background_color
+   * - **API ID Path**: tile_grid.iconTile.primary.background
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background: prismic.SelectField<"No Background" | "Background", "filled">;
 
   /**
    * Background Image field in *TileGrid → Icon Tile → Primary*

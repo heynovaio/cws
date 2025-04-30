@@ -12,14 +12,14 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "background_color": {
+        "background": {
           "type": "Select",
           "config": {
-            "label": "Background Color",
+            "label": "Background",
             "placeholder": "",
             "options": [
               "No Background",
-              "Darker"
+              "Background"
             ],
             "default_value": "No Background"
           }
