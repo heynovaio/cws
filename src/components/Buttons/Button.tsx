@@ -37,6 +37,7 @@ export const Button = ({
     default:
       buttonStyle = "btn btn-primary";
   }
+  if (!buttonLink || !label) return null;
 
   return (
     <PrismicNextLink
