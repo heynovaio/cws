@@ -3290,12 +3290,12 @@ export interface TileGridSliceIconTilePrimaryTilesItem {
   /**
    * Tile Title field in *TileGrid → Icon Tile → Primary → Tiles*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Title
    * - **Placeholder**: *None*
    * - **API ID Path**: tile_grid.iconTile.primary.tiles[].tile_title
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  tile_title: prismic.RichTextField;
+  tile_title: prismic.TitleField;
 
   /**
    * Tile Link field in *TileGrid → Icon Tile → Primary → Tiles*

@@ -4,11 +4,14 @@ import {
   Section,
 } from "@/components";
 import { components } from "@/utils";
-import { Content } from "@prismicio/client";
+import { Content, NumberField } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 import { CTATile } from "@/components/Tiles/CTATile";
 
+interface GridProps {
+  maxColumns: number | NumberField | undefined;
+}
 /**
  * Props for `TileGrid`.
  */
@@ -18,6 +21,18 @@ export type TileGridProps = SliceComponentProps<Content.TileGridSlice>;
  * Component for "TileGrid" Slices.
  */
 const TileGrid = ({ slice }: TileGridProps): JSX.Element => {
+  const columns = Math.max(1, Math.min(Number(4), 4));
+  const gridClasses = {
+    base: "grid gap-8",
+    responsive:
+      columns === 2
+        ? "grid-cols-1 sm:grid-cols-2"
+        : columns === 3
+          ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
+          : columns === 4
+            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            : "grid-cols-1",
+  };
   return (
     <Section
     data-slice-type={slice.slice_type}
@@ -35,7 +50,7 @@ const TileGrid = ({ slice }: TileGridProps): JSX.Element => {
         }
       />
       </Container>
-      <div> 
+      <div className={`${gridClasses.base} ${gridClasses.responsive}`}> 
         {slice.primary.tiles.map((tile, index) => (
           <CTATile
             key={index}

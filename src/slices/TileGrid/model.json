@@ -43,7 +43,7 @@
             "label": "Title",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "heading2,heading3,heading4"
+            "multi": "heading3,heading2,heading4"
           }
         },
         "body": {
@@ -96,8 +96,8 @@
                 "config": {
                   "label": "Tile Title",
                   "placeholder": "",
-                  "allowTargetBlank": true,
-                  "multi": "heading2,heading3,heading4"
+                  "allowTargetBlank": false,
+                  "single": "heading4"
                 }
               },
               "tile_link": {

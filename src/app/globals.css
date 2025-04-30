@@ -193,7 +193,13 @@
       rgba(51, 23, 153, 0.8) 100%
     );
   }
-
+  .bg-gradient-tile {
+    background: linear-gradient(
+      180deg,
+      rgba(51, 23, 153, 0.65) 0%,
+      rgba(65, 0, 152, 0.65) 100%
+    );
+  }
   /* Carousel Styling Below - Helps with making sure the cards are the same size */
   .tabbed-carousel .react-multi-carousel-item {
     align-content: center;
