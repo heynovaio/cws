@@ -18,8 +18,6 @@ export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
   const { data } = GetAllPrograms("en-ca");
   const { programCategoryData } = useProgramCategoryData("en-ca");
 
-  console.log("Data: ", data);
-  console.log("Program Category Data: ", programCategoryData);
   const categoryId =
     slice.primary.category && "id" in slice.primary.category
       ? slice.primary.category.id
@@ -38,8 +36,6 @@ export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
       }) ?? []
     );
   }, [data, categoryId]);
-
-  console.log("Program Data: ", programData);
 
   const matchedCategory = programCategoryData?.find(
     (category) => category.id === categoryId
