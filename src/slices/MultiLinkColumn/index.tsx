@@ -28,7 +28,7 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
       className="flex flex-col gap-5"
     >
       <div className="hidden md:flex flex-col gap-5">
-        <span className="pl-2">
+        <span>
           <PrismicRichText
             field={slice.primary.title}
             components={footerComponentStyling}
@@ -40,7 +40,7 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
               <PrismicNextLink
                 field={item}
                 key={index}
-                className="pl-2 no-underline"
+                className="no-underline"
               />
             ))}
           </div>
@@ -57,7 +57,7 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
                 field={slice.primary.title}
                 components={footerComponentStyling}
               />
-              <div className="pr-2">
+              <div>
                 <FaPlus
                   className={`h-4 w-4 font-bold ${open ? "hidden" : ""}`}
                 />
@@ -66,13 +66,13 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
                 />
               </div>
             </DisclosureButton>
-            <DisclosurePanel className="pl-2 flex flex-col gap-5 mb-3 transition duration-200 ease-out">
+            <DisclosurePanel className="pl-2 flex flex-col gap-5 mb-3 transition duration-200 ease-out text-center">
               {slice.variation === "default" &&
                 slice.primary.link.map((item, index) => (
                   <PrismicNextLink
                     field={item}
                     key={index}
-                    className="no underline"
+                    className="no-underline text-base"
                   />
                 ))}
             </DisclosurePanel>
