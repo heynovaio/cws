@@ -35,27 +35,6 @@
       },
       "helpline": {
         "type": "Link",
-<<<<<<< HEAD
-=======
-        "config": {
-          "label": "Helpline",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": false
-        }
-      },
-      "copyright": {
-        "type": "Text",
-        "config": {
-          "label": "Copyright",
-          "placeholder": ""
-        }
-      },
-      "partner_links": {
-        "type": "Group",
->>>>>>> 2f8a3a8 (Footer setup)
         "config": {
           "label": "Helpline",
           "placeholder": "",
