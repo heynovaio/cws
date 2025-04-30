@@ -3026,9 +3026,61 @@ export type MultiLinkColumnSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *MultiLinkColumn → With Icon → Primary*
+ */
+export interface MultiLinkColumnSliceWithIconPrimary {
+  /**
+   * Title field in *MultiLinkColumn → With Icon → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: multi_link_column.withIcon.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Link field in *MultiLinkColumn → With Icon → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: multi_link_column.withIcon.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Icon field in *MultiLinkColumn → With Icon → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: multi_link_column.withIcon.primary.icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+}
+
+/**
+ * With Icon variation for MultiLinkColumn Slice
+ *
+ * - **API ID**: `withIcon`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MultiLinkColumnSliceWithIcon = prismic.SharedSliceVariation<
+  "withIcon",
+  Simplify<MultiLinkColumnSliceWithIconPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *MultiLinkColumn*
  */
-type MultiLinkColumnSliceVariation = MultiLinkColumnSliceDefault;
+type MultiLinkColumnSliceVariation =
+  | MultiLinkColumnSliceDefault
+  | MultiLinkColumnSliceWithIcon;
 
 /**
  * MultiLinkColumn Shared Slice
@@ -4298,8 +4350,10 @@ declare module "@prismicio/client" {
       MenuPanelSliceMenuPanelAccordion,
       MultiLinkColumnSlice,
       MultiLinkColumnSliceDefaultPrimary,
+      MultiLinkColumnSliceWithIconPrimary,
       MultiLinkColumnSliceVariation,
       MultiLinkColumnSliceDefault,
+      MultiLinkColumnSliceWithIcon,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
