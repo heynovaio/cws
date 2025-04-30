@@ -1,81 +1,6 @@
 [
 	{
 		"__TYPE__": "SharedSliceContent",
-		"variation": "stats",
-		"primary": {
-			"card_background": {
-				"__TYPE__": "FieldContent",
-				"value": "Purple",
-				"type": "Select"
-			},
-			"column": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"description",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Tempor labore ut qui nisi anim voluptate occaecat quis consequat aliqua labore enim occaecat sint veniam. Adipisicing exercitation enim veniam dolore mollit commodo dolore proident."
-											}
-										}
-									]
-								}
-							],
-							[
-								"icon",
-								{
-									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1494173853739-c21f58b16055",
-										"width": 3277,
-										"height": 4092
-									},
-									"url": "https://images.unsplash.com/photo-1494173853739-c21f58b16055",
-									"width": 3277,
-									"height": 4092,
-									"edit": {
-										"zoom": 1,
-										"crop": {
-											"x": 0,
-											"y": 0
-										},
-										"background": "transparent"
-									},
-									"credits": null,
-									"alt": null,
-									"__TYPE__": "ImageContent",
-									"thumbnails": {}
-								}
-							],
-							[
-								"stat_number",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "42",
-									"type": "Number"
-								}
-							]
-						]
-					}
-				]
-			}
-		},
-		"items": [
-			{
-				"__TYPE__": "GroupItemContent",
-				"value": []
-			}
-		]
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
 			"card_background": {
@@ -183,7 +108,6 @@
 							[
 								"icon",
 								{
-									"__TYPE__": "ImageContent",
 									"provider": "imgix",
 									"url": "https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwzfHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3NDUzNDg3MTN8MA&ixlib=rb-4.0.3&q=85",
 									"alt": "assorted sliced citrus fruits on brown wooden chopping board",
@@ -203,6 +127,8 @@
 											"y": 0
 										}
 									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
 									"thumbnails": {}
 								}
 							]
@@ -246,7 +172,6 @@
 							[
 								"icon",
 								{
-									"__TYPE__": "ImageContent",
 									"provider": "imgix",
 									"url": "https://images.unsplash.com/photo-1610126176343-3e1833a107e1?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyN3x8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzQ1MzQ4NzEzfDA&ixlib=rb-4.0.3&q=85",
 									"alt": "yellow lemon fruit on water",
@@ -266,6 +191,8 @@
 											"y": 0
 										}
 									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
 									"thumbnails": {}
 								}
 							]
@@ -275,5 +202,80 @@
 			}
 		},
 		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "stats",
+		"primary": {
+			"card_background": {
+				"__TYPE__": "FieldContent",
+				"value": "Purple",
+				"type": "Select"
+			},
+			"column": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Tempor labore ut qui nisi anim voluptate occaecat quis consequat aliqua labore enim occaecat sint veniam. Adipisicing exercitation enim veniam dolore mollit commodo dolore proident."
+											}
+										}
+									]
+								}
+							],
+							[
+								"icon",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1494173853739-c21f58b16055",
+										"width": 3277,
+										"height": 4092
+									},
+									"url": "https://images.unsplash.com/photo-1494173853739-c21f58b16055",
+									"width": 3277,
+									"height": 4092,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"stat_number",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "42",
+									"type": "Number"
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

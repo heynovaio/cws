@@ -4,6 +4,74 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type CampaignPageDocumentDataSlicesSlice =
+  | ImageTextSlice
+  | HashtagBannerSlice
+  | CallToActionSlice;
+
+/**
+ * Content for Campaign Page documents
+ */
+interface CampaignPageDocumentData {
+  /**
+   * Slice Zone field in *Campaign Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: campaign_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<CampaignPageDocumentDataSlicesSlice> /**
+   * Meta Title field in *Campaign Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: campaign_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Campaign Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: campaign_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Campaign Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: campaign_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Campaign Page document from Prismic
+ *
+ * - **API ID**: `campaign_page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CampaignPageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<CampaignPageDocumentData>,
+    "campaign_page",
+    Lang
+  >;
+
 type ContactPageDocumentDataSlicesSlice = never;
 
 /**
@@ -201,33 +269,6 @@ export type GlobalsDocument<Lang extends string = string> =
 
 type MenusDocumentDataSlicesSlice = SingleLinkSlice | MenuPanelSlice;
 
-/**
- * Item in *Menus → Partner Links*
- */
-export interface MenusDocumentDataPartnerLinksItem {
-  /**
-   * Link field in *Menus → Partner Links*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menus.partner_links[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-
-  /**
-   * Image field in *Menus → Partner Links*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menus.partner_links[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
 type MenusDocumentDataSlices1Slice = MultiLinkColumnSlice;
 
 /**
@@ -257,17 +298,54 @@ interface MenusDocumentData {
   >;
 
   /**
-   * Partner Links field in *Menus*
+   * Helpline field in *Menus*
    *
-   * - **Field Type**: Group
+   * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: menus.partner_links[]
+   * - **API ID Path**: menus.helpline
    * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/field#group
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  partner_links: prismic.GroupField<
-    Simplify<MenusDocumentDataPartnerLinksItem>
+  helpline: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
   >;
+
+  /**
+   * Copyright field in *Menus*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.copyright
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  copyright: prismic.KeyTextField;
+
+  /**
+   * Instagram Handle field in *Menus*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.instagram_handle
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  instagram_handle: prismic.KeyTextField;
+
+  /**
+   * Facebook Handle field in *Menus*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.facebook_handle
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  facebook_handle: prismic.KeyTextField;
 
   /**
    * Slice Zone field in *Menus*
@@ -432,15 +510,18 @@ export type NewsletterSignupDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | TileGridSlice
+  | ContentGridSlice
+  | ContentCarouselSlice
+  | ContentColumnSlice
+  | HashtagBannerSlice
   | TabbedCarouselSlice
   | AccordionSlice
-  | LogoListSlice
   | RichTextSlice
   | ImageTextSlice
   | CallToActionSlice
   | TestimonialsSlice
-  | SimpleTextSlice
-  | TileGridSlice;
+  | SimpleTextSlice;
 
 /**
  * Content for Page documents
@@ -722,7 +803,7 @@ interface ProgramCategoryDocumentData {
  * Program Category document from Prismic
  *
  * - **API ID**: `program_category`
- * - **Repeatable**: `false`
+ * - **Repeatable**: `true`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
@@ -734,7 +815,17 @@ export type ProgramCategoryDocument<Lang extends string = string> =
     Lang
   >;
 
-type ProgramPageDocumentDataSlicesSlice = never;
+type ProgramPageDocumentDataSlicesSlice =
+  | ContentGridSlice
+  | TileGridSlice
+  | AccordionSlice
+  | SimpleTextSlice
+  | TestimonialsSlice
+  | RichTextSlice
+  | ContentCarouselSlice
+  | ContentColumnSlice
+  | CallToActionSlice
+  | ImageTextSlice;
 
 /**
  * Content for Program Page documents
@@ -1039,7 +1130,17 @@ export type ResourceCategoryDocument<Lang extends string = string> =
     Lang
   >;
 
-type ResourcePageDocumentDataSlicesSlice = never;
+type ResourcePageDocumentDataSlicesSlice =
+  | TileGridSlice
+  | TestimonialsSlice
+  | SimpleTextSlice
+  | RichTextSlice
+  | ImageTextSlice
+  | ContentGridSlice
+  | ContentColumnSlice
+  | AccordionSlice
+  | CallToActionSlice
+  | ContentCarouselSlice;
 
 /**
  * Content for Resource Page documents
@@ -1321,6 +1422,7 @@ export type TeamMembersDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | CampaignPageDocument
   | ContactPageDocument
   | GlobalsDocument
   | MenusDocument
@@ -1547,6 +1649,81 @@ type CallToActionSliceVariation = CallToActionSliceDefault;
 export type CallToActionSlice = prismic.SharedSlice<
   "call_to_action",
   CallToActionSliceVariation
+>;
+
+/**
+ * Primary content in *ContactInfo → Default → Primary*
+ */
+export interface ContactInfoSliceDefaultPrimary {
+  /**
+   * Title field in *ContactInfo → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Image field in *ContactInfo → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Description field in *ContactInfo → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Form field in *ContactInfo → Default → Primary*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.form
+   * - **Documentation**: https://prismic.io/docs/field#embed
+   */
+  form: prismic.EmbedField;
+}
+
+/**
+ * Default variation for ContactInfo Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactInfoSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContactInfoSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContactInfo*
+ */
+type ContactInfoSliceVariation = ContactInfoSliceDefault;
+
+/**
+ * ContactInfo Shared Slice
+ *
+ * - **API ID**: `contact_info`
+ * - **Description**: ContactInfo
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactInfoSlice = prismic.SharedSlice<
+  "contact_info",
+  ContactInfoSliceVariation
 >;
 
 /**
@@ -1802,6 +1979,188 @@ type ContentColumnSliceVariation =
 export type ContentColumnSlice = prismic.SharedSlice<
   "content_column",
   ContentColumnSliceVariation
+>;
+
+/**
+ * Primary content in *ContentGrid → Program Grid → Primary*
+ */
+export interface ContentGridSliceDefaultPrimary {
+  /**
+   * Background Color field in *ContentGrid → Program Grid → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: content_grid.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Title field in *ContentGrid → Program Grid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_grid.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ContentGrid → Program Grid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_grid.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Category field in *ContentGrid → Program Grid → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_grid.default.primary.category
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField<"program_category">;
+}
+
+/**
+ * Program Grid variation for ContentGrid Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentGridSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContentGridSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ContentGrid → Resource Grid → Primary*
+ */
+export interface ContentGridSliceResourceGridPrimary {
+  /**
+   * Background Color field in *ContentGrid → Resource Grid → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: content_grid.resourceGrid.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Title field in *ContentGrid → Resource Grid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_grid.resourceGrid.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ContentGrid → Resource Grid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_grid.resourceGrid.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Category field in *ContentGrid → Resource Grid → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_grid.resourceGrid.primary.category
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField<"resource_category">;
+}
+
+/**
+ * Resource Grid variation for ContentGrid Slice
+ *
+ * - **API ID**: `resourceGrid`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentGridSliceResourceGrid = prismic.SharedSliceVariation<
+  "resourceGrid",
+  Simplify<ContentGridSliceResourceGridPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContentGrid*
+ */
+type ContentGridSliceVariation =
+  | ContentGridSliceDefault
+  | ContentGridSliceResourceGrid;
+
+/**
+ * ContentGrid Shared Slice
+ *
+ * - **API ID**: `content_grid`
+ * - **Description**: ContentGrid
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentGridSlice = prismic.SharedSlice<
+  "content_grid",
+  ContentGridSliceVariation
+>;
+
+/**
+ * Primary content in *HashtagBanner → Default → Primary*
+ */
+export interface HashtagBannerSliceDefaultPrimary {
+  /**
+   * Display Word field in *HashtagBanner → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hashtag_banner.default.primary.display_word
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  display_word: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for HashtagBanner Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HashtagBannerSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HashtagBannerSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *HashtagBanner*
+ */
+type HashtagBannerSliceVariation = HashtagBannerSliceDefault;
+
+/**
+ * HashtagBanner Shared Slice
+ *
+ * - **API ID**: `hashtag_banner`
+ * - **Description**: HashtagBanner
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HashtagBannerSlice = prismic.SharedSlice<
+  "hashtag_banner",
+  HashtagBannerSliceVariation
 >;
 
 /**
@@ -2113,264 +2472,6 @@ type ImageTextSliceVariation =
 export type ImageTextSlice = prismic.SharedSlice<
   "image_text",
   ImageTextSliceVariation
->;
-
-/**
- * Item in *LogoList → Default → Primary → Logos*
- */
-export interface LogoListSliceDefaultPrimaryLogosItem {
-  /**
-   * Logo Image field in *LogoList → Default → Primary → Logos*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.default.primary.logos[].logo_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  logo_image: prismic.ImageField<never>;
-
-  /**
-   * Logo Link field in *LogoList → Default → Primary → Logos*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.default.primary.logos[].logo_link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  logo_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
-}
-
-/**
- * Item in *LogoList → LogoList with Call to Action → Primary → Logos*
- */
-export interface LogoListSliceLogoListWithCallToActionPrimaryLogosItem {
-  /**
-   * Logo Image field in *LogoList → LogoList with Call to Action → Primary → Logos*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.logos[].logo_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  logo_image: prismic.ImageField<never>;
-
-  /**
-   * Logo Link field in *LogoList → LogoList with Call to Action → Primary → Logos*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.logos[].logo_link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  logo_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
-}
-
-/**
- * Primary content in *LogoList → Default → Primary*
- */
-export interface LogoListSliceDefaultPrimary {
-  /**
-   * Background Color field in *LogoList → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: White
-   * - **API ID Path**: logo_list.default.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
-
-  /**
-   * Title field in *LogoList → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Body field in *LogoList → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.default.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Logos field in *LogoList → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.default.primary.logos[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  logos: prismic.GroupField<Simplify<LogoListSliceDefaultPrimaryLogosItem>>;
-
-  /**
-   * Button field in *LogoList → Default → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: Learn More
-   * - **API ID Path**: logo_list.default.primary.button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-}
-
-/**
- * Default variation for LogoList Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type LogoListSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<LogoListSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Primary content in *LogoList → LogoList with Call to Action → Primary*
- */
-export interface LogoListSliceLogoListWithCallToActionPrimary {
-  /**
-   * Background Color field in *LogoList → LogoList with Call to Action → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: White
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
-
-  /**
-   * Title field in *LogoList → LogoList with Call to Action → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Body field in *LogoList → LogoList with Call to Action → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Logos field in *LogoList → LogoList with Call to Action → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.logos[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  logos: prismic.GroupField<
-    Simplify<LogoListSliceLogoListWithCallToActionPrimaryLogosItem>
-  >;
-
-  /**
-   * Button field in *LogoList → LogoList with Call to Action → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: Learn More
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-
-  /**
-   * Call to Action Title field in *LogoList → LogoList with Call to Action → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.cta_title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  cta_title: prismic.RichTextField;
-
-  /**
-   * Call to Action Body field in *LogoList → LogoList with Call to Action → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.cta_body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  cta_body: prismic.RichTextField;
-
-  /**
-   * Call to Action Button field in *LogoList → LogoList with Call to Action → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: logo_list.logoListWithCallToAction.primary.cta_button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  cta_button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-}
-
-/**
- * LogoList with Call to Action variation for LogoList Slice
- *
- * - **API ID**: `logoListWithCallToAction`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type LogoListSliceLogoListWithCallToAction =
-  prismic.SharedSliceVariation<
-    "logoListWithCallToAction",
-    Simplify<LogoListSliceLogoListWithCallToActionPrimary>,
-    never
-  >;
-
-/**
- * Slice variation for *LogoList*
- */
-type LogoListSliceVariation =
-  | LogoListSliceDefault
-  | LogoListSliceLogoListWithCallToAction;
-
-/**
- * LogoList Shared Slice
- *
- * - **API ID**: `logo_list`
- * - **Description**: LogoList
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type LogoListSlice = prismic.SharedSlice<
-  "logo_list",
-  LogoListSliceVariation
 >;
 
 /**
@@ -3237,45 +3338,15 @@ export type TeamListSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *Testimonials → Default → Primary → Testimonials*
+ * Item in *Testimonials → Default → Primary → Author Titles*
  */
-export interface TestimonialsSliceDefaultPrimaryTestimonialsItem {
+export interface TestimonialsSliceDefaultPrimaryAuthorTitlesItem {
   /**
-   * Image field in *Testimonials → Default → Primary → Testimonials*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.testimonials[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Quote field in *Testimonials → Default → Primary → Testimonials*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.testimonials[].quote
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  quote: prismic.RichTextField;
-
-  /**
-   * Author field in *Testimonials → Default → Primary → Testimonials*
+   * Author Title field in *Testimonials → Default → Primary → Author Titles*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.testimonials[].author
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  author: prismic.KeyTextField;
-
-  /**
-   * Author Title field in *Testimonials → Default → Primary → Testimonials*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.testimonials[].author_title
+   * - **API ID Path**: testimonials.default.primary.author_titles[].author_title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   author_title: prismic.KeyTextField;
@@ -3285,6 +3356,17 @@ export interface TestimonialsSliceDefaultPrimaryTestimonialsItem {
  * Primary content in *Testimonials → Default → Primary*
  */
 export interface TestimonialsSliceDefaultPrimary {
+  /**
+   * Background Color field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: testimonials.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
   /**
    * Image Side field in *Testimonials → Default → Primary*
    *
@@ -3307,6 +3389,16 @@ export interface TestimonialsSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
+   * Quote field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.quote
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  quote: prismic.RichTextField;
+
+  /**
    * Button field in *Testimonials → Default → Primary*
    *
    * - **Field Type**: Link
@@ -3319,15 +3411,25 @@ export interface TestimonialsSliceDefaultPrimary {
   >;
 
   /**
-   * Testimonials field in *Testimonials → Default → Primary*
+   * Author field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.author
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  author: prismic.KeyTextField;
+
+  /**
+   * Author Titles field in *Testimonials → Default → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.testimonials[]
+   * - **API ID Path**: testimonials.default.primary.author_titles[]
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  testimonials: prismic.GroupField<
-    Simplify<TestimonialsSliceDefaultPrimaryTestimonialsItem>
+  author_titles: prismic.GroupField<
+    Simplify<TestimonialsSliceDefaultPrimaryAuthorTitlesItem>
   >;
 }
 
@@ -3362,58 +3464,11 @@ export type TestimonialsSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *TileGrid → Default → Primary → Tiles*
- */
-export interface TileGridSliceDefaultPrimaryTilesItem {
-  /**
-   * Tile Icon field in *TileGrid → Default → Primary → Tiles*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.default.primary.tiles[].tile_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  tile_image: prismic.ImageField<never>;
-
-  /**
-   * Tile Title field in *TileGrid → Default → Primary → Tiles*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.default.primary.tiles[].tile_title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  tile_title: prismic.RichTextField;
-
-  /**
-   * Tile Body field in *TileGrid → Default → Primary → Tiles*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.default.primary.tiles[].tile_body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  tile_body: prismic.RichTextField;
-
-  /**
-   * Tile Button field in *TileGrid → Default → Primary → Tiles*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.default.primary.tiles[].tile_button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  tile_button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-}
-
-/**
- * Item in *TileGrid → IconTile → Primary → Tiles*
+ * Item in *TileGrid → Icon Tile → Primary → Tiles*
  */
 export interface TileGridSliceIconTilePrimaryTilesItem {
   /**
-   * Tile Icon field in *TileGrid → IconTile → Primary → Tiles*
+   * Tile Icon field in *TileGrid → Icon Tile → Primary → Tiles*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -3423,7 +3478,7 @@ export interface TileGridSliceIconTilePrimaryTilesItem {
   tile_image: prismic.ImageField<never>;
 
   /**
-   * Tile Title field in *TileGrid → IconTile → Primary → Tiles*
+   * Tile Title field in *TileGrid → Icon Tile → Primary → Tiles*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3433,10 +3488,10 @@ export interface TileGridSliceIconTilePrimaryTilesItem {
   tile_title: prismic.RichTextField;
 
   /**
-   * Tile Button field in *TileGrid → IconTile → Primary → Tiles*
+   * Tile Button field in *TileGrid → Icon Tile → Primary → Tiles*
    *
    * - **Field Type**: Link
-   * - **Placeholder**: *None*
+   * - **Placeholder**: Learn More
    * - **API ID Path**: tile_grid.iconTile.primary.tiles[].tile_button
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
@@ -3446,151 +3501,32 @@ export interface TileGridSliceIconTilePrimaryTilesItem {
 }
 
 /**
- * Item in *TileGrid → ImageTile → Primary → Tiles*
- */
-export interface TileGridSliceImageTilePrimaryTilesItem {
-  /**
-   * Tile Icon field in *TileGrid → ImageTile → Primary → Tiles*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.imageTile.primary.tiles[].tile_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  tile_image: prismic.ImageField<never>;
-
-  /**
-   * Tile Title field in *TileGrid → ImageTile → Primary → Tiles*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.imageTile.primary.tiles[].tile_title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  tile_title: prismic.RichTextField;
-
-  /**
-   * Tile Body field in *TileGrid → ImageTile → Primary → Tiles*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.imageTile.primary.tiles[].tile_body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  tile_body: prismic.RichTextField;
-
-  /**
-   * Tile Button field in *TileGrid → ImageTile → Primary → Tiles*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.imageTile.primary.tiles[].tile_button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  tile_button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-}
-
-/**
- * Primary content in *TileGrid → Default → Primary*
- */
-export interface TileGridSliceDefaultPrimary {
-  /**
-   * Background Color field in *TileGrid → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: White
-   * - **API ID Path**: tile_grid.default.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
-
-  /**
-   * Columns field in *TileGrid → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: 2
-   * - **API ID Path**: tile_grid.default.primary.columns
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  columns: prismic.SelectField<"2" | "3" | "4", "filled">;
-
-  /**
-   * Title field in *TileGrid → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Body field in *TileGrid → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.default.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Tiles field in *TileGrid → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.default.primary.tiles[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  tiles: prismic.GroupField<Simplify<TileGridSliceDefaultPrimaryTilesItem>>;
-
-  /**
-   * Button field in *TileGrid → Default → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.default.primary.button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-}
-
-/**
- * Default variation for TileGrid Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TileGridSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<TileGridSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Primary content in *TileGrid → IconTile → Primary*
+ * Primary content in *TileGrid → Icon Tile → Primary*
  */
 export interface TileGridSliceIconTilePrimary {
   /**
-   * Background Color field in *TileGrid → IconTile → Primary*
+   * Background Color field in *TileGrid → Icon Tile → Primary*
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **Default Value**: White
+   * - **Default Value**: No Background
    * - **API ID Path**: tile_grid.iconTile.primary.background_color
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
 
   /**
-   * Columns field in *TileGrid → IconTile → Primary*
+   * Background Image field in *TileGrid → Icon Tile → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tile_grid.iconTile.primary.background_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  background_image: prismic.ImageField<never>;
+
+  /**
+   * Columns field in *TileGrid → Icon Tile → Primary*
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
@@ -3601,7 +3537,7 @@ export interface TileGridSliceIconTilePrimary {
   columns: prismic.SelectField<"2" | "3" | "4", "filled">;
 
   /**
-   * Title field in *TileGrid → IconTile → Primary*
+   * Title field in *TileGrid → Icon Tile → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3611,7 +3547,7 @@ export interface TileGridSliceIconTilePrimary {
   title: prismic.RichTextField;
 
   /**
-   * Body field in *TileGrid → IconTile → Primary*
+   * Body field in *TileGrid → Icon Tile → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3621,17 +3557,7 @@ export interface TileGridSliceIconTilePrimary {
   body: prismic.RichTextField;
 
   /**
-   * Tiles field in *TileGrid → IconTile → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.iconTile.primary.tiles[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  tiles: prismic.GroupField<Simplify<TileGridSliceIconTilePrimaryTilesItem>>;
-
-  /**
-   * Button field in *TileGrid → IconTile → Primary*
+   * Button field in *TileGrid → Icon Tile → Primary*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -3641,10 +3567,20 @@ export interface TileGridSliceIconTilePrimary {
   button: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
+
+  /**
+   * Tiles field in *TileGrid → Icon Tile → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tile_grid.iconTile.primary.tiles[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tiles: prismic.GroupField<Simplify<TileGridSliceIconTilePrimaryTilesItem>>;
 }
 
 /**
- * IconTile variation for TileGrid Slice
+ * Icon Tile variation for TileGrid Slice
  *
  * - **API ID**: `iconTile`
  * - **Description**: Default
@@ -3657,94 +3593,9 @@ export type TileGridSliceIconTile = prismic.SharedSliceVariation<
 >;
 
 /**
- * Primary content in *TileGrid → ImageTile → Primary*
- */
-export interface TileGridSliceImageTilePrimary {
-  /**
-   * Background Color field in *TileGrid → ImageTile → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: White
-   * - **API ID Path**: tile_grid.imageTile.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
-
-  /**
-   * Columns field in *TileGrid → ImageTile → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: 2
-   * - **API ID Path**: tile_grid.imageTile.primary.columns
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  columns: prismic.SelectField<"2" | "3" | "4", "filled">;
-
-  /**
-   * Title field in *TileGrid → ImageTile → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.imageTile.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Body field in *TileGrid → ImageTile → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.imageTile.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Tiles field in *TileGrid → ImageTile → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.imageTile.primary.tiles[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  tiles: prismic.GroupField<Simplify<TileGridSliceImageTilePrimaryTilesItem>>;
-
-  /**
-   * Button field in *TileGrid → ImageTile → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.imageTile.primary.button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-}
-
-/**
- * ImageTile variation for TileGrid Slice
- *
- * - **API ID**: `imageTile`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TileGridSliceImageTile = prismic.SharedSliceVariation<
-  "imageTile",
-  Simplify<TileGridSliceImageTilePrimary>,
-  never
->;
-
-/**
  * Slice variation for *TileGrid*
  */
-type TileGridSliceVariation =
-  | TileGridSliceDefault
-  | TileGridSliceIconTile
-  | TileGridSliceImageTile;
+type TileGridSliceVariation = TileGridSliceIconTile;
 
 /**
  * TileGrid Shared Slice
@@ -3762,14 +3613,14 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig,
+      options?: prismic.ClientConfig
     ): prismic.Client<AllDocumentTypes>;
   }
 
   interface CreateWriteClient {
     (
       repositoryNameOrEndpoint: string,
-      options: prismic.WriteClientConfig,
+      options: prismic.WriteClientConfig
     ): prismic.WriteClient<AllDocumentTypes>;
   }
 
@@ -3779,6 +3630,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      CampaignPageDocument,
+      CampaignPageDocumentData,
+      CampaignPageDocumentDataSlicesSlice,
       ContactPageDocument,
       ContactPageDocumentData,
       ContactPageDocumentDataSlicesSlice,
@@ -3787,7 +3641,6 @@ declare module "@prismicio/client" {
       MenusDocument,
       MenusDocumentData,
       MenusDocumentDataSlicesSlice,
-      MenusDocumentDataPartnerLinksItem,
       MenusDocumentDataSlices1Slice,
       NewsletterSignupDocument,
       NewsletterSignupDocumentData,
@@ -3824,6 +3677,10 @@ declare module "@prismicio/client" {
       CallToActionSliceDefaultPrimary,
       CallToActionSliceVariation,
       CallToActionSliceDefault,
+      ContactInfoSlice,
+      ContactInfoSliceDefaultPrimary,
+      ContactInfoSliceVariation,
+      ContactInfoSliceDefault,
       ContentCarouselSlice,
       ContentCarouselSliceDefaultPrimaryContentCardItem,
       ContentCarouselSliceDefaultPrimary,
@@ -3837,6 +3694,16 @@ declare module "@prismicio/client" {
       ContentColumnSliceVariation,
       ContentColumnSliceDefault,
       ContentColumnSliceStats,
+      ContentGridSlice,
+      ContentGridSliceDefaultPrimary,
+      ContentGridSliceResourceGridPrimary,
+      ContentGridSliceVariation,
+      ContentGridSliceDefault,
+      ContentGridSliceResourceGrid,
+      HashtagBannerSlice,
+      HashtagBannerSliceDefaultPrimary,
+      HashtagBannerSliceVariation,
+      HashtagBannerSliceDefault,
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
       ImageTextSliceVideoPrimary,
@@ -3846,14 +3713,6 @@ declare module "@prismicio/client" {
       ImageTextSliceDefault,
       ImageTextSliceVideo,
       ImageTextSliceStats,
-      LogoListSlice,
-      LogoListSliceDefaultPrimaryLogosItem,
-      LogoListSliceDefaultPrimary,
-      LogoListSliceLogoListWithCallToActionPrimaryLogosItem,
-      LogoListSliceLogoListWithCallToActionPrimary,
-      LogoListSliceVariation,
-      LogoListSliceDefault,
-      LogoListSliceLogoListWithCallToAction,
       MenuPanelSlice,
       MenuPanelSliceDefaultPrimaryLinkGroupItem,
       MenuPanelSliceDefaultPrimaryLinkWithParagraphItem,
@@ -3892,21 +3751,15 @@ declare module "@prismicio/client" {
       TeamListSliceVariation,
       TeamListSliceDefault,
       TestimonialsSlice,
-      TestimonialsSliceDefaultPrimaryTestimonialsItem,
+      TestimonialsSliceDefaultPrimaryAuthorTitlesItem,
       TestimonialsSliceDefaultPrimary,
       TestimonialsSliceVariation,
       TestimonialsSliceDefault,
       TileGridSlice,
-      TileGridSliceDefaultPrimaryTilesItem,
-      TileGridSliceDefaultPrimary,
       TileGridSliceIconTilePrimaryTilesItem,
       TileGridSliceIconTilePrimary,
-      TileGridSliceImageTilePrimaryTilesItem,
-      TileGridSliceImageTilePrimary,
       TileGridSliceVariation,
-      TileGridSliceDefault,
       TileGridSliceIconTile,
-      TileGridSliceImageTile,
     };
   }
 }

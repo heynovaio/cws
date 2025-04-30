@@ -5,10 +5,12 @@ import dynamic from "next/dynamic";
 export const components = {
   accordion: dynamic(() => import("./Accordion")),
   call_to_action: dynamic(() => import("./CallToAction")),
+  contact_info: dynamic(() => import("./ContactInfo")),
   content_carousel: dynamic(() => import("./ContentCarousel")),
   content_column: dynamic(() => import("./ContentColumn")),
+  content_grid: dynamic(() => import("./ContentGrid")),
+  hashtag_banner: dynamic(() => import("./HashtagBanner")),
   image_text: dynamic(() => import("./ImageText")),
-  logo_list: dynamic(() => import("./LogoList")),
   menu_panel: dynamic(() => import("./MenuPanel")),
   multi_link_column: dynamic(() => import("./MultiLinkColumn")),
   rich_text: dynamic(() => import("./RichText")),
