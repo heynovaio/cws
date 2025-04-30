@@ -1,18 +1,19 @@
-import { ResponsiveImage } from "@/components";
-import { Content } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { JSX } from "react";
+"use client";
 
-/**
- * Props for `MultiLinkColumn`.
- */
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
+import { FaPlus, FaMinus } from "react-icons/fa6";
+import { Content } from "@prismicio/client";
+import { PrismicNextLink } from "@prismicio/next";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import React, { JSX } from "react";
+
 export type MultiLinkColumnProps =
   SliceComponentProps<Content.MultiLinkColumnSlice>;
 
-/**
- * Component for "MultiLinkColumn" Slices.
- */
 const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
   const footerComponentStyling = {
     heading2: ({ children }: { children: React.ReactNode }) => (
@@ -22,7 +23,7 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
       <h3 className="footer-header">{children}</h3>
     ),
     heading4: ({ children }: { children: React.ReactNode }) => (
-      <h4 className="text-h4">{children}</h4>
+      <h4 className="footer-header">{children}</h4>
     ),
     heading5: ({ children }: { children: React.ReactNode }) => (
       <h5 className="footer-header">{children}</h5>
@@ -38,50 +39,54 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
       data-slice-variation={slice.variation}
       className="flex flex-col gap-5"
     >
-      <span className="pl-2">
-        <PrismicRichText
-          field={slice.primary.title}
-          components={footerComponentStyling}
-        />
-      </span>
+      <div className="hidden md:flex flex-col gap-5">
+        <span className="pl-2">
+          <PrismicRichText
+            field={slice.primary.title}
+            components={footerComponentStyling}
+          />
+        </span>
+        {slice.variation === "default" && (
+          <div className="flex flex-col gap-5">
+            {slice.primary.link.map((item, index) => (
+              <PrismicNextLink field={item} key={index} className="pl-2 " />
+            ))}
+          </div>
+        )}
+      </div>
 
-      {/* Default Variation */}
-      {slice.variation === "default" && (
-        <div className="flex flex-col gap-5">
-          {slice.primary.link.map((item, index) => (
-            <PrismicNextLink
-              field={item}
-              key={index}
-              className="pl-2 link-dark-bg focus"
-            />
-          ))}
-        </div>
-      )}
-
-      {/* Logo Variation */}
-      {/* {slice.variation === "withIcon" && (
-        <div className="flex flex-col gap-5 justify-center items-center md:justify-start md:items-start">
-          {slice.primary.Icon.map((item, index) => {
-            return (
-              <PrismicNextLink
-                field={item.link}
-                key={index}
-                className="link-dark-bg focus p-2"
-              >
-                {item.image && Object.keys(item.image).length !== 0 ? (
-                  <ResponsiveImage
-                    imageHeightClassName="max-w-[288px] pr-2 rounded-xl"
-                    containerClassName=""
-                    image={item.image}
+      <Disclosure as="div" className="md:hidden">
+        {({ open }) => (
+          <>
+            <DisclosureButton
+              className={`flex items-center justify-center gap-4 pl-2 w-full menu-link ${open ? "mb-3" : ""}`}
+            >
+              <PrismicRichText
+                field={slice.primary.title}
+                components={footerComponentStyling}
+              />
+              <div className="pr-2">
+                <FaPlus
+                  className={`h-4 w-4 font-bold ${open ? "hidden" : ""}`}
+                />
+                <FaMinus
+                  className={`h-4 w-4 font-bold ${open ? "" : "hidden"}`}
+                />
+              </div>
+            </DisclosureButton>
+            <DisclosurePanel className="pl-2 flex flex-col gap-5 mb-3 transition duration-200 ease-out">
+              {slice.variation === "default" &&
+                slice.primary.link.map((item, index) => (
+                  <PrismicNextLink
+                    field={item}
+                    key={index}
+                    className="link-dark-bg focus"
                   />
-                ) : (
-                  <span>{item.link.text}</span>
-                )}
-              </PrismicNextLink>
-            );
-          })}
-        </div>
-      )} */}
+                ))}
+            </DisclosurePanel>
+          </>
+        )}
+      </Disclosure>
     </section>
   );
 };

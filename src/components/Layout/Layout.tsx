@@ -53,11 +53,7 @@ export const Layout = ({
         )}
       </Container>
 
-      <Footer
-        logo={global.site_logo}
-        slices={menus?.slices1}
-        locales={locales}
-      />
+      <Footer global={global} slices={menus?.slices1} />
     </div>
   );
 };
