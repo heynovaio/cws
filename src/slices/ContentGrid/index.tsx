@@ -28,9 +28,9 @@ export type ContentGridProps = SliceComponentProps<Content.ContentGridSlice>;
  */
 const ProgramContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
   const { data } = GetAllPrograms("en-ca");
-  // const { programCategoryData: allProgramCategoryData } = useProgramCategoryData("en-ca");
+  const { programCategoryData: allProgramCategoryData } = useProgramCategoryData("en-ca");
 
-  // const { programCategoryData} = useProgramCategoryDataById()
+  console.log("Program Category Data: ", allProgramCategoryData);
 
   const categoryId =
     slice.primary.category && "id" in slice.primary.category
