@@ -45,7 +45,7 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
         <div className={titleClassName}>
           {tagline && <div className="text-bodyLarge">{tagline}</div>}
           {typeof title === "string" ? (
-            <h2 className={titleClassName}>{title}</h2>
+            <h3 className={titleClassName}>{title}</h3>
           ) : (
             <PrismicRichText field={title} components={titleComponents} />
           )}

@@ -6,14 +6,11 @@ import {
   Grid,
   Section,
 } from "@/components";
-import { useCategoryFilterData } from "@/hooks";
-import { useCategoryFilter } from "@/providers";
 import { components } from "@/utils";
 import GetAllPrograms from "@/utils/useGetAllPrograms";
-import { Content } from "@prismicio/client";
+import { asText, Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { JSX, useEffect, useMemo } from "react";
-import { ProgramPageDocument } from "../../../prismicio-types";
+import { JSX, useMemo } from "react";
 
 /**
  * Props for `ContentGrid`.
@@ -46,28 +43,6 @@ const ProgramContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
     );
   }, [data, categoryId]);
 
-  // const resourceData = useMemo(() => {
-  //   return data?.filter((item) => {
-  //     return item.data.categories?.some(
-  //       (categoryItem) =>
-  //         categoryItem.category &&
-  //         'id' in categoryItem.category &&
-  //         categoryItem.category.id === categoryId
-  //     );
-  //   }) as ResourcePageDocument[];
-  // }, [data, categoryId]);
-
-  // const ProgramData = useMemo(() => {
-  //   return data?.filter((item) => {
-  //     return item.data.category?.some(
-  //       (categoryItem) =>
-  //         categoryItem.category &&
-  //         "id" in categoryItem.category &&
-  //         categoryItem.category.id === categoryId
-  //     );
-  //   }) as ProgramPageDocument[];
-  // }, [data, categoryId]);
-
   return (
     <Section
       data-slice-type={slice.slice_type}
@@ -91,7 +66,7 @@ const ProgramContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
           {programData.map((item, index) => (
             <DefaultCard
               key={index}
-              title={item.data.title}
+              title={asText(item.data.title)}
               content={
                 <PrismicRichText
                   field={item.data.body}
@@ -99,13 +74,6 @@ const ProgramContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
                 />
               }
               image={item.data.image}
-              category={
-                item.data.category && Array.isArray(item.data.category)
-                  ? item.data.category.filter(
-                      (cat): cat is string => typeof cat === "string"
-                    )
-                  : undefined
-              }
               cardType="program"
             />
           ))}

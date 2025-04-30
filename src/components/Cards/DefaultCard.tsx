@@ -51,7 +51,7 @@ export const DefaultCard = ({
       <ResponsiveImage
         image={image}
         imageHeightClassName="h-full object-cover"
-        containerClassName="w-full max-h-[215px] h-[215px] h-full"
+        containerClassName="w-full max-h-[215px] h-full"
       />
       {/* TODO: Turn these into links once the filter pages are made */}
       {category && (
