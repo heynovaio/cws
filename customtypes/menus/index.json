@@ -73,6 +73,28 @@
           "repeat": false
         }
       },
+      "instagram_handle_link": {
+        "type": "Link",
+        "config": {
+          "label": "Instagram Handle Link",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
+      "facebook_handle_link": {
+        "type": "Link",
+        "config": {
+          "label": "Facebook Handle Link",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
       "slices1": {
         "type": "Slices",
         "fieldset": "Slice Zone",

@@ -261,5 +261,5 @@
   color: black !important;
 }
 .footer-header {
-  @apply text-base md:text-h4  font-normal md:font-bold;
+  @apply text-base md:text-h4  md:font-bold;
 }
