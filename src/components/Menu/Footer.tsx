@@ -21,7 +21,7 @@ export const Footer = ({ global, slices }: FooterProps) => {
       <nav className="py-14 px-5 mx-auto max-w-screen-xl w-full flex flex-col gap-20">
         <Grid
           maxColumns={numberOfSlices}
-          gridClassName="!gap-12 justify-center text-center md:justify-start md:text-left"
+          gridClassName="grid-cols-1 lg:grid-cols-4 gap-y-12 gap-x-8 justify-center text-center lg:justify-start lg:text-left"
         >
           <div className="flex flex-col items-center ">
             <ResponsiveImage

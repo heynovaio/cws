@@ -16,20 +16,8 @@ export type MultiLinkColumnProps =
 
 const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
   const footerComponentStyling = {
-    heading2: ({ children }: { children: React.ReactNode }) => (
-      <h2 className="footer-header">{children}</h2>
-    ),
-    heading3: ({ children }: { children: React.ReactNode }) => (
-      <h3 className="footer-header">{children}</h3>
-    ),
     heading4: ({ children }: { children: React.ReactNode }) => (
       <h4 className="footer-header">{children}</h4>
-    ),
-    heading5: ({ children }: { children: React.ReactNode }) => (
-      <h5 className="footer-header">{children}</h5>
-    ),
-    heading6: ({ children }: { children: React.ReactNode }) => (
-      <h6 className="footer-header">{children}</h6>
     ),
   };
 
@@ -49,7 +37,11 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
         {slice.variation === "default" && (
           <div className="flex flex-col gap-5">
             {slice.primary.link.map((item, index) => (
-              <PrismicNextLink field={item} key={index} className="pl-2 " />
+              <PrismicNextLink
+                field={item}
+                key={index}
+                className="pl-2 no-underline"
+              />
             ))}
           </div>
         )}
@@ -80,7 +72,7 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
                   <PrismicNextLink
                     field={item}
                     key={index}
-                    className="link-dark-bg focus"
+                    className="no underline"
                   />
                 ))}
             </DisclosurePanel>
