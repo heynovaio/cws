@@ -112,6 +112,18 @@ interface ContactPageDocumentData {
   body: prismic.RichTextField;
 
   /**
+   * Include Newsletter Sign Up Banner field in *Contact Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: contact_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Contact Page*
    *
    * - **Field Type**: Slice Zone
@@ -368,6 +380,135 @@ interface MenusDocumentData {
 export type MenusDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenusDocumentData>, "menus", Lang>;
 
+/**
+ * Item in *Newsletter SignUp → Form Field*
+ */
+export interface NewsletterSignupDocumentDataFormFieldItem {
+  /**
+   * label field in *Newsletter SignUp → Form Field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * name field in *Newsletter SignUp → Form Field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * type field in *Newsletter SignUp → Form Field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[].type
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  type: prismic.KeyTextField;
+
+  /**
+   * placeholder field in *Newsletter SignUp → Form Field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[].placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  placeholder: prismic.KeyTextField;
+}
+
+/**
+ * Item in *Newsletter SignUp → Submit Button*
+ */
+export interface NewsletterSignupDocumentDataSubmitButtonItem {
+  /**
+   * Button Text field in *Newsletter SignUp → Submit Button*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.submit_button[].button_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_text: prismic.KeyTextField;
+}
+
+/**
+ * Content for Newsletter SignUp documents
+ */
+interface NewsletterSignupDocumentData {
+  /**
+   * Title field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * subtitle field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.subtitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  subtitle: prismic.RichTextField;
+
+  /**
+   * Form Field field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  form_field: prismic.GroupField<
+    Simplify<NewsletterSignupDocumentDataFormFieldItem>
+  >;
+
+  /**
+   * Submit Button field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.submit_button[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  submit_button: prismic.GroupField<
+    Simplify<NewsletterSignupDocumentDataSubmitButtonItem>
+  >;
+}
+
+/**
+ * Newsletter SignUp document from Prismic
+ *
+ * - **API ID**: `newsletter_signup`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NewsletterSignupDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<NewsletterSignupDocumentData>,
+    "newsletter_signup",
+    Lang
+  >;
+
 type PageDocumentDataSlicesSlice =
   | TileGridSlice
   | ContentGridSlice
@@ -443,6 +584,18 @@ interface PageDocumentData {
   button: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
+
+  /**
+   * Include Newsletter Sign Up Banner field in *Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
 
   /**
    * Slice Zone field in *Page*
@@ -805,6 +958,18 @@ interface ProgramPageDocumentData {
   >;
 
   /**
+   * Include Newsletter Sign Up Banner field in *Program Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: program_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Program Page*
    *
    * - **Field Type**: Slice Zone
@@ -1051,6 +1216,18 @@ interface ResourcePageDocumentData {
   image: prismic.ImageField<never>;
 
   /**
+   * Include Newsletter Sign Up Banner field in *Resource Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: resource_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Resource Page*
    *
    * - **Field Type**: Slice Zone
@@ -1165,6 +1342,18 @@ interface TeamMembersDocumentData {
   >;
 
   /**
+   * Include Newsletter Sign Up Banner field in *Team Members*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: team_members.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Team Members*
    *
    * - **Field Type**: Slice Zone
@@ -1237,6 +1426,7 @@ export type AllDocumentTypes =
   | ContactPageDocument
   | GlobalsDocument
   | MenusDocument
+  | NewsletterSignupDocument
   | PageDocument
   | PartnersDocument
   | ProgramCategoryDocument
@@ -3433,14 +3623,14 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig,
+      options?: prismic.ClientConfig
     ): prismic.Client<AllDocumentTypes>;
   }
 
   interface CreateWriteClient {
     (
       repositoryNameOrEndpoint: string,
-      options: prismic.WriteClientConfig,
+      options: prismic.WriteClientConfig
     ): prismic.WriteClient<AllDocumentTypes>;
   }
 
@@ -3462,6 +3652,10 @@ declare module "@prismicio/client" {
       MenusDocumentData,
       MenusDocumentDataSlicesSlice,
       MenusDocumentDataSlices1Slice,
+      NewsletterSignupDocument,
+      NewsletterSignupDocumentData,
+      NewsletterSignupDocumentDataFormFieldItem,
+      NewsletterSignupDocumentDataSubmitButtonItem,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
