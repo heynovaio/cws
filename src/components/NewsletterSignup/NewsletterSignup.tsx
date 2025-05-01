@@ -1,10 +1,17 @@
 import { useNewsletterSignupData } from "@/hooks/use-newletter-signup-data-hook";
 import { PrismicRichText } from "@prismicio/react";
-import { Container, Button, Section } from "@/components";
+import { Container, Button } from "@/components";
 import { useState, useRef } from "react";
 
 type Props = {
   lang: string;
+};
+
+type NewsletterField = {
+  name: string | null;
+  type: string | null;
+  label: string | null;
+  placeholder?: string | null;
 };
 
 const NewsletterSignupBanner = ({ lang }: Props) => {
@@ -12,7 +19,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  if (isLoading) return null;
+  if (isLoading || !newsletterSignupData) return null;
 
   const { title, subtitle, signup_success_message, form_field, submit_button } =
     newsletterSignupData.data;
@@ -27,7 +34,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
     formData.append("b_8ee5619b8ee91b0ddf0ee8e84_bc04ac6cf0", "");
 
     try {
-      const response = await fetch(
+      await fetch(
         "https://heynova.us2.list-manage.com/subscribe/post?u=8ee5619b8ee91b0ddf0ee8e84&id=bc04ac6cf0",
         {
           method: "POST",
@@ -84,7 +91,11 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
             </h4>
           ) : (
             <form className="space-y-8" ref={formRef} onSubmit={handleSubmit}>
-              {form_field.map((field: any, index: number) => {
+              {form_field.map((field: NewsletterField, index: number) => {
+                const fieldName = field.name ?? `field-${index}`;
+                const fieldType = field.type ?? "text";
+                const fieldLabel = field.label ?? "Untitled Field";
+
                 if (field.type === "checkbox") {
                   return (
                     <div
@@ -92,14 +103,14 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                       className="flex items-center space-x-3 mt-6"
                     >
                       <input
-                        id={field.name}
-                        name={field.name}
+                        id={fieldName}
+                        name={fieldName}
                         type="checkbox"
                         className="h-7 w-7 border border-black rounded"
                         required
                       />
                       <label
-                        htmlFor={field.name}
+                        htmlFor={fieldName}
                         className="text-white font-semibold"
                       >
                         {field.label}
@@ -111,15 +122,15 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                 return (
                   <div key={index} className="mb-6">
                     <label
-                      htmlFor={field.name}
+                      htmlFor={fieldName}
                       className="block mb-4 text-white font-semibold"
                     >
-                      {field.label}
+                      {fieldLabel}
                     </label>
                     <input
-                      id={field.name}
-                      name={field.name}
-                      type={field.type}
+                      id={fieldName}
+                      name={fieldName}
+                      type={fieldType}
                       placeholder={field.placeholder ?? ""}
                       className="w-full p-4 rounded-xl"
                       required

@@ -16,7 +16,7 @@ interface ButtonProps {
 
 export const Button = ({
   as = "link",
-  type = "link",
+  type = "button",
   buttonType = "primary",
   label,
   linkButtonColorClass = "",
