@@ -8,7 +8,6 @@ import { NewsletterSignupDocument } from "../../prismicio-types";
 const fetchData = async (lang: string): Promise<NewsletterSignupDocument> => {
   const client = createClient();
   const response = await client.getSingle("newsletter_signup", { lang });
-  console.log("response", response);
   return response as NewsletterSignupDocument;
 };
 
