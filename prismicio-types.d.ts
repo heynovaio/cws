@@ -2760,31 +2760,6 @@ export interface MenuPanelSliceDefaultPrimaryLinkGroupItem {
 }
 
 /**
- * Item in *MenuPanel → Default → Primary → Link with Paragraph*
- */
-export interface MenuPanelSliceDefaultPrimaryLinkWithParagraphItem {
-  /**
-   * Link Title field in *MenuPanel → Default → Primary → Link with Paragraph*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.default.primary.link_with_paragraph[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
-  /**
-   * Body field in *MenuPanel → Default → Primary → Link with Paragraph*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.default.primary.link_with_paragraph[].body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-}
-
-/**
  * Primary content in *MenuPanel → Default → Primary*
  */
 export interface MenuPanelSliceDefaultPrimary {
@@ -2839,18 +2814,6 @@ export interface MenuPanelSliceDefaultPrimary {
    */
   link_group: prismic.GroupField<
     Simplify<MenuPanelSliceDefaultPrimaryLinkGroupItem>
-  >;
-
-  /**
-   * Link with Paragraph field in *MenuPanel → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.default.primary.link_with_paragraph[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  link_with_paragraph: prismic.GroupField<
-    Simplify<MenuPanelSliceDefaultPrimaryLinkWithParagraphItem>
   >;
 }
 
@@ -4192,7 +4155,6 @@ declare module "@prismicio/client" {
       ImageTextSliceStats,
       MenuPanelSlice,
       MenuPanelSliceDefaultPrimaryLinkGroupItem,
-      MenuPanelSliceDefaultPrimaryLinkWithParagraphItem,
       MenuPanelSliceDefaultPrimary,
       MenuPanelSliceVariation,
       MenuPanelSliceDefault,

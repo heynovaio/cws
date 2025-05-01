@@ -67,42 +67,6 @@
 					}
 				]
 			},
-			"link_with_paragraph": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"link",
-								{
-									"key": "09686eb0-1f92-422e-8762-00ddd2bf7215",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "https://prismic.io",
-										"text": "sea"
-									}
-								}
-							],
-							[
-								"body",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Aute quis Lorem aute mollit et laborum aliqua ipsum aliqua non veniam. Tempor duis dolore mollit officia reprehenderit ut labore ullamco."
-											}
-										}
-									]
-								}
-							]
-						]
-					}
-				]
-			},
 			"columns": {
 				"__TYPE__": "BooleanContent",
 				"value": true
