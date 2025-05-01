@@ -131,6 +131,9 @@
     @apply underline underline-offset-2
       hover:text-ultra-pink;
   }
+  input {
+    color: black;
+  }
 }
 
 @layer utilities {
@@ -242,5 +245,4 @@
 
 .hover-ultrapink:hover {
   color: black !important;
-
 }
