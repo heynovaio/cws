@@ -58,7 +58,14 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const locales = await getLocales(page, client);
 
   return (
-    <Layout locales={locales} global={global.data} menus={menus.data}>
+    <Layout
+      locales={locales}
+      global={global.data}
+      menus={menus.data}
+      include_newsletter_sign_up_banner={
+        page.data.include_newsletter_sign_up_banner
+      }
+    >
       <SliceZone
         slices={page.data.slices}
         components={components}

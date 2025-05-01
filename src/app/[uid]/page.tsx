@@ -48,8 +48,6 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid, lang } = await params;
 
-  console.log("hello world");
-
   const client = createClient();
   const page = await client
     .getByUID("page", uid, { lang })
@@ -66,6 +64,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       global={global.data}
       menus={menus.data}
       partners={partners.data}
+      include_newsletter_sign_up_banner={
+        page.data.include_newsletter_sign_up_banner
+      }
     >
       <SliceZone
         slices={page.data.slices}

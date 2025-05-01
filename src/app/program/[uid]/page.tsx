@@ -64,6 +64,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       global={global.data}
       menus={menus.data}
       partners={partners.data}
+      include_newsletter_sign_up_banner={
+        page.data.include_newsletter_sign_up_banner
+      }
     >
       <Intro type="program" pageData={page.data} />
       <SliceZone
