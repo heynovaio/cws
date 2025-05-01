@@ -1,47 +1,6 @@
 [
 	{
 		"__TYPE__": "SharedSliceContent",
-		"variation": "default",
-		"primary": {
-			"title": {
-				"__TYPE__": "FieldContent",
-				"value": "structure",
-				"type": "Text"
-			},
-			"content_card": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"content",
-								{
-									"key": "dfd0216a-9d19-4b4b-81f6-cbbb2ef5f696",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "DocumentLink",
-										"id": "mock_document_id"
-									}
-								}
-							]
-						]
-					}
-				]
-			},
-			"all_link": {
-				"key": "5d2549af-c0c7-4482-bf3d-23a2cab806d2",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "DocumentLink",
-					"id": "mock_document_id"
-				}
-			}
-		},
-		"items": []
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
 		"variation": "programsCarousel",
 		"primary": {
 			"title": {
@@ -58,7 +17,7 @@
 							[
 								"content",
 								{
-									"key": "2b117e6d-79bb-4168-a45b-b6764510f38e",
+									"key": "992e21a1-7cde-4f14-bcf8-026b3ae4150d",
 									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "DocumentLink",
@@ -72,6 +31,52 @@
 			},
 			"all_link": {
 				"key": "bcce3c35-d7fd-4825-8bb2-fe3075c6b1e8",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "resourceCarousel",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "somewhere",
+				"type": "Text"
+			},
+			"content_card": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"content",
+								{
+									"key": "5812578d-1590-4001-a809-624f4399011d",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			},
+			"all_link": {
+				"key": "ed20b677-fc6b-4526-931d-b7e39f3ceb3c",
 				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "DocumentLink",
