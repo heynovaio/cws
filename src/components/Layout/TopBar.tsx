@@ -16,7 +16,7 @@ export const TopBar: React.FC<TopBarProps> = ({ text, locales, global }) => {
         field={text}
         components={{
           paragraph: ({ children }) => (
-            <p className="text-base small-link">{children}</p>
+            <p className="text-base small-link mt-8 md:mt-0">{children}</p>
           ),
         }}
       />
