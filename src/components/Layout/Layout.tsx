@@ -11,9 +11,11 @@ import Partners from "../Menu/Partners";
 import NewsletterSignupBanner from "../NewsletterSignup/NewsletterSignup";
 import { Container } from "./Container";
 import { Footer } from "../Menu/Footer";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { TopBar } from "./TopBar";
 
 interface LayoutProps {
-  locales?: unknown;
+  locales?: any;
   menus: MenusDocumentData;
   global: GlobalsDocumentData;
   children: ReactNode;
@@ -31,12 +33,12 @@ export const Layout = ({
 }: LayoutProps) => {
   return (
     <div>
-      <Header logo={global.site_logo} slices={menus.slices} locales={locales} />
+      <TopBar locales={locales} global={global} text={partners?.body} />
 
+      <Header logo={global.site_logo} slices={menus.slices} locales={locales} />
       <main id="main-content" className="relative focus:outline-0" tabIndex={0}>
         {children}
       </main>
-
       <Container>
         {include_newsletter_sign_up_banner && (
           <NewsletterSignupBanner lang={"en-ca"} />
