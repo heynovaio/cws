@@ -102,7 +102,8 @@
     }
   }
 
-  .btn-tertiary, a.btn-tertiary {
+  .btn-tertiary,
+  a.btn-tertiary {
     @apply text-white bg-electric-blue border border-electric-blue transition-transform duration-200;
     &:hover {
       @apply bg-electric-blue/80 text-white border-electric-blue -translate-y-1;
@@ -316,4 +317,8 @@
   a {
     @apply text-base;
   }
+}
+
+.menu-link-mobile {
+  @apply text-[1.875rem] font-bold text-left;
 }

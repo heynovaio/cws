@@ -38,7 +38,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
             <PopoverButton className="menu-link flex items-center gap-2">
               {slice.primary.menu_display || "Dropdown"}
               <FaChevronDown
-                className={`h-3 w-3 ${open ? "rotate-180 transform" : ""}`}
+                className={`h-3 w-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
               />
             </PopoverButton>
             <PopoverPanel
@@ -86,22 +86,54 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
       </Popover>
       <Disclosure
         as="div"
-        className="flex flex-col md:hidden relative bg-dark-purple-background"
+        className="flex flex-col md:hidden relative menu-link-mobile gap-2"
       >
         {({ open }) => (
           <>
-            <DisclosureButton className="  menu-link flex items-center justify-center gap-2">
+            <DisclosureButton className="flex menu-link-mobile pl-4 gap-2">
               {slice.primary.menu_display || "Dropdown"}
-              <FaChevronDown
-                className={`h-3 w-3 ${open ? "rotate-90 transform" : "-rotate-90"}`}
-              />
             </DisclosureButton>
-            <DisclosurePanel className="bg-dark-purple-background z-[10] w-full text-sm origin-top transition duration-200 ease-out px-5 py-10">
-              <ContentBox
-                title={slice.primary.title}
-                content={<PrismicRichText field={slice.primary.body} />}
-                containerClassName="mb-4 text-white"
-              />
+
+            <DisclosurePanel className=" w-full text-sm origin-top transition duration-200 ease-out px-5 py-5">
+              <div className="border-b border-white pb-4 mb-4">
+                <ContentBox
+                  content={
+                    <PrismicRichText
+                      field={slice.primary.body}
+                      components={{
+                        paragraph: ({ children }) => (
+                          <p className="text-md font-normal">{children}</p>
+                        ),
+                      }}
+                    />
+                  }
+                  containerClassName="mb-4 text-white "
+                />
+              </div>
+
+              <div className="flex flex-col text-white ">
+                {slice.primary.link_group.map((item, index) => (
+                  <div key={index} className="mb-8">
+                    {item.title && (
+                      <div className="mb-4 ">
+                        <PrismicRichText field={item.title} />
+                      </div>
+                    )}
+
+                    <div className="flex flex-col gap-4">
+                      {(item.link || []).map((linkItem, linkIndex) => (
+                        <PrismicNextLink
+                          key={linkIndex}
+                          field={linkItem}
+                          className="block text-sm hover:underline"
+                        >
+                          {linkItem.text}
+                        </PrismicNextLink>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </DisclosurePanel>
           </>
         )}

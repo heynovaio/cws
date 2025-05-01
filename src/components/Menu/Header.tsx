@@ -61,9 +61,9 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
             >
               <PopoverPanel
                 anchor="bottom"
-                className="w-screen h-screen bg-purple mt-0 pb-10 z-40"
+                className="w-screen h-screen bg-dark-purple-background mt-0 pb-10 z-40"
               >
-                <div className="flex flex-col items-center gap-10 mt-10">
+                <div className="flex flex-col  gap-10 mt-10">
                   <SliceZone slices={slices} components={components} />
                 </div>
               </PopoverPanel>
