@@ -48,6 +48,8 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid, lang } = await params;
 
+  console.log("hello world");
+
   const client = createClient();
   const page = await client
     .getByUID("page", uid, { lang })

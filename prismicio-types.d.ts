@@ -14,6 +14,18 @@ type CampaignPageDocumentDataSlicesSlice =
  */
 interface CampaignPageDocumentData {
   /**
+   * Include Newsletter Sign Up Banner field in *Campaign Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: campaign_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Campaign Page*
    *
    * - **Field Type**: Slice Zone
