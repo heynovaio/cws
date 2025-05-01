@@ -31,9 +31,10 @@ export const Layout = ({
   children,
   include_newsletter_sign_up_banner,
 }: LayoutProps) => {
+  console.log(menus.banner_text);
   return (
     <div>
-      <TopBar locales={locales} global={global} text={partners?.body} />
+      <TopBar locales={locales} global={global} text={menus.banner_text} />
 
       <Header logo={global.site_logo} slices={menus.slices} locales={locales} />
       <main id="main-content" className="relative focus:outline-0" tabIndex={0}>

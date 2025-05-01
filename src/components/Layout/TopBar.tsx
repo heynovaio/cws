@@ -15,7 +15,9 @@ export const TopBar: React.FC<TopBarProps> = ({ text, locales, global }) => {
       <PrismicRichText
         field={text}
         components={{
-          paragraph: ({ children }) => <p className="text-base">{children}</p>,
+          paragraph: ({ children }) => (
+            <p className="text-base small-link">{children}</p>
+          ),
         }}
       />
 
