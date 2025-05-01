@@ -376,40 +376,6 @@ interface MenusDocumentData {
   >;
 
   /**
-   * Instagram Handle Link field in *Menus*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menus.instagram_handle_link
-   * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  instagram_handle_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
-
-  /**
-   * Facebook Handle Link field in *Menus*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menus.facebook_handle_link
-   * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  facebook_handle_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
-
-  /**
    * Slice Zone field in *Menus*
    *
    * - **Field Type**: Slice Zone
