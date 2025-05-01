@@ -74,35 +74,6 @@
               }
             }
           }
-        },
-        "link_with_paragraph": {
-          "type": "Group",
-          "config": {
-            "label": "Link with Paragraph",
-            "repeat": true,
-            "fields": {
-              "link": {
-                "type": "Link",
-                "config": {
-                  "label": "Link Title",
-                  "placeholder": "",
-                  "select": null,
-                  "allowTargetBlank": true,
-                  "allowText": true,
-                  "repeat": false
-                }
-              },
-              "body": {
-                "type": "StructuredText",
-                "config": {
-                  "label": "Body",
-                  "placeholder": "",
-                  "allowTargetBlank": true,
-                  "multi": "paragraph,strong,em,o-list-item,rtl,list-item,embed,image,hyperlink,preformatted"
-                }
-              }
-            }
-          }
         }
       },
       "items": {}
