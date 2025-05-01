@@ -4,7 +4,6 @@ import React, { ReactNode } from "react";
 import {
   GlobalsDocumentData,
   MenusDocumentData,
-  MultiLinkColumnSlice,
   PartnersDocumentData,
 } from "../../../prismicio-types";
 import { Header } from "../Menu/Header";
