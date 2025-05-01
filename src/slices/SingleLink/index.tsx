@@ -14,6 +14,22 @@ export type SingleLinkProps = SliceComponentProps<Content.SingleLinkSlice>;
 const SingleLink = ({ slice }: SingleLinkProps): JSX.Element => {
   const IconOnly = slice.primary.link.variant === "Icon Only";
 
+  let buttonClass = "btn btn-primary";
+
+  switch (slice.primary.link.variant) {
+    case "Primary":
+      buttonClass = "btn btn-primary";
+      break;
+    case "Secondary":
+      buttonClass = "btn btn-secondary";
+      break;
+    case "Icon Only":
+      buttonClass = "";
+      break;
+    default:
+      buttonClass = "btn btn-primary";
+  }
+
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -23,7 +39,7 @@ const SingleLink = ({ slice }: SingleLinkProps): JSX.Element => {
       {slice.variation === "singleLinkButtonIcon" && (
         <PrismicNextLink
           field={slice.primary.link}
-          className={` flex flex-row-reverse gap-2 justify-center items-center text-midnight no-underline`}
+          className={`flex flex-row-reverse gap-2 justify-center items-center text-md ${buttonClass}`}
         >
           {slice.primary.icon && (
             <PrismicNextImage
@@ -32,13 +48,16 @@ const SingleLink = ({ slice }: SingleLinkProps): JSX.Element => {
               alt=""
             />
           )}
-          {!IconOnly && <span>{slice.primary.link.text}</span>}
+          {!IconOnly && (
+            <span className="whitespace-nowrap">{slice.primary.link.text}</span>
+          )}
         </PrismicNextLink>
       )}
+
       {slice.variation === "default" && (
         <PrismicNextLink
           field={slice.primary.link}
-          className="flex justify-center text-midnight no-underline "
+          className="flex justify-center text-white no-underline text-md"
         >
           {slice.primary.link.text}
         </PrismicNextLink>

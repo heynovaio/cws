@@ -51,6 +51,7 @@ export default {
       label: "1.5rem",
       button: "1.25rem",
       bodyLarge: "1.25rem",
+      md: "1.125rem",
     },
     lineHeight: {
       h1: "1.3",
