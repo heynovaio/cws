@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
     <header>
       <nav
         aria-label="Main Nav"
-        className="flex bg-[#6D00FF] justify-between items-center px-5 lg:py-2 py-1"
+        className="flex bg-menu-purple justify-between items-center px-5 lg:py-2 py-1"
       >
         <PrismicNextLink
           className="flex "
@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
             >
               <PopoverPanel
                 anchor="bottom"
-                className="w-screen h-screen bg-dark-purple-background mt-0 pb-10 z-40"
+                className="w-screen h-screen bg-menu-purple mt-0 pb-10 z-40"
               >
                 <div className="flex flex-col  gap-10 mt-10">
                   <SliceZone slices={slices} components={components} />
