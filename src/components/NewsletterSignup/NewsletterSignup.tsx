@@ -9,10 +9,8 @@ type Props = {
 
 const NewsletterSignupBanner = ({ lang }: Props) => {
   const { newsletterSignupData, isLoading } = useNewsletterSignupData(lang);
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-
-  console.log("newsletterSignupData", newsletterSignupData);
 
   if (isLoading) return null;
 
