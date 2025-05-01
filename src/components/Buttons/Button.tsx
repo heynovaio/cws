@@ -3,21 +3,27 @@ import { PrismicNextLink } from "@prismicio/next";
 import { ReactNode } from "react";
 
 interface ButtonProps {
+  as?: "link" | "button";
+  type?: "button" | "submit";
   buttonType: "primary" | "secondary" | "outline" | "link";
   label: ReactNode;
   linkButtonColorClass?: string;
-  buttonLink: LinkField;
+  buttonLink?: LinkField;
   styling?: string;
   icon?: ReactNode;
+  onClick?: () => void;
 }
 
 export const Button = ({
+  as = "link",
+  type = "link",
   buttonType = "primary",
   label,
   linkButtonColorClass = "",
   buttonLink,
   styling,
   icon = null,
+  onClick,
 }: ButtonProps) => {
   let buttonStyle = "";
 
@@ -36,6 +42,21 @@ export const Button = ({
       break;
     default:
       buttonStyle = "btn btn-primary";
+  }
+
+  if (as === "button") {
+    return (
+      <button
+        type={type}
+        className={`flex flex-row w-fit items-center gap-2 hover:gap-4 ${styling} ${buttonStyle} ${linkButtonColorClass}`}
+        onClick={onClick}
+      >
+        {label}
+        {icon && (
+          <span className="flex items-center justify-center">{icon}</span>
+        )}
+      </button>
+    );
   }
 
   return (
