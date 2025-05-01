@@ -4,7 +4,7 @@ import {
   MenusDocumentData,
   MenusDocumentDataSlices1Slice,
 } from "../../../prismicio-types";
-import { Grid, ResponsiveImage } from "..";
+import { ResponsiveImage } from "..";
 import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import { FaFacebook, FaInstagram } from "react-icons/fa6";
