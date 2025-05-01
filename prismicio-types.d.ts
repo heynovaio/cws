@@ -806,13 +806,13 @@ interface ProgramCategoryDocumentData {
   /**
    * Body field in *Program Category*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: program_category.body
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  body: prismic.KeyTextField;
+  body: prismic.RichTextField;
 }
 
 /**
@@ -1088,13 +1088,13 @@ interface ResourceCategoryDocumentData {
   /**
    * Body field in *Resource Category*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: resource_category.body
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  body: prismic.KeyTextField /**
+  body: prismic.RichTextField /**
    * Title field in *Resource Category*
    *
    * - **Field Type**: Text
