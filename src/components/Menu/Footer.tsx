@@ -29,11 +29,19 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
             <div className="flex flex-col items-center md:items-start">
               <h4 className="mb-6">Follow Us</h4>
               <div className="flex flex-row md:flex-col justify-center items-center md:items-start gap-6 ">
-                <span className="flex flex-row gap-4 items-center">
-                  <FaInstagram size={40} />@{footerData?.instagram_handle}
+                <span className="flex flex-row gap-4 items-center ">
+                  <FaInstagram size={35} />
+                  <PrismicNextLink
+                    field={footerData?.instagram}
+                    className="text-base md:text-bodyLarge"
+                  />
                 </span>
                 <span className="flex flex-row gap-4 items-center">
-                  <FaFacebook size={40} />/{footerData?.facebook_handle}
+                  <FaFacebook size={35} />
+                  <PrismicNextLink
+                    field={footerData?.facebook}
+                    className="text-base md:text-bodyLarge"
+                  />
                 </span>
               </div>
             </div>
@@ -43,11 +51,19 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
       </nav>
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-row gap-6 md:gap-10">
-          <PrismicNextLink field={footerData?.policy_link} />
-          <PrismicNextLink field={footerData?.helpline} />
+          <PrismicNextLink
+            field={footerData?.policy_link}
+            className="text-base md:text-bodyLarge"
+          />
+          <PrismicNextLink
+            field={footerData?.helpline}
+            className="text-base md:text-bodyLarge"
+          />
         </div>
 
-        <p className="mt-6 text-center">{footerData?.copyright}</p>
+        <p className="mt-6 text-center text-base md:text-bodyLarge">
+          {footerData?.copyright}
+        </p>
       </div>
     </footer>
   );
