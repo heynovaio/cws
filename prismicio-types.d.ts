@@ -467,6 +467,17 @@ interface NewsletterSignupDocumentData {
   subtitle: prismic.RichTextField;
 
   /**
+   * signup_success_message field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.signup_success_message
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  signup_success_message: prismic.KeyTextField;
+
+  /**
    * Form Field field in *Newsletter SignUp*
    *
    * - **Field Type**: Group
@@ -3623,14 +3634,14 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig
+      options?: prismic.ClientConfig,
     ): prismic.Client<AllDocumentTypes>;
   }
 
   interface CreateWriteClient {
     (
       repositoryNameOrEndpoint: string,
-      options: prismic.WriteClientConfig
+      options: prismic.WriteClientConfig,
     ): prismic.WriteClient<AllDocumentTypes>;
   }
 
