@@ -30,7 +30,7 @@
           "select": null,
           "allowTargetBlank": true,
           "allowText": true,
-          "repeat": true
+          "repeat": false
         }
       },
       "helpline": {
@@ -51,18 +51,26 @@
           "placeholder": ""
         }
       },
-      "instagram_handle": {
-        "type": "Text",
+      "instagram": {
+        "type": "Link",
         "config": {
-          "label": "Instagram Handle",
-          "placeholder": ""
+          "label": "Instagram",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
         }
       },
-      "facebook_handle": {
-        "type": "Text",
+      "facebook": {
+        "type": "Link",
         "config": {
-          "label": "Facebook Handle",
-          "placeholder": ""
+          "label": "Facebook",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
         }
       },
       "slices1": {
