@@ -2785,55 +2785,6 @@ export interface MenuPanelSliceDefaultPrimaryLinkWithParagraphItem {
 }
 
 /**
- * Item in *MenuPanel → MenuPanel - Accordion → Primary → Accordion*
- */
-export interface MenuPanelSliceMenuPanelAccordionPrimaryAccordionItem {
-  /**
-   * Menu Panel Title field in *MenuPanel → MenuPanel - Accordion → Primary → Accordion*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.Accordion[].menu_panel_title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  menu_panel_title: prismic.KeyTextField;
-
-  /**
-   * Body field in *MenuPanel → MenuPanel - Accordion → Primary → Accordion*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.Accordion[].body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Button field in *MenuPanel → MenuPanel - Accordion → Primary → Accordion*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.Accordion[].button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-
-  /**
-   * Link field in *MenuPanel → MenuPanel - Accordion → Primary → Accordion*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.Accordion[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-}
-
-/**
  * Primary content in *MenuPanel → Default → Primary*
  */
 export interface MenuPanelSliceDefaultPrimary {
@@ -2917,61 +2868,9 @@ export type MenuPanelSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Primary content in *MenuPanel → MenuPanel - Accordion → Primary*
- */
-export interface MenuPanelSliceMenuPanelAccordionPrimary {
-  /**
-   * Menu_Display field in *MenuPanel → MenuPanel - Accordion → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.menu_display
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  menu_display: prismic.KeyTextField;
-
-  /**
-   * Title field in *MenuPanel → MenuPanel - Accordion → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Accordion field in *MenuPanel → MenuPanel - Accordion → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menu_panel.menuPanelAccordion.primary.Accordion[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  Accordion: prismic.GroupField<
-    Simplify<MenuPanelSliceMenuPanelAccordionPrimaryAccordionItem>
-  >;
-}
-
-/**
- * MenuPanel - Accordion variation for MenuPanel Slice
- *
- * - **API ID**: `menuPanelAccordion`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type MenuPanelSliceMenuPanelAccordion = prismic.SharedSliceVariation<
-  "menuPanelAccordion",
-  Simplify<MenuPanelSliceMenuPanelAccordionPrimary>,
-  never
->;
-
-/**
  * Slice variation for *MenuPanel*
  */
-type MenuPanelSliceVariation =
-  | MenuPanelSliceDefault
-  | MenuPanelSliceMenuPanelAccordion;
+type MenuPanelSliceVariation = MenuPanelSliceDefault;
 
 /**
  * MenuPanel Shared Slice
@@ -4295,11 +4194,8 @@ declare module "@prismicio/client" {
       MenuPanelSliceDefaultPrimaryLinkGroupItem,
       MenuPanelSliceDefaultPrimaryLinkWithParagraphItem,
       MenuPanelSliceDefaultPrimary,
-      MenuPanelSliceMenuPanelAccordionPrimaryAccordionItem,
-      MenuPanelSliceMenuPanelAccordionPrimary,
       MenuPanelSliceVariation,
       MenuPanelSliceDefault,
-      MenuPanelSliceMenuPanelAccordion,
       MultiLinkColumnSlice,
       MultiLinkColumnSliceDefaultPrimary,
       MultiLinkColumnSliceVariation,
