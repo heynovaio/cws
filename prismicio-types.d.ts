@@ -293,8 +293,12 @@ interface MenusDocumentData {
    * - **Tab**: Footer
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */;
-  policy_link: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  policy_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
   >;
 
   /**
@@ -326,26 +330,38 @@ interface MenusDocumentData {
   copyright: prismic.KeyTextField;
 
   /**
-   * Instagram Handle field in *Menus*
+   * Instagram field in *Menus*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: menus.instagram_handle
+   * - **API ID Path**: menus.instagram
    * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  instagram_handle: prismic.KeyTextField;
+  instagram: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
 
   /**
-   * Facebook Handle field in *Menus*
+   * Facebook field in *Menus*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: menus.facebook_handle
+   * - **API ID Path**: menus.facebook
    * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  facebook_handle: prismic.KeyTextField;
+  facebook: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
 
   /**
    * Slice Zone field in *Menus*
@@ -3623,14 +3639,14 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig
+      options?: prismic.ClientConfig,
     ): prismic.Client<AllDocumentTypes>;
   }
 
   interface CreateWriteClient {
     (
       repositoryNameOrEndpoint: string,
-      options: prismic.WriteClientConfig
+      options: prismic.WriteClientConfig,
     ): prismic.WriteClient<AllDocumentTypes>;
   }
 
