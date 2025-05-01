@@ -39,5 +39,51 @@
 			}
 		},
 		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "programsCarousel",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "printed",
+				"type": "Text"
+			},
+			"content_card": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"content",
+								{
+									"key": "2b117e6d-79bb-4168-a45b-b6764510f38e",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			},
+			"all_link": {
+				"key": "bcce3c35-d7fd-4825-8bb2-fe3075c6b1e8",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

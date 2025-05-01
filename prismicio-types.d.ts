@@ -1743,11 +1743,11 @@ export type ContactInfoSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *ContentCarousel → Default → Primary → Content Card*
+ * Item in *ContentCarousel → Resources Carousel → Primary → Content Card*
  */
 export interface ContentCarouselSliceDefaultPrimaryContentCardItem {
   /**
-   * Content field in *ContentCarousel → Default → Primary → Content Card*
+   * Content field in *ContentCarousel → Resources Carousel → Primary → Content Card*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
@@ -1760,11 +1760,26 @@ export interface ContentCarouselSliceDefaultPrimaryContentCardItem {
 }
 
 /**
- * Primary content in *ContentCarousel → Default → Primary*
+ * Item in *ContentCarousel → Programs Carousel → Primary → Content Card*
+ */
+export interface ContentCarouselSliceProgramsCarouselPrimaryContentCardItem {
+  /**
+   * Content field in *ContentCarousel → Programs Carousel → Primary → Content Card*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.programsCarousel.primary.content_card[].content
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  content: prismic.ContentRelationshipField<"program_category">;
+}
+
+/**
+ * Primary content in *ContentCarousel → Resources Carousel → Primary*
  */
 export interface ContentCarouselSliceDefaultPrimary {
   /**
-   * Title field in *ContentCarousel → Default → Primary*
+   * Title field in *ContentCarousel → Resources Carousel → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: Title
@@ -1774,7 +1789,7 @@ export interface ContentCarouselSliceDefaultPrimary {
   title: prismic.KeyTextField;
 
   /**
-   * Content Card field in *ContentCarousel → Default → Primary*
+   * Content Card field in *ContentCarousel → Resources Carousel → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -1786,7 +1801,7 @@ export interface ContentCarouselSliceDefaultPrimary {
   >;
 
   /**
-   * All Link field in *ContentCarousel → Default → Primary*
+   * All Link field in *ContentCarousel → Resources Carousel → Primary*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
@@ -1797,7 +1812,7 @@ export interface ContentCarouselSliceDefaultPrimary {
 }
 
 /**
- * Default variation for ContentCarousel Slice
+ * Resources Carousel variation for ContentCarousel Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -1810,9 +1825,61 @@ export type ContentCarouselSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *ContentCarousel → Programs Carousel → Primary*
+ */
+export interface ContentCarouselSliceProgramsCarouselPrimary {
+  /**
+   * Title field in *ContentCarousel → Programs Carousel → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Title
+   * - **API ID Path**: content_carousel.programsCarousel.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Content Card field in *ContentCarousel → Programs Carousel → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.programsCarousel.primary.content_card[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  content_card: prismic.GroupField<
+    Simplify<ContentCarouselSliceProgramsCarouselPrimaryContentCardItem>
+  >;
+
+  /**
+   * All Link field in *ContentCarousel → Programs Carousel → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.programsCarousel.primary.all_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  all_link: prismic.ContentRelationshipField<"page">;
+}
+
+/**
+ * Programs Carousel variation for ContentCarousel Slice
+ *
+ * - **API ID**: `programsCarousel`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentCarouselSliceProgramsCarousel = prismic.SharedSliceVariation<
+  "programsCarousel",
+  Simplify<ContentCarouselSliceProgramsCarouselPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *ContentCarousel*
  */
-type ContentCarouselSliceVariation = ContentCarouselSliceDefault;
+type ContentCarouselSliceVariation =
+  | ContentCarouselSliceDefault
+  | ContentCarouselSliceProgramsCarousel;
 
 /**
  * ContentCarousel Shared Slice
@@ -3710,8 +3777,11 @@ declare module "@prismicio/client" {
       ContentCarouselSlice,
       ContentCarouselSliceDefaultPrimaryContentCardItem,
       ContentCarouselSliceDefaultPrimary,
+      ContentCarouselSliceProgramsCarouselPrimaryContentCardItem,
+      ContentCarouselSliceProgramsCarouselPrimary,
       ContentCarouselSliceVariation,
       ContentCarouselSliceDefault,
+      ContentCarouselSliceProgramsCarousel,
       ContentColumnSlice,
       ContentColumnSliceDefaultPrimaryColumnItem,
       ContentColumnSliceDefaultPrimary,

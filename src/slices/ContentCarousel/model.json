@@ -6,7 +6,7 @@
   "variations": [
     {
       "id": "default",
-      "name": "Default",
+      "name": "Resources Carousel",
       "docURL": "...",
       "version": "initial",
       "description": "Default",
@@ -34,6 +34,55 @@
                   "customtypes": [
                     "resource_category",
                     "offerings_category"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "all_link": {
+          "type": "Link",
+          "config": {
+            "label": "All Link",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              "page"
+            ]
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "programsCarousel",
+      "name": "Programs Carousel",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "Title"
+          }
+        },
+        "content_card": {
+          "type": "Group",
+          "config": {
+            "label": "Content Card",
+            "repeat": true,
+            "fields": {
+              "content": {
+                "type": "Link",
+                "config": {
+                  "label": "Content",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "program_category"
                   ]
                 }
               }
