@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
     <header>
       <nav
         aria-label="Main Nav"
-        className="flex bg-menu-purple justify-between items-center px-5 lg:py-2 py-1"
+        className="flex  justify-between items-center px-5 lg:py-2 py-1"
       >
         <PrismicNextLink
           className="flex "
