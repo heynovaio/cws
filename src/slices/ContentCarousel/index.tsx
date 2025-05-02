@@ -18,6 +18,7 @@ import Carousel, {
 import "react-multi-carousel/lib/styles.css";
 
 import {
+  Button,
   Section,
   Container,
   ContentBox,
@@ -237,6 +238,21 @@ const ContentCarousel = ({
             </div>
           ))}
         </Carousel>
+        {slice.primary.redirect_button?.[0] && (
+          <div className="mt-10">
+            <Button
+              key={slice.id}
+              buttonType="primary"
+              label={
+                typeof slice.primary.redirect_button[0]?.url === "object" &&
+                "text" in slice.primary.redirect_button[0]?.url
+                  ? slice.primary.redirect_button[0]?.url.text
+                  : "Learn More"
+              }
+              buttonLink={slice.primary.redirect_button[0]?.url ?? "#"}
+            />
+          </div>
+        )}
       </Container>
     </Section>
   );
