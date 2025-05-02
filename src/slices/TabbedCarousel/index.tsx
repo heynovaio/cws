@@ -1,10 +1,5 @@
 "use client";
-import {
-  ContentBox,
-  Section,
-  Container,
-  CarouselButton,
-} from "@/components";
+import { ContentBox, Section, Container, CarouselButton } from "@/components";
 import { LongCard } from "@/components/Cards";
 import { components } from "@/utils";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
