@@ -53,19 +53,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
 
   return (
     <section>
-      <Container
-        className="
-    bg-gradient-dark 
-    rounded-[1.5rem] 
-    border 
-    border-neon-violet 
-    pt-[1.875rem] 
-    pb-[4.375rem] 
-    gap-[0.625rem] 
-    backdrop-blur-[16px]
-    shadow-[0_0_30px_0_#630FF9CC]
-  "
-      >
+      <Container className="newsletter-signup">
         {" "}
         <div className="p-8 max-w-4xl mx-auto">
           <div className="text-center mb-12">
@@ -73,7 +61,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
               field={title}
               components={{
                 heading2: ({ children }) => (
-                  <h2 className="text-[46px] font-extrabold text-white text-center leading-tight">
+                  <h2 className="text-[2.875rem] font-extrabold text-white text-center leading-tight">
                     {children}
                   </h2>
                 ),
@@ -106,7 +94,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                         id={fieldName}
                         name={fieldName}
                         type="checkbox"
-                        className="h-7 w-7 border border-black rounded"
+                        className="min-w-[1.5rem] min-h-[1.5rem] h-7 w-7 border border-black rounded"
                         required
                       />
                       <label
