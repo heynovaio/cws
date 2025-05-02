@@ -8,6 +8,7 @@ import {
 } from "../../../prismicio-types";
 import { Header } from "../Menu/Header";
 import Partners from "../Menu/Partners";
+import NewsletterSignupBanner from "../NewsletterSignup/NewsletterSignup";
 import { Container } from "./Container";
 
 interface LayoutProps {
@@ -16,6 +17,7 @@ interface LayoutProps {
   global: GlobalsDocumentData;
   children: ReactNode;
   partners?: PartnersDocumentData;
+  include_newsletter_sign_up_banner: boolean;
 }
 
 export const Layout = ({
@@ -24,6 +26,7 @@ export const Layout = ({
   global,
   partners,
   children,
+  include_newsletter_sign_up_banner,
 }: LayoutProps) => {
   return (
     <div>
@@ -34,6 +37,9 @@ export const Layout = ({
       </main>
 
       <Container>
+        {include_newsletter_sign_up_banner && (
+          <NewsletterSignupBanner lang={"en-ca"} />
+        )}
         {partners && (
           <Partners
             title={partners.title}

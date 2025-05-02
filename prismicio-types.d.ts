@@ -14,6 +14,18 @@ type CampaignPageDocumentDataSlicesSlice =
  */
 interface CampaignPageDocumentData {
   /**
+   * Include Newsletter Sign Up Banner field in *Campaign Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: campaign_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Campaign Page*
    *
    * - **Field Type**: Slice Zone
@@ -481,6 +493,17 @@ interface NewsletterSignupDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   subtitle: prismic.RichTextField;
+
+  /**
+   * signup_success_message field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.signup_success_message
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  signup_success_message: prismic.KeyTextField;
 
   /**
    * Form Field field in *Newsletter SignUp*

@@ -24,6 +24,13 @@
           "multi": "paragraph,strong,em"
         }
       },
+      "signup_success_message": {
+        "type": "Text",
+        "config": {
+          "label": "signup_success_message",
+          "placeholder": ""
+        }
+      },
       "form_field": {
         "type": "Group",
         "config": {
