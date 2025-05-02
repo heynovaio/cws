@@ -43,7 +43,6 @@ export const Button = ({
     default:
       buttonStyle = "btn btn-primary";
   }
-  if (!buttonLink || !label) return null;
 
   if (as === "button") {
     return (
@@ -52,13 +51,15 @@ export const Button = ({
         className={`flex flex-row w-fit items-center gap-2 hover:gap-4 ${styling} ${buttonStyle} ${linkButtonColorClass}`}
         onClick={onClick}
       >
-        {label}
+        {label || "Submit"}
         {icon && (
           <span className="flex items-center justify-center">{icon}</span>
         )}
       </button>
     );
   }
+
+  if (!buttonLink || !label) return null;
 
   return (
     <PrismicNextLink
