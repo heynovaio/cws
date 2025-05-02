@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo } from "react";
 import { useProgramCategoryData } from "@/hooks";
-import { components } from "@/utils";
+import { componentsTextSmall } from "@/utils";
 import GetAllPrograms from "@/utils/useGetAllPrograms";
 import { asText, Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
@@ -53,7 +53,7 @@ export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
           key={index}
           title={asText(item.data.title)}
           content={
-            <PrismicRichText field={item.data.body} components={components} />
+            <PrismicRichText field={item.data.body} components={componentsTextSmall} />
           }
           image={item.data.image}
           category={categoryName as string}

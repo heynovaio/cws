@@ -60,6 +60,7 @@ export const DefaultCard = ({
       )}
       <ContentBox
         title={title}
+        titleLevel={3}
         content={content}
         buttons={buttons}
         width="full"

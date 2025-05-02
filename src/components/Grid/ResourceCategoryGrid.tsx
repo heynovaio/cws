@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useResourceCategoryData } from "@/hooks";
-import { components } from "@/utils";
+import { componentsTextSmall } from "@/utils";
 import { asText, Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Link from "next/link";
@@ -52,7 +52,7 @@ export const ResourceCategoryGrid = ({ slice }: ResourceCategoryGridProps) => {
           key={index}
           title={asText(item.data.title)}
           content={
-            <PrismicRichText field={item.data.body} components={components} />
+            <PrismicRichText field={item.data.body} components={componentsTextSmall} />
           }
           image={item.data.image}
           category={categoryName as string}

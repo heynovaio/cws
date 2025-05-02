@@ -16,7 +16,9 @@ interface ContentBoxProps {
   titleComponents?: {
     [key: string]: React.FC<{ children: ReactNode }>;
   };
+  titleLevel?: 2 | 3; // New prop to control heading level
 }
+
 export const ContentBox: React.FC<ContentBoxProps> = ({
   children,
   title,
@@ -27,9 +29,18 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
   width = "full",
   containerClassName,
   titleComponents,
+  titleLevel = 2,
   ...props
 }) => {
   const widthClassName = getWidthClassNames(width);
+
+  const TitleHeading = ({ children }: { children: ReactNode }) => {
+    return titleLevel === 2 ? (
+      <h2 className={titleClassName}>{children}</h2>
+    ) : (
+      <h3 className={titleClassName}>{children}</h3>
+    );
+  };
 
   return (
     <div
@@ -45,14 +56,16 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
         <div className={titleClassName}>
           {tagline && <div className="text-bodyLarge">{tagline}</div>}
           {typeof title === "string" ? (
-            <h3 className={titleClassName}>{title}</h3>
+            <TitleHeading>{title}</TitleHeading>
           ) : (
             <PrismicRichText field={title} components={titleComponents} />
           )}
         </div>
         {content && <div>{content}</div>}
       </div>
-      {buttons && buttons.length > 0 && <div className="flex gap-6">{buttons}</div>}
+      {buttons && buttons.length > 0 && (
+        <div className="flex gap-6">{buttons}</div>
+      )}
       {children}
     </div>
   );
