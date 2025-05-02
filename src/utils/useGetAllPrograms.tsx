@@ -6,7 +6,6 @@ const fetchData = async (lang: string) => {
   const client = createClient();
   const response = await client.getAllByType("program_page", { lang });
   return response as ProgramPageDocument[];
-
 };
 
 const GetAllPrograms = (lang: string) => {

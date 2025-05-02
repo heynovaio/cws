@@ -29,13 +29,27 @@
 					}
 				]
 			},
-			"all_link": {
-				"key": "bcce3c35-d7fd-4825-8bb2-fe3075c6b1e8",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "DocumentLink",
-					"id": "mock_document_id"
-				}
+			"redirect_button": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"url",
+								{
+									"key": "4bc7e906-5661-43bb-bc95-9d36453a7ef8",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://twitter.com",
+										"text": "girl"
+									}
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": [
@@ -75,13 +89,27 @@
 					}
 				]
 			},
-			"all_link": {
-				"key": "ed20b677-fc6b-4526-931d-b7e39f3ceb3c",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "DocumentLink",
-					"id": "mock_document_id"
-				}
+			"redirect_button": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"url",
+								{
+									"key": "2ab91bfc-818c-4951-a955-8f49117110c1",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "aid"
+									}
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": [

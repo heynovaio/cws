@@ -39,15 +39,24 @@
             }
           }
         },
-        "all_link": {
-          "type": "Link",
+        "redirect_button": {
+          "type": "Group",
           "config": {
-            "label": "All Link",
-            "select": "document",
+            "label": "redirect_button",
             "repeat": false,
-            "customtypes": [
-              "page"
-            ]
+            "fields": {
+              "url": {
+                "type": "Link",
+                "config": {
+                  "label": "url",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              }
+            }
           }
         }
       },
@@ -88,15 +97,24 @@
             }
           }
         },
-        "all_link": {
-          "type": "Link",
+        "redirect_button": {
+          "type": "Group",
           "config": {
-            "label": "All Link",
-            "select": "document",
+            "label": "redirect_button",
             "repeat": false,
-            "customtypes": [
-              "page"
-            ]
+            "fields": {
+              "url": {
+                "type": "Link",
+                "config": {
+                  "label": "url",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              }
+            }
           }
         }
       },
