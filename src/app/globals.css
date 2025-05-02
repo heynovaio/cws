@@ -130,7 +130,7 @@
     }
   }
   .text-link {
-    @apply underline underline-offset-2
+    @apply underline underline-offset-4
       hover:text-ultra-pink;
   }
 }
@@ -244,5 +244,4 @@
 
 .hover-ultrapink:hover {
   color: black !important;
-
 }

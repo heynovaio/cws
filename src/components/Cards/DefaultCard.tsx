@@ -1,8 +1,6 @@
-import { ImageField, LinkField, RichTextField } from "@prismicio/client";
+import { ImageField, RichTextField } from "@prismicio/client";
 import React, { ReactNode } from "react";
 import { ContentBox } from "../ContentBox/ContentBox";
-import { PrismicNextLink } from "@prismicio/next";
-import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 
 /**
@@ -12,9 +10,9 @@ import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 interface DefaultCardProps {
   title: string | RichTextField;
   content?: ReactNode;
-  buttons?: LinkField[];
+  buttons?: ReactNode[] | undefined;
   image?: ImageField;
-  category?: string[];
+  category?: string;
   cardType?: "program" | "resource" | string;
 }
 
@@ -26,16 +24,13 @@ export const DefaultCard = ({
   buttons,
   cardType,
 }: DefaultCardProps) => {
-  const buttonsExist = buttons && buttons.length > 0;
-
   let cardBackground;
   let categoryChipColor;
 
   switch (cardType) {
     case "program":
       cardBackground = "card-gradient";
-      categoryChipColor =
-        "bg-light-violet text-midnight border-midnight";
+      categoryChipColor = "bg-light-violet text-midnight border-midnight";
       break;
     case "resource":
       cardBackground = "card-white";
@@ -50,49 +45,24 @@ export const DefaultCard = ({
     <div className={`flex flex-col gap-5 ${cardBackground}`}>
       <ResponsiveImage
         image={image}
-        imageHeightClassName="h-full object-cover"
-        containerClassName="w-full max-h-[215px] h-[215px] h-full"
+        imageHeightClassName="h-full w-full"
+        containerClassName="w-full max-h-[215px] h-full"
       />
       {/* TODO: Turn these into links once the filter pages are made */}
       {category && (
         <div className="flex gap-2">
-          {category.map((item, index) => (
-            <span
-              key={index}
-              className={`self-start rounded-full px-2 py-1 items-center font-accent font-medium border-[1.5px] ${categoryChipColor}`}
-            >
-              {item}
-            </span>
-          ))}
+          <span
+            className={`self-start rounded-full px-2 py-1 items-center font-accent font-medium border-[1.5px] ${categoryChipColor}`}
+          >
+            {category}
+          </span>
         </div>
       )}
       <ContentBox
         title={title}
+        titleLevel={3}
         content={content}
-        buttons={
-          buttonsExist
-            ? [
-                <div
-                  className="flex flex-wrap justify-start gap-8"
-                  key="buttons"
-                >
-                  {buttons.map(
-                    (item, index) =>
-                      item.text && (
-                        <PrismicNextLink
-                          key={index}
-                          field={item}
-                          className="btn px-0 flex items-center gap-2 btn-text underline"
-                        >
-                          {item.text}
-                          <HiOutlineArrowLongRight className="h-10 w-10" />
-                        </PrismicNextLink>
-                      )
-                  )}
-                </div>,
-              ]
-            : []
-        }
+        buttons={buttons}
         width="full"
       />
     </div>
