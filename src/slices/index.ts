@@ -17,6 +17,7 @@ export const components = {
   simple_text: dynamic(() => import("./SimpleText")),
   single_link: dynamic(() => import("./SingleLink")),
   tabbed_carousel: dynamic(() => import("./TabbedCarousel")),
+  tag_category: dynamic(() => import("./TagCategory")),
   team_list: dynamic(() => import("./TeamList")),
   testimonials: dynamic(() => import("./Testimonials")),
   tile_grid: dynamic(() => import("./TileGrid")),

@@ -3331,6 +3331,72 @@ export type TabbedCarouselSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *TagCategory → Default → Primary*
+ */
+export interface TagCategorySliceDefaultPrimary {
+  /**
+   * Background Color field in *TagCategory → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: tag_category.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Title field in *TagCategory → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tag_category.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *TagCategory → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tag_category.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for TagCategory Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TagCategorySliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TagCategorySliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TagCategory*
+ */
+type TagCategorySliceVariation = TagCategorySliceDefault;
+
+/**
+ * TagCategory Shared Slice
+ *
+ * - **API ID**: `tag_category`
+ * - **Description**: TagCategory
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TagCategorySlice = prismic.SharedSlice<
+  "tag_category",
+  TagCategorySliceVariation
+>;
+
+/**
  * Item in *TeamList → Default → Primary → Team Member*
  */
 export interface TeamListSliceDefaultPrimaryTeamMemberItem {
@@ -3875,6 +3941,10 @@ declare module "@prismicio/client" {
       TabbedCarouselSliceDefaultPrimary,
       TabbedCarouselSliceVariation,
       TabbedCarouselSliceDefault,
+      TagCategorySlice,
+      TagCategorySliceDefaultPrimary,
+      TagCategorySliceVariation,
+      TagCategorySliceDefault,
       TeamListSlice,
       TeamListSliceDefaultPrimaryTeamMemberItem,
       TeamListSliceDefaultPrimary,
