@@ -43,6 +43,7 @@ export const Button = ({
     default:
       buttonStyle = "btn btn-primary";
   }
+  if (!buttonLink || !label) return null;
 
   if (as === "button") {
     return (

@@ -9,6 +9,7 @@ import { components } from "@/slices";
 import React from "react";
 import { Intro, Layout } from "@/components";
 import { getLocales } from "@/utils";
+import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -59,22 +60,24 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const locales = await getLocales(page, client);
 
   return (
-    <Layout
-      locales={locales}
-      global={global.data}
-      menus={menus.data}
-      partners={partners.data}
-      include_newsletter_sign_up_banner={
-        page.data.include_newsletter_sign_up_banner
-      }
-    >
-      <Intro type="resource" pageData={page.data} />
-      <SliceZone
-        slices={page.data.slices}
-        components={components}
-        context={{ lang: "en-ca" }}
-      />
-    </Layout>
+    <CategoryFilterProvider>
+      <Layout
+        locales={locales}
+        global={global.data}
+        menus={menus.data}
+        partners={partners.data}
+        include_newsletter_sign_up_banner={
+          page.data.include_newsletter_sign_up_banner
+        }
+      >
+        <Intro type="resource" pageData={page.data} />
+        <SliceZone
+          slices={page.data.slices}
+          components={components}
+          context={{ lang: "en-ca" }}
+        />
+      </Layout>
+    </CategoryFilterProvider>
   );
 }
 

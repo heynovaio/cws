@@ -829,13 +829,13 @@ interface ProgramCategoryDocumentData {
   /**
    * Body field in *Program Category*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: program_category.body
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  body: prismic.KeyTextField;
+  body: prismic.RichTextField;
 }
 
 /**
@@ -1111,13 +1111,13 @@ interface ResourceCategoryDocumentData {
   /**
    * Body field in *Resource Category*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: resource_category.body
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  body: prismic.KeyTextField /**
+  body: prismic.RichTextField /**
    * Title field in *Resource Category*
    *
    * - **Field Type**: Text
@@ -1766,76 +1766,175 @@ export type ContactInfoSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *ContentCarousel → Default → Primary → Content Card*
+ * Item in *ContentCarousel → Programs Carousel → Primary → Content Card*
  */
-export interface ContentCarouselSliceDefaultPrimaryContentCardItem {
+export interface ContentCarouselSliceProgramsCarouselPrimaryContentCardItem {
   /**
-   * Content field in *ContentCarousel → Default → Primary → Content Card*
+   * Content field in *ContentCarousel → Programs Carousel → Primary → Content Card*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: content_carousel.default.primary.content_card[].content
+   * - **API ID Path**: content_carousel.programsCarousel.primary.content_card[].content
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  content: prismic.ContentRelationshipField<
-    "resource_category" | "offerings_category"
-  >;
+  content: prismic.ContentRelationshipField<"program_page">;
 }
 
 /**
- * Primary content in *ContentCarousel → Default → Primary*
+ * Item in *ContentCarousel → Programs Carousel → Primary → redirect_button*
  */
-export interface ContentCarouselSliceDefaultPrimary {
+export interface ContentCarouselSliceProgramsCarouselPrimaryRedirectButtonItem {
   /**
-   * Title field in *ContentCarousel → Default → Primary*
+   * url field in *ContentCarousel → Programs Carousel → Primary → redirect_button*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.programsCarousel.primary.redirect_button[].url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *ContentCarousel → Resource Carousel → Primary → Content Card*
+ */
+export interface ContentCarouselSliceResourceCarouselPrimaryContentCardItem {
+  /**
+   * Content field in *ContentCarousel → Resource Carousel → Primary → Content Card*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.content_card[].content
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  content: prismic.ContentRelationshipField<"resource_page">;
+}
+
+/**
+ * Item in *ContentCarousel → Resource Carousel → Primary → redirect_button*
+ */
+export interface ContentCarouselSliceResourceCarouselPrimaryRedirectButtonItem {
+  /**
+   * url field in *ContentCarousel → Resource Carousel → Primary → redirect_button*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.redirect_button[].url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *ContentCarousel → Programs Carousel → Primary*
+ */
+export interface ContentCarouselSliceProgramsCarouselPrimary {
+  /**
+   * Title field in *ContentCarousel → Programs Carousel → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: Title
-   * - **API ID Path**: content_carousel.default.primary.title
+   * - **API ID Path**: content_carousel.programsCarousel.primary.title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
 
   /**
-   * Content Card field in *ContentCarousel → Default → Primary*
+   * Content Card field in *ContentCarousel → Programs Carousel → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: content_carousel.default.primary.content_card[]
+   * - **API ID Path**: content_carousel.programsCarousel.primary.content_card[]
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   content_card: prismic.GroupField<
-    Simplify<ContentCarouselSliceDefaultPrimaryContentCardItem>
+    Simplify<ContentCarouselSliceProgramsCarouselPrimaryContentCardItem>
   >;
 
   /**
-   * All Link field in *ContentCarousel → Default → Primary*
+   * redirect_button field in *ContentCarousel → Programs Carousel → Primary*
    *
-   * - **Field Type**: Content Relationship
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: content_carousel.default.primary.all_link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **API ID Path**: content_carousel.programsCarousel.primary.redirect_button[]
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  all_link: prismic.ContentRelationshipField<"page">;
+  redirect_button: prismic.GroupField<
+    Simplify<ContentCarouselSliceProgramsCarouselPrimaryRedirectButtonItem>
+  >;
 }
 
 /**
- * Default variation for ContentCarousel Slice
+ * Programs Carousel variation for ContentCarousel Slice
  *
- * - **API ID**: `default`
+ * - **API ID**: `programsCarousel`
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type ContentCarouselSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<ContentCarouselSliceDefaultPrimary>,
+export type ContentCarouselSliceProgramsCarousel = prismic.SharedSliceVariation<
+  "programsCarousel",
+  Simplify<ContentCarouselSliceProgramsCarouselPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ContentCarousel → Resource Carousel → Primary*
+ */
+export interface ContentCarouselSliceResourceCarouselPrimary {
+  /**
+   * Title field in *ContentCarousel → Resource Carousel → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Title
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Content Card field in *ContentCarousel → Resource Carousel → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.content_card[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  content_card: prismic.GroupField<
+    Simplify<ContentCarouselSliceResourceCarouselPrimaryContentCardItem>
+  >;
+
+  /**
+   * redirect_button field in *ContentCarousel → Resource Carousel → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.redirect_button[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  redirect_button: prismic.GroupField<
+    Simplify<ContentCarouselSliceResourceCarouselPrimaryRedirectButtonItem>
+  >;
+}
+
+/**
+ * Resource Carousel variation for ContentCarousel Slice
+ *
+ * - **API ID**: `resourceCarousel`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentCarouselSliceResourceCarousel = prismic.SharedSliceVariation<
+  "resourceCarousel",
+  Simplify<ContentCarouselSliceResourceCarouselPrimary>,
   never
 >;
 
 /**
  * Slice variation for *ContentCarousel*
  */
-type ContentCarouselSliceVariation = ContentCarouselSliceDefault;
+type ContentCarouselSliceVariation =
+  | ContentCarouselSliceProgramsCarousel
+  | ContentCarouselSliceResourceCarousel;
 
 /**
  * ContentCarousel Shared Slice
@@ -3731,10 +3830,15 @@ declare module "@prismicio/client" {
       ContactInfoSliceVariation,
       ContactInfoSliceDefault,
       ContentCarouselSlice,
-      ContentCarouselSliceDefaultPrimaryContentCardItem,
-      ContentCarouselSliceDefaultPrimary,
+      ContentCarouselSliceProgramsCarouselPrimaryContentCardItem,
+      ContentCarouselSliceProgramsCarouselPrimaryRedirectButtonItem,
+      ContentCarouselSliceProgramsCarouselPrimary,
+      ContentCarouselSliceResourceCarouselPrimaryContentCardItem,
+      ContentCarouselSliceResourceCarouselPrimaryRedirectButtonItem,
+      ContentCarouselSliceResourceCarouselPrimary,
       ContentCarouselSliceVariation,
-      ContentCarouselSliceDefault,
+      ContentCarouselSliceProgramsCarousel,
+      ContentCarouselSliceResourceCarousel,
       ContentColumnSlice,
       ContentColumnSliceDefaultPrimaryColumnItem,
       ContentColumnSliceDefaultPrimary,
