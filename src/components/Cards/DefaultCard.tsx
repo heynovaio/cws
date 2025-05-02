@@ -64,6 +64,7 @@ export const DefaultCard = ({
         content={content}
         buttons={buttons}
         width="full"
+        containerClassName="justify-between flex-grow"
       />
     </div>
   );
