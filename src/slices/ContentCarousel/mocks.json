@@ -98,8 +98,8 @@
 							[
 								"url",
 								{
-									"__TYPE__": "LinkContent",
 									"key": "2ab91bfc-818c-4951-a955-8f49117110c1",
+									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "ExternalLink",
 										"url": "http://google.com",
