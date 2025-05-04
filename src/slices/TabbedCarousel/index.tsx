@@ -92,7 +92,6 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
           width="standard"
           containerClassName="text-center gap-4"
         />
-
         <TabGroup onChange={handleTabChange}>
           <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
             <div className="w-10"></div>
