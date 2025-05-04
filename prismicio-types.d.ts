@@ -3169,11 +3169,11 @@ export type SingleLinkSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+ * Item in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
  */
 export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   /**
-   * Tab Label field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Tab Label field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -3183,7 +3183,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   tab_label: prismic.KeyTextField;
 
   /**
-   * Card Title field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Title field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3193,7 +3193,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   card_title: prismic.RichTextField;
 
   /**
-   * Card Description field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Description field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3203,7 +3203,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   card_description: prismic.RichTextField;
 
   /**
-   * Card Image field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Image field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -3213,7 +3213,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   card_image: prismic.ImageField<never>;
 
   /**
-   * Card Button field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Button field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -3225,7 +3225,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   >;
 
   /**
-   * Card Link field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Link field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -3235,54 +3235,192 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   card_link: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
+}
+
+/**
+ * Item in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+ */
+export interface TabbedCarouselSliceTabbedCarouselCampaignPrimaryTabItem {
+  /**
+   * Tab Label field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].tab_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tab_label: prismic.KeyTextField;
 
   /**
-   * Audio Media (Optional) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Title field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_title: prismic.RichTextField;
+
+  /**
+   * Card Description field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_description: prismic.RichTextField;
+
+  /**
+   * Card Image field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  card_image: prismic.ImageField<never>;
+
+  /**
+   * Card Button field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Card Link field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Audio Media field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
    *
    * - **Field Type**: Link to Media
    * - **Placeholder**: *None*
-   * - **API ID Path**: tabbed_carousel.default.primary.tab[].audio_media
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].audio_media
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   audio_media: prismic.LinkToMediaField<prismic.FieldState, never>;
 
   /**
-   * Audio Media Alt Text (Optional) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Audio Media Alt Text (Optional) field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: tabbed_carousel.default.primary.tab[].audio_media_alt_text
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].audio_media_alt_text
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   audio_media_alt_text: prismic.KeyTextField;
 
   /**
-   * Image Media (Campaign Variant) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Image Media (Campaign Variant) field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: tabbed_carousel.default.primary.tab[].image_media
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].image_media
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image_media: prismic.ImageField<never>;
 
   /**
-   * Rich Text (Campaign Variant) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Rich Text (Campaign Variant) field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: tabbed_carousel.default.primary.tab[].rich_text
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].rich_text
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   rich_text: prismic.RichTextField;
 }
 
 /**
- * Primary content in *TabbedCarousel → TabbedCarousel → Primary*
+ * Item in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+ */
+export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem {
+  /**
+   * Tab Label field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].tab_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tab_label: prismic.KeyTextField;
+
+  /**
+   * Card Title field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_title: prismic.RichTextField;
+
+  /**
+   * Card Description field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_description: prismic.RichTextField;
+
+  /**
+   * Card Image field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  card_image: prismic.ImageField<never>;
+
+  /**
+   * Card Button field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Card Link field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+}
+
+/**
+ * Primary content in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
  */
 export interface TabbedCarouselSliceDefaultPrimary {
   /**
-   * TItle field in *TabbedCarousel → TabbedCarousel → Primary*
+   * Title field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3292,7 +3430,7 @@ export interface TabbedCarouselSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
-   * Body field in *TabbedCarousel → TabbedCarousel → Primary*
+   * Body field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3302,18 +3440,7 @@ export interface TabbedCarouselSliceDefaultPrimary {
   body: prismic.RichTextField;
 
   /**
-   * Variant field in *TabbedCarousel → TabbedCarousel → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: Long Card
-   * - **API ID Path**: tabbed_carousel.default.primary.variant
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  variant: prismic.SelectField<"Long Card" | "Campaign Card", "filled">;
-
-  /**
-   * Tab field in *TabbedCarousel → TabbedCarousel → Primary*
+   * Tab field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -3324,7 +3451,7 @@ export interface TabbedCarouselSliceDefaultPrimary {
 }
 
 /**
- * TabbedCarousel variation for TabbedCarousel Slice
+ * TabbedCarousel - Card per Tab variation for TabbedCarousel Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -3337,9 +3464,114 @@ export type TabbedCarouselSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
+ */
+export interface TabbedCarouselSliceTabbedCarouselCampaignPrimary {
+  /**
+   * Title field in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Tab field in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tab: prismic.GroupField<
+    Simplify<TabbedCarouselSliceTabbedCarouselCampaignPrimaryTabItem>
+  >;
+}
+
+/**
+ * TabbedCarousel - Campaign variation for TabbedCarousel Slice
+ *
+ * - **API ID**: `tabbedCarouselCampaign`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabbedCarouselSliceTabbedCarouselCampaign =
+  prismic.SharedSliceVariation<
+    "tabbedCarouselCampaign",
+    Simplify<TabbedCarouselSliceTabbedCarouselCampaignPrimary>,
+    never
+  >;
+
+/**
+ * Primary content in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+ */
+export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimary {
+  /**
+   * Title field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Tab field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tab: prismic.GroupField<
+    Simplify<TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem>
+  >;
+}
+
+/**
+ * TabbedCarousel - MultiCard variation for TabbedCarousel Slice
+ *
+ * - **API ID**: `tabbedCarouselMultiCard`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabbedCarouselSliceTabbedCarouselMultiCard =
+  prismic.SharedSliceVariation<
+    "tabbedCarouselMultiCard",
+    Simplify<TabbedCarouselSliceTabbedCarouselMultiCardPrimary>,
+    never
+  >;
+
+/**
  * Slice variation for *TabbedCarousel*
  */
-type TabbedCarouselSliceVariation = TabbedCarouselSliceDefault;
+type TabbedCarouselSliceVariation =
+  | TabbedCarouselSliceDefault
+  | TabbedCarouselSliceTabbedCarouselCampaign
+  | TabbedCarouselSliceTabbedCarouselMultiCard;
 
 /**
  * TabbedCarousel Shared Slice
@@ -3962,12 +4194,18 @@ declare module "@prismicio/client" {
       TabbedCarouselSlice,
       TabbedCarouselSliceDefaultPrimaryTabItem,
       TabbedCarouselSliceDefaultPrimary,
+      TabbedCarouselSliceTabbedCarouselCampaignPrimaryTabItem,
+      TabbedCarouselSliceTabbedCarouselCampaignPrimary,
+      TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem,
+      TabbedCarouselSliceTabbedCarouselMultiCardPrimary,
       TabbedCarouselSliceVariation,
       TabbedCarouselSliceDefault,
       TagCategorySlice,
       TagCategorySliceDefaultPrimary,
       TagCategorySliceVariation,
       TagCategorySliceDefault,
+      TabbedCarouselSliceTabbedCarouselCampaign,
+      TabbedCarouselSliceTabbedCarouselMultiCard,
       TeamListSlice,
       TeamListSliceDefaultPrimaryTeamMemberItem,
       TeamListSliceDefaultPrimary,
