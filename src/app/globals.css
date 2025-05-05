@@ -290,3 +290,13 @@
     box-shadow: 0 0 40px 0 #630ff9cc;
   }
 }
+
+.footer-header {
+  @apply text-base md:text-[1.625rem]  md:font-bold;
+}
+
+.footer-links {
+  a {
+    @apply text-base;
+  }
+}

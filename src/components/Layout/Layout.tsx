@@ -10,6 +10,7 @@ import { Header } from "../Menu/Header";
 import Partners from "../Menu/Partners";
 import NewsletterSignupBanner from "../NewsletterSignup/NewsletterSignup";
 import { Container } from "./Container";
+import { Footer } from "../Menu/Footer";
 
 interface LayoutProps {
   locales?: unknown;
@@ -50,6 +51,8 @@ export const Layout = ({
           />
         )}
       </Container>
+
+      <Footer global={global} slices={menus?.slices1} footerData={menus} />
     </div>
   );
 };
