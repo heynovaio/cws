@@ -57,7 +57,17 @@
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "call_to_action": {
+              "type": "SharedSlice"
+            },
+            "testimonials": {
+              "type": "SharedSlice"
+            },
+            "team_list": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },

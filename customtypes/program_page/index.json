@@ -124,6 +124,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "tag_category": {
+              "type": "SharedSlice"
+            },
+            "tabbed_carousel": {
+              "type": "SharedSlice"
+            },
             "content_grid": {
               "type": "SharedSlice"
             },

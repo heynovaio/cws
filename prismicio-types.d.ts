@@ -855,6 +855,8 @@ export type ProgramCategoryDocument<Lang extends string = string> =
   >;
 
 type ProgramPageDocumentDataSlicesSlice =
+  | TagCategorySlice
+  | TabbedCarouselSlice
   | ContentGridSlice
   | TileGridSlice
   | AccordionSlice
@@ -1170,6 +1172,8 @@ export type ResourceCategoryDocument<Lang extends string = string> =
   >;
 
 type ResourcePageDocumentDataSlicesSlice =
+  | TabbedCarouselSlice
+  | TagCategorySlice
   | TileGridSlice
   | TestimonialsSlice
   | SimpleTextSlice
@@ -1325,7 +1329,122 @@ export type ResourcePageDocument<Lang extends string = string> =
     Lang
   >;
 
-type TeamMembersDocumentDataSlicesSlice = never;
+type SearchPageDocumentDataSlicesSlice = TileGridSlice | CallToActionSlice;
+
+/**
+ * Content for Search Page documents
+ */
+interface SearchPageDocumentData {
+  /**
+   * Title field in *Search Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *Search Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Button field in *Search Page*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Include Newsletter Sign Up Banner field in *Search Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: search_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
+   * Slice Zone field in *Search Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<SearchPageDocumentDataSlicesSlice> /**
+   * Meta Title field in *Search Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: search_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Search Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: search_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Search Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Search Page document from Prismic
+ *
+ * - **API ID**: `search_page`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SearchPageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<SearchPageDocumentData>,
+    "search_page",
+    Lang
+  >;
+
+type TeamMembersDocumentDataSlicesSlice =
+  | CallToActionSlice
+  | TestimonialsSlice
+  | TeamListSlice;
 
 type TeamMembersDocumentDataSlices2Slice = TeamListSlice;
 
@@ -1472,6 +1591,7 @@ export type AllDocumentTypes =
   | ProgramPageDocument
   | ResourceCategoryDocument
   | ResourcePageDocument
+  | SearchPageDocument
   | TeamMembersDocument;
 
 /**
@@ -4109,6 +4229,9 @@ declare module "@prismicio/client" {
       ResourcePageDocument,
       ResourcePageDocumentData,
       ResourcePageDocumentDataSlicesSlice,
+      SearchPageDocument,
+      SearchPageDocumentData,
+      SearchPageDocumentDataSlicesSlice,
       TeamMembersDocument,
       TeamMembersDocumentData,
       TeamMembersDocumentDataSlicesSlice,
@@ -4200,12 +4323,12 @@ declare module "@prismicio/client" {
       TabbedCarouselSliceTabbedCarouselMultiCardPrimary,
       TabbedCarouselSliceVariation,
       TabbedCarouselSliceDefault,
+      TabbedCarouselSliceTabbedCarouselCampaign,
+      TabbedCarouselSliceTabbedCarouselMultiCard,
       TagCategorySlice,
       TagCategorySliceDefaultPrimary,
       TagCategorySliceVariation,
       TagCategorySliceDefault,
-      TabbedCarouselSliceTabbedCarouselCampaign,
-      TabbedCarouselSliceTabbedCarouselMultiCard,
       TeamListSlice,
       TeamListSliceDefaultPrimaryTeamMemberItem,
       TeamListSliceDefaultPrimary,
