@@ -7,11 +7,13 @@ import { GlobalsDocumentData } from "../../../prismicio-types";
 interface LanguageSwitcherProps {
   locales: PrismicDocument[];
   global: GlobalsDocumentData | undefined;
+  classname?: string;
 }
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   locales,
   global,
+  classname,
 }) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -27,14 +29,15 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     }
   };
 
+  console.log(locales);
+
   return (
-    <div className="print:hidden">
+    <div className={`print:hidden ${classname}`}>
       <div className="inline-flex items-center  px-2 pt-1">
         <span className="px-1 py-1">
           <strong>{global?.language || "Language"}:</strong>
         </span>
 
-        {/* Language select dropdown */}
         <select
           id="language-switcher"
           value={currentLang}
