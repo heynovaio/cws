@@ -52,12 +52,12 @@
 									"type": "Link",
 									"value": [
 										{
-											"key": "2f14bd0b-a2bc-484f-b19b-8af3850dbac2",
+											"key": "e28b963c-cf22-4652-8775-c51d20eaafdd",
 											"__TYPE__": "LinkContent",
 											"value": {
 												"__TYPE__": "ExternalLink",
 												"url": "https://prismic.io",
-												"text": "dark"
+												"text": "still"
 											}
 										}
 									]
@@ -75,6 +75,42 @@
 				"__TYPE__": "FieldContent",
 				"value": "sound",
 				"type": "Text"
+			},
+			"link_with_paragraph": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"link",
+								{
+									"key": "d5238377-89ef-44c4-9342-9e410b3328d3",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "health"
+									}
+								}
+							],
+							[
+								"body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Ad ea quis anim aute deserunt nisi anim cillum pariatur culpa duis ipsum nulla cillum elit. Exercitation eiusmod ex quis. Et ullamco exercitation esse aliquip enim excepteur reprehenderit amet dolor aute veniam duis."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": []
