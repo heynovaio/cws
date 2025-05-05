@@ -14,6 +14,18 @@ type CampaignPageDocumentDataSlicesSlice =
  */
 interface CampaignPageDocumentData {
   /**
+   * Include Newsletter Sign Up Banner field in *Campaign Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: campaign_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Campaign Page*
    *
    * - **Field Type**: Slice Zone
@@ -110,6 +122,18 @@ interface ContactPageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   body: prismic.RichTextField;
+
+  /**
+   * Include Newsletter Sign Up Banner field in *Contact Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: contact_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
 
   /**
    * Slice Zone field in *Contact Page*
@@ -257,33 +281,6 @@ export type GlobalsDocument<Lang extends string = string> =
 
 type MenusDocumentDataSlicesSlice = SingleLinkSlice | MenuPanelSlice;
 
-/**
- * Item in *Menus → Partner Links*
- */
-export interface MenusDocumentDataPartnerLinksItem {
-  /**
-   * Link field in *Menus → Partner Links*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menus.partner_links[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-
-  /**
-   * Image field in *Menus → Partner Links*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: menus.partner_links[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
 type MenusDocumentDataSlices1Slice = MultiLinkColumnSlice;
 
 /**
@@ -308,21 +305,74 @@ interface MenusDocumentData {
    * - **Tab**: Footer
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */;
-  policy_link: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  policy_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
   >;
 
   /**
-   * Partner Links field in *Menus*
+   * Helpline field in *Menus*
    *
-   * - **Field Type**: Group
+   * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: menus.partner_links[]
+   * - **API ID Path**: menus.helpline
    * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/field#group
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  partner_links: prismic.GroupField<
-    Simplify<MenusDocumentDataPartnerLinksItem>
+  helpline: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Copyright field in *Menus*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.copyright
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  copyright: prismic.KeyTextField;
+
+  /**
+   * Instagram field in *Menus*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.instagram
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  instagram: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Facebook field in *Menus*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.facebook
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  facebook: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
   >;
 
   /**
@@ -357,6 +407,146 @@ interface MenusDocumentData {
  */
 export type MenusDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenusDocumentData>, "menus", Lang>;
+
+/**
+ * Item in *Newsletter SignUp → Form Field*
+ */
+export interface NewsletterSignupDocumentDataFormFieldItem {
+  /**
+   * label field in *Newsletter SignUp → Form Field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * name field in *Newsletter SignUp → Form Field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * type field in *Newsletter SignUp → Form Field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[].type
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  type: prismic.KeyTextField;
+
+  /**
+   * placeholder field in *Newsletter SignUp → Form Field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[].placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  placeholder: prismic.KeyTextField;
+}
+
+/**
+ * Item in *Newsletter SignUp → Submit Button*
+ */
+export interface NewsletterSignupDocumentDataSubmitButtonItem {
+  /**
+   * Button Text field in *Newsletter SignUp → Submit Button*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.submit_button[].button_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_text: prismic.KeyTextField;
+}
+
+/**
+ * Content for Newsletter SignUp documents
+ */
+interface NewsletterSignupDocumentData {
+  /**
+   * Title field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * subtitle field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.subtitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  subtitle: prismic.RichTextField;
+
+  /**
+   * signup_success_message field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.signup_success_message
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  signup_success_message: prismic.KeyTextField;
+
+  /**
+   * Form Field field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.form_field[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  form_field: prismic.GroupField<
+    Simplify<NewsletterSignupDocumentDataFormFieldItem>
+  >;
+
+  /**
+   * Submit Button field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter_signup.submit_button[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  submit_button: prismic.GroupField<
+    Simplify<NewsletterSignupDocumentDataSubmitButtonItem>
+  >;
+}
+
+/**
+ * Newsletter SignUp document from Prismic
+ *
+ * - **API ID**: `newsletter_signup`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NewsletterSignupDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<NewsletterSignupDocumentData>,
+    "newsletter_signup",
+    Lang
+  >;
 
 type PageDocumentDataSlicesSlice =
   | TileGridSlice
@@ -433,6 +623,18 @@ interface PageDocumentData {
   button: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
+
+  /**
+   * Include Newsletter Sign Up Banner field in *Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
 
   /**
    * Slice Zone field in *Page*
@@ -627,13 +829,13 @@ interface ProgramCategoryDocumentData {
   /**
    * Body field in *Program Category*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: program_category.body
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  body: prismic.KeyTextField;
+  body: prismic.RichTextField;
 }
 
 /**
@@ -653,6 +855,8 @@ export type ProgramCategoryDocument<Lang extends string = string> =
   >;
 
 type ProgramPageDocumentDataSlicesSlice =
+  | TagCategorySlice
+  | TabbedCarouselSlice
   | ContentGridSlice
   | TileGridSlice
   | AccordionSlice
@@ -795,6 +999,18 @@ interface ProgramPageDocumentData {
   >;
 
   /**
+   * Include Newsletter Sign Up Banner field in *Program Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: program_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Program Page*
    *
    * - **Field Type**: Slice Zone
@@ -897,13 +1113,13 @@ interface ResourceCategoryDocumentData {
   /**
    * Body field in *Resource Category*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: resource_category.body
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  body: prismic.KeyTextField /**
+  body: prismic.RichTextField /**
    * Title field in *Resource Category*
    *
    * - **Field Type**: Text
@@ -956,6 +1172,8 @@ export type ResourceCategoryDocument<Lang extends string = string> =
   >;
 
 type ResourcePageDocumentDataSlicesSlice =
+  | TabbedCarouselSlice
+  | TagCategorySlice
   | TileGridSlice
   | TestimonialsSlice
   | SimpleTextSlice
@@ -1041,6 +1259,18 @@ interface ResourcePageDocumentData {
   image: prismic.ImageField<never>;
 
   /**
+   * Include Newsletter Sign Up Banner field in *Resource Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: resource_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Resource Page*
    *
    * - **Field Type**: Slice Zone
@@ -1099,7 +1329,122 @@ export type ResourcePageDocument<Lang extends string = string> =
     Lang
   >;
 
-type TeamMembersDocumentDataSlicesSlice = never;
+type SearchPageDocumentDataSlicesSlice = TileGridSlice | CallToActionSlice;
+
+/**
+ * Content for Search Page documents
+ */
+interface SearchPageDocumentData {
+  /**
+   * Title field in *Search Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *Search Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Button field in *Search Page*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Include Newsletter Sign Up Banner field in *Search Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: search_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
+   * Slice Zone field in *Search Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<SearchPageDocumentDataSlicesSlice> /**
+   * Meta Title field in *Search Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: search_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Search Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: search_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Search Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: search_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Search Page document from Prismic
+ *
+ * - **API ID**: `search_page`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SearchPageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<SearchPageDocumentData>,
+    "search_page",
+    Lang
+  >;
+
+type TeamMembersDocumentDataSlicesSlice =
+  | CallToActionSlice
+  | TestimonialsSlice
+  | TeamListSlice;
 
 type TeamMembersDocumentDataSlices2Slice = TeamListSlice;
 
@@ -1153,6 +1498,18 @@ interface TeamMembersDocumentData {
   button: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
+
+  /**
+   * Include Newsletter Sign Up Banner field in *Team Members*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: team_members.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
 
   /**
    * Slice Zone field in *Team Members*
@@ -1227,12 +1584,14 @@ export type AllDocumentTypes =
   | ContactPageDocument
   | GlobalsDocument
   | MenusDocument
+  | NewsletterSignupDocument
   | PageDocument
   | PartnersDocument
   | ProgramCategoryDocument
   | ProgramPageDocument
   | ResourceCategoryDocument
   | ResourcePageDocument
+  | SearchPageDocument
   | TeamMembersDocument;
 
 /**
@@ -1527,76 +1886,175 @@ export type ContactInfoSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *ContentCarousel → Default → Primary → Content Card*
+ * Item in *ContentCarousel → Programs Carousel → Primary → Content Card*
  */
-export interface ContentCarouselSliceDefaultPrimaryContentCardItem {
+export interface ContentCarouselSliceProgramsCarouselPrimaryContentCardItem {
   /**
-   * Content field in *ContentCarousel → Default → Primary → Content Card*
+   * Content field in *ContentCarousel → Programs Carousel → Primary → Content Card*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: content_carousel.default.primary.content_card[].content
+   * - **API ID Path**: content_carousel.programsCarousel.primary.content_card[].content
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  content: prismic.ContentRelationshipField<
-    "resource_category" | "offerings_category"
-  >;
+  content: prismic.ContentRelationshipField<"program_page">;
 }
 
 /**
- * Primary content in *ContentCarousel → Default → Primary*
+ * Item in *ContentCarousel → Programs Carousel → Primary → redirect_button*
  */
-export interface ContentCarouselSliceDefaultPrimary {
+export interface ContentCarouselSliceProgramsCarouselPrimaryRedirectButtonItem {
   /**
-   * Title field in *ContentCarousel → Default → Primary*
+   * url field in *ContentCarousel → Programs Carousel → Primary → redirect_button*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.programsCarousel.primary.redirect_button[].url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *ContentCarousel → Resource Carousel → Primary → Content Card*
+ */
+export interface ContentCarouselSliceResourceCarouselPrimaryContentCardItem {
+  /**
+   * Content field in *ContentCarousel → Resource Carousel → Primary → Content Card*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.content_card[].content
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  content: prismic.ContentRelationshipField<"resource_page">;
+}
+
+/**
+ * Item in *ContentCarousel → Resource Carousel → Primary → redirect_button*
+ */
+export interface ContentCarouselSliceResourceCarouselPrimaryRedirectButtonItem {
+  /**
+   * url field in *ContentCarousel → Resource Carousel → Primary → redirect_button*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.redirect_button[].url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *ContentCarousel → Programs Carousel → Primary*
+ */
+export interface ContentCarouselSliceProgramsCarouselPrimary {
+  /**
+   * Title field in *ContentCarousel → Programs Carousel → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: Title
-   * - **API ID Path**: content_carousel.default.primary.title
+   * - **API ID Path**: content_carousel.programsCarousel.primary.title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
 
   /**
-   * Content Card field in *ContentCarousel → Default → Primary*
+   * Content Card field in *ContentCarousel → Programs Carousel → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: content_carousel.default.primary.content_card[]
+   * - **API ID Path**: content_carousel.programsCarousel.primary.content_card[]
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   content_card: prismic.GroupField<
-    Simplify<ContentCarouselSliceDefaultPrimaryContentCardItem>
+    Simplify<ContentCarouselSliceProgramsCarouselPrimaryContentCardItem>
   >;
 
   /**
-   * All Link field in *ContentCarousel → Default → Primary*
+   * redirect_button field in *ContentCarousel → Programs Carousel → Primary*
    *
-   * - **Field Type**: Content Relationship
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: content_carousel.default.primary.all_link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **API ID Path**: content_carousel.programsCarousel.primary.redirect_button[]
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  all_link: prismic.ContentRelationshipField<"page">;
+  redirect_button: prismic.GroupField<
+    Simplify<ContentCarouselSliceProgramsCarouselPrimaryRedirectButtonItem>
+  >;
 }
 
 /**
- * Default variation for ContentCarousel Slice
+ * Programs Carousel variation for ContentCarousel Slice
  *
- * - **API ID**: `default`
+ * - **API ID**: `programsCarousel`
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type ContentCarouselSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<ContentCarouselSliceDefaultPrimary>,
+export type ContentCarouselSliceProgramsCarousel = prismic.SharedSliceVariation<
+  "programsCarousel",
+  Simplify<ContentCarouselSliceProgramsCarouselPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ContentCarousel → Resource Carousel → Primary*
+ */
+export interface ContentCarouselSliceResourceCarouselPrimary {
+  /**
+   * Title field in *ContentCarousel → Resource Carousel → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Title
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Content Card field in *ContentCarousel → Resource Carousel → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.content_card[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  content_card: prismic.GroupField<
+    Simplify<ContentCarouselSliceResourceCarouselPrimaryContentCardItem>
+  >;
+
+  /**
+   * redirect_button field in *ContentCarousel → Resource Carousel → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.resourceCarousel.primary.redirect_button[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  redirect_button: prismic.GroupField<
+    Simplify<ContentCarouselSliceResourceCarouselPrimaryRedirectButtonItem>
+  >;
+}
+
+/**
+ * Resource Carousel variation for ContentCarousel Slice
+ *
+ * - **API ID**: `resourceCarousel`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentCarouselSliceResourceCarousel = prismic.SharedSliceVariation<
+  "resourceCarousel",
+  Simplify<ContentCarouselSliceResourceCarouselPrimary>,
   never
 >;
 
 /**
  * Slice variation for *ContentCarousel*
  */
-type ContentCarouselSliceVariation = ContentCarouselSliceDefault;
+type ContentCarouselSliceVariation =
+  | ContentCarouselSliceProgramsCarousel
+  | ContentCarouselSliceResourceCarousel;
 
 /**
  * ContentCarousel Shared Slice
@@ -2831,11 +3289,11 @@ export type SingleLinkSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+ * Item in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
  */
 export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   /**
-   * Tab Label field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Tab Label field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -2845,7 +3303,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   tab_label: prismic.KeyTextField;
 
   /**
-   * Card Title field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Title field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -2855,7 +3313,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   card_title: prismic.RichTextField;
 
   /**
-   * Card Description field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Description field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -2865,7 +3323,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   card_description: prismic.RichTextField;
 
   /**
-   * Card Image field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Image field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -2875,7 +3333,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   card_image: prismic.ImageField<never>;
 
   /**
-   * Card Button field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Button field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -2887,7 +3345,7 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   >;
 
   /**
-   * Card Link field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Link field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -2897,54 +3355,192 @@ export interface TabbedCarouselSliceDefaultPrimaryTabItem {
   card_link: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
+}
+
+/**
+ * Item in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+ */
+export interface TabbedCarouselSliceTabbedCarouselCampaignPrimaryTabItem {
+  /**
+   * Tab Label field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].tab_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tab_label: prismic.KeyTextField;
 
   /**
-   * Audio Media (Optional) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Card Title field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_title: prismic.RichTextField;
+
+  /**
+   * Card Description field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_description: prismic.RichTextField;
+
+  /**
+   * Card Image field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  card_image: prismic.ImageField<never>;
+
+  /**
+   * Card Button field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Card Link field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].card_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Audio Media field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
    *
    * - **Field Type**: Link to Media
    * - **Placeholder**: *None*
-   * - **API ID Path**: tabbed_carousel.default.primary.tab[].audio_media
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].audio_media
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   audio_media: prismic.LinkToMediaField<prismic.FieldState, never>;
 
   /**
-   * Audio Media Alt Text (Optional) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Audio Media Alt Text (Optional) field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: tabbed_carousel.default.primary.tab[].audio_media_alt_text
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].audio_media_alt_text
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   audio_media_alt_text: prismic.KeyTextField;
 
   /**
-   * Image Media (Campaign Variant) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Image Media (Campaign Variant) field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: tabbed_carousel.default.primary.tab[].image_media
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].image_media
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image_media: prismic.ImageField<never>;
 
   /**
-   * Rich Text (Campaign Variant) field in *TabbedCarousel → TabbedCarousel → Primary → Tab*
+   * Rich Text (Campaign Variant) field in *TabbedCarousel → TabbedCarousel - Campaign → Primary → Tab*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: tabbed_carousel.default.primary.tab[].rich_text
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[].rich_text
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   rich_text: prismic.RichTextField;
 }
 
 /**
- * Primary content in *TabbedCarousel → TabbedCarousel → Primary*
+ * Item in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+ */
+export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem {
+  /**
+   * Tab Label field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].tab_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tab_label: prismic.KeyTextField;
+
+  /**
+   * Card Title field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_title: prismic.RichTextField;
+
+  /**
+   * Card Description field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  card_description: prismic.RichTextField;
+
+  /**
+   * Card Image field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  card_image: prismic.ImageField<never>;
+
+  /**
+   * Card Button field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Card Link field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[].card_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card_link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+}
+
+/**
+ * Primary content in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
  */
 export interface TabbedCarouselSliceDefaultPrimary {
   /**
-   * TItle field in *TabbedCarousel → TabbedCarousel → Primary*
+   * Title field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -2954,7 +3550,7 @@ export interface TabbedCarouselSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
-   * Body field in *TabbedCarousel → TabbedCarousel → Primary*
+   * Body field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -2964,18 +3560,7 @@ export interface TabbedCarouselSliceDefaultPrimary {
   body: prismic.RichTextField;
 
   /**
-   * Variant field in *TabbedCarousel → TabbedCarousel → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: Long Card
-   * - **API ID Path**: tabbed_carousel.default.primary.variant
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  variant: prismic.SelectField<"Long Card" | "Campaign Card", "filled">;
-
-  /**
-   * Tab field in *TabbedCarousel → TabbedCarousel → Primary*
+   * Tab field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -2986,7 +3571,7 @@ export interface TabbedCarouselSliceDefaultPrimary {
 }
 
 /**
- * TabbedCarousel variation for TabbedCarousel Slice
+ * TabbedCarousel - Card per Tab variation for TabbedCarousel Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -2999,9 +3584,114 @@ export type TabbedCarouselSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
+ */
+export interface TabbedCarouselSliceTabbedCarouselCampaignPrimary {
+  /**
+   * Title field in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Tab field in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.tab[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tab: prismic.GroupField<
+    Simplify<TabbedCarouselSliceTabbedCarouselCampaignPrimaryTabItem>
+  >;
+}
+
+/**
+ * TabbedCarousel - Campaign variation for TabbedCarousel Slice
+ *
+ * - **API ID**: `tabbedCarouselCampaign`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabbedCarouselSliceTabbedCarouselCampaign =
+  prismic.SharedSliceVariation<
+    "tabbedCarouselCampaign",
+    Simplify<TabbedCarouselSliceTabbedCarouselCampaignPrimary>,
+    never
+  >;
+
+/**
+ * Primary content in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+ */
+export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimary {
+  /**
+   * Title field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Tab field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.tab[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tab: prismic.GroupField<
+    Simplify<TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem>
+  >;
+}
+
+/**
+ * TabbedCarousel - MultiCard variation for TabbedCarousel Slice
+ *
+ * - **API ID**: `tabbedCarouselMultiCard`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabbedCarouselSliceTabbedCarouselMultiCard =
+  prismic.SharedSliceVariation<
+    "tabbedCarouselMultiCard",
+    Simplify<TabbedCarouselSliceTabbedCarouselMultiCardPrimary>,
+    never
+  >;
+
+/**
  * Slice variation for *TabbedCarousel*
  */
-type TabbedCarouselSliceVariation = TabbedCarouselSliceDefault;
+type TabbedCarouselSliceVariation =
+  | TabbedCarouselSliceDefault
+  | TabbedCarouselSliceTabbedCarouselCampaign
+  | TabbedCarouselSliceTabbedCarouselMultiCard;
 
 /**
  * TabbedCarousel Shared Slice
@@ -3013,6 +3703,72 @@ type TabbedCarouselSliceVariation = TabbedCarouselSliceDefault;
 export type TabbedCarouselSlice = prismic.SharedSlice<
   "tabbed_carousel",
   TabbedCarouselSliceVariation
+>;
+
+/**
+ * Primary content in *TagCategory → Default → Primary*
+ */
+export interface TagCategorySliceDefaultPrimary {
+  /**
+   * Background Color field in *TagCategory → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: tag_category.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Title field in *TagCategory → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tag_category.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *TagCategory → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tag_category.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for TagCategory Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TagCategorySliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TagCategorySliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TagCategory*
+ */
+type TagCategorySliceVariation = TagCategorySliceDefault;
+
+/**
+ * TagCategory Shared Slice
+ *
+ * - **API ID**: `tag_category`
+ * - **Description**: TagCategory
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TagCategorySlice = prismic.SharedSlice<
+  "tag_category",
+  TagCategorySliceVariation
 >;
 
 /**
@@ -3138,15 +3894,45 @@ export type TeamListSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *Testimonials → Default → Primary → Author Titles*
+ * Item in *Testimonials → Default → Primary → Testimonials*
  */
-export interface TestimonialsSliceDefaultPrimaryAuthorTitlesItem {
+export interface TestimonialsSliceDefaultPrimaryTestimonialsItem {
   /**
-   * Author Title field in *Testimonials → Default → Primary → Author Titles*
+   * Image field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Quote field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].quote
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  quote: prismic.RichTextField;
+
+  /**
+   * Author field in *Testimonials → Default → Primary → Testimonials*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.author_titles[].author_title
+   * - **API ID Path**: testimonials.default.primary.testimonials[].author
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  author: prismic.KeyTextField;
+
+  /**
+   * Author Title field in *Testimonials → Default → Primary → Testimonials*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[].author_title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   author_title: prismic.KeyTextField;
@@ -3189,16 +3975,6 @@ export interface TestimonialsSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
-   * Quote field in *Testimonials → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.quote
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  quote: prismic.RichTextField;
-
-  /**
    * Button field in *Testimonials → Default → Primary*
    *
    * - **Field Type**: Link
@@ -3211,25 +3987,15 @@ export interface TestimonialsSliceDefaultPrimary {
   >;
 
   /**
-   * Author field in *Testimonials → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.author
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  author: prismic.KeyTextField;
-
-  /**
-   * Author Titles field in *Testimonials → Default → Primary*
+   * Testimonials field in *Testimonials → Default → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.author_titles[]
+   * - **API ID Path**: testimonials.default.primary.testimonials[]
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  author_titles: prismic.GroupField<
-    Simplify<TestimonialsSliceDefaultPrimaryAuthorTitlesItem>
+  testimonials: prismic.GroupField<
+    Simplify<TestimonialsSliceDefaultPrimaryTestimonialsItem>
   >;
 }
 
@@ -3448,8 +4214,11 @@ declare module "@prismicio/client" {
       MenusDocument,
       MenusDocumentData,
       MenusDocumentDataSlicesSlice,
-      MenusDocumentDataPartnerLinksItem,
       MenusDocumentDataSlices1Slice,
+      NewsletterSignupDocument,
+      NewsletterSignupDocumentData,
+      NewsletterSignupDocumentDataFormFieldItem,
+      NewsletterSignupDocumentDataSubmitButtonItem,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
@@ -3467,6 +4236,9 @@ declare module "@prismicio/client" {
       ResourcePageDocument,
       ResourcePageDocumentData,
       ResourcePageDocumentDataSlicesSlice,
+      SearchPageDocument,
+      SearchPageDocumentData,
+      SearchPageDocumentDataSlicesSlice,
       TeamMembersDocument,
       TeamMembersDocumentData,
       TeamMembersDocumentDataSlicesSlice,
@@ -3486,10 +4258,15 @@ declare module "@prismicio/client" {
       ContactInfoSliceVariation,
       ContactInfoSliceDefault,
       ContentCarouselSlice,
-      ContentCarouselSliceDefaultPrimaryContentCardItem,
-      ContentCarouselSliceDefaultPrimary,
+      ContentCarouselSliceProgramsCarouselPrimaryContentCardItem,
+      ContentCarouselSliceProgramsCarouselPrimaryRedirectButtonItem,
+      ContentCarouselSliceProgramsCarouselPrimary,
+      ContentCarouselSliceResourceCarouselPrimaryContentCardItem,
+      ContentCarouselSliceResourceCarouselPrimaryRedirectButtonItem,
+      ContentCarouselSliceResourceCarouselPrimary,
       ContentCarouselSliceVariation,
-      ContentCarouselSliceDefault,
+      ContentCarouselSliceProgramsCarousel,
+      ContentCarouselSliceResourceCarousel,
       ContentColumnSlice,
       ContentColumnSliceDefaultPrimaryColumnItem,
       ContentColumnSliceDefaultPrimary,
@@ -3547,15 +4324,25 @@ declare module "@prismicio/client" {
       TabbedCarouselSlice,
       TabbedCarouselSliceDefaultPrimaryTabItem,
       TabbedCarouselSliceDefaultPrimary,
+      TabbedCarouselSliceTabbedCarouselCampaignPrimaryTabItem,
+      TabbedCarouselSliceTabbedCarouselCampaignPrimary,
+      TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem,
+      TabbedCarouselSliceTabbedCarouselMultiCardPrimary,
       TabbedCarouselSliceVariation,
       TabbedCarouselSliceDefault,
+      TabbedCarouselSliceTabbedCarouselCampaign,
+      TabbedCarouselSliceTabbedCarouselMultiCard,
+      TagCategorySlice,
+      TagCategorySliceDefaultPrimary,
+      TagCategorySliceVariation,
+      TagCategorySliceDefault,
       TeamListSlice,
       TeamListSliceDefaultPrimaryTeamMemberItem,
       TeamListSliceDefaultPrimary,
       TeamListSliceVariation,
       TeamListSliceDefault,
       TestimonialsSlice,
-      TestimonialsSliceDefaultPrimaryAuthorTitlesItem,
+      TestimonialsSliceDefaultPrimaryTestimonialsItem,
       TestimonialsSliceDefaultPrimary,
       TestimonialsSliceVariation,
       TestimonialsSliceDefault,

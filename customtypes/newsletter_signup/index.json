@@ -1,0 +1,89 @@
+{
+  "format": "custom",
+  "id": "newsletter_signup",
+  "label": "Newsletter SignUp",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Title",
+          "placeholder": "",
+          "allowTargetBlank": false,
+          "single": "heading2,heading4,heading3,heading5,heading6"
+        }
+      },
+      "subtitle": {
+        "type": "StructuredText",
+        "config": {
+          "label": "subtitle",
+          "placeholder": "",
+          "allowTargetBlank": false,
+          "multi": "paragraph,strong,em"
+        }
+      },
+      "signup_success_message": {
+        "type": "Text",
+        "config": {
+          "label": "signup_success_message",
+          "placeholder": ""
+        }
+      },
+      "form_field": {
+        "type": "Group",
+        "config": {
+          "label": "Form Field",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "label",
+                "placeholder": ""
+              }
+            },
+            "name": {
+              "type": "Text",
+              "config": {
+                "label": "name",
+                "placeholder": ""
+              }
+            },
+            "type": {
+              "type": "Text",
+              "config": {
+                "label": "type",
+                "placeholder": ""
+              }
+            },
+            "placeholder": {
+              "type": "Text",
+              "config": {
+                "label": "placeholder",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "submit_button": {
+        "type": "Group",
+        "config": {
+          "label": "Submit Button",
+          "repeat": false,
+          "fields": {
+            "button_text": {
+              "type": "Text",
+              "config": {
+                "label": "Button Text",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

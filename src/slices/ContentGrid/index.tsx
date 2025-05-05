@@ -1,6 +1,15 @@
-import { FC } from "react";
+"use client";
+import {
+  Container,
+  ContentBox,
+  ProgramCategoryGrid,
+  ResourceCategoryGrid,
+  Section,
+} from "@/components";
+import { components } from "@/utils";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { JSX } from "react";
 
 /**
  * Props for `ContentGrid`.
@@ -10,15 +19,34 @@ export type ContentGridProps = SliceComponentProps<Content.ContentGridSlice>;
 /**
  * Component for "ContentGrid" Slices.
  */
-const ContentGrid: FC<ContentGridProps> = ({ slice }) => {
+const ContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
+  const isProgram = slice.variation === "default";
+
   return (
-    <section
+    <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      backgroundColor={slice.primary.background_color}
     >
-      Placeholder component for content_grid (variation: {slice.variation})
-      Slices
-    </section>
+      <Container containerClassName="flex flex-col gap-12">
+        <ContentBox
+          title={slice.primary.title}
+          content={
+            <PrismicRichText
+              field={slice.primary.body}
+              components={components}
+            />
+          }
+          width="standard"
+          containerClassName="flex mx-auto justify-center text-center"
+        />
+        {isProgram ? (
+          <ProgramCategoryGrid slice={slice} />
+        ) : (
+          <ResourceCategoryGrid slice={slice} />
+        )}
+      </Container>
+    </Section>
   );
 };
 

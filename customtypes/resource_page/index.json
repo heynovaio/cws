@@ -67,11 +67,26 @@
           "thumbnails": []
         }
       },
+      "include_newsletter_sign_up_banner": {
+        "type": "Boolean",
+        "config": {
+          "label": "Include Newsletter Sign Up Banner",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "tabbed_carousel": {
+              "type": "SharedSlice"
+            },
+            "tag_category": {
+              "type": "SharedSlice"
+            },
             "tile_grid": {
               "type": "SharedSlice"
             },
