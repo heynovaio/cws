@@ -17,6 +17,7 @@ interface FooterProps {
 }
 
 export const Footer = ({ global, slices, footerData }: FooterProps) => {
+  console.log(global);
   return (
     <footer className="bg-gradient-dark text-white flex flex-col justify-center items-center">
       <nav className="py-14  mx-auto max-w-screen-xl w-full flex flex-col">
@@ -53,7 +54,7 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-col justify-center items-center mt-6">
+      <div className="flex flex-col justify-center items-center mt-6 footer-links">
         <div className="flex flex-row gap-6 md:gap-10">
           <PrismicNextLink
             field={footerData?.policy_link}
@@ -65,9 +66,7 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
           />
         </div>
 
-        <p className="mt-6 text-center text-base md:text-bodyLarge">
-          {footerData?.copyright}
-        </p>
+        <p className="mt-6 text-center text-base  ">{footerData?.copyright}</p>
       </div>
     </footer>
   );
