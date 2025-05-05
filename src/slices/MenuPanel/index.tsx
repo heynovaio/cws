@@ -26,7 +26,7 @@ export type MenuPanelProps = SliceComponentProps<Content.MenuPanelSlice>;
  */
 const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
   const numColumns3 = slice.primary.columns === true;
-  console.log(slice.primary.link_with_paragraph);
+
   return (
     <>
       <Popover
@@ -111,7 +111,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
         as="div"
         className="flex flex-col md:hidden relative menu-link-mobile gap-2"
       >
-        {({ open }) => (
+        {({}) => (
           <>
             <DisclosureButton className="flex menu-link-mobile pl-4 gap-2">
               {slice.primary.menu_display || "Dropdown"}
