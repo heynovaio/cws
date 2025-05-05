@@ -1,7 +1,7 @@
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { ImageField, LinkField, RichTextField } from "@prismicio/client";
 import { PrismicRichText } from "@prismicio/react";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink, PrismicNextImage } from "@prismicio/next";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 
 interface CTATileProps {
@@ -19,17 +19,17 @@ export const CTATile = ({
 }: CTATileProps) => {
   
   return (
-    <div className="bg-gradient-tile h-[430px] border border-neon-violet rounded overflow-hidden text-midnight w-full flex flex-col shadow">
+    <PrismicNextLink
+      field={link}
+      className="hover-zoom hover-shadow relative bg-gradient-tile h-[430px] border border-neon-violet rounded overflow-hidden text-midnight w-full flex flex-col no-underline">
       {image && (
-        <>
-          <ResponsiveImage
-            image={bg_image}
-            className="absolute top-0 bottom-0 left-0 right-0 z-0 w-full object-cover aspect-square opacity-10"
-            imageHeightClassName="h-full"
+          <PrismicNextImage
+            field={bg_image}
+            alt=""
+            className="hover-zoom-img absolute top-0 bottom-0 left-0 right-0 z-0 w-full min-h-full object-cover opacity-10"
           />
-        </>
       )}
-      <div className="text-white h-full w-full flex flex-col gap-5 items-center justify-center">
+      <div className="relative z-10 text-white h-full w-full flex flex-col gap-0 items-center justify-center">
         {image && (
           <>
             <ResponsiveImage
@@ -40,19 +40,18 @@ export const CTATile = ({
           </>
         )}
         {title && 
-          <h4>
+          <div className="mt-4">
             <PrismicRichText field={title}/>
-          </h4>
+          </div>
         }
         {link && (
-          <PrismicNextLink
-            field={link}
+          <div
             className={`flex items-center text-large underline font-normal"`}
           >
-            Learn more <HiOutlineArrowLongRight className="h-10 w-10 ml-3" />
-          </PrismicNextLink>
+            {link?.text || 'Learn More'}<HiOutlineArrowLongRight className="h-10 w-10 ml-3" />
+          </div>
           )}
         </div>
-    </div>
+    </PrismicNextLink>
   );
 };

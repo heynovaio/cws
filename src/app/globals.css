@@ -266,3 +266,27 @@
 .hover-ultrapink:hover {
   color: black !important;
 }
+
+/* Apply hover-zoom to the link and then hover-zoom-img to the image you want to do the zooming */
+.hover-zoom { 
+  .hover-zoom-img {
+    transition: all .5s;
+  }
+
+  &:hover {
+    .hover-zoom-img {
+      transform: scale(1.25);
+    }
+  }
+}
+
+.hover-shadow {
+  box-shadow: 0 0 21px 0 #630ff9cc;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px); /* Safari */
+  transition: all .5s;
+
+  &:hover {
+    box-shadow: 0 0 40px 0 #630ff9cc;
+  }
+}

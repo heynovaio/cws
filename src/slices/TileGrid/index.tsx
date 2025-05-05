@@ -34,12 +34,13 @@ const TileGrid = ({ slice }: TileGridProps): JSX.Element => {
             : "grid-cols-1",
   };
   return (
-    <Section
+  <Section
     data-slice-type={slice.slice_type}
     data-slice-variation={slice.variation}
     backgroundColor={slice.primary.background_color}
+    styling={`pb-12 mb-12`}
   >
-    <Container containerClassName="flex flex-col gap-12">
+    <Container containerClassName="flex flex-col gap-12 text-center">
       <ContentBox
         title={slice.primary.title}
         content={
@@ -49,7 +50,6 @@ const TileGrid = ({ slice }: TileGridProps): JSX.Element => {
           />
         }
       />
-      </Container>
       <div className={`${gridClasses.base} ${gridClasses.responsive}`}> 
         {slice.primary.tiles.map((tile, index) => (
           <CTATile
@@ -60,7 +60,8 @@ const TileGrid = ({ slice }: TileGridProps): JSX.Element => {
             link={tile.tile_link}
           />
         ))}  
-      </div> 
+        </div> 
+      </Container>
   </Section>
   );
 };

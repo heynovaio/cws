@@ -4093,10 +4093,7 @@ export interface TileGridSliceIconTilePrimary {
    * - **API ID Path**: tile_grid.iconTile.primary.background_color
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  background_color: prismic.SelectField<
-    "No Background" | "Background",
-    "filled"
-  >;
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
 
   /**
    * Columns field in *TileGrid → Icon Tile → Primary*

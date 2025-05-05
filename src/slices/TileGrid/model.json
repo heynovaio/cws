@@ -19,7 +19,7 @@
             "placeholder": "",
             "options": [
               "No Background",
-              "Background"
+              "Darker"
             ],
             "default_value": "No Background"
           }
