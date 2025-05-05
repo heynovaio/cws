@@ -261,5 +261,11 @@
   color: black !important;
 }
 .footer-header {
-  @apply text-base md:text-h4  md:font-bold;
+  @apply text-base md:text-[1.625rem]  md:font-bold;
+}
+
+.footer-links {
+  a {
+    @apply text-base;
+  }
 }
