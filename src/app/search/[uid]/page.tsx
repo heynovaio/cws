@@ -1,32 +1,43 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
-
 import { SliceZone } from "@prismicio/react";
-import * as prismic from "@prismicio/client";
-
+import { notFound } from "next/navigation";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
-import React from "react";
-import { Layout } from "@/components";
 import { getLocales } from "@/utils";
-import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
+import * as prismic from "@prismicio/client";
+import { Layout } from "@/components";
 
-/**
- * This page renders a Prismic Document dynamically based on the URL.
- */
-
-type Params = { uid: string; lang: string };
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
-  const { uid, lang } = await params;
-
+export default async function Page({}) {
   const client = createClient();
   const page = await client
-    .getByUID("search_page", uid, { lang })
+    .getSingle("search_page", { lang: "en-ca" })
+    .catch(() => notFound());
+  const global = await client.getSingle("globals", { lang: "en-ca" });
+  const menus = await client.getSingle("menus", { lang: "en-ca" });
+
+  const locales = await getLocales(page, client);
+  return (
+    <Layout
+      locales={locales}
+      global={global.data}
+      menus={menus.data}
+      include_newsletter_sign_up_banner={
+        page.data.include_newsletter_sign_up_banner
+      }
+    >
+      <SliceZone
+        slices={page.data.slices}
+        components={components}
+        context={{ lang: "en-ca" }}
+      />
+    </Layout>
+  );
+}
+
+export async function generateMetadata({}): Promise<Metadata> {
+  const client = createClient();
+  const page = await client
+    .getSingle("search_page", { lang: "en-ca" })
     .catch(() => notFound());
 
   return {
@@ -46,51 +57,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: Promise<Params> }) {
-  const { uid, lang } = await params;
-
-  const client = createClient();
-  const page = await client
-    .getByUID("search_page", uid, { lang })
-    .catch(() => notFound());
-  const global = await client.getSingle("globals", { lang });
-  const menus = await client.getSingle("menus", { lang });
-  const partners = await client.getSingle("partners", { lang });
-
-  const locales = await getLocales(page, client);
-
-  return (
-    <CategoryFilterProvider>
-      <Layout
-        locales={locales}
-        global={global.data}
-        menus={menus.data}
-        partners={partners.data}
-        include_newsletter_sign_up_banner={
-          page.data.include_newsletter_sign_up_banner
-        }
-      >
-        <SliceZone
-          slices={page.data.slices}
-          components={components}
-          context={{ lang: "en-ca" }}
-        />
-      </Layout>
-    </CategoryFilterProvider>
-  );
-}
-
 export async function generateStaticParams() {
   const client = createClient();
-  const pages = await client
-    .getAllByType("search_page", {
-      lang: "*",
-    })
-    .catch(() => notFound());
+
+  const pages = await client.getAllByType("search_page", {
+    lang: "*",
+  });
 
   return pages.map((page) => {
     return {
-      uid: page.uid,
       lang: page.lang,
     };
   });
