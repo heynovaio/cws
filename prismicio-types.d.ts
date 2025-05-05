@@ -1329,10 +1329,7 @@ export type ResourcePageDocument<Lang extends string = string> =
     Lang
   >;
 
-type SearchPageDocumentDataSlicesSlice =
-  | TileGridSlice
-  | ContentColumnSlice
-  | CallToActionSlice;
+type SearchPageDocumentDataSlicesSlice = TileGridSlice | CallToActionSlice;
 
 /**
  * Content for Search Page documents
