@@ -26,6 +26,7 @@ export type MenuPanelProps = SliceComponentProps<Content.MenuPanelSlice>;
  */
 const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
   const numColumns3 = slice.primary.columns === true;
+  console.log(slice.primary.link_with_paragraph);
   return (
     <>
       <Popover
@@ -131,6 +132,20 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
                         </PrismicNextLink>
                       ))}
                     </div>
+                  </div>
+                ))}
+                {slice.primary.link_with_paragraph.map((item, index) => (
+                  <div key={index} className="mb-8">
+                    {item.link && (
+                      <div className="mb-4 ">
+                        <PrismicNextLink field={item.link} />
+                      </div>
+                    )}
+                    {item.body && (
+                      <div className="mb-4 ">
+                        <PrismicRichText field={item.body} />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
