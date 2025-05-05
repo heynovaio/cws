@@ -79,6 +79,28 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
                       </div>
                     </div>
                   ))}
+                  {slice.primary.link_with_paragraph.length > 0 && (
+                    <div
+                      className={`mb-8 grid gap-x-24 gap-y-8 text-left ${
+                        numColumns3 ? "grid-cols-3" : "grid-cols-2"
+                      }`}
+                    >
+                      {slice.primary.link_with_paragraph.map((item, index) => (
+                        <div key={index}>
+                          {item.link && (
+                            <div className="mb-4">
+                              <PrismicNextLink field={item.link} />
+                            </div>
+                          )}
+                          {item.body && (
+                            <div className="mb-4">
+                              <PrismicRichText field={item.body} />
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </PopoverPanel>
