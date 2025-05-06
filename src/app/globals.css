@@ -205,8 +205,11 @@
     justify-content: center;
   }
 
+  .tabbed-carousel .react-multi-carousel-list {
+    overflow: visible !important;
+  }
+
   .tabbed-carousel .react-multi-carousel-item {
-    padding: 0 20px;
     height: auto !important;
     display: flex !important;
     flex: 1 1 auto;

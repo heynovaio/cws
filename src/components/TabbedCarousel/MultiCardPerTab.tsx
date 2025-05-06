@@ -1,3 +1,4 @@
+"use client";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import React, { useCallback, useRef, useState } from "react";
 import { CarouselButton } from "../Buttons";
@@ -6,6 +7,7 @@ import { LongCard } from "../Cards";
 import { SliceComponentProps } from "@prismicio/react";
 import { Content } from "@prismicio/client";
 import { responsive } from "@/slices/TabbedCarousel/responsive";
+import { Container } from "../Layout";
 
 export type MultiCardPerTabProps = {
   slice: SliceComponentProps<Content.TabbedCarouselSlice>["slice"];
@@ -56,64 +58,68 @@ export const MultiCardPerTab = ({ slice }: MultiCardPerTabProps) => {
   );
   return (
     <TabGroup onChange={handleTabChange}>
-      <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
-        <div className="w-10"></div>
-        <TabList className="rounded-full bg-white flex gap-2 p-1 shadow justify-center mx-auto w-fit">
-          {tabLabels.map((label) => (
-            <Tab
-              key={label}
-              className={({ selected }) =>
-                `rounded-full px-4 py-2 font-semibold focus ${
-                  selected
-                    ? "bg-neon-violet text-white"
-                    : "text-midnight hover:bg-neon-violet/20"
-                }`
-              }
-            >
-              {label}
-            </Tab>
-          ))}
-        </TabList>
-        {/* Carousel Buttons */}
-        <CarouselButton
-          currentSlide={currentSlide}
-          totalSlides={totalSlides}
-          onSlideChange={handleSlideChange}
-        />
-      </div>
+      <Container>
+        <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
+          <div className="w-10"></div>
+          <TabList className="rounded-full bg-white flex gap-2 p-1 shadow justify-center mx-auto w-fit">
+            {tabLabels.map((label) => (
+              <Tab
+                key={label}
+                className={({ selected }) =>
+                  `rounded-full px-4 py-2 font-semibold focus ${
+                    selected
+                      ? "bg-neon-violet text-white"
+                      : "text-midnight hover:bg-neon-violet/20"
+                  }`
+                }
+              >
+                {label}
+              </Tab>
+            ))}
+          </TabList>
+          {/* Carousel Buttons */}
+          <CarouselButton
+            currentSlide={currentSlide}
+            totalSlides={totalSlides}
+            onSlideChange={handleSlideChange}
+          />
+        </div>
 
-      <TabPanels className="py-12 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm max-w-screen-xs xl:min-w-screen-xl lg:min-w-screen-lg md:min-w-screen-md sm:min-w-screen-sm min-w-screen-xs w-full">
-        {tabLabels.map((label) => (
-          <TabPanel
-            key={label}
-            className="tabbed-carousel m-0 rounded-xl focus:focus focus:outline-offset-8"
-          >
-            <Carousel
-              responsive={responsive}
-              partialVisible
-              keyBoardControl
-              arrows={false}
-              itemClass="react-multi-carousel-item"
-              className="focus:focus"
-              containerClass={`lg:w-[1144px] ${groupedTabs[label].length === 1 ? "!overflow-visible" : ""}`}
-              ref={activeTab === tabLabels.indexOf(label) ? carouselRef : null}
-              beforeChange={(nextSlide) => setCurrentSlide(nextSlide + 1)}
+        <TabPanels className="py-12 w-full">
+          {tabLabels.map((label) => (
+            <TabPanel
+              key={label}
+              className="tabbed-carousel m-0 focus:focus focus:outline-offset-4 !overflow-visible"
             >
-              {groupedTabs[label].map((item, index) => (
-                <div key={index} className="px-2">
-                  <LongCard
-                    image={item?.card_image}
-                    title={item?.card_title || "Untitled"}
-                    content={item?.card_description}
-                    buttons={item?.card_button}
-                    links={item?.card_link}
-                  />
-                </div>
-              ))}
-            </Carousel>
-          </TabPanel>
-        ))}
-      </TabPanels>
+              <Carousel
+                responsive={responsive}
+                partialVisible
+                keyBoardControl
+                arrows={false}
+                itemClass="react-multi-carousel-item"
+                className="focus:focus"
+                containerClass={` ${groupedTabs[label].length === 1 ? "!overflow-visible" : ""}`}
+                ref={
+                  activeTab === tabLabels.indexOf(label) ? carouselRef : null
+                }
+                beforeChange={(nextSlide) => setCurrentSlide(nextSlide + 1)}
+              >
+                {groupedTabs[label].map((item, index) => (
+                  <div key={index} className="px-2">
+                    <LongCard
+                      image={item?.card_image}
+                      title={item?.card_title || "Untitled"}
+                      content={item?.card_description}
+                      buttons={item?.card_button}
+                      links={item?.card_link}
+                    />
+                  </div>
+                ))}
+              </Carousel>
+            </TabPanel>
+          ))}
+        </TabPanels>
+      </Container>
     </TabGroup>
   );
 };

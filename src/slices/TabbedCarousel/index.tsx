@@ -30,6 +30,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      styling="overflow-x-hidden"
     >
       <Container containerClassName="flex flex-col items-center">
         <ContentBox
@@ -44,7 +45,6 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
           containerClassName="text-center gap-4"
         />
       </Container>
-      {/* Renders carousel based on type */}
       {carouselType}
     </Section>
   );

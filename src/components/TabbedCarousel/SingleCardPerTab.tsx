@@ -1,71 +1,87 @@
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+"use client";
+import { Tab, TabGroup, TabList, TabPanels } from "@headlessui/react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import React from "react";
+import React, { useState, useRef } from "react";
 import { LongCard } from "../Cards";
+import Carousel from "react-multi-carousel";
+import { responsive } from "@/slices/TabbedCarousel/responsive";
+import { Container } from "../Layout";
 
 export type SingleCardPerTabProps = {
   slice: SliceComponentProps<Content.TabbedCarouselSlice>["slice"];
 };
 
 export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
-  type TabItem = (typeof slice.primary.tab)[number];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const carouselRef = useRef<Carousel>(null);
 
-  // Group tabs by label with "Other" last
-  const groupedTabs = slice.primary.tab.reduce<Record<string, TabItem[]>>(
-    (acc, item) => {
-      const label = item.tab_label || "Other";
-      if (!acc[label]) acc[label] = [];
-      acc[label].push(item);
-      return acc;
-    },
-    {}
-  );
+  // If no tabs exist, create a single "Other" tab
+  const tabs =
+    slice.primary.tab?.length > 0
+      ? slice.primary.tab
+      : [{ tab_label: "Other" } as (typeof slice.primary.tab)[number]];
 
-  const tabLabels = Object.keys(groupedTabs).sort((a, b) =>
-    a === "Other" ? 1 : b === "Other" ? -1 : 0
-  );
+  const handleTabChange = (index: number) => {
+    setCurrentSlide(index);
+    if (carouselRef.current) {
+      carouselRef.current.goToSlide(index);
+    }
+  };
 
   return (
-    <TabGroup>
+    <TabGroup selectedIndex={currentSlide} onChange={handleTabChange}>
       <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
-        <TabList className="rounded-full bg-white flex gap-2 p-1 shadow justify-center mx-auto w-fit">
-          {tabLabels.map((label) => (
+        <TabList className="rounded-full bg-white flex gap-2 p-1 shadow justify-center mx-auto w-fit max-w-full overflow-x-auto">
+          {tabs.map((item, index) => (
             <Tab
-              key={label}
+              key={index}
               className={({ selected }) =>
-                `rounded-full px-4 py-2 font-semibold focus ${
+                `whitespace-nowrap rounded-full px-4 py-2 font-semibold focus ${
                   selected
                     ? "bg-neon-violet text-white"
                     : "text-midnight hover:bg-neon-violet/20"
                 }`
               }
             >
-              {label}
+              {item.tab_label || "Other"}
             </Tab>
           ))}
         </TabList>
       </div>
-      <TabPanels className="py-12 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm max-w-screen-xs xl:min-w-screen-xl lg:min-w-screen-lg md:min-w-screen-md sm:min-w-screen-sm min-w-screen-xs w-full">
-        {tabLabels.map((label) => (
-          <TabPanel
-            key={label}
-            className="tabbed-carousel m-0 rounded-xl focus:focus focus:outline-offset-8"
+      <Container>
+        <TabPanels className="py-12 w-full">
+          <Carousel
+            responsive={responsive}
+            partialVisible
+            keyBoardControl
+            arrows={false}
+            ref={carouselRef}
+            beforeChange={(nextSlide) => setCurrentSlide(nextSlide)}
+            additionalTransfrom={0}
+            itemClass="pr-10"
+            containerClass="mx-auto tabbed-carousel m-0 focus:focus focus:outline-offset-8 !overflow-visible"
           >
-            {groupedTabs[label].map((item, index) => (
-              <div key={index} className="px-2">
-                <LongCard
-                  image={item?.card_image}
-                  title={item?.card_title || "Untitled"}
-                  content={item?.card_description}
-                  buttons={item?.card_button}
-                  links={item?.card_link}
-                />
+            {tabs.map((item, index) => (
+              <div key={index} className="h-full">
+                {item.card_title ? (
+                  <LongCard
+                    image={item?.card_image}
+                    title={item?.card_title || "Untitled"}
+                    content={item?.card_description}
+                    buttons={item?.card_button}
+                    links={item?.card_link}
+                  />
+                ) : (
+                  <div className="text-center py-8 h-full flex items-center justify-center">
+                    No content available
+                  </div>
+                )}
               </div>
             ))}
-          </TabPanel>
-        ))}
-      </TabPanels>
+          </Carousel>
+        </TabPanels>
+      </Container>
     </TabGroup>
   );
 };
