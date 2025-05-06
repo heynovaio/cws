@@ -56,9 +56,33 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
   const partners = await client.getSingle("partners", { lang });
-
   const locales = await getLocales(page, client);
   const pageTags = page.tags || [];
+
+  const pageTypeLabel = page.type === "program_page" ? "Programs" : "Resources";
+  const pageTypeSearchParam =
+    page.type === "program_page" ? "program" : "resource";
+
+  const category = page.data.category;
+
+  // const categoryTitle =
+  //   prismic.asText(category.data.title)
+
+  // const categoryUid = category ? category.uid : "";
+
+  const links = [
+    {
+      label: pageTypeLabel,
+      href: `/search?type=${pageTypeSearchParam}`,
+    },
+    // {
+    //   label: categoryTitle,
+    //   href: `/search?category=${categoryUid}`,
+    // },
+    {
+      label: prismic.asText(page.data.title),
+    },
+  ];
 
   return (
     <CategoryFilterProvider>
@@ -71,7 +95,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           page.data.include_newsletter_sign_up_banner
         }
       >
-        <Intro type="program" pageData={page.data} />
+        <Intro type="program" pageData={page.data} links={links} />
         <SliceZone
           slices={page.data.slices}
           components={components}

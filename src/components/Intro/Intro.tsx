@@ -13,13 +13,15 @@ import {
 } from "../../../prismicio-types";
 import { PrismicRichText } from "@prismicio/react";
 import { components } from "@/utils";
+import { Breadcrumb, BreadcrumbProps } from "../Breadcrumb";
 
 interface IntroProps {
   pageData?: ProgramPageDocumentData | ResourcePageDocumentData;
   type?: "program" | "resource" | string;
+  links: BreadcrumbProps["links"];
 }
 
-export const Intro = ({ type, pageData }: IntroProps) => {
+export const Intro = ({ type, pageData, links }: IntroProps) => {
   const { image, title, body, link, newsletter_sign_up } = pageData || {};
   const isProgramPage = type === "program";
   const newsLetterSignUp = isProgramPage && newsletter_sign_up;
@@ -112,7 +114,7 @@ export const Intro = ({ type, pageData }: IntroProps) => {
               />
             </div>
             {/* TODO: Add the real breadcrumbs */}
-            <p>[INSERT BREADCRUMBS HERE]</p>
+            <Breadcrumb links={links} />
           </div>
           <div
             className={`md:col-span-6 grid ${isProgramPage ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} gap-4`}
