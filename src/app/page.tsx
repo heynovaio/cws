@@ -9,6 +9,7 @@ import { components } from "@/slices";
 import { Layout } from "@/components";
 import { getLocales } from "@/utils";
 import React from "react";
+import { DefaultHero } from "@/components/Heros/GeneralHero";
 
 type Params = { lang: string };
 
@@ -61,6 +62,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         page.data.include_newsletter_sign_up_banner
       }
     >
+      <DefaultHero />
       <SliceZone
         slices={page.data.slices}
         components={components}
