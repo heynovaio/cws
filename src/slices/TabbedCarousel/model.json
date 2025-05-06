@@ -6,7 +6,7 @@
   "variations": [
     {
       "id": "default",
-      "name": "TabbedCarousel",
+      "name": "TabbedCarousel - Card per Tab",
       "docURL": "...",
       "version": "initial",
       "description": "Default",
@@ -15,7 +15,7 @@
         "title": {
           "type": "StructuredText",
           "config": {
-            "label": "TItle",
+            "label": "Title",
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "heading2,heading3,heading4,heading5,heading6"
@@ -30,16 +30,99 @@
             "multi": "paragraph,strong,em,hyperlink,image,embed"
           }
         },
-        "variant": {
-          "type": "Select",
+        "tab": {
+          "type": "Group",
           "config": {
-            "label": "Variant",
+            "label": "Tab",
+            "repeat": true,
+            "fields": {
+              "tab_label": {
+                "type": "Text",
+                "config": {
+                  "label": "Tab Label",
+                  "placeholder": ""
+                }
+              },
+              "card_title": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Card Title",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading2,heading3,heading4,heading5,heading6"
+                }
+              },
+              "card_description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Card Description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "card_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Card Image",
+                  "constraint": {
+                    "width": null
+                  },
+                  "thumbnails": []
+                }
+              },
+              "card_button": {
+                "type": "Link",
+                "config": {
+                  "label": "Card Button",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
+                }
+              },
+              "card_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Card Link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "tabbedCarouselCampaign",
+      "name": "TabbedCarousel - Campaign",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
             "placeholder": "",
-            "options": [
-              "Long Card",
-              "Campaign Card"
-            ],
-            "default_value": "Long Card"
+            "allowTargetBlank": true,
+            "multi": "heading2,heading3,heading4,heading5,heading6"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,image,embed"
           }
         },
         "tab": {
@@ -108,7 +191,7 @@
               "audio_media": {
                 "type": "Link",
                 "config": {
-                  "label": "Audio Media (Optional)",
+                  "label": "Audio Media",
                   "placeholder": "",
                   "select": "media",
                   "allowText": true
@@ -136,6 +219,101 @@
                   "placeholder": "",
                   "allowTargetBlank": true,
                   "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "tabbedCarouselMultiCard",
+      "name": "TabbedCarousel - MultiCard",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2,heading3,heading4,heading5,heading6"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,image,embed"
+          }
+        },
+        "tab": {
+          "type": "Group",
+          "config": {
+            "label": "Tab",
+            "repeat": true,
+            "fields": {
+              "tab_label": {
+                "type": "Text",
+                "config": {
+                  "label": "Tab Label",
+                  "placeholder": ""
+                }
+              },
+              "card_title": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Card Title",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading2,heading3,heading4,heading5,heading6"
+                }
+              },
+              "card_description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Card Description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "card_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Card Image",
+                  "constraint": {
+                    "width": null
+                  },
+                  "thumbnails": []
+                }
+              },
+              "card_button": {
+                "type": "Link",
+                "config": {
+                  "label": "Card Button",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
+                }
+              },
+              "card_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Card Link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
                 }
               }
             }

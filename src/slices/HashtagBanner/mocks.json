@@ -1,0 +1,14 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"display_word": {
+				"__TYPE__": "FieldContent",
+				"value": "trade",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

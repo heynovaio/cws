@@ -5,8 +5,8 @@
 		"primary": {
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "White",
-				"type": "Select"
+				"type": "Select",
+				"value": "No Background"
 			},
 			"title": {
 				"__TYPE__": "StructuredTextContent",
@@ -14,8 +14,10 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "Exactly"
-						}
+							"text": "Exactly",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -38,9 +40,9 @@
 						"key": "10d8e2b7-a548-43d6-8cf1-49e1ee720d1b",
 						"__TYPE__": "LinkContent",
 						"value": {
-							"__TYPE__": "ExternalLink",
-							"url": "http://twitter.com",
-							"text": "symbol"
+							"__TYPE__": "AnyLink",
+							"kind": "any",
+							"text": ""
 						}
 					}
 				]
@@ -57,10 +59,12 @@
 									"__TYPE__": "StructuredTextContent",
 									"value": [
 										{
-											"type": "heading2",
+											"type": "paragraph",
 											"content": {
-												"text": "Education"
-											}
+												"text": "Sit exercitation anim esse sunt do tempor anim ",
+												"spans": []
+											},
+											"direction": "ltr"
 										}
 									]
 								}
@@ -73,8 +77,10 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Minim irure sit mollit laborum esse cupidatat irure officia Lorem dolore dolore voluptate laborum."
-											}
+												"text": "Minim irure sit mollit laborum esse cupidatat irure officia Lorem dolore dolore voluptate laborum.",
+												"spans": []
+											},
+											"direction": "ltr"
 										}
 									]
 								}
@@ -93,6 +99,43 @@
 												"url": "http://google.com",
 												"text": "talk"
 											}
+										}
+									]
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Incididunt est amet occaecat sit consequat non est commodo nisi irure commodo ",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Minim irure sit mollit laborum esse cupidatat irure officia Lorem dolore dolore voluptate laborum.",
+												"spans": []
+											},
+											"direction": "ltr"
 										}
 									]
 								}

@@ -17,8 +17,8 @@
         "config": {
           "label": "Icon",
           "constraint": {
-            "width": 800,
-            "height": 800
+            "width": null,
+            "height": null
           },
           "thumbnails": []
         }
@@ -31,10 +31,12 @@
         }
       },
       "body": {
-        "type": "Text",
+        "type": "StructuredText",
         "config": {
           "label": "Body",
-          "placeholder": ""
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,heading1,hyperlink,list-item,o-list-item,heading6,strong,em,heading5,heading4,heading3,heading2"
         }
       }
     },

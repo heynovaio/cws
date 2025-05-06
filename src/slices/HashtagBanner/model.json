@@ -1,0 +1,26 @@
+{
+  "id": "hashtag_banner",
+  "type": "SharedSlice",
+  "name": "HashtagBanner",
+  "description": "HashtagBanner",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "display_word": {
+          "type": "Text",
+          "config": {
+            "label": "Display Word",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

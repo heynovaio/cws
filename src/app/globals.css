@@ -4,36 +4,45 @@
 
 @layer base {
   body {
-    @apply text-white bg-navy-background font-body;
+    @apply text-[1rem] md:text-base text-white bg-navy-background font-body;
 
     /* dark:text-white dark:bg-midnight */
   }
   h1 {
-    @apply font-title md:text-h1 font-extraBold leading-h1;
+    @apply font-title text-[2.5rem] md:text-h1 font-extraBold leading-h1;
+  }
+  h1.h1-alt {
+    @apply font-title text-h3 font-extraBold leading-h3;
   }
   h2 {
-    @apply font-title md:text-h2 font-extraBold leading-h2;
+    @apply font-title text-[1.875rem] md:text-h2 font-extraBold leading-h2;
   }
   h3 {
-    @apply font-title md:text-h3 font-extraBold leading-h3;
+    @apply font-title text-[1.625rem] md:text-h3 font-extraBold leading-h3;
   }
   h4 {
-    @apply font-title md:text-h4 font-bold leading-h4;
+    @apply font-title text-[1.375rem] md:text-h4 font-bold leading-h4;
   }
   p {
-    @apply text-bodyLarge font-body;
+    @apply text-[1.125rem] md:text-bodyLarge font-body mb-2;
   }
   a {
-    @apply underline text-bodyLarge;
+    @apply underline text-[1.125rem]  md:text-bodyLarge;
     &:hover {
       @apply text-ultra-pink;
     }
   }
+  .link-no-underline {
+    @apply no-underline !text-base;
+    &:hover {
+      @apply text-ultra-pink underline;
+    }
+  }
   ul {
-    @apply list-disc pl-6 space-y-2 text-bodyLarge;
+    @apply list-disc pl-6 mx-4 space-y-2;
   }
   ol {
-    @apply list-decimal pl-6 space-y-2 text-bodyLarge;
+    @apply list-decimal pl-6 space-y-2;
   }
 
   .focus:focus,
@@ -47,6 +56,11 @@
     ring-ultra-pink;
   }
 
+  label,
+  .tagline {
+    @apply text-label font-bold;
+  }
+
   .btn {
     @apply inline-block
       rounded-full 
@@ -54,6 +68,8 @@
       font-bold
       px-8 py-2
       no-underline
+      text-[1.125rem]
+      md:text-bodyLarge
       relative;
   }
   .btn-primary {
@@ -114,8 +130,11 @@
     }
   }
   .text-link {
-    @apply underline underline-offset-2
+    @apply underline underline-offset-4
       hover:text-ultra-pink;
+  }
+  input {
+    color: black;
   }
 }
 
@@ -123,6 +142,30 @@
   img {
     @apply rounded;
   }
+
+  .text-content {
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply mb-4;
+    }
+    p {
+      @apply text-base;
+    }
+    a {
+      @apply text-aqua;
+    }
+    ul,
+    ol {
+      display: inline-block;
+      text-align: left;
+    }
+  }
+
   .backdrop-blur-default {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -168,5 +211,61 @@
     display: flex !important;
     flex: 1 1 auto;
     margin: 0 !important;
+  }
+
+  .carousel-button {
+    @apply flex flex-row items-center gap-2 bg-white text-bodyLarge text-midnight border border-midnight rounded-md px-4 py-2 shadow transition;
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+
+  .logo-carousel-tile {
+    @apply flex items-center justify-center bg-white rounded-2xl p-4 h-40;
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+
+  .neon-banner {
+    @apply w-[105%] -ml-[2.5%] border-t-2 border-b-2 border-neon-violet bg-gradient-dark overflow-hidden py-10;
+
+    transform: rotate(-2.79deg);
+    transform-origin: center;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); /* Safari */
+    box-shadow: 0 0 30px 0 #630ff9cc;
+  }
+
+  .newsletter-signup {
+    @apply bg-gradient-dark 
+           rounded-[1.5rem] 
+           border 
+           border-neon-violet 
+           pt-[1.875rem] 
+           pb-[4.375rem] 
+           gap-[0.625rem] 
+           backdrop-blur-[16px] 
+           drop-shadow-glow;
+  }
+
+  .pagination-button {
+    @apply text-midnight bg-aqua px-2 py-2 rounded-full;
+  }
+}
+
+.hover-ultrapink:hover {
+  color: black !important;
+}
+.footer-header {
+  @apply text-base md:text-[1.625rem]  md:font-bold;
+}
+
+.footer-links {
+  a {
+    @apply text-base;
   }
 }

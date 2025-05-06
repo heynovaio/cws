@@ -12,6 +12,18 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Darker"
+            ],
+            "default_value": "No Background"
+          }
+        },
         "image_side": {
           "type": "Boolean",
           "config": {
@@ -61,7 +73,7 @@
                   "label": "Quote",
                   "placeholder": "",
                   "allowTargetBlank": true,
-                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  "multi": "heading2,heading3,heading4,heading5,heading6,strong,em,rtl,o-list-item,list-item,embed,image,hyperlink,paragraph,preformatted"
                 }
               },
               "author": {

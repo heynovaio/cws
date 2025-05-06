@@ -61,18 +61,39 @@
           "repeat": true
         }
       },
+      "include_newsletter_sign_up_banner": {
+        "type": "Boolean",
+        "config": {
+          "label": "Include Newsletter Sign Up Banner",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "tile_grid": {
+              "type": "SharedSlice"
+            },
+            "content_grid": {
+              "type": "SharedSlice"
+            },
+            "content_carousel": {
+              "type": "SharedSlice"
+            },
+            "content_column": {
+              "type": "SharedSlice"
+            },
+            "hashtag_banner": {
+              "type": "SharedSlice"
+            },
             "tabbed_carousel": {
               "type": "SharedSlice"
             },
             "accordion": {
-              "type": "SharedSlice"
-            },
-            "logo_list": {
               "type": "SharedSlice"
             },
             "rich_text": {
@@ -88,9 +109,6 @@
               "type": "SharedSlice"
             },
             "simple_text": {
-              "type": "SharedSlice"
-            },
-            "tile_grid": {
               "type": "SharedSlice"
             }
           }

@@ -3,36 +3,27 @@ import { PrismicNextLink } from "@prismicio/next";
 import { ReactNode } from "react";
 
 interface ButtonProps {
+  as?: "link" | "button";
+  type?: "button" | "submit";
   buttonType: "primary" | "secondary" | "outline" | "link";
   label: ReactNode;
   linkButtonColorClass?: string;
-  buttonLink: LinkField;
+  buttonLink?: LinkField;
   styling?: string;
+  icon?: ReactNode;
+  onClick?: () => void;
 }
 
-const arrowIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className="size-6"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-    />
-  </svg>
-);
-
 export const Button = ({
+  as = "link",
+  type = "button",
   buttonType = "primary",
   label,
   linkButtonColorClass = "",
   buttonLink,
   styling,
+  icon = null,
+  onClick,
 }: ButtonProps) => {
   let buttonStyle = "";
 
@@ -53,13 +44,30 @@ export const Button = ({
       buttonStyle = "btn btn-primary";
   }
 
+  if (as === "button") {
+    return (
+      <button
+        type={type}
+        className={`flex flex-row w-fit items-center gap-2 hover:gap-4 ${styling} ${buttonStyle} ${linkButtonColorClass}`}
+        onClick={onClick}
+      >
+        {label || "Submit"}
+        {icon && (
+          <span className="flex items-center justify-center">{icon}</span>
+        )}
+      </button>
+    );
+  }
+
+  if (!buttonLink || !label) return null;
+
   return (
     <PrismicNextLink
       field={buttonLink}
       className={`flex flex-row w-fit items-center gap-2 hover:gap-4 ${styling} ${buttonStyle} ${linkButtonColorClass}`}
     >
       {label}
-      {buttonType == "link" && arrowIcon}
+      {icon && <span className="flex items-center justify-center">{icon}</span>}
     </PrismicNextLink>
   );
 };

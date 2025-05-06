@@ -5,8 +5,8 @@
   "description": "ContentCarousel",
   "variations": [
     {
-      "id": "default",
-      "name": "Default",
+      "id": "programsCarousel",
+      "name": "Programs Carousel",
       "docURL": "...",
       "version": "initial",
       "description": "Default",
@@ -32,23 +32,89 @@
                   "select": "document",
                   "repeat": false,
                   "customtypes": [
-                    "resource_category",
-                    "offerings_category"
+                    "program_page"
                   ]
                 }
               }
             }
           }
         },
-        "all_link": {
-          "type": "Link",
+        "redirect_button": {
+          "type": "Group",
           "config": {
-            "label": "All Link",
-            "select": "document",
+            "label": "redirect_button",
             "repeat": false,
-            "customtypes": [
-              "page"
-            ]
+            "fields": {
+              "url": {
+                "type": "Link",
+                "config": {
+                  "label": "url",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "resourceCarousel",
+      "name": "Resource Carousel",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "Title"
+          }
+        },
+        "content_card": {
+          "type": "Group",
+          "config": {
+            "label": "Content Card",
+            "repeat": true,
+            "fields": {
+              "content": {
+                "type": "Link",
+                "config": {
+                  "label": "Content",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "resource_page"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "redirect_button": {
+          "type": "Group",
+          "config": {
+            "label": "redirect_button",
+            "repeat": false,
+            "fields": {
+              "url": {
+                "type": "Link",
+                "config": {
+                  "label": "url",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              }
+            }
           }
         }
       },

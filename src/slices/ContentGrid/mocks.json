@@ -1,0 +1,91 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Thought"
+						}
+					}
+				]
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Non laborum nisi proident aliqua reprehenderit fugiat aute adipisicing consequat nulla veniam dolor nulla consequat sint."
+						}
+					}
+				]
+			},
+			"category": {
+				"key": "697445e0-d84a-49f8-8098-015c9c0521d2",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "resourceGrid",
+		"primary": {
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "South"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Eiusmod officia ea voluptate deserunt exercitation eu in pariatur dolore. Laboris ut sunt nulla duis id voluptate aliqua fugiat laborum id amet incididunt aute veniam. Pariatur anim commodo elit Lorem mollit fugiat excepteur esse do dolor velit sit qui ex."
+						}
+					}
+				]
+			},
+			"category": {
+				"__TYPE__": "LinkContent",
+				"key": "c69c3350-9192-4e10-8ace-5b9b20ee27b2",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

@@ -6,18 +6,16 @@ import * as prismic from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
-import { getLocales } from "./utils";
-import React from "react";
 import { Layout } from "@/components";
+import { getLocales } from "@/utils";
+import React from "react";
 
-/**
- * This page renders a Prismic Document dynamically based on the URL.
- */
+type Params = { lang: string };
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: string }>;
+  params: Promise<Params>;
 }): Promise<Metadata> {
   const { lang } = await params;
   const client = createClient();
@@ -29,7 +27,7 @@ export async function generateMetadata({
     title:
       page.data.meta_title ||
       prismic.asText(page.data.title) ||
-      "Community Legal Information",
+      "Canadian Women in Sports",
     description: page.data.meta_description,
     openGraph: {
       title: page.data.meta_title || undefined,
@@ -42,22 +40,27 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function Page({ params }: { params: Promise<Params> }) {
   const { lang } = await params;
   const client = createClient();
-
-  const page = await client.getByUID("page", "home", { lang });
+  const page = await client
+    .getByUID("page", "home", { lang })
+    .catch(() => notFound());
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
-
+  const partners = await client.getSingle("partners", { lang });
   const locales = await getLocales(page, client);
 
   return (
-    <Layout locales={locales} global={global.data} menus={menus.data}>
+    <Layout
+      locales={locales}
+      global={global.data}
+      menus={menus.data}
+      partners={partners.data}
+      include_newsletter_sign_up_banner={
+        page.data.include_newsletter_sign_up_banner
+      }
+    >
       <SliceZone
         slices={page.data.slices}
         components={components}
