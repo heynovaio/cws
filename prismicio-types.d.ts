@@ -4034,6 +4034,16 @@ export type TestimonialsSlice = prismic.SharedSlice<
  */
 export interface TileGridSliceIconTilePrimaryTilesItem {
   /**
+   * Tile Background Image field in *TileGrid → Icon Tile → Primary → Tiles*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tile_grid.iconTile.primary.tiles[].tile_background_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  tile_background_image: prismic.ImageField<never>;
+
+  /**
    * Tile Icon field in *TileGrid → Icon Tile → Primary → Tiles*
    *
    * - **Field Type**: Image
@@ -4046,23 +4056,27 @@ export interface TileGridSliceIconTilePrimaryTilesItem {
   /**
    * Tile Title field in *TileGrid → Icon Tile → Primary → Tiles*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Title
    * - **Placeholder**: *None*
    * - **API ID Path**: tile_grid.iconTile.primary.tiles[].tile_title
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  tile_title: prismic.RichTextField;
+  tile_title: prismic.TitleField;
 
   /**
-   * Tile Button field in *TileGrid → Icon Tile → Primary → Tiles*
+   * Tile Link field in *TileGrid → Icon Tile → Primary → Tiles*
    *
    * - **Field Type**: Link
    * - **Placeholder**: Learn More
-   * - **API ID Path**: tile_grid.iconTile.primary.tiles[].tile_button
+   * - **API ID Path**: tile_grid.iconTile.primary.tiles[].tile_link
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  tile_button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  tile_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
   >;
 }
 
@@ -4080,16 +4094,6 @@ export interface TileGridSliceIconTilePrimary {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
-
-  /**
-   * Background Image field in *TileGrid → Icon Tile → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.iconTile.primary.background_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  background_image: prismic.ImageField<never>;
 
   /**
    * Columns field in *TileGrid → Icon Tile → Primary*

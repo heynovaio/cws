@@ -198,7 +198,13 @@
       rgba(51, 23, 153, 0.8) 100%
     );
   }
-
+  .bg-gradient-tile {
+    background: linear-gradient(
+      180deg,
+      rgba(51, 23, 153, 0.65) 0%,
+      rgba(65, 0, 152, 0.65) 100%
+    );
+  }
   /* Carousel Styling Below - Helps with making sure the cards are the same size */
   .tabbed-carousel .react-multi-carousel-item {
     align-content: center;
@@ -260,6 +266,31 @@
 .hover-ultrapink:hover {
   color: black !important;
 }
+
+/* Apply hover-zoom to the link and then hover-zoom-img to the image you want to do the zooming */
+.hover-zoom { 
+  .hover-zoom-img {
+    transition: all .5s;
+  }
+
+  &:hover {
+    .hover-zoom-img {
+      transform: scale(1.25);
+    }
+  }
+}
+
+.hover-shadow {
+  box-shadow: 0 0 21px 0 #630ff9cc;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px); /* Safari */
+  transition: all .5s;
+
+  &:hover {
+    box-shadow: 0 0 40px 0 #630ff9cc;
+  }
+}
+
 .footer-header {
   @apply text-base md:text-[1.625rem]  md:font-bold;
 }
