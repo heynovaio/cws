@@ -176,6 +176,7 @@ const ContentCarousel = ({
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      styling="overflow-x-hidden"
     >
       <Container>
         {/* Header and Carousel Navigation */}

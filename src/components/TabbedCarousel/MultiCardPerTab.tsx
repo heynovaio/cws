@@ -78,11 +78,13 @@ export const MultiCardPerTab = ({ slice }: MultiCardPerTabProps) => {
             ))}
           </TabList>
           {/* Carousel Buttons */}
-          <CarouselButton
-            currentSlide={currentSlide}
-            totalSlides={totalSlides}
-            onSlideChange={handleSlideChange}
-          />
+          {currentItems.length > 1 && (
+            <CarouselButton
+              currentSlide={currentSlide}
+              totalSlides={totalSlides}
+              onSlideChange={handleSlideChange}
+            />
+          )}
         </div>
 
         <TabPanels className="py-12 w-full">
