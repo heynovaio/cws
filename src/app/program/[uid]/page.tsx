@@ -58,6 +58,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const partners = await client.getSingle("partners", { lang });
 
   const locales = await getLocales(page, client);
+  const pageTags = page.tags || [];
 
   return (
     <CategoryFilterProvider>
@@ -74,7 +75,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <SliceZone
           slices={page.data.slices}
           components={components}
-          context={{ lang: "en-ca" }}
+          context={{ lang: "en-ca", tags: pageTags }}
         />
       </Layout>
     </CategoryFilterProvider>
