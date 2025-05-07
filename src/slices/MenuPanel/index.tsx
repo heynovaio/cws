@@ -36,7 +36,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
       >
         {({ open }) => (
           <>
-            <PopoverButton className="menu-link flex items-center gap-2 focus:outline focus:outline-4 focus:outline-offset-2 focus:outline-ultra-pink rounded-md text-md">
+            <PopoverButton className="menu-link flex items-center gap-2 ocus:outline focus:outline-4 focus:outline-offset-2 focus:outline-ultra-pink rounded-md text-md">
               {slice.primary.menu_display || "Dropdown"}
               <FaChevronDown
                 className={`h-3 w-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
@@ -113,7 +113,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
       >
         {({}) => (
           <>
-            <DisclosureButton className="flex menu-link-mobile pl-4 gap-2">
+            <DisclosureButton className="flex menu-link-mobile  gap-2">
               {slice.primary.menu_display || "Dropdown"}
             </DisclosureButton>
 
