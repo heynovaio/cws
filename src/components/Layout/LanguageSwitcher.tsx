@@ -12,7 +12,7 @@ interface LanguageSwitcherProps {
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   locales,
-  global,
+  // global,
   classname,
 }) => {
   const router = useRouter();
@@ -29,13 +29,14 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     }
   };
 
-  console.log(locales);
+  console.log(global);
 
   return (
     <div className={`print:hidden ${classname}`}>
       <div className="inline-flex items-center  px-2 pt-1">
         <span className="px-1 py-1">
-          <strong>{global?.language || "Language"}:</strong>
+          {/* <strong>{global?.language || "Language"}:</strong> */}
+          <strong>Language:</strong>
         </span>
 
         <select

@@ -11,11 +11,11 @@ import Partners from "../Menu/Partners";
 import NewsletterSignupBanner from "../NewsletterSignup/NewsletterSignup";
 import { Container } from "./Container";
 import { Footer } from "../Menu/Footer";
-import LanguageSwitcher from "./LanguageSwitcher";
 import { TopBar } from "./TopBar";
+import { PrismicDocument } from "@prismicio/client";
 
 interface LayoutProps {
-  locales?: any;
+  locales: PrismicDocument[];
   menus: MenusDocumentData;
   global: GlobalsDocumentData;
   children: ReactNode;
@@ -31,7 +31,6 @@ export const Layout = ({
   children,
   include_newsletter_sign_up_banner,
 }: LayoutProps) => {
-  console.log(menus.banner_text);
   return (
     <div>
       <div className="sticky top-0 z-50 ">
