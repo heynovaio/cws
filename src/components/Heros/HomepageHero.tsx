@@ -13,27 +13,29 @@ export const HomepageHero: React.FC<HomepageHeroProps> = ({ data }) => {
   return (
     <section
       data-test-id="default-hero"
-      className="min-h-[600px] flex items-center  mb-[-120px] w-full"
+      className="min-h-[600px] flex items-center w-full"
     >
       <Container>
-        <div className="text-white flex flex-col sm:flex-row justify-between sm:items-center  py-0 gap-8 mt-0">
-          <ContentBox
-            title={data.title}
-            content={<PrismicRichText field={data.body} />}
-            buttons={data.button.map((link, index) => (
-              <Button
-                key={index}
-                buttonType="primary"
-                buttonLink={link}
-                label={link.text}
-              />
-            ))}
-          />
+        <div className="text-white flex flex-col sm:flex-row justify-between items-center py-0 gap-16 mt-0">
+          <div className="basis-1/2">
+            <ContentBox
+              title={data.title}
+              content={<PrismicRichText field={data.body} />}
+              buttons={data.button.map((link, index) => (
+                <Button
+                  key={index}
+                  buttonType="primary"
+                  buttonLink={link}
+                  label={link.text}
+                />
+              ))}
+            />
+          </div>
 
-          <div className=" print:mt-6 print:mb-0 ">
+          <div className="basis-1/2 flex justify-center print:mt-6 print:mb-0">
             <PrismicNextImage
               field={data.image}
-              className="w-[900px] h-auto object-contain"
+              className="w-full h-auto object-contain max-w-[700px]"
               fallbackAlt=""
               priority={true}
               imgixParams={{ compress: true }}
