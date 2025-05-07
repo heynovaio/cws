@@ -35,7 +35,6 @@ export default {
       "navy-background": "#00002D",
       "dark-purple-background": "#180451",
       "soft-purple": "#D4C6FD40",
-      "menu-purple": "#360096",
     },
     fontWeight: {
       normal: "400",

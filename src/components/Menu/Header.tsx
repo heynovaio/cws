@@ -22,7 +22,10 @@ interface HeaderProps {
 // TODO: Change the menu colors and add from themeing file
 export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
   return (
-    <header>
+    <header
+      className="sticky top-0 z-50 bg-midnight/70"
+      style={{ backdropFilter: "blur(35px)" }}
+    >
       <nav
         aria-label="Main Nav"
         className="flex  justify-between items-center px-5 lg:py-2 py-1 "
