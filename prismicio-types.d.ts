@@ -3467,11 +3467,11 @@ export interface TabbedCarouselSliceTabbedCarouselCampaignPrimaryTabItem {
 }
 
 /**
- * Item in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+ * Item in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary → Tab*
  */
 export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem {
   /**
-   * Tab Label field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   * Tab Label field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary → Tab*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -3481,7 +3481,7 @@ export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem {
   tab_label: prismic.KeyTextField;
 
   /**
-   * Card Title field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   * Card Title field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary → Tab*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3491,7 +3491,7 @@ export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem {
   card_title: prismic.RichTextField;
 
   /**
-   * Card Description field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   * Card Description field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary → Tab*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3501,7 +3501,7 @@ export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem {
   card_description: prismic.RichTextField;
 
   /**
-   * Card Image field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   * Card Image field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary → Tab*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -3511,7 +3511,7 @@ export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem {
   card_image: prismic.ImageField<never>;
 
   /**
-   * Card Button field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   * Card Button field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary → Tab*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -3523,7 +3523,7 @@ export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem {
   >;
 
   /**
-   * Card Link field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary → Tab*
+   * Card Link field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary → Tab*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -3635,11 +3635,11 @@ export type TabbedCarouselSliceTabbedCarouselCampaign =
   >;
 
 /**
- * Primary content in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+ * Primary content in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary*
  */
 export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimary {
   /**
-   * Title field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+   * Title field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3649,7 +3649,7 @@ export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimary {
   title: prismic.RichTextField;
 
   /**
-   * Body field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+   * Body field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -3659,7 +3659,7 @@ export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimary {
   body: prismic.RichTextField;
 
   /**
-   * Tab field in *TabbedCarousel → TabbedCarousel - MultiCard → Primary*
+   * Tab field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -3672,7 +3672,7 @@ export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimary {
 }
 
 /**
- * TabbedCarousel - MultiCard variation for TabbedCarousel Slice
+ * TabbedCarousel - MultiCard per Tab variation for TabbedCarousel Slice
  *
  * - **API ID**: `tabbedCarouselMultiCard`
  * - **Description**: Default

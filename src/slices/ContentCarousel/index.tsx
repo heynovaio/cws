@@ -176,10 +176,11 @@ const ContentCarousel = ({
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      styling="overflow-x-hidden"
     >
       <Container>
         {/* Header and Carousel Navigation */}
-        <div className="flex justify-between items-start mb-6">
+        <div className="flex justify-between items-center mb-6">
           <ContentBox
             title={slice.primary.title ?? undefined}
             content={
@@ -197,8 +198,9 @@ const ContentCarousel = ({
             styling="w-fit"
           />
         </div>
-
-        {/* Carousel Content */}
+      </Container>
+      {/* Carousel Content */}
+      <Container>
         <Carousel
           ref={carouselRef}
           responsive={responsive}
@@ -209,7 +211,7 @@ const ContentCarousel = ({
           keyBoardControl
           afterChange={handleSlideChange}
           itemClass="px-3 !mt-0"
-          containerClass="w-full py-1"
+          containerClass="w-full py-1 !overflow-visible"
         >
           {filteredDataWithCategory.map((item, index) => (
             <div key={item.id} className="carousel-card flex h-full">
