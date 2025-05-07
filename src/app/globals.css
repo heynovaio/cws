@@ -328,3 +328,31 @@
     @apply text-base;
   }
 }
+
+.bg-quadrant-gradient {
+  background:
+    linear-gradient(
+        to bottom right,
+        rgba(46, 7, 143, 0.7) 0%,
+        rgba(0, 0, 46, 0.7) 50%
+      )
+      bottom right / 50% 50% no-repeat,
+    linear-gradient(
+        to bottom left,
+        rgba(46, 7, 143, 0.7) 0%,
+        rgba(0, 0, 46, 0.7) 50%
+      )
+      bottom left / 50% 50% no-repeat,
+    linear-gradient(
+        to top left,
+        rgba(46, 7, 143, 0.7) 0%,
+        rgba(0, 0, 46, 0.7) 50%
+      )
+      top left / 50% 50% no-repeat,
+    linear-gradient(
+        to top right,
+        rgba(46, 7, 143, 0.7) 0%,
+        rgba(0, 0, 46, 0.7) 50%
+      )
+      top right / 50% 50% no-repeat;
+}
