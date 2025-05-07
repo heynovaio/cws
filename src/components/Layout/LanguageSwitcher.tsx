@@ -29,8 +29,6 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     }
   };
 
-  console.log(global);
-
   return (
     <div className={`print:hidden ${classname}`}>
       <div className="inline-flex items-center  px-2 pt-1">
