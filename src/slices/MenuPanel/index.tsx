@@ -45,15 +45,15 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
             <PopoverPanel
               transition
               anchor="bottom"
-              className="bg-menu-purple z-10 lg:mt-4 mt-0 w-full transition duration-200 ease-in-out [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0"
+              className="bg-menu-purple z-10 w-full transition duration-200 ease-in-out [--anchor-gap:var(--spacing-5)] translate-y-6 data-[closed]:-translate-y-1 data-[closed]:opacity-0"
             >
-              <div className="px-16 py-10 lg:px-28 lg:py-20 flex items-center">
+              <div className="px-16 py-10 lg:px-28 lg:py-20 flex ">
                 <ContentBox
                   title={slice.primary.title}
                   content={<PrismicRichText field={slice.primary.body} />}
                   containerClassName="border-r border-black basis-1/3 lg:pr-32 pr-16 py-5"
                 />
-                <div className="flex flex-col basis-2/3 text-white lg:pl-32 pl-16 py-5 w-full">
+                <div className="flex flex-col basis-2/3 justify-center text-white lg:pl-32 pl-16 py-5 w-full">
                   {slice.primary.link_group.map((item, index) => (
                     <div key={index} className="mb-8">
                       {item.title && (
