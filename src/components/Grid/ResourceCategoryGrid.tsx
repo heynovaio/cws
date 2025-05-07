@@ -1,3 +1,4 @@
+"use client";
 import React, { useMemo } from "react";
 import { useResourceCategoryData } from "@/hooks";
 import { componentsTextSmall } from "@/utils";
@@ -6,8 +7,8 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { DefaultCard } from "../Cards";
-import { Grid } from "./Grid";
 import GetAllResources from "@/utils/getAllResources";
+import { CustomPagination } from "../CustomPagination";
 
 export type ResourceCategoryGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
@@ -45,30 +46,31 @@ export const ResourceCategoryGrid = ({ slice }: ResourceCategoryGridProps) => {
       ? slice.primary.category.name
       : "Other");
 
-  return (
-    <Grid maxColumns={3}>
-      {resourceData.map((item, index) => (
-        <DefaultCard
-          key={index}
-          title={asText(item.data.title)}
-          content={
-            <PrismicRichText field={item.data.body} components={componentsTextSmall} />
-          }
-          image={item.data.image}
-          category={categoryName as string}
-          cardType="resource"
-          buttons={[
-            <Link
-              key={index}
-              href={item.url ?? ""}
-              className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
-            >
-              Learn More
-              <HiOutlineArrowLongRight className="h-10 w-10" />
-            </Link>,
-          ]}
+  const resourceCards = resourceData.map((item, index) => (
+    <DefaultCard
+      key={index}
+      title={asText(item.data.title)}
+      content={
+        <PrismicRichText
+          field={item.data.body}
+          components={componentsTextSmall}
         />
-      ))}
-    </Grid>
-  );
+      }
+      image={item.data.image}
+      category={categoryName as string}
+      cardType="resource"
+      buttons={[
+        <Link
+          key={index}
+          href={item.url ?? ""}
+          className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
+        >
+          Learn More
+          <HiOutlineArrowLongRight className="h-10 w-10" />
+        </Link>,
+      ]}
+    />
+  ));
+
+  return <CustomPagination itemsPerPage={9}>{resourceCards}</CustomPagination>;
 };

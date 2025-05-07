@@ -36,22 +36,24 @@ export const CustomPagination = ({
         {currentItems}
       </div>
 
-      <Pagination
-        currentPage={page}
-        setCurrentPage={handlePageChange}
-        totalPages={totalPages}
-        edgePageCount={1}
-        middlePagesSiblingCount={1}
-        truncableText="..."
-        truncableClassName="text-white px-3 py-2 text-bodyLarge font-bold"
-        className="flex gap-2 items-center flex-wrap mt-4 list-none justify-center"
-      >
-        <Pagination.PageButton
-          activeClassName="bg-ultra-pink border-ultra-pink border-2  focus:rounded-full hover-ultrapink"
-          inactiveClassName="bg-dark-purple-background border-white border-2  focus:rounded-full"
-          className="w-10 h-10 flex items-center justify-center rounded-full  focus:outline-none focus:ring-2 focus:ring-aqua font-bold no-underline cursor-pointer"
-        />
-      </Pagination>
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={page}
+          setCurrentPage={handlePageChange}
+          totalPages={totalPages}
+          edgePageCount={1}
+          middlePagesSiblingCount={1}
+          truncableText="..."
+          truncableClassName="text-white px-3 py-2 text-bodyLarge font-bold"
+          className="flex gap-2 items-center flex-wrap mt-4 list-none justify-center"
+        >
+          <Pagination.PageButton
+            activeClassName="bg-ultra-pink border-ultra-pink border-2  focus:rounded-full hover-ultrapink"
+            inactiveClassName="bg-dark-purple-background border-white border-2  focus:rounded-full"
+            className="w-10 h-10 flex items-center justify-center rounded-full  focus:outline-none focus:ring-2 focus:ring-aqua font-bold no-underline cursor-pointer"
+          />
+        </Pagination>
+      )}
     </div>
   );
 };
