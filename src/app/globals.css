@@ -102,6 +102,20 @@
     }
   }
 
+  .btn-tertiary, a.btn-tertiary {
+    @apply text-white bg-electric-blue border border-electric-blue transition-transform duration-200;
+    &:hover {
+      @apply bg-electric-blue/80 text-white border-electric-blue -translate-y-1;
+      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
+    }
+
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+
   .btn-outline {
     @apply bg-transparent
     border-[3px]
@@ -268,9 +282,9 @@
 }
 
 /* Apply hover-zoom to the link and then hover-zoom-img to the image you want to do the zooming */
-.hover-zoom { 
+.hover-zoom {
   .hover-zoom-img {
-    transition: all .5s;
+    transition: all 0.5s;
   }
 
   &:hover {
@@ -284,7 +298,7 @@
   box-shadow: 0 0 21px 0 #630ff9cc;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px); /* Safari */
-  transition: all .5s;
+  transition: all 0.5s;
 
   &:hover {
     box-shadow: 0 0 40px 0 #630ff9cc;
