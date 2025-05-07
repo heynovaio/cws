@@ -34,9 +34,14 @@ export const Layout = ({
   console.log(menus.banner_text);
   return (
     <div>
-      <TopBar locales={locales} global={global} text={menus.banner_text} />
-
-      <Header logo={global.site_logo} slices={menus.slices} locales={locales} />
+      <div className="sticky top-0 z-50 ">
+        <TopBar locales={locales} global={global} text={menus.banner_text} />
+        <Header
+          logo={global.site_logo}
+          slices={menus.slices}
+          locales={locales}
+        />
+      </div>
       <main id="main-content" className="relative focus:outline-0" tabIndex={0}>
         {children}
       </main>
