@@ -21,11 +21,11 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { uid, lang } = await params;
+  const { lang } = await params;
 
   const client = createClient();
   const page = await client
-    .getByUID("team_members", uid, { lang })
+    .getSingle("team_members", { lang })
     .catch(() => notFound());
 
   return {
@@ -46,11 +46,11 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const { uid, lang } = await params;
+  const { lang } = await params;
 
   const client = createClient();
   const page = await client
-    .getByUID("team_members", uid, { lang })
+    .getSingle("team_members", { lang })
     .catch(() => notFound());
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
