@@ -52,7 +52,11 @@
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "contact_info": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },

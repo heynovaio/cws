@@ -124,6 +124,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "contact_info": {
+              "type": "SharedSlice"
+            },
             "tag_category": {
               "type": "SharedSlice"
             },
