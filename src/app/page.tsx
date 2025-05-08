@@ -62,12 +62,17 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         page.data.include_newsletter_sign_up_banner
       }
     >
-      <HomepageHero data={page.data} />
-      <SliceZone
-        slices={page.data.slices}
-        components={components}
-        context={{ lang }}
-      />
+      <div className="relative">
+        <HomepageHero data={page.data} />
+
+        <div className="absolute top-full left-0 right-0 z-10">
+          <SliceZone
+            slices={page.data.slices}
+            components={components}
+            context={{ lang }}
+          />
+        </div>
+      </div>
     </Layout>
   );
 }
