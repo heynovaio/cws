@@ -1,7 +1,7 @@
 {
   "id": "contact_info",
   "type": "SharedSlice",
-  "name": "ContactInfo",
+  "name": "FormEmbed",
   "description": "ContactInfo",
   "variations": [
     {
@@ -43,6 +43,18 @@
           "config": {
             "label": "Form",
             "placeholder": ""
+          }
+        },
+        "desktop_alignment": {
+          "type": "Select",
+          "config": {
+            "label": "Desktop Alignment",
+            "placeholder": "",
+            "options": [
+              "Two Column",
+              "Center Stacked"
+            ],
+            "default_value": "Two Column"
           }
         }
       },

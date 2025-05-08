@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 export const components = {
   accordion: dynamic(() => import("./Accordion")),
   call_to_action: dynamic(() => import("./CallToAction")),
-  contact_info: dynamic(() => import("./ContactInfo")),
+  contact_info: dynamic(() => import("./FormEmbed")),
   content_carousel: dynamic(() => import("./ContentCarousel")),
   content_column: dynamic(() => import("./ContentColumn")),
   content_grid: dynamic(() => import("./ContentGrid")),

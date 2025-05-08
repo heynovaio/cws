@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type CampaignPageDocumentDataSlicesSlice =
+  | ContactInfoSlice
   | ImageTextSlice
   | HashtagBannerSlice
   | CallToActionSlice;
@@ -84,7 +85,7 @@ export type CampaignPageDocument<Lang extends string = string> =
     Lang
   >;
 
-type ContactPageDocumentDataSlicesSlice = never;
+type ContactPageDocumentDataSlicesSlice = ContactInfoSlice;
 
 /**
  * Content for Contact Page documents
@@ -549,6 +550,7 @@ export type NewsletterSignupDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | ContactInfoSlice
   | TileGridSlice
   | ContentGridSlice
   | ContentCarouselSlice
@@ -855,6 +857,7 @@ export type ProgramCategoryDocument<Lang extends string = string> =
   >;
 
 type ProgramPageDocumentDataSlicesSlice =
+  | ContactInfoSlice
   | TagCategorySlice
   | TabbedCarouselSlice
   | ContentGridSlice
@@ -1172,6 +1175,7 @@ export type ResourceCategoryDocument<Lang extends string = string> =
   >;
 
 type ResourcePageDocumentDataSlicesSlice =
+  | ContactInfoSlice
   | TabbedCarouselSlice
   | TagCategorySlice
   | TileGridSlice
@@ -1442,6 +1446,7 @@ export type SearchPageDocument<Lang extends string = string> =
   >;
 
 type TeamMembersDocumentDataSlicesSlice =
+  | ContactInfoSlice
   | CallToActionSlice
   | TestimonialsSlice
   | TeamListSlice;
@@ -1811,11 +1816,11 @@ export type CallToActionSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *ContactInfo → Default → Primary*
+ * Primary content in *FormEmbed → Default → Primary*
  */
 export interface ContactInfoSliceDefaultPrimary {
   /**
-   * Title field in *ContactInfo → Default → Primary*
+   * Title field in *FormEmbed → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1825,7 +1830,7 @@ export interface ContactInfoSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
-   * Image field in *ContactInfo → Default → Primary*
+   * Image field in *FormEmbed → Default → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -1835,7 +1840,7 @@ export interface ContactInfoSliceDefaultPrimary {
   image: prismic.ImageField<never>;
 
   /**
-   * Description field in *ContactInfo → Default → Primary*
+   * Description field in *FormEmbed → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1845,7 +1850,7 @@ export interface ContactInfoSliceDefaultPrimary {
   description: prismic.RichTextField;
 
   /**
-   * Form field in *ContactInfo → Default → Primary*
+   * Form field in *FormEmbed → Default → Primary*
    *
    * - **Field Type**: Embed
    * - **Placeholder**: *None*
@@ -1853,10 +1858,24 @@ export interface ContactInfoSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#embed
    */
   form: prismic.EmbedField;
+
+  /**
+   * Desktop Alignment field in *FormEmbed → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Two Column
+   * - **API ID Path**: contact_info.default.primary.desktop_alignment
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  desktop_alignment: prismic.SelectField<
+    "Two Column" | "Center Stacked",
+    "filled"
+  >;
 }
 
 /**
- * Default variation for ContactInfo Slice
+ * Default variation for FormEmbed Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -1869,12 +1888,12 @@ export type ContactInfoSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *ContactInfo*
+ * Slice variation for *FormEmbed*
  */
 type ContactInfoSliceVariation = ContactInfoSliceDefault;
 
 /**
- * ContactInfo Shared Slice
+ * FormEmbed Shared Slice
  *
  * - **API ID**: `contact_info`
  * - **Description**: ContactInfo
