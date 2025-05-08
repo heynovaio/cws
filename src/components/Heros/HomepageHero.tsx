@@ -4,20 +4,23 @@ import { PrismicNextImage } from "@prismicio/next";
 import { Container } from "../Layout";
 import { ContentBox } from "../ContentBox/ContentBox";
 import { Button } from "../Buttons";
+import { ImageField, LinkField, RichTextField } from "@prismicio/client";
 
 interface HomepageHeroProps {
-  data: any;
+  data: {
+    title: RichTextField;
+    body: RichTextField;
+    button: (LinkField & { text?: string })[];
+    image: ImageField;
+  };
 }
 
 export const HomepageHero: React.FC<HomepageHeroProps> = ({ data }) => {
   return (
-    <section
-      data-test-id="default-hero"
-      className="min-h-[600px] flex items-center w-full"
-    >
+    <section className="min-h-[600px] flex items-center w-full bg-quadrant-gradient ">
       <Container>
-        <div className="text-white flex flex-col sm:flex-row justify-between items-center py-0 gap-16 mt-0">
-          <div className="basis-1/2">
+        <div className="text-white flex flex-col sm:flex-row justify-between items-center py-0 gap-16 mt-0 ">
+          <div className="basis-1/2 ">
             <ContentBox
               title={data.title}
               content={<PrismicRichText field={data.body} />}
