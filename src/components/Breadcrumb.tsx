@@ -2,8 +2,9 @@
 import { PrismicNextLink } from "@prismicio/next";
 import { Fragment } from "react";
 import { FaChevronRight } from "react-icons/fa";
+import Link from "next/link";
 
-type BreadcrumbLink = {
+export type BreadcrumbLink = {
   href?: string;
   label: string;
 };
@@ -19,9 +20,9 @@ export const Breadcrumb = ({ links, color = "black" }: BreadcrumbProps) => {
       aria-label="Breadcrumb"
       className="print:hidden flex items-center flex-wrap gap-1 text-md"
     >
-      <a href="/" className={`${textColor} underlined-link-dark text-md`}>
+      <Link href="/" className={`${textColor} underlined-link-dark text-md`}>
         Home
-      </a>
+      </Link>
       <span>
         <FaChevronRight size={15} color={color} />
       </span>
