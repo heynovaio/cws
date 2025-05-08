@@ -59,31 +59,41 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const locales = await getLocales(page, client);
   const pageTags = page.tags || [];
 
-  const pageTypeLabel = page.type === "program_page" ? "Programs" : "Resources";
+  const pageTypeLabel =
+    page.type === "program_page"
+      ? "Support Pathways"
+      : "Gender Equity in Action";
   const pageTypeSearchParam =
     page.type === "program_page" ? "program" : "resource";
 
-  const category = page.data.category;
-
-  // const categoryTitle =
-  //   prismic.asText(category.data.title)
-
-  // const categoryUid = category ? category.uid : "";
+  let categoryDoc = null;
+  if (page.data.category?.uid) {
+    try {
+      categoryDoc = await client.getByUID(
+        "program_category",
+        page.data.category.uid,
+        { lang }
+      );
+    } catch {
+      console.warn("Not Found:", page.data.category);
+    }
+  }
+  console.log(categoryDoc?.data.name);
+  const categoryLabel = categoryDoc && categoryDoc.data.name;
 
   const links = [
     {
       label: pageTypeLabel,
       href: `/search?type=${pageTypeSearchParam}`,
     },
-    // {
-    //   label: categoryTitle,
-    //   href: `/search?category=${categoryUid}`,
-    // },
+    categoryLabel && {
+      label: categoryLabel,
+      href: `/search?category=${pageTypeSearchParam}`,
+    },
     {
       label: prismic.asText(page.data.title),
     },
   ];
-
   return (
     <CategoryFilterProvider>
       <Layout
