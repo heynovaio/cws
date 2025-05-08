@@ -65,13 +65,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       <div className="relative">
         <HomepageHero data={page.data} />
 
-        <div className="absolute top-full left-0 right-0 z-10">
-          <SliceZone
-            slices={page.data.slices}
-            components={components}
-            context={{ lang }}
-          />
-        </div>
+        <SliceZone
+          slices={page.data.slices}
+          components={components}
+          context={{ lang }}
+        />
       </div>
     </Layout>
   );
