@@ -16,7 +16,7 @@ export type ContentColumnProps =
 const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
   const cardStyling =
     slice.primary.card_background === "Purple"
-      ? "bg-neon-violet/60 text-white divide-soft-purple/25"
+      ? "bg-midnight bg-gradient-dark text-white divide-soft-purple/25"
       : "bg-white text-midnight divide-neon-violet";
 
   const isSingleColumn = slice.primary.column.length === 1;

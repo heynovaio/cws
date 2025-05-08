@@ -70,11 +70,13 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       }
     >
       <GeneralHero data={page.data} tagline="Test tagline" />
-      <SliceZone
-        slices={page.data.slices}
-        components={components}
-        context={{ lang: "en-ca" }}
-      />
+      <div id="next-section">
+        <SliceZone
+          slices={page.data.slices}
+          components={components}
+          context={{ lang: "en-ca" }}
+        />
+      </div>
     </Layout>
   );
 }

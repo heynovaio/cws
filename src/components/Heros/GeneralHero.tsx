@@ -3,6 +3,7 @@ import { Container } from "../Layout";
 import { PrismicRichText } from "@prismicio/react";
 import { Button } from "../Buttons";
 import { KeyTextField, LinkField, RichTextField } from "@prismicio/client";
+import { HiArrowLongDown } from "react-icons/hi2";
 
 interface GeneralHeroProps {
   data: {
@@ -11,23 +12,29 @@ interface GeneralHeroProps {
     button: (LinkField & { text?: string })[];
   };
   tagline?: string | KeyTextField;
+  shortHero?: boolean;
 }
 
-export const GeneralHero: React.FC<GeneralHeroProps> = ({ data, tagline }) => {
+export const GeneralHero: React.FC<GeneralHeroProps> = ({
+  data,
+  tagline,
+  shortHero = false,
+}) => {
   return (
     <section
       data-test-id="default-hero"
-      className="min-h-[600px] flex items-center w-full bg-quadrant-gradient"
+      className={`relative flex items-center w-full bg-quadrant-gradient ${
+        shortHero ? "min-h-[500px]" : "min-h-[600px]"
+      }`}
     >
       <Container>
         {tagline && (
-          <p className="uppercase text-aqua font-bold text-md md:text-tagline text-center">
-            tagline
+          <p className="uppercase text-aqua font-bold text-md md:text-tagline text-center mb-4">
+            {tagline}
           </p>
         )}
-        <div
-          className={`text-white flex flex-col items-center  text-center justify-between py-0 gap-8 mt-0 `}
-        >
+
+        <div className="text-white flex flex-col items-center text-center justify-between py-0 gap-8 mt-0">
           <PrismicRichText field={data.title} />
           <PrismicRichText field={data.body} />
           {data.button.map((link, index) => (
@@ -40,6 +47,14 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({ data, tagline }) => {
           ))}
         </div>
       </Container>
+
+      {!shortHero && (
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 cursor-pointer">
+          <a href="#next-section" aria-label="Scroll to next section">
+            <HiArrowLongDown className="w-8 h-8 text-white" />
+          </a>
+        </div>
+      )}
     </section>
   );
 };
