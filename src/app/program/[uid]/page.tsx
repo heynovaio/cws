@@ -10,7 +10,7 @@ import React from "react";
 import { Intro, Layout } from "@/components";
 import { getLocales } from "@/utils";
 import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
-
+import type { BreadcrumbLink } from "@/components/Breadcrumb";
 /**
  * This page renders a Prismic Document dynamically based on the URL.
  */
@@ -67,15 +67,15 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     page.type === "program_page" ? "program" : "resource";
 
   let categoryDoc = null;
-  if (page.data.category?.uid) {
+  const category = page.data.category;
+
+  if (category && category.link_type === "Document" && category.uid) {
     try {
-      categoryDoc = await client.getByUID(
-        "program_category",
-        page.data.category.uid,
-        { lang }
-      );
+      categoryDoc = await client.getByUID("program_category", category.uid, {
+        lang,
+      });
     } catch {
-      console.warn("Not Found:", page.data.category);
+      console.warn("Not Found:", category);
     }
   }
 
@@ -86,14 +86,17 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       label: pageTypeLabel,
       href: `/search?type=${pageTypeSearchParam}`,
     },
-    categoryLabel && {
-      label: categoryLabel,
-      href: `/search?category=${pageTypeSearchParam}`,
-    },
+    categoryLabel
+      ? {
+          label: categoryLabel,
+          href: `/search?category=${pageTypeSearchParam}`,
+        }
+      : null,
     {
       label: prismic.asText(page.data.title),
     },
-  ];
+  ].filter(Boolean) as BreadcrumbLink[];
+
   return (
     <CategoryFilterProvider>
       <Layout
