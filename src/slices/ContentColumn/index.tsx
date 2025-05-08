@@ -29,7 +29,7 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
         containerClassName={isSingleColumn ? "flex justify-center" : ""}
       >
         <div
-          className={`${cardStyling} flex flex-col md:flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch ${
+          className={`${cardStyling} relative z-10 flex flex-col md:flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch ${
             isSingleColumn ? "max-w-[860px] w-full" : "w-full"
           }`}
         >
