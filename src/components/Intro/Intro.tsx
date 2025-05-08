@@ -18,7 +18,7 @@ import { Breadcrumb, BreadcrumbProps } from "../Breadcrumb";
 interface IntroProps {
   pageData?: ProgramPageDocumentData | ResourcePageDocumentData;
   type?: "program" | "resource" | string;
-  links: BreadcrumbProps["links"];
+  links?: BreadcrumbProps["links"];
 }
 
 export const Intro = ({ type, pageData, links }: IntroProps) => {
@@ -54,6 +54,7 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
       break;
   }
 
+  const breadcrumbColor = isProgramPage ? "white" : "black";
   return (
     <Section data-test-id="intro">
       <Container>
@@ -114,7 +115,7 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
               />
             </div>
             {/* TODO: Add the real breadcrumbs */}
-            <Breadcrumb links={links} />
+            <Breadcrumb links={links} color={breadcrumbColor} />
           </div>
           <div
             className={`md:col-span-6 grid ${isProgramPage ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} gap-4`}
