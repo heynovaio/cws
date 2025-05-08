@@ -78,7 +78,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       console.warn("Not Found:", page.data.category);
     }
   }
-  console.log(categoryDoc?.data.name);
+
   const categoryLabel = categoryDoc && categoryDoc.data.name;
 
   const links = [
