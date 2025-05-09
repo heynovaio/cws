@@ -262,6 +262,17 @@ interface GlobalsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   fax_number: prismic.KeyTextField /**
+   * label_details field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_details
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  label_details: prismic.KeyTextField;
+
+  /**
    * label_time field in *Globals*
    *
    * - **Field Type**: Text
@@ -269,7 +280,7 @@ interface GlobalsDocumentData {
    * - **API ID Path**: globals.label_time
    * - **Tab**: Labels
    * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
+   */
   label_time: prismic.KeyTextField;
 
   /**

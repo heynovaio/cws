@@ -56,6 +56,13 @@
       }
     },
     "Labels": {
+      "label_details": {
+        "type": "Text",
+        "config": {
+          "label": "label_details",
+          "placeholder": ""
+        }
+      },
       "label_time": {
         "type": "Text",
         "config": {
