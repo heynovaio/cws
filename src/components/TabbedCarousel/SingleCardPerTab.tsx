@@ -7,6 +7,7 @@ import { LongCard } from "../Cards";
 import Carousel from "react-multi-carousel";
 import { responsive } from "@/slices/TabbedCarousel/responsive";
 import { Container } from "../Layout";
+import { useLabels } from "@/providers/LabelProvider";
 
 export type SingleCardPerTabProps = {
   slice: SliceComponentProps<Content.TabbedCarouselSlice>["slice"];
@@ -15,6 +16,7 @@ export type SingleCardPerTabProps = {
 export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselRef = useRef<Carousel>(null);
+  const labels = useLabels();
 
   // If no tabs exist, create a single "Other" tab
   const tabs =
@@ -67,14 +69,16 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
                 {item.card_title ? (
                   <LongCard
                     image={item?.card_image}
-                    title={item?.card_title || "Untitled"}
+                    title={
+                      item?.card_title || labels.label_untitled || "Untitled"
+                    }
                     content={item?.card_description}
                     buttons={item?.card_button}
                     links={item?.card_link}
                   />
                 ) : (
                   <div className="text-center py-8 h-full flex items-center justify-center">
-                    No content available
+                    {`${labels.label_no_content_available || "No content available"}`}{" "}
                   </div>
                 )}
               </div>

@@ -10,6 +10,7 @@ import { PrismicRichText } from "@prismicio/react";
 import React from "react";
 import { FaLaptop, FaMedal } from "react-icons/fa";
 import { MdAccessTimeFilled, MdAttachMoney } from "react-icons/md";
+import { useLabels } from "@/providers/LabelProvider";
 
 interface SpecCardProps {
   title?: string | RichTextField;
@@ -23,26 +24,30 @@ interface SpecCardProps {
 // TODO: Translations
 
 export const SpecCard = ({
-  title = "Details: ",
+  title,
   time,
   cost,
   certs,
   format,
   resources,
 }: SpecCardProps) => {
+  const labels = useLabels();
+
+  const displayTitle = title || `${labels.label_details || "Details"}:`;
+
   return (
     <div className="card-white p-5 flex gap-5 flex-col border border-neon-violet font-accent">
-      {typeof title === "string" ? (
-        <label>{title}</label>
+      {typeof displayTitle === "string" ? (
+        <label>{displayTitle}</label>
       ) : (
-        <PrismicRichText field={title} />
+        <PrismicRichText field={displayTitle} />
       )}
       <div className="grid grid-cols-2 md:grid-cols-1 gap-5">
         {time && (
           <div className="flex flex-col md:flex-row flex-wrap gap-2 items-center text-center md:text-start">
             <MdAccessTimeFilled className="h-6 w-6 text-neon-violet" />
             <span>
-              <strong>Time: </strong>
+              <strong>{`${labels.label_time || "Time"}:`} </strong>
               {time}
             </span>
           </div>
@@ -51,7 +56,7 @@ export const SpecCard = ({
           <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
             <MdAttachMoney className="h-6 w-6 text-neon-violet" />
             <span>
-              <strong>Cost: $</strong>
+              <strong>{`${labels.label_cost || "Cost"}: $`}</strong>
               {cost}
             </span>
           </div>
@@ -60,8 +65,8 @@ export const SpecCard = ({
           <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
             <FaMedal className="h-4 w-6 text-neon-violet" />
             <span>
-              <strong>Certs: </strong>
-              NCCP PD Points
+              <strong>{`${labels.label_certs || "Certs"}:`} </strong>
+              {`${labels.label_nccp_pd_points || "NCCP PD Points"}`}{" "}
             </span>
           </div>
         )}
@@ -69,7 +74,7 @@ export const SpecCard = ({
           <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
             <FaLaptop className="h-4 w-6 text-neon-violet" />
             <span>
-              <strong>Format: </strong>
+              <strong>{`${labels.label_format || "Format"}:`} </strong>
               {format}
             </span>
           </div>
@@ -77,7 +82,9 @@ export const SpecCard = ({
       </div>
       {resources && resources.length > 0 && (
         <div className="flex flex-col mx-auto md:mx-0 gap-2">
-          <strong>This Program Includes: </strong>
+          <strong>
+            {`${labels.label_program_includes || "This Program Includes"}:`}{" "}
+          </strong>
           <ul className="list-disc pl-5">
             {resources.map((item, index) => (
               <li key={index}>

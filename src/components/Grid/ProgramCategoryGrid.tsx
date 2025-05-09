@@ -9,6 +9,7 @@ import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { DefaultCard } from "../Cards";
 import { CustomPagination } from "../CustomPagination";
+import { useLabels } from "@/providers/LabelProvider";
 
 export type ProgramCategoryGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
@@ -17,6 +18,7 @@ export type ProgramCategoryGridProps = {
 export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
   const { data } = GetAllPrograms("en-ca");
   const { programCategoryData } = useProgramCategoryData("en-ca");
+  const labels = useLabels();
 
   const categoryId =
     slice.primary.category && "id" in slice.primary.category
@@ -38,11 +40,12 @@ export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
   const matchedCategory = programCategoryData?.find(
     (category) => category.id === categoryId
   );
+
   const categoryName =
     matchedCategory?.data?.name ||
     (slice.primary.category && "name" in slice.primary.category
       ? slice.primary.category.name
-      : "Other");
+      : labels?.label_other || "Other");
 
   const programCards = programData.map((item, index) => (
     <DefaultCard

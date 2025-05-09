@@ -9,6 +9,7 @@ import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { DefaultCard } from "../Cards";
 import GetAllResources from "@/utils/getAllResources";
 import { CustomPagination } from "../CustomPagination";
+import { useLabels } from "@/providers/LabelProvider";
 
 export type ResourceCategoryGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
@@ -17,6 +18,7 @@ export type ResourceCategoryGridProps = {
 export const ResourceCategoryGrid = ({ slice }: ResourceCategoryGridProps) => {
   const { data } = GetAllResources("en-ca");
   const { resourceCategoryData } = useResourceCategoryData("en-ca");
+  const labels = useLabels();
 
   const categoryId =
     slice.primary.category && "id" in slice.primary.category
@@ -40,11 +42,12 @@ export const ResourceCategoryGrid = ({ slice }: ResourceCategoryGridProps) => {
   const matchedCategory = resourceCategoryData?.find(
     (category) => category.id === categoryId
   );
+
   const categoryName =
     matchedCategory?.data?.name ||
     (slice.primary.category && "name" in slice.primary.category
       ? slice.primary.category.name
-      : "Other");
+      : labels?.label_other || "Other");
 
   const resourceCards = resourceData.map((item, index) => (
     <DefaultCard

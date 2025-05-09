@@ -9,6 +9,7 @@ import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import { FaFacebook, FaInstagram } from "react-icons/fa6";
 import { PrismicNextLink } from "@prismicio/next";
+import { useLabels } from "@/providers/LabelProvider";
 
 interface FooterProps {
   global?: GlobalsDocumentData;
@@ -17,6 +18,8 @@ interface FooterProps {
 }
 
 export const Footer = ({ global, slices, footerData }: FooterProps) => {
+  const labels = useLabels();
+
   return (
     <footer className="bg-neon-violet/50 text-white flex flex-col justify-center items-center">
       <nav className="py-14  mx-auto max-w-screen-xl w-full flex flex-col">
@@ -48,7 +51,9 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
           </div>
           <SliceZone slices={slices} components={components} />
           <div className="flex flex-col">
-            <h4 className="footer-header">Contact Us</h4>
+            <h4 className="footer-header">
+              {labels.label_contact_us || "Contact Us"}
+            </h4>
             <p>{global?.email}</p>
           </div>
         </div>

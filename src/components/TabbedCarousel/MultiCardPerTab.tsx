@@ -8,6 +8,7 @@ import { SliceComponentProps } from "@prismicio/react";
 import { Content } from "@prismicio/client";
 import { responsive } from "@/slices/TabbedCarousel/responsive";
 import { Container } from "../Layout";
+import { useLabels } from "@/providers/LabelProvider";
 
 export type MultiCardPerTabProps = {
   slice: SliceComponentProps<Content.TabbedCarouselSlice>["slice"];
@@ -16,6 +17,7 @@ export type MultiCardPerTabProps = {
 export const MultiCardPerTab = ({ slice }: MultiCardPerTabProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const carouselRef = useRef<Carousel>(null);
+  const labels = useLabels();
 
   type TabItem = (typeof slice.primary.tab)[number];
 
@@ -110,7 +112,9 @@ export const MultiCardPerTab = ({ slice }: MultiCardPerTabProps) => {
                   <div key={index} className="px-2">
                     <LongCard
                       image={item?.card_image}
-                      title={item?.card_title || "Untitled"}
+                      title={
+                        item?.card_title || labels.label_untitled || "Untitled"
+                      }
                       content={item?.card_description}
                       buttons={item?.card_button}
                       links={item?.card_link}

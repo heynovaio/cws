@@ -13,6 +13,7 @@ import {
 } from "../../../prismicio-types";
 import { PrismicRichText } from "@prismicio/react";
 import { components } from "@/utils";
+import { useLabels } from "@/providers/LabelProvider";
 
 interface IntroProps {
   pageData?: ProgramPageDocumentData | ResourcePageDocumentData;
@@ -23,6 +24,7 @@ export const Intro = ({ type, pageData }: IntroProps) => {
   const { image, title, body, link, newsletter_sign_up } = pageData || {};
   const isProgramPage = type === "program";
   const newsLetterSignUp = isProgramPage && newsletter_sign_up;
+  const labels = useLabels();
 
   // Only if it is a program page
   const { time, cost, certs, format, included_resources } = (
@@ -124,7 +126,7 @@ export const Intro = ({ type, pageData }: IntroProps) => {
             />
             {isProgramPage && (
               <SpecCard
-                title="Details: "
+                title={`${labels.label_details || "Details"}:`}
                 time={time}
                 cost={cost}
                 certs={certs}
