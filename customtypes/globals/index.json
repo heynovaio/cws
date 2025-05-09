@@ -54,6 +54,78 @@
           "placeholder": ""
         }
       }
+    },
+    "Labels": {
+      "label_time": {
+        "type": "Text",
+        "config": {
+          "label": "label_time",
+          "placeholder": ""
+        }
+      },
+      "label_cost": {
+        "type": "Text",
+        "config": {
+          "label": "label_cost",
+          "placeholder": ""
+        }
+      },
+      "label_certs": {
+        "type": "Text",
+        "config": {
+          "label": "label_certs",
+          "placeholder": ""
+        }
+      },
+      "label_nccp_pd_points": {
+        "type": "Text",
+        "config": {
+          "label": "label_nccp_pd_points",
+          "placeholder": ""
+        }
+      },
+      "label_format": {
+        "type": "Text",
+        "config": {
+          "label": "label_format",
+          "placeholder": ""
+        }
+      },
+      "label_program_includes": {
+        "type": "Text",
+        "config": {
+          "label": "label_program_includes",
+          "placeholder": ""
+        }
+      },
+      "label_other": {
+        "type": "Text",
+        "config": {
+          "label": "label_other",
+          "placeholder": ""
+        }
+      },
+      "label_untitled": {
+        "type": "Text",
+        "config": {
+          "label": "label_untitled",
+          "placeholder": ""
+        }
+      },
+      "label_no_content_available": {
+        "type": "Text",
+        "config": {
+          "label": "label_no_content_available",
+          "placeholder": ""
+        }
+      },
+      "label_contact_us": {
+        "type": "Text",
+        "config": {
+          "label": "label_contact_us",
+          "placeholder": ""
+        }
+      }
     }
   }
 }

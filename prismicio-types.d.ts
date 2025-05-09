@@ -261,7 +261,115 @@ interface GlobalsDocumentData {
    * - **Tab**: Contact
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  fax_number: prismic.KeyTextField;
+  fax_number: prismic.KeyTextField /**
+   * label_time field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_time
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  label_time: prismic.KeyTextField;
+
+  /**
+   * label_cost field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_cost
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_cost: prismic.KeyTextField;
+
+  /**
+   * label_certs field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_certs
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_certs: prismic.KeyTextField;
+
+  /**
+   * label_nccp_pd_points field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_nccp_pd_points
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_nccp_pd_points: prismic.KeyTextField;
+
+  /**
+   * label_format field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_format
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_format: prismic.KeyTextField;
+
+  /**
+   * label_program_includes field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_program_includes
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_program_includes: prismic.KeyTextField;
+
+  /**
+   * label_other field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_other
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_other: prismic.KeyTextField;
+
+  /**
+   * label_untitled field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_untitled
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_untitled: prismic.KeyTextField;
+
+  /**
+   * label_no_content_available field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_no_content_available
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_no_content_available: prismic.KeyTextField;
+
+  /**
+   * label_contact_us field in *Globals*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globals.label_contact_us
+   * - **Tab**: Labels
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_contact_us: prismic.KeyTextField;
 }
 
 /**
