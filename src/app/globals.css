@@ -322,3 +322,9 @@
 .menu-link-mobile {
   @apply text-[1.875rem] font-bold text-left;
 }
+
+.small-link {
+  a {
+    @apply text-base;
+  }
+}
