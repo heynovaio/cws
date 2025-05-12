@@ -1,0 +1,64 @@
+{
+  "id": "contact_info",
+  "type": "SharedSlice",
+  "name": "FormEmbed",
+  "description": "ContactInfo",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2"
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl,heading3,heading4,heading5,heading6,preformatted"
+          }
+        },
+        "form": {
+          "type": "Embed",
+          "config": {
+            "label": "Form",
+            "placeholder": ""
+          }
+        },
+        "desktop_alignment": {
+          "type": "Select",
+          "config": {
+            "label": "Desktop Alignment",
+            "placeholder": "",
+            "options": [
+              "Two Column",
+              "Center Stacked"
+            ],
+            "default_value": "Two Column"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

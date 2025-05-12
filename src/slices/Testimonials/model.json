@@ -18,11 +18,10 @@
             "label": "Background Color",
             "placeholder": "",
             "options": [
-              "White",
-              "Light",
-              "Dark"
+              "No Background",
+              "Darker"
             ],
-            "default_value": "White"
+            "default_value": "No Background"
           }
         },
         "image_side": {
@@ -34,17 +33,6 @@
             "default_value": false
           }
         },
-        "image": {
-          "type": "Image",
-          "config": {
-            "label": "Image",
-            "constraint": {
-              "width": 800,
-              "height": 800
-            },
-            "thumbnails": []
-          }
-        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -52,15 +40,6 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "heading1,heading2,heading3,heading4,heading5,heading6"
-          }
-        },
-        "body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em,paragraph,hyperlink,list-item,o-list-item,image"
           }
         },
         "button": {
@@ -72,6 +51,46 @@
             "allowTargetBlank": true,
             "allowText": true,
             "repeat": true
+          }
+        },
+        "testimonials": {
+          "type": "Group",
+          "config": {
+            "label": "Testimonials",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "quote": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Quote",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading2,heading3,heading4,heading5,heading6,strong,em,rtl,o-list-item,list-item,embed,image,hyperlink,paragraph,preformatted"
+                }
+              },
+              "author": {
+                "type": "Text",
+                "config": {
+                  "label": "Author",
+                  "placeholder": ""
+                }
+              },
+              "author_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Author Title",
+                  "placeholder": ""
+                }
+              }
+            }
           }
         }
       },

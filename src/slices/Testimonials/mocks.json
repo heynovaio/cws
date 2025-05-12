@@ -3,55 +3,18 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "White",
-				"type": "Select"
-			},
 			"title": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"type": "heading1",
+						"type": "heading2",
 						"content": {
-							"text": "Journey"
-						}
+							"text": "A quote from...",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Laborum et cillum adipisicing fugiat. Qui ullamco nulla aliquip mollit mollit et aliquip. Eiusmod irure nulla ut deserunt id id sint qui."
-						}
-					}
-				]
-			},
-			"image": {
-				"origin": {
-					"id": "main",
-					"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88",
-					"width": 3168,
-					"height": 4752
-				},
-				"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88?rect=0%2C792%2C3168%2C3168&w=800&h=800",
-				"width": 800,
-				"height": 800,
-				"edit": {
-					"zoom": 1,
-					"crop": {
-						"x": 0,
-						"y": 792
-					},
-					"background": "transparent"
-				},
-				"credits": null,
-				"alt": null,
-				"__TYPE__": "ImageContent",
-				"thumbnails": {}
 			},
 			"image_side": {
 				"__TYPE__": "BooleanContent",
@@ -62,13 +25,84 @@
 				"type": "Link",
 				"value": [
 					{
-						"__TYPE__": "LinkContent",
 						"key": "6cbe9d64-fb09-443d-8c5d-d306f6c0d7ee",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "https://prismic.io",
-							"text": "express"
+							"text": "All Stories"
 						}
+					}
+				]
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
+			},
+			"testimonials": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1537498425277-c283d32ef9db",
+										"width": 4380,
+										"height": 2895
+									},
+									"url": "https://images.unsplash.com/photo-1537498425277-c283d32ef9db",
+									"width": 4380,
+									"height": 2895,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "sent",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"quote",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Elit cupidatat non cupidatat. Id aliquip ut ullamco. Veniam officia ex ex sunt nostrud esse reprehenderit officia pariatur."
+											}
+										}
+									]
+								}
+							],
+							[
+								"author",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "pictured",
+									"type": "Text"
+								}
+							],
+							[
+								"author_title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "cookies",
+									"type": "Text"
+								}
+							]
+						]
 					}
 				]
 			}

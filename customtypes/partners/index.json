@@ -1,0 +1,78 @@
+{
+  "format": "custom",
+  "id": "partners",
+  "label": "Partners",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Title",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "heading2"
+        }
+      },
+      "body": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Body",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "button": {
+        "type": "Link",
+        "config": {
+          "label": "Button",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true
+        }
+      },
+      "cta_text": {
+        "type": "Text",
+        "config": {
+          "label": "CTA text",
+          "placeholder": ""
+        }
+      },
+      "logos": {
+        "type": "Group",
+        "config": {
+          "label": "Logos",
+          "repeat": true,
+          "fields": {
+            "logo_image": {
+              "type": "Image",
+              "config": {
+                "label": "Logo Image",
+                "constraint": {
+                  "width": null,
+                  "height": null
+                },
+                "thumbnails": []
+              }
+            },
+            "logo_link": {
+              "type": "Link",
+              "config": {
+                "label": "Logo Link",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

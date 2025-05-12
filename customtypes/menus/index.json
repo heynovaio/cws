@@ -30,38 +30,47 @@
           "select": null,
           "allowTargetBlank": true,
           "allowText": true,
-          "repeat": true
+          "repeat": false
         }
       },
-      "partner_links": {
-        "type": "Group",
+      "helpline": {
+        "type": "Link",
         "config": {
-          "label": "Partner Links",
-          "repeat": true,
-          "fields": {
-            "link": {
-              "type": "Link",
-              "config": {
-                "label": "Link",
-                "placeholder": "",
-                "select": null,
-                "allowTargetBlank": true,
-                "allowText": true,
-                "repeat": true
-              }
-            },
-            "image": {
-              "type": "Image",
-              "config": {
-                "label": "Image",
-                "constraint": {
-                  "width": 800,
-                  "height": 800
-                },
-                "thumbnails": []
-              }
-            }
-          }
+          "label": "Helpline",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
+      "copyright": {
+        "type": "Text",
+        "config": {
+          "label": "Copyright",
+          "placeholder": ""
+        }
+      },
+      "instagram": {
+        "type": "Link",
+        "config": {
+          "label": "Instagram",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
+      "facebook": {
+        "type": "Link",
+        "config": {
+          "label": "Facebook",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
         }
       },
       "slices1": {

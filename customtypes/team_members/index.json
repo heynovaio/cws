@@ -44,11 +44,33 @@
           "repeat": true
         }
       },
+      "include_newsletter_sign_up_banner": {
+        "type": "Boolean",
+        "config": {
+          "label": "Include Newsletter Sign Up Banner",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "contact_info": {
+              "type": "SharedSlice"
+            },
+            "call_to_action": {
+              "type": "SharedSlice"
+            },
+            "testimonials": {
+              "type": "SharedSlice"
+            },
+            "team_list": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },

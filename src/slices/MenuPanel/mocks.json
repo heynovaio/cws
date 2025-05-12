@@ -52,48 +52,12 @@
 									"type": "Link",
 									"value": [
 										{
-											"key": "2f14bd0b-a2bc-484f-b19b-8af3850dbac2",
+											"key": "e28b963c-cf22-4652-8775-c51d20eaafdd",
 											"__TYPE__": "LinkContent",
 											"value": {
 												"__TYPE__": "ExternalLink",
 												"url": "https://prismic.io",
-												"text": "dark"
-											}
-										}
-									]
-								}
-							]
-						]
-					}
-				]
-			},
-			"link_with_paragraph": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"link",
-								{
-									"key": "09686eb0-1f92-422e-8762-00ddd2bf7215",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "https://prismic.io",
-										"text": "sea"
-									}
-								}
-							],
-							[
-								"body",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Aute quis Lorem aute mollit et laborum aliqua ipsum aliqua non veniam. Tempor duis dolore mollit officia reprehenderit ut labore ullamco."
+												"text": "still"
 											}
 										}
 									]
@@ -111,26 +75,8 @@
 				"__TYPE__": "FieldContent",
 				"value": "sound",
 				"type": "Text"
-			}
-		},
-		"items": []
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "menuPanelAccordion",
-		"primary": {
-			"title": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Plural"
-						}
-					}
-				]
 			},
-			"Accordion": {
+			"link_with_paragraph": {
 				"__TYPE__": "GroupContentType",
 				"value": [
 					{
@@ -139,19 +85,13 @@
 							[
 								"link",
 								{
-									"__TYPE__": "RepeatableContent",
-									"type": "Link",
-									"value": [
-										{
-											"key": "50ab2e9e-43e8-4434-82f4-4495c51113d8",
-											"__TYPE__": "LinkContent",
-											"value": {
-												"__TYPE__": "ExternalLink",
-												"url": "https://prismic.io",
-												"text": "human"
-											}
-										}
-									]
+									"key": "d5238377-89ef-44c4-9342-9e410b3328d3",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "health"
+									}
 								}
 							],
 							[
@@ -162,53 +102,17 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Cillum nulla officia ullamco ut tempor reprehenderit ullamco enim do sint cillum ullamco consectetur exercitation."
+												"text": "Ad ea quis anim aute deserunt nisi anim cillum pariatur culpa duis ipsum nulla cillum elit. Exercitation eiusmod ex quis. Et ullamco exercitation esse aliquip enim excepteur reprehenderit amet dolor aute veniam duis."
 											}
 										}
 									]
-								}
-							],
-							[
-								"button",
-								{
-									"__TYPE__": "RepeatableContent",
-									"type": "Link",
-									"value": [
-										{
-											"key": "38cf73a4-35e9-48d3-9c39-9948ba774ea1",
-											"__TYPE__": "LinkContent",
-											"value": {
-												"__TYPE__": "ExternalLink",
-												"url": "http://google.com",
-												"text": "gentle"
-											}
-										}
-									]
-								}
-							],
-							[
-								"menu_panel_title",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "vowel",
-									"type": "Text"
 								}
 							]
 						]
 					}
 				]
-			},
-			"menu_display": {
-				"__TYPE__": "FieldContent",
-				"value": "women",
-				"type": "Text"
 			}
 		},
-		"items": [
-			{
-				"__TYPE__": "GroupItemContent",
-				"value": []
-			}
-		]
+		"items": []
 	}
 ]

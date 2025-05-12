@@ -1,0 +1,498 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Measure"
+						}
+					}
+				]
+			},
+			"tab": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "mixture",
+									"type": "Text"
+								}
+							],
+							[
+								"card_title",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "heading2",
+											"content": {
+												"text": "Solar"
+											}
+										}
+									]
+								}
+							],
+							[
+								"card_description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Ad eiusmod enim ex elit nisi Lorem aliqua dolor pariatur cillum dolor. Minim commodo eu consequat cupidatat dolore enim proident qui Lorem minim anim nostrud velit consequat aute. Veniam consequat Lorem mollit enim elit quis esse labore enim elit."
+											}
+										}
+									]
+								}
+							],
+							[
+								"card_image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+										"width": 5243,
+										"height": 3495
+									},
+									"url": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+									"width": 5243,
+									"height": 3495,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"card_link",
+								{
+									"__TYPE__": "RepeatableContent",
+									"type": "Link",
+									"value": [
+										{
+											"key": "74587324-9e99-4795-9267-f5c9c6568d72",
+											"__TYPE__": "LinkContent",
+											"value": {
+												"__TYPE__": "ExternalLink",
+												"url": "https://prismic.io",
+												"text": "muscle"
+											}
+										}
+									]
+								}
+							],
+							[
+								"card_button",
+								{
+									"__TYPE__": "RepeatableContent",
+									"type": "Link",
+									"value": [
+										{
+											"key": "58e3f369-1085-4c98-a35c-83e3e06a3379",
+											"__TYPE__": "LinkContent",
+											"value": {
+												"__TYPE__": "AnyLink",
+												"kind": "any",
+												"text": "Button 1"
+											}
+										},
+										{
+											"key": "fc594f6a-b0d9-4b09-91be-d2e827ecb93e",
+											"__TYPE__": "LinkContent",
+											"value": {
+												"__TYPE__": "AnyLink",
+												"kind": "any",
+												"text": "Button 2"
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Through our programs, we empower sport organizations and leaders to drive gender equity, building a stronger, more inclusive sport system for all.",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "tabbedCarouselCampaign",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Special"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Elit ullamco aliqua do consectetur veniam incididunt sit deserunt elit ut aute fugiat exercitation."
+						}
+					}
+				]
+			},
+			"tab": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "movie",
+									"type": "Text"
+								}
+							],
+							[
+								"card_title",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "heading2",
+											"content": {
+												"text": "Everybody"
+											}
+										}
+									]
+								}
+							],
+							[
+								"card_description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Occaecat excepteur officia esse quis velit nostrud ex qui incididunt Lorem mollit ut. Occaecat laboris minim ipsum. Irure id veniam do do fugiat est aliquip est enim velit sint do laborum voluptate."
+											}
+										}
+									]
+								}
+							],
+							[
+								"card_image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1587840171670-8b850147754e",
+										"width": 4480,
+										"height": 4480
+									},
+									"url": "https://images.unsplash.com/photo-1587840171670-8b850147754e",
+									"width": 4480,
+									"height": 4480,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "second",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"card_button",
+								{
+									"__TYPE__": "RepeatableContent",
+									"type": "Link",
+									"value": [
+										{
+											"key": "c3c70e3f-4dd9-432b-9b7d-433a947b7399",
+											"__TYPE__": "LinkContent",
+											"value": {
+												"__TYPE__": "ExternalLink",
+												"url": "http://twitter.com",
+												"text": "since"
+											}
+										}
+									]
+								}
+							],
+							[
+								"card_link",
+								{
+									"__TYPE__": "RepeatableContent",
+									"type": "Link",
+									"value": [
+										{
+											"key": "2618ace3-70a9-4a6b-a789-91d34f1c65e0",
+											"__TYPE__": "LinkContent",
+											"value": {
+												"__TYPE__": "ExternalLink",
+												"url": "https://prismic.io",
+												"text": "rhyme"
+											}
+										}
+									]
+								}
+							],
+							[
+								"audio_media_alt_text",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "character",
+									"type": "Text"
+								}
+							],
+							[
+								"image_media",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1560457079-9a6532ccb118",
+										"width": 4160,
+										"height": 3120
+									},
+									"url": "https://images.unsplash.com/photo-1560457079-9a6532ccb118",
+									"width": 4160,
+									"height": 3120,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "away",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"rich_text",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Irure laboris quis cillum adipisicing elit laborum veniam voluptate commodo aliqua sint pariatur incididunt anim. Do dolor est esse quis consequat dolore occaecat exercitation aliqua officia sint. Eiusmod consectetur aliquip deserunt."
+											}
+										}
+									]
+								}
+							],
+							[
+								"audio_media",
+								{
+									"key": "41ae811a-7542-4e66-afbf-6162381efbe1",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "FileLink",
+										"id": "mock_Media_link",
+										"kind": "file",
+										"name": "mock_name",
+										"url": "https://source.unsplash.com/daily",
+										"size": "0",
+										"text": "body"
+									}
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "tabbedCarouselMultiCard",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Parent"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ipsum culpa dolore aliquip proident ad ullamco mollit laborum occaecat officia. Eu in esse ullamco. Aute nisi culpa deserunt excepteur non adipisicing duis nostrud veniam dolor exercitation veniam exercitation elit."
+						}
+					}
+				]
+			},
+			"tab": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "living",
+									"type": "Text"
+								}
+							],
+							[
+								"card_title",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "heading2",
+											"content": {
+												"text": "Separate"
+											}
+										}
+									]
+								}
+							],
+							[
+								"card_description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Minim Lorem ex laboris velit quis velit est. Exercitation do excepteur adipisicing occaecat culpa duis do ad voluptate ut voluptate reprehenderit voluptate eiusmod officia."
+											}
+										}
+									]
+								}
+							],
+							[
+								"card_image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1531771686035-25f47595c87a",
+										"width": 3024,
+										"height": 3778
+									},
+									"url": "https://images.unsplash.com/photo-1531771686035-25f47595c87a",
+									"width": 3024,
+									"height": 3778,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "we",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"card_button",
+								{
+									"__TYPE__": "RepeatableContent",
+									"type": "Link",
+									"value": [
+										{
+											"key": "10e86d02-9b65-464b-b01f-01bb6e40b3ca",
+											"__TYPE__": "LinkContent",
+											"value": {
+												"__TYPE__": "ExternalLink",
+												"url": "https://prismic.io",
+												"text": "origin"
+											}
+										}
+									]
+								}
+							],
+							[
+								"card_link",
+								{
+									"__TYPE__": "RepeatableContent",
+									"type": "Link",
+									"value": [
+										{
+											"key": "51adf313-0908-43f2-9bb6-aa35d33201ae",
+											"__TYPE__": "LinkContent",
+											"value": {
+												"__TYPE__": "ExternalLink",
+												"url": "https://prismic.io",
+												"text": "pressure"
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

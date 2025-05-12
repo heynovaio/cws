@@ -1,3 +1,324 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-[1rem] md:text-base text-white bg-navy-background font-body;
+
+    /* dark:text-white dark:bg-midnight */
+  }
+  h1 {
+    @apply font-title text-[2.5rem] md:text-h1 font-extraBold leading-h1;
+  }
+  h1.h1-alt {
+    @apply font-title text-h3 font-extraBold leading-h3;
+  }
+  h2 {
+    @apply font-title text-[1.875rem] md:text-h2 font-extraBold leading-h2;
+  }
+  h3 {
+    @apply font-title text-[1.625rem] md:text-h3 font-extraBold leading-h3;
+  }
+  h4 {
+    @apply font-title text-[1.375rem] md:text-h4 font-bold leading-h4;
+  }
+  p {
+    @apply text-[1.125rem] md:text-bodyLarge font-body mb-2;
+  }
+  a {
+    @apply underline text-[1.125rem]  md:text-bodyLarge;
+    &:hover {
+      @apply text-ultra-pink;
+    }
+  }
+  .link-no-underline {
+    @apply no-underline !text-base;
+    &:hover {
+      @apply text-ultra-pink underline;
+    }
+  }
+  ul {
+    @apply list-disc pl-6 mx-4 space-y-2;
+  }
+  ol {
+    @apply list-decimal pl-6 space-y-2;
+  }
+
+  .focus:focus,
+  .btn:focus {
+    @apply outline -outline-offset-1 outline-4 outline-ultra-pink
+    ring-ultra-pink overflow-hidden;
+  }
+
+  a:focus {
+    @apply outline outline-offset-2 rounded-md outline-4 outline-ultra-pink
+    ring-ultra-pink;
+  }
+
+  label,
+  .tagline {
+    @apply text-label font-bold;
+  }
+
+  .btn {
+    @apply inline-block
+      rounded-full 
+      text-button	
+      font-bold
+      px-8 py-2
+      no-underline
+      text-[1.125rem]
+      md:text-bodyLarge
+      relative;
+  }
+  .btn-primary {
+    @apply text-white bg-ultra-pink border border-ultra-pink transition-transform duration-200;
+
+    &:hover {
+      @apply bg-neon-violet text-white border-ultra-pink -translate-y-1;
+      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
+    }
+
+    &:active,
+    &:focus {
+      @apply ring-4 ring-ultra-pink shadow
+      outline-none;
+    }
+  }
+
+  .btn-secondary {
+    @apply text-white bg-aqua border border-aqua transition-transform duration-200;
+
+    &:hover {
+      @apply bg-aqua/80 text-white border-aqua -translate-y-1;
+      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
+    }
+
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+
+  .btn-tertiary,
+  a.btn-tertiary {
+    @apply text-white bg-electric-blue border border-electric-blue transition-transform duration-200;
+    &:hover {
+      @apply bg-electric-blue/80 text-white border-electric-blue -translate-y-1;
+      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
+    }
+
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+
+  .btn-outline {
+    @apply bg-transparent
+    border-[3px]
+        border-white;
+    &:hover {
+      @apply text-white -translate-y-1;
+      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
+    }
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+  .btn-link {
+    @apply border-0 p-0 bg-transparent inline-block;
+
+    &:hover {
+      @apply underline text-current;
+    }
+
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+  .text-link {
+    @apply underline underline-offset-4
+      hover:text-ultra-pink;
+  }
+  input {
+    color: black;
+  }
+}
+
+@layer utilities {
+  img {
+    @apply rounded;
+  }
+
+  .text-content {
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply mb-4;
+    }
+    p {
+      @apply text-base;
+    }
+    a {
+      @apply text-aqua;
+    }
+    ul,
+    ol {
+      display: inline-block;
+      text-align: left;
+    }
+  }
+
+  .backdrop-blur-default {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .card-white {
+    @apply bg-white text-midnight p-4 rounded shadow;
+  }
+  .card-gradient {
+    @apply bg-gradient-primary text-white p-4 rounded shadow backdrop-blur border border-neon-violet;
+  }
+  .card-overlay {
+    @apply border-2
+    border-ultra-pink
+    relative;
+    &::after {
+      @apply absolute
+      top-0 bottom-0 left-0 right-0;
+      content: "";
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(3, 0, 233, 0.5) 61.5%
+      );
+    }
+  }
+  .bg-gradient-primary {
+    background: linear-gradient(
+      90deg,
+      rgba(99, 15, 249, 0.8) 0%,
+      rgba(51, 23, 153, 0.8) 100%
+    );
+  }
+  .bg-gradient-tile {
+    background: linear-gradient(
+      180deg,
+      rgba(51, 23, 153, 0.65) 0%,
+      rgba(65, 0, 152, 0.65) 100%
+    );
+  }
+  /* Carousel Styling Below - Helps with making sure the cards are the same size */
+  .tabbed-carousel .react-multi-carousel-item {
+    align-content: center;
+    justify-content: center;
+  }
+
+  .tabbed-carousel .react-multi-carousel-list {
+    overflow: visible !important;
+  }
+
+  .tabbed-carousel .react-multi-carousel-item {
+    height: auto !important;
+    display: flex !important;
+    flex: 1 1 auto;
+    margin: 0 !important;
+  }
+
+  .carousel-button {
+    @apply flex flex-row items-center gap-2 bg-white text-bodyLarge text-midnight border border-midnight rounded-md px-4 py-2 shadow transition;
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+
+  .logo-carousel-tile {
+    @apply flex items-center justify-center bg-white rounded-2xl p-4 h-40;
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+
+  .neon-banner {
+    @apply w-[105%] -ml-[2.5%] border-t-2 border-b-2 border-neon-violet bg-gradient-dark overflow-hidden py-10;
+
+    transform: rotate(-2.79deg);
+    transform-origin: center;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); /* Safari */
+    box-shadow: 0 0 30px 0 #630ff9cc;
+  }
+
+  .newsletter-signup {
+    @apply bg-gradient-dark 
+           rounded-[1.5rem] 
+           border 
+           border-neon-violet 
+           pt-[1.875rem] 
+           pb-[4.375rem] 
+           gap-[0.625rem] 
+           backdrop-blur-[16px] 
+           drop-shadow-glow;
+  }
+
+  .pagination-button {
+    @apply text-midnight bg-aqua px-2 py-2 rounded-full;
+  }
+}
+
+.hover-ultrapink:hover {
+  color: black !important;
+}
+
+/* Apply hover-zoom to the link and then hover-zoom-img to the image you want to do the zooming */
+.hover-zoom {
+  .hover-zoom-img {
+    transition: all 0.5s;
+  }
+
+  &:hover {
+    .hover-zoom-img {
+      transform: scale(1.25);
+    }
+  }
+}
+
+.hover-shadow {
+  box-shadow: 0 0 21px 0 #630ff9cc;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px); /* Safari */
+  transition: all 0.5s;
+
+  &:hover {
+    box-shadow: 0 0 40px 0 #630ff9cc;
+  }
+}
+
+.footer-header {
+  @apply text-base md:text-[1.625rem]  md:font-bold;
+}
+
+.footer-links {
+  a {
+    @apply text-base;
+  }
+}
+
+.menu-link-mobile {
+  @apply text-[1.875rem] font-bold text-left;
+}
