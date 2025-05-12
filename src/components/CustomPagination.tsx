@@ -7,7 +7,7 @@ interface CustomPaginationProps {
   itemsPerPage?: number;
   initialPage?: number;
   onPageChange?: (page: number) => void;
-  styling?: string;
+  className?: string;
 }
 
 export const CustomPagination = ({
@@ -15,7 +15,7 @@ export const CustomPagination = ({
   itemsPerPage = 9,
   initialPage = 0,
   onPageChange,
-  styling,
+  className = "`grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
 }: CustomPaginationProps) => {
   const [page, setPage] = useState(initialPage);
 
@@ -35,7 +35,7 @@ export const CustomPagination = ({
   return (
     <div>
       <div
-        className={`grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${styling}`}
+        className={className}
       >
         {currentItems}
       </div>
