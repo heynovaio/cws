@@ -1985,10 +1985,10 @@ export interface ContentCarouselSliceProgramsCarouselPrimary {
    * - **Field Type**: Boolean
    * - **Placeholder**: *None*
    * - **Default Value**: true
-   * - **API ID Path**: content_carousel.programsCarousel.primary.no_photo
+   * - **API ID Path**: content_carousel.programsCarousel.primary.photo
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
-  no_photo: prismic.BooleanField;
+  photo: prismic.BooleanField;
 
   /**
    * Title field in *ContentCarousel → Programs Carousel → Primary*

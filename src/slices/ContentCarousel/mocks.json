@@ -56,7 +56,7 @@
 				"value": "Darker",
 				"type": "Select"
 			},
-			"no_photo": {
+			"photo": {
 				"__TYPE__": "BooleanContent",
 				"value": false
 			}
