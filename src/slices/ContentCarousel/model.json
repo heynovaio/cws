@@ -24,7 +24,7 @@
             "default_value": "No Background"
           }
         },
-        "no_photo": {
+        "photo": {
           "type": "Boolean",
           "config": {
             "label": "Photo",
