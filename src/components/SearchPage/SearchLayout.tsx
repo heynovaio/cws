@@ -23,18 +23,43 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
     setPrograms,
     setResourceCategories,
     setProgramCategories,
+    activeFilter,
   } = useCategoryFilter();
   const { data: resourceData } = GetAllResources(lang);
   const { data: programData } = GetAllPrograms(lang);
   const { data: resourceCategoryData } = GetAllResourceCategories(lang);
   const { data: programCategoryData } = GetAllProgramCategories(lang);
+  const [isResourceContainerHidden, setIsResourceContainerHidden] =
+    React.useState(false);
+  const [isProgramContainerHidden, setIsProgramContainerHidden] =
+    React.useState(false);
 
   useEffect(() => {
     if (resourceData) setResources(resourceData);
     if (programData) setPrograms(programData);
     if (resourceCategoryData) setResourceCategories(resourceCategoryData);
     if (programCategoryData) setProgramCategories(programCategoryData);
-  }, [resourceData, programData, setResources, setPrograms, resourceCategoryData, setResourceCategories, programCategoryData, setProgramCategories]);
+    if (activeFilter === "resource_page") {
+      setIsResourceContainerHidden(false);
+      setIsProgramContainerHidden(true);
+    } else if (activeFilter === "program_page") {
+      setIsResourceContainerHidden(true);
+      setIsProgramContainerHidden(false);
+    } else {
+      setIsResourceContainerHidden(false);
+      setIsProgramContainerHidden(false);
+    }
+  }, [
+    resourceData,
+    programData,
+    setResources,
+    setPrograms,
+    resourceCategoryData,
+    setResourceCategories,
+    programCategoryData,
+    setProgramCategories,
+    activeFilter,
+  ]);
 
   return (
     <section
@@ -48,11 +73,13 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
           label="Resource Filters"
           panel={<ResourcesCategoriesFilterPanel />}
           topPanel={true}
+          isHidden={isResourceContainerHidden}
         />
         <SearchPanelContainer
           label="Program Filters"
           panel={<ProgramsCategoriesFilterPanel />}
           topPanel={true}
+          isHidden={isProgramContainerHidden}
         />
         <ClearFilterButton />
       </aside>
