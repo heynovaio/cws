@@ -55,17 +55,6 @@
             "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item,image"
           }
         },
-        "button": {
-          "type": "Link",
-          "config": {
-            "label": "Button",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": true
-          }
-        },
         "tiles": {
           "type": "Group",
           "config": {
