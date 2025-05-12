@@ -1969,6 +1969,28 @@ export interface ContentCarouselSliceResourceCarouselPrimaryRedirectButtonItem {
  */
 export interface ContentCarouselSliceProgramsCarouselPrimary {
   /**
+   * Background Color field in *ContentCarousel → Programs Carousel → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: content_carousel.programsCarousel.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Photo field in *ContentCarousel → Programs Carousel → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: content_carousel.programsCarousel.primary.no_photo
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  no_photo: prismic.BooleanField;
+
+  /**
    * Title field in *ContentCarousel → Programs Carousel → Primary*
    *
    * - **Field Type**: Text
