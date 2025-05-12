@@ -24,6 +24,7 @@ import {
   ContentBox,
   CarouselButton,
   DefaultCard,
+  ShortCard,
 } from "@/components";
 import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
@@ -218,28 +219,46 @@ const ContentCarousel = ({
         >
           {filteredDataWithCategory.map((item, index) => (
             <div key={item.id} className="carousel-card flex h-full">
-              <DefaultCard
-                title={asText(item.data.title)}
-                content={
-                  <PrismicRichText
-                    field={item.data.body}
-                    components={components}
-                  />
-                }
-                category={item.categoryName as string}
-                image={hasPhoto ? item.data.image : undefined}
-                cardType={cardType}
-                buttons={[
-                  <Link
-                    key={index}
-                    href={item.url ?? ""}
-                    className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
-                  >
-                    Learn More
-                    <HiOutlineArrowLongRight className="h-10 w-10" />
-                  </Link>,
-                ]}
-              />
+              {hasPhoto ? (
+                <DefaultCard
+                  title={asText(item.data.title)}
+                  content={
+                    <PrismicRichText
+                      field={item.data.body}
+                      components={components}
+                    />
+                  }
+                  category={item.categoryName as string}
+                  image={item.data.image}
+                  cardType={cardType}
+                  buttons={[
+                    <Link
+                      key={index}
+                      href={item.url ?? ""}
+                      className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
+                    >
+                      Learn More
+                      <HiOutlineArrowLongRight className="h-10 w-10" />
+                    </Link>,
+                  ]}
+                />
+              ) : (
+                <ShortCard
+                  title={asText(item.data.title)}
+                  category={item.categoryName as string}
+                  cardType={cardType}
+                  buttons={[
+                    <Link
+                      key={index}
+                      href={item.url ?? ""}
+                      className="btn p-0 flex flex-row items-center gap-2 focus:outline-offset-4"
+                    >
+                      Learn More
+                      <HiOutlineArrowLongRight className="h-7 w-7" />
+                    </Link>,
+                  ]}
+                />
+              )}
             </div>
           ))}
         </Carousel>
