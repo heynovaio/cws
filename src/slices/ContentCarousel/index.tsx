@@ -195,12 +195,14 @@ const ContentCarousel = ({
             }
             width="standard"
           />
-          <CarouselButton
-            currentSlide={currentSlide + 1}
-            totalSlides={totalSlides}
-            onSlideChange={handleArrowClick}
-            styling="w-fit"
-          />
+          {filteredDataWithCategory.length > itemsPerPage && (
+            <CarouselButton
+              currentSlide={currentSlide + 1}
+              totalSlides={totalSlides}
+              onSlideChange={handleArrowClick}
+              styling="w-fit"
+            />
+          )}
         </div>
       </Container>
       {/* Carousel Content */}
