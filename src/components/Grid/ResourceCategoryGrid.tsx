@@ -58,7 +58,7 @@ export const ResourceCategoryGrid = ({ slice }: ResourceCategoryGridProps) => {
       }
       image={item.data.image}
       category={categoryName as string}
-      cardType="resource"
+      cardType={item.type}
       buttons={[
         <Link
           key={index}
