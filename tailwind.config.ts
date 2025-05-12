@@ -15,7 +15,6 @@ export default {
     fontFamily: {
       title: ["var(--font-outfit)"],
       body: ["var(--font-outfit)"],
-      accent: ["var(--font-roboto-condensed)"],
     },
     colors: {
       primary: colors.ultraPink,

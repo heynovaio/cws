@@ -50,7 +50,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
               <PrismicRichText field={slice.primary.title} />
               <PrismicRichText field={displayedTestimonial.quote} />
               <div className="flex flex-col">
-                <p className="text-base font-accent">
+                <p className="text-base font-body">
                   {displayedTestimonial.author}
                 </p>
                 <p className="text-[1.375rem] font-bold">

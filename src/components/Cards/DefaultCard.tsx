@@ -52,7 +52,7 @@ export const DefaultCard = ({
       {category && (
         <div className="flex gap-2">
           <span
-            className={`self-start rounded-full px-2 py-1 items-center font-accent font-medium border-[1.5px] ${categoryChipColor}`}
+            className={`self-start rounded-full px-2 py-1 items-center font-body font-medium border-[1.5px] ${categoryChipColor}`}
           >
             {category}
           </span>
