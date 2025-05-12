@@ -15,7 +15,6 @@ export default {
     fontFamily: {
       title: ["var(--font-outfit)"],
       body: ["var(--font-outfit)"],
-      accent: ["var(--font-roboto-condensed)"],
     },
     colors: {
       primary: colors.ultraPink,
@@ -81,7 +80,7 @@ export default {
         "gradient-primary":
           "linear-gradient(90deg, #3802a7 0%, #3c1253 98.73%)",
         "gradient-dark":
-          "linear-gradient(90deg, rgba(99, 15, 249, 0.8) 0%, rgba(51, 23, 153, 0.8) 100%)",
+          "linear-gradient(90deg, rgba(51, 23, 153, 0.70) 0%, rgba(99, 15, 249, 0.70) 100%)",
         "gradient-overlay":
           "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(3, 0, 233, 0.5) 61.5%)",
       },

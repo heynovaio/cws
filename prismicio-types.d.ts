@@ -4089,18 +4089,6 @@ export interface TileGridSliceIconTilePrimary {
   body: prismic.RichTextField;
 
   /**
-   * Button field in *TileGrid → Icon Tile → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: tile_grid.iconTile.primary.button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-
-  /**
    * Tiles field in *TileGrid → Icon Tile → Primary*
    *
    * - **Field Type**: Group
