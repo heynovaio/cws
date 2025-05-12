@@ -172,11 +172,14 @@ const ContentCarousel = ({
     }
   };
 
+  const hasPhoto = slice.primary.photo == true;
+
   return (
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       styling="overflow-x-hidden"
+      backgroundColor={slice.primary.background_color}
     >
       <Container>
         {/* Header and Carousel Navigation */}
@@ -224,7 +227,7 @@ const ContentCarousel = ({
                   />
                 }
                 category={item.categoryName as string}
-                image={item.data.image}
+                image={hasPhoto ? item.data.image : undefined}
                 cardType={cardType}
                 buttons={[
                   <Link
