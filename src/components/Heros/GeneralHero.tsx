@@ -23,7 +23,7 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
   return (
     <section
       data-test-id="default-hero"
-      className={`relative flex items-center w-full bg-quadrant-gradient ${
+      className={`relative flex items-center w-full bg-quadrant-gradient   ${
         shortHero ? "min-h-[500px]" : "min-h-[600px]"
       }`}
     >
@@ -34,7 +34,7 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
           </p>
         )}
 
-        <div className="text-white flex flex-col items-center text-center justify-between py-0 gap-8 mt-0">
+        <div className="text-white flex flex-col items-center text-center justify-between gap-8 mx-auto max-w-[900px]">
           <PrismicRichText field={data.title} />
           <PrismicRichText field={data.body} />
           {data.button.map((link, index) => (
