@@ -18,7 +18,7 @@ interface HomepageHeroProps {
 export const HomepageHero: React.FC<HomepageHeroProps> = ({ data }) => {
   return (
     <section
-      className="z-0 min-h-[700px] flex items-center w-full bg-cover bg-center mb-[-120px]"
+      className="z-0 min-h-[700px] flex items-center w-full bg-cover bg-center mb-[-55px] md:mb-[-155px] xl:mb-[-120px]"
       style={{ backgroundImage: "url('/hero-gradient.png')" }}
     >
       <Container>
