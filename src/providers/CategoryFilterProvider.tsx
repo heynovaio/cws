@@ -1,8 +1,17 @@
 "use client";
-import React, { createContext, useContext, useState, useMemo, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
+import Fuse from "fuse.js";
 import {
   ResourcePageDocument,
   ProgramPageDocument,
+  ResourceCategoryDocument,
+  ProgramCategoryDocument,
 } from "../../prismicio-types";
 import { ModuleFilter } from "@/constants";
 import { asText } from "@prismicio/client";
@@ -19,6 +28,21 @@ interface CategoryFilterContextProps {
   filteredItems: (ResourcePageDocument | ProgramPageDocument)[];
   filterCounts: Record<ModuleFilter, number>;
   resultCount: number;
+  selectedTags: string[];
+  toggleTag: (tag: string) => void;
+  allTags: string[];
+  clearAllFilters: () => void;
+  selectedResourceCategories: string[];
+  setSelectedResourceCategories: (categoryIds: string[]) => void;
+  toggleResourceCategory: (categoryId: string) => void;
+  resourceCategories: ResourceCategoryDocument[];
+  setResourceCategories: (categories: ResourceCategoryDocument[]) => void;
+  selectedProgramCategories: string[];
+  setSelectedProgramCategories: (categoryIds: string[]) => void;
+  toggleProgramCategory: (categoryId: string) => void;
+  programCategories: ProgramCategoryDocument[];
+  setProgramCategories: (categories: ProgramCategoryDocument[]) => void;
+  availableTags: string[];
 }
 
 const CategoryFilterContext = createContext<
@@ -32,33 +56,191 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [resources, setResources] = useState<ResourcePageDocument[]>([]);
   const [programs, setPrograms] = useState<ProgramPageDocument[]>([]);
-  const [activeFilter, setActiveFilter] = useState<ModuleFilter>(defaultCategoryFilter);
+  const [activeFilter, setActiveFilter] = useState<ModuleFilter>(
+    defaultCategoryFilter
+  );
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedResourceCategories, setSelectedResourceCategories] = useState<
+    string[]
+  >([]);
+  const [selectedProgramCategories, setSelectedProgramCategories] = useState<
+    string[]
+  >([]);
+  const [resourceCategories, setResourceCategories] = useState<
+    ResourceCategoryDocument[]
+  >([]);
+  const [programCategories, setProgramCategories] = useState<
+    ProgramCategoryDocument[]
+  >([]);
 
-  // Search through an item's text fields
-  const matchesSearchTerm = useCallback(
-    (item: ResourcePageDocument | ProgramPageDocument) => {
-      if (!searchTerm) return true;
-      
-      const searchLower = searchTerm.toLowerCase();
-      
-      // Check title (adjust based on your actual data structure)
-      if (asText(item.data.title)?.toLowerCase().includes(searchLower)) return true;
-      
-      // Check description (adjust based on your actual data structure)
-      if (asText(item.data.body)?.toLowerCase().includes(searchLower)) return true;
-      
-      return false;
+  const toggleResourceCategory = useCallback(
+    (categoryId: string) => {
+      setSelectedResourceCategories((prev) =>
+        prev.includes(categoryId)
+          ? prev.filter((id) => id !== categoryId)
+          : [...prev, categoryId]
+      );
+      // Automatically set filter to resource_page when selecting a category
+      if (!selectedResourceCategories.includes(categoryId)) {
+        setActiveFilter("resource_page");
+      }
+      setSelectedTags([]);
+      setSelectedProgramCategories([]); // Clear program categories when selecting resource categories
     },
-    [searchTerm]
+    [selectedResourceCategories]
   );
 
-  // Calculate filtered items based on active filter AND search term
+  const toggleProgramCategory = useCallback(
+    (categoryId: string) => {
+      setSelectedProgramCategories((prev) =>
+        prev.includes(categoryId)
+          ? prev.filter((id) => id !== categoryId)
+          : [...prev, categoryId]
+      );
+      // Automatically set filter to program_page when selecting a category
+      if (!selectedProgramCategories.includes(categoryId)) {
+        setActiveFilter("program_page");
+      }
+      setSelectedTags([]);
+      setSelectedResourceCategories([]); // Clear resource categories when selecting program categories
+    },
+    [selectedProgramCategories]
+  );
+
+  // Handle setting resource categories (for bulk operations)
+  const handleSetResourceCategories = useCallback((categoryIds: string[]) => {
+    setSelectedResourceCategories(categoryIds);
+    // Automatically set filter to resource_page when categories are selected
+    if (categoryIds.length > 0) {
+      setActiveFilter("resource_page");
+    }
+    setSelectedTags([]);
+    setSelectedProgramCategories([]);
+  }, []);
+
+  // Handle setting program categories (for bulk operations)
+  const handleSetProgramCategories = useCallback((categoryIds: string[]) => {
+    setSelectedProgramCategories(categoryIds);
+    // Automatically set filter to program_page when categories are selected
+    if (categoryIds.length > 0) {
+      setActiveFilter("program_page");
+    }
+    setSelectedTags([]);
+    setSelectedResourceCategories([]);
+  }, []);
+
+  // Update available tags calculation
+  const resourceTags = useMemo(() => {
+    return Array.from(
+      new Set(resources.flatMap((resource) => resource.tags || []))
+    ).sort();
+  }, [resources]);
+
+  const programTags = useMemo(() => {
+    return Array.from(
+      new Set(programs.flatMap((program) => program.tags || []))
+    ).sort();
+  }, [programs]);
+
+  const allTags = useMemo(() => {
+    return Array.from(new Set([...resourceTags, ...programTags])).sort();
+  }, [resourceTags, programTags]);
+
+  const availableTags = useMemo(() => {
+    // If resource categories are selected, only show resource tags
+    if (selectedResourceCategories.length > 0) return resourceTags;
+    // If program categories are selected, only show program tags
+    if (selectedProgramCategories.length > 0) return programTags;
+    return allTags;
+  }, [
+    selectedResourceCategories,
+    selectedProgramCategories,
+    resourceTags,
+    programTags,
+    allTags,
+  ]);
+
+  const toggleTag = useCallback(
+    (tag: string) => {
+      // Only allow toggling if the tag is in availableTags
+      if (availableTags.includes(tag)) {
+        setSelectedTags((prev) =>
+          prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+        );
+      }
+      // When tags are selected, reset category filters
+      setSelectedResourceCategories([]);
+      setSelectedProgramCategories([]);
+    },
+    [availableTags]
+  );
+
+  // Clear all filters (search term, active filter, tags, and categories)
+  const clearAllFilters = useCallback(() => {
+    setSearchTerm("");
+    setActiveFilter(defaultCategoryFilter);
+    setSelectedTags([]);
+    setSelectedResourceCategories([]);
+    setSelectedProgramCategories([]);
+  }, []);
+
+  // Fuse.js options
+  const fuseOptions = useMemo(
+    () => ({
+      keys: [
+        { name: "title", weight: 0.6 },
+        { name: "description", weight: 0.3 },
+        { name: "tags", weight: 0.1 },
+      ],
+      threshold: 0.3,
+      minMatchCharLength: 2,
+      includeScore: true,
+      includeMatches: true,
+    }),
+    []
+  );
+
+  // Prepare data for Fuse.js
+  const searchableItems = useMemo(() => {
+    return [...programs, ...resources].map((item) => ({
+      id: item.id,
+      type: item.type,
+      title: asText(item.data.title) || "",
+      description: asText(item.data.body) || "",
+      tags: item.tags || [],
+      originalItem: item,
+    }));
+  }, [programs, resources]);
+
+  // Initialize Fuse.js
+  const fuse = useMemo(() => {
+    return new Fuse(searchableItems, fuseOptions);
+  }, [searchableItems, fuseOptions]);
+
+  // Fuzzy search function
+  const fuzzySearch = useCallback(
+    (term: string) => {
+      if (!term.trim()) return searchableItems.map((item) => item.originalItem);
+      const results = fuse.search(term);
+      return results.map((result) => result.item.originalItem);
+    },
+    [fuse, searchableItems]
+  );
+
+  // Update filteredItems to handle both resource and program categories
   const filteredItems = useMemo(() => {
     let items: (ResourcePageDocument | ProgramPageDocument)[] = [];
-    
-    // First filter by category
-    switch (activeFilter) {
+
+    // Determine effective filter based on selected categories
+    let effectiveFilter = activeFilter;
+    if (selectedResourceCategories.length > 0) {
+      effectiveFilter = "resource_page";
+    } else if (selectedProgramCategories.length > 0) {
+      effectiveFilter = "program_page";
+    }
+
+    switch (effectiveFilter) {
       case "program_page":
         items = programs;
         break;
@@ -69,25 +251,69 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       default:
         items = [...programs, ...resources];
     }
-    
-    // Then filter by search term if one exists
+
     if (searchTerm) {
-      return items.filter(matchesSearchTerm);
+      items = fuzzySearch(searchTerm).filter((item) =>
+        items.some((i) => i.id === item.id)
+      );
     }
-    
+
+    // Filter by selected resource categories if any
+    if (selectedResourceCategories.length > 0) {
+      items = items.filter(
+        (item) =>
+          item.type === "resource_page" &&
+          item.data.category &&
+          selectedResourceCategories.includes(
+            item.data.category && "id" in item.data.category
+              ? item.data.category.id
+              : ""
+          )
+      );
+    }
+
+    // Filter by selected program categories if any
+    if (selectedProgramCategories.length > 0) {
+      items = items.filter(
+        (item) =>
+          item.type === "program_page" &&
+          item.data.category &&
+          selectedProgramCategories.includes(
+            item.data.category && "id" in item.data.category
+              ? item.data.category.id
+              : ""
+          )
+      );
+    }
+
+    if (selectedTags.length > 0) {
+      items = items.filter((item) =>
+        selectedTags.some((tag) => item.tags?.includes(tag))
+      );
+    }
+
     return items;
-  }, [activeFilter, matchesSearchTerm, programs, resources, searchTerm]);
+  }, [
+    activeFilter,
+    programs,
+    resources,
+    searchTerm,
+    fuzzySearch,
+    selectedResourceCategories,
+    selectedProgramCategories,
+    selectedTags,
+  ]);
 
-  // Calculate counts for each filter (excluding search)
-  const filterCounts = useMemo(() => ({
-    all: programs.length + resources.length,
-    program_page: programs.length,
-    resource_page: resources.length,
-  }), [programs, resources]);
+  // Calculate filter counts
+  const filterCounts = useMemo(() => {
+    return {
+      all: programs.length + resources.length,
+      program_page: programs.length,
+      resource_page: resources.length,
+    };
+  }, [programs, resources]);
 
-  // Count of actual results after all filtering
-  const resultCount = filteredItems.length;
-
+  // Update the value object
   const value = {
     resources,
     setResources,
@@ -99,7 +325,22 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     setSearchTerm,
     filteredItems,
     filterCounts,
-    resultCount,
+    resultCount: filteredItems.length,
+    selectedTags,
+    toggleTag,
+    allTags,
+    clearAllFilters,
+    selectedResourceCategories,
+    setSelectedResourceCategories: handleSetResourceCategories,
+    toggleResourceCategory,
+    resourceCategories,
+    setResourceCategories,
+    selectedProgramCategories,
+    setSelectedProgramCategories: handleSetProgramCategories,
+    toggleProgramCategory,
+    programCategories,
+    setProgramCategories,
+    availableTags,
   };
 
   return (
@@ -108,7 +349,6 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     </CategoryFilterContext.Provider>
   );
 };
-
 export default CategoryFilterProvider;
 
 export const useCategoryFilter = (): CategoryFilterContextProps => {

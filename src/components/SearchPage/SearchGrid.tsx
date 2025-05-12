@@ -1,6 +1,5 @@
 "use client";
 import { Container } from "../Layout";
-import { Grid } from "../Grid";
 import { DefaultCard } from "../Cards";
 import { asText } from "@prismicio/client";
 import { PrismicRichText } from "@prismicio/react";
@@ -13,6 +12,7 @@ import { useCategoryFilter } from "@/providers";
 import { components, componentsTextSmall } from "@/utils";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { useResourceCategoryData, useProgramCategoryData } from "@/hooks";
+import { CustomPagination } from "../CustomPagination";
 
 interface SearchGridProps {
   lang: string;
@@ -23,7 +23,6 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
   const { resourceCategoryData } = useResourceCategoryData(lang);
   const { programCategoryData } = useProgramCategoryData(lang);
 
-  console.log("Filtered Items:", filteredItems);
   // Get category name for an item
   const getCategoryName = (
     item: ResourcePageDocument | ProgramPageDocument
@@ -56,11 +55,14 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
   return (
     <div className="padded-div" data-test-id="search-grid">
       <Container>
-        <Grid maxColumns={3}>
-          {filteredItems.length > 0 ? (
-            (
+        {filteredItems.length > 0 ? (
+          <CustomPagination
+            itemsPerPage={6}
+            styling="grid gap-4 grid-cols-1 lg:grid-cols-2"
+          >
+            {(
               filteredItems as (ResourcePageDocument | ProgramPageDocument)[]
-            )?.map((item, index) => (
+            ).map((item, index) => (
               <DefaultCard
                 key={index}
                 title={asText(item.data.title)}
@@ -86,18 +88,18 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
                   </Link>,
                 ]}
               />
-            ))
-          ) : (
-            <div className="text-center col-span-3 mx-auto md:w-1/2 my-24">
-              <PrismicRichText
-                field={[
-                  { type: "paragraph", text: "No results found", spans: [] },
-                ]}
-                components={components}
-              />
-            </div>
-          )}
-        </Grid>
+            ))}
+          </CustomPagination>
+        ) : (
+          <div className="text-center col-span-3 mx-auto md:w-1/2 my-24">
+            <PrismicRichText
+              field={[
+                { type: "paragraph", text: "No results found", spans: [] },
+              ]}
+              components={components}
+            />
+          </div>
+        )}
       </Container>
     </div>
   );
