@@ -57,7 +57,7 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
     <div className="padded-div" data-test-id="search-grid">
       <Container>
         {filteredItems.length > 0 ? (
-          <CustomPagination itemsPerPage={6} className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
+          <CustomPagination itemsPerPage={6} className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 mb-10">
             {(
               filteredItems as (ResourcePageDocument | ProgramPageDocument)[]
             ).map((item, index) => (

@@ -7,6 +7,7 @@ import { getLocales } from "@/utils";
 import * as prismic from "@prismicio/client";
 import { Layout, SearchLayout } from "@/components";
 import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
+import { GeneralHero } from "@/components/Heros/GeneralHero";
 
 export default async function Page({}) {
   const client = createClient();
@@ -26,6 +27,7 @@ export default async function Page({}) {
         page.data.include_newsletter_sign_up_banner
       }
     >
+      <GeneralHero data={page.data} />
       <CategoryFilterProvider>
         <SearchLayout />
       </CategoryFilterProvider>
