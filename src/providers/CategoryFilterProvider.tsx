@@ -5,6 +5,7 @@ import React, {
   useState,
   useMemo,
   useCallback,
+  useEffect,
 } from "react";
 import Fuse from "fuse.js";
 import {
@@ -49,6 +50,10 @@ interface CategoryFilterContextProps {
   hasCredentials: boolean;
   setHasCredentials: (value: boolean) => void;
   toggleCredentials: () => void;
+  costRange: [number, number];
+  setCostRange: (range: [number, number]) => void;
+  maxCost: number;
+  resetCostRange: () => void;
 }
 
 const CategoryFilterContext = createContext<
@@ -81,6 +86,23 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   >([]);
   const [selectedFormats, setSelectedFormats] = useState<ProgramFormat[]>([]);
   const [hasCredentials, setHasCredentials] = useState<boolean>(false);
+  const [costRange, setCostRange] = useState<[number, number]>([0, 0]);
+
+  // Calculate max cost from programs
+  const maxCost = useMemo(() => {
+    if (programs.length === 0) return 0;
+    return Math.max(...programs.map((program) => program.data.cost || 0));
+  }, [programs]);
+
+  useEffect(() => {
+    if (programs.length > 0 && costRange[1] === 0) {
+      setCostRange([0, maxCost]);
+    }
+  }, [programs, maxCost, costRange]);
+
+  const resetCostRange = useCallback(() => {
+    setCostRange([0, maxCost]);
+  }, [maxCost]);
 
   const toggleCredentials = useCallback(() => {
     setHasCredentials((prev) => !prev);
@@ -242,7 +264,9 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       selectedResourceCategories.length > 0 ||
       selectedProgramCategories.length > 0 ||
       selectedFormats.length > 0 ||
-      hasCredentials
+      hasCredentials ||
+      costRange[0] !== 0 ||
+      costRange[1] !== maxCost
     ) {
       items = items.filter((item) => {
         // Resource category check
@@ -281,12 +305,19 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
           item.type === "program_page" &&
           item.data.certs === true;
 
+        const matchesCostRange =
+          item.type === "program_page" &&
+          typeof item.data.cost === "number" &&
+          item.data.cost >= costRange[0] &&
+          item.data.cost <= costRange[1];
+
         return (
           matchesResourceCategory ||
           matchesProgramCategory ||
           matchesTags ||
           matchesFormat ||
-          matchesCredentials
+          matchesCredentials ||
+          matchesCostRange
         );
       });
     }
@@ -303,6 +334,8 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     selectedTags,
     selectedFormats,
     hasCredentials,
+    costRange,
+    maxCost,
   ]);
 
   // Calculate filter counts
@@ -347,6 +380,10 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     hasCredentials,
     setHasCredentials,
     toggleCredentials,
+    costRange,
+    setCostRange,
+    maxCost,
+    resetCostRange,
   };
 
   return (
