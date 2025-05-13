@@ -13,7 +13,7 @@ interface DefaultCardProps {
   buttons?: ReactNode[] | undefined;
   image?: ImageField;
   category?: string;
-  cardType?: "program" | "resource" | string;
+  cardType?: "program_page" | "resource_page" | string;
 }
 
 export const DefaultCard = ({

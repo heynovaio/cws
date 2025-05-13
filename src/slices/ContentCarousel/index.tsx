@@ -116,11 +116,11 @@ const ContentCarousel = ({
 
   if (slice.variation === "programsCarousel") {
     data = programPageData;
-    cardType = "program";
+    cardType = "program_page";
     categoryData = programCategoryData;
   } else if (slice.variation === "resourceCarousel") {
     data = resourcePageData;
-    cardType = "resource";
+    cardType = "resource_page";
     categoryData = resourceCategoryData;
   }
 
