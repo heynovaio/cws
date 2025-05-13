@@ -33,6 +33,15 @@
             "default_value": false
           }
         },
+        "animation": {
+          "type": "Boolean",
+          "config": {
+            "label": "Animation",
+            "placeholder_false": "off",
+            "placeholder_true": "on",
+            "default_value": true
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -100,6 +109,15 @@
             "placeholder_false": "Left",
             "placeholder_true": "Right",
             "default_value": false
+          }
+        },
+        "animation": {
+          "type": "Boolean",
+          "config": {
+            "label": "Animation",
+            "placeholder_false": "off",
+            "placeholder_true": "on",
+            "default_value": true
           }
         },
         "title": {
@@ -176,6 +194,15 @@
             "placeholder_false": "Left",
             "placeholder_true": "Right",
             "default_value": false
+          }
+        },
+        "animation": {
+          "type": "Boolean",
+          "config": {
+            "label": "Animation",
+            "placeholder_false": "off",
+            "placeholder_true": "on",
+            "default_value": true
           }
         },
         "title": {

@@ -24,7 +24,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
 
   const isVideo = slice.variation === "video";
   const isStats = slice.variation === "stats";
-
+  const animation = slice.primary.animation !== false;
   return (
       <Section
         data-slice-type={slice.slice_type}
@@ -36,7 +36,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
         >
         <div ref={ref} className={`w-full md:w-1/2 overflow-hidden`}>
             {isVideo ? (
-              <div className={`w-full h-[250px] md:h-[400px] overflow-hidden rounded-xl transition-all duration-700 ${inView ? 'opacity-100 translate-none' : 'motion-safe:opacity-10 motion-safe:translate-y-[150px] lg:motion-safe:translate-y-[300px]'}`}>
+              <div className={`w-full h-[250px] md:h-[400px] overflow-hidden rounded-xl transition-all duration-700 ${animation ? inView ? 'opacity-100 translate-none' : 'motion-safe:opacity-10 motion-safe:translate-y-[150px] lg:motion-safe:translate-y-[300px]' : ''}`}>
                 <div
                   className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:absolute [&>iframe]:top-0 [&>iframe]:left-0 relative"
                   dangerouslySetInnerHTML={{
@@ -47,12 +47,12 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
             ) : (
               <ResponsiveImage
                 image={slice.primary.image}
-                className={`w-full h-[250px] md:h-[400px] object-cover mb-4 md:mb-0 transition-all duration-700 ease-in-out ${inView ? 'opacity-100 translate-none' : 'motion-safe:opacity-10 motion-safe:translate-y-[150px] lg:motion-safe:translate-y-[300px]'}`}
+                className={`w-full h-[250px] md:h-[400px] object-cover mb-4 md:mb-0 transition-all duration-700 ease-in-out ${animation ? inView ? 'opacity-100 translate-none' : 'motion-safe:opacity-10 motion-safe:translate-y-[150px] lg:motion-safe:translate-y-[300px]': ''}`}
               />
             )}
           </div>
 
-          <div className={`w-full md:w-1/2 transition-all duration-700 ${inView ? 'opacity-100 translate-none' : 'md:motion-safe:opacity-10 lg:motion-safe:translate-y-[-50px]'}`}>
+          <div className={`w-full md:w-1/2 transition-all duration-700 ${animation ? inView ? 'opacity-100 translate-none' : 'md:motion-safe:opacity-10 lg:motion-safe:translate-y-[-50px]' :''}`}>
             <ContentBox
               title={slice.primary.title}
               content={
