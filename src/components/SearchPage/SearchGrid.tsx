@@ -23,6 +23,7 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
   const { resourceCategoryData } = useResourceCategoryData(lang);
   const { programCategoryData } = useProgramCategoryData(lang);
 
+  console.log("Filtered items:", filteredItems);
   // Get category name for an item
   const getCategoryName = (
     item: ResourcePageDocument | ProgramPageDocument

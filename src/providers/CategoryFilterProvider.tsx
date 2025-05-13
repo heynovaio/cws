@@ -74,63 +74,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     ProgramCategoryDocument[]
   >([]);
 
-  const toggleResourceCategory = useCallback(
-    (categoryId: string) => {
-      setSelectedResourceCategories((prev) =>
-        prev.includes(categoryId)
-          ? prev.filter((id) => id !== categoryId)
-          : [...prev, categoryId]
-      );
-      // Automatically set filter to resource_page when selecting a category
-      if (!selectedResourceCategories.includes(categoryId)) {
-        setActiveFilter("resource_page");
-      }
-      setSelectedTags([]);
-      setSelectedProgramCategories([]); // Clear program categories when selecting resource categories
-    },
-    [selectedResourceCategories]
-  );
-
-  const toggleProgramCategory = useCallback(
-    (categoryId: string) => {
-      setSelectedProgramCategories((prev) =>
-        prev.includes(categoryId)
-          ? prev.filter((id) => id !== categoryId)
-          : [...prev, categoryId]
-      );
-      // Automatically set filter to program_page when selecting a category
-      if (!selectedProgramCategories.includes(categoryId)) {
-        setActiveFilter("program_page");
-      }
-      setSelectedTags([]);
-      setSelectedResourceCategories([]); // Clear resource categories when selecting program categories
-    },
-    [selectedProgramCategories]
-  );
-
-  // Handle setting resource categories (for bulk operations)
-  const handleSetResourceCategories = useCallback((categoryIds: string[]) => {
-    setSelectedResourceCategories(categoryIds);
-    // Automatically set filter to resource_page when categories are selected
-    if (categoryIds.length > 0) {
-      setActiveFilter("resource_page");
-    }
-    setSelectedTags([]);
-    setSelectedProgramCategories([]);
-  }, []);
-
-  // Handle setting program categories (for bulk operations)
-  const handleSetProgramCategories = useCallback((categoryIds: string[]) => {
-    setSelectedProgramCategories(categoryIds);
-    // Automatically set filter to program_page when categories are selected
-    if (categoryIds.length > 0) {
-      setActiveFilter("program_page");
-    }
-    setSelectedTags([]);
-    setSelectedResourceCategories([]);
-  }, []);
-
-  // Update available tags calculation
+  // Extract all tags from resources and programs
   const resourceTags = useMemo(() => {
     return Array.from(
       new Set(resources.flatMap((resource) => resource.tags || []))
@@ -147,19 +91,42 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     return Array.from(new Set([...resourceTags, ...programTags])).sort();
   }, [resourceTags, programTags]);
 
+  // Determine available tags based on active filter
   const availableTags = useMemo(() => {
-    // If resource categories are selected, only show resource tags
-    if (selectedResourceCategories.length > 0) return resourceTags;
-    // If program categories are selected, only show program tags
-    if (selectedProgramCategories.length > 0) return programTags;
-    return allTags;
-  }, [
-    selectedResourceCategories,
-    selectedProgramCategories,
-    resourceTags,
-    programTags,
-    allTags,
-  ]);
+    switch (activeFilter) {
+      case "resource_page":
+        return resourceTags;
+      case "program_page":
+        return programTags;
+      case "all":
+      default:
+        return allTags;
+    }
+  }, [activeFilter, resourceTags, programTags, allTags]);
+
+  const toggleResourceCategory = useCallback((categoryId: string) => {
+    setSelectedResourceCategories((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
+    );
+  }, []);
+
+  const toggleProgramCategory = useCallback((categoryId: string) => {
+    setSelectedProgramCategories((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
+    );
+  }, []);
+
+  const handleSetResourceCategories = useCallback((categoryIds: string[]) => {
+    setSelectedResourceCategories(categoryIds);
+  }, []);
+
+  const handleSetProgramCategories = useCallback((categoryIds: string[]) => {
+    setSelectedProgramCategories(categoryIds);
+  }, []);
 
   const toggleTag = useCallback(
     (tag: string) => {
@@ -169,14 +136,10 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
           prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
         );
       }
-      // When tags are selected, reset category filters
-      setSelectedResourceCategories([]);
-      setSelectedProgramCategories([]);
     },
     [availableTags]
   );
 
-  // Clear all filters (search term, active filter, tags, and categories)
   const clearAllFilters = useCallback(() => {
     setSearchTerm("");
     setActiveFilter(defaultCategoryFilter);
@@ -228,19 +191,12 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     [fuse, searchableItems]
   );
 
-  // Update filteredItems to handle both resource and program categories
+  // Main filtering logic
   const filteredItems = useMemo(() => {
+    // Start with all items based on active filter
     let items: (ResourcePageDocument | ProgramPageDocument)[] = [];
 
-    // Determine effective filter based on selected categories
-    let effectiveFilter = activeFilter;
-    if (selectedResourceCategories.length > 0) {
-      effectiveFilter = "resource_page";
-    } else if (selectedProgramCategories.length > 0) {
-      effectiveFilter = "program_page";
-    }
-
-    switch (effectiveFilter) {
+    switch (activeFilter) {
       case "program_page":
         items = programs;
         break;
@@ -252,44 +208,52 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         items = [...programs, ...resources];
     }
 
+    // Apply search filter if search term exists
     if (searchTerm) {
       items = fuzzySearch(searchTerm).filter((item) =>
         items.some((i) => i.id === item.id)
       );
     }
 
-    // Filter by selected resource categories if any
-    if (selectedResourceCategories.length > 0) {
-      items = items.filter(
-        (item) =>
+    // Check if we have any category or tag filters
+    const hasResourceCategoryFilter = selectedResourceCategories.length > 0;
+    const hasProgramCategoryFilter = selectedProgramCategories.length > 0;
+    const hasTagFilter = selectedTags.length > 0;
+    const hasAnyFilter =
+      hasResourceCategoryFilter || hasProgramCategoryFilter || hasTagFilter;
+
+    if (hasAnyFilter) {
+      items = items.filter((item) => {
+        // Check category matches
+        const matchesResourceCategory =
           item.type === "resource_page" &&
+          hasResourceCategoryFilter &&
           item.data.category &&
           selectedResourceCategories.includes(
             item.data.category && "id" in item.data.category
               ? item.data.category.id
               : ""
-          )
-      );
-    }
+          );
 
-    // Filter by selected program categories if any
-    if (selectedProgramCategories.length > 0) {
-      items = items.filter(
-        (item) =>
+        const matchesProgramCategory =
           item.type === "program_page" &&
+          hasProgramCategoryFilter &&
           item.data.category &&
           selectedProgramCategories.includes(
             item.data.category && "id" in item.data.category
               ? item.data.category.id
               : ""
-          )
-      );
-    }
+          );
 
-    if (selectedTags.length > 0) {
-      items = items.filter((item) =>
-        selectedTags.some((tag) => item.tags?.includes(tag))
-      );
+        // Check tag matches
+        const matchesTags =
+          hasTagFilter && item.tags
+            ? selectedTags.some((tag) => item.tags?.includes(tag))
+            : false;
+
+        // Return true if any of the filters match (OR logic)
+        return matchesResourceCategory || matchesProgramCategory || matchesTags;
+      });
     }
 
     return items;
@@ -313,7 +277,6 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     };
   }, [programs, resources]);
 
-  // Update the value object
   const value = {
     resources,
     setResources,
