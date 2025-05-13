@@ -7,3 +7,4 @@ export * from "./Buttons";
 export * from "./Intro";
 export * from "./Grid";
 export * from "./TabbedCarousel";
+export * from "./SearchPage";

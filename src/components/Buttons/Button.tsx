@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 interface ButtonProps {
   as?: "link" | "button";
   type?: "button" | "submit";
-  buttonType: "primary" | "secondary" | "outline" | "link";
+  buttonType: "primary" | "secondary" | "outline" | "link" | "text";
   label: ReactNode;
   linkButtonColorClass?: string;
   buttonLink?: LinkField;

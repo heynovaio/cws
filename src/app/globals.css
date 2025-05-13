@@ -61,6 +61,10 @@
     @apply text-label font-bold;
   }
 
+  .label-small {
+    @apply !text-bodyLarge font-bold;
+  }
+
   .btn {
     @apply inline-block
       rounded-full 
@@ -68,7 +72,6 @@
       font-bold
       px-8 py-2
       no-underline
-      text-[1.125rem]
       md:text-bodyLarge
       relative;
   }
