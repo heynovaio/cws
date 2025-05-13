@@ -359,3 +359,40 @@
       )
       top right / 50% 50% no-repeat;
 }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 100%;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 20px;
+  background: linear-gradient(
+    to right,
+    #1e1e2d var(--range-progress),
+    #c7c7c7 var(--range-progress)
+  );
+  border-radius: 25px;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    #1e1e2d var(--range-progress),
+    #c7c7c7 var(--range-progress)
+  );
+  border-radius: 25px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 40px;
+  height: 40px;
+  background: #DD0748;
+  border-radius: 50%;
+  margin-top: -10px;
+  
+}

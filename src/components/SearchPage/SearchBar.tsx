@@ -12,7 +12,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <Field className="flex items-center gap-2">
+    <Field className="flex gap-3 self-start md:self-auto w-full md:max-w-[400px]">
       <div className="flex items-center gap-2">
         <FaSearch className="h-5 w-5 text-aqua" />
         <Label htmlFor="search" className="label-small">
@@ -25,7 +25,7 @@ export const SearchBar = () => {
         value={searchTerm}
         onChange={handleSearchChange}
         placeholder="Search..."
-        className={`bg-white px-4 py-1 rounded-full focus flex-grow`}
+        className={`bg-white px-4 py-1 rounded-full focus flex w-full`}
       />
     </Field>
   );
