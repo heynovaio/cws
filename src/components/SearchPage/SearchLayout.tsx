@@ -13,6 +13,8 @@ import GetAllResourceCategories from "@/utils/useGetAllResourceCategories";
 import { SearchPanelContainer } from "./SearchPanelContainer";
 import { ProgramsCategoriesFilterPanel } from "./ProgramsCategoriesFilterPanel";
 import GetAllProgramCategories from "@/utils/useGetAllProgramCategories";
+import { ProgramsFormatFilterPanel } from "./ProgramsFormatFilterPanel";
+import { ProgramsCredentialsFilterPanel } from "./ProgramsCredentialsFilterPanel";
 
 interface SearchLayoutProps {
   lang?: string;
@@ -77,7 +79,13 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
         />
         <SearchPanelContainer
           label="Program Filters"
-          panel={<ProgramsCategoriesFilterPanel />}
+          panel={
+            <div className="flex flex-col gap-5">
+              <ProgramsCategoriesFilterPanel />
+              <ProgramsFormatFilterPanel />
+              <ProgramsCredentialsFilterPanel />
+            </div>
+          }
           topPanel={true}
           isHidden={isProgramContainerHidden}
         />

@@ -13,7 +13,7 @@ import {
   ResourceCategoryDocument,
   ProgramCategoryDocument,
 } from "../../prismicio-types";
-import { ModuleFilter } from "@/constants";
+import { ModuleFilter, ProgramFormat } from "@/constants";
 import { asText } from "@prismicio/client";
 
 interface CategoryFilterContextProps {
@@ -43,6 +43,12 @@ interface CategoryFilterContextProps {
   programCategories: ProgramCategoryDocument[];
   setProgramCategories: (categories: ProgramCategoryDocument[]) => void;
   availableTags: string[];
+  selectedFormats: ProgramFormat[];
+  setSelectedFormats: (formats: ProgramFormat[]) => void;
+  toggleFormat: (format: ProgramFormat) => void;
+  hasCredentials: boolean;
+  setHasCredentials: (value: boolean) => void;
+  toggleCredentials: () => void;
 }
 
 const CategoryFilterContext = createContext<
@@ -73,6 +79,20 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   const [programCategories, setProgramCategories] = useState<
     ProgramCategoryDocument[]
   >([]);
+  const [selectedFormats, setSelectedFormats] = useState<ProgramFormat[]>([]);
+  const [hasCredentials, setHasCredentials] = useState<boolean>(false);
+
+  const toggleCredentials = useCallback(() => {
+    setHasCredentials((prev) => !prev);
+  }, []);
+
+  const toggleFormat = useCallback((format: ProgramFormat) => {
+    setSelectedFormats((prev) =>
+      prev.includes(format)
+        ? prev.filter((f) => f !== format)
+        : [...prev, format]
+    );
+  }, []);
 
   // Extract all tags from resources and programs
   const resourceTags = useMemo(() => {
@@ -146,6 +166,8 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     setSelectedTags([]);
     setSelectedResourceCategories([]);
     setSelectedProgramCategories([]);
+    setSelectedFormats([]);
+    setHasCredentials(false);
   }, []);
 
   // Fuse.js options
@@ -193,7 +215,6 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Main filtering logic
   const filteredItems = useMemo(() => {
-    // Start with all items based on active filter
     let items: (ResourcePageDocument | ProgramPageDocument)[] = [];
 
     switch (activeFilter) {
@@ -215,44 +236,58 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       );
     }
 
-    // Check if we have any category or tag filters
-    const hasResourceCategoryFilter = selectedResourceCategories.length > 0;
-    const hasProgramCategoryFilter = selectedProgramCategories.length > 0;
-    const hasTagFilter = selectedTags.length > 0;
-    const hasAnyFilter =
-      hasResourceCategoryFilter || hasProgramCategoryFilter || hasTagFilter;
-
-    if (hasAnyFilter) {
+    // Only apply other filters if any are active
+    if (
+      selectedTags.length > 0 ||
+      selectedResourceCategories.length > 0 ||
+      selectedProgramCategories.length > 0 ||
+      selectedFormats.length > 0 ||
+      hasCredentials
+    ) {
       items = items.filter((item) => {
-        // Check category matches
+        // Resource category check
         const matchesResourceCategory =
           item.type === "resource_page" &&
-          hasResourceCategoryFilter &&
+          selectedResourceCategories.length > 0 &&
           item.data.category &&
           selectedResourceCategories.includes(
-            item.data.category && "id" in item.data.category
-              ? item.data.category.id
-              : ""
+            "id" in item.data.category ? item.data.category.id : ""
           );
 
+        // Program category check
         const matchesProgramCategory =
           item.type === "program_page" &&
-          hasProgramCategoryFilter &&
+          selectedProgramCategories.length > 0 &&
           item.data.category &&
           selectedProgramCategories.includes(
-            item.data.category && "id" in item.data.category
-              ? item.data.category.id
-              : ""
+            "id" in item.data.category ? item.data.category.id : ""
           );
 
-        // Check tag matches
+        // Tag check
         const matchesTags =
-          hasTagFilter && item.tags
+          selectedTags.length > 0 && item.tags
             ? selectedTags.some((tag) => item.tags?.includes(tag))
             : false;
 
-        // Return true if any of the filters match (OR logic)
-        return matchesResourceCategory || matchesProgramCategory || matchesTags;
+        // Format check - only for programs with format specified
+        const matchesFormat =
+          item.type === "program_page" &&
+          selectedFormats.length > 0 &&
+          item.data.format &&
+          selectedFormats.includes(item.data.format);
+
+        const matchesCredentials =
+          hasCredentials &&
+          item.type === "program_page" &&
+          item.data.certs === true;
+
+        return (
+          matchesResourceCategory ||
+          matchesProgramCategory ||
+          matchesTags ||
+          matchesFormat ||
+          matchesCredentials
+        );
       });
     }
 
@@ -266,6 +301,8 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     selectedResourceCategories,
     selectedProgramCategories,
     selectedTags,
+    selectedFormats,
+    hasCredentials,
   ]);
 
   // Calculate filter counts
@@ -304,6 +341,12 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     programCategories,
     setProgramCategories,
     availableTags,
+    selectedFormats,
+    setSelectedFormats,
+    toggleFormat,
+    hasCredentials,
+    setHasCredentials,
+    toggleCredentials,
   };
 
   return (
