@@ -1,6 +1,6 @@
 import { Field, Checkbox, Label } from "@headlessui/react";
 import { FaCheck, FaMinus, FaPlus } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type FilterItem = string | { id: string; name: string };
 
@@ -11,6 +11,13 @@ interface FilterPanelProps {
   onItemToggle?: (itemId: string) => void;
   className?: string;
   initialVisibleCount?: number;
+
+  // Slider specific props
+  slider?: boolean;
+  sliderMin?: number;
+  sliderMax?: number;
+  sliderValue?: number;
+  onSliderChange?: (value: number) => void;
 }
 
 export const FilterPanel = ({
@@ -20,68 +27,113 @@ export const FilterPanel = ({
   onItemToggle,
   className = "rounded bg-light-violet text-midnight p-4 flex flex-col gap-6",
   initialVisibleCount = 4,
+
+  slider = false,
+  sliderMin = 0,
+  sliderMax = 100,
+  sliderValue = 100,
+  onSliderChange,
 }: FilterPanelProps) => {
   const [showAll, setShowAll] = useState(false);
 
-  // Helper function to get the ID/string value for comparison
+  const [localSliderValue, setLocalSliderValue] = useState(sliderValue);
+
+  useEffect(() => {
+    setLocalSliderValue(sliderValue);
+  }, [sliderValue]);
+
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = Number(e.target.value);
+    setLocalSliderValue(newValue);
+    onSliderChange?.(newValue);
+  };
+
   const getItemValue = (item: FilterItem): string => {
     return typeof item === "string" ? item : item.id;
   };
 
-  // Helper function to get the display name
   const getItemName = (item: FilterItem): string => {
     return typeof item === "string" ? item : item.name;
   };
 
   const visibleItems = showAll ? items : items.slice(0, initialVisibleCount);
-  const remainingCount = items.length - initialVisibleCount;
+  const remainingCount = Math.max(0, items.length - initialVisibleCount);
 
   return (
     <div className={className}>
       <label className="label">{label}</label>
 
-      <div className="flex flex-col gap-3">
-        {visibleItems.map((item) => {
-          const value = getItemValue(item);
-          const name = getItemName(item);
+      {/* Slider Section */}
+      {slider && (
+        <div className="mb-6 space-y-4">
+          <div className="flex justify-between items-center">
+            <span className="text-sm">Free - ${localSliderValue}</span>
+          </div>
+          <input
+            type="range"
+            min={sliderMin}
+            max={sliderMax}
+            value={localSliderValue}
+            onChange={handleSliderChange}
+            style={
+              {
+                "--range-progress": `${((localSliderValue - sliderMin) / (sliderMax - sliderMin)) * 100}%`,
+              } as React.CSSProperties
+            }
+          />
+        </div>
+      )}
 
-          return (
-            <Field key={value} className="flex items-center gap-3">
-              <Checkbox
-                checked={selectedItems?.includes(value)}
-                onChange={() => onItemToggle?.(value)}
-                className="group flex size-6 items-center justify-center border border-midnight rounded-md data-[checked]:bg-midnight focus"
-              >
-                <FaCheck
-                  className={`size-3 ${selectedItems?.includes(value) ? "text-aqua" : "opacity-0"}`}
-                />
-              </Checkbox>
-              <Label className="cursor-pointer text-base font-normal">
-                {name}
-              </Label>
-            </Field>
-          );
-        })}
+      {/* Filter Items Section */}
+      {!slider && (
+        <div>
+          <div className="space-y-3">
+            {visibleItems.map((item) => {
+              const value = getItemValue(item);
+              const name = getItemName(item);
+              const isSelected = selectedItems?.includes(value);
 
-        {items.length > initialVisibleCount && (
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="flex items-center gap-2 text-sm text-midnight mt-2 hover:underline focus:outline-none btn-link"
-          >
-            {showAll ? (
-              <>
-                <FaMinus className="size-3" />
-                Hide ({remainingCount})
-              </>
-            ) : (
-              <>
-                <FaPlus className="size-3" />
-                View all ({remainingCount})
-              </>
-            )}
-          </button>
-        )}
-      </div>
+              return (
+                <Field key={value} className="flex items-center gap-3">
+                  <Checkbox
+                    checked={isSelected}
+                    onChange={() => onItemToggle?.(value)}
+                    className={`group flex size-6 items-center justify-center rounded-md border focus
+                  ${isSelected ? "border-midnight bg-midnight" : "border-midnight"}`}
+                  >
+                    <FaCheck
+                      className={`size-3 ${isSelected ? "text-aqua" : "opacity-0"}`}
+                    />
+                  </Checkbox>
+                  <Label className="cursor-pointer text-base font-normal">
+                    {name}
+                  </Label>
+                </Field>
+              );
+            })}
+          </div>
+
+          {/* Show More/Less Button */}
+          {remainingCount > 0 && (
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="flex items-center gap-2 text-sm text-midnight btn-link mt-4 focus"
+            >
+              {showAll ? (
+                <>
+                  <FaMinus className="size-3" />
+                  Show less
+                </>
+              ) : (
+                <>
+                  <FaPlus className="size-3" />
+                  Show more ({remainingCount})
+                </>
+              )}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

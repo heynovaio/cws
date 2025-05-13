@@ -10,6 +10,10 @@ export const ClearFilterButton = () => {
     selectedTags,
     selectedResourceCategories,
     selectedProgramCategories,
+    selectedFormats,
+    hasCredentials,
+    costRange,
+    maxCost,
   } = useCategoryFilter();
 
   const anyFiltersActive =
@@ -17,7 +21,11 @@ export const ClearFilterButton = () => {
     activeFilter !== defaultCategoryFilter ||
     selectedTags.length > 0 ||
     selectedResourceCategories.length > 0 ||
-    selectedProgramCategories.length > 0;
+    selectedProgramCategories.length > 0 ||
+    selectedFormats.length > 0 ||
+    hasCredentials ||
+    costRange[0] !== 0 ||
+    costRange[1] !== maxCost;
 
   if (!anyFiltersActive) return null;
 

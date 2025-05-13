@@ -67,7 +67,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [resources, setResources] = useState<ResourcePageDocument[]>([]);
   const [programs, setPrograms] = useState<ProgramPageDocument[]>([]);
-  const [activeFilter, setActiveFilter] = useState<ModuleFilter>(
+  const [_activeFilter, _setActiveFilter] = useState<ModuleFilter>(
     defaultCategoryFilter
   );
   const [searchTerm, setSearchTerm] = useState("");
@@ -115,6 +115,19 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         : [...prev, format]
     );
   }, []);
+
+  const setActiveFilter = useCallback(
+    (filter: ModuleFilter) => {
+      if (_activeFilter === "program_page" && filter !== "program_page") {
+        setSelectedFormats([]);
+        setHasCredentials(false);
+        setCostRange([0, maxCost]);
+      }
+      _setActiveFilter(filter);
+    },
+    [_activeFilter, maxCost]
+  );
+  const activeFilter = _activeFilter;
 
   // Extract all tags from resources and programs
   const resourceTags = useMemo(() => {
@@ -190,9 +203,10 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     setSelectedProgramCategories([]);
     setSelectedFormats([]);
     setHasCredentials(false);
-  }, []);
+    setCostRange([0, maxCost]);
+  }, [maxCost, setActiveFilter]);
 
-  // Fuse.js options
+  // Fuse.js
   const fuseOptions = useMemo(
     () => ({
       keys: [
@@ -208,7 +222,6 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     []
   );
 
-  // Prepare data for Fuse.js
   const searchableItems = useMemo(() => {
     return [...programs, ...resources].map((item) => ({
       id: item.id,
@@ -220,12 +233,10 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     }));
   }, [programs, resources]);
 
-  // Initialize Fuse.js
   const fuse = useMemo(() => {
     return new Fuse(searchableItems, fuseOptions);
   }, [searchableItems, fuseOptions]);
 
-  // Fuzzy search function
   const fuzzySearch = useCallback(
     (term: string) => {
       if (!term.trim()) return searchableItems.map((item) => item.originalItem);
@@ -235,7 +246,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     [fuse, searchableItems]
   );
 
-  // Main filtering logic
+  // Filtering logic
   const filteredItems = useMemo(() => {
     let items: (ResourcePageDocument | ProgramPageDocument)[] = [];
 
@@ -265,8 +276,8 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       selectedProgramCategories.length > 0 ||
       selectedFormats.length > 0 ||
       hasCredentials ||
-      costRange[0] !== 0 ||
-      costRange[1] !== maxCost
+      ((costRange[0] !== 0 || costRange[1] !== maxCost) &&
+        activeFilter !== "resource_page") // Only apply cost filter if not viewing resources
     ) {
       items = items.filter((item) => {
         // Resource category check
@@ -305,6 +316,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
           item.type === "program_page" &&
           item.data.certs === true;
 
+        // Only apply cost filter to programs or when viewing all items
         const matchesCostRange =
           item.type === "program_page" &&
           typeof item.data.cost === "number" &&
@@ -317,7 +329,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
           matchesTags ||
           matchesFormat ||
           matchesCredentials ||
-          matchesCostRange
+          (matchesCostRange && activeFilter !== "resource_page")
         );
       });
     }
