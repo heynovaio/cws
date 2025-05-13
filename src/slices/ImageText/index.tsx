@@ -16,13 +16,11 @@ export type ImageTextProps = SliceComponentProps<Content.ImageTextSlice>;
  * Component for "ImageText" Slices.
  */
 const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
-  const { ref, inView, entry } = useInView({
-    /* Optional options */
-    threshold: 1,
+  const { ref, inView} = useInView({
+    rootMargin: "-200px 0px",
   })
 
-  const imageSide =
-    slice.primary.image_side === false ? "md:flex-row" : "md:flex-row-reverse";
+  const imageSide = slice.primary.image_side === false ? "md:flex-row" : "md:flex-row-reverse";
 
   const isVideo = slice.variation === "video";
   const isStats = slice.variation === "stats";
@@ -36,10 +34,9 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
         <Container
           containerClassName={`flex flex-col ${imageSide} gap-4 md:gap-16 w-full items-center`}
         >
-        <div ref={ref} className="w-full md:w-1/2">
-          <h2>{`Header inside viewport ${inView}.`}</h2>
+        <div ref={ref} className={`w-full md:w-1/2 overflow-hidden`}>
             {isVideo ? (
-              <div className="w-full h-[250px] md:h-[400px] overflow-hidden rounded-xl">
+              <div className={`w-full h-[250px] md:h-[400px] overflow-hidden rounded-xl transition-all duration-700 ${inView ? 'opacity-100 translate-none' : 'motion-safe:opacity-10 motion-safe:translate-y-[150px] lg:motion-safe:translate-y-[300px]'}`}>
                 <div
                   className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:absolute [&>iframe]:top-0 [&>iframe]:left-0 relative"
                   dangerouslySetInnerHTML={{
@@ -50,12 +47,12 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
             ) : (
               <ResponsiveImage
                 image={slice.primary.image}
-                className="w-full h-[250px] md:h-[400px] object-cover mb-4 md:mb-0"
+                className={`w-full h-[250px] md:h-[400px] object-cover mb-4 md:mb-0 transition-all duration-700 ease-in-out ${inView ? 'opacity-100 translate-none' : 'motion-safe:opacity-10 motion-safe:translate-y-[150px] lg:motion-safe:translate-y-[300px]'}`}
               />
             )}
           </div>
 
-          <div className="w-full md:w-1/2">
+          <div className={`w-full md:w-1/2 transition-all duration-700 ${inView ? 'opacity-100 translate-none' : 'md:motion-safe:opacity-10 lg:motion-safe:translate-y-[-50px]'}`}>
             <ContentBox
               title={slice.primary.title}
               content={
