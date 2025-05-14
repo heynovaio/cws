@@ -30,10 +30,11 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
     >
       <Container containerClassName="flex flex-col gap-12 items-center">
         <div
-          className="bg-neon-violet shadow rounded py-4 px-6 md:py-16 md:px-28  bg-no-repeat "
+          className="bg-neon-violet shadow rounded py-4 px-6 lg:py-16 lg:px-28  bg-no-repeat "
           style={{
             backgroundImage: "url('/LogoBig.png')",
             backgroundPosition: backgroundImageSide,
+            backgroundSize: 'cover',
           }}
         >
           <div
@@ -50,10 +51,10 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
               <PrismicRichText field={slice.primary.title} />
               <PrismicRichText field={displayedTestimonial.quote} />
               <div className="flex flex-col">
-                <p className="text-base font-body">
+                <p className="text-bodyLarge font-bold">
                   {displayedTestimonial.author}
                 </p>
-                <p className="text-[1.375rem] font-bold">
+                <p className="text-base font-body">
                   {displayedTestimonial.author_title}
                 </p>
               </div>

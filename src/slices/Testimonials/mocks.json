@@ -9,10 +9,8 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "A quote from...",
-							"spans": []
-						},
-						"direction": "ltr"
+							"text": "Coach"
+						}
 					}
 				]
 			},

@@ -4242,12 +4242,12 @@ export interface TestimonialsSliceDefaultPrimary {
   /**
    * Title field in *Testimonials → Default → Primary*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Title
    * - **Placeholder**: *None*
    * - **API ID Path**: testimonials.default.primary.title
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  title: prismic.RichTextField;
+  title: prismic.TitleField;
 
   /**
    * Button field in *Testimonials → Default → Primary*
