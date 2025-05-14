@@ -201,6 +201,17 @@ type CareerPageDocumentDataSlicesSlice = RichTextSlice;
  */
 interface CareerPageDocumentData {
   /**
+   * Category field in *Career Page*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: career_page.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField;
+
+  /**
    * Title field in *Career Page*
    *
    * - **Field Type**: Rich Text

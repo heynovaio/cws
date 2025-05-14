@@ -12,6 +12,14 @@
           "label": "UID"
         }
       },
+      "category": {
+        "type": "Link",
+        "config": {
+          "label": "Category",
+          "select": "document",
+          "repeat": false
+        }
+      },
       "title": {
         "type": "StructuredText",
         "config": {
