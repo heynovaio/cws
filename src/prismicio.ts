@@ -22,7 +22,9 @@ const routes: prismic.ClientConfig["routes"] = [
   { type: "contact_page", path: "/:lang?/contact/:uid" },
   { type: "team_members", path: "/:lang?/team" },
   { type: "campaign_page", path: "/:lang?/campaign/:uid" },
-  { type: "search_page", path: "/:lang?/search"}
+  { type: "search_page", path: "/:lang?/search" },
+  { type: "career_hub", path: "/:lang?/career" },
+  { type: "career_page", path: "/:lang?/career/:uid" },
   // { type: "search_page", path: "/:lang?/search" },
 ];
 
