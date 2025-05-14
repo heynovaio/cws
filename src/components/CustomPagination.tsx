@@ -15,7 +15,7 @@ export const CustomPagination = ({
   itemsPerPage = 9,
   initialPage = 0,
   onPageChange,
-  className = "`grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+  className = "grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
 }: CustomPaginationProps) => {
   const [page, setPage] = useState(initialPage);
 
@@ -34,11 +34,7 @@ export const CustomPagination = ({
 
   return (
     <div>
-      <div
-        className={className}
-      >
-        {currentItems}
-      </div>
+      <div className={className}>{currentItems}</div>
 
       {totalPages > 1 && (
         <Pagination
