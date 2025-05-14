@@ -48,13 +48,13 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
         </div>
       </Container>
 
-      {!shortHero && (
+      {/* {!shortHero && (
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 cursor-pointer">
           <a href="#next-section" aria-label="Scroll to next section">
             <HiArrowLongDown className="w-8 h-8 text-white" />
           </a>
         </div>
-      )}
+      )} */}
     </section>
   );
 };
