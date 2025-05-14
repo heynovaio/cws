@@ -85,7 +85,116 @@ export type CampaignPageDocument<Lang extends string = string> =
     Lang
   >;
 
-type CareerPageDocumentDataSlicesSlice = ContentGridSlice;
+type CareerHubDocumentDataSlicesSlice = ContentGridSlice;
+
+/**
+ * Content for Career Hub documents
+ */
+interface CareerHubDocumentData {
+  /**
+   * Title field in *Career Hub*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: career_hub.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *Career Hub*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: career_hub.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Image field in *Career Hub*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: career_hub.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Button field in *Career Hub*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: career_hub.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Slice Zone field in *Career Hub*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: career_hub.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<CareerHubDocumentDataSlicesSlice> /**
+   * Meta Title field in *Career Hub*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: career_hub.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Career Hub*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: career_hub.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Career Hub*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: career_hub.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Career Hub document from Prismic
+ *
+ * - **API ID**: `career_hub`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CareerHubDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<CareerHubDocumentData>,
+    "career_hub",
+    Lang
+  >;
+
+type CareerPageDocumentDataSlicesSlice = RichTextSlice;
 
 /**
  * Content for Career Page documents
@@ -1695,6 +1804,7 @@ export type TeamMembersDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | CampaignPageDocument
+  | CareerHubDocument
   | CareerPageDocument
   | ContactPageDocument
   | GlobalsDocument
@@ -4263,6 +4373,9 @@ declare module "@prismicio/client" {
       CampaignPageDocument,
       CampaignPageDocumentData,
       CampaignPageDocumentDataSlicesSlice,
+      CareerHubDocument,
+      CareerHubDocumentData,
+      CareerHubDocumentDataSlicesSlice,
       CareerPageDocument,
       CareerPageDocumentData,
       CareerPageDocumentDataSlicesSlice,
