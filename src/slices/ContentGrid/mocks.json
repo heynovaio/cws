@@ -73,8 +73,55 @@
 				]
 			},
 			"category": {
-				"__TYPE__": "LinkContent",
 				"key": "c69c3350-9192-4e10-8ace-5b9b20ee27b2",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "careersGrid",
+		"primary": {
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Society"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Pariatur deserunt labore anim aliquip sit amet dolor amet deserunt sunt esse eiusmod velit voluptate. Occaecat reprehenderit aliqua ex eiusmod excepteur. Exercitation incididunt cillum dolor elit eu culpa consectetur aliquip ut dolore quis eu elit cillum."
+						}
+					}
+				]
+			},
+			"category": {
+				"key": "4acc0191-447f-4d0c-9049-99f7650c6bcf",
+				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "DocumentLink",
 					"id": "mock_document_id"
