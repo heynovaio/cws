@@ -91,7 +91,11 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   // Calculate max cost from programs
   const maxCost = useMemo(() => {
     if (programs.length === 0) return 0;
-    return Math.max(...programs.map((program) => program.data.cost || 0));
+    return Math.max(
+      ...programs.map((program) =>
+        typeof program.data.cost === "number" ? program.data.cost : 0
+      )
+    );
   }, [programs]);
 
   useEffect(() => {
@@ -345,11 +349,9 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       }
 
       if (item.type === "program_page") {
-        if (
-          typeof item.data.cost !== "number" ||
-          item.data.cost < costRange[0] ||
-          item.data.cost > costRange[1]
-        ) {
+        const itemCost =
+          typeof item.data.cost === "number" ? item.data.cost : maxCost;
+        if (itemCost < costRange[0] || itemCost > costRange[1]) {
           return false;
         }
       }
