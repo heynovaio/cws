@@ -11,6 +11,7 @@ import { Intro, Layout } from "@/components";
 import { getLocales } from "@/utils";
 import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
 import type { BreadcrumbLink } from "@/components/Breadcrumb";
+import { CareerIntro } from "@/components/Intro/CareerIntro";
 /**
  * This page renders a Prismic Document dynamically based on the URL.
  */
@@ -106,7 +107,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         partners={partners.data}
         include_newsletter_sign_up_banner={false}
       >
-        {/* <Intro type="program" pageData={page.data} links={links} /> */}
+        <CareerIntro pageData={page.data} />
         <SliceZone
           slices={page.data.slices}
           components={components}
