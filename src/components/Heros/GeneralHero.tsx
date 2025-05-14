@@ -3,7 +3,7 @@ import { Container } from "../Layout";
 import { PrismicRichText } from "@prismicio/react";
 import { Button } from "../Buttons";
 import { KeyTextField, LinkField, RichTextField } from "@prismicio/client";
-import { HiArrowLongDown } from "react-icons/hi2";
+// import { HiArrowLongDown } from "react-icons/hi2";
 
 interface GeneralHeroProps {
   data: {
