@@ -6,6 +6,7 @@ import {
   ResourceCategoryGrid,
   Section,
 } from "@/components";
+import { CareerGrid } from "@/components/Grid/CareerGrid";
 import { components } from "@/utils";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
@@ -21,6 +22,7 @@ export type ContentGridProps = SliceComponentProps<Content.ContentGridSlice>;
  */
 const ContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
   const isProgram = slice.variation === "default";
+  const isCareer = slice.variation === "careersGrid";
 
   return (
     <Section
@@ -42,6 +44,8 @@ const ContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
         />
         {isProgram ? (
           <ProgramCategoryGrid slice={slice} />
+        ) : isCareer ? (
+          <CareerGrid slice={slice} />
         ) : (
           <ResourceCategoryGrid slice={slice} />
         )}
