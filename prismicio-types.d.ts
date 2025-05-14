@@ -2641,11 +2641,71 @@ export type ContentGridSliceResourceGrid = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *ContentGrid → Careers Grid → Primary*
+ */
+export interface ContentGridSliceCareersGridPrimary {
+  /**
+   * Background Color field in *ContentGrid → Careers Grid → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: content_grid.careersGrid.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Title field in *ContentGrid → Careers Grid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_grid.careersGrid.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ContentGrid → Careers Grid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_grid.careersGrid.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Category field in *ContentGrid → Careers Grid → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_grid.careersGrid.primary.category
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField<"program_category">;
+}
+
+/**
+ * Careers Grid variation for ContentGrid Slice
+ *
+ * - **API ID**: `careersGrid`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentGridSliceCareersGrid = prismic.SharedSliceVariation<
+  "careersGrid",
+  Simplify<ContentGridSliceCareersGridPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *ContentGrid*
  */
 type ContentGridSliceVariation =
   | ContentGridSliceDefault
-  | ContentGridSliceResourceGrid;
+  | ContentGridSliceResourceGrid
+  | ContentGridSliceCareersGrid;
 
 /**
  * ContentGrid Shared Slice
@@ -4484,9 +4544,11 @@ declare module "@prismicio/client" {
       ContentGridSlice,
       ContentGridSliceDefaultPrimary,
       ContentGridSliceResourceGridPrimary,
+      ContentGridSliceCareersGridPrimary,
       ContentGridSliceVariation,
       ContentGridSliceDefault,
       ContentGridSliceResourceGrid,
+      ContentGridSliceCareersGrid,
       HashtagBannerSlice,
       HashtagBannerSliceDefaultPrimary,
       HashtagBannerSliceVariation,
