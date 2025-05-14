@@ -73,6 +73,10 @@
 				"alt": null,
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"animation": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": []
@@ -180,6 +184,10 @@
 					"height": 113,
 					"width": 200
 				}
+			},
+			"animation": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": [
@@ -313,6 +321,10 @@
 						]
 					}
 				]
+			},
+			"animation": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": [

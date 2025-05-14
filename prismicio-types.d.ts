@@ -2756,6 +2756,17 @@ export interface ImageTextSliceDefaultPrimary {
   image_side: prismic.BooleanField;
 
   /**
+   * Animation field in *ImageText → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: image_text.default.primary.animation
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  animation: prismic.BooleanField;
+
+  /**
    * Title field in *ImageText → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -2836,6 +2847,17 @@ export interface ImageTextSliceVideoPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   image_side: prismic.BooleanField;
+
+  /**
+   * Animation field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: image_text.video.primary.animation
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  animation: prismic.BooleanField;
 
   /**
    * Title field in *ImageText → Video → Primary*
@@ -2928,6 +2950,17 @@ export interface ImageTextSliceStatsPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   image_side: prismic.BooleanField;
+
+  /**
+   * Animation field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: image_text.stats.primary.animation
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  animation: prismic.BooleanField;
 
   /**
    * Title field in *ImageText → Stats → Primary*
