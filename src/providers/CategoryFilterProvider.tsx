@@ -122,10 +122,19 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const setActiveFilter = useCallback(
     (filter: ModuleFilter) => {
-      if (_activeFilter === "program_page" && filter !== "program_page") {
+      // Reset filters (except search) when switching between program and resource filters
+      if (filter === "program_page" && _activeFilter !== "program_page") {
+        setSelectedTags([]);
+        setSelectedResourceCategories([]);
         setSelectedFormats([]);
         setHasCredentials(false);
         setCostRange([0, maxCost]);
+      } else if (
+        filter === "resource_page" &&
+        _activeFilter !== "resource_page"
+      ) {
+        setSelectedTags([]);
+        setSelectedProgramCategories([]);
       }
       _setActiveFilter(filter);
     },
