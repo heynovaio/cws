@@ -36,10 +36,12 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
         <ContentBox
           title={slice.primary.title}
           content={
-            <PrismicRichText
-              field={slice.primary.body}
-              components={components}
-            />
+            <div className="text-bodyLarge">
+              <PrismicRichText
+                field={slice.primary.body}
+                components={components}
+                />
+            </div>
           }
           width="standard"
           containerClassName="text-center gap-4"

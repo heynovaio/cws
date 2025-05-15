@@ -92,7 +92,7 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
               <ContentBox
                 title={title}
                 content={
-                  <PrismicRichText field={body} components={components} />
+                  <div className="text-bodyLarge"><PrismicRichText field={body} components={components} /></div>
                 }
                 buttons={
                   buttonsExist && (!isProgramPage || newsLetterSignUp)

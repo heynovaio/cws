@@ -58,10 +58,12 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
               content={
                 isStats ? (
                   <div className="flex flex-col gap-4 md:mb-4">
-                    <PrismicRichText
-                      field={slice.primary.body}
-                      components={components}
-                    />
+                    <div className="text-bodyLarge">
+                      <PrismicRichText
+                        field={slice.primary.body}
+                        components={components}
+                      />
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-center md:text-left">
                       {slice.primary.stats.map((item, index) => (
                         <div key={index}>

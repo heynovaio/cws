@@ -26,7 +26,7 @@ export const HomepageHero: React.FC<HomepageHeroProps> = ({ data }) => {
           <div className="basis-1/2 md:pb-12 lg:pb-0">
             <ContentBox
               title={data.title}
-              content={<PrismicRichText field={data.body} />}
+              content={<div className="text-bodyLarge"><PrismicRichText field={data.body} /></div>}
               buttons={data.button.map((link, index) => (
                 <Button
                   key={index}
