@@ -1,5 +1,5 @@
 import { Content } from "@prismicio/client";
-import { Container, Section } from "@/components";
+import { Button, Container, Section } from "@/components";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 import { components } from "@/utils";
@@ -18,20 +18,33 @@ const RichText = ({ slice }: RichTextProps): JSX.Element => {
     ? "items-start text-left"
     : "items-center text-center";
 
+  const buttonAlignment = leftAligned ? "" : "flex justify-center";
   return (
-     <Section
-          data-slice-type={slice.slice_type}
-          data-slice-variation={slice.variation}
-          styling={`py-10`}
-        >
-          <Container>
-            <div
-              className={`text-content ${textAlignment} max-w-[80ch] mx-auto`}
-            >
-              <PrismicRichText field={slice.primary.content}  components={components} />
+    <Section
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+      styling={`py-10`}
+    >
+      <Container>
+        <div className={`max-w-[80ch] mx-auto ${textAlignment}`}>
+          <div className="text-content">
+            <PrismicRichText
+              field={slice.primary.content}
+              components={components}
+            />
+          </div>
+          {slice.primary.button && (
+            <div className={`${buttonAlignment} mt-6`}>
+              <Button
+                buttonType="primary"
+                buttonLink={slice.primary.button}
+                label={slice.primary.button.text}
+              />
             </div>
-          </Container>
-        </Section>
+          )}
+        </div>
+      </Container>
+    </Section>
   );
 };
 
