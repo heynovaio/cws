@@ -291,6 +291,28 @@
 						]
 					}
 				]
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "House"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Reprehenderit velit exercitation voluptate magna officia dolore anim est. Fugiat tempor ad irure cupidatat magna proident id."
+						}
+					}
+				]
 			}
 		},
 		"items": [
