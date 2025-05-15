@@ -58,6 +58,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   const locales = await getLocales(page, client);
 
+  const heroData = {
+    title: page.data.title,
+    body: page.data.body,
+    button: Array.isArray(page.data.button) ? page.data.button : [],
+  };
+
   return (
     <Layout
       locales={locales}
@@ -65,7 +71,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       menus={menus.data}
       include_newsletter_sign_up_banner={false}
     >
-      <GeneralHero data={page.data} shortHero />
+      <GeneralHero data={heroData} shortHero />
       <SliceZone
         slices={page.data.slices}
         components={components}

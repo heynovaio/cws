@@ -7,11 +7,11 @@ import * as prismic from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import React from "react";
-import { Intro, Layout } from "@/components";
+import { Layout, CareerIntro } from "@/components";
 import { getLocales } from "@/utils";
 import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
 import type { BreadcrumbLink } from "@/components/Breadcrumb";
-import { CareerIntro } from "@/components/Intro/CareerIntro";
+
 /**
  * This page renders a Prismic Document dynamically based on the URL.
  */
