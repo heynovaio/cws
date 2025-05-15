@@ -2489,6 +2489,26 @@ export type ContentColumnSliceDefault = prismic.SharedSliceVariation<
  */
 export interface ContentColumnSliceStatsPrimary {
   /**
+   * Title field in *ContentColumn → Stats → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.stats.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ContentColumn → Stats → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_column.stats.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
    * Card Background field in *ContentColumn → Stats → Primary*
    *
    * - **Field Type**: Select
