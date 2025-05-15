@@ -96,9 +96,6 @@
             "testimonials": {
               "type": "SharedSlice"
             },
-            "simple_text": {
-              "type": "SharedSlice"
-            },
             "rich_text": {
               "type": "SharedSlice"
             },

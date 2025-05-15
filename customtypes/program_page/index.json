@@ -142,9 +142,6 @@
             "accordion": {
               "type": "SharedSlice"
             },
-            "simple_text": {
-              "type": "SharedSlice"
-            },
             "testimonials": {
               "type": "SharedSlice"
             },

@@ -781,8 +781,7 @@ type PageDocumentDataSlicesSlice =
   | RichTextSlice
   | ImageTextSlice
   | CallToActionSlice
-  | TestimonialsSlice
-  | SimpleTextSlice;
+  | TestimonialsSlice;
 
 /**
  * Content for Page documents
@@ -1083,7 +1082,6 @@ type ProgramPageDocumentDataSlicesSlice =
   | ContentGridSlice
   | TileGridSlice
   | AccordionSlice
-  | SimpleTextSlice
   | TestimonialsSlice
   | RichTextSlice
   | ContentCarouselSlice
@@ -1400,7 +1398,6 @@ type ResourcePageDocumentDataSlicesSlice =
   | TagCategorySlice
   | TileGridSlice
   | TestimonialsSlice
-  | SimpleTextSlice
   | RichTextSlice
   | ImageTextSlice
   | ContentGridSlice
@@ -3383,6 +3380,16 @@ export interface RichTextSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   content: prismic.RichTextField;
+
+  /**
+   * Button field in *RichText → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.default.primary.button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
 
 /**
@@ -3413,105 +3420,6 @@ type RichTextSliceVariation = RichTextSliceDefault;
 export type RichTextSlice = prismic.SharedSlice<
   "rich_text",
   RichTextSliceVariation
->;
-
-/**
- * Primary content in *SimpleText → Default → Primary*
- */
-export interface SimpleTextSliceDefaultPrimary {
-  /**
-   * Background Color field in *SimpleText → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: White
-   * - **API ID Path**: simple_text.default.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
-
-  /**
-   * Text Alignment field in *SimpleText → Default → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: simple_text.default.primary.text_alignment
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  text_alignment: prismic.BooleanField;
-
-  /**
-   * Tagline field in *SimpleText → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: simple_text.default.primary.tagline
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  tagline: prismic.KeyTextField;
-
-  /**
-   * Title field in *SimpleText → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: simple_text.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Body field in *SimpleText → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: simple_text.default.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Button field in *SimpleText → Default → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: simple_text.default.primary.button
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-}
-
-/**
- * Default variation for SimpleText Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type SimpleTextSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<SimpleTextSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *SimpleText*
- */
-type SimpleTextSliceVariation = SimpleTextSliceDefault;
-
-/**
- * SimpleText Shared Slice
- *
- * - **API ID**: `simple_text`
- * - **Description**: SimpleText
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type SimpleTextSlice = prismic.SharedSlice<
-  "simple_text",
-  SimpleTextSliceVariation
 >;
 
 /**
@@ -4618,10 +4526,6 @@ declare module "@prismicio/client" {
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
       RichTextSliceDefault,
-      SimpleTextSlice,
-      SimpleTextSliceDefaultPrimary,
-      SimpleTextSliceVariation,
-      SimpleTextSliceDefault,
       SingleLinkSlice,
       SingleLinkSliceDefaultPrimary,
       SingleLinkSliceSingleLinkButtonIconPrimary,

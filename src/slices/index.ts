@@ -14,7 +14,6 @@ export const components = {
   menu_panel: dynamic(() => import("./MenuPanel")),
   multi_link_column: dynamic(() => import("./MultiLinkColumn")),
   rich_text: dynamic(() => import("./RichText")),
-  simple_text: dynamic(() => import("./SimpleText")),
   single_link: dynamic(() => import("./SingleLink")),
   tabbed_carousel: dynamic(() => import("./TabbedCarousel")),
   tag_category: dynamic(() => import("./TagCategory")),

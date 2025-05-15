@@ -110,9 +110,6 @@
             },
             "testimonials": {
               "type": "SharedSlice"
-            },
-            "simple_text": {
-              "type": "SharedSlice"
             }
           }
         }
