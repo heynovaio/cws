@@ -37,7 +37,11 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
           {slice.primary.body?.length > 0 && (
             <PrismicRichText
               field={slice.primary.body}
-              components={components}
+              components={{
+                paragraph: ({ children }) => (
+                  <p className="text-bodyLarge">{children}</p>
+                ),
+              }}
             />
           )}
         </div>
