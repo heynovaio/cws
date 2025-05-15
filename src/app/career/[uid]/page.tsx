@@ -60,43 +60,15 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const locales = await getLocales(page, client);
   const pageTags = page.tags || [];
 
-  //   const pageTypeLabel =
-  //     page.type === "program_page"
-  //       ? "Support Pathways"
-  //       : "Gender Equity in Action";
-  //   const pageTypeSearchParam =
-  //     page.type === "program_page" ? "program" : "resource";
-
-  //   let categoryDoc = null;
-  //   const category = page.data.category;
-
-  //   if (category && category.link_type === "Document" && category.uid) {
-  //     try {
-  //       categoryDoc = await client.getByUID("program_category", category.uid, {
-  //         lang,
-  //       });
-  //     } catch {
-  //       console.warn("Not Found:", category);
-  //     }
-  //   }
-
-  //   const categoryLabel = categoryDoc && categoryDoc.data.name;
-
-  //   const links = [
-  //     {
-  //       label: pageTypeLabel,
-  //       href: `/search?type=${pageTypeSearchParam}`,
-  //     },
-  //     categoryLabel
-  //       ? {
-  //           label: categoryLabel,
-  //           href: `/search?category=${pageTypeSearchParam}`,
-  //         }
-  //       : null,
-  //     {
-  //       label: prismic.asText(page.data.title),
-  //     },
-  //   ].filter(Boolean) as BreadcrumbLink[];
+  const links: BreadcrumbLink[] = [
+    {
+      label: "Careers",
+      href: "/career",
+    },
+    {
+      label: prismic.asText(page.data.title),
+    },
+  ];
 
   return (
     <CategoryFilterProvider>
@@ -107,7 +79,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         partners={partners.data}
         include_newsletter_sign_up_banner={false}
       >
-        <CareerIntro pageData={page.data} />
+        <CareerIntro pageData={page.data} links={links} />
         <SliceZone
           slices={page.data.slices}
           components={components}
