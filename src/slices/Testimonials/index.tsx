@@ -1,4 +1,4 @@
-import { Container, Button } from "@/components";
+import { Container, Button, Section } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
@@ -23,10 +23,10 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
     allTestimonials[Math.floor(Math.random() * allTestimonials.length)];
 
   return (
-    <section
+    <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-midnight"
+      backgroundColor={slice.primary.background_color}
     >
       <Container containerClassName="flex flex-col gap-12 items-center">
         <div
@@ -34,7 +34,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
           style={{
             backgroundImage: "url('/LogoBig.png')",
             backgroundPosition: backgroundImageSide,
-            backgroundSize: 'cover',
+            backgroundSize: "cover",
           }}
         >
           <div
@@ -71,7 +71,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
             />
           ))}
       </Container>
-    </section>
+    </Section>
   );
 };
 
