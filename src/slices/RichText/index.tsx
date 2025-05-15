@@ -20,30 +20,18 @@ const RichText = ({ slice }: RichTextProps): JSX.Element => {
 
   const buttonAlignment = leftAligned ? "" : "flex justify-center";
   return (
-    <Section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
-      <Container>
-        <div className={`max-w-[80ch] mx-auto ${textAlignment}`}>
-          <div className="text-content">
-            <PrismicRichText
-              field={slice.primary.content}
-              components={components}
-            />
-          </div>
-          {slice.primary.button && (
-            <div className={`${buttonAlignment} mt-6`}>
-              <Button
-                buttonType="primary"
-                buttonLink={slice.primary.button}
-                label={slice.primary.button.text}
-              />
+     <Section
+          data-slice-type={slice.slice_type}
+          data-slice-variation={slice.variation}
+        >
+          <Container>
+            <div
+              className={`text-content ${textAlignment}`}
+            >
+              <PrismicRichText field={slice.primary.content}  components={components} />
             </div>
-          )}
-        </div>
-      </Container>
-    </Section>
+          </Container>
+        </Section>
   );
 };
 
