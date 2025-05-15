@@ -28,7 +28,6 @@ export const CareerGrid = ({ slice }: CareerGridProps) => {
         />
       }
       image={item.data.image}
-      category="Career Opportunity"
       cardType={item.type}
       buttons={[
         <Link
