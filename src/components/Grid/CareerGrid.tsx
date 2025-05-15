@@ -14,7 +14,7 @@ export type CareerGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
 };
 
-export const CareerGrid = ({ slice }: CareerGridProps) => {
+export const CareerGrid = ({}: CareerGridProps) => {
   const { data } = GetAllCareers("en-ca");
 
   const careerCards = data?.map((item, index) => (
