@@ -30,7 +30,7 @@ const ContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
       data-slice-variation={slice.variation}
       backgroundColor={slice.primary.background_color}
     >
-      <Container containerClassName="flex flex-col gap-12">
+      <Container containerClassName="flex flex-col gap-12 mb-12">
         <ContentBox
           title={slice.primary.title}
           content={
@@ -45,7 +45,9 @@ const ContentGrid = ({ slice }: ContentGridProps): JSX.Element => {
         {isProgram ? (
           <ProgramCategoryGrid slice={slice} />
         ) : isCareer ? (
-          <CareerGrid slice={slice} />
+          <div className="mt-[-2rem]">
+            <CareerGrid slice={slice} />
+          </div>
         ) : (
           <ResourceCategoryGrid slice={slice} />
         )}
