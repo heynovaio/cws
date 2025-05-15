@@ -20,11 +20,28 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
       : "bg-white text-midnight divide-neon-violet";
 
   const isSingleColumn = slice.primary.column.length === 1;
+
   return (
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
+      {(slice.primary.title || slice.primary.body) && (
+        <div className="mb-6 md:mb-10 text-center">
+          {slice.primary.title && (
+            <PrismicRichText
+              field={slice.primary.title}
+              components={components}
+            />
+          )}
+          {slice.primary.body && (
+            <PrismicRichText
+              field={slice.primary.body}
+              components={components}
+            />
+          )}
+        </div>
+      )}
       <Container
         containerClassName={isSingleColumn ? "flex justify-center" : ""}
       >
