@@ -54,7 +54,7 @@
           "select": null,
           "allowTargetBlank": true,
           "allowText": true,
-          "repeat": false
+          "repeat": true
         }
       },
       "slices": {

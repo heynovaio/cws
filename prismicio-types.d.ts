@@ -253,7 +253,9 @@ interface CareerPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+  button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
 
   /**
    * Slice Zone field in *Career Page*
