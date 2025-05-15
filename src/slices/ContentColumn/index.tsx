@@ -26,15 +26,15 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      {(slice.primary.title || slice.primary.body) && (
+      {(slice.primary.title?.length || slice.primary.body?.length) > 0 && (
         <div className="mb-4 md:mb-10 text-center">
-          {slice.primary.title && (
+          {slice.primary.title?.length > 0 && (
             <PrismicRichText
               field={slice.primary.title}
               components={components}
             />
           )}
-          {slice.primary.body && (
+          {slice.primary.body?.length > 0 && (
             <PrismicRichText
               field={slice.primary.body}
               components={components}
