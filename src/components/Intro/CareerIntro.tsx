@@ -34,31 +34,19 @@ export const CareerIntro = ({ pageData, links }: IntroProps) => {
                 content={
                   <PrismicRichText field={body} components={components} />
                 }
-                // buttons={
-                //   buttonsExist && (
-                //     <div
-                //       className="flex flex-wrap justify-start gap-2"
-                //       key="buttons"
-                //     >
-                //       {button.map(
-                //         (item, index) =>
-                //           item.text && (
-                //             <PrismicNextLink
-                //               key={index}
-                //               field={item}
-                //               className={
-                //                 index === 1
-                //                   ? "btn btn-secondary"
-                //                   : "btn btn-primary"
-                //               }
-                //             >
-                //               {item.text}
-                //             </PrismicNextLink>
-                //           )
-                //       )}
-                //     </div>
-                //   )
-                // }
+                buttons={
+                  buttonsExist
+                    ? [
+                        <PrismicNextLink
+                          key="primary"
+                          field={button}
+                          className="btn btn-primary"
+                        >
+                          {button.text || "Learn more"}
+                        </PrismicNextLink>,
+                      ]
+                    : undefined
+                }
                 width="full"
               />
             </div>

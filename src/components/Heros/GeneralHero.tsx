@@ -37,14 +37,14 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
         <div className="text-white flex flex-col items-center text-center justify-between gap-8 mx-auto max-w-[900px]">
           <PrismicRichText field={data.title} />
           <PrismicRichText field={data.body} />
-          {/* {data.button.map((link, index) => (
+          {data.button.map((link, index) => (
             <Button
               key={index}
               buttonType="primary"
               buttonLink={link}
               label={link.text}
             />
-          ))} */}
+          ))}
         </div>
       </Container>
 
