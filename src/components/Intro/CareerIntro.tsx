@@ -8,6 +8,7 @@ import { CareerPageDocumentData } from "../../../prismicio-types";
 import { PrismicRichText } from "@prismicio/react";
 import { components } from "@/utils";
 import { Breadcrumb, BreadcrumbProps } from "../Breadcrumb";
+import { isFilled } from "@prismicio/client";
 
 interface IntroProps {
   pageData?: CareerPageDocumentData;
@@ -17,7 +18,11 @@ interface IntroProps {
 export const CareerIntro = ({ pageData, links }: IntroProps) => {
   const { image, title, body, button } = pageData || {};
 
-  const buttonsExist = Array.isArray(button) && button.length > 0;
+  const buttonArray = Array.isArray(button)
+    ? button.filter((btn) => isFilled.link(btn))
+    : isFilled.link(button)
+      ? [button]
+      : [];
 
   const containerStyle = "bg-white text-midnight";
 
@@ -35,16 +40,16 @@ export const CareerIntro = ({ pageData, links }: IntroProps) => {
                   <PrismicRichText field={body} components={components} />
                 }
                 buttons={
-                  buttonsExist
-                    ? [
+                  buttonArray.length > 0
+                    ? buttonArray.map((btn, i) => (
                         <PrismicNextLink
-                          key="primary"
-                          field={button}
+                          key={i}
+                          field={btn}
                           className="btn btn-primary"
                         >
-                          {button.text || "Learn more"}
-                        </PrismicNextLink>,
-                      ]
+                          {"text" in btn && btn.text ? btn.text : "Learn more"}
+                        </PrismicNextLink>
+                      ))
                     : undefined
                 }
                 width="full"
