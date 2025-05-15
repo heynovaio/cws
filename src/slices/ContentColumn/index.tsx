@@ -27,7 +27,7 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
       data-slice-variation={slice.variation}
     >
       {(slice.primary.title || slice.primary.body) && (
-        <div className="mb-6 md:mb-10 text-center">
+        <div className="mb-4 md:mb-10 text-center">
           {slice.primary.title && (
             <PrismicRichText
               field={slice.primary.title}
