@@ -50,10 +50,10 @@ interface CategoryFilterContextProps {
   hasCredentials: boolean;
   setHasCredentials: (value: boolean) => void;
   toggleCredentials: () => void;
-  costRange: [number, number];
-  setCostRange: (range: [number, number]) => void;
+  maxCostFilter: number;
+  setMaxCostFilter: (value: number) => void;
   maxCost: number;
-  resetCostRange: () => void;
+  resetCostFilter: () => void;
 }
 
 const CategoryFilterContext = createContext<
@@ -72,21 +72,14 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   );
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedResourceCategories, setSelectedResourceCategories] = useState<
-    string[]
-  >([]);
-  const [selectedProgramCategories, setSelectedProgramCategories] = useState<
-    string[]
-  >([]);
-  const [resourceCategories, setResourceCategories] = useState<
-    ResourceCategoryDocument[]
-  >([]);
-  const [programCategories, setProgramCategories] = useState<
-    ProgramCategoryDocument[]
-  >([]);
+  const [selectedResourceCategories, setSelectedResourceCategories] = useState<string[]>([]);
+  const [selectedProgramCategories, setSelectedProgramCategories] = useState<string[]>([]);
+  const [resourceCategories, setResourceCategories] = useState<ResourceCategoryDocument[]>([]);
+  const [programCategories, setProgramCategories] = useState<ProgramCategoryDocument[]>([]);
   const [selectedFormats, setSelectedFormats] = useState<ProgramFormat[]>([]);
   const [hasCredentials, setHasCredentials] = useState<boolean>(false);
-  const [costRange, setCostRange] = useState<[number, number]>([0, 0]);
+  const [maxCostFilter, setMaxCostFilter] = useState<number>(0);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Calculate max cost from programs
   const maxCost = useMemo(() => {
@@ -99,13 +92,14 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [programs]);
 
   useEffect(() => {
-    if (programs.length > 0 && costRange[1] === 0) {
-      setCostRange([0, maxCost]);
+    if (programs.length > 0 && !isInitialized && maxCost > 0) {
+      setMaxCostFilter(maxCost);
+      setIsInitialized(true);
     }
-  }, [programs, maxCost, costRange]);
+  }, [programs, maxCost, isInitialized]);
 
-  const resetCostRange = useCallback(() => {
-    setCostRange([0, maxCost]);
+  const resetCostFilter = useCallback(() => {
+    setMaxCostFilter(maxCost);
   }, [maxCost]);
 
   const toggleCredentials = useCallback(() => {
@@ -128,7 +122,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         setSelectedResourceCategories([]);
         setSelectedFormats([]);
         setHasCredentials(false);
-        setCostRange([0, maxCost]);
+        setMaxCostFilter(maxCost);
       } else if (
         filter === "resource_page" &&
         _activeFilter !== "resource_page"
@@ -216,7 +210,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     setSelectedProgramCategories([]);
     setSelectedFormats([]);
     setHasCredentials(false);
-    setCostRange([0, maxCost]);
+    setMaxCostFilter(maxCost);
   }, [maxCost, setActiveFilter]);
 
   // Fuse.js
@@ -267,8 +261,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       selectedProgramCategories.length > 0 ||
       selectedFormats.length > 0 ||
       hasCredentials ||
-      costRange[0] !== 0 ||
-      costRange[1] !== maxCost;
+      maxCostFilter !== maxCost;
 
     const hasResourceSpecificFilters = selectedResourceCategories.length > 0;
 
@@ -345,9 +338,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
           return false;
         }
         if (selectedFormats.length > 1) {
-          return selectedFormats.every(
-            (format) => format === item.data.format // Assuming single format per item
-          );
+          return selectedFormats.every((format) => format === item.data.format);
         }
       }
 
@@ -360,7 +351,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       if (item.type === "program_page") {
         const itemCost =
           typeof item.data.cost === "number" ? item.data.cost : maxCost;
-        if (itemCost < costRange[0] || itemCost > costRange[1]) {
+        if (itemCost > maxCostFilter) {
           return false;
         }
       }
@@ -380,7 +371,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     selectedTags,
     selectedFormats,
     hasCredentials,
-    costRange,
+    maxCostFilter,
     maxCost,
   ]);
 
@@ -426,10 +417,10 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     hasCredentials,
     setHasCredentials,
     toggleCredentials,
-    costRange,
-    setCostRange,
+    maxCostFilter,
+    setMaxCostFilter,
     maxCost,
-    resetCostRange,
+    resetCostFilter,
   };
 
   return (

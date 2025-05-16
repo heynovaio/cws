@@ -14,10 +14,10 @@ interface FilterPanelProps {
 
   // Slider specific props
   slider?: boolean;
-  sliderMin?: number;
   sliderMax?: number;
   sliderValue?: number;
   onSliderChange?: (value: number) => void;
+  currencySymbol?: string;
 }
 
 export const FilterPanel = ({
@@ -29,13 +29,12 @@ export const FilterPanel = ({
   initialVisibleCount = 4,
 
   slider = false,
-  sliderMin = 0,
   sliderMax = 100,
   sliderValue = 100,
   onSliderChange,
+  currencySymbol = "$",
 }: FilterPanelProps) => {
   const [showAll, setShowAll] = useState(false);
-
   const [localSliderValue, setLocalSliderValue] = useState(sliderValue);
 
   useEffect(() => {
@@ -62,28 +61,38 @@ export const FilterPanel = ({
   return (
     <div className={className}>
       <label className="label">{label}</label>
-
       {/* Slider Section */}
       {slider && (
         <div className="mb-6 space-y-4">
           <div className="flex justify-between items-center">
-            <span className="text-sm">Free - ${localSliderValue}</span>
+            <span className="text-sm">
+              {localSliderValue === 0
+                ? "Free"
+                : `${currencySymbol}${localSliderValue.toLocaleString()}`}
+            </span>
           </div>
           <input
             type="range"
-            min={sliderMin}
+            min={0}
             max={sliderMax}
             value={localSliderValue}
             onChange={handleSliderChange}
             style={
               {
-                "--range-progress": `${((localSliderValue - sliderMin) / (sliderMax - sliderMin)) * 100}%`,
+                "--range-progress": `${((localSliderValue - 0) / (sliderMax - 0)) * 100}%`,
               } as React.CSSProperties
             }
+            className="w-full [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-midnight"
           />
+          <div className="flex justify-between text-xs text-gray-500">
+            <span>Free</span>
+            <span>
+              {currencySymbol}
+              {sliderMax.toLocaleString()}
+            </span>
+          </div>
         </div>
       )}
-
       {/* Filter Items Section */}
       {!slider && (
         <div>
@@ -113,7 +122,6 @@ export const FilterPanel = ({
             })}
           </div>
 
-          {/* Show More/Less Button */}
           {remainingCount > 0 && (
             <button
               onClick={() => setShowAll(!showAll)}
