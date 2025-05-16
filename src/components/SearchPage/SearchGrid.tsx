@@ -13,6 +13,7 @@ import { components, componentsTextSmall } from "@/utils";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { useResourceCategoryData, useProgramCategoryData } from "@/hooks";
 import { CustomPagination } from "../CustomPagination";
+import { useState, useEffect, useMemo } from "react";
 
 interface SearchGridProps {
   lang: string;
@@ -22,8 +23,19 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
   const { filteredItems } = useCategoryFilter();
   const { resourceCategoryData } = useResourceCategoryData(lang);
   const { programCategoryData } = useProgramCategoryData(lang);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
-  console.log("Filtered items:", filteredItems);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredItems]);
+
+  // Calculate paginated items
+  const paginatedItems = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return filteredItems.slice(startIndex, startIndex + itemsPerPage);
+  }, [currentPage, filteredItems, itemsPerPage]);
+
   // Get category name for an item
   const getCategoryName = (
     item: ResourcePageDocument | ProgramPageDocument
@@ -57,12 +69,15 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
     <div className="padded-div" data-test-id="search-grid">
       <Container>
         {filteredItems.length > 0 ? (
-          <CustomPagination itemsPerPage={6} className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 mb-10">
+          <CustomPagination
+            itemsPerPage={paginatedItems.length}
+            className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 mb-10"
+          >
             {(
               filteredItems as (ResourcePageDocument | ProgramPageDocument)[]
             ).map((item, index) => (
               <DefaultCard
-                key={index}
+                key={`${item.id}-${index}`}
                 title={asText(item.data.title)}
                 content={
                   <PrismicRichText

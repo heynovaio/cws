@@ -12,7 +12,7 @@ export const ClearFilterButton = () => {
     selectedProgramCategories,
     selectedFormats,
     hasCredentials,
-    costRange,
+    maxCostFilter,
     maxCost,
   } = useCategoryFilter();
 
@@ -24,8 +24,7 @@ export const ClearFilterButton = () => {
     selectedProgramCategories.length > 0 ||
     selectedFormats.length > 0 ||
     hasCredentials ||
-    costRange[0] !== 0 ||
-    costRange[1] !== maxCost;
+    maxCostFilter !== maxCost;
 
   if (!anyFiltersActive) return null;
 
