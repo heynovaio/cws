@@ -67,7 +67,10 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
                 <span className="tagline">
                   {programCategoryData
                     ?.find(
-                      (categories) => categories.id === pageData.category.id
+                      (categories) =>
+                        pageData.category &&
+                        "id" in pageData.category &&
+                        categories.id === pageData.category.id
                     )
                     ?.data.name?.toUpperCase()}
                 </span>
@@ -78,7 +81,11 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
                 "id" in pageData.category && (
                   <span className="text-neon-violet tagline">
                     {resourceCategoryData
-                      ?.find((category) => category.id === pageData.category.id)
+                      ?.find(
+                        (category) =>
+                          "id" in pageData.category &&
+                          category.id === pageData.category.id
+                      )
                       ?.data.name?.toUpperCase()}
                   </span>
                 )}
