@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply text-[1rem] md:text-base text-white bg-navy-background font-body;
+    @apply text-[1rem] md:text-base text-white bg-navy-background font-normal;
 
     /* dark:text-white dark:bg-midnight */
   }
@@ -24,10 +24,10 @@
     @apply font-title text-[1.375rem] md:text-h4 font-bold leading-h4;
   }
   p {
-    @apply text-[1.125rem] md:text-bodyLarge font-body mb-2;
+    @apply font-normal mb-2;
   }
   a {
-    @apply underline text-[1.125rem]  md:text-bodyLarge;
+    @apply underline;
     &:hover {
       @apply text-ultra-pink;
     }
@@ -172,15 +172,13 @@
       @apply mb-4;
     }
     p {
-      @apply text-base;
+      @apply text-base mb-2 max-w-[80ch] mx-auto;
     }
     a {
       @apply text-aqua;
     }
-    ul,
-    ol {
-      display: inline-block;
-      text-align: left;
+    ol, ul {
+      @apply max-w-[80ch] mx-auto pl-8 my-4;
     }
   }
 
