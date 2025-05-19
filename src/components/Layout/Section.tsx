@@ -28,7 +28,7 @@ export const Section: React.FC<SectionProps> = ({
   return (
     // Vertical Padding
     <section
-      className={`py-8 print:py-0 print:my-0 w-full ${background} ${styling}`}
+      className={`py-16 print:py-0 print:my-0 w-full ${background} ${styling}`}
       {...props}
     >
       {children}

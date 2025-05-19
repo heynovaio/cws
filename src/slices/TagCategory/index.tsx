@@ -21,7 +21,6 @@ const TagCategory: FC<TagCategoryProps> = ({ slice, context }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       backgroundColor={slice.primary.background_color}
-      styling={`py-10`}
     >
       <Container>
         <ContentBox

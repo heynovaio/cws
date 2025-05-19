@@ -30,7 +30,6 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       backgroundColor={slice.primary.background_color}
-      styling="py-10"
     >
       <Container>
         <div className="md:max-w-[50%] flex flex-col gap-4 mb-8 ">
