@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
         className="flex justify-between items-center px-5 lg:py-2 py-1 "
       >
         <PrismicNextLink
-          className="flex "
+          className="flex max-w-[180px] md:max-w-[220px]"
           aria-label="homepage link"
           prefetch={true}
           href={`/`}
