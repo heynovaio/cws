@@ -18,7 +18,7 @@ export const Breadcrumb = ({ links, color = "black" }: BreadcrumbProps) => {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="print:hidden flex items-center flex-wrap gap-1 text-md"
+      className="print:hidden flex items-center flex-wrap gap-1 text-md mt-7"
     >
       <Link href="/" className={`${textColor} underlined-link-dark text-md`}>
         Home
