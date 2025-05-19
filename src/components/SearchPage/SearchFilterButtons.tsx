@@ -1,0 +1,52 @@
+"use client";
+import React, { useEffect } from "react";
+import {
+  defaultModuleFilters,
+  module_filters_list,
+  ModuleFilter,
+} from "@/constants";
+import { useCategoryFilter } from "@/providers";
+import { useSearchParams, useRouter } from "next/navigation";
+
+export const SearchFilterButtons = () => {
+  const { filterCounts, activeFilter, setActiveFilter } = useCategoryFilter();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const urlFilter = searchParams?.get("filter") as ModuleFilter | null;
+    if (urlFilter && module_filters_list.includes(urlFilter)) {
+      setActiveFilter?.(urlFilter);
+    } else if (!urlFilter) {
+      setActiveFilter?.("all");
+      const newSearchParams = new URLSearchParams(searchParams.toString());
+      newSearchParams.set("filter", "all");
+      router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+    }
+  }, [searchParams, activeFilter, setActiveFilter, router]);
+
+  const handleFilterClick = (filterKey: ModuleFilter) => {
+    setActiveFilter?.(filterKey);
+
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    newSearchParams.set("filter", filterKey);
+    router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+  };
+
+  return (
+    <div className="flex md:flex-nowrap flex-wrap items-center justify-center gap-2 px-0 md:px-2 py-2 module-filter-buttons">
+      {module_filters_list.map((filterKey: ModuleFilter) => (
+        <button
+          key={filterKey}
+          onClick={() => handleFilterClick(filterKey)}
+          className={`
+            ${activeFilter === filterKey ? "bg-white !text-midnight shadow font-bold" : ""} btn btn-outline focus border`}
+        >
+          <span className="text-base font-normal hover:text-current">
+            {defaultModuleFilters[filterKey]} ({filterCounts[filterKey]})
+          </span>
+        </button>
+      ))}
+    </div>
+  );
+};

@@ -1,122 +1,140 @@
 [
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "programsCarousel",
-		"primary": {
-			"title": {
-				"__TYPE__": "FieldContent",
-				"value": "printed",
-				"type": "Text"
-			},
-			"content_card": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"content",
-								{
-									"key": "992e21a1-7cde-4f14-bcf8-026b3ae4150d",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "DocumentLink",
-										"id": "mock_document_id"
-									}
-								}
-							]
-						]
-					}
-				]
-			},
-			"redirect_button": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"url",
-								{
-									"key": "4bc7e906-5661-43bb-bc95-9d36453a7ef8",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "http://twitter.com",
-										"text": "girl"
-									}
-								}
-							]
-						]
-					}
-				]
-			}
-		},
-		"items": [
-			{
-				"__TYPE__": "GroupItemContent",
-				"value": []
-			}
-		]
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "resourceCarousel",
-		"primary": {
-			"title": {
-				"__TYPE__": "FieldContent",
-				"value": "somewhere",
-				"type": "Text"
-			},
-			"content_card": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"content",
-								{
-									"key": "5812578d-1590-4001-a809-624f4399011d",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "DocumentLink",
-										"id": "mock_document_id"
-									}
-								}
-							]
-						]
-					}
-				]
-			},
-			"redirect_button": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"url",
-								{
-									"key": "2ab91bfc-818c-4951-a955-8f49117110c1",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "http://google.com",
-										"text": "aid"
-									}
-								}
-							]
-						]
-					}
-				]
-			}
-		},
-		"items": [
-			{
-				"__TYPE__": "GroupItemContent",
-				"value": []
-			}
-		]
-	}
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "programsCarousel",
+    "primary": {
+      "title": {
+        "__TYPE__": "FieldContent",
+        "value": "printed",
+        "type": "Text"
+      },
+      "content_card": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "content",
+                {
+                  "key": "992e21a1-7cde-4f14-bcf8-026b3ae4150d",
+                  "__TYPE__": "LinkContent",
+                  "value": {
+                    "__TYPE__": "DocumentLink",
+                    "id": "mock_document_id"
+                  }
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "redirect_button": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "url",
+                {
+                  "key": "4bc7e906-5661-43bb-bc95-9d36453a7ef8",
+                  "__TYPE__": "LinkContent",
+                  "value": {
+                    "__TYPE__": "ExternalLink",
+                    "url": "http://twitter.com",
+                    "text": "girl"
+                  }
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "background_color": {
+        "__TYPE__": "FieldContent",
+        "value": "Darker",
+        "type": "Select"
+      },
+      "photo": {
+        "__TYPE__": "BooleanContent",
+        "value": true
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  },
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "resourceCarousel",
+    "primary": {
+      "title": {
+        "__TYPE__": "FieldContent",
+        "value": "somewhere",
+        "type": "Text"
+      },
+      "content_card": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "content",
+                {
+                  "key": "5812578d-1590-4001-a809-624f4399011d",
+                  "__TYPE__": "LinkContent",
+                  "value": {
+                    "__TYPE__": "DocumentLink",
+                    "id": "mock_document_id"
+                  }
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "redirect_button": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "url",
+                {
+                  "key": "2ab91bfc-818c-4951-a955-8f49117110c1",
+                  "__TYPE__": "LinkContent",
+                  "value": {
+                    "__TYPE__": "ExternalLink",
+                    "url": "http://google.com",
+                    "text": "aid"
+                  }
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "background_color": {
+        "__TYPE__": "FieldContent",
+        "value": "No Background",
+        "type": "Select"
+      },
+      "photo": {
+        "__TYPE__": "BooleanContent",
+        "value": false
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  }
 ]

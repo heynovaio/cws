@@ -199,6 +199,28 @@
 						]
 					}
 				]
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Orange"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Commodo non nostrud id officia consectetur sit sit elit deserunt adipisicing do adipisicing sint in."
+						}
+					}
+				]
 			}
 		},
 		"items": []
@@ -267,6 +289,28 @@
 								}
 							]
 						]
+					}
+				]
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "House"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Reprehenderit velit exercitation voluptate magna officia dolore anim est. Fugiat tempor ad irure cupidatat magna proident id."
+						}
 					}
 				]
 			}

@@ -10,7 +10,7 @@ import React from "react";
 import { Intro, Layout } from "@/components";
 import { getLocales } from "@/utils";
 import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
-
+import type { BreadcrumbLink } from "@/components/Breadcrumb";
 /**
  * This page renders a Prismic Document dynamically based on the URL.
  */
@@ -56,8 +56,46 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
   const partners = await client.getSingle("partners", { lang });
-
   const locales = await getLocales(page, client);
+  const pageTags = page.tags || [];
+
+  const pageTypeLabel =
+    page.type === "program_page"
+      ? "Support Pathways"
+      : "Gender Equity in Action";
+  const pageTypeSearchParam =
+    page.type === "program_page" ? "program" : "resource";
+
+  let categoryDoc = null;
+  const category = page.data.category;
+
+  if (category && category.link_type === "Document" && category.uid) {
+    try {
+      categoryDoc = await client.getByUID("program_category", category.uid, {
+        lang,
+      });
+    } catch {
+      console.warn("Not Found:", category);
+    }
+  }
+
+  const categoryLabel = categoryDoc && categoryDoc.data.name;
+
+  const links = [
+    {
+      label: pageTypeLabel,
+      href: `/search?type=${pageTypeSearchParam}`,
+    },
+    categoryLabel
+      ? {
+          label: categoryLabel,
+          href: `/search?category=${pageTypeSearchParam}`,
+        }
+      : null,
+    {
+      label: prismic.asText(page.data.title),
+    },
+  ].filter(Boolean) as BreadcrumbLink[];
 
   return (
     <CategoryFilterProvider>
@@ -70,11 +108,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           page.data.include_newsletter_sign_up_banner
         }
       >
-        <Intro type="program" pageData={page.data} />
+        <Intro type="program" pageData={page.data} links={links} />
         <SliceZone
           slices={page.data.slices}
           components={components}
-          context={{ lang: "en-ca" }}
+          context={{ lang: "en-ca", tags: pageTags }}
         />
       </Layout>
     </CategoryFilterProvider>

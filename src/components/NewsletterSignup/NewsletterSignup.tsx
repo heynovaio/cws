@@ -1,6 +1,6 @@
 import { useNewsletterSignupData } from "@/hooks/use-newletter-signup-data-hook";
 import { PrismicRichText } from "@prismicio/react";
-import { Container, Button } from "@/components";
+import { Container, Button, Section } from "@/components";
 import { useState, useRef } from "react";
 
 type Props = {
@@ -52,9 +52,8 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
   };
 
   return (
-    <section>
+    <Section data-slice-type="newsletter_signup">
       <Container className="newsletter-signup">
-        {" "}
         <div className="p-8 max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <PrismicRichText
@@ -137,7 +136,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
           )}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 };
 export default NewsletterSignupBanner;

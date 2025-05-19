@@ -126,6 +126,15 @@
 			"text_alignment": {
 				"__TYPE__": "BooleanContent",
 				"value": true
+			},
+			"button": {
+				"__TYPE__": "LinkContent",
+				"key": "5182144f-c8c7-469c-990d-b464b77d2a75",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "division"
+				}
 			}
 		},
 		"items": []

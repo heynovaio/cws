@@ -11,9 +11,11 @@ import Partners from "../Menu/Partners";
 import NewsletterSignupBanner from "../NewsletterSignup/NewsletterSignup";
 import { Container } from "./Container";
 import { Footer } from "../Menu/Footer";
+import { TopBar } from "./TopBar";
+import { PrismicDocument } from "@prismicio/client";
 
 interface LayoutProps {
-  locales?: unknown;
+  locales: PrismicDocument[];
   menus: MenusDocumentData;
   global: GlobalsDocumentData;
   children: ReactNode;
@@ -31,12 +33,17 @@ export const Layout = ({
 }: LayoutProps) => {
   return (
     <div>
-      <Header logo={global.site_logo} slices={menus.slices} locales={locales} />
-
+      <div className="sticky top-0 z-50 ">
+        <TopBar locales={locales} global={global} text={menus.banner_text} />
+        <Header
+          logo={global.site_logo}
+          slices={menus.slices}
+          locales={locales}
+        />
+      </div>
       <main id="main-content" className="relative focus:outline-0" tabIndex={0}>
         {children}
       </main>
-
       <Container>
         {include_newsletter_sign_up_banner && (
           <NewsletterSignupBanner lang={"en-ca"} />

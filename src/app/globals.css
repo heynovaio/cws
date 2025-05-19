@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply text-[1rem] md:text-base text-white bg-navy-background font-body;
+    @apply text-[1rem] md:text-base text-white bg-navy-background font-normal;
 
     /* dark:text-white dark:bg-midnight */
   }
@@ -24,10 +24,10 @@
     @apply font-title text-[1.375rem] md:text-h4 font-bold leading-h4;
   }
   p {
-    @apply text-[1.125rem] md:text-bodyLarge font-body mb-2;
+    @apply font-normal mb-2;
   }
   a {
-    @apply underline text-[1.125rem]  md:text-bodyLarge;
+    @apply underline;
     &:hover {
       @apply text-ultra-pink;
     }
@@ -61,6 +61,10 @@
     @apply text-label font-bold;
   }
 
+  .label-small {
+    @apply !text-bodyLarge font-bold;
+  }
+
   .btn {
     @apply inline-block
       rounded-full 
@@ -68,7 +72,6 @@
       font-bold
       px-8 py-2
       no-underline
-      text-[1.125rem]
       md:text-bodyLarge
       relative;
   }
@@ -92,6 +95,21 @@
 
     &:hover {
       @apply bg-aqua/80 text-white border-aqua -translate-y-1;
+      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
+    }
+
+    &:active,
+    &:focus {
+      @apply ring-4 ring-neon-violet shadow
+      outline-none;
+    }
+  }
+
+  .btn-tertiary,
+  a.btn-tertiary {
+    @apply text-white bg-electric-blue border border-electric-blue transition-transform duration-200;
+    &:hover {
+      @apply bg-electric-blue/80 text-white border-electric-blue -translate-y-1;
       box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
 
@@ -154,15 +172,13 @@
       @apply mb-4;
     }
     p {
-      @apply text-base;
+      @apply text-base mb-2 max-w-[80ch] mx-auto;
     }
     a {
       @apply text-aqua;
     }
-    ul,
-    ol {
-      display: inline-block;
-      text-align: left;
+    ol, ul {
+      @apply max-w-[80ch] mx-auto pl-8 my-4;
     }
   }
 
@@ -198,15 +214,24 @@
       rgba(51, 23, 153, 0.8) 100%
     );
   }
-
+  .bg-gradient-tile {
+    background: linear-gradient(
+      180deg,
+      rgba(51, 23, 153, 0.65) 0%,
+      rgba(65, 0, 152, 0.65) 100%
+    );
+  }
   /* Carousel Styling Below - Helps with making sure the cards are the same size */
   .tabbed-carousel .react-multi-carousel-item {
     align-content: center;
     justify-content: center;
   }
 
+  .tabbed-carousel .react-multi-carousel-list {
+    overflow: visible !important;
+  }
+
   .tabbed-carousel .react-multi-carousel-item {
-    padding: 0 20px;
     height: auto !important;
     display: flex !important;
     flex: 1 1 auto;
@@ -260,6 +285,31 @@
 .hover-ultrapink:hover {
   color: black !important;
 }
+
+/* Apply hover-zoom to the link and then hover-zoom-img to the image you want to do the zooming */
+.hover-zoom {
+  .hover-zoom-img {
+    transition: all 0.5s;
+  }
+
+  &:hover {
+    .hover-zoom-img {
+      transform: scale(1.25);
+    }
+  }
+}
+
+.hover-shadow {
+  box-shadow: 0 0 21px 0 #630ff9cc;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px); /* Safari */
+  transition: all 0.5s;
+
+  &:hover {
+    box-shadow: 0 0 40px 0 #630ff9cc;
+  }
+}
+
 .footer-header {
   @apply text-base md:text-[1.625rem]  md:font-bold;
 }
@@ -267,5 +317,91 @@
 .footer-links {
   a {
     @apply text-base;
+  }
+}
+
+.menu-link-mobile {
+  @apply text-[1.875rem] font-bold text-left;
+}
+
+.menu-link {
+    @apply hover:underline hover:underline-offset-4 hover:text-ultra-pink;
+}
+
+.small-link {
+  a {
+    @apply text-base;
+  }
+}
+
+.bg-quadrant-gradient {
+  background:
+    linear-gradient(
+        to bottom right,
+        rgba(46, 7, 143, 0.7) 0%,
+        rgba(0, 0, 46, 0.7) 50%
+      )
+      bottom right / 50% 50% no-repeat,
+    linear-gradient(
+        to bottom left,
+        rgba(46, 7, 143, 0.7) 0%,
+        rgba(0, 0, 46, 0.7) 50%
+      )
+      bottom left / 50% 50% no-repeat,
+    linear-gradient(
+        to top left,
+        rgba(46, 7, 143, 0.7) 0%,
+        rgba(0, 0, 46, 0.7) 50%
+      )
+      top left / 50% 50% no-repeat,
+    linear-gradient(
+        to top right,
+        rgba(46, 7, 143, 0.7) 0%,
+        rgba(0, 0, 46, 0.7) 50%
+      )
+      top right / 50% 50% no-repeat;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 100%;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 20px;
+  background: linear-gradient(
+    to right,
+    #1e1e2d var(--range-progress),
+    #c7c7c7 var(--range-progress)
+  );
+  border-radius: 25px;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    #1e1e2d var(--range-progress),
+    #c7c7c7 var(--range-progress)
+  );
+  border-radius: 25px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 40px;
+  height: 40px;
+  background: #dd0748;
+  border-radius: 50%;
+  margin-top: -10px;
+}
+
+iframe {
+  width: 100%;
+  height: 250px;
+  @media screen and (min-width: 768px) {
+    height: 450px;
   }
 }

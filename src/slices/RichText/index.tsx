@@ -22,11 +22,10 @@ const RichText = ({ slice }: RichTextProps): JSX.Element => {
      <Section
           data-slice-type={slice.slice_type}
           data-slice-variation={slice.variation}
-          styling={`py-10`}
         >
           <Container>
             <div
-              className={`text-content ${textAlignment} max-w-[80ch] mx-auto`}
+              className={`text-content ${textAlignment}`}
             >
               <PrismicRichText field={slice.primary.content}  components={components} />
             </div>

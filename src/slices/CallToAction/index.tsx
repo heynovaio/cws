@@ -23,7 +23,6 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       backgroundColor={slice.primary.background_color}
-      styling={`py-10`}
     >
       <Container>
         <div

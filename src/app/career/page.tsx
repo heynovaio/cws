@@ -9,6 +9,7 @@ import { components } from "@/slices";
 import React from "react";
 import { Layout } from "@/components";
 import { getLocales } from "@/utils";
+import { GeneralHero } from "@/components/Heros/GeneralHero";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -21,11 +22,11 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { uid, lang } = await params;
+  const { lang } = await params;
 
   const client = createClient();
   const page = await client
-    .getByUID("team_members", uid, { lang })
+    .getSingle("career_hub", { lang })
     .catch(() => notFound());
 
   return {
@@ -46,26 +47,31 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const { uid, lang } = await params;
+  const { lang } = await params;
 
   const client = createClient();
   const page = await client
-    .getByUID("team_members", uid, { lang })
+    .getSingle("career_hub", { lang })
     .catch(() => notFound());
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
 
   const locales = await getLocales(page, client);
 
+  const heroData = {
+    title: page.data.title,
+    body: page.data.body,
+    button: Array.isArray(page.data.button) ? page.data.button : [],
+  };
+
   return (
     <Layout
       locales={locales}
       global={global.data}
       menus={menus.data}
-      include_newsletter_sign_up_banner={
-        page.data.include_newsletter_sign_up_banner
-      }
+      include_newsletter_sign_up_banner={false}
     >
+      <GeneralHero data={heroData} shortHero />
       <SliceZone
         slices={page.data.slices}
         components={components}
@@ -78,7 +84,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 export async function generateStaticParams() {
   const client = createClient();
   const pages = await client
-    .getAllByType("team_members", {
+    .getAllByType("career_hub", {
       lang: "*",
     })
     .catch(() => notFound());

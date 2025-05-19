@@ -6,7 +6,7 @@ import { RichTextField } from "@prismicio/client";
 
 interface ContentBoxProps {
   children?: ReactNode;
-  title: string | RichTextField | undefined;
+  title?: string | RichTextField | undefined;
   tagline?: string;
   titleClassName?: string;
   content?: ReactNode | undefined;
@@ -61,7 +61,7 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
             <PrismicRichText field={title} components={titleComponents} />
           )}
         </div>
-        {content && <div>{content}</div>}
+        {content && <div className="text-content">{content}</div>}
       </div>
       {buttons && buttons.length > 0 && (
         <div className="flex gap-6">{buttons}</div>

@@ -44,8 +44,8 @@
         "config": {
           "label": "Image",
           "constraint": {
-            "width": 1200,
-            "height": 1200
+            "width": null,
+            "height": null
           },
           "thumbnails": []
         }
@@ -75,6 +75,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "contact_info": {
+              "type": "SharedSlice"
+            },
             "tile_grid": {
               "type": "SharedSlice"
             },
@@ -106,9 +109,6 @@
               "type": "SharedSlice"
             },
             "testimonials": {
-              "type": "SharedSlice"
-            },
-            "simple_text": {
               "type": "SharedSlice"
             }
           }

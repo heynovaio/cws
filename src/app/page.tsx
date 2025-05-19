@@ -9,6 +9,7 @@ import { components } from "@/slices";
 import { Layout } from "@/components";
 import { getLocales } from "@/utils";
 import React from "react";
+import { HomepageHero } from "@/components/Heros/HomepageHero";
 
 type Params = { lang: string };
 
@@ -61,11 +62,15 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         page.data.include_newsletter_sign_up_banner
       }
     >
-      <SliceZone
-        slices={page.data.slices}
-        components={components}
-        context={{ lang }}
-      />
+      <div className="relative">
+        <HomepageHero data={page.data} />
+
+        <SliceZone
+          slices={page.data.slices}
+          components={components}
+          context={{ lang }}
+        />
+      </div>
     </Layout>
   );
 }

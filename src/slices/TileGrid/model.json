@@ -24,14 +24,6 @@
             "default_value": "No Background"
           }
         },
-        "background_image": {
-          "type": "Image",
-          "config": {
-            "label": "Background Image",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
         "columns": {
           "type": "Select",
           "config": {
@@ -51,7 +43,7 @@
             "label": "Title",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "heading2,heading3,heading4"
+            "multi": "heading3,heading2,heading4"
           }
         },
         "body": {
@@ -63,23 +55,20 @@
             "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item,image"
           }
         },
-        "button": {
-          "type": "Link",
-          "config": {
-            "label": "Button",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": true
-          }
-        },
         "tiles": {
           "type": "Group",
           "config": {
             "label": "Tiles",
             "repeat": true,
             "fields": {
+              "tile_background_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Tile Background Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
               "tile_image": {
                 "type": "Image",
                 "config": {
@@ -96,19 +85,19 @@
                 "config": {
                   "label": "Tile Title",
                   "placeholder": "",
-                  "allowTargetBlank": true,
-                  "multi": "heading2,heading3,heading4"
+                  "allowTargetBlank": false,
+                  "single": "heading4"
                 }
               },
-              "tile_button": {
+              "tile_link": {
                 "type": "Link",
                 "config": {
-                  "label": "Tile Button",
+                  "label": "Tile Link",
                   "placeholder": "Learn More",
                   "select": null,
                   "allowTargetBlank": true,
                   "allowText": true,
-                  "repeat": true
+                  "repeat": false
                 }
               }
             }

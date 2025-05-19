@@ -5,7 +5,11 @@ import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import { getLocales } from "@/utils";
 import * as prismic from "@prismicio/client";
-import { Layout } from "@/components";
+import { Layout, SearchLayout } from "@/components";
+import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
+import { GeneralHero } from "@/components/Heros/GeneralHero";
+import { Suspense } from "react";
+import { Loading } from "@/components/Loading/Loading";
 
 export default async function Page({}) {
   const client = createClient();
@@ -25,11 +29,17 @@ export default async function Page({}) {
         page.data.include_newsletter_sign_up_banner
       }
     >
-      <SliceZone
-        slices={page.data.slices}
-        components={components}
-        context={{ lang: "en-ca" }}
-      />
+      <Suspense fallback={<Loading hasText />}>
+        <GeneralHero data={page.data} />
+        <CategoryFilterProvider>
+          <SearchLayout />
+        </CategoryFilterProvider>
+        <SliceZone
+          slices={page.data.slices}
+          components={components}
+          context={{ lang: "en-ca" }}
+        />
+      </Suspense>
     </Layout>
   );
 }

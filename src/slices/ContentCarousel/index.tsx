@@ -24,6 +24,7 @@ import {
   ContentBox,
   CarouselButton,
   DefaultCard,
+  ShortCard,
 } from "@/components";
 import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
@@ -116,11 +117,11 @@ const ContentCarousel = ({
 
   if (slice.variation === "programsCarousel") {
     data = programPageData;
-    cardType = "program";
+    cardType = "program_page";
     categoryData = programCategoryData;
   } else if (slice.variation === "resourceCarousel") {
     data = resourcePageData;
-    cardType = "resource";
+    cardType = "resource_page";
     categoryData = resourceCategoryData;
   }
 
@@ -172,14 +173,18 @@ const ContentCarousel = ({
     }
   };
 
+  const hasPhoto = slice.primary.photo == true;
+
   return (
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      styling="overflow-x-hidden"
+      backgroundColor={slice.primary.background_color}
     >
       <Container>
         {/* Header and Carousel Navigation */}
-        <div className="flex justify-between items-start mb-6">
+        <div className="flex justify-between items-center mb-6">
           <ContentBox
             title={slice.primary.title ?? undefined}
             content={
@@ -190,15 +195,18 @@ const ContentCarousel = ({
             }
             width="standard"
           />
-          <CarouselButton
-            currentSlide={currentSlide + 1}
-            totalSlides={totalSlides}
-            onSlideChange={handleArrowClick}
-            styling="w-fit"
-          />
+          {filteredDataWithCategory.length > itemsPerPage && (
+            <CarouselButton
+              currentSlide={currentSlide + 1}
+              totalSlides={totalSlides}
+              onSlideChange={handleArrowClick}
+              styling="w-fit"
+            />
+          )}
         </div>
-
-        {/* Carousel Content */}
+      </Container>
+      {/* Carousel Content */}
+      <Container>
         <Carousel
           ref={carouselRef}
           responsive={responsive}
@@ -209,32 +217,50 @@ const ContentCarousel = ({
           keyBoardControl
           afterChange={handleSlideChange}
           itemClass="px-3 !mt-0"
-          containerClass="w-full py-1"
+          containerClass="w-full py-1 !overflow-visible"
         >
           {filteredDataWithCategory.map((item, index) => (
             <div key={item.id} className="carousel-card flex h-full">
-              <DefaultCard
-                title={asText(item.data.title)}
-                content={
-                  <PrismicRichText
-                    field={item.data.body}
-                    components={components}
-                  />
-                }
-                category={item.categoryName as string}
-                image={item.data.image}
-                cardType={cardType}
-                buttons={[
-                  <Link
-                    key={index}
-                    href={item.url ?? ""}
-                    className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
-                  >
-                    Learn More
-                    <HiOutlineArrowLongRight className="h-10 w-10" />
-                  </Link>,
-                ]}
-              />
+              {hasPhoto ? (
+                <DefaultCard
+                  title={asText(item.data.title)}
+                  content={
+                    <PrismicRichText
+                      field={item.data.body}
+                      components={components}
+                    />
+                  }
+                  category={item.categoryName as string}
+                  image={item.data.image}
+                  cardType={cardType}
+                  buttons={[
+                    <Link
+                      key={index}
+                      href={item.url ?? ""}
+                      className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
+                    >
+                      Learn More
+                      <HiOutlineArrowLongRight className="h-10 w-10" />
+                    </Link>,
+                  ]}
+                />
+              ) : (
+                <ShortCard
+                  title={asText(item.data.title)}
+                  category={item.categoryName as string}
+                  cardType={cardType}
+                  buttons={[
+                    <Link
+                      key={index}
+                      href={item.url ?? ""}
+                      className="btn p-0 flex flex-row items-center gap-2 focus:outline-offset-4"
+                    >
+                      Learn More
+                      <HiOutlineArrowLongRight className="h-7 w-7" />
+                    </Link>,
+                  ]}
+                />
+              )}
             </div>
           ))}
         </Carousel>

@@ -7,6 +7,7 @@ interface CustomPaginationProps {
   itemsPerPage?: number;
   initialPage?: number;
   onPageChange?: (page: number) => void;
+  className?: string;
 }
 
 export const CustomPagination = ({
@@ -14,6 +15,7 @@ export const CustomPagination = ({
   itemsPerPage = 9,
   initialPage = 0,
   onPageChange,
+  className = "grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
 }: CustomPaginationProps) => {
   const [page, setPage] = useState(initialPage);
 
@@ -32,26 +34,26 @@ export const CustomPagination = ({
 
   return (
     <div>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {currentItems}
-      </div>
+      <div className={className}>{currentItems}</div>
 
-      <Pagination
-        currentPage={page}
-        setCurrentPage={handlePageChange}
-        totalPages={totalPages}
-        edgePageCount={1}
-        middlePagesSiblingCount={1}
-        truncableText="..."
-        truncableClassName="text-white px-3 py-2 text-bodyLarge font-bold"
-        className="flex gap-2 items-center flex-wrap mt-4 list-none justify-center"
-      >
-        <Pagination.PageButton
-          activeClassName="bg-ultra-pink border-ultra-pink border-2  focus:rounded-full hover-ultrapink"
-          inactiveClassName="bg-dark-purple-background border-white border-2  focus:rounded-full"
-          className="w-10 h-10 flex items-center justify-center rounded-full  focus:outline-none focus:ring-2 focus:ring-aqua font-bold no-underline cursor-pointer"
-        />
-      </Pagination>
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={page}
+          setCurrentPage={handlePageChange}
+          totalPages={totalPages}
+          edgePageCount={1}
+          middlePagesSiblingCount={1}
+          truncableText="..."
+          truncableClassName="text-white px-3 py-2 text-bodyLarge font-bold"
+          className="flex gap-2 items-center flex-wrap mt-4 list-none justify-center"
+        >
+          <Pagination.PageButton
+            activeClassName="bg-ultra-pink border-ultra-pink border-2  focus:rounded-full hover-ultrapink"
+            inactiveClassName="bg-dark-purple-background border-white border-2  focus:rounded-full"
+            className="w-10 h-10 flex items-center justify-center rounded-full  focus:outline-none focus:ring-2 focus:ring-aqua font-bold no-underline cursor-pointer"
+          />
+        </Pagination>
+      )}
     </div>
   );
 };

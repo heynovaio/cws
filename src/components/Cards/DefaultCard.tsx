@@ -13,7 +13,7 @@ interface DefaultCardProps {
   buttons?: ReactNode[] | undefined;
   image?: ImageField;
   category?: string;
-  cardType?: "program" | "resource" | string;
+  cardType?: "program_page" | "resource_page" | string;
 }
 
 export const DefaultCard = ({
@@ -43,16 +43,18 @@ export const DefaultCard = ({
   }
   return (
     <div className={`flex flex-col gap-5 ${cardBackground}`}>
-      <ResponsiveImage
-        image={image}
-        imageHeightClassName="h-full w-full"
-        containerClassName="w-full max-h-[215px] h-full"
-      />
+      {image && (
+        <ResponsiveImage
+          image={image}
+          imageHeightClassName="h-full w-full"
+          containerClassName="w-full max-h-[215px] h-full"
+        />
+      )}
       {/* TODO: Turn these into links once the filter pages are made */}
       {category && (
         <div className="flex gap-2">
           <span
-            className={`self-start rounded-full px-2 py-1 items-center font-accent font-medium border-[1.5px] ${categoryChipColor}`}
+            className={`self-start rounded-full px-2 py-1 items-center font-medium border-[1.5px] ${categoryChipColor}`}
           >
             {category}
           </span>

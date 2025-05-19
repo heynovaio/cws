@@ -15,7 +15,6 @@ export default {
     fontFamily: {
       title: ["var(--font-outfit)"],
       body: ["var(--font-outfit)"],
-      accent: ["var(--font-roboto-condensed)"],
     },
     colors: {
       primary: colors.ultraPink,
@@ -37,21 +36,22 @@ export default {
       "soft-purple": "#D4C6FD40",
     },
     fontWeight: {
-      normal: "400",
+      normal: "300",
       medium: "500",
       bold: "600",
       extraBold: "700",
     },
     fontSize: {
-      base: "1rem",
-      h1: "4.1875rem",
-      h2: "3.5625rem",
-      h3: "2.5rem",
-      h4: "1.875rem",
+      base: "1.125rem",
+      h1: "3.75rem",
+      h2: "2.75rem",
+      h3: "2.12rem",
+      h4: "1.8rem",
       label: "1.5rem",
       button: "1.25rem",
       bodyLarge: "1.25rem",
-      md: "1.125rem",
+      md: "1.12rem",
+      tagline: "1.62rem",
     },
     lineHeight: {
       h1: "1.3",
@@ -81,7 +81,7 @@ export default {
         "gradient-primary":
           "linear-gradient(90deg, #3802a7 0%, #3c1253 98.73%)",
         "gradient-dark":
-          "linear-gradient(90deg, rgba(99, 15, 249, 0.8) 0%, rgba(51, 23, 153, 0.8) 100%)",
+          "linear-gradient(90deg, rgba(51, 23, 153, 0.70) 0%, rgba(99, 15, 249, 0.70) 100%)",
         "gradient-overlay":
           "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(3, 0, 233, 0.5) 61.5%)",
       },

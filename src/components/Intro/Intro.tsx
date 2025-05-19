@@ -13,13 +13,15 @@ import {
 } from "../../../prismicio-types";
 import { PrismicRichText } from "@prismicio/react";
 import { components } from "@/utils";
+import { Breadcrumb, BreadcrumbProps } from "../Breadcrumb";
 
 interface IntroProps {
   pageData?: ProgramPageDocumentData | ResourcePageDocumentData;
   type?: "program" | "resource" | string;
+  links?: BreadcrumbProps["links"];
 }
 
-export const Intro = ({ type, pageData }: IntroProps) => {
+export const Intro = ({ type, pageData, links }: IntroProps) => {
   const { image, title, body, link, newsletter_sign_up } = pageData || {};
   const isProgramPage = type === "program";
   const newsLetterSignUp = isProgramPage && newsletter_sign_up;
@@ -52,34 +54,45 @@ export const Intro = ({ type, pageData }: IntroProps) => {
       break;
   }
 
+  const breadcrumbColor = isProgramPage ? "white" : "black";
   return (
     <Section data-test-id="intro">
       <Container>
         <div
-          className={`grid grid-cols-1 md:grid-cols-12 gap-4 rounded p-12 border border-neon-violet shadow backdrop-blur-3xl ${containerStyle}`}
+          className={`grid grid-cols-1 md:grid-cols-12 gap-4 rounded p-6 md:p-12 border border-neon-violet shadow backdrop-blur-3xl ${containerStyle}`}
         >
           <div className="md:col-span-6 flex flex-col h-full">
             <div className="flex-grow flex flex-col justify-center">
-              {/* If program intro */}
-              {isProgramPage &&
-                programCategoryData?.map((category, index) => (
-                  <span key={category.id} className="tagline">
-                    {category.data.name?.toUpperCase()}
-                    {index < programCategoryData.length - 1 && ", "}
-                  </span>
-                ))}
+              {isProgramPage && pageData?.category && (
+                <span className="tagline">
+                  {programCategoryData
+                    ?.find(
+                      (categories) =>
+                        pageData.category &&
+                        "id" in pageData.category &&
+                        categories.id === pageData.category.id
+                    )
+                    ?.data.name?.toUpperCase()}
+                </span>
+              )}
               {/* If resource intro */}
               {!isProgramPage &&
-                resourceCategoryData?.map((category, index) => (
-                  <span key={category.id} className="text-neon-violet tagline">
-                    {category.data.name?.toUpperCase()}
-                    {index < resourceCategoryData.length - 1 && ", "}
+                pageData?.category &&
+                "id" in pageData.category && (
+                  <span className="text-neon-violet tagline">
+                    {resourceCategoryData
+                      ?.find(
+                        (category) =>
+                          "id" in pageData.category &&
+                          category.id === pageData.category.id
+                      )
+                      ?.data.name?.toUpperCase()}
                   </span>
-                ))}
+                )}
               <ContentBox
                 title={title}
                 content={
-                  <PrismicRichText field={body} components={components} />
+                  <div className="text-bodyLarge"><PrismicRichText field={body} components={components} /></div>
                 }
                 buttons={
                   buttonsExist && (!isProgramPage || newsLetterSignUp)
@@ -112,7 +125,7 @@ export const Intro = ({ type, pageData }: IntroProps) => {
               />
             </div>
             {/* TODO: Add the real breadcrumbs */}
-            <p>[INSERT BREADCRUMBS HERE]</p>
+            <Breadcrumb links={links} color={breadcrumbColor} />
           </div>
           <div
             className={`md:col-span-6 grid ${isProgramPage ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} gap-4`}

@@ -1,4 +1,4 @@
-import { Container, Button } from "@/components";
+import { Container, Button, Section } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
@@ -23,17 +23,18 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
     allTestimonials[Math.floor(Math.random() * allTestimonials.length)];
 
   return (
-    <section
+    <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-midnight p-10"
+      backgroundColor={slice.primary.background_color}
     >
       <Container containerClassName="flex flex-col gap-12 items-center">
         <div
-          className="bg-neon-violet shadow rounded py-4 px-6 md:py-16 md:px-28  bg-no-repeat "
+          className="bg-neon-violet shadow rounded py-4 px-6 lg:py-16 lg:px-28  bg-no-repeat "
           style={{
             backgroundImage: "url('/LogoBig.png')",
             backgroundPosition: backgroundImageSide,
+            backgroundSize: "cover",
           }}
         >
           <div
@@ -48,12 +49,12 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
             </div>
             <div className="flex flex-col gap-4">
               <PrismicRichText field={slice.primary.title} />
-              <PrismicRichText field={displayedTestimonial.quote} />
+              <div className="text-bodyLarge"><PrismicRichText field={displayedTestimonial.quote} /></div>
               <div className="flex flex-col">
-                <p className="text-base font-accent">
+                <p className="text-bodyLarge font-bold">
                   {displayedTestimonial.author}
                 </p>
-                <p className="text-[1.375rem] font-bold">
+                <p className="text-base">
                   {displayedTestimonial.author_title}
                 </p>
               </div>
@@ -70,7 +71,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
             />
           ))}
       </Container>
-    </section>
+    </Section>
   );
 };
 

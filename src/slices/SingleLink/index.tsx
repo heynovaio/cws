@@ -39,7 +39,7 @@ const SingleLink = ({ slice }: SingleLinkProps): JSX.Element => {
       {slice.variation === "singleLinkButtonIcon" && (
         <PrismicNextLink
           field={slice.primary.link}
-          className={`flex flex-row-reverse gap-2 justify-center items-center text-md ${buttonClass}`}
+          className={`flex flex-row-reverse gap-2 justify-center items-center  text-md w-fit ${buttonClass}`}
         >
           {slice.primary.icon && (
             <PrismicNextImage
@@ -57,7 +57,7 @@ const SingleLink = ({ slice }: SingleLinkProps): JSX.Element => {
       {slice.variation === "default" && (
         <PrismicNextLink
           field={slice.primary.link}
-          className="flex justify-center text-white no-underline text-md"
+          className="flex md:justify-center text-white no-underline menu-link text-left menu-link-mobile md:text-md menu-link"
         >
           {slice.primary.link.text}
         </PrismicNextLink>

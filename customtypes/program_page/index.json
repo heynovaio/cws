@@ -124,6 +124,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "contact_info": {
+              "type": "SharedSlice"
+            },
             "tag_category": {
               "type": "SharedSlice"
             },
@@ -137,9 +140,6 @@
               "type": "SharedSlice"
             },
             "accordion": {
-              "type": "SharedSlice"
-            },
-            "simple_text": {
               "type": "SharedSlice"
             },
             "testimonials": {

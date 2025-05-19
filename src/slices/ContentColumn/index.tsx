@@ -16,20 +16,41 @@ export type ContentColumnProps =
 const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
   const cardStyling =
     slice.primary.card_background === "Purple"
-      ? "bg-neon-violet/60 text-white divide-soft-purple/25"
+      ? "bg-midnight bg-gradient-dark text-white divide-soft-purple/25"
       : "bg-white text-midnight divide-neon-violet";
 
   const isSingleColumn = slice.primary.column.length === 1;
+
   return (
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
+      {(slice.primary.title?.length || slice.primary.body?.length) > 0 && (
+        <div className="mb-4 md:mb-10 text-center max-w-[900px] mx-auto">
+          {slice.primary.title?.length > 0 && (
+            <PrismicRichText
+              field={slice.primary.title}
+              components={components}
+            />
+          )}
+          {slice.primary.body?.length > 0 && (
+            <PrismicRichText
+              field={slice.primary.body}
+              components={{
+                paragraph: ({ children }) => (
+                  <p className="text-bodyLarge">{children}</p>
+                ),
+              }}
+            />
+          )}
+        </div>
+      )}
       <Container
         containerClassName={isSingleColumn ? "flex justify-center" : ""}
       >
         <div
-          className={`${cardStyling} flex flex-col md:flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch ${
+          className={`${cardStyling} relative z-10 flex flex-col md:flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch ${
             isSingleColumn ? "max-w-[860px] w-full" : "w-full"
           }`}
         >
@@ -51,7 +72,16 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
               <div className="mt-4 text-center flex flex-col gap-2">
                 {slice.variation === "stats"
                   ? "stat_number" in item && <h3>{item.stat_number}</h3>
-                  : "title" in item && <PrismicRichText field={item.title} />}
+                  : "title" in item && (
+                      <PrismicRichText
+                        field={item.title}
+                        components={{
+                          heading3: ({ children }) => (
+                            <h3 className="text-[1.625rem]">{children}</h3>
+                          ),
+                        }}
+                      />
+                    )}
                 <PrismicRichText
                   field={item.description}
                   components={components}

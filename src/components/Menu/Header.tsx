@@ -22,10 +22,13 @@ interface HeaderProps {
 // TODO: Change the menu colors and add from themeing file
 export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
   return (
-    <header>
+    <header
+      className="sticky top-0 z-50 bg-midnight/70"
+      style={{ backdropFilter: "blur(35px)" }}
+    >
       <nav
         aria-label="Main Nav"
-        className="flex bg-[#6D00FF] justify-between items-center px-5 lg:py-2 py-1"
+        className="flex justify-between items-center px-5 lg:py-2 py-1 "
       >
         <PrismicNextLink
           className="flex "
@@ -37,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
         </PrismicNextLink>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center xl:gap-10 gap-3 z-50">
+        <div className="hidden md:flex items-center xl:gap-10 gap-3 z-50 ">
           <SliceZone slices={slices} components={components} />
         </div>
 
@@ -61,9 +64,9 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
             >
               <PopoverPanel
                 anchor="bottom"
-                className="w-screen h-screen bg-purple mt-0 pb-10 z-40"
+                className="w-screen h-screen bg-midnight bg-gradient-dark mt-4 pb-10 z-40"
               >
-                <div className="flex flex-col items-center gap-10 mt-10">
+                <div className="flex flex-col pl-4  gap-10 mt-10">
                   <SliceZone slices={slices} components={components} />
                 </div>
               </PopoverPanel>
