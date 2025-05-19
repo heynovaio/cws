@@ -326,6 +326,10 @@
   @apply text-[1.875rem] font-bold text-left;
 }
 
+.menu-link {
+    @apply hover:underline hover:underline-offset-4 hover:text-ultra-pink;
+}
+
 .small-link {
   a {
     @apply text-base;

@@ -57,7 +57,7 @@ const SingleLink = ({ slice }: SingleLinkProps): JSX.Element => {
       {slice.variation === "default" && (
         <PrismicNextLink
           field={slice.primary.link}
-          className="flex md:justify-center text-white text-left no-underline menu-link-mobile md:text-md"
+          className="flex md:justify-center text-white no-underline menu-link text-left menu-link-mobile md:text-md menu-link"
         >
           {slice.primary.link.text}
         </PrismicNextLink>

@@ -33,14 +33,14 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
                   <FaInstagram size={35} />
                   <PrismicNextLink
                     field={footerData?.instagram}
-                    className="text-base"
+                    className="text-base underline-offset-4 menu-link"
                   />
                 </span>
                 <span className="flex flex-row gap-4 items-center">
                   <FaFacebook size={35} />
                   <PrismicNextLink
                     field={footerData?.facebook}
-                    className="text-base"
+                    className="text-base underline-offset-4 menu-link"
                   />
                 </span>
               </div>
@@ -57,15 +57,15 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
         <div className="flex flex-row gap-6 md:gap-10">
           <PrismicNextLink
             field={footerData?.policy_link}
-            className="text-base md:text-bodyLarge"
+            className="text-base md:text-bodyLarge menu-link underline-offset-4"
           />
           <PrismicNextLink
             field={footerData?.helpline}
-            className="text-base md:text-bodyLarge"
+            className="text-base md:text-bodyLarge menu-link underline-offset-4"
           />
         </div>
 
-        <p className="mt-6 text-center text-base  ">{footerData?.copyright}</p>
+        <p className="mt-6 text-center text-base">{footerData?.copyright}</p>
       </div>
     </footer>
   );

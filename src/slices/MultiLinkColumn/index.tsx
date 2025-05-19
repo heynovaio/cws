@@ -28,7 +28,7 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
       className="flex flex-col gap-5"
     >
       <div className="hidden md:flex flex-col gap-5">
-        <span>
+        <span className="">
           <PrismicRichText
             field={slice.primary.title}
             components={footerComponentStyling}
@@ -40,7 +40,7 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
               <PrismicNextLink
                 field={item}
                 key={index}
-                className="no-underline"
+                className="no-underline menu-link"
               />
             ))}
           </div>
@@ -51,7 +51,7 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
         {({ open }) => (
           <>
             <DisclosureButton
-              className={`flex items-center justify-center gap-4 pl-2 w-full menu-link ${open ? "mb-3" : ""}`}
+              className={`flex items-center justify-center gap-4 pl-2 w-full menu-link  ${open ? "mb-3" : ""}`}
             >
               <PrismicRichText
                 field={slice.primary.title}
@@ -72,7 +72,7 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
                   <PrismicNextLink
                     field={item}
                     key={index}
-                    className="no-underline text-base"
+                    className="no-underline text-base menu-link"
                   />
                 ))}
             </DisclosurePanel>
