@@ -47,11 +47,12 @@ export default {
       h2: "2.75rem",
       h3: "2.12rem",
       h4: "1.8rem",
-      label: "1.5rem",
+      label: "1.3rem",
       button: "1.25rem",
       bodyLarge: "1.25rem",
       md: "1.12rem",
       tagline: "1.62rem",
+      sm: "1rem"
     },
     lineHeight: {
       h1: "1.3",

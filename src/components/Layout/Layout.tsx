@@ -33,6 +33,12 @@ export const Layout = ({
 }: LayoutProps) => {
   return (
     <div>
+      <a
+        href="#main-content"
+        className="skip-to-content-link"
+      >
+        Skip to Content
+      </a>
       <div className="sticky top-0 z-50 ">
         <TopBar locales={locales} global={global} text={menus.banner_text} />
         <Header

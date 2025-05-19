@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply text-[1rem] md:text-base text-white bg-navy-background font-normal;
+    @apply text-[1rem] md:text-base text-white bg-navy-background font-normal font-body;
 
     /* dark:text-white dark:bg-midnight */
   }
@@ -24,12 +24,15 @@
     @apply font-title text-[1.375rem] md:text-h4 font-bold leading-h4;
   }
   p {
-    @apply font-normal mb-2;
+    @apply font-normal text-base mb-2;
+  }
+  button {
+    @apply font-body;
   }
   a {
     @apply underline;
     &:hover {
-      @apply text-ultra-pink;
+      @apply text-aqua;
     }
   }
   .link-no-underline {
@@ -58,7 +61,7 @@
 
   label,
   .tagline {
-    @apply text-label font-bold;
+    @apply text-label font-medium;
   }
 
   .label-small {
@@ -85,7 +88,7 @@
 
     &:active,
     &:focus {
-      @apply ring-4 ring-ultra-pink shadow
+      @apply ring-4 ring-aqua shadow
       outline-none;
     }
   }
@@ -156,6 +159,23 @@
   }
 }
 
+.skip-to-content-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  z-index: 100;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+.skip-to-content-link:focus {
+  transform: translateY(0);
+}
+
+
 @layer utilities {
   img {
     @apply rounded;
@@ -172,7 +192,7 @@
       @apply mb-4;
     }
     p {
-      @apply text-base mb-2 max-w-[80ch] mx-auto;
+      @apply mb-2 max-w-[80ch];
     }
     a {
       @apply text-aqua;
@@ -321,16 +341,17 @@
 }
 
 .menu-link-mobile {
-  @apply text-[1.875rem] font-bold text-left;
+  @apply text-[1.875rem] font-bold text-left hover:text-aqua;
+
 }
 
 .menu-link {
-    @apply hover:underline hover:underline-offset-4 hover:text-ultra-pink;
+  @apply font-normal hover:underline hover:underline-offset-4 hover:text-aqua;
 }
 
 .small-link {
   a {
-    @apply text-base;
+    @apply text-[1rem];
   }
 }
 

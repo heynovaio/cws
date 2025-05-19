@@ -22,8 +22,8 @@ export const HomepageHero: React.FC<HomepageHeroProps> = ({ data }) => {
       style={{ backgroundImage: "url('/hero-gradient.png')" }}
     >
       <Container>
-        <div className="text-white flex flex-col sm:flex-row justify-between items-stretch pt-8 lg:py-0 md:gap-16 mt-0 ">
-          <div className="basis-1/2 md:pb-12 lg:pb-0">
+        <div className="text-white flex flex-col sm:flex-row justify-between items-stretch pt-16 lg:py-0 md:gap-16 mt-0 ">
+          <div className="basis-1/2 self-center md:pb-12 lg:pb-0">
             <ContentBox
               title={data.title}
               content={<div className="text-bodyLarge"><PrismicRichText field={data.body} /></div>}

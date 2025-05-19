@@ -24,7 +24,7 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
     <section
       data-test-id="default-hero"
       className={`relative flex items-center w-full bg-quadrant-gradient   ${
-        shortHero ? "min-h-[500px]" : "min-h-[600px]"
+        shortHero ? "md:min-h-[500px] min-h-[400px]" : "md:min-h-[600px] min-h-[400px]"
       }`}
     >
       <Container>

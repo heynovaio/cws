@@ -31,7 +31,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
 
   return (
     <div className={`print:hidden ${classname}`}>
-      <div className="inline-flex items-center  px-2 pt-1">
+      <div className="inline-flex text-[1rem] items-center  px-2 pt-1">
         <span className="px-1 py-1">
           {/* <strong>{global?.language || "Language"}:</strong> */}
           <strong>Language:</strong>
@@ -41,7 +41,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
           id="language-switcher"
           value={currentLang}
           onChange={handleLanguageChange}
-          className="bg-transparent px-1 py-1 rounded-lg outline-none focus:ring-2 focus:ring-ultra-pink"
+          className="bg-transparent px-1 py-1 rounded-lg text-[1rem] outline-none focus:ring-2 focus:ring-ultra-pink"
         >
           {locales.map((locale) => (
             <option key={locale.id} value={locale.lang}>

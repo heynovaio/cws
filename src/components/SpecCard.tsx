@@ -33,11 +33,11 @@ export const SpecCard = ({
   return (
     <div className="card-white p-5 flex gap-5 flex-col border border-neon-violet font-accent">
       {typeof title === "string" ? (
-        <label>{title}</label>
+        <h2 className="text-tagline">{title}</h2>
       ) : (
         <PrismicRichText field={title} />
       )}
-      <div className="grid grid-cols-2 md:grid-cols-1 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-1 gap-5 text-base">
         {time && (
           <div className="flex flex-col md:flex-row flex-wrap gap-2 items-center text-center md:text-start">
             <MdAccessTimeFilled className="h-6 w-6 text-neon-violet" />
@@ -51,8 +51,8 @@ export const SpecCard = ({
           <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
             <MdAttachMoney className="h-6 w-6 text-neon-violet" />
             <span>
-              <strong>Cost: $</strong>
-              {cost}
+              <span className="font-bold">Cost: </span>
+              ${cost}
             </span>
           </div>
         )}
@@ -60,7 +60,7 @@ export const SpecCard = ({
           <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
             <FaMedal className="h-4 w-6 text-neon-violet" />
             <span>
-              <strong>Certs: </strong>
+              <span className="font-bold">Certs: </span>
               NCCP PD Points
             </span>
           </div>
@@ -69,22 +69,22 @@ export const SpecCard = ({
           <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
             <FaLaptop className="h-4 w-6 text-neon-violet" />
             <span>
-              <strong>Format: </strong>
+              <span className="font-bold">Format: </span>
               {format}
             </span>
           </div>
         )}
       </div>
       {resources && resources.length > 0 && (
-        <div className="flex flex-col mx-auto md:mx-0 gap-2">
-          <strong>This Program Includes: </strong>
-          <ul className="list-disc pl-5">
+        <div className="w-full flex flex-col mx-auto md:mx-0 gap-2 text-base border-t border-neon-violet pt-3">
+          <h3 className="text-base font-bold">Included: </h3>
+          <ul className="list-disc pl-1">
             {resources.map((item, index) => (
               <li key={index}>
                 {item.link_type === "Any" ? (
                   item.text
                 ) : (
-                  <PrismicNextLink field={item} className="link-no-underline">
+                  <PrismicNextLink field={item}>
                     {item.text}
                   </PrismicNextLink>
                 )}
