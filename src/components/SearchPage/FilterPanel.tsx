@@ -39,48 +39,74 @@ export const FilterPanel = ({
 }: FilterPanelProps) => {
   const [showAll, setShowAll] = useState(false);
   const [localSliderValue, setLocalSliderValue] = useState(sliderValue);
+  const [initialized, setInitialized] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
-  
+
   useEffect(() => {
     setLocalSliderValue(sliderValue);
   }, [sliderValue]);
 
-  // Get initial values from URL on mount
+  // Initialize state from URL parameters on mount
   useEffect(() => {
-    if (slider) return;
+    if (!searchParams || initialized) return;
 
-    const params = new URLSearchParams(searchParams?.toString());
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (slider) {
+      const urlSliderValue = params.get(filterKey);
+      if (urlSliderValue && !isNaN(Number(urlSliderValue))) {
+        const numValue = Number(urlSliderValue);
+        if (numValue >= 0 && numValue <= sliderMax) {
+          setLocalSliderValue(numValue);
+          onSliderChange?.(numValue);
+        }
+      }
+      setInitialized(true);
+      return;
+    }
+
     const urlValues = params.get(filterKey)?.split(",").filter(Boolean) || [];
 
-    // Only update if there's a mismatch between URL and current selection
-    if (
-      urlValues.length > 0 &&
-      JSON.stringify(urlValues) !== JSON.stringify(selectedItems)
-    ) {
+    // If there are URL params but selectedItems is empty, we need to initialize
+    if (urlValues.length > 0 && selectedItems.length === 0) {
       urlValues.forEach((value) => {
-        if (
-          items.some((item) => getItemValue(item) === value) &&
-          !selectedItems?.includes(value)
-        ) {
+        if (items.some((item) => getItemValue(item) === value)) {
           onItemToggle?.(value);
         }
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterKey, searchParams]);
+
+    setInitialized(true);
+  }, [
+    searchParams,
+    initialized,
+    slider,
+    filterKey,
+    items,
+    selectedItems,
+    onItemToggle,
+    onSliderChange,
+    sliderMax,
+  ]);
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
     setLocalSliderValue(newValue);
     onSliderChange?.(newValue);
+
+    const newParams = new URLSearchParams(searchParams?.toString());
+    if (newValue === sliderMax) {
+      newParams.delete(filterKey);
+    } else {
+      newParams.set(filterKey, newValue.toString());
+    }
+    router.replace(`?${newParams.toString()}`, { scroll: false });
   };
 
   const handleItemToggle = (itemId: string) => {
-    // First update the local state
     onItemToggle?.(itemId);
 
-    // Then update the URL
     const newParams = new URLSearchParams(searchParams?.toString());
     const currentValues =
       newParams.get(filterKey)?.split(",").filter(Boolean) || [];
@@ -113,12 +139,20 @@ export const FilterPanel = ({
   const visibleItems = showAll ? items : items.slice(0, initialVisibleCount);
   const remainingCount = Math.max(0, items.length - initialVisibleCount);
 
+  // Get the actual selected state by combining props and URL params
+  const getActualSelectedState = (value: string): boolean => {
+    if (!searchParams) return selectedItems.includes(value);
+
+    const params = new URLSearchParams(searchParams.toString());
+    const urlValues = params.get(filterKey)?.split(",").filter(Boolean) || [];
+    return urlValues.includes(value) || selectedItems.includes(value);
+  };
+
   return (
     <>
       {(slider || (items && items.length > 0)) && (
         <div className={className}>
           <label className="label">{label}</label>
-          {/* Slider Section */}
           {slider && (
             <div className="mb-6 space-y-4">
               <div className="flex justify-between items-center">
@@ -150,14 +184,13 @@ export const FilterPanel = ({
               </div>
             </div>
           )}
-          {/* Filter Items Section */}
           {!slider && (
             <div>
               <div className="space-y-3">
                 {visibleItems.map((item) => {
                   const value = getItemValue(item);
                   const name = getItemName(item);
-                  const isSelected = selectedItems?.includes(value);
+                  const isSelected = getActualSelectedState(value);
 
                   return (
                     <Field key={value} className="flex items-center gap-3">

@@ -18,7 +18,7 @@ export const ProgramsCostFilterPanel = () => {
       label="Max Cost"
       filterKey="max_cost"
       sliderMax={maxCost}
-      sliderValue={maxCostFilter ?? maxCost} // Fallback to maxCost if undefined
+      sliderValue={maxCostFilter ?? maxCost}
       onSliderChange={setMaxCostFilter}
       currencySymbol="$"
     />
