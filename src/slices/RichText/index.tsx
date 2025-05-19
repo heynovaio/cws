@@ -1,5 +1,5 @@
 import { Content } from "@prismicio/client";
-import { Button, Container, Section } from "@/components";
+import { Container, Section } from "@/components";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 import { components } from "@/utils";
@@ -18,7 +18,6 @@ const RichText = ({ slice }: RichTextProps): JSX.Element => {
     ? "items-start text-left"
     : "items-center text-center";
 
-  const buttonAlignment = leftAligned ? "" : "flex justify-center";
   return (
      <Section
           data-slice-type={slice.slice_type}
