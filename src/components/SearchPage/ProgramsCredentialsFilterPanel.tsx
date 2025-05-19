@@ -7,6 +7,7 @@ export const ProgramsCredentialsFilterPanel = () => {
   return (
     <FilterPanel
       label="Credentials"
+      filterKey="credentials"
       items={[
         {
           id: "nccp-pd-points",

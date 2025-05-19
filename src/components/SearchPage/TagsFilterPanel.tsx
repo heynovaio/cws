@@ -8,6 +8,7 @@ export const TagsFilterPanel = () => {
   return (
     <FilterPanel
       label="Tags"
+      filterKey="tags"
       items={availableTags}
       selectedItems={selectedTags}
       onItemToggle={toggleTag}

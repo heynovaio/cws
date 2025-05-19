@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../Buttons";
 import { defaultCategoryFilter, useCategoryFilter } from "@/providers";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const ClearFilterButton = () => {
   const {
@@ -16,6 +17,9 @@ export const ClearFilterButton = () => {
     maxCost,
   } = useCategoryFilter();
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const anyFiltersActive =
     searchTerm ||
     activeFilter !== defaultCategoryFilter ||
@@ -26,6 +30,23 @@ export const ClearFilterButton = () => {
     hasCredentials ||
     maxCostFilter !== maxCost;
 
+  const handleClearFilters = () => {
+    clearAllFilters();
+
+    const newSearchParams = new URLSearchParams(searchParams?.toString());
+
+    newSearchParams.delete("searchTerm");
+    newSearchParams.delete("filter");
+    newSearchParams.delete("tags");
+    newSearchParams.delete("resource_categories");
+    newSearchParams.delete("program_categories");
+    newSearchParams.delete("formats");
+    newSearchParams.delete("credentials");
+    newSearchParams.delete("max_cost");
+
+    router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+  };
+
   if (!anyFiltersActive) return null;
 
   return (
@@ -34,7 +55,7 @@ export const ClearFilterButton = () => {
       type="button"
       buttonType="primary"
       label="Clear Filters"
-      onClick={clearAllFilters}
+      onClick={handleClearFilters}
     />
   );
 };

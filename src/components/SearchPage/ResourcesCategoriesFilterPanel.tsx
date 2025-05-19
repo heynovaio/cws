@@ -11,6 +11,7 @@ export const ResourcesCategoriesFilterPanel = () => {
   return (
     <FilterPanel
       label="Resource Categories"
+      filterKey="resource_categories"
       items={resourceCategories.map((cat) => ({
         id: cat.id,
         name: cat?.data?.name?.toString() || "Unknown",

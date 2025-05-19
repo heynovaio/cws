@@ -8,6 +8,7 @@ export const ProgramsFormatFilterPanel = () => {
   return (
     <FilterPanel
       label="Format"
+      filterKey="program_formats"
       items={Object.values(PROGRAM_FORMATS).map((format) => ({
         id: format,
         name: format,

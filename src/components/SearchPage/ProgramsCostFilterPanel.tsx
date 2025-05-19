@@ -8,6 +8,7 @@ export const ProgramsCostFilterPanel = () => {
     <FilterPanel
       slider
       label="Max Cost"
+      filterKey="max_cost"
       sliderMax={maxCost}
       sliderValue={maxCostFilter}
       onSliderChange={setMaxCostFilter}

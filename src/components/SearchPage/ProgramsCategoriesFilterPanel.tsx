@@ -11,6 +11,7 @@ export const ProgramsCategoriesFilterPanel = () => {
   return (
     <FilterPanel
       label="Program Categories"
+      filterKey="program_categories"
       items={programCategories.map((cat) => ({
         id: cat.id,
         name: cat?.data?.name?.toString() || "Unknown",

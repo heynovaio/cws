@@ -1,6 +1,8 @@
+"use client";
 import { Field, Checkbox, Label } from "@headlessui/react";
 import { FaCheck, FaMinus, FaPlus } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 type FilterItem = string | { id: string; name: string };
 
@@ -11,6 +13,7 @@ interface FilterPanelProps {
   onItemToggle?: (itemId: string) => void;
   className?: string;
   initialVisibleCount?: number;
+  filterKey?: string;
 
   // Slider specific props
   slider?: boolean;
@@ -27,7 +30,7 @@ export const FilterPanel = ({
   onItemToggle,
   className = "rounded bg-light-violet text-midnight p-4 flex flex-col gap-6",
   initialVisibleCount = 4,
-
+  filterKey = "FilterPanel",
   slider = false,
   sliderMax = 100,
   sliderValue = 100,
@@ -36,15 +39,62 @@ export const FilterPanel = ({
 }: FilterPanelProps) => {
   const [showAll, setShowAll] = useState(false);
   const [localSliderValue, setLocalSliderValue] = useState(sliderValue);
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
-    setLocalSliderValue(sliderValue);
-  }, [sliderValue]);
+    if (slider) return;
+    const params = new URLSearchParams(searchParams?.toString());
+
+    if (!slider) {
+      const urlValues = params.get(filterKey)?.split(",") || [];
+      if (urlValues.length > 0 && selectedItems?.length === 0) {
+        // Only trigger toggles if current selection is empty
+        urlValues.forEach((value) => {
+          if (items.some((item) => getItemValue(item) === value)) {
+            onItemToggle?.(value);
+          }
+        });
+      }
+    }
+  }, [
+    filterKey,
+    items,
+    onItemToggle,
+    onSliderChange,
+    searchParams,
+    selectedItems?.length,
+    slider,
+  ]);
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
     setLocalSliderValue(newValue);
     onSliderChange?.(newValue);
+
+    // Update URL
+    const newParams = new URLSearchParams(searchParams?.toString());
+    newParams.set(`${filterKey}_max`, newValue.toString());
+    router.replace(`?${newParams.toString()}`, { scroll: false });
+  };
+
+  const handleItemToggle = (itemId: string) => {
+    onItemToggle?.(itemId);
+
+    // Update URL
+    const newParams = new URLSearchParams(searchParams?.toString());
+    const currentValues = newParams.get(filterKey)?.split(",") || [];
+    const newValues = currentValues.includes(itemId)
+      ? currentValues.filter((v) => v !== itemId)
+      : [...currentValues, itemId];
+
+    if (newValues.length > 0) {
+      newParams.set(filterKey, newValues.join(","));
+    } else {
+      newParams.delete(filterKey);
+    }
+
+    router.replace(`?${newParams.toString()}`, { scroll: false });
   };
 
   const getItemValue = (item: FilterItem): string => {
@@ -106,7 +156,7 @@ export const FilterPanel = ({
                 <Field key={value} className="flex items-center gap-3">
                   <Checkbox
                     checked={isSelected}
-                    onChange={() => onItemToggle?.(value)}
+                    onChange={() => handleItemToggle(value)}
                     className={`group flex size-6 items-center justify-center rounded-md border focus
                   ${isSelected ? "border-midnight bg-midnight" : "border-midnight"}`}
                   >

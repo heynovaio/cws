@@ -1,14 +1,33 @@
 "use client";
 import { useCategoryFilter } from "@/providers";
 import { Field, Input, Label } from "@headlessui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export const SearchBar = () => {
   const { searchTerm, setSearchTerm } = useCategoryFilter();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const urlSearchTerm = searchParams?.get("searchTerm") || "";
+    if (urlSearchTerm !== searchTerm) {
+      setSearchTerm(urlSearchTerm);
+    }
+  }, [searchParams, searchTerm, setSearchTerm]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    const newSearchTerm = e.target.value;
+    setSearchTerm(newSearchTerm);
+
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    if (newSearchTerm) {
+      newSearchParams.set("searchTerm", newSearchTerm);
+    } else {
+      newSearchParams.delete("searchTerm");
+    }
+    router.replace(`?${newSearchParams.toString()}`, { scroll: false });
   };
 
   return (

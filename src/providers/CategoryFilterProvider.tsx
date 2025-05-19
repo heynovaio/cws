@@ -253,7 +253,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     [fuse, searchableItems]
   );
 
-  // Filtering logic
+  // Filtering logic - For future put it into a hook
   const filteredItems = useMemo(() => {
     let items: (ResourcePageDocument | ProgramPageDocument)[] = [];
 
