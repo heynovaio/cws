@@ -19,7 +19,6 @@ interface HeaderProps {
   locales?: unknown;
 }
 
-// TODO: Change the menu colors and add from themeing file
 export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
   return (
     <header
@@ -40,12 +39,12 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
         </PrismicNextLink>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center xl:gap-10 gap-3 z-50 ">
+        <div className="hidden lg:flex items-center xl:gap-10 gap-3 z-50 ">
           <SliceZone slices={slices} components={components} />
         </div>
 
         {/* Mobile Menu */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <Popover className="relative">
             <PopoverButton
               className="inline-flex justify-center w-full p-2 relative"
@@ -64,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
             >
               <PopoverPanel
                 anchor="bottom"
-                className="w-screen h-screen bg-midnight bg-gradient-dark mt-4 pb-10 z-40"
+                className="w-screen h-screen bg-midnight bg-gradient-dark lg:mt-4 pb-10 z-40"
               >
                 <div className="flex flex-col pl-4  gap-10 mt-10">
                   <SliceZone slices={slices} components={components} />

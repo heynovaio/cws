@@ -63,6 +63,7 @@ export const DefaultCard = ({
       <ContentBox
         title={title}
         titleLevel={3}
+        titleClassName="text-h4"
         content={content}
         buttons={buttons}
         width="full"

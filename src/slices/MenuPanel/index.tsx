@@ -32,7 +32,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
       <Popover
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="relative hidden md:flex"
+        className="relative hidden lg:flex"
       >
         {({ open }) => (
           <>
@@ -71,7 +71,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
                           <PrismicNextLink
                             key={linkIndex}
                             field={linkItem}
-                            className="block text-sm hover:underline"
+                            className="block text-base hover:underline"
                           >
                             {linkItem.text}
                           </PrismicNextLink>
@@ -109,7 +109,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
       </Popover>
       <Disclosure
         as="div"
-        className="flex flex-col md:hidden relative menu-link-mobile gap-2"
+        className="flex flex-col lg:hidden relative menu-link-mobile gap-2"
       >
         {({}) => (
           <>
@@ -117,7 +117,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
               {slice.primary.menu_display || "Dropdown"}
             </DisclosureButton>
 
-            <DisclosurePanel className=" w-full text-sm origin-top transition duration-200 ease-out px-5 py-5">
+            <DisclosurePanel className=" w-full text-base origin-top transition duration-200 ease-out px-5 py-5">
               <div className="border-b border-white pb-4 mb-4">
                 <ContentBox
                   content={
@@ -148,7 +148,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
                         <PrismicNextLink
                           key={linkIndex}
                           field={linkItem}
-                          className="block text-sm hover:underline"
+                          className="block text-base hover:underline"
                         >
                           {linkItem.text}
                         </PrismicNextLink>
