@@ -36,7 +36,6 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
   const animation = slice.primary.animation !== false;
 
   const count = useMotionValue(0);
-  const rounded = useTransform(() => Math.round(count.get()));
 
   useEffect(() => {
     const controls = animate(count, 100, { duration: 5 });
