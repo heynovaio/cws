@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../Buttons";
 import { defaultCategoryFilter, useCategoryFilter } from "@/providers";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const ClearFilterButton = () => {
   const {
@@ -18,7 +18,6 @@ export const ClearFilterButton = () => {
   } = useCategoryFilter();
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const anyFiltersActive =
     searchTerm ||
@@ -32,19 +31,10 @@ export const ClearFilterButton = () => {
 
   const handleClearFilters = () => {
     clearAllFilters();
+    const newSearchParams = new URLSearchParams();
+    const path = window.location.pathname;
 
-    const newSearchParams = new URLSearchParams(searchParams?.toString());
-
-    newSearchParams.delete("searchTerm");
-    newSearchParams.delete("filter");
-    newSearchParams.delete("tags");
-    newSearchParams.delete("resource_categories");
-    newSearchParams.delete("program_categories");
-    newSearchParams.delete("formats");
-    newSearchParams.delete("credentials");
-    newSearchParams.delete("max_cost");
-
-    router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+    router.replace(`${path}?${newSearchParams.toString()}`, { scroll: false });
   };
 
   if (!anyFiltersActive) return null;

@@ -10,9 +10,7 @@ import { TagsFilterPanel } from "./TagsFilterPanel";
 import { useCategoryFilter } from "@/providers";
 
 export const SideFilter = () => {
-  const {
-    activeFilter,
-  } = useCategoryFilter();
+  const { activeFilter, availableTags } = useCategoryFilter();
 
   const [isResourceContainerHidden, setIsResourceContainerHidden] =
     React.useState(false);
@@ -33,12 +31,12 @@ export const SideFilter = () => {
   }, [activeFilter]);
 
   return (
-    <div className="flex flex-col gap-12 pb-16 md:pb-4">
+    <div className={`flex flex-col ${availableTags.length > 0 && "gap-12"} pb-16 md:pb-4`}>
       <SearchPanelContainer panel={<TagsFilterPanel />} />
       <SearchPanelContainer
         label="Resource Filters"
         panel={<ResourcesCategoriesFilterPanel />}
-        topPanel={true}
+        topPanel={availableTags.length > 0 ? true : false}
         isHidden={isResourceContainerHidden}
       />
       <SearchPanelContainer
@@ -51,7 +49,7 @@ export const SideFilter = () => {
             <ProgramsCredentialsFilterPanel />
           </div>
         }
-        topPanel={true}
+        topPanel={availableTags.length > 0 ? true : false}
         isHidden={isProgramContainerHidden}
       />
       <ClearFilterButton />

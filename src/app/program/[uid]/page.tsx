@@ -63,8 +63,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     page.type === "program_page"
       ? "Support Pathways"
       : "Gender Equity in Action";
-  const pageTypeSearchParam =
-    page.type === "program_page" ? "program" : "resource";
 
   let categoryDoc = null;
   const category = page.data.category;
@@ -84,12 +82,16 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const links = [
     {
       label: pageTypeLabel,
-      href: `/search?type=${pageTypeSearchParam}`,
+      href: "/search?filter=program_page",
     },
     categoryLabel
       ? {
           label: categoryLabel,
-          href: `/search?category=${pageTypeSearchParam}`,
+          href:
+            page.data.category && "id" in page.data.category
+              ? page.data.category.id &&
+                `/search?filter=program_page&program_categories=${page.data.category.id}`
+              : undefined,
         }
       : null,
     {
