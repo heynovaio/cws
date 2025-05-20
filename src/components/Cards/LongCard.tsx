@@ -26,7 +26,7 @@ export const LongCard = ({
   const linksExist = links && links.length > 0;
 
   return (
-    <div className="card-white flex flex-col md:flex-row items-center !p-2 gap-12 shadow text-midnight h-full">
+    <div className="card-white flex flex-col md:flex-row items-center md:!p-2 p-4 gap-12 shadow text-midnight h-full">
       <ResponsiveImage
         image={image}
         containerClassName="md:w-1/3 w-full h-full"
