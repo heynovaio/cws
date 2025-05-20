@@ -484,6 +484,19 @@
 								}
 							]
 						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "another label"
+								}
+							]
+						]
 					}
 				]
 			}
