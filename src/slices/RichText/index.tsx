@@ -19,18 +19,19 @@ const RichText = ({ slice }: RichTextProps): JSX.Element => {
     : "items-center text-center";
 
   return (
-     <Section
-          data-slice-type={slice.slice_type}
-          data-slice-variation={slice.variation}
-        >
-          <Container>
-            <div
-              className={`text-content ${textAlignment}`}
-            >
-              <PrismicRichText field={slice.primary.content}  components={components} />
-            </div>
-          </Container>
-        </Section>
+    <Section
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
+      <Container>
+        <div className={`!!!text-content ${textAlignment}`}>
+          <PrismicRichText
+            field={slice.primary.content}
+            components={components}
+          />
+        </div>
+      </Container>
+    </Section>
   );
 };
 
