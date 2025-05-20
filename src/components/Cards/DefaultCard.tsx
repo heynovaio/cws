@@ -43,7 +43,7 @@ export const DefaultCard = ({
       break;
   }
   return (
-    <div className={`flex flex-col gap-5 w-full ${cardBackground}`}>
+    <div className={`flex flex-col gap-5 w-full hover-shadow ${cardBackground}`}>
       {image && (
         <ResponsiveImage
           image={image}

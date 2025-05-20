@@ -30,7 +30,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
     >
       <Container containerClassName="flex flex-col gap-12 items-center">
         <div
-          className="bg-neon-violet shadow rounded py-4 px-6 lg:py-16 lg:px-28  bg-no-repeat "
+          className="bg-neon-violet hover-shadow rounded py-4 px-6 lg:py-16 lg:px-28  bg-no-repeat "
           style={{
             backgroundImage: "url('/LogoBig.png')",
             backgroundPosition: backgroundImageSide,
