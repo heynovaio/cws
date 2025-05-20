@@ -91,7 +91,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           href:
             page.data.category && "id" in page.data.category
               ? page.data.category.id &&
-                `/search?resource_categories=${page.data.category.id}`
+                `/search?filter=resource_page&resource_categories=${page.data.category.id}`
               : undefined,
         }
       : null,
