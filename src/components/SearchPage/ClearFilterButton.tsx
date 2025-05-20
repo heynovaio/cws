@@ -3,7 +3,11 @@ import { Button } from "../Buttons";
 import { defaultCategoryFilter, useCategoryFilter } from "@/providers";
 import { useRouter } from "next/navigation";
 
-export const ClearFilterButton = () => {
+interface ClearFilterButtonProps {
+  styling?: string;
+}
+
+export const ClearFilterButton = ({ styling }: ClearFilterButtonProps) => {
   const {
     clearAllFilters,
     searchTerm,
@@ -46,6 +50,7 @@ export const ClearFilterButton = () => {
       buttonType="primary"
       label="Clear Filters"
       onClick={handleClearFilters}
+      styling={styling}
     />
   );
 };

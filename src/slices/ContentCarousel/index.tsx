@@ -117,11 +117,11 @@ const ContentCarousel = ({
 
   if (slice.variation === "programsCarousel") {
     data = programPageData;
-    cardType = "program_page";
+    cardType = "program";
     categoryData = programCategoryData;
   } else if (slice.variation === "resourceCarousel") {
     data = resourcePageData;
-    cardType = "resource_page";
+    cardType = "resource";
     categoryData = resourceCategoryData;
   }
 
@@ -216,11 +216,10 @@ const ContentCarousel = ({
           swipeable
           keyBoardControl
           afterChange={handleSlideChange}
-          itemClass="px-3 !mt-0"
-          containerClass="w-full py-1 !overflow-visible"
+          itemClass="react-multi-carousel-item !mt-0 flex"
         >
           {filteredDataWithCategory.map((item, index) => (
-            <div key={item.id} className="carousel-card flex h-full">
+            <div key={item.id} className="flex h-full w-full pr-7">
               {hasPhoto ? (
                 <DefaultCard
                   title={asText(item.data.title)}
@@ -232,12 +231,16 @@ const ContentCarousel = ({
                   }
                   category={item.categoryName as string}
                   image={item.data.image}
-                  cardType={cardType}
+                  cardType={
+                    slice.variation === "programsCarousel"
+                      ? "program"
+                      : "resource"
+                  }
                   buttons={[
                     <Link
                       key={index}
                       href={item.url ?? ""}
-                      className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
+                      className="btn pl-0 flex flex-row items-center gap-2 underline underline-offset-4"
                     >
                       Learn More
                       <HiOutlineArrowLongRight className="h-10 w-10" />
