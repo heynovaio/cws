@@ -31,24 +31,26 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
 
   return (
     <TabGroup selectedIndex={currentSlide} onChange={handleTabChange}>
-      <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
-        <TabList className="rounded-full bg-white flex gap-2 p-1 shadow justify-center mx-auto w-fit max-w-full overflow-x-auto">
-          {tabs.map((item, index) => (
-            <Tab
-              key={index}
-              className={({ selected }) =>
-                `whitespace-nowrap rounded-full px-4 py-2 font-semibold focus ${
-                  selected
-                    ? "bg-neon-violet text-white"
-                    : "text-midnight hover:bg-neon-violet/20"
-                }`
-              }
-            >
-              {item.tab_label || "Other"}
-            </Tab>
-          ))}
-        </TabList>
-      </div>
+      <Container>
+        <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
+          <TabList className="rounded-3xl md:rounded-full bg-white md:flex-nowrap flex-wrap md:flex-row flex gap-2 p-1 shadow justify-center mx-auto w-fit max-w-full overflow-x-auto">
+            {tabs.map((item, index) => (
+              <Tab
+                key={index}
+                className={({ selected }) =>
+                  `whitespace-nowrap rounded-full px-4 py-2 font-semibold focus ${
+                    selected
+                      ? "bg-neon-violet text-white"
+                      : "text-midnight hover:bg-neon-violet/20"
+                  }`
+                }
+              >
+                {item.tab_label || "Other"}
+              </Tab>
+            ))}
+          </TabList>
+        </div>
+      </Container>
       <Container>
         <TabPanels className="py-12 w-full">
           <Carousel
@@ -59,11 +61,10 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
             ref={carouselRef}
             beforeChange={(nextSlide) => setCurrentSlide(nextSlide)}
             additionalTransfrom={0}
-            itemClass="pr-10"
             containerClass="mx-auto tabbed-carousel m-0 focus:focus focus:outline-offset-8 !overflow-visible"
           >
             {tabs.map((item, index) => (
-              <div key={index} className="h-full">
+              <div key={index} className="pr-3 md:pr-7 h-full">
                 {item.card_title ? (
                   <LongCard
                     image={item?.card_image}

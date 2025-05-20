@@ -219,7 +219,7 @@ const ContentCarousel = ({
           itemClass="react-multi-carousel-item !mt-0 flex"
         >
           {filteredDataWithCategory.map((item, index) => (
-            <div key={item.id} className="flex h-full w-full pr-7">
+            <div key={item.id} className="flex h-full w-full pr-3 md:pr-7">
               {hasPhoto ? (
                 <DefaultCard
                   title={asText(item.data.title)}
