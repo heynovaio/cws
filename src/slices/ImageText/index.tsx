@@ -13,6 +13,7 @@ import {
   useMotionValue,
   useTransform,
 } from "motion/react";
+import { asText } from "@prismicio/helpers";
 
 /**
  * Props for `ImageText`.
@@ -88,7 +89,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-center md:text-left">
                     {slice.primary.stats.map((item, index) => {
                       const targetNumber = parseInt(
-                        item.statistic[0]?.text || "0",
+                        asText(item.statistic) || "0",
                         10
                       );
                       const count = useMotionValue(0);
