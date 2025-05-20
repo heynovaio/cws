@@ -1,18 +1,12 @@
 "use client";
 import { Button } from "@/components";
 import { Section, Container, ResponsiveImage, ContentBox } from "@/components";
-import { Content } from "@prismicio/client";
+import { Content, RichTextField } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX, useEffect } from "react";
 import { components } from "@/utils";
 import { useInView } from "react-intersection-observer";
-import {
-  animate,
-  motion,
-  number,
-  useMotionValue,
-  useTransform,
-} from "motion/react";
+import { animate, motion, useMotionValue, useTransform } from "motion/react";
 import { asText } from "@prismicio/helpers";
 
 /**
@@ -35,12 +29,41 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
   const isStats = slice.variation === "stats";
   const animation = slice.primary.animation !== false;
 
-  const count = useMotionValue(0);
+  type StatItemProps = {
+    statistic: RichTextField;
+    description: RichTextField;
+    inView: boolean;
+  };
 
-  useEffect(() => {
-    const controls = animate(count, 100, { duration: 5 });
-    return () => controls.stop();
-  }, []);
+  const StatItem = ({ statistic, description, inView }: StatItemProps) => {
+    const targetNumber = parseInt(asText(statistic) || "0", 10);
+    const count = useMotionValue(0);
+    const rounded = useTransform(count, (latest) => Math.round(latest));
+
+    useEffect(() => {
+      if (inView) {
+        count.set(0);
+        const controls = animate(count, targetNumber, { duration: 2 });
+        return () => controls.stop();
+      }
+    }, [inView, targetNumber, count]);
+
+    return (
+      <div>
+        <motion.p className="text-[3.125rem] text-aqua font-extraBold">
+          {rounded}
+        </motion.p>
+        <PrismicRichText
+          field={description}
+          components={{
+            paragraph: ({ children }) => (
+              <p className="text-base">{children}</p>
+            ),
+          }}
+        />
+      </div>
+    );
+  };
 
   return (
     <Section
@@ -86,42 +109,14 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
                     />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-center md:text-left">
-                    {slice.primary.stats.map((item, index) => {
-                      const targetNumber = parseInt(
-                        asText(item.statistic) || "0",
-                        10
-                      );
-                      const count = useMotionValue(0);
-                      const rounded = useTransform(count, (latest) =>
-                        Math.round(latest)
-                      );
-
-                      useEffect(() => {
-                        if (inView) {
-                          count.set(0);
-                          const controls = animate(count, targetNumber, {
-                            duration: 2,
-                          });
-                          return () => controls.stop();
-                        }
-                      }, [inView, targetNumber]);
-
-                      return (
-                        <div key={index}>
-                          <motion.p className="text-[3.125rem] text-aqua font-extraBold">
-                            {rounded}
-                          </motion.p>
-                          <PrismicRichText
-                            field={item.description}
-                            components={{
-                              paragraph: ({ children }) => (
-                                <p className="text-base">{children}</p>
-                              ),
-                            }}
-                          />
-                        </div>
-                      );
-                    })}
+                    {slice.primary.stats.map((item, index) => (
+                      <StatItem
+                        key={index}
+                        statistic={item.statistic}
+                        description={item.description}
+                        inView={inView}
+                      />
+                    ))}
                   </div>
                 </div>
               ) : (
