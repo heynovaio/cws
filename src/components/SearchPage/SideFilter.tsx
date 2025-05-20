@@ -31,7 +31,9 @@ export const SideFilter = () => {
   }, [activeFilter]);
 
   return (
-    <div className={`flex flex-col ${availableTags.length > 0 && "gap-12"} pb-16 md:pb-4`}>
+    <div
+      className={`flex flex-col ${availableTags.length > 0 && "gap-12"} pb-16 md:pb-4`}
+    >
       <SearchPanelContainer panel={<TagsFilterPanel />} />
       <SearchPanelContainer
         label="Resource Filters"
@@ -52,7 +54,7 @@ export const SideFilter = () => {
         topPanel={availableTags.length > 0 ? true : false}
         isHidden={isProgramContainerHidden}
       />
-      <ClearFilterButton />
+      <ClearFilterButton styling={availableTags.length > 0 ? "" : "mt-12"} />
     </div>
   );
 };

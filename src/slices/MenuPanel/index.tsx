@@ -111,10 +111,13 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
         as="div"
         className="flex flex-col lg:hidden relative menu-link-mobile gap-2"
       >
-        {({}) => (
+        {({ open }) => (
           <>
-            <DisclosureButton className="flex menu-link-mobile  gap-2">
+            <DisclosureButton className="flex menu-link-mobile gap-4 items-center">
               {slice.primary.menu_display || "Dropdown"}
+              <FaChevronDown
+                className={`h-6 w-6 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+              />
             </DisclosureButton>
 
             <DisclosurePanel className=" w-full text-base origin-top transition duration-200 ease-out px-5 py-5">

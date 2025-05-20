@@ -14,6 +14,7 @@ interface DefaultCardProps {
   image?: ImageField;
   category?: string;
   cardType?: "program_page" | "resource_page" | string;
+
 }
 
 export const DefaultCard = ({
@@ -42,7 +43,7 @@ export const DefaultCard = ({
       break;
   }
   return (
-    <div className={`flex flex-col gap-5 ${cardBackground}`}>
+    <div className={`flex flex-col gap-5 w-full ${cardBackground}`}>
       {image && (
         <ResponsiveImage
           image={image}
