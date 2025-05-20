@@ -18,7 +18,7 @@ export const TeamMemberTile = ({
   linkLabel,
 }: TeamMemberTileProps) => {
   return (
-    <div className="bg-white border border-neon-violet rounded p-4 text-midnight w-full flex flex-col shadow">
+    <div className="bg-white border border-neon-violet rounded p-4 text-midnight w-full flex flex-col hover-shadow">
       {image && (
         <div className="rounded mb-4 overflow-hidden border border-neon-violet aspect-square rounded">
           <ResponsiveImage

@@ -212,15 +212,44 @@
     }
   }
 
+  .hover-ultrapink:hover {
+    color: black !important;
+  }
+
+  /* Apply hover-zoom to the link and then hover-zoom-img to the image you want to do the zooming */
+  .hover-zoom {
+    .hover-zoom-img {
+      transition: all 0.5s;
+    }
+
+    &:hover {
+      .hover-zoom-img {
+        transform: scale(1.25);
+      }
+    }
+  }
+
+  .hover-shadow {
+    box-shadow: 0 0 21px 0 #630ff9cc;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); /* Safari */
+    transition: all 0.5s;
+
+    &:hover {
+      box-shadow: 0 0 40px 0 #630ff9cc;
+    }
+  }
+
+
   .backdrop-blur-default {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
   .card-white {
-    @apply bg-white text-midnight p-4 rounded shadow;
+    @apply bg-white text-midnight p-4 rounded;
   }
   .card-gradient {
-    @apply bg-gradient-primary text-white p-4 rounded shadow backdrop-blur border border-neon-violet;
+    @apply bg-gradient-primary text-white p-4 rounded backdrop-blur border border-neon-violet;
   }
   .card-overlay {
     @apply border-2
@@ -304,39 +333,10 @@
            pb-[4.375rem] 
            gap-[0.625rem] 
            backdrop-blur-[16px] 
-           drop-shadow-glow;
   }
 
   .pagination-button {
     @apply text-midnight bg-aqua px-2 py-2 rounded-full;
-  }
-}
-
-.hover-ultrapink:hover {
-  color: black !important;
-}
-
-/* Apply hover-zoom to the link and then hover-zoom-img to the image you want to do the zooming */
-.hover-zoom {
-  .hover-zoom-img {
-    transition: all 0.5s;
-  }
-
-  &:hover {
-    .hover-zoom-img {
-      transform: scale(1.25);
-    }
-  }
-}
-
-.hover-shadow {
-  box-shadow: 0 0 21px 0 #630ff9cc;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px); /* Safari */
-  transition: all 0.5s;
-
-  &:hover {
-    box-shadow: 0 0 40px 0 #630ff9cc;
   }
 }
 
