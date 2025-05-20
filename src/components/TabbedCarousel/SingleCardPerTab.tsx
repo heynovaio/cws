@@ -2,11 +2,12 @@
 import { Tab, TabGroup, TabList, TabPanels } from "@headlessui/react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { LongCard } from "../Cards";
 import Carousel from "react-multi-carousel";
 import { responsive } from "@/slices/TabbedCarousel/responsive";
 import { Container } from "../Layout";
+import { motion } from "motion/react";
 
 export type SingleCardPerTabProps = {
   slice: SliceComponentProps<Content.TabbedCarouselSlice>["slice"];
@@ -15,12 +16,13 @@ export type SingleCardPerTabProps = {
 export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselRef = useRef<Carousel>(null);
+  const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [indicatorPosition, setIndicatorPosition] = useState({
+    left: 0,
+    width: 0,
+  });
 
-  // If no tabs exist, create a single "Other" tab
-  const tabs =
-    slice.primary.tab?.length > 0
-      ? slice.primary.tab
-      : [{ tab_label: "Other" } as (typeof slice.primary.tab)[number]];
+  const tabs = slice.primary.tab || [];
 
   const handleTabChange = (index: number) => {
     setCurrentSlide(index);
@@ -29,28 +31,49 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
     }
   };
 
+  useEffect(() => {
+    const currentTab = tabRefs.current[currentSlide];
+    if (currentTab && currentTab.offsetParent) {
+      setIndicatorPosition({
+        left: currentTab.offsetLeft,
+        width: currentTab.offsetWidth,
+      });
+    }
+  }, [currentSlide, tabs]);
+
   return (
     <TabGroup selectedIndex={currentSlide} onChange={handleTabChange}>
       <Container>
         <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
-          <TabList className="rounded-3xl md:rounded-full bg-white md:flex-nowrap flex-wrap md:flex-row flex gap-2 p-1 shadow justify-center mx-auto w-fit max-w-full overflow-x-auto">
+          <TabList className="relative rounded-3xl md:rounded-full bg-white flex flex-wrap md:flex-nowrap gap-2 p-1 shadow justify-center mx-auto w-fit max-w-full overflow-x-auto">
+            <motion.div
+              className="absolute top-1 bottom-1 bg-neon-violet rounded-full z-0"
+              animate={{
+                left: indicatorPosition.left,
+                width: indicatorPosition.width,
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            />
             {tabs.map((item, index) => (
-              <Tab
-                key={index}
-                className={({ selected }) =>
-                  `whitespace-nowrap rounded-full px-4 py-2 font-semibold focus ${
-                    selected
-                      ? "bg-neon-violet text-white"
-                      : "text-midnight hover:bg-neon-violet/20"
-                  }`
-                }
-              >
-                {item.tab_label || "Other"}
+              <Tab key={index}>
+                {({ selected }) => (
+                  <div
+                    ref={(reffedTab) => {
+                      tabRefs.current[index] = reffedTab;
+                    }}
+                    className={`relative z-10 whitespace-nowrap rounded-full px-4 py-2 font-semibold cursor-pointer duration-300 ${
+                      selected ? "text-white" : "text-midnight"
+                    }`}
+                  >
+                    {item.tab_label || "Label"}
+                  </div>
+                )}
               </Tab>
             ))}
           </TabList>
         </div>
       </Container>
+
       <Container>
         <TabPanels className="py-12 w-full">
           <Carousel
