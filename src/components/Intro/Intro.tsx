@@ -67,7 +67,7 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
                 <span className="tagline">
                   {programCategoryData
                     ?.find(
-                      (categories) =>
+                      (categories: { id: string }) =>
                         pageData.category &&
                         "id" in pageData.category &&
                         categories.id === pageData.category.id
@@ -82,7 +82,7 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
                   <span className="text-neon-violet tagline">
                     {resourceCategoryData
                       ?.find(
-                        (category) =>
+                        (category: { id: string }) =>
                           "id" in pageData.category &&
                           category.id === pageData.category.id
                       )
@@ -92,7 +92,9 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
               <ContentBox
                 title={title}
                 content={
-                  <div className="text-bodyLarge"><PrismicRichText field={body} components={components} /></div>
+                  <div className="text-bodyLarge">
+                    <PrismicRichText field={body} components={components} />
+                  </div>
                 }
                 buttons={
                   buttonsExist && (!isProgramPage || newsLetterSignUp)
