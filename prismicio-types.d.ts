@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type CampaignPageDocumentDataSlicesSlice =
+  | AccordionSlice
   | ContactInfoSlice
   | ImageTextSlice
   | HashtagBannerSlice
@@ -85,7 +86,7 @@ export type CampaignPageDocument<Lang extends string = string> =
     Lang
   >;
 
-type CareerHubDocumentDataSlicesSlice = ContentGridSlice;
+type CareerHubDocumentDataSlicesSlice = AccordionSlice | ContentGridSlice;
 
 /**
  * Content for Career Hub documents
@@ -194,7 +195,7 @@ export type CareerHubDocument<Lang extends string = string> =
     Lang
   >;
 
-type CareerPageDocumentDataSlicesSlice = RichTextSlice;
+type CareerPageDocumentDataSlicesSlice = AccordionSlice | RichTextSlice;
 
 /**
  * Content for Career Page documents
@@ -305,7 +306,7 @@ export type CareerPageDocument<Lang extends string = string> =
     Lang
   >;
 
-type ContactPageDocumentDataSlicesSlice = ContactInfoSlice;
+type ContactPageDocumentDataSlicesSlice = AccordionSlice | ContactInfoSlice;
 
 /**
  * Content for Contact Page documents
@@ -1528,7 +1529,10 @@ export type ResourcePageDocument<Lang extends string = string> =
     Lang
   >;
 
-type SearchPageDocumentDataSlicesSlice = TileGridSlice | CallToActionSlice;
+type SearchPageDocumentDataSlicesSlice =
+  | AccordionSlice
+  | TileGridSlice
+  | CallToActionSlice;
 
 /**
  * Content for Search Page documents
@@ -1641,6 +1645,7 @@ export type SearchPageDocument<Lang extends string = string> =
   >;
 
 type TeamMembersDocumentDataSlicesSlice =
+  | AccordionSlice
   | ContactInfoSlice
   | CallToActionSlice
   | TestimonialsSlice
