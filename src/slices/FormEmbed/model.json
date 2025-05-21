@@ -38,13 +38,6 @@
             "multi": "paragraph,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl,heading3,heading4,heading5,heading6,preformatted"
           }
         },
-        "form": {
-          "type": "Embed",
-          "config": {
-            "label": "Form",
-            "placeholder": ""
-          }
-        },
         "desktop_alignment": {
           "type": "Select",
           "config": {
@@ -55,6 +48,17 @@
               "Center Stacked"
             ],
             "default_value": "Two Column"
+          }
+        },
+        "jotform_url": {
+          "type": "Link",
+          "config": {
+            "label": "Jotform URL",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
           }
         }
       },

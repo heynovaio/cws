@@ -2047,16 +2047,6 @@ export interface ContactInfoSliceDefaultPrimary {
   description: prismic.RichTextField;
 
   /**
-   * Form field in *FormEmbed → Default → Primary*
-   *
-   * - **Field Type**: Embed
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_info.default.primary.form
-   * - **Documentation**: https://prismic.io/docs/field#embed
-   */
-  form: prismic.EmbedField;
-
-  /**
    * Desktop Alignment field in *FormEmbed → Default → Primary*
    *
    * - **Field Type**: Select
@@ -2068,6 +2058,22 @@ export interface ContactInfoSliceDefaultPrimary {
   desktop_alignment: prismic.SelectField<
     "Two Column" | "Center Stacked",
     "filled"
+  >;
+
+  /**
+   * Jotform URL field in *FormEmbed → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.jotform_url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  jotform_url: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
   >;
 }
 
