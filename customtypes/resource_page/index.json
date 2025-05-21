@@ -39,19 +39,10 @@
           "multi": "paragraph,preformatted,strong,em,rtl,o-list-item,list-item,embed,image,hyperlink"
         }
       },
-      "newsletter_sign_up": {
-        "type": "Boolean",
-        "config": {
-          "label": "Newsletter Sign Up",
-          "placeholder_false": "false",
-          "placeholder_true": "true",
-          "default_value": false
-        }
-      },
-      "link": {
+      "button": {
         "type": "Link",
         "config": {
-          "label": "Link",
+          "label": "Button",
           "placeholder": "",
           "select": null,
           "allowTargetBlank": true,

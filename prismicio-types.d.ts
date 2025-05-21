@@ -1138,27 +1138,17 @@ interface ProgramPageDocumentData {
   body: prismic.RichTextField;
 
   /**
-   * Newsletter Sign Up field in *Program Page*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: program_page.newsletter_sign_up
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  newsletter_sign_up: prismic.BooleanField;
-
-  /**
-   * Newsletter Link field in *Program Page*
+   * Button field in *Program Page*
    *
    * - **Field Type**: Link
    * - **Placeholder**: Get Started
-   * - **API ID Path**: program_page.link
+   * - **API ID Path**: program_page.button
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+  button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
 
   /**
    * Time field in *Program Page*
@@ -1444,27 +1434,15 @@ interface ResourcePageDocumentData {
   body: prismic.RichTextField;
 
   /**
-   * Newsletter Sign Up field in *Resource Page*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: resource_page.newsletter_sign_up
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  newsletter_sign_up: prismic.BooleanField;
-
-  /**
-   * Link field in *Resource Page*
+   * Button field in *Resource Page*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: resource_page.link
+   * - **API ID Path**: resource_page.button
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  link: prismic.Repeatable<
+  button: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
 

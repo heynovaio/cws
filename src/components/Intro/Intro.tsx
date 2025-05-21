@@ -22,9 +22,9 @@ interface IntroProps {
 }
 
 export const Intro = ({ type, pageData, links }: IntroProps) => {
-  const { image, title, body, link, newsletter_sign_up } = pageData || {};
+  const { image, title, body, button, include_newsletter_sign_up_banner } = pageData || {};
   const isProgramPage = type === "program";
-  const newsLetterSignUp = isProgramPage && newsletter_sign_up;
+  const newsLetterSignUp = isProgramPage && include_newsletter_sign_up_banner;
 
   // Only if it is a program page
   const { time, cost, certs, format, included_resources } = (
@@ -37,7 +37,7 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
     included_resources?: [];
   };
 
-  const buttonsExist = Array.isArray(link) && link.length > 0;
+  const buttonsExist = Array.isArray(button) && button.length > 0;
 
   // TODO: Fix the lang once we have the use context provider set up (future PR for all translations as well)
   const { programCategoryData } = useProgramCategoryData("en-ca");
@@ -103,7 +103,7 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
                           className="flex flex-wrap justify-start gap-2"
                           key="buttons"
                         >
-                          {link.map(
+                          {button.map(
                             (item, index) =>
                               item.text && (
                                 <PrismicNextLink
@@ -126,7 +126,6 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
                 width="full"
               />
             </div>
-            {/* TODO: Add the real breadcrumbs */}
             <Breadcrumb links={links} color={breadcrumbColor} />
           </div>
           <div
