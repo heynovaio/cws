@@ -32,13 +32,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
                 />
               )}
             </div>
-            <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: slice.primary.form?.html ?? "",
-                }}
-              />
-            </div>
+            <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center"></div>
           </div>
         ) : (
           <div className="max-w-[800px] mx-auto flex flex-col items-center gap-6">
@@ -54,13 +48,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
               />
             )}
 
-            <div className="bg-white w-full rounded text-midnight p-6 flex justify-center items-center">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: slice.primary.form?.html ?? "",
-                }}
-              />
-            </div>
+            <div className="bg-white w-full rounded text-midnight p-6 flex justify-center items-center"></div>
           </div>
         )}
       </Container>
