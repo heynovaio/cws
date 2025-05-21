@@ -54,6 +54,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "accordion": {
+              "type": "SharedSlice"
+            },
             "rich_text": {
               "type": "SharedSlice"
             }
