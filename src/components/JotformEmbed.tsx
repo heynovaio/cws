@@ -1,4 +1,4 @@
-import { LinkField } from "@prismicio/client";
+"use client";
 import { useEffect } from "react";
 
 declare global {
@@ -8,7 +8,7 @@ declare global {
 }
 
 interface JotformEmbedProps {
-  url: LinkField;
+  url: string;
   title?: string;
 }
 
@@ -16,7 +16,6 @@ export const JotformEmbed = ({
   url,
   title = "Jotform Form",
 }: JotformEmbedProps) => {
-  // Extract form ID from the URL
   const match = url.match(/\/(\d{9,})$/);
   const formId = match ? match[1] : null;
 
@@ -53,8 +52,6 @@ export const JotformEmbed = ({
         style={{ minHeight: "540px" }}
         allow="geolocation; microphone; camera; fullscreen"
         allowTransparency={true}
-        scrolling="no"
-        frameBorder="0"
       ></iframe>
     </div>
   );
