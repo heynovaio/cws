@@ -33,9 +33,15 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     statistic: RichTextField;
     description: RichTextField;
     inView: boolean;
+    isPercentage: boolean;
   };
 
-  const StatItem = ({ statistic, description, inView }: StatItemProps) => {
+  const StatItem = ({
+    statistic,
+    description,
+    inView,
+    isPercentage,
+  }: StatItemProps) => {
     const targetNumber = parseInt(asText(statistic) || "0", 10);
     const count = useMotionValue(0);
     const rounded = useTransform(count, (latest) => Math.round(latest));
@@ -51,9 +57,14 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
 
     return (
       <div>
-        <motion.p className="text-[3.125rem] text-aqua font-extraBold">
-          {rounded}
-        </motion.p>
+        <span className="flex flex-row gap-2">
+          <motion.p className="text-[3.125rem] text-aqua font-extraBold">
+            {rounded}
+          </motion.p>
+          {isPercentage && (
+            <p className="text-[3.125rem] text-aqua font-extraBold">%</p>
+          )}
+        </span>
         <PrismicRichText
           field={description}
           components={{
@@ -116,6 +127,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
                         statistic={item.statistic}
                         description={item.description}
                         inView={inView}
+                        isPercentage={item.percentage}
                       />
                     ))}
                   </div>

@@ -265,6 +265,15 @@
                   "allowTargetBlank": true,
                   "multi": "paragraph,hyperlink,preformatted,strong,em"
                 }
+              },
+              "percentage": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Percentage",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
               }
             }
           }

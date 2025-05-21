@@ -2804,6 +2804,17 @@ export interface ImageTextSliceStatsPrimaryStatsItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
+
+  /**
+   * Percentage field in *ImageText → Stats → Primary → Stats*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_text.stats.primary.stats[].percentage
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  percentage: prismic.BooleanField;
 }
 
 /**

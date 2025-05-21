@@ -317,6 +317,57 @@
 										}
 									]
 								}
+							],
+							[
+								"percentage",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"statistic",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "67",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "test test tes t test setes tset st set set ",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"percentage",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
 							]
 						]
 					}
