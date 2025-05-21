@@ -106,9 +106,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
           )}
         </div>
 
-        <div
-          className={`w-full md:w-1/2 transition-all duration-700 ${animation ? (inView ? "opacity-100 translate-none" : "md:motion-safe:opacity-10 lg:motion-safe:translate-y-[-50px]") : ""}`}
-        >
+        <div className={`w-full md:w-1/2 transition-all duration-700`}>
           <ContentBox
             title={slice.primary.title}
             content={
