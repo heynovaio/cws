@@ -51,14 +51,10 @@
           }
         },
         "jotform_url": {
-          "type": "Link",
+          "type": "Text",
           "config": {
             "label": "Jotform URL",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": false
+            "placeholder": ""
           }
         }
       },

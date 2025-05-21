@@ -2063,18 +2063,12 @@ export interface ContactInfoSliceDefaultPrimary {
   /**
    * Jotform URL field in *FormEmbed → Default → Primary*
    *
-   * - **Field Type**: Link
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
    * - **API ID Path**: contact_info.default.primary.jotform_url
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  jotform_url: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
+  jotform_url: prismic.KeyTextField;
 }
 
 /**

@@ -84,13 +84,9 @@
 				"type": "Select"
 			},
 			"jotform_url": {
-				"__TYPE__": "LinkContent",
-				"key": "52bb3c79-ae27-4d70-9f3a-99594a496665",
-				"value": {
-					"__TYPE__": "ExternalLink",
-					"url": "http://twitter.com",
-					"text": "short"
-				}
+				"__TYPE__": "FieldContent",
+				"value": "soap",
+				"type": "Text"
 			}
 		},
 		"items": []
