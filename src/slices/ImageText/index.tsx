@@ -39,11 +39,12 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     const targetNumber = parseInt(asText(statistic) || "0", 10);
     const count = useMotionValue(0);
     const rounded = useTransform(count, (latest) => Math.round(latest));
+    const duration = targetNumber > 50 ? 1 : 2;
 
     useEffect(() => {
       if (inView) {
         count.set(0);
-        const controls = animate(count, targetNumber, { duration: 2 });
+        const controls = animate(count, targetNumber, { duration: duration });
         return () => controls.stop();
       }
     }, [inView, targetNumber, count]);
