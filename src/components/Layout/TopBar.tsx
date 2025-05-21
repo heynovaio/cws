@@ -22,7 +22,7 @@ export const TopBar: React.FC<TopBarProps> = ({ text, locales, global }) => {
       />
 
       {locales && (
-        <div className="absolute top-0 right-0 z-[60] ">
+        <div className="absolute top-0 right-4 z-[60] ">
           <LanguageSwitcher
             locales={locales}
             global={global}
