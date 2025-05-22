@@ -247,7 +247,7 @@
   }
   .card-white {
     @apply bg-white text-midnight p-4 rounded;
-    a {
+    a:hover {
       @apply text-neon-violet;
     }
   }
