@@ -216,10 +216,11 @@ const ContentCarousel = ({
           swipeable
           keyBoardControl
           afterChange={handleSlideChange}
-          itemClass="react-multi-carousel-item !mt-0 flex"
+          containerClass="content-carousel"
+          itemClass="react-multi-carousel-item !mt-0 flex "
         >
           {filteredDataWithCategory.map((item, index) => (
-            <div key={item.id} className="flex h-full w-full pr-3 md:pr-7">
+            <div key={item.id} className="flex h-full w-full p-3 overflow-visible">
               {hasPhoto ? (
                 <DefaultCard
                   title={asText(item.data.title)}

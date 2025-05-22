@@ -435,3 +435,8 @@ iframe {
     height: 450px;
   }
 }
+.content-carousel  {
+  padding: 1em;
+  overflow: visible!important;
+  margin-left: -1.5em;
+}
