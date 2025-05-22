@@ -9,7 +9,7 @@ interface GeneralHeroProps {
   data: {
     title: RichTextField;
     body: RichTextField;
-    button: (LinkField & { text?: string })[];
+    button?: (LinkField & { text?: string })[];
   };
   tagline?: string | KeyTextField;
   shortHero?: boolean;
@@ -18,13 +18,15 @@ interface GeneralHeroProps {
 export const GeneralHero: React.FC<GeneralHeroProps> = ({
   data,
   tagline,
-  shortHero = false,
+  shortHero = true,
 }) => {
   return (
     <section
       data-test-id="default-hero"
       className={`relative flex items-center w-full bg-quadrant-gradient   ${
-        shortHero ? "md:min-h-[500px] min-h-[400px]" : "md:min-h-[600px] min-h-[400px]"
+        shortHero
+          ? "md:min-h-[500px] min-h-[400px]"
+          : "md:min-h-[600px] min-h-[400px]"
       }`}
     >
       <Container>
@@ -37,7 +39,7 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
         <div className="text-white flex flex-col items-center text-center justify-between gap-8 mx-auto max-w-[900px]">
           <PrismicRichText field={data.title} />
           <PrismicRichText field={data.body} />
-          {data.button.map((link, index) => (
+          {(data.button ?? []).map((link, index) => (
             <Button
               key={index}
               buttonType="primary"
