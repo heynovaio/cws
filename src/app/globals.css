@@ -166,6 +166,49 @@
   }
 }
 
+.more-hover {
+  text-decoration: none;
+
+  > span {
+    position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 2px;
+      height: 2px;
+      width: 0%;
+      background: #ffffff;
+      transition: all ease-in-out 400ms;
+    }
+  }
+
+  svg {
+    transition: all ease-in-out 400ms;
+  }
+
+  &:hover {
+    > span:after {
+      width: 100%;
+      background: #02BBFF;
+    }
+    svg {
+      transform: translateX(5px);
+    }
+  }
+}
+
+.card-white {
+  .more-hover {
+    &:hover {
+      > span:after {
+        width: 100%;
+        background: #6D00FF;
+      }
+    }
+  }
+}
+
 .skip-to-content-link {
   position: absolute;
   top: 0;
