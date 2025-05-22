@@ -25,7 +25,7 @@ const RichText = ({ slice }: RichTextProps): JSX.Element => {
     >
       <Container>
         <div
-          className={`!!!text-content max-w-[900px] mx-auto ${textAlignment}`}
+          className={`text-content max-w-[900px] mx-auto ${textAlignment}`}
         >
           <PrismicRichText
             field={slice.primary.content}

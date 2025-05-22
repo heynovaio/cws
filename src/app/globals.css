@@ -240,8 +240,17 @@
     h6 {
       @apply mb-4;
     }
+    h2:not(:first-child) {
+      @apply mt-6;
+    } 
+    h3, 
+    h4, 
+    h5, 
+    h6 {
+
+    }
     p {
-      @apply mb-2 max-w-[900px];
+      @apply mb-4 max-w-[900px];
     }
     a {
       @apply text-aqua;
@@ -250,8 +259,12 @@
     ul {
       @apply max-w-[80ch] mx-auto pl-8 my-6;
     }
+    img,
     iframe {
-      margin-bottom: 2rem;
+     @apply mb-5;
+    }
+    img {
+      @apply p-2 bg-white;
     }
   }
 
@@ -290,6 +303,9 @@
   }
   .card-white {
     @apply bg-white text-midnight p-4 rounded;
+    a:hover {
+      @apply text-neon-violet;
+    }
   }
   .card-gradient {
     @apply bg-gradient-primary text-white p-4 rounded backdrop-blur border border-neon-violet;
