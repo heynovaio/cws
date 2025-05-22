@@ -1,5 +1,5 @@
 import { Button, CloseButton, Dialog, DialogPanel } from "@headlessui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { VscSettings } from "react-icons/vsc";
 import { SideFilter } from "./SideFilter";
 import { useWindowSize } from "@/hooks";
