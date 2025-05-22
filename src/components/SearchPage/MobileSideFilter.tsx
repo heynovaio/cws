@@ -15,7 +15,7 @@ export const MobileSideFilter = () => {
   };
 
   useEffect(() => {
-    if (!isMobile) {
+    if (isMobile) {
       setIsOpen(false);
     }
   }, [isMobile]);
