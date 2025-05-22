@@ -247,6 +247,9 @@
   }
   .card-white {
     @apply bg-white text-midnight p-4 rounded;
+    a {
+      @apply text-neon-violet;
+    }
   }
   .card-gradient {
     @apply bg-gradient-primary text-white p-4 rounded backdrop-blur border border-neon-violet;
