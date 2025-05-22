@@ -49,9 +49,9 @@ export const LongCard = ({
                           <PrismicNextLink
                             key={index}
                             field={item}
-                            className={`flex items-center gap-2 px-0 btn btn-text text-neon-violet`}
+                            className={`more-hover flex items-center gap-2 px-0 btn btn-text text-neon-violet`}
                           >
-                            {item.text}
+                            <span>{item.text}</span>
                             <HiOutlineArrowLongRight className="h-10 w-10" />
                           </PrismicNextLink>
                         )
