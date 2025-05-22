@@ -32,10 +32,9 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   return (
     <div className={`print:hidden ${classname}`}>
       <div className="inline-flex text-[1rem] items-center  px-2 pt-1">
-        <span className="px-1 py-1">
-          {/* <strong>{global?.language || "Language"}:</strong> */}
-          <strong>Language:</strong>
-        </span>
+        <label htmlFor="language-switcher" className="px-1 py-1 text-sm">
+          Language:
+        </label>
 
         <select
           id="language-switcher"
