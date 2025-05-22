@@ -2,6 +2,7 @@ import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 import { Section, Container, ResponsiveImage } from "@/components";
+import { JotformEmbed } from "@/components/JotformEmbed";
 
 /**
  * Props for `FormEmbed`.
@@ -13,6 +14,7 @@ export type ContactInfoProps = SliceComponentProps<Content.ContactInfoSlice>;
  */
 const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
   const isTwoColumn = slice.primary.desktop_alignment === "Two Column";
+  const jotformUrl = slice.primary.jotform_url;
 
   return (
     <Section
@@ -32,7 +34,13 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
                 />
               )}
             </div>
-            <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center"></div>
+            <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
+              {jotformUrl ? (
+                <JotformEmbed url={jotformUrl} />
+              ) : (
+                <p className="text-gray-600">Form not available right now.</p>
+              )}
+            </div>
           </div>
         ) : (
           <div className="max-w-[800px] mx-auto flex flex-col items-center gap-6">
@@ -48,7 +56,13 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
               />
             )}
 
-            <div className="bg-white w-full rounded text-midnight p-6 flex justify-center items-center"></div>
+            <div className="bg-white w-full rounded text-midnight p-6 flex justify-center items-center">
+              {jotformUrl ? (
+                <JotformEmbed url={jotformUrl} />
+              ) : (
+                <p className="text-gray-600">Form not available right now.</p>
+              )}
+            </div>
           </div>
         )}
       </Container>
