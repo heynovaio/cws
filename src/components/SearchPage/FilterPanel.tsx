@@ -152,7 +152,9 @@ export const FilterPanel = ({
     <>
       {(slider || (items && items.length > 0)) && (
         <div className={className}>
-          <label className="label">{label}</label>
+          <label className="label" aria-labelledby={slider ? "label" : ""}>
+            {label}
+          </label>
           {slider && (
             <div className="mb-6 space-y-4">
               <div className="flex justify-between items-center">
