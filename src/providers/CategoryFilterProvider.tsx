@@ -72,10 +72,18 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   );
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedResourceCategories, setSelectedResourceCategories] = useState<string[]>([]);
-  const [selectedProgramCategories, setSelectedProgramCategories] = useState<string[]>([]);
-  const [resourceCategories, setResourceCategories] = useState<ResourceCategoryDocument[]>([]);
-  const [programCategories, setProgramCategories] = useState<ProgramCategoryDocument[]>([]);
+  const [selectedResourceCategories, setSelectedResourceCategories] = useState<
+    string[]
+  >([]);
+  const [selectedProgramCategories, setSelectedProgramCategories] = useState<
+    string[]
+  >([]);
+  const [resourceCategories, setResourceCategories] = useState<
+    ResourceCategoryDocument[]
+  >([]);
+  const [programCategories, setProgramCategories] = useState<
+    ProgramCategoryDocument[]
+  >([]);
   const [selectedFormats, setSelectedFormats] = useState<ProgramFormat[]>([]);
   const [hasCredentials, setHasCredentials] = useState<boolean>(false);
   const [maxCostFilter, setMaxCostFilter] = useState<number>(0);
@@ -375,14 +383,31 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     maxCost,
   ]);
 
-  // Calculate filter counts
   const filterCounts = useMemo(() => {
-    return {
-      all: programs.length + resources.length,
-      program_page: programs.length,
-      resource_page: resources.length,
+    const countFiltered = (type: ModuleFilter) => {
+      let count = 0;
+
+      if (type === "all") {
+        count = filteredItems.length;
+      } else if (type === "program_page") {
+        count = filteredItems.filter(
+          (item) => item.type === "program_page"
+        ).length;
+      } else if (type === "resource_page") {
+        count = filteredItems.filter(
+          (item) => item.type === "resource_page"
+        ).length;
+      }
+
+      return count;
     };
-  }, [programs, resources]);
+
+    return {
+      all: countFiltered("all"),
+      program_page: countFiltered("program_page"),
+      resource_page: countFiltered("resource_page"),
+    };
+  }, [filteredItems]);
 
   const value = {
     resources,
