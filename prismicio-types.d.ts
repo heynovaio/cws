@@ -1195,7 +1195,7 @@ interface ProgramPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  format: prismic.SelectField<"Virtual" | "In-Person", "filled">;
+  format: prismic.SelectField<"Virtual" | "In-Person" | "Both", "filled">;
 
   /**
    * Included Resources field in *Program Page*

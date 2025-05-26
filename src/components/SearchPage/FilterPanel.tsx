@@ -152,7 +152,8 @@ export const FilterPanel = ({
     <>
       {(slider || (items && items.length > 0)) && (
         <div className={className}>
-          <label className="label" aria-labelledby={slider ? "label" : ""}>
+          <label className="label" aria-labelledby={slider ? 
+            "label" : ""}>
             {label}
           </label>
           {slider && (

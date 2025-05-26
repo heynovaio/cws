@@ -8,7 +8,7 @@ import Link from "next/link";
  * Props for `TagCategory`.
  */
 export type TagCategoryProps = SliceComponentProps<Content.TagCategorySlice> & {
-  context: { tags?: string[] };
+  context: { tags?: string[], pageType?: string };
 };
 
 /**
@@ -16,6 +16,7 @@ export type TagCategoryProps = SliceComponentProps<Content.TagCategorySlice> & {
  */
 const TagCategory: FC<TagCategoryProps> = ({ slice, context }) => {
   const { tags } = context;
+
   return (
     <Section
       data-slice-type={slice.slice_type}
@@ -32,7 +33,7 @@ const TagCategory: FC<TagCategoryProps> = ({ slice, context }) => {
               ? tags.map((tag, index) => (
                   <Link
                     key={index}
-                    href={"#"} // TODO: Update with the correct URL once search page is made
+                    href={'/search?tags=' + tag} 
                     className="btn btn-tertiary"
                   >
                     {tag}
