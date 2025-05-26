@@ -58,13 +58,20 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
               {({ open }) => (
                 <div className="group focus-within:ring-4 focus-within:ring-neon-violet shadow rounded border border-neon-violet my-4 p-4 bg-white text-midnight ">
                   <DisclosureButton
-                    className="py-2 w-full text-left font-semibold flex flex-row justify-between items-center font-extraBold focus:outline-none"
+                    className="py-2 w-full text-left flex flex-row justify-between items-center font-extraBold focus:outline-none"
                     aria-expanded={open}
                     aria-controls={panelId}
                     id={buttonId}
                     role="button"
                   >
-                    <PrismicRichText field={accordion.title} />
+                    <PrismicRichText
+                      field={accordion.title}
+                      components={{
+                        paragraph: ({ children }) => (
+                          <p className="font-extraBold">{children}</p>
+                        ),
+                      }}
+                    />
                     {open ? (
                       <FaMinus color="6D00FF" />
                     ) : (

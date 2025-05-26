@@ -14,8 +14,9 @@ import {
   ResourceCategoryDocument,
   ProgramCategoryDocument,
 } from "../../prismicio-types";
-import { ModuleFilter, ProgramFormat } from "@/constants";
+import { ModuleFilter, PROGRAM_FORMATS, ProgramFormat } from "@/constants";
 import { asText } from "@prismicio/client";
+import { useSearchParams } from "next/navigation";
 
 interface CategoryFilterContextProps {
   resources: ResourcePageDocument[];
@@ -65,13 +66,19 @@ export const defaultCategoryFilter: ModuleFilter = "all";
 const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const searchParams = useSearchParams();
   const [resources, setResources] = useState<ResourcePageDocument[]>([]);
   const [programs, setPrograms] = useState<ProgramPageDocument[]>([]);
-  const [_activeFilter, _setActiveFilter] = useState<ModuleFilter>(
-    defaultCategoryFilter
-  );
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>(() => {
+    const urlTags = searchParams.get("tags")?.split(",") || [];
+    return urlTags;
+  });
+  const [_activeFilter, _setActiveFilter] = useState<ModuleFilter>(() => {
+    return (
+      (searchParams.get("filter") as ModuleFilter) || defaultCategoryFilter
+    );
+  });
   const [selectedResourceCategories, setSelectedResourceCategories] = useState<
     string[]
   >([]);
@@ -342,11 +349,24 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       }
 
       if (selectedFormats.length > 0 && item.type === "program_page") {
-        if (!item.data.format || !selectedFormats.includes(item.data.format)) {
-          return false;
+        if (!item.data.format) return false;
+
+        const format = item.data.format;
+        const hasVirtual = selectedFormats.includes(PROGRAM_FORMATS.VIRTUAL);
+        const hasInPerson = selectedFormats.includes(PROGRAM_FORMATS.IN_PERSON);
+
+        if (hasVirtual && !hasInPerson) {
+          return format === PROGRAM_FORMATS.VIRTUAL || format.includes("Both");
         }
-        if (selectedFormats.length > 1) {
-          return selectedFormats.every((format) => format === item.data.format);
+
+        if (hasInPerson && !hasVirtual) {
+          return (
+            format === PROGRAM_FORMATS.IN_PERSON || format.includes("Both")
+          );
+        }
+
+        if (hasVirtual && hasInPerson) {
+          return format.includes("Both");
         }
       }
 

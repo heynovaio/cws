@@ -86,7 +86,7 @@
         "config": {
           "label": "Format",
           "placeholder": "",
-          "options": ["Virtual", "In-Person"],
+          "options": ["Virtual", "In-Person", "Both"],
           "default_value": "Virtual"
         }
       },
