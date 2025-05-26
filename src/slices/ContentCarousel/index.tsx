@@ -193,7 +193,7 @@ const ContentCarousel = ({
                 components={components}
               />
             }
-            width="standard"
+            width="full"
           />
           {filteredDataWithCategory.length > itemsPerPage && (
             <CarouselButton

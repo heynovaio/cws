@@ -250,7 +250,7 @@
 
     }
     p {
-      @apply mb-4 max-w-[900px];
+      @apply mb-4 max-w-[900px] mx-auto;
     }
     a {
       @apply text-aqua;
