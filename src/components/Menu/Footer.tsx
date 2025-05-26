@@ -7,8 +7,9 @@ import {
 import { ResponsiveImage } from "..";
 import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
-import { FaFacebook, FaInstagram } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaMeta } from "react-icons/fa6";
 import { PrismicNextLink } from "@prismicio/next";
+import { FaLinkedin } from "react-icons/fa";
 
 interface FooterProps {
   global?: GlobalsDocumentData;
@@ -29,20 +30,42 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
             <div className="flex flex-col items-center md:items-start">
               <h4 className="mb-6 footer-header">Follow Us</h4>
               <div className="flex flex-row md:flex-col justify-center items-center md:items-start gap-6 ">
-                <span className="flex flex-row gap-4 items-center ">
-                  <FaInstagram size={35} />
-                  <PrismicNextLink
-                    field={footerData?.instagram}
-                    className="text-base underline-offset-4 menu-link"
-                  />
-                </span>
-                <span className="flex flex-row gap-4 items-center">
-                  <FaFacebook size={35} />
-                  <PrismicNextLink
-                    field={footerData?.facebook}
-                    className="text-base underline-offset-4 menu-link"
-                  />
-                </span>
+                {footerData?.instagram && (
+                  <span className="flex flex-row gap-4 items-center ">
+                    <FaInstagram size={35} />
+                    <PrismicNextLink
+                      field={footerData?.instagram}
+                      className="text-base underline-offset-4 menu-link"
+                    />
+                  </span>
+                )}
+                {footerData?.facebook && (
+                  <span className="flex flex-row gap-4 items-center">
+                    <FaFacebook size={35} />
+                    <PrismicNextLink
+                      field={footerData?.facebook}
+                      className="text-base underline-offset-4 menu-link"
+                    />
+                  </span>
+                )}
+                {footerData?.linkedin && (
+                  <span className="flex flex-row gap-4 items-center">
+                    <FaLinkedin size={35} />
+                    <PrismicNextLink
+                      field={footerData?.linkedin}
+                      className="text-base underline-offset-4 menu-link"
+                    />
+                  </span>
+                )}
+                {footerData?.meta && (
+                  <span className="flex flex-row gap-4 items-center">
+                    <FaMeta size={35} />
+                    <PrismicNextLink
+                      field={footerData?.meta}
+                      className="text-base underline-offset-4 menu-link"
+                    />
+                  </span>
+                )}
               </div>
             </div>
           </div>

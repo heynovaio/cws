@@ -598,6 +598,34 @@ interface MenusDocumentData {
   >;
 
   /**
+   * LinkedIn field in *Menus*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.linkedin
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  linkedin: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Meta field in *Menus*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.meta
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  meta: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
    * Slice Zone field in *Menus*
    *
    * - **Field Type**: Slice Zone

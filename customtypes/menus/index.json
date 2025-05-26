@@ -73,6 +73,28 @@
           "repeat": false
         }
       },
+      "linkedin": {
+        "type": "Link",
+        "config": {
+          "label": "LinkedIn",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
+      "meta": {
+        "type": "Link",
+        "config": {
+          "label": "Meta",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
       "slices1": {
         "type": "Slices",
         "fieldset": "Slice Zone",
