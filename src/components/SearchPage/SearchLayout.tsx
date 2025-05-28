@@ -3,37 +3,29 @@ import React, { useEffect } from "react";
 import { SearchBar } from "./SearchBar";
 import { SearchFilterButtons } from "./SearchFilterButtons";
 import { SearchGrid } from "./SearchGrid";
-import { defaultCategoryFilter, useCategoryFilter } from "@/providers";
+import { useCategoryFilter } from "@/providers";
 import GetAllResources from "@/utils/getAllResources";
 import GetAllPrograms from "@/utils/useGetAllPrograms";
 import GetAllResourceCategories from "@/utils/useGetAllResourceCategories";
 import GetAllProgramCategories from "@/utils/useGetAllProgramCategories";
 import { SideFilter } from "./SideFilter";
 import { MobileSideFilter } from "./MobileSideFilter";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ModuleFilter } from "@/constants";
 
 interface SearchLayoutProps {
   lang?: string;
 }
 export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
   const {
     setResources,
     setPrograms,
     setResourceCategories,
     setProgramCategories,
     activeFilter,
-    selectedTags,
-    toggleTag,
-    setActiveFilter,
   } = useCategoryFilter();
   const { data: resourceData } = GetAllResources(lang);
   const { data: programData } = GetAllPrograms(lang);
   const { data: resourceCategoryData } = GetAllResourceCategories(lang);
   const { data: programCategoryData } = GetAllProgramCategories(lang);
-
   useEffect(() => {
     if (resourceData) setResources(resourceData);
     if (programData) setPrograms(programData);
@@ -50,41 +42,6 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
     setProgramCategories,
     activeFilter,
   ]);
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-    const urlTags = params.get("tags")?.split(",") || [];
-    const filter =
-      (params.get("filter") as ModuleFilter) || defaultCategoryFilter;
-
-    // Sync active filter
-    setActiveFilter(filter);
-
-    // Sync tags
-    urlTags.forEach((tag) => {
-      if (!selectedTags.includes(tag)) {
-        toggleTag(tag);
-      }
-    });
-  }, [searchParams, selectedTags, setActiveFilter, toggleTag]);
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (selectedTags.length > 0) {
-      params.set("tags", selectedTags.join(","));
-    } else {
-      params.delete("tags");
-    }
-
-    if (activeFilter !== defaultCategoryFilter) {
-      params.set("filter", activeFilter);
-    } else {
-      params.delete("filter");
-    }
-
-    router.replace(`?${params.toString()}`, { scroll: false });
-  }, [selectedTags, activeFilter, searchParams, router]);
 
   return (
     <section
