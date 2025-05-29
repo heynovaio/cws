@@ -44,16 +44,16 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
   }: StatItemProps) => {
     const targetNumber = parseInt(asText(statistic) || "0", 10);
     const count = useMotionValue(0);
-    const rounded = !isNaN(targetNumber) && (useTransform(count, (latest) => Math.round(latest)));
+    const rounded = useTransform(count, (latest) => !isNaN(targetNumber) ? Math.round(latest) : 0);
     const duration = targetNumber > 50 ? 1 : 2;
 
     useEffect(() => {
-      if (inView) {
+      if (targetNumber && inView) {
         count.set(0);
         const controls = animate(count, targetNumber, { duration: duration });
         return () => controls.stop();
       }
-    }, [inView, targetNumber, count]);
+    }, [inView, targetNumber, count, duration, rounded]);
 
     return (
       <div>
