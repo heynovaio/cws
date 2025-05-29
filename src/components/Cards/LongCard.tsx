@@ -65,13 +65,13 @@ export const LongCard = ({
           containerClassName="flex-1 md:my-12"
         />
         {/* Link Fields */}
-        <div className="flex flex-col w-full md:w-1/3 items-center justify-center gap-4">
+        <div className="flex flex-col w-full md:w-1/3 justify-flex-start pt-[5.25em] gap-4">
           {linksExist &&
             links.map((item, index) => (
               <PrismicNextLink
                 key={index}
                 field={item}
-                className={`flex items-center`}
+                className={`flex`}
               >
                 {item.text}
               </PrismicNextLink>

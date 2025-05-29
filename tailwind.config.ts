@@ -22,7 +22,6 @@ export default {
       transparent: "transparent",
       current: "currentColor",
       dark: colors.midnight,
-
       white: "#FFFFFF",
       "dove-grey": "#6D00FF",
       "ultra-pink": "#DD0748",

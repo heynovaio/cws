@@ -44,35 +44,37 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
   }: StatItemProps) => {
     const targetNumber = parseInt(asText(statistic) || "0", 10);
     const count = useMotionValue(0);
-    const rounded = useTransform(count, (latest) => Math.round(latest));
+    const rounded = useTransform(count, (latest) => !isNaN(targetNumber) ? Math.round(latest) : 0);
     const duration = targetNumber > 50 ? 1 : 2;
 
     useEffect(() => {
-      if (inView) {
+      if (targetNumber && inView) {
         count.set(0);
         const controls = animate(count, targetNumber, { duration: duration });
         return () => controls.stop();
       }
-    }, [inView, targetNumber, count]);
+    }, [inView, targetNumber, count, duration, rounded]);
 
     return (
       <div>
         <span className="flex flex-row gap-2">
-          <motion.p className="text-[3.125rem] text-aqua font-extraBold">
+          <motion.span className="text-[3.125rem] text-aqua font-extraBold">
             {rounded}
-          </motion.p>
+          </motion.span>
           {isPercentage && (
-            <p className="text-[3.125rem] text-aqua font-extraBold">%</p>
+            <span className="text-[3.125rem] text-aqua font-extraBold">%</span>
           )}
         </span>
-        <PrismicRichText
-          field={description}
-          components={{
-            paragraph: ({ children }) => (
-              <p className="text-base">{children}</p>
-            ),
-          }}
-        />
+        {rounded && (
+          <PrismicRichText
+            field={description}
+            components={{
+              paragraph: ({ children }) => (
+                <p className="text-base">{children}</p>
+              ),
+            }}
+            />
+        )}
       </div>
     );
   };
