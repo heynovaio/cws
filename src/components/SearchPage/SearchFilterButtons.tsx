@@ -9,7 +9,8 @@ import { useCategoryFilter } from "@/providers";
 import { useSearchParams, useRouter } from "next/navigation";
 
 export const SearchFilterButtons = () => {
-  const { filterCounts, activeFilter, setActiveFilter } = useCategoryFilter();
+  const { filterCounts, activeFilter, setActiveFilter, isLoading } =
+    useCategoryFilter();
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -42,8 +43,13 @@ export const SearchFilterButtons = () => {
           className={`
             ${activeFilter === filterKey ? "bg-white !text-midnight shadow font-bold" : ""} btn btn-outline focus border`}
         >
-          <span className="text-base font-normal hover:text-current">
-            {defaultModuleFilters[filterKey]} ({filterCounts[filterKey]})
+          <span className="text-base font-normal hover:text-current flex gap-2 items-center">
+            {defaultModuleFilters[filterKey]}{" "}
+            {isLoading ? (
+              <div className="w-5 h-5 rounded-full bg-white/40 animate-pulse" />
+            ) : (
+              `(${filterCounts[filterKey]})`
+            )}
           </span>
         </button>
       ))}

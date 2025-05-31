@@ -2,21 +2,14 @@ import { Button, CloseButton, Dialog, DialogPanel } from "@headlessui/react";
 import React, { useState } from "react";
 import { VscSettings } from "react-icons/vsc";
 import { SideFilter } from "./SideFilter";
-import { useWindowSize } from "@/hooks";
 import { FaXmark } from "react-icons/fa6";
 
 export const MobileSideFilter = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const windowSize = useWindowSize();
-  const isMobile = windowSize.width < 768;
 
   const handleFilterClick = () => {
     setIsOpen(true);
   };
-
-  if (!isMobile) {
-    return null;
-  }
 
   return (
     <div className="flex md:hidden w-full">

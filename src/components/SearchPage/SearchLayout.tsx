@@ -21,6 +21,8 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
     setResourceCategories,
     setProgramCategories,
     activeFilter,
+    isLoading,
+    setLoading,
   } = useCategoryFilter();
   const { data: resourceData } = GetAllResources(lang);
   const { data: programData } = GetAllPrograms(lang);
@@ -31,6 +33,7 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
     if (programData) setPrograms(programData);
     if (resourceCategoryData) setResourceCategories(resourceCategoryData);
     if (programCategoryData) setProgramCategories(programCategoryData);
+    setLoading(false);
   }, [
     resourceData,
     programData,
@@ -41,6 +44,7 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
     programCategoryData,
     setProgramCategories,
     activeFilter,
+    setLoading,
   ]);
 
   return (
@@ -51,7 +55,7 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
       {/* Containers */}
       <div className="hidden md:flex w-1/4">
         <aside className="flex flex-col m-0 py-7 px-5 border-neon-violet border-r bg-[#7913E033]">
-          <SideFilter />
+          {isLoading ? <div className="flex bg-white/10 rounded h-full w-full animate-pulse min-w-[300px] grow"></div> : <SideFilter />}
         </aside>
       </div>
       <div className="py-7 md:pl-0 px-6 md:w-3/4 w-full flex flex-col gap-14">

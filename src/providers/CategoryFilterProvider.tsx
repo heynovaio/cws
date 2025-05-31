@@ -55,6 +55,8 @@ interface CategoryFilterContextProps {
   setMaxCostFilter: (value: number) => void;
   maxCost: number;
   resetCostFilter: () => void;
+  isLoading: boolean;
+  setLoading: (loading: boolean) => void;
 }
 
 const CategoryFilterContext = createContext<
@@ -95,6 +97,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   const [hasCredentials, setHasCredentials] = useState<boolean>(false);
   const [maxCostFilter, setMaxCostFilter] = useState<number>(0);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isLoading, setLoading] = useState<boolean>(true); // Initialize as true
 
   // Calculate max cost from programs
   const maxCost = useMemo(() => {
@@ -466,6 +469,8 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     setMaxCostFilter,
     maxCost,
     resetCostFilter,
+    isLoading,
+    setLoading,
   };
 
   return (

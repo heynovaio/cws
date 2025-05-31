@@ -1,16 +1,19 @@
 import React from "react";
-import { FilterPanel } from "./FilterPanel";
-import { useCategoryFilter } from "@/providers";
+import { FilterPanel, FilterItem } from "./FilterPanel";
+interface TagFilterPanelProps {
+  selectedItems?: string[];
+  availableTags?: FilterItem[];
+  toggleTag: (tag: string) => void;
+}
 
-export const TagsFilterPanel = () => {
-  const { availableTags, selectedTags, toggleTag } = useCategoryFilter();
+export const TagsFilterPanel = ({availableTags, selectedItems, toggleTag}: TagFilterPanelProps) => {
 
   return (
     <FilterPanel
       label="Tags"
       filterKey="tags"
       items={availableTags}
-      selectedItems={selectedTags}
+      selectedItems={selectedItems}
       onItemToggle={toggleTag}
     />
   );

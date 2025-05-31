@@ -10,7 +10,8 @@ import { TagsFilterPanel } from "./TagsFilterPanel";
 import { useCategoryFilter } from "@/providers";
 
 export const SideFilter = () => {
-  const { activeFilter, availableTags } = useCategoryFilter();
+  const { activeFilter, availableTags, isLoading, selectedTags, toggleTag } =
+    useCategoryFilter();
 
   const [isResourceContainerHidden, setIsResourceContainerHidden] =
     React.useState(false);
@@ -32,29 +33,43 @@ export const SideFilter = () => {
 
   return (
     <div
-      className={`flex flex-col ${availableTags.length > 0 && "gap-12"} pb-16 md:pb-4`}
+      className={`flex flex-col ${availableTags.length > 0 && "gap-12"} pb-16 md:pb-4 min-w-[300px]`}
     >
-      <SearchPanelContainer panel={<TagsFilterPanel />} />
-      <SearchPanelContainer
-        label="Resource Filters"
-        panel={<ResourcesCategoriesFilterPanel />}
-        topPanel={availableTags.length > 0 ? true : false}
-        isHidden={isResourceContainerHidden}
-      />
-      <SearchPanelContainer
-        label="Program Filters"
-        panel={
-          <div className="flex flex-col gap-5">
-            <ProgramsCategoriesFilterPanel />
-            <ProgramsFormatFilterPanel />
-            <ProgramsCostFilterPanel />
-            <ProgramsCredentialsFilterPanel />
-          </div>
-        }
-        topPanel={availableTags.length > 0 ? true : false}
-        isHidden={isProgramContainerHidden}
-      />
-      <ClearFilterButton styling={availableTags.length > 0 ? "" : "mt-12"} />
+      {!isLoading && (
+        <>
+          <SearchPanelContainer
+            panel={
+              <TagsFilterPanel
+                availableTags={availableTags}
+                selectedItems={selectedTags}
+                toggleTag={toggleTag}
+              />
+            }
+          />
+          <SearchPanelContainer
+            label="Resource Filters"
+            panel={<ResourcesCategoriesFilterPanel />}
+            topPanel={availableTags.length > 0 ? true : false}
+            isHidden={isResourceContainerHidden}
+          />
+          <SearchPanelContainer
+            label="Program Filters"
+            panel={
+              <div className="flex flex-col gap-5">
+                <ProgramsCategoriesFilterPanel />
+                <ProgramsFormatFilterPanel />
+                <ProgramsCostFilterPanel />
+                <ProgramsCredentialsFilterPanel />
+              </div>
+            }
+            topPanel={availableTags.length > 0 ? true : false}
+            isHidden={isProgramContainerHidden}
+          />
+          <ClearFilterButton
+            styling={availableTags.length > 0 ? "" : "mt-12"}
+          />
+        </>
+      )}
     </div>
   );
 };
