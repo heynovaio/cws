@@ -6,10 +6,12 @@ import * as prismic from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import React, { Suspense } from "react";
 import { Intro, Layout } from "@/components";
 import { getLocales } from "@/utils";
 import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
 import type { BreadcrumbLink } from "@/components/Breadcrumb";
+import { Loading } from "@/components/Loading/Loading";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -100,24 +102,26 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   ].filter(Boolean) as BreadcrumbLink[];
 
   return (
-    <CategoryFilterProvider>
-      <Layout
-        locales={locales}
-        global={global.data}
-        menus={menus.data}
-        partners={partners.data}
-        include_newsletter_sign_up_banner={
-          page.data.include_newsletter_sign_up_banner
-        }
-      >
-        <Intro type="program" pageData={page.data} links={links} />
-        <SliceZone
-          slices={page.data.slices}
-          components={components}
-          context={{ lang: "en-ca", tags: pageTags }}
-        />
-      </Layout>
-    </CategoryFilterProvider>
+    <Suspense fallback={<Loading hasText />}>
+      <CategoryFilterProvider>
+        <Layout
+          locales={locales}
+          global={global.data}
+          menus={menus.data}
+          partners={partners.data}
+          include_newsletter_sign_up_banner={
+            page.data.include_newsletter_sign_up_banner
+          }
+        >
+          <Intro type="program" pageData={page.data} links={links} />
+          <SliceZone
+            slices={page.data.slices}
+            components={components}
+            context={{ lang: "en-ca", tags: pageTags }}
+          />
+        </Layout>
+      </CategoryFilterProvider>
+    </Suspense>
   );
 }
 
