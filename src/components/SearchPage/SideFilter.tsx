@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ClearFilterButton } from "./ClearFilterButton";
 import { ProgramsCategoriesFilterPanel } from "./ProgramsCategoriesFilterPanel";
 import { ProgramsCostFilterPanel } from "./ProgramsCostFilterPanel";
@@ -14,9 +14,10 @@ export const SideFilter = () => {
     useCategoryFilter();
 
   const [isResourceContainerHidden, setIsResourceContainerHidden] =
-    React.useState(false);
+    useState(false);
   const [isProgramContainerHidden, setIsProgramContainerHidden] =
-    React.useState(false);
+    useState(false);
+  const [loadingStage, setLoadingStage] = useState(0); // 0 = initial, 1 = tags loaded, 2 = resources loaded, 3 = all loaded
 
   useEffect(() => {
     if (activeFilter === "resource_page") {
@@ -31,44 +32,84 @@ export const SideFilter = () => {
     }
   }, [activeFilter]);
 
+  // Simulate staggered loading
+  useEffect(() => {
+    if (isLoading) {
+      setLoadingStage(0);
+      return;
+    }
+
+    // Start loading sequence when data is ready
+    const timer1 = setTimeout(() => setLoadingStage(1), 100); // Tags load first
+    const timer2 = setTimeout(() => setLoadingStage(4), 300); // Then resources
+    const timer3 = setTimeout(() => setLoadingStage(6), 500); // Then programs
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
+  }, [isLoading]);
+
   return (
     <div
       className={`flex flex-col ${availableTags.length > 0 && "gap-12"} pb-16 md:pb-4 min-w-[300px]`}
     >
-      {!isLoading && (
-        <>
-          <SearchPanelContainer
-            panel={
-              <TagsFilterPanel
-                availableTags={availableTags}
-                selectedItems={selectedTags}
-                toggleTag={toggleTag}
-              />
-            }
-          />
-          <SearchPanelContainer
-            label="Resource Filters"
-            panel={<ResourcesCategoriesFilterPanel />}
-            topPanel={availableTags.length > 0 ? true : false}
-            isHidden={isResourceContainerHidden}
-          />
-          <SearchPanelContainer
-            label="Program Filters"
-            panel={
+      {/* Tags Panel - Always load first */}
+      <SearchPanelContainer
+        panel={
+          loadingStage < 1 ? (
+            <div className="h-32 bg-white/10 animate-pulse rounded"></div>
+          ) : (
+            <TagsFilterPanel
+              availableTags={availableTags}
+              selectedItems={selectedTags}
+              toggleTag={toggleTag}
+            />
+          )
+        }
+      />
+
+      {/* Resource Filters - Load second */}
+      {loadingStage >= 1 && (
+        <SearchPanelContainer
+          label="Resource Filters"
+          panel={
+            loadingStage < 2 ? (
+              <div className="h-48 bg-white/10 animate-pulse rounded"></div>
+            ) : (
+              <ResourcesCategoriesFilterPanel />
+            )
+          }
+          topPanel={availableTags.length > 0}
+          isHidden={isResourceContainerHidden}
+        />
+      )}
+
+      {/* Program Filters - Load last */}
+      {loadingStage >= 2 && (
+        <SearchPanelContainer
+          label="Program Filters"
+          panel={
+            loadingStage < 3 ? (
+              <div className="h-64 bg-white/10 animate-pulse rounded"></div>
+            ) : (
               <div className="flex flex-col gap-5">
                 <ProgramsCategoriesFilterPanel />
                 <ProgramsFormatFilterPanel />
                 <ProgramsCostFilterPanel />
                 <ProgramsCredentialsFilterPanel />
               </div>
-            }
-            topPanel={availableTags.length > 0 ? true : false}
-            isHidden={isProgramContainerHidden}
-          />
-          <ClearFilterButton
-            styling={availableTags.length > 0 ? "" : "mt-12"}
-          />
-        </>
+            )
+          }
+          topPanel={availableTags.length > 0}
+          isHidden={isProgramContainerHidden}
+        />
+      )}
+
+      {/* Clear Button - Only show after all panels loaded */}
+      {loadingStage >= 3 && (
+        <ClearFilterButton styling={availableTags.length > 0 ? "" : "mt-12"} />
       )}
     </div>
   );

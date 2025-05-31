@@ -10,7 +10,7 @@ export const ResourcesCategoriesFilterPanel = () => {
 
   return (
     <FilterPanel
-      label="Resource Categories"
+      label="Categories"
       filterKey="resource_categories"
       items={resourceCategories.map((cat) => ({
         id: cat.id,
