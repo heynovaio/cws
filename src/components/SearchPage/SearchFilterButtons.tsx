@@ -9,7 +9,22 @@ import { useCategoryFilter } from "@/providers";
 import { useSearchParams, useRouter } from "next/navigation";
 
 export const SearchFilterButtons = () => {
-  const { filterCounts, activeFilter, setActiveFilter } = useCategoryFilter();
+  const {
+    filterCounts,
+    activeFilter,
+    setActiveFilter,
+    isLoading,
+    clearAllFilters,
+    searchTerm,
+    selectedTags,
+    selectedResourceCategories,
+    selectedProgramCategories,
+    selectedFormats,
+    hasCredentials,
+    maxCostFilter,
+    maxCost,
+  } = useCategoryFilter();
+
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -26,11 +41,32 @@ export const SearchFilterButtons = () => {
   }, [searchParams, activeFilter, setActiveFilter, router]);
 
   const handleFilterClick = (filterKey: ModuleFilter) => {
-    setActiveFilter?.(filterKey);
+    // If clicking "All" and there are active filters, clear them
+    if (filterKey === "all" && hasActiveFilters()) {
+      clearAllFilters();
+      const newSearchParams = new URLSearchParams();
+      newSearchParams.set("filter", "all");
+      router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+    } else {
+      // Normal filter behavior
+      setActiveFilter?.(filterKey);
+      const newSearchParams = new URLSearchParams(searchParams.toString());
+      newSearchParams.set("filter", filterKey);
+      router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+    }
+  };
 
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    newSearchParams.set("filter", filterKey);
-    router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+  const hasActiveFilters = () => {
+    return (
+      searchTerm ||
+      activeFilter !== "all" ||
+      selectedTags.length > 0 ||
+      selectedResourceCategories.length > 0 ||
+      selectedProgramCategories.length > 0 ||
+      selectedFormats.length > 0 ||
+      hasCredentials ||
+      maxCostFilter !== maxCost
+    );
   };
 
   return (
@@ -42,8 +78,13 @@ export const SearchFilterButtons = () => {
           className={`
             ${activeFilter === filterKey ? "bg-white !text-midnight shadow font-bold" : ""} btn btn-outline focus border`}
         >
-          <span className="text-base font-normal hover:text-current">
-            {defaultModuleFilters[filterKey]} ({filterCounts[filterKey]})
+          <span className="text-base font-normal hover:text-current flex gap-2 items-center">
+            {defaultModuleFilters[filterKey]}{" "}
+            {isLoading ? (
+              <div className="w-5 h-5 rounded-full bg-white/40 animate-pulse" />
+            ) : (
+              `(${filterCounts[filterKey]})`
+            )}
           </span>
         </button>
       ))}

@@ -10,7 +10,7 @@ export const ProgramsCategoriesFilterPanel = () => {
 
   return (
     <FilterPanel
-      label="Program Categories"
+      label="Categories"
       filterKey="program_categories"
       items={programCategories.map((cat) => ({
         id: cat.id,
