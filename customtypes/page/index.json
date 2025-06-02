@@ -30,6 +30,13 @@
           "multi": "heading1"
         }
       },
+      "tagline": {
+        "type": "Text",
+        "config": {
+          "label": "Tagline",
+          "placeholder": ""
+        }
+      },
       "body": {
         "type": "StructuredText",
         "config": {
