@@ -10,14 +10,14 @@ interface GeneralHeroProps {
     title: RichTextField;
     body: RichTextField;
     button?: (LinkField & { text?: string })[];
+    tagline?: string | KeyTextField;
   };
-  tagline?: string | KeyTextField;
+
   shortHero?: boolean;
 }
 
 export const GeneralHero: React.FC<GeneralHeroProps> = ({
   data,
-  tagline,
   shortHero = true,
 }) => {
   return (
@@ -30,9 +30,9 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
       }`}
     >
       <Container>
-        {tagline && (
+        {data.tagline && (
           <p className="uppercase text-aqua font-bold text-md md:text-tagline text-center mb-4">
-            {tagline}
+            {data.tagline}
           </p>
         )}
 

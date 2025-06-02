@@ -69,7 +69,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         page.data.include_newsletter_sign_up_banner
       }
     >
-      <GeneralHero data={page.data} tagline="Test tagline" />
+      <GeneralHero data={page.data} />
       <div id="next-section">
         <SliceZone
           slices={page.data.slices}
