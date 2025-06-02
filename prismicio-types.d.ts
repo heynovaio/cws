@@ -840,6 +840,17 @@ interface PageDocumentData {
   title: prismic.RichTextField;
 
   /**
+   * Tagline field in *Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.tagline
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tagline: prismic.KeyTextField;
+
+  /**
    * Body field in *Page*
    *
    * - **Field Type**: Rich Text
