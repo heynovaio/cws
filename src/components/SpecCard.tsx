@@ -42,7 +42,7 @@ export const SpecCard = ({
           <div className="flex flex-col md:flex-row flex-wrap gap-2 items-center text-center md:text-start">
             <MdAccessTimeFilled className="h-6 w-6 text-neon-violet" />
             <span>
-              <strong>Time: </strong>
+              <span className="font-bold">Time: </span>
               {time}
             </span>
           </div>
@@ -51,8 +51,7 @@ export const SpecCard = ({
           <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
             <MdAttachMoney className="h-6 w-6 text-neon-violet" />
             <span>
-              <span className="font-bold">Cost: </span>
-              ${cost}
+              <span className="font-bold">Cost: </span>${cost}
             </span>
           </div>
         )}
@@ -84,9 +83,7 @@ export const SpecCard = ({
                 {item.link_type === "Any" ? (
                   item.text
                 ) : (
-                  <PrismicNextLink field={item}>
-                    {item.text}
-                  </PrismicNextLink>
+                  <PrismicNextLink field={item}>{item.text}</PrismicNextLink>
                 )}
               </li>
             ))}
