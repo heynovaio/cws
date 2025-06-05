@@ -29,7 +29,7 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
             />
             <div className="flex flex-col items-center md:items-start">
               <h4 className="mb-6 footer-header">Follow Us</h4>
-              <div className="flex flex-row md:flex-col justify-center items-center md:items-start gap-6 ">
+              <div className="flex  flex-col justify-center items-center md:items-start gap-6 ">
                 {footerData?.instagram && (
                   <span className="flex flex-row gap-4 items-center ">
                     <FaInstagram size={35} />
