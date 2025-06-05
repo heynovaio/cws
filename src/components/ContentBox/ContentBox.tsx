@@ -64,7 +64,9 @@ export const ContentBox: React.FC<ContentBoxProps> = ({
         {content && <div className="text-content">{content}</div>}
       </div>
       {buttons && buttons.length > 0 && (
-        <div className="flex gap-6">{buttons}</div>
+        <div className="flex flex-col md:flex-row gap-6 items-center">
+          {buttons}
+        </div>
       )}
       {children}
     </div>

@@ -82,6 +82,7 @@
       font-bold
       px-8 py-2
       no-underline
+      text-sm
       md:text-bodyLarge
       relative;
   }
@@ -172,7 +173,7 @@
   > span {
     position: relative;
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       bottom: 2px;
@@ -190,7 +191,7 @@
   &:hover {
     > span:after {
       width: 100%;
-      background: #02BBFF;
+      background: #02bbff;
     }
     svg {
       transform: translateX(5px);
@@ -203,7 +204,7 @@
     &:hover {
       > span:after {
         width: 100%;
-        background: #6D00FF;
+        background: #6d00ff;
       }
     }
   }
@@ -242,12 +243,11 @@
     }
     h2:not(:first-child) {
       @apply mt-6;
-    } 
-    h3, 
-    h4, 
-    h5, 
+    }
+    h3,
+    h4,
+    h5,
     h6 {
-
     }
     p {
       @apply mb-4 max-w-[900px] mx-auto;
@@ -261,7 +261,7 @@
     }
     img,
     iframe {
-     @apply mb-5;
+      @apply mb-5;
     }
     img {
       @apply p-2 bg-white;
@@ -295,7 +295,6 @@
       box-shadow: 0 0 40px 0 #630ff9cc;
     }
   }
-
 
   .backdrop-blur-default {
     backdrop-filter: blur(8px);
@@ -391,7 +390,7 @@
            pt-[1.875rem] 
            pb-[4.375rem] 
            gap-[0.625rem] 
-           backdrop-blur-[16px] 
+           backdrop-blur-[16px];
   }
 
   .pagination-button {
@@ -494,8 +493,8 @@ iframe {
     height: 450px;
   }
 }
-.content-carousel  {
+.content-carousel {
   padding: 1em;
-  overflow: visible!important;
+  overflow: visible !important;
   margin-left: -1.5em;
 }
