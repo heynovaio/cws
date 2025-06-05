@@ -30,6 +30,10 @@ export const SpecCard = ({
   format,
   resources,
 }: SpecCardProps) => {
+  const validResources = Array.isArray(resources)
+    ? resources.filter((item) => item.link_type !== "Any" && item.text)
+    : [];
+
   return (
     <div className="card-white p-5 flex gap-5 flex-col border border-neon-violet font-accent">
       {typeof title === "string" ? (
@@ -74,11 +78,11 @@ export const SpecCard = ({
           </div>
         )}
       </div>
-      {resources && resources.length > 0 && (
+      {validResources.length > 0 && (
         <div className="w-full flex flex-col mx-auto md:mx-0 gap-2 text-base border-t border-neon-violet pt-3">
-          <h3 className="text-base font-bold">Included: </h3>
+          <h3 className="text-base font-bold">Included:</h3>
           <ul className="list-disc pl-1">
-            {resources.map((item, index) => (
+            {validResources.map((item, index) => (
               <li key={index}>
                 {item.link_type === "Any" ? (
                   item.text
