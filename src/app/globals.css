@@ -264,7 +264,7 @@
       @apply mb-5;
     }
     img {
-      @apply p-2 bg-white;
+      @apply p-2 bg-none;
     }
   }
 

@@ -24,9 +24,7 @@ const RichText = ({ slice }: RichTextProps): JSX.Element => {
       data-slice-variation={slice.variation}
     >
       <Container>
-        <div
-          className={`text-content max-w-[900px] mx-auto ${textAlignment}`}
-        >
+        <div className={`text-content max-w-[900px] mx-auto ${textAlignment}`}>
           <PrismicRichText
             field={slice.primary.content}
             components={components}

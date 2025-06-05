@@ -9,7 +9,10 @@ export const components: JSXMapSerializer = {
   oList: ({ children }) => <ol>{children}</ol>,
   image: ({ node }) => {
     const imageElement = (
-      <ResponsiveImage containerClassName="w-auto" image={node} />
+      <ResponsiveImage
+        containerClassName="w-auto flex items-center justify-center"
+        image={node}
+      />
     );
 
     if (node.linkTo) {
@@ -47,9 +50,7 @@ export const componentsTextSmall: JSXMapSerializer = {
     </PrismicNextLink>
   ),
   image: ({ node }) => {
-    const imageElement = (
-      <ResponsiveImage containerClassName="w-auto" image={node} />
-    );
+    const imageElement = <ResponsiveImage containerClassName="" image={node} />;
 
     if (node.linkTo) {
       return (
