@@ -20,6 +20,8 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
   const [indicatorPosition, setIndicatorPosition] = useState({
     left: 0,
     width: 0,
+    top: 0,
+    height: 0,
   });
 
   const tabs = slice.primary.tab || [];
@@ -37,6 +39,8 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
       setIndicatorPosition({
         left: currentTab.offsetLeft,
         width: currentTab.offsetWidth,
+        top: currentTab.offsetTop,
+        height: currentTab.offsetHeight,
       });
     }
   }, [currentSlide, tabs]);
@@ -47,10 +51,12 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
         <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
           <TabList className="relative rounded-3xl md:rounded-full bg-white flex flex-wrap md:flex-nowrap gap-2 p-1 shadow justify-center mx-auto w-fit max-w-full overflow-x-auto">
             <motion.div
-              className="absolute top-1 bottom-1 bg-neon-violet rounded-full z-0"
+              className="absolute bg-neon-violet rounded-full z-0"
               animate={{
                 left: indicatorPosition.left,
+                top: indicatorPosition.top,
                 width: indicatorPosition.width,
+                height: indicatorPosition.height,
               }}
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
             />
