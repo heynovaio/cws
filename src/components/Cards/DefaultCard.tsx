@@ -30,10 +30,12 @@ export const DefaultCard = ({
 
   switch (cardType) {
     case "program":
+    case "program_page":
       cardBackground = "card-gradient";
       categoryChipColor = "bg-light-violet text-midnight border-midnight";
       break;
     case "resource":
+    case "resource_page":
       cardBackground = "card-white";
       categoryChipColor = "text-dark border-neon-violet";
       break;

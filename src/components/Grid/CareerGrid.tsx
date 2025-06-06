@@ -33,7 +33,7 @@ export const CareerGrid = ({}: CareerGridProps) => {
         <Link
           key={index}
           href={item.url ?? ""}
-          className="btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
+          className="more-hover btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
         >
           Learn More
           <HiOutlineArrowLongRight className="h-10 w-10" />

@@ -30,7 +30,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
               {slice.primary.image && (
                 <ResponsiveImage
                   image={slice.primary.image}
-                  className="mt-6 md:mt-10 w-full h-[350px] object-cover"
+                  className="rounded mt-6 md:mt-10 w-full h-[350px] object-cover"
                 />
               )}
             </div>
@@ -52,7 +52,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
             {slice.primary.image && (
               <ResponsiveImage
                 image={slice.primary.image}
-                className={`${isTwoColumn ? "mt-6" : "mt-0"} w-full h-[350px] object-cover`}
+                className={`${isTwoColumn ? "mt-6" : "mt-0"} rounded w-full h-[350px] object-cover`}
               />
             )}
 
