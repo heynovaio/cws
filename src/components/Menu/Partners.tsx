@@ -66,7 +66,7 @@ export const Partners = ({
         <ContentBox
           title={title}
           content={
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 pr-8">
               <PrismicRichText field={body} />
               <p className="font-extraBold text-[1.625rem] md:text-[2rem] mt-6">
                 {ctaText}

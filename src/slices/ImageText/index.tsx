@@ -103,7 +103,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
           ) : (
             <ResponsiveImage
               image={slice.primary.image}
-              className={`w-full h-[250px] md:h-[400px] object-cover mb-4 md:mb-0 transition-all duration-700 ease-in-out ${animation ? (inView ? "opacity-100 translate-none" : "motion-safe:opacity-10 motion-safe:translate-y-[150px] lg:motion-safe:translate-y-[300px]") : ""}`}
+              className={`rounded w-full h-[250px] md:h-[400px] object-cover mb-4 md:mb-0 transition-all duration-700 ease-in-out ${animation ? (inView ? "opacity-100 translate-none" : "motion-safe:opacity-10 motion-safe:translate-y-[150px] lg:motion-safe:translate-y-[300px]") : ""}`}
             />
           )}
         </div>

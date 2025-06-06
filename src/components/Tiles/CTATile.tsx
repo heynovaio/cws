@@ -21,7 +21,7 @@ export const CTATile = ({
   return (
     <PrismicNextLink
       field={link}
-      className="hover-zoom hover-shadow relative bg-gradient-tile h-[430px] border border-neon-violet rounded overflow-hidden text-midnight w-full flex flex-col no-underline">
+      className="hover-zoom hover-shadow md:p-4 lg:p-8 relative bg-gradient-tile h-[430px] border border-neon-violet rounded overflow-hidden text-midnight w-full flex flex-col no-underline">
       {image && (
           <PrismicNextImage
             field={bg_image}
@@ -46,7 +46,7 @@ export const CTATile = ({
         }
         {link && (
           <div
-            className={`flex items-center text-large underline font-normal"`}
+            className={`more-hover flex items-center text-large underline font-normal"`}
           >
             {link?.text || 'Learn More'}<HiOutlineArrowLongRight className="h-10 w-10 ml-3" />
           </div>

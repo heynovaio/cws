@@ -70,7 +70,7 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
             </div>
           </div>
           <SliceZone slices={slices} components={components} />
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-4">
             <h4 className="footer-header">Contact Us</h4>
             <p>{global?.email}</p>
           </div>
