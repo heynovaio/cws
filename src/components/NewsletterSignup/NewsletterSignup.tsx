@@ -14,9 +14,22 @@ type NewsletterField = {
   placeholder?: string | null;
 };
 
+type ErrorState = {
+  hasErrors: boolean;
+  requiredFieldsError: boolean;
+  emailError: boolean;
+  invalidFields: string[];
+};
+
 const NewsletterSignupBanner = ({ lang }: Props) => {
   const { newsletterSignupData, isLoading } = useNewsletterSignupData(lang);
   const [success, setSuccess] = useState(false);
+  const [errors, setErrors] = useState<ErrorState>({
+    hasErrors: false,
+    requiredFieldsError: false,
+    emailError: false,
+    invalidFields: [],
+  });
   const formRef = useRef<HTMLFormElement>(null);
 
   if (isLoading || !newsletterSignupData) return null;
@@ -24,11 +37,67 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
   const { title, subtitle, signup_success_message, form_field, submit_button } =
     newsletterSignupData.data;
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = (formData: FormData): ErrorState => {
+    const newErrors: ErrorState = {
+      hasErrors: false,
+      requiredFieldsError: false,
+      emailError: false,
+      invalidFields: [],
+    };
+
+    form_field.forEach((field: NewsletterField, index: number) => {
+      const fieldName = field.name ?? `field-${index}`;
+      const fieldValue = formData.get(fieldName) as string;
+
+      if (field.type === "checkbox") {
+        return;
+      }
+
+      if (!fieldValue || fieldValue.trim() === "") {
+        newErrors.requiredFieldsError = true;
+        newErrors.hasErrors = true;
+        newErrors.invalidFields.push(fieldName);
+      }
+
+      if (field.type === "email" && fieldValue && !validateEmail(fieldValue)) {
+        newErrors.emailError = true;
+        newErrors.hasErrors = true;
+        if (!newErrors.invalidFields.includes(fieldName)) {
+          newErrors.invalidFields.push(fieldName);
+        }
+      }
+    });
+
+    return newErrors;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+
+    // Validate form
+    const validationErrors = validateForm(formData);
+
+    if (validationErrors.hasErrors) {
+      setErrors(validationErrors);
+
+      return;
+    }
+
+    // Clear errors if validation passes
+    setErrors({
+      hasErrors: false,
+      requiredFieldsError: false,
+      emailError: false,
+      invalidFields: [],
+    });
 
     // Mailchimp honeypot field (must be included + left empty)
     formData.append("b_8ee5619b8ee91b0ddf0ee8e84_bc04ac6cf0", "");
@@ -49,6 +118,10 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
     } catch (error) {
       console.error("Mailchimp submission failed", error);
     }
+  };
+
+  const getFieldError = (fieldName: string): boolean => {
+    return errors.invalidFields.includes(fieldName);
   };
 
   return (
@@ -77,11 +150,19 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
               {signup_success_message}
             </h4>
           ) : (
-            <form className="space-y-8" ref={formRef} onSubmit={handleSubmit}>
+            <form
+              className="space-y-8"
+              ref={formRef}
+              onSubmit={handleSubmit}
+              noValidate
+              aria-describedby={errors.hasErrors ? "form-errors" : undefined}
+            >
               {form_field.map((field: NewsletterField, index: number) => {
                 const fieldName = field.name ?? `field-${index}`;
                 const fieldType = field.type ?? "text";
                 const fieldLabel = field.label ?? "Untitled Field";
+                const hasError = getFieldError(fieldName);
+                const errorId = `${fieldName}-error`;
 
                 if (field.type === "checkbox") {
                   return (
@@ -93,12 +174,18 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                         id={fieldName}
                         name={fieldName}
                         type="checkbox"
-                        className="min-w-[1.5rem] min-h-[1.5rem] h-7 w-7 border border-black rounded"
+                        className={`min-w-[1.5rem] min-h-[1.5rem] h-7 w-7 border border-black rounded focus ${
+                          hasError ? "border-ultra-pink" : "border-black"
+                        }`}
                         required
+                        aria-describedby={hasError ? errorId : undefined}
+                        aria-invalid={hasError}
                       />
                       <label
                         htmlFor={fieldName}
-                        className="text-white font-semibold"
+                        className={`font-semibold ${
+                          hasError ? "text-ultra-pink" : "text-white"
+                        }`}
                       >
                         {field.label}
                       </label>
@@ -110,7 +197,9 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                   <div key={index} className="mb-6">
                     <label
                       htmlFor={fieldName}
-                      className="block mb-4 text-white font-semibold"
+                      className={`block mb-4 font-semibold ${
+                        hasError ? "text-ultra-pink" : "text-white"
+                      }`}
                     >
                       {fieldLabel}
                     </label>
@@ -119,13 +208,34 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                       name={fieldName}
                       type={fieldType}
                       placeholder={field.placeholder ?? ""}
-                      className="w-full p-4 rounded-xl"
+                      className={`w-full p-4 rounded-xl border-2 focus ${
+                        hasError
+                          ? "border-ultra-pink focus:ring-ultra-p-500 focus:border-red-500"
+                          : "border-transparent focus:ring-blue-500 focus:border-blue-500"
+                      }`}
                       required
+                      aria-describedby={hasError ? errorId : undefined}
+                      aria-invalid={hasError}
                     />
                   </div>
                 );
               })}
-
+              {/* Error Messages */}
+              {errors.hasErrors && (
+                <div
+                  id="form-errors"
+                  role="alert"
+                  aria-live="polite"
+                  className="flex flex-col gap-4"
+                >
+                  {errors.requiredFieldsError && (
+                    <label>Please fill out all required sections.</label>
+                  )}
+                  {errors.emailError && (
+                    <label>Please enter a valid email.</label>
+                  )}
+                </div>
+              )}
               <Button
                 as="button"
                 type="submit"
@@ -139,4 +249,5 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
     </Section>
   );
 };
+
 export default NewsletterSignupBanner;
