@@ -20,6 +20,7 @@ export type ImageTextProps = SliceComponentProps<Content.ImageTextSlice>;
 const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
   const { ref, inView } = useInView({
     rootMargin: "-200px 0px",
+    triggerOnce: true,
   });
 
   const imageSide =
@@ -44,7 +45,9 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
   }: StatItemProps) => {
     const targetNumber = parseInt(asText(statistic) || "0", 10);
     const count = useMotionValue(0);
-    const rounded = useTransform(count, (latest) => !isNaN(targetNumber) ? Math.round(latest) : 0);
+    const rounded = useTransform(count, (latest) =>
+      !isNaN(targetNumber) ? Math.round(latest) : 0
+    );
     const duration = targetNumber > 50 ? 1 : 2;
 
     useEffect(() => {
@@ -73,7 +76,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
                 <p className="text-base">{children}</p>
               ),
             }}
-            />
+          />
         )}
       </div>
     );
