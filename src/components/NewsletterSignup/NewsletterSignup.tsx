@@ -125,7 +125,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
   };
 
   return (
-    <Section data-slice-type="newsletter_signup">
+    <Section data-slice-type="newsletter_signup" id="newsletter">
       <Container className="newsletter-signup hover-shadow">
         <div className="p-8 max-w-4xl mx-auto">
           <div className="text-center mb-12">
