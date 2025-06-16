@@ -85,20 +85,27 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
                         numColumns3 ? "grid-cols-3" : "grid-cols-2"
                       }`}
                     >
-                      {slice.primary.link_with_paragraph.map((item, index) => (
-                        <div key={index}>
-                          {item.link && (
-                            <div className="mb-4">
-                              <PrismicNextLink field={item.link} />
-                            </div>
-                          )}
-                          {item.body && (
-                            <div className="mb-4">
-                              <PrismicRichText field={item.body} />
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                      {slice.primary.link_with_paragraph.map((item, index) => {
+                        const print_statement =
+                          slice.primary?.menu_display === "Equity in Action"
+                            ? item.link
+                            : "";
+                        console.log("Link: ", print_statement);
+                        return (
+                          <div key={index}>
+                            {item.link && (
+                              <div className="mb-4">
+                                <PrismicNextLink field={item.link} />
+                              </div>
+                            )}
+                            {item.body && (
+                              <div className="mb-4">
+                                <PrismicRichText field={item.body} />
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
