@@ -134,19 +134,19 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const setActiveFilter = useCallback(
     (filter: ModuleFilter) => {
-      // Reset filters (except search) when switching between program and resource filters
+      // Clear opposite category filters when switching to specific filter types
       if (filter === "program_page" && _activeFilter !== "program_page") {
-        setSelectedTags([]);
+        // Clear resource-specific filters
         setSelectedResourceCategories([]);
-        setSelectedFormats([]);
-        setHasCredentials(false);
-        setMaxCostFilter(maxCost);
+        // Keep tags, formats, credentials, and cost filters for programs
       } else if (
         filter === "resource_page" &&
         _activeFilter !== "resource_page"
       ) {
-        setSelectedTags([]);
         setSelectedProgramCategories([]);
+        setSelectedFormats([]);
+        setHasCredentials(false);
+        setMaxCostFilter(maxCost);
       }
       _setActiveFilter(filter);
     },
@@ -282,23 +282,24 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       maxCostFilter !== maxCost;
 
     const hasResourceSpecificFilters = selectedResourceCategories.length > 0;
+    const hasTagFilters = selectedTags.length > 0;
 
-    if (hasProgramSpecificFilters) {
+    // Determine initial item set based on active filter and specific filters
+    if (activeFilter === "program_page") {
       items = programs;
-    } else if (hasResourceSpecificFilters) {
+    } else if (activeFilter === "resource_page") {
       items = resources;
+    } else if (
+      hasProgramSpecificFilters ||
+      hasResourceSpecificFilters ||
+      hasTagFilters
+    ) {
+      // When ANY filters are active (including tags), show both programs and resources
+      // This allows tags to act as an OR clause at the top level
+      items = [...programs, ...resources];
     } else {
-      switch (activeFilter) {
-        case "program_page":
-          items = programs;
-          break;
-        case "resource_page":
-          items = resources;
-          break;
-        case "all":
-        default:
-          items = [...programs, ...resources];
-      }
+      // Default "all" case with no specific filters
+      items = [...programs, ...resources];
     }
 
     if (searchTerm) {
@@ -308,78 +309,102 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     items = items.filter((item) => {
+      // Skip items that don't match the active filter ONLY if no cross-type filters are active
+      // If tags are selected, allow both types to show through regardless of active filter
       if (
+        activeFilter === "program_page" &&
+        item.type !== "program_page" &&
+        !hasTagFilters
+      ) {
+        return false;
+      }
+      if (
+        activeFilter === "resource_page" &&
+        item.type !== "resource_page" &&
+        !hasTagFilters
+      ) {
+        return false;
+      }
+
+      const matchesResourceFilters =
+        item.type === "resource_page" &&
         selectedResourceCategories.length > 0 &&
-        item.type === "resource_page"
-      ) {
-        if (!item.data.category) return false;
-        const categoryId =
-          "id" in item.data.category ? item.data.category.id : "";
-        if (!selectedResourceCategories.includes(categoryId)) {
-          return false;
-        }
-        if (selectedResourceCategories.length > 1) {
-          return selectedResourceCategories.some(
-            (catId) => catId === categoryId
-          );
-        }
-      }
+        item.data.category &&
+        selectedResourceCategories.includes(
+          "id" in item.data.category ? item.data.category.id : ""
+        );
 
-      if (
+      const matchesProgramCategoryFilters =
+        item.type === "program_page" &&
         selectedProgramCategories.length > 0 &&
-        item.type === "program_page"
-      ) {
-        if (!item.data.category) return false;
-        const categoryId =
-          "id" in item.data.category ? item.data.category.id : "";
-        if (!selectedProgramCategories.includes(categoryId)) {
-          return false;
-        }
-        if (selectedProgramCategories.length > 1) {
-          return selectedProgramCategories.some(
-            (catId) => catId === categoryId
-          );
-        }
-      }
+        item.data.category &&
+        selectedProgramCategories.includes(
+          "id" in item.data.category ? item.data.category.id : ""
+        );
 
-      if (selectedTags.length > 0) {
-        if (
-          !item.tags ||
-          !selectedTags.some((tag) => item.tags?.includes(tag))
-        ) {
-          return false;
-        }
-      }
+      const matchesTagFilters =
+        hasTagFilters &&
+        item.tags &&
+        selectedTags.some((tag) => item.tags?.includes(tag));
 
-      if (selectedFormats.length > 0 && item.type === "program_page") {
-        if (!item.data.format) return false;
+      const hasAnyFilters =
+        selectedResourceCategories.length > 0 ||
+        selectedProgramCategories.length > 0 ||
+        hasTagFilters ||
+        selectedFormats.length > 0 ||
+        hasCredentials ||
+        maxCostFilter !== maxCost;
 
-        const format = item.data.format;
-        const hasVirtual = selectedFormats.includes(PROGRAM_FORMATS.VIRTUAL);
-        const hasInPerson = selectedFormats.includes(PROGRAM_FORMATS.IN_PERSON);
-        
-        if (hasVirtual && !hasInPerson) {
-          return format === PROGRAM_FORMATS.VIRTUAL || format.includes("Both");
-        }
+      if (hasAnyFilters) {
+        const passesTopLevelOR =
+          matchesResourceFilters ||
+          matchesProgramCategoryFilters ||
+          matchesTagFilters;
 
-        if (hasInPerson && !hasVirtual) {
-          return (
-            format === PROGRAM_FORMATS.IN_PERSON || format.includes("Both")
-          );
-        }
-
-        if (hasVirtual && hasInPerson) {
-          return format.includes("Both");
-        }
-      }
-
-      if (hasCredentials && item.type === "program_page") {
-        if (item.data.certs !== true) {
+        if (!passesTopLevelOR) {
           return false;
         }
       }
 
       if (item.type === "program_page") {
+        if (selectedFormats.length > 0) {
+          if (!item.data.format) return false;
+
+          const format = item.data.format;
+          const hasVirtual = selectedFormats.includes(PROGRAM_FORMATS.VIRTUAL);
+          const hasInPerson = selectedFormats.includes(
+            PROGRAM_FORMATS.IN_PERSON
+          );
+
+          if (hasVirtual && !hasInPerson) {
+            if (
+              !(format === PROGRAM_FORMATS.VIRTUAL || format.includes("Both"))
+            ) {
+              return false;
+            }
+          }
+
+          if (hasInPerson && !hasVirtual) {
+            if (
+              !(format === PROGRAM_FORMATS.IN_PERSON || format.includes("Both"))
+            ) {
+              return false;
+            }
+          }
+
+          if (hasVirtual && hasInPerson) {
+            if (!format.includes("Both")) {
+              return false;
+            }
+          }
+        }
+
+        if (hasCredentials) {
+          if (item.data.certs !== true) {
+            return false;
+          }
+        }
+
         const itemCost =
           typeof item.data.cost === "number" ? item.data.cost : maxCost;
         if (itemCost > maxCostFilter) {
