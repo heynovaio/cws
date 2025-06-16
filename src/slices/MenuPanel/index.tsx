@@ -90,7 +90,10 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
                           <div key={index}>
                             {item.link && (
                               <div className="mb-4">
-                                <PrismicNextLink field={item.link} />
+                                <PrismicNextLink
+                                  field={item.link}
+                                  prefetch={false}
+                                />
                               </div>
                             )}
                             {item.body && (

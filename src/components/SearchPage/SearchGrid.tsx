@@ -13,185 +13,22 @@ import { components, componentsTextSmall } from "@/utils";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { useResourceCategoryData, useProgramCategoryData } from "@/hooks";
 import { CustomPagination } from "../CustomPagination";
-import { useState, useEffect, useMemo, useCallback } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { ModuleFilter, ProgramFormat } from "@/constants";
+import { useState, useEffect, useMemo } from "react";
 
 interface SearchGridProps {
   lang: string;
 }
 
 export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
-  const {
-    filteredItems,
-    activeFilter,
-    setActiveFilter,
-    searchTerm,
-    setSearchTerm,
-    selectedResourceCategories,
-    setSelectedResourceCategories,
-    selectedProgramCategories,
-    setSelectedProgramCategories,
-    selectedFormats,
-    setSelectedFormats,
-    hasCredentials,
-    setHasCredentials,
-    maxCostFilter,
-    setMaxCostFilter,
-    maxCost,
-  } = useCategoryFilter();
-
+  const { filteredItems } = useCategoryFilter();
   const { resourceCategoryData } = useResourceCategoryData(lang);
   const { programCategoryData } = useProgramCategoryData(lang);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isInitialized, setIsInitialized] = useState(false);
   const itemsPerPage = 6;
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  // Initialize filters from URL params on first load
   useEffect(() => {
-    if (
-      !isInitialized &&
-      (resourceCategoryData?.length || programCategoryData?.length)
-    ) {
-      const searchParam = searchParams.get("search");
-      const filterParam = searchParams.get("filter");
-      const resourceCategoriesParam = searchParams.get("resourceCategories");
-      const programCategoriesParam = searchParams.get("programCategories");
-      const formatsParam = searchParams.get("formats");
-      const credentialsParam = searchParams.get("credentials");
-      const maxCostParam = searchParams.get("maxCost");
-      const pageParam = searchParams.get("page");
-
-      // Apply filters from URL
-      if (searchParam) {
-        setSearchTerm(searchParam);
-      }
-
-      if (
-        filterParam &&
-        ["all", "program_page", "resource_page"].includes(filterParam)
-      ) {
-        setActiveFilter(filterParam as ModuleFilter);
-      }
-
-      if (resourceCategoriesParam) {
-        const categories = resourceCategoriesParam.split(",").filter(Boolean);
-        setSelectedResourceCategories(categories);
-      }
-
-      if (programCategoriesParam) {
-        const categories = programCategoriesParam.split(",").filter(Boolean);
-        setSelectedProgramCategories(categories);
-      }
-
-      if (formatsParam) {
-        const formats = formatsParam.split(",").filter(Boolean);
-        setSelectedFormats(formats as ProgramFormat[]);
-      }
-
-      if (credentialsParam === "true") {
-        setHasCredentials(true);
-      }
-
-      if (maxCostParam) {
-        const cost = parseInt(maxCostParam, 10);
-        if (!isNaN(cost)) {
-          setMaxCostFilter(cost);
-        }
-      }
-
-      // Set page from URL
-      if (pageParam) {
-        const page = parseInt(pageParam, 10);
-        if (page > 0) {
-          setCurrentPage(page);
-        }
-      }
-
-      setIsInitialized(true);
-    }
-  }, [
-    searchParams,
-    resourceCategoryData,
-    programCategoryData,
-    isInitialized,
-    setSearchTerm,
-    setActiveFilter,
-    setSelectedResourceCategories,
-    setSelectedProgramCategories,
-    setSelectedFormats,
-    setHasCredentials,
-    setMaxCostFilter,
-  ]);
-
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    if (isInitialized) {
-      setCurrentPage(1);
-    }
-  }, [filteredItems, isInitialized]);
-
-  // Update URL when filters or page change
-  const updateURL = useCallback(() => {
-    const params = new URLSearchParams();
-
-    // Add current filters to URL
-    if (searchTerm) params.set("search", searchTerm);
-    if (activeFilter !== "all") params.set("filter", activeFilter);
-    if (selectedResourceCategories.length > 0) {
-      params.set("resourceCategories", selectedResourceCategories.join(","));
-    }
-    if (selectedProgramCategories.length > 0) {
-      params.set("programCategories", selectedProgramCategories.join(","));
-    }
-    if (selectedFormats.length > 0) {
-      params.set("formats", selectedFormats.join(","));
-    }
-    if (hasCredentials) params.set("credentials", "true");
-    if (maxCostFilter !== maxCost && maxCost > 0) {
-      params.set("maxCost", maxCostFilter.toString());
-    }
-    if (currentPage > 1) params.set("page", currentPage.toString());
-
-    const newURL = params.toString()
-      ? `${pathname}?${params.toString()}`
-      : pathname;
-    router.replace(newURL, { scroll: false });
-  }, [
-    searchTerm,
-    activeFilter,
-    selectedResourceCategories,
-    selectedProgramCategories,
-    selectedFormats,
-    hasCredentials,
-    maxCostFilter,
-    maxCost,
-    currentPage,
-    pathname,
-    router,
-  ]);
-
-  useEffect(() => {
-    if (isInitialized) {
-      updateURL();
-    }
-  }, [
-    isInitialized,
-    searchTerm,
-    activeFilter,
-    selectedResourceCategories,
-    selectedProgramCategories,
-    selectedFormats,
-    hasCredentials,
-    maxCostFilter,
-    maxCost,
-    currentPage,
-    updateURL,
-  ]);
+    setCurrentPage(1);
+  }, [filteredItems]);
 
   // Calculate paginated items
   const paginatedItems = useMemo(() => {
@@ -237,7 +74,7 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
             className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 mb-10"
           >
             {(
-              paginatedItems as (ResourcePageDocument | ProgramPageDocument)[]
+              filteredItems as (ResourcePageDocument | ProgramPageDocument)[]
             ).map((item, index) => (
               <DefaultCard
                 key={`${item.id}-${index}`}
