@@ -53,7 +53,7 @@ export const SideFilter = () => {
 
   return (
     <div
-      className={`flex flex-col ${availableTags.length > 0 && "gap-12"} pb-16 md:pb-4 min-w-[300px]`}
+      className={`flex flex-col ${availableTags.length > 0 && "gap-12"} pb-16 md:pb-4`}
     >
       {/* Tags Panel - Always load first */}
       <SearchPanelContainer

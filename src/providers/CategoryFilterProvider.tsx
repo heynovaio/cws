@@ -319,7 +319,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
           return false;
         }
         if (selectedResourceCategories.length > 1) {
-          return selectedResourceCategories.every(
+          return selectedResourceCategories.some(
             (catId) => catId === categoryId
           );
         }
@@ -336,7 +336,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
           return false;
         }
         if (selectedProgramCategories.length > 1) {
-          return selectedProgramCategories.every(
+          return selectedProgramCategories.some(
             (catId) => catId === categoryId
           );
         }
@@ -345,7 +345,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       if (selectedTags.length > 0) {
         if (
           !item.tags ||
-          !selectedTags.every((tag) => item.tags?.includes(tag))
+          !selectedTags.some((tag) => item.tags?.includes(tag))
         ) {
           return false;
         }
@@ -357,7 +357,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         const format = item.data.format;
         const hasVirtual = selectedFormats.includes(PROGRAM_FORMATS.VIRTUAL);
         const hasInPerson = selectedFormats.includes(PROGRAM_FORMATS.IN_PERSON);
-
+        
         if (hasVirtual && !hasInPerson) {
           return format === PROGRAM_FORMATS.VIRTUAL || format.includes("Both");
         }
