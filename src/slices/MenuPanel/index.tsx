@@ -86,11 +86,6 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
                       }`}
                     >
                       {slice.primary.link_with_paragraph.map((item, index) => {
-                        const print_statement =
-                          slice.primary?.menu_display === "Equity in Action"
-                            ? item.link
-                            : "";
-                        console.log("Link: ", print_statement);
                         return (
                           <div key={index}>
                             {item.link && (

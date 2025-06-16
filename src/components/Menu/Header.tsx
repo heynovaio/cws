@@ -19,7 +19,6 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
-  console.log("slices", slices);
   return (
     <header
       className="sticky top-0 z-50 bg-midnight/70"
