@@ -16,7 +16,7 @@ import {
 } from "../../prismicio-types";
 import { ModuleFilter, PROGRAM_FORMATS, ProgramFormat } from "@/constants";
 import { asText } from "@prismicio/client";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 interface CategoryFilterContextProps {
   resources: ResourcePageDocument[];
@@ -57,6 +57,7 @@ interface CategoryFilterContextProps {
   resetCostFilter: () => void;
   isLoading: boolean;
   setLoading: (loading: boolean) => void;
+  updateUrlFromState: () => void;
 }
 
 const CategoryFilterContext = createContext<
@@ -69,6 +70,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [resources, setResources] = useState<ResourcePageDocument[]>([]);
   const [programs, setPrograms] = useState<ProgramPageDocument[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -97,7 +99,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   const [hasCredentials, setHasCredentials] = useState<boolean>(false);
   const [maxCostFilter, setMaxCostFilter] = useState<number>(0);
   const [isInitialized, setIsInitialized] = useState(false);
-  const [isLoading, setLoading] = useState<boolean>(true); // Initialize as true
+  const [isLoading, setLoading] = useState<boolean>(true);
 
   // Calculate max cost from programs
   const maxCost = useMemo(() => {
@@ -116,6 +118,59 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [programs, maxCost, isInitialized]);
 
+  const updateUrlFromState = useCallback(() => {
+    const newSearchParams = new URLSearchParams();
+
+    newSearchParams.set("filter", _activeFilter);
+
+    if (searchTerm.trim()) {
+      newSearchParams.set("search", searchTerm);
+    }
+
+    if (selectedTags.length > 0) {
+      newSearchParams.set("tags", selectedTags.join(","));
+    }
+
+    if (selectedResourceCategories.length > 0) {
+      newSearchParams.set(
+        "resource_categories",
+        selectedResourceCategories.join(",")
+      );
+    }
+
+    if (selectedProgramCategories.length > 0) {
+      newSearchParams.set(
+        "program_categories",
+        selectedProgramCategories.join(",")
+      );
+    }
+
+    if (selectedFormats.length > 0) {
+      newSearchParams.set("formats", selectedFormats.join(","));
+    }
+
+    if (hasCredentials) {
+      newSearchParams.set("credentials", "true");
+    }
+
+    if (maxCostFilter !== maxCost && maxCost > 0) {
+      newSearchParams.set("max_cost", maxCostFilter.toString());
+    }
+
+    router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+  }, [
+    _activeFilter,
+    searchTerm,
+    selectedTags,
+    selectedResourceCategories,
+    selectedProgramCategories,
+    selectedFormats,
+    hasCredentials,
+    maxCostFilter,
+    maxCost,
+    router,
+  ]);
+
   const resetCostFilter = useCallback(() => {
     setMaxCostFilter(maxCost);
   }, [maxCost]);
@@ -131,6 +186,22 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         : [...prev, format]
     );
   }, []);
+
+  const resourceTags = useMemo(() => {
+    return Array.from(
+      new Set(resources.flatMap((resource) => resource.tags || []))
+    ).sort();
+  }, [resources]);
+
+  const programTags = useMemo(() => {
+    return Array.from(
+      new Set(programs.flatMap((program) => program.tags || []))
+    ).sort();
+  }, [programs]);
+
+  const allTags = useMemo(() => {
+    return Array.from(new Set([...resourceTags, ...programTags])).sort();
+  }, [resourceTags, programTags]);
 
   const setActiveFilter = useCallback(
     (filter: ModuleFilter) => {
@@ -148,30 +219,34 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         setHasCredentials(false);
         setMaxCostFilter(maxCost);
       }
+
+      const getAvailableTagsForFilter = (filterType: ModuleFilter) => {
+        switch (filterType) {
+          case "resource_page":
+            return resourceTags;
+          case "program_page":
+            return programTags;
+          case "all":
+          default:
+            return allTags;
+        }
+      };
+
+      const availableTagsForNewFilter = getAvailableTagsForFilter(filter);
+      const compatibleTags = selectedTags.filter((tag) =>
+        availableTagsForNewFilter.includes(tag)
+      );
+
+      if (compatibleTags.length !== selectedTags.length) {
+        setSelectedTags(compatibleTags);
+      }
+
       _setActiveFilter(filter);
     },
-    [_activeFilter, maxCost]
+    [_activeFilter, maxCost, resourceTags, programTags, allTags, selectedTags]
   );
   const activeFilter = _activeFilter;
 
-  // Extract all tags from resources and programs
-  const resourceTags = useMemo(() => {
-    return Array.from(
-      new Set(resources.flatMap((resource) => resource.tags || []))
-    ).sort();
-  }, [resources]);
-
-  const programTags = useMemo(() => {
-    return Array.from(
-      new Set(programs.flatMap((program) => program.tags || []))
-    ).sort();
-  }, [programs]);
-
-  const allTags = useMemo(() => {
-    return Array.from(new Set([...resourceTags, ...programTags])).sort();
-  }, [resourceTags, programTags]);
-
-  // Determine available tags based on active filter
   const availableTags = useMemo(() => {
     switch (activeFilter) {
       case "resource_page":
@@ -222,14 +297,15 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const clearAllFilters = useCallback(() => {
     setSearchTerm("");
-    setActiveFilter(defaultCategoryFilter);
     setSelectedTags([]);
     setSelectedResourceCategories([]);
     setSelectedProgramCategories([]);
     setSelectedFormats([]);
     setHasCredentials(false);
     setMaxCostFilter(maxCost);
-  }, [maxCost, setActiveFilter]);
+
+    _setActiveFilter(defaultCategoryFilter);
+  }, [maxCost]);
 
   // Fuse.js
   const fuseOptions = useMemo(
@@ -271,7 +347,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     [fuse, searchableItems]
   );
 
-  // Filtering logic - For future put it into a hook
+  // Filtering logic
   const filteredItems = useMemo(() => {
     let items: (ResourcePageDocument | ProgramPageDocument)[] = [];
 
@@ -496,6 +572,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     resetCostFilter,
     isLoading,
     setLoading,
+    updateUrlFromState,
   };
 
   return (

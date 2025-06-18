@@ -38,6 +38,7 @@ const AppliedFiltersSection = () => {
   const searchParams = useSearchParams();
 
   const {
+    activeFilter,
     selectedTags,
     toggleTag,
     selectedResourceCategories,
@@ -58,31 +59,52 @@ const AppliedFiltersSection = () => {
   const updateFilterParams = React.useCallback(() => {
     const params = new URLSearchParams(searchParams.toString());
 
-    if (selectedResourceCategories.length > 0) {
-      params.set("resourceCategories", selectedResourceCategories.join(","));
-    } else {
+    params.set("filter", activeFilter);
+
+    if (activeFilter === "program_page") {
       params.delete("resourceCategories");
-    }
-
-    if (selectedProgramCategories.length > 0) {
-      params.set("programCategories", selectedProgramCategories.join(","));
-    } else {
+    } else if (activeFilter === "resource_page") {
       params.delete("programCategories");
-    }
-
-    if (selectedFormats.length > 0) {
-      params.set("formats", selectedFormats.join(","));
-    } else {
       params.delete("formats");
+      params.delete("hasCredentials");
+      params.delete("maxCost");
     }
 
-    if (hasCredentials) {
+    if (selectedTags.length > 0) {
+      params.set("tags", selectedTags.join(","));
+    } else {
+      params.delete("tags");
+    }
+
+    if (
+      selectedResourceCategories.length > 0 &&
+      activeFilter !== "program_page"
+    ) {
+      params.set("resourceCategories", selectedResourceCategories.join(","));
+    }
+
+    if (
+      selectedProgramCategories.length > 0 &&
+      activeFilter !== "resource_page"
+    ) {
+      params.set("programCategories", selectedProgramCategories.join(","));
+    }
+
+    if (selectedFormats.length > 0 && activeFilter !== "resource_page") {
+      params.set("formats", selectedFormats.join(","));
+    }
+
+    if (hasCredentials && activeFilter !== "resource_page") {
       params.set("hasCredentials", "true");
     } else {
       params.delete("hasCredentials");
     }
 
-    if (maxCostFilter < maxCost && maxCost > 0) {
+    if (
+      maxCostFilter < maxCost &&
+      maxCost > 0 &&
+      activeFilter !== "resource_page"
+    ) {
       params.set("maxCost", maxCostFilter.toString());
     } else {
       params.delete("maxCost");
@@ -95,6 +117,8 @@ const AppliedFiltersSection = () => {
     }
   }, [
     searchParams,
+    activeFilter,
+    selectedTags,
     selectedResourceCategories,
     selectedProgramCategories,
     selectedFormats,
@@ -109,77 +133,79 @@ const AppliedFiltersSection = () => {
   };
 
   const handleRemoveResourceCategory = (categoryId: string) => {
-    toggleResourceCategory(categoryId);
+    if (activeFilter !== "program_page") {
+      toggleResourceCategory(categoryId);
+    }
   };
 
   const handleRemoveProgramCategory = (categoryId: string) => {
-    toggleProgramCategory(categoryId);
+    if (activeFilter !== "resource_page") {
+      toggleProgramCategory(categoryId);
+    }
   };
 
   const handleRemoveFormat = (format: ProgramFormat) => {
-    toggleFormat(format);
+    if (activeFilter !== "resource_page") {
+      toggleFormat(format);
+    }
   };
 
   const handleRemoveCredentials = () => {
-    toggleCredentials();
+    if (activeFilter !== "resource_page") {
+      toggleCredentials();
+    }
   };
 
   const handleResetCostFilter = () => {
-    resetCostFilter();
+    if (activeFilter !== "resource_page") {
+      resetCostFilter();
+    }
   };
 
   React.useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      updateFilterParams();
-    }, 15);
+    updateFilterParams();
+  }, [updateFilterParams]);
 
-    return () => clearTimeout(timeoutId);
-  }, [
-    selectedResourceCategories,
-    selectedProgramCategories,
-    selectedFormats,
-    hasCredentials,
-    maxCostFilter,
-    maxCost,
-    updateFilterParams,
-  ]);
-
-  // Collect all applied filters with URL-synced handlers
+  // Filter out incompatible applied filters based on active filter
   const appliedFilters = [
-    // Tags
+    // Tags (always applicable)
     ...selectedTags.map((tag) => ({
       type: "tag",
       label: tag,
       removeHandler: () => handleRemoveTag(tag),
     })),
 
-    // Resource Categories
-    ...selectedResourceCategories.map((categoryId) => {
-      const category = resourceCategories?.find((c) => c.id === categoryId);
-      return {
-        type: "resource-category",
-        label: category?.data?.name || "Other",
-        removeHandler: () => handleRemoveResourceCategory(categoryId),
-      };
-    }),
+    ...(activeFilter !== "program_page"
+      ? selectedResourceCategories.map((categoryId) => {
+          const category = resourceCategories?.find((c) => c.id === categoryId);
+          return {
+            type: "resource-category",
+            label: category?.data?.name || "Other",
+            removeHandler: () => handleRemoveResourceCategory(categoryId),
+          };
+        })
+      : []),
 
-    // Program Categories
-    ...selectedProgramCategories.map((categoryId) => {
-      const category = programCategories?.find((c) => c.id === categoryId);
-      return {
-        type: "program-category",
-        label: category?.data?.name || "Other",
-        removeHandler: () => handleRemoveProgramCategory(categoryId),
-      };
-    }),
+    ...(activeFilter !== "resource_page"
+      ? selectedProgramCategories.map((categoryId) => {
+          const category = programCategories?.find((c) => c.id === categoryId);
+          return {
+            type: "program-category",
+            label: category?.data?.name || "Other",
+            removeHandler: () => handleRemoveProgramCategory(categoryId),
+          };
+        })
+      : []),
 
-    ...selectedFormats.map((format) => ({
-      type: "format",
-      label: format,
-      removeHandler: () => handleRemoveFormat(format as ProgramFormat),
-    })),
+    ...(activeFilter !== "resource_page"
+      ? selectedFormats.map((format) => ({
+          type: "format",
+          label: format,
+          removeHandler: () => handleRemoveFormat(format as ProgramFormat),
+        }))
+      : []),
 
-    ...(hasCredentials
+    ...(hasCredentials && activeFilter !== "resource_page"
       ? [
           {
             type: "credentials",
@@ -189,11 +215,11 @@ const AppliedFiltersSection = () => {
         ]
       : []),
 
-    ...(maxCostFilter < maxCost
+    ...(maxCostFilter < maxCost && activeFilter !== "resource_page"
       ? [
           {
             type: "cost",
-            label: `Under ${maxCostFilter.toLocaleString()}`,
+            label: `Under $${maxCostFilter.toLocaleString()}`,
             removeHandler: handleResetCostFilter,
           },
         ]
@@ -242,11 +268,9 @@ export const MobileSideFilter = () => {
           <VscSettings className="h-5 w-5" />
         </Button>
       </div>
-
-      {/* Applied Filters Display - Only on mobile */}
-      <AppliedFiltersSection />
-
-      {/* Filter Dialog */}
+      <div className="mt-6">
+        <AppliedFiltersSection />
+      </div>
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
@@ -265,7 +289,7 @@ export const MobileSideFilter = () => {
             </CloseButton>
 
             {/* Applied Filters in Dialog */}
-            <div className="mb-6">
+            <div className="my-6">
               <AppliedFiltersSection />
             </div>
 
