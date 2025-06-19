@@ -18,7 +18,6 @@ interface FooterProps {
 }
 
 export const Footer = ({ global, slices, footerData }: FooterProps) => {
-  console.log("Footer data:", footerData);
   return (
     <footer className="bg-neon-violet/50 text-white flex flex-col justify-center items-center">
       <nav className="py-14 px-5  mx-auto max-w-screen-xl w-full flex flex-col">
