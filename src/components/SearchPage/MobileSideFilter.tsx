@@ -3,6 +3,251 @@ import React, { useState } from "react";
 import { VscSettings } from "react-icons/vsc";
 import { SideFilter } from "./SideFilter";
 import { FaXmark } from "react-icons/fa6";
+import { useCategoryFilter } from "@/providers";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ProgramFormat } from "@/constants";
+
+// Applied Filter Tag Component
+type AppliedFilterTagProps = {
+  label: string;
+  onRemove: () => void;
+  type?: string;
+};
+
+const AppliedFilterTag: React.FC<AppliedFilterTagProps> = ({
+  label,
+  onRemove,
+}) => {
+  return (
+    <div className="inline-flex items-center gap-2 bg-purple-600/20 border border-purple-400/30 rounded-full px-3 py-1.5 text-sm text-purple-200">
+      <span className="truncate max-w-32">{label}</span>
+      <button
+        onClick={onRemove}
+        className="flex-shrink-0 hover:bg-purple-500/30 rounded-full p-0.5 transition-colors duration-200"
+        aria-label={`Remove ${label} filter`}
+      >
+        <FaXmark className="h-3 w-3" />
+      </button>
+    </div>
+  );
+};
+
+// Applied Filters Section Component
+const AppliedFiltersSection = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const {
+    activeFilter,
+    selectedTags,
+    toggleTag,
+    selectedResourceCategories,
+    toggleResourceCategory,
+    resourceCategories,
+    selectedProgramCategories,
+    toggleProgramCategory,
+    programCategories,
+    selectedFormats,
+    toggleFormat,
+    hasCredentials,
+    toggleCredentials,
+    maxCostFilter,
+    maxCost,
+    resetCostFilter,
+  } = useCategoryFilter();
+
+  const updateFilterParams = React.useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("filter", activeFilter);
+
+    if (activeFilter === "program_page") {
+      params.delete("resourceCategories");
+    } else if (activeFilter === "resource_page") {
+      params.delete("programCategories");
+      params.delete("formats");
+      params.delete("hasCredentials");
+      params.delete("maxCost");
+    }
+
+    if (selectedTags.length > 0) {
+      params.set("tags", selectedTags.join(","));
+    } else {
+      params.delete("tags");
+    }
+
+    if (
+      selectedResourceCategories.length > 0 &&
+      activeFilter !== "program_page"
+    ) {
+      params.set("resourceCategories", selectedResourceCategories.join(","));
+    }
+
+    if (
+      selectedProgramCategories.length > 0 &&
+      activeFilter !== "resource_page"
+    ) {
+      params.set("programCategories", selectedProgramCategories.join(","));
+    }
+
+    if (selectedFormats.length > 0 && activeFilter !== "resource_page") {
+      params.set("formats", selectedFormats.join(","));
+    }
+
+    if (hasCredentials && activeFilter !== "resource_page") {
+      params.set("hasCredentials", "true");
+    } else {
+      params.delete("hasCredentials");
+    }
+
+    if (
+      maxCostFilter < maxCost &&
+      maxCost > 0 &&
+      activeFilter !== "resource_page"
+    ) {
+      params.set("maxCost", maxCostFilter.toString());
+    } else {
+      params.delete("maxCost");
+    }
+
+    const currentUrl = searchParams.toString();
+    const newUrl = params.toString();
+    if (currentUrl !== newUrl) {
+      router.replace(`?${newUrl}`, { scroll: false });
+    }
+  }, [
+    searchParams,
+    activeFilter,
+    selectedTags,
+    selectedResourceCategories,
+    selectedProgramCategories,
+    selectedFormats,
+    hasCredentials,
+    maxCostFilter,
+    maxCost,
+    router,
+  ]);
+
+  const handleRemoveTag = (tag: string) => {
+    toggleTag(tag);
+  };
+
+  const handleRemoveResourceCategory = (categoryId: string) => {
+    if (activeFilter !== "program_page") {
+      toggleResourceCategory(categoryId);
+    }
+  };
+
+  const handleRemoveProgramCategory = (categoryId: string) => {
+    if (activeFilter !== "resource_page") {
+      toggleProgramCategory(categoryId);
+    }
+  };
+
+  const handleRemoveFormat = (format: ProgramFormat) => {
+    if (activeFilter !== "resource_page") {
+      toggleFormat(format);
+    }
+  };
+
+  const handleRemoveCredentials = () => {
+    if (activeFilter !== "resource_page") {
+      toggleCredentials();
+    }
+  };
+
+  const handleResetCostFilter = () => {
+    if (activeFilter !== "resource_page") {
+      resetCostFilter();
+    }
+  };
+
+  React.useEffect(() => {
+    updateFilterParams();
+  }, [updateFilterParams]);
+
+  // Filter out incompatible applied filters based on active filter
+  const appliedFilters = [
+    // Tags (always applicable)
+    ...selectedTags.map((tag) => ({
+      type: "tag",
+      label: tag,
+      removeHandler: () => handleRemoveTag(tag),
+    })),
+
+    ...(activeFilter !== "program_page"
+      ? selectedResourceCategories.map((categoryId) => {
+          const category = resourceCategories?.find((c) => c.id === categoryId);
+          return {
+            type: "resource-category",
+            label: category?.data?.name || "Other",
+            removeHandler: () => handleRemoveResourceCategory(categoryId),
+          };
+        })
+      : []),
+
+    ...(activeFilter !== "resource_page"
+      ? selectedProgramCategories.map((categoryId) => {
+          const category = programCategories?.find((c) => c.id === categoryId);
+          return {
+            type: "program-category",
+            label: category?.data?.name || "Other",
+            removeHandler: () => handleRemoveProgramCategory(categoryId),
+          };
+        })
+      : []),
+
+    ...(activeFilter !== "resource_page"
+      ? selectedFormats.map((format) => ({
+          type: "format",
+          label: format,
+          removeHandler: () => handleRemoveFormat(format as ProgramFormat),
+        }))
+      : []),
+
+    ...(hasCredentials && activeFilter !== "resource_page"
+      ? [
+          {
+            type: "credentials",
+            label: "Has Credentials",
+            removeHandler: handleRemoveCredentials,
+          },
+        ]
+      : []),
+
+    ...(maxCostFilter < maxCost && activeFilter !== "resource_page"
+      ? [
+          {
+            type: "cost",
+            label: `Under $${maxCostFilter.toLocaleString()}`,
+            removeHandler: handleResetCostFilter,
+          },
+        ]
+      : []),
+  ];
+
+  if (appliedFilters.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="mb-4">
+      <h3 className="text-sm font-medium text-gray-300 mb-3">
+        Applied Filters
+      </h3>
+      <div className="flex flex-wrap gap-2">
+        {appliedFilters.map((filter, index) => (
+          <AppliedFilterTag
+            key={`${filter.type}-${filter.label}-${index}`}
+            label={filter.label}
+            onRemove={filter.removeHandler}
+            type={filter.type}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export const MobileSideFilter = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,14 +257,20 @@ export const MobileSideFilter = () => {
   };
 
   return (
-    <div className="flex md:hidden w-full">
-      <Button
-        onClick={handleFilterClick}
-        className="self-start btn btn-outline border focus flex items-center gap-2 justify-center"
-      >
-        Filters
-        <VscSettings className="h-5 w-5" />
-      </Button>
+    <div className="flex md:hidden w-full flex-col gap-3">
+      {/* Filter Button */}
+      <div className="flex items-center justify-between">
+        <Button
+          onClick={handleFilterClick}
+          className="self-start btn btn-outline border focus flex items-center gap-2 justify-center relative"
+        >
+          Filters
+          <VscSettings className="h-5 w-5" />
+        </Button>
+      </div>
+      <div className="mt-6">
+        <AppliedFiltersSection />
+      </div>
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
@@ -36,6 +287,12 @@ export const MobileSideFilter = () => {
             >
               <FaXmark className="h-5 w-5" />
             </CloseButton>
+
+            {/* Applied Filters in Dialog */}
+            <div className="my-6">
+              <AppliedFiltersSection />
+            </div>
+
             <SideFilter />
           </DialogPanel>
         </div>
