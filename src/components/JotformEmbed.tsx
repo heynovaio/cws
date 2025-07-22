@@ -43,7 +43,7 @@ export const JotformEmbed = ({
   if (!formId) return null;
 
   return (
-    <div className="w-full">
+    <div className="w-full" id="form">
       <iframe
         id={`JotFormIFrame-${formId}`}
         title={title}

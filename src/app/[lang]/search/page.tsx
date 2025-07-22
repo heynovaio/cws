@@ -11,13 +11,17 @@ import { GeneralHero } from "@/components/Heros/GeneralHero";
 import { Suspense } from "react";
 import { Loading } from "@/components/Loading/Loading";
 
-export default async function Page({}) {
+type Params = { uid: string; lang: string };
+
+export default async function Page({ params }: { params: Promise<Params> }) {
   const client = createClient();
+  const { lang } = await params;
+
   const page = await client
-    .getSingle("search_page", { lang: "en-ca" })
+    .getSingle("search_page", { lang })
     .catch(() => notFound());
-  const global = await client.getSingle("globals", { lang: "en-ca" });
-  const menus = await client.getSingle("menus", { lang: "en-ca" });
+  const global = await client.getSingle("globals", { lang });
+  const menus = await client.getSingle("menus", { lang });
 
   const locales = await getLocales(page, client);
   return (
@@ -37,17 +41,22 @@ export default async function Page({}) {
         <SliceZone
           slices={page.data.slices}
           components={components}
-          context={{ lang: "en-ca" }}
+          context={{ lang }}
         />
       </Suspense>
     </Layout>
   );
 }
 
-export async function generateMetadata({}): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { lang } = await params;
   const client = createClient();
   const page = await client
-    .getSingle("search_page", { lang: "en-ca" })
+    .getSingle("search_page", { lang })
     .catch(() => notFound());
 
   return {
