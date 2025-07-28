@@ -4,7 +4,6 @@ import { VscSettings } from "react-icons/vsc";
 import { SideFilter } from "./SideFilter";
 import { FaXmark } from "react-icons/fa6";
 import { useCategoryFilter } from "@/providers";
-import { useRouter, useSearchParams } from "next/navigation";
 import { ProgramFormat } from "@/constants";
 
 // Applied Filter Tag Component
@@ -34,9 +33,6 @@ const AppliedFilterTag: React.FC<AppliedFilterTagProps> = ({
 
 // Applied Filters Section Component
 const AppliedFiltersSection = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
   const {
     activeFilter,
     selectedTags,
@@ -55,78 +51,6 @@ const AppliedFiltersSection = () => {
     maxCost,
     resetCostFilter,
   } = useCategoryFilter();
-
-  const updateFilterParams = React.useCallback(() => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    params.set("filter", activeFilter);
-
-    if (activeFilter === "program_page") {
-      params.delete("resourceCategories");
-    } else if (activeFilter === "resource_page") {
-      params.delete("programCategories");
-      params.delete("formats");
-      params.delete("hasCredentials");
-      params.delete("maxCost");
-    }
-
-    if (selectedTags.length > 0) {
-      params.set("tags", selectedTags.join(","));
-    } else {
-      params.delete("tags");
-    }
-
-    if (
-      selectedResourceCategories.length > 0 &&
-      activeFilter !== "program_page"
-    ) {
-      params.set("resourceCategories", selectedResourceCategories.join(","));
-    }
-
-    if (
-      selectedProgramCategories.length > 0 &&
-      activeFilter !== "resource_page"
-    ) {
-      params.set("programCategories", selectedProgramCategories.join(","));
-    }
-
-    if (selectedFormats.length > 0 && activeFilter !== "resource_page") {
-      params.set("formats", selectedFormats.join(","));
-    }
-
-    if (hasCredentials && activeFilter !== "resource_page") {
-      params.set("hasCredentials", "true");
-    } else {
-      params.delete("hasCredentials");
-    }
-
-    if (
-      maxCostFilter < maxCost &&
-      maxCost > 0 &&
-      activeFilter !== "resource_page"
-    ) {
-      params.set("maxCost", maxCostFilter.toString());
-    } else {
-      params.delete("maxCost");
-    }
-
-    const currentUrl = searchParams.toString();
-    const newUrl = params.toString();
-    if (currentUrl !== newUrl) {
-      router.replace(`?${newUrl}`, { scroll: false });
-    }
-  }, [
-    searchParams,
-    activeFilter,
-    selectedTags,
-    selectedResourceCategories,
-    selectedProgramCategories,
-    selectedFormats,
-    hasCredentials,
-    maxCostFilter,
-    maxCost,
-    router,
-  ]);
 
   const handleRemoveTag = (tag: string) => {
     toggleTag(tag);
@@ -161,10 +85,6 @@ const AppliedFiltersSection = () => {
       resetCostFilter();
     }
   };
-
-  React.useEffect(() => {
-    updateFilterParams();
-  }, [updateFilterParams]);
 
   // Filter out incompatible applied filters based on active filter
   const appliedFilters = [

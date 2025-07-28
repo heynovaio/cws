@@ -2,10 +2,7 @@
 import { Field, Checkbox, Label } from "@headlessui/react";
 import { FaCheck, FaMinus, FaPlus } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import {
-  useCategoryFilter,
-} from "@/providers/CategoryFilterProvider";
+import { useCategoryFilter } from "@/providers/CategoryFilterProvider";
 
 export type FilterItem = string | { id: string; name: string };
 
@@ -33,7 +30,6 @@ export const FilterPanel = ({
   onItemToggle,
   className = "rounded bg-light-violet text-midnight p-4 flex flex-col gap-6",
   initialVisibleCount = 4,
-  filterKey = "FilterPanel",
   slider = false,
   sliderMax = 100,
   sliderValue = 100,
@@ -44,8 +40,6 @@ export const FilterPanel = ({
   const [showAll, setShowAll] = useState(false);
   const [localSliderValue, setLocalSliderValue] = useState(sliderValue);
   const [initialized, setInitialized] = useState(false);
-  const searchParams = useSearchParams();
-  const router = useRouter();
 
   useEffect(() => {
     setLocalSliderValue(sliderValue);
@@ -53,83 +47,27 @@ export const FilterPanel = ({
 
   // Initialize state from URL parameters on mount
   useEffect(() => {
-    if (!searchParams || initialized) return;
-
-    const params = new URLSearchParams(searchParams.toString());
+    if (initialized) return;
 
     if (slider) {
-      const urlSliderValue = params.get(filterKey);
-      if (urlSliderValue && !isNaN(Number(urlSliderValue))) {
-        const numValue = Number(urlSliderValue);
-        if (numValue >= 0 && numValue <= sliderMax) {
-          setLocalSliderValue(numValue);
-          onSliderChange?.(numValue);
-        }
-      }
+      // For sliders, the URL sync is handled by the parent component
       setInitialized(true);
       return;
     }
 
-    const urlValues = params.get(filterKey)?.split(",").filter(Boolean) || [];
-
-    // If there are URL params but selectedItems is empty, we need to initialize
-    if (urlValues.length > 0 && selectedItems.length === 0) {
-      urlValues.forEach((value) => {
-        if (items.some((item) => getItemValue(item) === value)) {
-          onItemToggle?.(value);
-        }
-      });
-    }
-
+    // For non-slider filters, we rely on the selectedItems prop
+    // which should already be synchronized with the URL by the parent component
     setInitialized(true);
-  }, [
-    searchParams,
-    initialized,
-    slider,
-    filterKey,
-    items,
-    selectedItems,
-    onItemToggle,
-    onSliderChange,
-    sliderMax,
-  ]);
+  }, [initialized, slider]);
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
     setLocalSliderValue(newValue);
     onSliderChange?.(newValue);
-
-    const newParams = new URLSearchParams(searchParams?.toString());
-    if (newValue === sliderMax) {
-      newParams.delete(filterKey);
-    } else {
-      newParams.set(filterKey, newValue.toString());
-    }
-    router.replace(`?${newParams.toString()}`, { scroll: false });
   };
 
   const handleItemToggle = (itemId: string) => {
     onItemToggle?.(itemId);
-
-    const newParams = new URLSearchParams(searchParams?.toString());
-    const currentValues =
-      newParams.get(filterKey)?.split(",").filter(Boolean) || [];
-    const valueExists = currentValues.includes(itemId);
-
-    let newValues: string[];
-    if (valueExists) {
-      newValues = currentValues.filter((v) => v !== itemId);
-    } else {
-      newValues = [...currentValues, itemId];
-    }
-
-    if (newValues.length > 0) {
-      newParams.set(filterKey, newValues.join(","));
-    } else {
-      newParams.delete(filterKey);
-    }
-
-    router.replace(`?${newParams.toString()}`, { scroll: false });
   };
 
   const getItemValue = (item: FilterItem): string => {
@@ -142,15 +80,6 @@ export const FilterPanel = ({
 
   const visibleItems = showAll ? items : items.slice(0, initialVisibleCount);
   const remainingCount = Math.max(0, items.length - initialVisibleCount);
-
-  // Get the actual selected state by combining props and URL params
-  const getActualSelectedState = (value: string): boolean => {
-    if (!searchParams) return selectedItems.includes(value);
-
-    const params = new URLSearchParams(searchParams.toString());
-    const urlValues = params.get(filterKey)?.split(",").filter(Boolean) || [];
-    return urlValues.includes(value) || selectedItems.includes(value);
-  };
 
   return (
     <>
@@ -200,7 +129,7 @@ export const FilterPanel = ({
                     {visibleItems.map((item) => {
                       const value = getItemValue(item);
                       const name = getItemName(item);
-                      const isSelected = getActualSelectedState(value);
+                      const isSelected = selectedItems.includes(value);
 
                       return (
                         <Field key={value} className="flex items-center gap-3">

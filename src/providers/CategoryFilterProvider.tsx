@@ -57,7 +57,6 @@ interface CategoryFilterContextProps {
   resetCostFilter: () => void;
   isLoading: boolean;
   setLoading: (loading: boolean) => void;
-  updateUrlFromState: () => void;
 }
 
 const CategoryFilterContext = createContext<
@@ -71,11 +70,15 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
+
+  // State initialization from URL
   const [resources, setResources] = useState<ResourcePageDocument[]>([]);
   const [programs, setPrograms] = useState<ProgramPageDocument[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(
+    () => searchParams.get("search") || ""
+  );
   const [selectedTags, setSelectedTags] = useState<string[]>(() => {
-    const urlTags = searchParams.get("tags")?.split(",") || [];
+    const urlTags = searchParams.get("tags")?.split(",").filter(Boolean) || [];
     return urlTags;
   });
   const [_activeFilter, _setActiveFilter] = useState<ModuleFilter>(() => {
@@ -85,108 +88,148 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   });
   const [selectedResourceCategories, setSelectedResourceCategories] = useState<
     string[]
-  >([]);
+  >(() => {
+    const urlCategories =
+      searchParams.get("resource_categories")?.split(",").filter(Boolean) || [];
+    return urlCategories;
+  });
   const [selectedProgramCategories, setSelectedProgramCategories] = useState<
     string[]
-  >([]);
+  >(() => {
+    const urlCategories =
+      searchParams.get("program_categories")?.split(",").filter(Boolean) || [];
+    return urlCategories;
+  });
   const [resourceCategories, setResourceCategories] = useState<
     ResourceCategoryDocument[]
   >([]);
   const [programCategories, setProgramCategories] = useState<
     ProgramCategoryDocument[]
   >([]);
-  const [selectedFormats, setSelectedFormats] = useState<ProgramFormat[]>([]);
-  const [hasCredentials, setHasCredentials] = useState<boolean>(false);
-  const [maxCostFilter, setMaxCostFilter] = useState<number>(0);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [selectedFormats, setSelectedFormats] = useState<ProgramFormat[]>(
+    () => {
+      const urlFormats =
+        searchParams.get("formats")?.split(",").filter(Boolean) || [];
+      return urlFormats as ProgramFormat[];
+    }
+  );
+  const [hasCredentials, setHasCredentials] = useState<boolean>(() => {
+    return searchParams.get("credentials") === "true";
+  });
   const [isLoading, setLoading] = useState<boolean>(true);
 
-  // Calculate max cost from programs
+  // Calculate max cost from programs - Fixed to handle the actual cost values properly
   const maxCost = useMemo(() => {
     if (programs.length === 0) return 0;
-    return Math.max(
-      ...programs.map((program) =>
-        typeof program.data.cost === "number" ? program.data.cost : 0
-      )
-    );
+
+    const costs = programs
+      .map((program) => program.data.cost)
+      .filter((cost): cost is number => typeof cost === "number" && cost > 0);
+
+    return costs.length > 0 ? Math.max(...costs) : 0;
   }, [programs]);
 
+  // Initialize maxCostFilter - handle both URL params and program data loading
+  const [maxCostFilter, setMaxCostFilter] = useState<number>(() => {
+    const urlMaxCost = searchParams.get("max_cost");
+    return urlMaxCost ? parseInt(urlMaxCost, 10) : 0;
+  });
+
+  // Update maxCostFilter when programs load and no URL param was set
   useEffect(() => {
-    if (programs.length > 0 && !isInitialized && maxCost > 0) {
+    const urlMaxCost = searchParams.get("max_cost");
+    if (!urlMaxCost && maxCost > 0 && maxCostFilter === 0) {
       setMaxCostFilter(maxCost);
-      setIsInitialized(true);
     }
-  }, [programs, maxCost, isInitialized]);
+  }, [maxCost, maxCostFilter, searchParams]);
 
-  const updateUrlFromState = useCallback(() => {
-    const newSearchParams = new URLSearchParams();
+  // Centralized URL update function
+  const updateUrl = useCallback(
+    (
+      updates: Partial<{
+        filter: ModuleFilter;
+        search: string;
+        tags: string[];
+        resource_categories: string[];
+        program_categories: string[];
+        formats: ProgramFormat[];
+        credentials: boolean;
+        max_cost: number;
+      }>
+    ) => {
+      const newSearchParams = new URLSearchParams(searchParams.toString());
 
-    newSearchParams.set("filter", _activeFilter);
+      // Handle each parameter
+      if (updates.filter !== undefined) {
+        newSearchParams.set("filter", updates.filter);
+      }
 
-    if (searchTerm.trim()) {
-      newSearchParams.set("search", searchTerm);
-    }
+      if (updates.search !== undefined) {
+        if (updates.search.trim()) {
+          newSearchParams.set("search", updates.search);
+        } else {
+          newSearchParams.delete("search");
+        }
+      }
 
-    if (selectedTags.length > 0) {
-      newSearchParams.set("tags", selectedTags.join(","));
-    }
+      if (updates.tags !== undefined) {
+        if (updates.tags.length > 0) {
+          newSearchParams.set("tags", updates.tags.join(","));
+        } else {
+          newSearchParams.delete("tags");
+        }
+      }
 
-    if (selectedResourceCategories.length > 0) {
-      newSearchParams.set(
-        "resource_categories",
-        selectedResourceCategories.join(",")
-      );
-    }
+      if (updates.resource_categories !== undefined) {
+        if (updates.resource_categories.length > 0) {
+          newSearchParams.set(
+            "resource_categories",
+            updates.resource_categories.join(",")
+          );
+        } else {
+          newSearchParams.delete("resource_categories");
+        }
+      }
 
-    if (selectedProgramCategories.length > 0) {
-      newSearchParams.set(
-        "program_categories",
-        selectedProgramCategories.join(",")
-      );
-    }
+      if (updates.program_categories !== undefined) {
+        if (updates.program_categories.length > 0) {
+          newSearchParams.set(
+            "program_categories",
+            updates.program_categories.join(",")
+          );
+        } else {
+          newSearchParams.delete("program_categories");
+        }
+      }
 
-    if (selectedFormats.length > 0) {
-      newSearchParams.set("formats", selectedFormats.join(","));
-    }
+      if (updates.formats !== undefined) {
+        if (updates.formats.length > 0) {
+          newSearchParams.set("formats", updates.formats.join(","));
+        } else {
+          newSearchParams.delete("formats");
+        }
+      }
 
-    if (hasCredentials) {
-      newSearchParams.set("credentials", "true");
-    }
+      if (updates.credentials !== undefined) {
+        if (updates.credentials) {
+          newSearchParams.set("credentials", "true");
+        } else {
+          newSearchParams.delete("credentials");
+        }
+      }
 
-    if (maxCostFilter !== maxCost && maxCost > 0) {
-      newSearchParams.set("max_cost", maxCostFilter.toString());
-    }
+      if (updates.max_cost !== undefined) {
+        // Always set the max_cost parameter if it's different from the current maxCost
+        // This allows for proper URL state management
+        newSearchParams.set("max_cost", updates.max_cost.toString());
+      }
 
-    router.replace(`?${newSearchParams.toString()}`, { scroll: false });
-  }, [
-    _activeFilter,
-    searchTerm,
-    selectedTags,
-    selectedResourceCategories,
-    selectedProgramCategories,
-    selectedFormats,
-    hasCredentials,
-    maxCostFilter,
-    maxCost,
-    router,
-  ]);
+      router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+    },
+    [searchParams, router, maxCost]
+  );
 
-  const resetCostFilter = useCallback(() => {
-    setMaxCostFilter(maxCost);
-  }, [maxCost]);
-
-  const toggleCredentials = useCallback(() => {
-    setHasCredentials((prev) => !prev);
-  }, []);
-
-  const toggleFormat = useCallback((format: ProgramFormat) => {
-    setSelectedFormats((prev) =>
-      prev.includes(format)
-        ? prev.filter((f) => f !== format)
-        : [...prev, format]
-    );
-  }, []);
-
+  // Tag calculations (moved up to avoid initialization issues)
   const resourceTags = useMemo(() => {
     return Array.from(
       new Set(resources.flatMap((resource) => resource.tags || []))
@@ -203,13 +246,17 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     return Array.from(new Set([...resourceTags, ...programTags])).sort();
   }, [resourceTags, programTags]);
 
+  // Enhanced state setters that update URL
   const setActiveFilter = useCallback(
     (filter: ModuleFilter) => {
       // Clear opposite category filters when switching to specific filter types
       if (filter === "program_page" && _activeFilter !== "program_page") {
         // Clear resource-specific filters
         setSelectedResourceCategories([]);
-        // Keep tags, formats, credentials, and cost filters for programs
+        updateUrl({
+          filter,
+          resource_categories: [],
+        });
       } else if (
         filter === "resource_page" &&
         _activeFilter !== "resource_page"
@@ -218,6 +265,15 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         setSelectedFormats([]);
         setHasCredentials(false);
         setMaxCostFilter(maxCost);
+        updateUrl({
+          filter,
+          program_categories: [],
+          formats: [],
+          credentials: false,
+          max_cost: maxCost,
+        });
+      } else {
+        updateUrl({ filter });
       }
 
       const getAvailableTagsForFilter = (filterType: ModuleFilter) => {
@@ -239,12 +295,22 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (compatibleTags.length !== selectedTags.length) {
         setSelectedTags(compatibleTags);
+        updateUrl({ tags: compatibleTags });
       }
 
       _setActiveFilter(filter);
     },
-    [_activeFilter, maxCost, resourceTags, programTags, allTags, selectedTags]
+    [
+      _activeFilter,
+      maxCost,
+      resourceTags,
+      programTags,
+      allTags,
+      selectedTags,
+      updateUrl,
+    ]
   );
+
   const activeFilter = _activeFilter;
 
   const availableTags = useMemo(() => {
@@ -259,41 +325,101 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [activeFilter, resourceTags, programTags, allTags]);
 
-  const toggleResourceCategory = useCallback((categoryId: string) => {
-    setSelectedResourceCategories((prev) =>
-      prev.includes(categoryId)
-        ? prev.filter((id) => id !== categoryId)
-        : [...prev, categoryId]
-    );
-  }, []);
-
-  const toggleProgramCategory = useCallback((categoryId: string) => {
-    setSelectedProgramCategories((prev) =>
-      prev.includes(categoryId)
-        ? prev.filter((id) => id !== categoryId)
-        : [...prev, categoryId]
-    );
-  }, []);
-
-  const handleSetResourceCategories = useCallback((categoryIds: string[]) => {
-    setSelectedResourceCategories(categoryIds);
-  }, []);
-
-  const handleSetProgramCategories = useCallback((categoryIds: string[]) => {
-    setSelectedProgramCategories(categoryIds);
-  }, []);
-
   const toggleTag = useCallback(
     (tag: string) => {
-      // Only allow toggling if the tag is in availableTags
       if (availableTags.includes(tag)) {
-        setSelectedTags((prev) =>
-          prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-        );
+        const newTags = selectedTags.includes(tag)
+          ? selectedTags.filter((t) => t !== tag)
+          : [...selectedTags, tag];
+
+        setSelectedTags(newTags);
+        updateUrl({ tags: newTags });
       }
     },
-    [availableTags]
+    [availableTags, selectedTags, updateUrl]
   );
+
+  const handleSetSearchTerm = useCallback(
+    (term: string) => {
+      setSearchTerm(term);
+      updateUrl({ search: term });
+    },
+    [updateUrl]
+  );
+
+  const toggleResourceCategory = useCallback(
+    (categoryId: string) => {
+      const newCategories = selectedResourceCategories.includes(categoryId)
+        ? selectedResourceCategories.filter((id) => id !== categoryId)
+        : [...selectedResourceCategories, categoryId];
+
+      setSelectedResourceCategories(newCategories);
+      updateUrl({ resource_categories: newCategories });
+    },
+    [selectedResourceCategories, updateUrl]
+  );
+
+  const toggleProgramCategory = useCallback(
+    (categoryId: string) => {
+      const newCategories = selectedProgramCategories.includes(categoryId)
+        ? selectedProgramCategories.filter((id) => id !== categoryId)
+        : [...selectedProgramCategories, categoryId];
+
+      setSelectedProgramCategories(newCategories);
+      updateUrl({ program_categories: newCategories });
+    },
+    [selectedProgramCategories, updateUrl]
+  );
+
+  const handleSetResourceCategories = useCallback(
+    (categoryIds: string[]) => {
+      setSelectedResourceCategories(categoryIds);
+      updateUrl({ resource_categories: categoryIds });
+    },
+    [updateUrl]
+  );
+
+  const handleSetProgramCategories = useCallback(
+    (categoryIds: string[]) => {
+      setSelectedProgramCategories(categoryIds);
+      updateUrl({ program_categories: categoryIds });
+    },
+    [updateUrl]
+  );
+
+  const toggleFormat = useCallback(
+    (format: ProgramFormat) => {
+      const newFormats = selectedFormats.includes(format)
+        ? selectedFormats.filter((f) => f !== format)
+        : [...selectedFormats, format];
+
+      setSelectedFormats(newFormats);
+      updateUrl({ formats: newFormats });
+    },
+    [selectedFormats, updateUrl]
+  );
+
+  const toggleCredentials = useCallback(() => {
+    const newValue = !hasCredentials;
+    setHasCredentials(newValue);
+    updateUrl({ credentials: newValue });
+  }, [hasCredentials, updateUrl]);
+
+  const handleSetMaxCostFilter = useCallback(
+    (value: number) => {
+      setMaxCostFilter(value);
+      updateUrl({ max_cost: value });
+    },
+    [updateUrl]
+  );
+
+  const resetCostFilter = useCallback(() => {
+    setMaxCostFilter(maxCost);
+    // Remove the max_cost parameter from URL when resetting to max
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    newSearchParams.delete("max_cost");
+    router.replace(`?${newSearchParams.toString()}`, { scroll: false });
+  }, [maxCost, router, searchParams]);
 
   const clearAllFilters = useCallback(() => {
     setSearchTerm("");
@@ -303,11 +429,13 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     setSelectedFormats([]);
     setHasCredentials(false);
     setMaxCostFilter(maxCost);
-
     _setActiveFilter(defaultCategoryFilter);
-  }, [maxCost]);
 
-  // Fuse.js
+    // Clear all URL parameters except keep the base URL
+    router.replace(window.location.pathname, { scroll: false });
+  }, [maxCost, router]);
+
+  // Fuse.js setup
   const fuseOptions = useMemo(
     () => ({
       keys: [
@@ -347,34 +475,20 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     [fuse, searchableItems]
   );
 
-  // Filtering logic
   const filteredItems = useMemo(() => {
     let items: (ResourcePageDocument | ProgramPageDocument)[] = [];
 
-    const hasProgramSpecificFilters =
-      selectedProgramCategories.length > 0 ||
-      selectedFormats.length > 0 ||
-      hasCredentials ||
-      maxCostFilter !== maxCost;
-
-    const hasResourceSpecificFilters = selectedResourceCategories.length > 0;
+    const urlMaxCost = searchParams.get("max_cost");
+    const isCostFilterActive = urlMaxCost
+      ? parseInt(urlMaxCost, 10) < maxCost
+      : maxCostFilter < maxCost;
     const hasTagFilters = selectedTags.length > 0;
 
-    // Determine initial item set based on active filter and specific filters
     if (activeFilter === "program_page") {
       items = programs;
     } else if (activeFilter === "resource_page") {
       items = resources;
-    } else if (
-      hasProgramSpecificFilters ||
-      hasResourceSpecificFilters ||
-      hasTagFilters
-    ) {
-      // When ANY filters are active (including tags), show both programs and resources
-      // This allows tags to act as an OR clause at the top level
-      items = [...programs, ...resources];
     } else {
-      // Default "all" case with no specific filters
       items = [...programs, ...resources];
     }
 
@@ -385,59 +499,48 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     items = items.filter((item) => {
-      // Skip items that don't match the active filter ONLY if no cross-type filters are active
-      // If tags are selected, allow both types to show through regardless of active filter
-      if (
-        activeFilter === "program_page" &&
-        item.type !== "program_page" &&
-        !hasTagFilters
-      ) {
-        return false;
-      }
-      if (
-        activeFilter === "resource_page" &&
-        item.type !== "resource_page" &&
-        !hasTagFilters
-      ) {
-        return false;
+      const hasResourceCategoryFilters = selectedResourceCategories.length > 0;
+      const hasProgramCategoryFilters = selectedProgramCategories.length > 0;
+      const hasMainFilters =
+        hasResourceCategoryFilters ||
+        hasProgramCategoryFilters ||
+        hasTagFilters;
+
+      if (hasCredentials && !hasMainFilters) {
+        if (item.type === "resource_page") {
+          return false;
+        }
       }
 
-      const matchesResourceFilters =
-        item.type === "resource_page" &&
-        selectedResourceCategories.length > 0 &&
-        item.data.category &&
-        selectedResourceCategories.includes(
-          "id" in item.data.category ? item.data.category.id : ""
-        );
+      if (hasMainFilters) {
+        let passesMainFilters = false;
 
-      const matchesProgramCategoryFilters =
-        item.type === "program_page" &&
-        selectedProgramCategories.length > 0 &&
-        item.data.category &&
-        selectedProgramCategories.includes(
-          "id" in item.data.category ? item.data.category.id : ""
-        );
+        if (hasResourceCategoryFilters && item.type === "resource_page") {
+          const matchesResourceCategory =
+            item.data.category &&
+            selectedResourceCategories.includes(
+              "id" in item.data.category ? item.data.category.id : ""
+            );
+          if (matchesResourceCategory) passesMainFilters = true;
+        }
 
-      const matchesTagFilters =
-        hasTagFilters &&
-        item.tags &&
-        selectedTags.some((tag) => item.tags?.includes(tag));
+        if (hasProgramCategoryFilters && item.type === "program_page") {
+          const matchesProgramCategory =
+            item.data.category &&
+            selectedProgramCategories.includes(
+              "id" in item.data.category ? item.data.category.id : ""
+            );
+          if (matchesProgramCategory) passesMainFilters = true;
+        }
 
-      const hasAnyFilters =
-        selectedResourceCategories.length > 0 ||
-        selectedProgramCategories.length > 0 ||
-        hasTagFilters ||
-        selectedFormats.length > 0 ||
-        hasCredentials ||
-        maxCostFilter !== maxCost;
+        if (hasTagFilters && item.tags) {
+          const matchesTag = selectedTags.some((tag) =>
+            item.tags?.includes(tag)
+          );
+          if (matchesTag) passesMainFilters = true;
+        }
 
-      if (hasAnyFilters) {
-        const passesTopLevelOR =
-          matchesResourceFilters ||
-          matchesProgramCategoryFilters ||
-          matchesTagFilters;
-
-        if (!passesTopLevelOR) {
+        if (!passesMainFilters) {
           return false;
         }
       }
@@ -476,14 +579,41 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         }
 
         if (hasCredentials) {
-          if (item.data.certs !== true) {
+          if (!item.data.certs) {
             return false;
           }
         }
 
-        const itemCost =
-          typeof item.data.cost === "number" ? item.data.cost : maxCost;
-        if (itemCost > maxCostFilter) {
+        if (isCostFilterActive) {
+          // Special case: if only cost filter is active (no tags/categories), only show programs
+          if (!hasMainFilters) {
+            const effectiveMaxCost = urlMaxCost
+              ? parseInt(urlMaxCost, 10)
+              : maxCostFilter;
+            const itemCost =
+              typeof item.data.cost === "number" ? item.data.cost : 0;
+
+            if (itemCost > effectiveMaxCost) {
+              return false;
+            }
+          } else {
+            // If main filters are also active, apply cost filter to programs
+            const effectiveMaxCost = urlMaxCost
+              ? parseInt(urlMaxCost, 10)
+              : maxCostFilter;
+            const itemCost =
+              typeof item.data.cost === "number" ? item.data.cost : 0;
+
+            if (itemCost > effectiveMaxCost) {
+              return false;
+            }
+          }
+        }
+      } else if (item.type === "resource_page") {
+        // For resources, if only cost filter is active (no other filters), hide resources
+        const hasOtherFilters =
+          hasMainFilters || selectedFormats.length > 0 || hasCredentials;
+        if (isCostFilterActive && !hasOtherFilters) {
           return false;
         }
       }
@@ -505,6 +635,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     hasCredentials,
     maxCostFilter,
     maxCost,
+    searchParams,
   ]);
 
   const filterCounts = useMemo(() => {
@@ -541,7 +672,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     activeFilter,
     setActiveFilter,
     searchTerm,
-    setSearchTerm,
+    setSearchTerm: handleSetSearchTerm,
     filteredItems,
     filterCounts,
     resultCount: filteredItems.length,
@@ -567,12 +698,11 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     setHasCredentials,
     toggleCredentials,
     maxCostFilter,
-    setMaxCostFilter,
+    setMaxCostFilter: handleSetMaxCostFilter,
     maxCost,
     resetCostFilter,
     isLoading,
     setLoading,
-    updateUrlFromState,
   };
 
   return (
@@ -581,6 +711,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     </CategoryFilterContext.Provider>
   );
 };
+
 export default CategoryFilterProvider;
 
 export const useCategoryFilter = (): CategoryFilterContextProps => {
