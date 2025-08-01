@@ -55,7 +55,11 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
       {/* Containers */}
       <div className="hidden md:flex w-1/4">
         <aside className="flex flex-col m-0 py-7 px-5 border-neon-violet border-r bg-[#7913E033]">
-          {isLoading ? <div className="flex bg-white/10 rounded h-full w-full animate-pulse"></div> : <SideFilter />}
+          {isLoading ? (
+            <div className="flex bg-white/10 rounded h-full w-full animate-pulse"></div>
+          ) : (
+            <SideFilter />
+          )}
         </aside>
       </div>
       <div className="py-7 md:pl-0 px-6 md:w-3/4 w-full flex flex-col gap-14">
