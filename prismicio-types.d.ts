@@ -829,6 +829,17 @@ interface PageDocumentData {
   background_color: prismic.SelectField<"White" | "Light" | "Dark", "filled">;
 
   /**
+   * Category field in *Page*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField<"resource_category">;
+
+  /**
    * Title field in *Page*
    *
    * - **Field Type**: Rich Text

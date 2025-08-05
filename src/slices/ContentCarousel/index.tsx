@@ -35,13 +35,14 @@ import { useProgramCategoryData } from "@/hooks";
 import { useResourceCategoryData } from "@/hooks";
 
 import { components } from "@/utils";
+import { PageDocument } from "../../../prismicio-types";
 
 export type ContentCarouselProps =
   SliceComponentProps<Content.ContentCarouselSlice>;
 
 type ProgramDocument = Content.ProgramPageDocument;
 type ResourceDocument = Content.ResourcePageDocument;
-type PrismicItem = ProgramDocument | ResourceDocument;
+type PrismicItem = ProgramDocument | ResourceDocument | PageDocument;
 type CategoryDocument =
   | Content.ProgramCategoryDocument
   | Content.ResourceCategoryDocument;
@@ -220,7 +221,10 @@ const ContentCarousel = ({
           itemClass="react-multi-carousel-item !mt-0 flex "
         >
           {filteredDataWithCategory.map((item, index) => (
-            <div key={item.id} className="flex h-full w-full p-3 overflow-visible">
+            <div
+              key={item.id}
+              className="flex h-full w-full p-3 overflow-visible"
+            >
               {hasPhoto ? (
                 <DefaultCard
                   title={asText(item.data.title)}

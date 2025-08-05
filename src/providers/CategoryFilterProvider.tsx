@@ -13,21 +13,22 @@ import {
   ProgramPageDocument,
   ResourceCategoryDocument,
   ProgramCategoryDocument,
+  PageDocument,
 } from "../../prismicio-types";
 import { ModuleFilter, PROGRAM_FORMATS, ProgramFormat } from "@/constants";
 import { asText } from "@prismicio/client";
 import { useSearchParams, useRouter } from "next/navigation";
 
 interface CategoryFilterContextProps {
-  resources: ResourcePageDocument[];
-  setResources: (resources: ResourcePageDocument[]) => void;
+  resources: (ResourcePageDocument | PageDocument)[];
+  setResources: (resources: (ResourcePageDocument | PageDocument)[]) => void;
   programs: ProgramPageDocument[];
   setPrograms: (programs: ProgramPageDocument[]) => void;
   activeFilter: ModuleFilter;
   setActiveFilter: (filter: ModuleFilter) => void;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
-  filteredItems: (ResourcePageDocument | ProgramPageDocument)[];
+  filteredItems: (ResourcePageDocument | PageDocument | ProgramPageDocument)[];
   filterCounts: Record<ModuleFilter, number>;
   resultCount: number;
   selectedTags: string[];
@@ -72,7 +73,9 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   const router = useRouter();
 
   // State initialization from URL
-  const [resources, setResources] = useState<ResourcePageDocument[]>([]);
+  const [resources, setResources] = useState<
+    (ResourcePageDocument | PageDocument)[]
+  >([]);
   const [programs, setPrograms] = useState<ProgramPageDocument[]>([]);
   const [searchTerm, setSearchTerm] = useState(
     () => searchParams.get("search") || ""
@@ -476,7 +479,8 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   const filteredItems = useMemo(() => {
-    let items: (ResourcePageDocument | ProgramPageDocument)[] = [];
+    let items: (ResourcePageDocument | ProgramPageDocument | PageDocument)[] =
+      [];
 
     const urlMaxCost = searchParams.get("max_cost");
     const isCostFilterActive = urlMaxCost
@@ -507,7 +511,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         hasTagFilters;
 
       if (hasCredentials && !hasMainFilters) {
-        if (item.type === "resource_page") {
+        if (item.type === "resource_page" || item.type === "page") {
           return false;
         }
       }
@@ -515,7 +519,10 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
       if (hasMainFilters) {
         let passesMainFilters = false;
 
-        if (hasResourceCategoryFilters && item.type === "resource_page") {
+        if (
+          hasResourceCategoryFilters &&
+          (item.type === "resource_page" || item.type === "page")
+        ) {
           const matchesResourceCategory =
             item.data.category &&
             selectedResourceCategories.includes(
@@ -609,8 +616,8 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
             }
           }
         }
-      } else if (item.type === "resource_page") {
-        // For resources, if only cost filter is active (no other filters), hide resources
+      } else if (item.type === "resource_page" || item.type === "page") {
+        // For resources and pages, if only cost filter is active (no other filters), hide them
         const hasOtherFilters =
           hasMainFilters || selectedFormats.length > 0 || hasCredentials;
         if (isCostFilterActive && !hasOtherFilters) {
@@ -650,7 +657,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
         ).length;
       } else if (type === "resource_page") {
         count = filteredItems.filter(
-          (item) => item.type === "resource_page"
+          (item) => item.type === "resource_page" || item.type === "page"
         ).length;
       }
 
@@ -666,7 +673,8 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const value = {
     resources,
-    setResources,
+    setResources: (resources: (ResourcePageDocument | PageDocument)[]) =>
+      setResources(resources),
     programs,
     setPrograms,
     activeFilter,
