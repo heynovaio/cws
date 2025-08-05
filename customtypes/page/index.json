@@ -21,6 +21,15 @@
           "default_value": "White"
         }
       },
+      "category": {
+        "type": "Link",
+        "config": {
+          "label": "Category",
+          "select": "document",
+          "repeat": false,
+          "customtypes": ["resource_category"]
+        }
+      },
       "title": {
         "type": "StructuredText",
         "config": {

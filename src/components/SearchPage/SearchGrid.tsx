@@ -62,7 +62,7 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
       return category?.data?.name || "Other";
     }
 
-    return item.type === "resource_page" ? "Resource" : "Program";
+    return item.type === "program_page" ? "Program" : "Resource";
   };
 
   return (
@@ -87,9 +87,7 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
                 }
                 image={item.data.image}
                 category={getCategoryName(item)}
-                cardType={
-                  item.type === "resource_page" ? "resource" : "program"
-                }
+                cardType={item.type === "program_page" ? "program" : "resource"}
                 buttons={[
                   <Link
                     key={index}

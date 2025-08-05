@@ -29,6 +29,8 @@ export async function generateMetadata({
     .getByUID("page", uid, { lang })
     .catch(() => notFound());
 
+  console.log("Page data:", page.data);
+
   return {
     title:
       page.data.meta_title ||
