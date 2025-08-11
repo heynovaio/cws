@@ -58,7 +58,9 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
           {isLoading ? (
             <div className="flex bg-white/10 rounded h-full w-full animate-pulse"></div>
           ) : (
-            <SideFilter />
+            <div className="flex lg:min-w-64 flex-col">
+              <SideFilter />
+            </div>
           )}
         </aside>
       </div>
