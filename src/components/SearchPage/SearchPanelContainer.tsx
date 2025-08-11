@@ -18,7 +18,7 @@ export const SearchPanelContainer = ({
       {!isHidden && (
         <div className="flex flex-col gap-5">
           {topPanel && (
-            <hr className="h-[1px] border-t-0 bg-neutral-100 bg-white/70" />
+            <hr className="h-[1px] border-t-0 mt-7 bg-neutral-100 bg-white/70" />
           )}
           <label>{label}</label>
           {panel}

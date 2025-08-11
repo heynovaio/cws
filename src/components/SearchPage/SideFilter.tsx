@@ -102,7 +102,7 @@ export const SideFilter = () => {
               </div>
             )
           }
-          topPanel={availableTags.length > 0}
+          topPanel={availableTags.length > 0 || !isResourceContainerHidden}
           isHidden={isProgramContainerHidden}
         />
       )}
