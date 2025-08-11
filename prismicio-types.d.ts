@@ -5,6 +5,14 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type CampaignPageDocumentDataSlicesSlice =
+  | ContentGridSlice
+  | TileGridSlice
+  | TabbedCarouselSlice
+  | TagCategorySlice
+  | TestimonialsSlice
+  | RichTextSlice
+  | ContentColumnSlice
+  | ContentCarouselSlice
   | AccordionSlice
   | ContactInfoSlice
   | ImageTextSlice
@@ -26,6 +34,18 @@ interface CampaignPageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
+   * Include Partners field in *Campaign Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: campaign_page.include_partners
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_partners: prismic.BooleanField;
 
   /**
    * Slice Zone field in *Campaign Page*
@@ -92,6 +112,30 @@ type CareerHubDocumentDataSlicesSlice = AccordionSlice | ContentGridSlice;
  * Content for Career Hub documents
  */
 interface CareerHubDocumentData {
+  /**
+   * Include Newsletter Sign Up Banner field in *Career Hub*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: career_hub.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
+   * Include Partners field in *Career Hub*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: career_hub.include_partners
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_partners: prismic.BooleanField;
+
   /**
    * Title field in *Career Hub*
    *
@@ -201,6 +245,30 @@ type CareerPageDocumentDataSlicesSlice = AccordionSlice | RichTextSlice;
  * Content for Career Page documents
  */
 interface CareerPageDocumentData {
+  /**
+   * Include Newsletter Sign Up Banner field in *Career Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: career_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
+   * Include Partners field in *Career Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: career_page.include_partners
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_partners: prismic.BooleanField;
+
   /**
    * Title field in *Career Page*
    *
@@ -313,6 +381,30 @@ type ContactPageDocumentDataSlicesSlice = AccordionSlice | ContactInfoSlice;
  */
 interface ContactPageDocumentData {
   /**
+   * Include Newsletter Sign Up Banner field in *Contact Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: contact_page.include_newsletter_sign_up_banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
+   * Include Partners field in *Contact Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: contact_page.include_partners
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_partners: prismic.BooleanField;
+
+  /**
    * Image field in *Contact Page*
    *
    * - **Field Type**: Image
@@ -344,18 +436,6 @@ interface ContactPageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   body: prismic.RichTextField;
-
-  /**
-   * Include Newsletter Sign Up Banner field in *Contact Page*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: contact_page.include_newsletter_sign_up_banner
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  include_newsletter_sign_up_banner: prismic.BooleanField;
 
   /**
    * Slice Zone field in *Contact Page*
@@ -909,6 +989,18 @@ interface PageDocumentData {
   include_newsletter_sign_up_banner: prismic.BooleanField;
 
   /**
+   * Include Partners field in *Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: page.include_partners
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_partners: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Page*
    *
    * - **Field Type**: Slice Zone
@@ -1273,6 +1365,18 @@ interface ProgramPageDocumentData {
   include_newsletter_sign_up_banner: prismic.BooleanField;
 
   /**
+   * Include Partners field in *Program Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: program_page.include_partners
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_partners: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Program Page*
    *
    * - **Field Type**: Slice Zone
@@ -1332,21 +1436,6 @@ export type ProgramPageDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *Resource Category → Keywords*
- */
-export interface ResourceCategoryDocumentDataKeywordsItem {
-  /**
-   * Keyword field in *Resource Category → Keywords*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: resource_category.keywords[].keyword
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  keyword: prismic.KeyTextField;
-}
-
-/**
  * Content for Resource Category documents
  */
 interface ResourceCategoryDocumentData {
@@ -1402,19 +1491,6 @@ interface ResourceCategoryDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   description: prismic.KeyTextField;
-
-  /**
-   * Keywords field in *Resource Category*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: resource_category.keywords[]
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  keywords: prismic.GroupField<
-    Simplify<ResourceCategoryDocumentDataKeywordsItem>
-  >;
 }
 
 /**
@@ -1519,6 +1595,18 @@ interface ResourcePageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
+   * Include Partners field in *Resource Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: resource_page.include_partners
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_partners: prismic.BooleanField;
 
   /**
    * Slice Zone field in *Resource Page*
@@ -1636,6 +1724,18 @@ interface SearchPageDocumentData {
   include_newsletter_sign_up_banner: prismic.BooleanField;
 
   /**
+   * Include Partners field in *Search Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: search_page.include_partners
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_partners: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Search Page*
    *
    * - **Field Type**: Slice Zone
@@ -1695,6 +1795,15 @@ export type SearchPageDocument<Lang extends string = string> =
   >;
 
 type TeamMembersDocumentDataSlicesSlice =
+  | TabbedCarouselSlice
+  | TileGridSlice
+  | ContentGridSlice
+  | RichTextSlice
+  | ContentColumnSlice
+  | TagCategorySlice
+  | ImageTextSlice
+  | HashtagBannerSlice
+  | ContentCarouselSlice
   | AccordionSlice
   | ContactInfoSlice
   | CallToActionSlice
@@ -1765,6 +1874,18 @@ interface TeamMembersDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   include_newsletter_sign_up_banner: prismic.BooleanField;
+
+  /**
+   * Include Partners field in *Team Members*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: team_members.include_partners
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_partners: prismic.BooleanField;
 
   /**
    * Slice Zone field in *Team Members*
@@ -3033,16 +3154,6 @@ export interface ImageTextSliceVideoPrimary {
   button: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
-
-  /**
-   * Image field in *ImageText → Video → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_text.video.primary.image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
 
   /**
    * Video field in *ImageText → Video → Primary*
@@ -4492,7 +4603,6 @@ declare module "@prismicio/client" {
       ProgramPageDocumentDataSlicesSlice,
       ResourceCategoryDocument,
       ResourceCategoryDocumentData,
-      ResourceCategoryDocumentDataKeywordsItem,
       ResourcePageDocument,
       ResourcePageDocumentData,
       ResourcePageDocumentDataSlicesSlice,

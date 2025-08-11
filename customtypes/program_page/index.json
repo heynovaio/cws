@@ -110,6 +110,15 @@
           "default_value": false
         }
       },
+      "include_partners": {
+        "type": "Boolean",
+        "config": {
+          "label": "Include Partners",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": true
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

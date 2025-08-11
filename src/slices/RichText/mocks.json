@@ -7,119 +7,10 @@
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"type": "heading2",
-						"content": {
-							"text": "Heading 2",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
 						"type": "paragraph",
 						"content": {
-							"text": "Augue diam urna non volutpat elementum. Dolor dolor et eget amet pellentesque laoreet mattis imperdiet leo. Nulla feugiat tempus mauris elit nisl nulla. Dictumst a vestibulum sed diam nunc bibendum. Turpis porta fermentum sit neque mi.",
-							"spans": [
-								{
-									"type": "hyperlink",
-									"start": 175,
-									"end": 188,
-									"data": {
-										"__TYPE__": "ExternalLink",
-										"url": "#",
-										"target": "_self"
-									}
-								}
-							]
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Heading 3",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Augue diam urna non volutpat elementum. Dolor dolor et eget amet pellentesque laoreet mattis imperdiet leo. Nulla feugiat tempus mauris elit nisl nulla. Dictumst a vestibulum sed diam nunc bibendum. Turpis porta fermentum sit neque mi.",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "list-item",
-						"content": {
-							"text": "This is a list",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "list-item",
-						"content": {
-							"text": "is a list this",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "list-item",
-						"content": {
-							"text": "a list this is",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "list-item",
-						"content": {
-							"text": "list this is a",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "o-list-item",
-						"content": {
-							"text": "This is a list",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "o-list-item",
-						"content": {
-							"text": "is a list this",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "o-list-item",
-						"content": {
-							"text": "a list this is",
-							"spans": []
-						},
-						"direction": "ltr"
-					},
-					{
-						"type": "o-list-item",
-						"content": {
-							"text": "list this is a",
-							"spans": []
-						},
-						"direction": "ltr"
+							"text": "Culpa cupidatat laborum culpa id ad ipsum nostrud."
+						}
 					}
 				]
 			},
@@ -128,8 +19,8 @@
 				"value": true
 			},
 			"button": {
-				"__TYPE__": "LinkContent",
 				"key": "5182144f-c8c7-469c-990d-b464b77d2a75",
+				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "ExternalLink",
 					"url": "https://prismic.io",

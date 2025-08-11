@@ -149,14 +149,6 @@
             "repeat": true
           }
         },
-        "image": {
-          "type": "Image",
-          "config": {
-            "label": "Image",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
         "video": {
           "type": "Embed",
           "config": {

@@ -54,22 +54,6 @@
           "label": "Description",
           "placeholder": ""
         }
-      },
-      "keywords": {
-        "type": "Group",
-        "config": {
-          "label": "Keywords",
-          "repeat": true,
-          "fields": {
-            "keyword": {
-              "type": "Text",
-              "config": {
-                "label": "Keyword",
-                "placeholder": ""
-              }
-            }
-          }
-        }
       }
     }
   }

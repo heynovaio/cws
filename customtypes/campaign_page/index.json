@@ -21,11 +21,44 @@
           "default_value": false
         }
       },
+      "include_partners": {
+        "type": "Boolean",
+        "config": {
+          "label": "Include Partners",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": true
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "content_grid": {
+              "type": "SharedSlice"
+            },
+            "tile_grid": {
+              "type": "SharedSlice"
+            },
+            "tabbed_carousel": {
+              "type": "SharedSlice"
+            },
+            "tag_category": {
+              "type": "SharedSlice"
+            },
+            "testimonials": {
+              "type": "SharedSlice"
+            },
+            "rich_text": {
+              "type": "SharedSlice"
+            },
+            "content_column": {
+              "type": "SharedSlice"
+            },
+            "content_carousel": {
+              "type": "SharedSlice"
+            },
             "accordion": {
               "type": "SharedSlice"
             },
