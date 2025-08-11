@@ -55,6 +55,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     .catch(() => notFound());
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
+  const partners = await client.getSingle("partners", { lang });
 
   const locales = await getLocales(page, client);
 
@@ -69,6 +70,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       locales={locales}
       global={global.data}
       menus={menus.data}
+      partners={page.data.include_partners ? partners.data : null}
       include_newsletter_sign_up_banner={false}
     >
       <GeneralHero data={heroData} shortHero />

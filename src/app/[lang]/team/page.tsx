@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     .catch(() => notFound());
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
-
+  const partners = await client.getSingle("partners", { lang });
   const locales = await getLocales(page, client);
 
   return (
@@ -66,6 +66,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       include_newsletter_sign_up_banner={
         page.data.include_newsletter_sign_up_banner
       }
+      partners={page.data.include_partners ? partners.data : null}
     >
       <GeneralHero data={page.data} />
       <SliceZone

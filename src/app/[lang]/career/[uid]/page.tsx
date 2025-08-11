@@ -78,7 +78,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           locales={locales}
           global={global.data}
           menus={menus.data}
-          partners={partners.data}
+          partners={page.data.include_partners ? partners.data : null}
           include_newsletter_sign_up_banner={false}
         >
           <CareerIntro pageData={page.data} links={links} />

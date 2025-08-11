@@ -19,7 +19,7 @@ interface LayoutProps {
   menus: MenusDocumentData;
   global: GlobalsDocumentData;
   children: ReactNode;
-  partners?: PartnersDocumentData;
+  partners?: PartnersDocumentData | null;
   include_newsletter_sign_up_banner: boolean;
 }
 
@@ -33,10 +33,7 @@ export const Layout = ({
 }: LayoutProps) => {
   return (
     <div>
-      <a
-        href="#main-content"
-        className="skip-to-content-link"
-      >
+      <a href="#main-content" className="skip-to-content-link">
         Skip to Content
       </a>
       <div className="sticky top-0 z-50 ">
