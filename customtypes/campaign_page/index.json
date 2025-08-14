@@ -30,6 +30,23 @@
           "default_value": true
         }
       },
+      "simplified_navigation": {
+        "type": "Boolean",
+        "config": {
+          "label": "Simplified Navigation",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": true
+        }
+      },
+      "category": {
+        "type": "Link",
+        "config": {
+          "label": "Category",
+          "select": "document",
+          "repeat": false
+        }
+      },
       "title": {
         "type": "StructuredText",
         "config": {

@@ -48,6 +48,29 @@ interface CampaignPageDocumentData {
   include_partners: prismic.BooleanField;
 
   /**
+   * Simplified Navigation field in *Campaign Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: campaign_page.simplified_navigation
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  simplified_navigation: prismic.BooleanField;
+
+  /**
+   * Category field in *Campaign Page*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: campaign_page.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  category: prismic.ContentRelationshipField;
+
+  /**
    * Title field in *Campaign Page*
    *
    * - **Field Type**: Rich Text
