@@ -16,6 +16,9 @@ export const components = {
   rich_text: dynamic(() => import("./RichText")),
   single_link: dynamic(() => import("./SingleLink")),
   tabbed_carousel: dynamic(() => import("./TabbedCarousel")),
+  tabbed_content_sticky_image: dynamic(
+    () => import("./TabbedContentStickyImage"),
+  ),
   tag_category: dynamic(() => import("./TagCategory")),
   team_list: dynamic(() => import("./TeamList")),
   testimonials: dynamic(() => import("./Testimonials")),
