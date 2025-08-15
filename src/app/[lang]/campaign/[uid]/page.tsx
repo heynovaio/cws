@@ -8,6 +8,7 @@ import { components } from "@/slices";
 import React from "react";
 import { Layout } from "@/components";
 import { getLocales } from "@/utils";
+import { GeneralHero } from "@/components/Heros/GeneralHero";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -66,6 +67,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       }
       useMobileNav={page.data.simplified_navigation}
     >
+      <GeneralHero data={page.data} shortHero={false} />
       <SliceZone
         slices={page.data.slices}
         components={components}
