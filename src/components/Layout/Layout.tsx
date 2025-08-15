@@ -21,6 +21,7 @@ interface LayoutProps {
   children: ReactNode;
   partners?: PartnersDocumentData | null;
   include_newsletter_sign_up_banner: boolean;
+  useMobileNav?: boolean;
 }
 
 export const Layout = ({
@@ -30,6 +31,7 @@ export const Layout = ({
   partners,
   children,
   include_newsletter_sign_up_banner,
+  useMobileNav = false,
 }: LayoutProps) => {
   return (
     <div>
@@ -42,6 +44,7 @@ export const Layout = ({
           logo={global.site_logo}
           slices={menus.slices}
           locales={locales}
+          useMobileNav={useMobileNav}
         />
       </div>
       <main id="main-content" className="relative focus:outline-0" tabIndex={0}>
