@@ -1,0 +1,82 @@
+{
+  "id": "tabbed_content_sticky_image",
+  "type": "SharedSlice",
+  "name": "TabbedContentStickyImage",
+  "description": "TabbedContentStickyImage",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "section": {
+          "type": "Group",
+          "config": {
+            "label": "Section",
+            "repeat": true,
+            "fields": {
+              "tab_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Tab Title",
+                  "placeholder": ""
+                }
+              },
+              "tab_description": {
+                "type": "Text",
+                "config": {
+                  "label": "Tab Description",
+                  "placeholder": ""
+                }
+              },
+              "section_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Section Title",
+                  "placeholder": ""
+                }
+              },
+              "section_quote": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Section Quote",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "section_text": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Section Text",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "section_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Section Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "section_audio": {
+                "type": "Embed",
+                "config": {
+                  "label": "Section Audio",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

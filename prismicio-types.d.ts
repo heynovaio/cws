@@ -4176,6 +4176,129 @@ export type TabbedCarouselSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *TabbedContentStickyImage → Default → Primary → Section*
+ */
+export interface TabbedContentStickyImageSliceDefaultPrimarySectionItem {
+  /**
+   * Tab Title field in *TabbedContentStickyImage → Default → Primary → Section*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].tab_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tab_title: prismic.KeyTextField;
+
+  /**
+   * Tab Description field in *TabbedContentStickyImage → Default → Primary → Section*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].tab_description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tab_description: prismic.KeyTextField;
+
+  /**
+   * Section Title field in *TabbedContentStickyImage → Default → Primary → Section*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].section_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_title: prismic.KeyTextField;
+
+  /**
+   * Section Quote field in *TabbedContentStickyImage → Default → Primary → Section*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].section_quote
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  section_quote: prismic.RichTextField;
+
+  /**
+   * Section Text field in *TabbedContentStickyImage → Default → Primary → Section*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].section_text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  section_text: prismic.RichTextField;
+
+  /**
+   * Section Image field in *TabbedContentStickyImage → Default → Primary → Section*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].section_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  section_image: prismic.ImageField<never>;
+
+  /**
+   * Section Audio field in *TabbedContentStickyImage → Default → Primary → Section*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].section_audio
+   * - **Documentation**: https://prismic.io/docs/field#embed
+   */
+  section_audio: prismic.EmbedField;
+}
+
+/**
+ * Primary content in *TabbedContentStickyImage → Default → Primary*
+ */
+export interface TabbedContentStickyImageSliceDefaultPrimary {
+  /**
+   * Section field in *TabbedContentStickyImage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  section: prismic.GroupField<
+    Simplify<TabbedContentStickyImageSliceDefaultPrimarySectionItem>
+  >;
+}
+
+/**
+ * Default variation for TabbedContentStickyImage Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabbedContentStickyImageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TabbedContentStickyImageSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TabbedContentStickyImage*
+ */
+type TabbedContentStickyImageSliceVariation =
+  TabbedContentStickyImageSliceDefault;
+
+/**
+ * TabbedContentStickyImage Shared Slice
+ *
+ * - **API ID**: `tabbed_content_sticky_image`
+ * - **Description**: TabbedContentStickyImage
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabbedContentStickyImageSlice = prismic.SharedSlice<
+  "tabbed_content_sticky_image",
+  TabbedContentStickyImageSliceVariation
+>;
+
+/**
  * Primary content in *TagCategory → Default → Primary*
  */
 export interface TagCategorySliceDefaultPrimary {
@@ -4787,6 +4910,11 @@ declare module "@prismicio/client" {
       TabbedCarouselSliceDefault,
       TabbedCarouselSliceTabbedCarouselCampaign,
       TabbedCarouselSliceTabbedCarouselMultiCard,
+      TabbedContentStickyImageSlice,
+      TabbedContentStickyImageSliceDefaultPrimarySectionItem,
+      TabbedContentStickyImageSliceDefaultPrimary,
+      TabbedContentStickyImageSliceVariation,
+      TabbedContentStickyImageSliceDefault,
       TagCategorySlice,
       TagCategorySliceDefaultPrimary,
       TagCategorySliceVariation,
