@@ -87,6 +87,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "soap",
 				"type": "Text"
+			},
+			"section_id": {
+				"__TYPE__": "FieldContent",
+				"value": "safe",
+				"type": "Text"
 			}
 		},
 		"items": []

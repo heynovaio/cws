@@ -2273,6 +2273,16 @@ export type CallToActionSlice = prismic.SharedSlice<
  */
 export interface ContactInfoSliceDefaultPrimary {
   /**
+   * Section ID field in *FormEmbed → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.default.primary.section_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_id: prismic.KeyTextField;
+
+  /**
    * Title field in *FormEmbed → Default → Primary*
    *
    * - **Field Type**: Rich Text
