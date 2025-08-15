@@ -4,7 +4,6 @@ import { PrismicRichText } from "@prismicio/react";
 import { Button } from "../Buttons";
 import { KeyTextField, LinkField, RichTextField } from "@prismicio/client";
 import { HiArrowLongDown } from "react-icons/hi2";
-// import { HiArrowLongDown } from "react-icons/hi2";
 
 interface GeneralHeroProps {
   data: {
@@ -28,7 +27,7 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
       className={`relative flex items-center w-full bg-quadrant-gradient   ${
         shortHero
           ? "md:min-h-[500px] min-h-[400px]"
-          : "md:min-h-[600px] min-h-[400px]"
+          : "md:min-h-[500px] min-h-[400px]"
       }`}
     >
       <Container>
@@ -49,16 +48,16 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
               label={link.text}
             />
           ))}
+
+          {!shortHero && scrollID && (
+            <div className="mt-12 flex justify-center">
+              <a href={`#${scrollID}`} aria-label="Scroll to next section">
+                <HiArrowLongDown className="w-8 h-8 text-white animate-bounce" />
+              </a>
+            </div>
+          )}
         </div>
       </Container>
-
-      {!shortHero && (
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 cursor-pointer">
-          <a href={`#${scrollID}`} aria-label="Scroll to next section">
-            <HiArrowLongDown className="w-8 h-8 text-white" />
-          </a>
-        </div>
-      )}
     </section>
   );
 };

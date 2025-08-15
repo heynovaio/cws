@@ -15,9 +15,11 @@ export type ContactInfoProps = SliceComponentProps<Content.ContactInfoSlice>;
 const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
   const isTwoColumn = slice.primary.desktop_alignment === "Two Column";
   const jotformUrl = slice.primary.jotform_url;
+  const sectionId = slice.primary.section_id ?? undefined;
 
   return (
     <Section
+      id={sectionId}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
