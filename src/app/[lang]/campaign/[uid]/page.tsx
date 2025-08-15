@@ -56,6 +56,14 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   const locales = await getLocales(page, client);
 
+  const contactInfoSlice = page.data.slices.find(
+    (slice) => slice.slice_type === "contact_info"
+  );
+
+  const scrollID = contactInfoSlice
+    ? (contactInfoSlice.primary as { section_id: string }).section_id
+    : undefined;
+
   return (
     <Layout
       locales={locales}
@@ -67,7 +75,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       }
       useMobileNav={page.data.simplified_navigation}
     >
-      <GeneralHero data={page.data} shortHero={false} />
+      <GeneralHero data={page.data} shortHero={false} scrollID={scrollID} />
       <SliceZone
         slices={page.data.slices}
         components={components}
