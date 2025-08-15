@@ -16,9 +16,14 @@ interface HeaderProps {
   logo: ImageField;
   slices: MenusDocumentDataSlicesSlice[];
   locales?: unknown;
+  useMobileNav?: boolean;
 }
 
-export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
+export const Header: React.FC<HeaderProps> = ({
+  logo,
+  slices,
+  useMobileNav = false,
+}) => {
   return (
     <header
       className="sticky top-0 z-50 bg-midnight/70"
@@ -38,12 +43,14 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
         </PrismicNextLink>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center xl:gap-10 gap-3 z-50 ">
-          <SliceZone slices={slices} components={components} />
-        </div>
+        {!useMobileNav && (
+          <div className="hidden lg:flex items-center xl:gap-10 gap-3 z-50">
+            <SliceZone slices={slices} components={components} />
+          </div>
+        )}
 
         {/* Mobile Menu */}
-        <div className="lg:hidden">
+        <div className={useMobileNav ? "" : "lg:hidden"}>
           <Popover className="relative">
             {({ open }) => (
               <>
@@ -53,13 +60,19 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
                 >
                   <div className="flex flex-col justify-center items-center w-8 h-8">
                     <span
-                      className={`block absolute h-0.5 w-8 bg-white transform transition duration-300 ease-in-out ${open ? "rotate-45 translate-y-0" : "-translate-y-2"}`}
+                      className={`block absolute h-0.5 w-8 bg-white transform transition duration-300 ease-in-out ${
+                        open ? "rotate-45 translate-y-0" : "-translate-y-2"
+                      }`}
                     ></span>
                     <span
-                      className={`block absolute h-0.5 w-8 bg-white transform transition duration-300 ease-in-out ${open ? "opacity-0" : "opacity-100"}`}
+                      className={`block absolute h-0.5 w-8 bg-white transform transition duration-300 ease-in-out ${
+                        open ? "opacity-0" : "opacity-100"
+                      }`}
                     ></span>
                     <span
-                      className={`block absolute h-0.5 w-8 bg-white transform transition duration-300 ease-in-out ${open ? "-rotate-45 translate-y-0" : "translate-y-2"}`}
+                      className={`block absolute h-0.5 w-8 bg-white transform transition duration-300 ease-in-out ${
+                        open ? "-rotate-45 translate-y-0" : "translate-y-2"
+                      }`}
                     ></span>
                   </div>
                 </PopoverButton>

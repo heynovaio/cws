@@ -64,6 +64,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       include_newsletter_sign_up_banner={
         page.data.include_newsletter_sign_up_banner
       }
+      useMobileNav={page.data.simplified_navigation}
     >
       <SliceZone
         slices={page.data.slices}

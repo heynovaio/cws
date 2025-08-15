@@ -53,7 +53,7 @@ interface CampaignPageDocumentData {
    *
    * - **Field Type**: Boolean
    * - **Placeholder**: *None*
-   * - **Default Value**: true
+   * - **Default Value**: false
    * - **API ID Path**: campaign_page.simplified_navigation
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#boolean
