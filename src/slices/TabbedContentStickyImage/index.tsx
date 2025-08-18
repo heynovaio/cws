@@ -2,7 +2,7 @@
 import { FC, useRef, useState } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
-import { Tab } from "@headlessui/react";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Container } from "@/components";
 import { BlockQuote } from "@/components/BlockQuote";
 import { PrismicNextImage } from "@prismicio/next";
@@ -35,8 +35,8 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
       className="relative"
     >
       <Container>
-        <Tab.Group>
-          <Tab.List className="flex space-x-2 mb-4">
+        <TabGroup>
+          <TabList className="flex space-x-2 mb-4">
             {sections.map((tab, idx) => (
               <Tab
                 key={idx}
@@ -56,11 +56,11 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                 )}
               </Tab>
             ))}
-          </Tab.List>
+          </TabList>
 
-          <Tab.Panels className="mt-4">
+          <TabPanels className="mt-4">
             {sections.map((tab, idx) => (
-              <Tab.Panel
+              <TabPanel
                 key={idx}
                 className="p-6 rounded-[20px] border border-[#6D00FF]"
                 style={{
@@ -70,9 +70,9 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                 }}
               >
                 <div className="flex flex-col md:flex-row gap-6">
-                  <div className="flex-1">
+                  <div className="flex-1 flex flex-col gap-8">
                     {tab.section_title && (
-                      <h3 className="text-[5.5rem] font-[600] mb-2">
+                      <h3 className="xs:text-[2.5rem] md:text-[5.5rem] font-[600]">
                         {tab.section_title}
                       </h3>
                     )}
@@ -80,7 +80,9 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                       <BlockQuote quote={tab.section_quote} />
                     )}
                     {tab.section_text && (
-                      <PrismicRichText field={tab.section_text} />
+                      <div className="flex flex-col gap-2">
+                        <PrismicRichText field={tab.section_text} />
+                      </div>
                     )}
                   </div>
 
@@ -89,7 +91,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                       <div className="my-4 sticky top-0">
                         <PrismicNextImage field={tab.section_image} alt="" />
 
-                        <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60  transition">
+                        <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/30 border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60  transition">
                           <button onClick={toggleAudio}>
                             <span>
                               {isPlaying ? (
@@ -101,21 +103,20 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                           </button>
                         </div>
 
-                        {/* Hidden audio element */}
-                        {tab.section_audio?.embed_url && (
+                        {(tab.section_audio_clip as any)?.url && (
                           <audio
                             ref={audioRef}
-                            src={tab.section_audio.embed_url}
+                            src={(tab.section_audio_clip as any).url}
                           />
                         )}
                       </div>
                     )}
                   </div>
                 </div>
-              </Tab.Panel>
+              </TabPanel>
             ))}
-          </Tab.Panels>
-        </Tab.Group>
+          </TabPanels>
+        </TabGroup>
       </Container>
     </section>
   );
