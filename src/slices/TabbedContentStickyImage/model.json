@@ -65,11 +65,13 @@
                   "thumbnails": []
                 }
               },
-              "section_audio": {
-                "type": "Embed",
+              "section_audio_clip": {
+                "type": "Link",
                 "config": {
-                  "label": "Section Audio",
-                  "placeholder": ""
+                  "label": "Section Audio Clip",
+                  "placeholder": "",
+                  "select": "media",
+                  "allowText": true
                 }
               }
             }

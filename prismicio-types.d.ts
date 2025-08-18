@@ -4241,14 +4241,14 @@ export interface TabbedContentStickyImageSliceDefaultPrimarySectionItem {
   section_image: prismic.ImageField<never>;
 
   /**
-   * Section Audio field in *TabbedContentStickyImage → Default → Primary → Section*
+   * Section Audio Clip field in *TabbedContentStickyImage → Default → Primary → Section*
    *
-   * - **Field Type**: Embed
+   * - **Field Type**: Link to Media
    * - **Placeholder**: *None*
-   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].section_audio
-   * - **Documentation**: https://prismic.io/docs/field#embed
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].section_audio_clip
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  section_audio: prismic.EmbedField;
+  section_audio_clip: prismic.LinkToMediaField<prismic.FieldState, never>;
 }
 
 /**
