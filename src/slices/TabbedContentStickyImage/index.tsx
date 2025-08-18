@@ -4,6 +4,8 @@ import { Content } from "@prismicio/client";
 import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
 import { Tab } from "@headlessui/react";
 import { Container } from "@/components";
+import { BlockQuote } from "@/components/BlockQuote";
+import { PrismicNextImage } from "@prismicio/next";
 
 /**
  * Props for `TabbedContentStickyImage`.
@@ -59,27 +61,29 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                   backdropFilter: "blur(8px)",
                 }}
               >
-                {tab.section_title && (
-                  <h3 className="text-[5.5rem] font-[600] mb-2">
-                    {tab.section_title}
-                  </h3>
-                )}
-
-                {tab.section_quote && (
-                  <blockquote className="italic mb-2">
-                    <PrismicRichText field={tab.section_quote} />
-                  </blockquote>
-                )}
-
-                {tab.section_text && (
-                  <PrismicRichText field={tab.section_text} />
-                )}
-
-                {tab.section_image?.url && (
-                  <div className="my-4">
-                    {/* <PrismicNextImage field={tab.section_image} /> */}
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-1">
+                    {tab.section_title && (
+                      <h3 className="text-[5.5rem] font-[600] mb-2">
+                        {tab.section_title}
+                      </h3>
+                    )}
+                    {tab.section_quote && (
+                      <BlockQuote quote={tab.section_quote} />
+                    )}
+                    {tab.section_text && (
+                      <PrismicRichText field={tab.section_text} />
+                    )}
                   </div>
-                )}
+
+                  <div className="flex-1 flex items-start justify-center">
+                    {tab.section_image?.url && (
+                      <div className="my-4 sticky top-0">
+                        <PrismicNextImage field={tab.section_image} alt="" />
+                      </div>
+                    )}
+                  </div>
+                </div>
               </Tab.Panel>
             ))}
           </Tab.Panels>
