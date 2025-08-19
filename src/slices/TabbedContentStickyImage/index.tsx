@@ -36,12 +36,12 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
     >
       <Container>
         <TabGroup>
-          <TabList className="flex space-x-2 mb-4">
+          <TabList className="flex xs:flex-col md:flex-row  mb-4 gap-4">
             {sections.map((tab, idx) => (
               <Tab
                 key={idx}
                 className={({ selected }) =>
-                  `px-4 py-2 rounded-[12px] focus:outline-none ${
+                  `xs:px-4 md:px-12 py-2 rounded-[12px] focus:outline-none ${
                     selected
                       ? "bg-[#6D00FF] text-white font-bold"
                       : "border border-white text-white hover:bg-white/20"
