@@ -198,12 +198,14 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                             </button>
                           </div>
 
-                          {(tab.section_audio_clip as any)?.url && (
-                            <audio
-                              ref={audioRef}
-                              src={(tab.section_audio_clip as any).url}
-                            />
-                          )}
+                          {tab.section_audio_clip &&
+                            "url" in tab.section_audio_clip &&
+                            tab.section_audio_clip.url && (
+                              <audio
+                                ref={audioRef}
+                                src={tab.section_audio_clip.url}
+                              />
+                            )}
                         </div>
                       )}
                     </div>
