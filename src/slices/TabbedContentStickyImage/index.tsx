@@ -41,7 +41,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
               <Tab
                 key={idx}
                 className={({ selected }) =>
-                  `xs:px-4 md:px-12 py-2 rounded-[12px] focus:outline-none ${
+                  `w-full xs:px-4 md:px-12 py-2 rounded-[12px] focus:outline-none ${
                     selected
                       ? "bg-[#6D00FF] text-white font-bold"
                       : "border border-white text-white hover:bg-white/20"
@@ -91,7 +91,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                       <div className="my-4 sticky top-0">
                         <PrismicNextImage field={tab.section_image} alt="" />
 
-                        <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/30 border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60  transition">
+                        <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60  transition">
                           <button onClick={toggleAudio}>
                             <span>
                               {isPlaying ? (
