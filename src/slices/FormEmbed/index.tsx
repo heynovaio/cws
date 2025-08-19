@@ -22,6 +22,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
       id={sectionId}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="scroll-mt-32"
     >
       <Container>
         {isTwoColumn ? (
