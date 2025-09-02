@@ -12,13 +12,16 @@ import {
 } from "@headlessui/react";
 import { MenusDocumentDataSlicesSlice } from "../../../prismicio-types";
 
-interface HeaderProps {
+interface CampaignHeaderProps {
   logo: ImageField;
   slices: MenusDocumentDataSlicesSlice[];
   locales?: unknown;
 }
 
-export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
+export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
+  logo,
+  slices,
+}) => {
   return (
     <header
       className="sticky top-0 z-50 bg-midnight/70"
@@ -37,14 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
           <PrismicNextImage field={logo} fallbackAlt="" className="pr-4" />
         </PrismicNextLink>
 
-        {/* Desktop Menu */}
-
-        <div className="hidden lg:flex items-center xl:gap-10 gap-3 z-50">
-          <SliceZone slices={slices} components={components} />
-        </div>
-
-        {/* Mobile Menu */}
-        <div className="lg:hidden">
+        <div>
           <Popover className="relative">
             {({ open }) => (
               <>
@@ -81,9 +77,19 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
                 >
                   <PopoverPanel
                     anchor="bottom"
-                    className="w-screen h-screen bg-midnight bg-gradient-dark lg:mt-4 pb-10 z-40"
+                    className="
+                        lg:absolute lg:right-0 lg:top-full 
+                        w-screen h-screen lg:w-auto lg:h-auto
+                        bg-midnight bg-gradient-dark 
+                        lg:shadow-lg
+                        lg:mt-2
+                    "
                   >
-                    <div className="flex flex-col pl-4 gap-10 mt-10">
+                    <div className="flex flex-col pl-4 gap-10 mt-10 lg:hidden">
+                      <SliceZone slices={slices} components={components} />
+                    </div>
+
+                    <div className="hidden lg:flex justify-center items-center xl:gap-10 gap-6 w-full p-6">
                       <SliceZone slices={slices} components={components} />
                     </div>
                   </PopoverPanel>

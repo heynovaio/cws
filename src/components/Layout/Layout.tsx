@@ -13,6 +13,7 @@ import { Container } from "./Container";
 import { Footer } from "../Menu/Footer";
 import { TopBar } from "./TopBar";
 import { PrismicDocument } from "@prismicio/client";
+import { CampaignHeader } from "../Menu/CampaignHeader";
 
 interface LayoutProps {
   locales: PrismicDocument[];
@@ -21,7 +22,7 @@ interface LayoutProps {
   children: ReactNode;
   partners?: PartnersDocumentData | null;
   include_newsletter_sign_up_banner: boolean;
-  useMobileNav?: boolean;
+  isCampaignPage?: boolean;
 }
 
 export const Layout = ({
@@ -31,7 +32,7 @@ export const Layout = ({
   partners,
   children,
   include_newsletter_sign_up_banner,
-  useMobileNav = false,
+  isCampaignPage = false,
 }: LayoutProps) => {
   return (
     <div>
@@ -40,12 +41,19 @@ export const Layout = ({
       </a>
       <div className="sticky top-0 z-50 ">
         <TopBar locales={locales} global={global} text={menus.banner_text} />
-        <Header
-          logo={global.site_logo}
-          slices={menus.slices}
-          locales={locales}
-          useMobileNav={useMobileNav}
-        />
+        {!isCampaignPage ? (
+          <Header
+            logo={global.site_logo}
+            slices={menus.slices}
+            locales={locales}
+          />
+        ) : (
+          <CampaignHeader
+            logo={global.site_logo}
+            slices={menus.slices}
+            locales={locales}
+          />
+        )}
       </div>
       <main id="main-content" className="relative focus:outline-0" tabIndex={0}>
         {children}
