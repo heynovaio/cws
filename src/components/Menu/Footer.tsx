@@ -77,7 +77,7 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
         </div>
       </nav>
       <div className="flex flex-col justify-center items-center mt-6 footer-links">
-        <div className="flex flex-row gap-6 md:gap-10">
+        <div className="flex flex-row">
           <PrismicNextLink
             field={footerData?.policy_link}
             className="text-base md:text-bodyLarge menu-link underline-offset-4"
@@ -88,7 +88,14 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
           />
         </div>
 
-        <p className="mt-6 text-center text-base">{footerData?.copyright}</p>
+        <p className="mt-4 text-center text-base">{footerData?.copyright}</p>
+
+        <a
+          className="mt-2 text-center text-base no-underline mb-4"
+          href="https://heynova.io/"
+        >
+          Website By: Hey Nova
+        </a>
       </div>
     </footer>
   );
