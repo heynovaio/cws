@@ -12,6 +12,18 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Section Background",
+            "placeholder": "",
+            "options": [
+              "Purple",
+              "Transparent"
+            ],
+            "default_value": "Purple"
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -149,6 +161,18 @@
                 }
               }
             }
+          }
+        },
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Section Background",
+            "placeholder": "",
+            "options": [
+              "Purple",
+              "Transparent"
+            ],
+            "default_value": "Purple"
           }
         }
       },
