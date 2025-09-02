@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://https://womenandsport.ca/
+
+# Sitemaps
+Sitemap: https://https://womenandsport.ca/sitemap.xml
