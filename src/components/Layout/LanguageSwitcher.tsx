@@ -40,13 +40,13 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
           id="language-switcher"
           value={currentLang}
           onChange={handleLanguageChange}
-          className="bg-transparent px-1 py-1 rounded-lg text-[1rem] outline-none focus:ring-2 focus:ring-ultra-pink text-black dark:text-white"
+          className="bg-transparent px-1 py-1 rounded-lg text-[1rem] outline-none focus:ring-2 focus:ring-ultra-pink text-black"
         >
           {locales.map((locale) => (
             <option
               key={locale.id}
               value={locale.lang}
-              className="text-black dark:text-white bg-white dark:bg-gray-800"
+              style={{ color: "black" }}
             >
               {fullLangList[locale.lang as keyof typeof fullLangList]}
             </option>
