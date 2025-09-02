@@ -21,6 +21,9 @@ export const Section: React.FC<SectionProps> = ({
     case "Darker":
       background = "bg-dark-purple-background";
       break;
+    case "Transparent":
+      background = "bg-transparent"
+      break;
     default:
       background = "bg-midnight";
       break;
@@ -32,6 +35,7 @@ export const Section: React.FC<SectionProps> = ({
       {...props}
     >
       {children}
+
     </section>
   );
 };

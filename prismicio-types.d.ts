@@ -2670,6 +2670,17 @@ export interface ContentColumnSliceStatsPrimaryColumnItem {
  */
 export interface ContentColumnSliceDefaultPrimary {
   /**
+   * Section Background field in *ContentColumn → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Purple
+   * - **API ID Path**: content_column.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"Purple" | "Transparent", "filled">;
+
+  /**
    * Title field in *ContentColumn → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -2772,6 +2783,17 @@ export interface ContentColumnSliceStatsPrimary {
   column: prismic.GroupField<
     Simplify<ContentColumnSliceStatsPrimaryColumnItem>
   >;
+
+  /**
+   * Section Background field in *ContentColumn → Stats → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Purple
+   * - **API ID Path**: content_column.stats.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"Purple" | "Transparent", "filled">;
 }
 
 /**

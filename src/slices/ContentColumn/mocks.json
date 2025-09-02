@@ -5,8 +5,8 @@
 		"primary": {
 			"card_background": {
 				"__TYPE__": "FieldContent",
-				"type": "Select",
-				"value": "Purple"
+				"value": "Purple",
+				"type": "Select"
 			},
 			"column": {
 				"__TYPE__": "GroupContentType",
@@ -221,6 +221,11 @@
 						}
 					}
 				]
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"type": "Select",
+				"value": "Transparent"
 			}
 		},
 		"items": []
@@ -313,6 +318,11 @@
 						}
 					}
 				]
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Purple",
+				"type": "Select"
 			}
 		},
 		"items": [

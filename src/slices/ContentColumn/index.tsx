@@ -14,10 +14,14 @@ export type ContentColumnProps =
  * Component for "ContentColumn" Slices.
  */
 const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
+  const backBlur =
+    slice.primary.background_color === "Transparent"
+      ? "backdrop-blur"
+      : "";
   const cardStyling =
     slice.primary.card_background === "Purple"
-      ? "bg-midnight bg-gradient-dark text-white divide-soft-purple/25"
-      : "bg-white text-[#01015E] divide-neon-violet";
+      ? "bg-gradient-dark text-white divide-soft-purple/25"
+      : "bg-white text-[#01015E] divide-neon-violet"
 
   const isSingleColumn = slice.primary.column.length === 1;
 
@@ -25,6 +29,7 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      backgroundColor={slice.primary.background_color}
     >
       {(slice.primary.title?.length || slice.primary.body?.length) > 0 && (
         <div className="mb-4 md:mb-10 text-center max-w-[900px] mx-auto">
@@ -50,7 +55,7 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
         containerClassName={isSingleColumn ? "flex justify-center" : ""}
       >
         <div
-          className={`${cardStyling} relative z-10 flex flex-col md:flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch ${
+          className={`${cardStyling} ${backBlur} relative z-10 flex flex-col md:flex-row items-center justify-center shadow rounded border border-neon-violet items-stretch ${
             isSingleColumn ? "max-w-[860px] w-full" : "w-full"
           }`}
         >
