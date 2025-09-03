@@ -187,7 +187,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                     <div className="flex-1 flex items-start justify-center">
                       {tab.section_image?.url && (
                         <div
-                          className="my-4 sticky"
+                          className="my-4 sticky flex items-center justify-center"
                           style={{
                             top: "160px",
                             maxHeight: "calc(100vh - 180px)",
@@ -197,7 +197,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                           <PrismicNextImage
                             field={tab.section_image}
                             alt=""
-                            className="object-contain w-full h-full"
+                            className="max-h-full object-contain"
                           />
                           <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
                             <button onClick={toggleAudio}>
