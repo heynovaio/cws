@@ -132,7 +132,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
 
         <div className="hidden md:block">
           <TabGroup>
-            <TabList className="flex mb-4 gap-4">
+            <TabList className="flex mb-4 gap-4 sticky top-0 z-50 w-full ">
               {sections.map((tab, idx) => (
                 <Tab
                   key={idx}
@@ -140,7 +140,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                     `w-full px-12 py-2 rounded-[12px] focus:outline-none ${
                       selected
                         ? "bg-[#6D00FF] text-white font-bold"
-                        : "border border-white text-white hover:bg-white/20"
+                        : " bg-midnight border border-white text-white hover:bg-white/20"
                     }`
                   }
                 >

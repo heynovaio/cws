@@ -24,7 +24,7 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
 }) => {
   return (
     <header
-      className="sticky top-0 z-50 bg-midnight/70"
+      className="z-50 bg-midnight/70"
       style={{ backdropFilter: "blur(35px)" }}
     >
       <nav
