@@ -93,6 +93,7 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
         <a
           className="mt-2 text-center text-base no-underline mb-4"
           href="https://heynova.io/"
+          target="_blank"
         >
           Website By: Hey Nova
         </a>
