@@ -191,22 +191,24 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                           style={{
                             top: "160px",
                             maxHeight: "calc(100vh - 180px)",
-                            overflow: "hidden",
                           }}
                         >
-                          <PrismicNextImage
-                            field={tab.section_image}
-                            alt=""
-                            className="max-h-full object-contain"
-                          />
-                          <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
-                            <button onClick={toggleAudio}>
-                              {isPlaying ? (
-                                <FaPause size="50" color="#DD0748" />
-                              ) : (
-                                <FaPlay size="50" color="#DD0748" />
-                              )}
-                            </button>
+                          <div className="relative w-full h-full flex items-center justify-center">
+                            <PrismicNextImage
+                              field={tab.section_image}
+                              alt=""
+                              className="max-h-[calc(100vh-180px)] w-auto h-auto object-contain"
+                            />
+
+                            <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
+                              <button onClick={toggleAudio}>
+                                {isPlaying ? (
+                                  <FaPause size="50" color="#DD0748" />
+                                ) : (
+                                  <FaPlay size="50" color="#DD0748" />
+                                )}
+                              </button>
+                            </div>
                           </div>
                         </div>
                       )}
