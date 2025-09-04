@@ -314,7 +314,7 @@ interface CareerHubDocumentData {
  * @typeParam Lang - Language API ID of the document.
  */
 export type CareerHubDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
+  prismic.PrismicDocumentWithUID<
     Simplify<CareerHubDocumentData>,
     "career_hub",
     Lang
