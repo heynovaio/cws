@@ -4,7 +4,7 @@ import { Field, Input, Label } from "@headlessui/react";
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 
-export const SearchBar = () => {
+export const SearchBar = ({ lang }: { lang: string }) => {
   const { searchTerm, setSearchTerm } = useCategoryFilter();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,7 @@ export const SearchBar = () => {
       <div className="flex items-center gap-2">
         <FaSearch className="h-5 w-5 text-aqua" />
         <Label htmlFor="search" className="label-small">
-          Search
+          {lang === "fr-ca" ? "Recherche" : "Search"}
         </Label>
       </div>
       <Input
@@ -26,7 +26,7 @@ export const SearchBar = () => {
         type="search"
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder="Search..."
+        placeholder={lang === "fr-ca" ? "Recherche..." : "Search..."}
         className={`bg-white px-4 py-1 rounded-full focus flex w-full`}
       />
     </Field>

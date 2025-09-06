@@ -10,9 +10,9 @@ import GetAllResourceCategories from "@/utils/useGetAllResourceCategories";
 import GetAllProgramCategories from "@/utils/useGetAllProgramCategories";
 import { SideFilter } from "./SideFilter";
 import { MobileSideFilter } from "./MobileSideFilter";
-
+import { SupportedLanguage } from "@/constants";
 interface SearchLayoutProps {
-  lang?: string;
+  lang?: SupportedLanguage;
 }
 export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
   const {
@@ -59,7 +59,7 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
             <div className="flex bg-white/10 rounded h-full w-full animate-pulse"></div>
           ) : (
             <div className="flex lg:min-w-64 flex-col">
-              <SideFilter />
+              <SideFilter lang={lang} />
             </div>
           )}
         </aside>
@@ -68,14 +68,14 @@ export const SearchLayout = ({ lang = "en-ca" }: SearchLayoutProps) => {
         {/* Search Bar + Page Type */}
         <div className="flex justify-center items-center md:justify-between md:flex-row flex-col gap-9 md:gap-2">
           {/* Filter Categories */}
-          <SearchFilterButtons />
+          <SearchFilterButtons lang={lang} />
           {/* Search Bar */}
-          <SearchBar />
+          <SearchBar lang={lang} />
           {/* Mobile side filter */}
-          <MobileSideFilter />
+          <MobileSideFilter lang={lang} />
         </div>
         {/* Grid */}
-        <SearchGrid lang={"en-ca"} />
+        <SearchGrid lang={lang} />
       </div>
     </section>
   );

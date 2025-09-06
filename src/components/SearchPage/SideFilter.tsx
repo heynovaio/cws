@@ -9,7 +9,7 @@ import { SearchPanelContainer } from "./SearchPanelContainer";
 import { TagsFilterPanel } from "./TagsFilterPanel";
 import { useCategoryFilter } from "@/providers";
 
-export const SideFilter = () => {
+export const SideFilter = ({ lang }: { lang: string }) => {
   const { activeFilter, availableTags, isLoading, selectedTags, toggleTag } =
     useCategoryFilter();
 
@@ -73,7 +73,9 @@ export const SideFilter = () => {
       {/* Resource Filters - Load second */}
       {loadingStage >= 1 && (
         <SearchPanelContainer
-          label="Resource Filters"
+          label={
+            lang === "fr-ca" ? "Filtres de ressources" : "Resource Filters"
+          }
           panel={
             loadingStage < 2 ? (
               <div className="h-48 bg-white/10 animate-pulse rounded"></div>
@@ -89,16 +91,16 @@ export const SideFilter = () => {
       {/* Program Filters - Load last */}
       {loadingStage >= 2 && (
         <SearchPanelContainer
-          label="Program Filters"
+          label={lang === "fr-ca" ? "Filtres de programmes" : "Program Filters"}
           panel={
             loadingStage < 3 ? (
               <div className="h-64 bg-white/10 animate-pulse rounded"></div>
             ) : (
               <div className="flex flex-col gap-5">
-                <ProgramsCategoriesFilterPanel />
-                <ProgramsFormatFilterPanel />
-                <ProgramsCostFilterPanel />
-                <ProgramsCredentialsFilterPanel />
+                <ProgramsCategoriesFilterPanel lang={lang} />
+                <ProgramsFormatFilterPanel lang={lang} />
+                <ProgramsCostFilterPanel lang={lang} />
+                <ProgramsCredentialsFilterPanel lang={lang} />
               </div>
             )
           }
@@ -109,7 +111,10 @@ export const SideFilter = () => {
 
       {/* Clear Button - Only show after all panels loaded */}
       {loadingStage >= 3 && (
-        <ClearFilterButton styling={availableTags.length > 0 ? "" : "mt-12"} />
+        <ClearFilterButton
+          styling={availableTags.length > 0 ? "" : "mt-12"}
+          lang={lang}
+        />
       )}
     </div>
   );

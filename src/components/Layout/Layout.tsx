@@ -17,6 +17,7 @@ import { CampaignHeader } from "../Menu/CampaignHeader";
 
 interface LayoutProps {
   locales: PrismicDocument[];
+  lang?: string;
   menus: MenusDocumentData;
   global: GlobalsDocumentData;
   children: ReactNode;
@@ -27,6 +28,7 @@ interface LayoutProps {
 
 export const Layout = ({
   locales,
+  lang = "en-ca",
   menus,
   global,
   partners,
@@ -60,7 +62,7 @@ export const Layout = ({
       </main>
       <Container>
         {include_newsletter_sign_up_banner && (
-          <NewsletterSignupBanner lang={"en-ca"} />
+          <NewsletterSignupBanner lang={lang} />
         )}
         {partners && (
           <Partners

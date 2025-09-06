@@ -13,9 +13,10 @@ import { isFilled } from "@prismicio/client";
 interface IntroProps {
   pageData?: CareerPageDocumentData;
   links?: BreadcrumbProps["links"];
+  lang?: string;
 }
 
-export const CareerIntro = ({ pageData, links }: IntroProps) => {
+export const CareerIntro = ({ pageData, links, lang }: IntroProps) => {
   const { image, title, body, button } = pageData || {};
 
   const buttonArray = Array.isArray(button)
@@ -55,7 +56,7 @@ export const CareerIntro = ({ pageData, links }: IntroProps) => {
                 width="full"
               />
             </div>
-            <Breadcrumb links={links} color="black" />
+            <Breadcrumb links={links} color="black" lang={lang} />
           </div>
           <div className="md:col-span-6 grid grid-cols-1 gap-4">
             <ResponsiveImage

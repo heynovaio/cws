@@ -14,6 +14,7 @@ interface FilterPanelProps {
   className?: string;
   initialVisibleCount?: number;
   filterKey?: string;
+  lang?: string;
 
   // Slider specific props
   slider?: boolean;
@@ -35,6 +36,7 @@ export const FilterPanel = ({
   sliderValue = 100,
   onSliderChange,
   currencySymbol = "$",
+  lang = "en-ca",
 }: FilterPanelProps) => {
   const { isLoading } = useCategoryFilter();
   const [showAll, setShowAll] = useState(false);
@@ -97,7 +99,9 @@ export const FilterPanel = ({
                   <div className="flex justify-between items-center">
                     <span className="text-sm">
                       {localSliderValue === 0
-                        ? "Free"
+                        ? lang === "fr-ca"
+                          ? "Gratuit"
+                          : "Free"
                         : `${currencySymbol}${localSliderValue.toLocaleString()}`}
                     </span>
                   </div>
@@ -115,7 +119,7 @@ export const FilterPanel = ({
                     className="w-full [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-midnight"
                   />
                   <div className="flex justify-between text-xs text-gray-500">
-                    <span>Free</span>
+                    <span>{lang == "fr-ca" ? "Gratuit" : "Free"}</span>
                     <span>
                       {currencySymbol}
                       {sliderMax.toLocaleString()}

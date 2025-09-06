@@ -76,12 +76,13 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       <CategoryFilterProvider>
         <Layout
           locales={locales}
+          lang={lang}
           global={global.data}
           menus={menus.data}
           partners={page.data.include_partners ? partners.data : null}
           include_newsletter_sign_up_banner={false}
         >
-          <CareerIntro pageData={page.data} links={links} />
+          <CareerIntro pageData={page.data} links={links} lang={lang} />
           <SliceZone
             slices={page.data.slices}
             components={components}

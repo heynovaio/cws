@@ -1,7 +1,7 @@
 import { useCategoryFilter } from "@/providers";
 import { FilterPanel } from "./FilterPanel";
 
-export const ProgramsCategoriesFilterPanel = () => {
+export const ProgramsCategoriesFilterPanel = ({ lang }: { lang: string }) => {
   const {
     selectedProgramCategories,
     toggleProgramCategory,
@@ -10,7 +10,7 @@ export const ProgramsCategoriesFilterPanel = () => {
 
   return (
     <FilterPanel
-      label="Categories"
+      label={lang === "fr-ca" ? "Catégories" : "Categories"}
       filterKey="program_categories"
       items={programCategories.map((cat) => ({
         id: cat.id,
