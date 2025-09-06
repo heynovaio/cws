@@ -1,13 +1,18 @@
 "use client";
 import React from "react";
 import {
-  defaultModuleFilters,
   module_filters_list,
   ModuleFilter,
+  getModuleFilterLabel,
+  SupportedLanguage,
 } from "@/constants";
 import { useCategoryFilter } from "@/providers";
 
-export const SearchFilterButtons = () => {
+interface SearchFilterButtonsProps {
+  lang: SupportedLanguage;
+}
+
+export const SearchFilterButtons = ({ lang }: SearchFilterButtonsProps) => {
   const {
     filterCounts,
     activeFilter,
@@ -55,7 +60,7 @@ export const SearchFilterButtons = () => {
             ${activeFilter === filterKey ? "bg-white !text-midnight shadow font-bold" : ""} btn btn-outline focus border`}
         >
           <span className="text-base font-normal hover:text-current flex gap-2 items-center">
-            {defaultModuleFilters[filterKey]}{" "}
+            {getModuleFilterLabel(filterKey, lang)}{" "}
             {isLoading ? (
               <div className="w-5 h-5 rounded-full bg-white/40 animate-pulse" />
             ) : (

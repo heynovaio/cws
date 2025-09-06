@@ -1,4 +1,5 @@
 "use client";
+import { getFormatLabel, ProgramFormat, SupportedLanguage } from "@/constants";
 import {
   KeyTextField,
   LinkField,
@@ -16,8 +17,9 @@ interface SpecCardProps {
   time?: KeyTextField;
   cost?: NumberField;
   certs?: boolean;
-  format?: string;
+  format?: ProgramFormat | "both";
   resources?: LinkField[];
+  lang?: SupportedLanguage | string;
 }
 
 // TODO: Translations
@@ -29,6 +31,7 @@ export const SpecCard = ({
   certs,
   format,
   resources,
+  lang,
 }: SpecCardProps) => {
   const validResources = Array.isArray(resources)
     ? resources.filter((item) => item.link_type !== "Any" && item.text)
@@ -46,7 +49,9 @@ export const SpecCard = ({
           <div className="flex flex-col md:flex-row flex-wrap gap-2 items-center text-center md:text-start">
             <MdAccessTimeFilled className="h-6 w-6 text-neon-violet" />
             <span>
-              <span className="font-bold">Time: </span>
+              <span className="font-bold">
+                {lang === "fr-ca" ? "Temps: " : "Time: "}
+              </span>
               {time}
             </span>
           </div>
@@ -55,7 +60,10 @@ export const SpecCard = ({
           <div className="flex gap-2 flex-col md:flex-row items-center text-center md:text-start">
             <MdAttachMoney className="h-6 w-6 text-neon-violet" />
             <span>
-              <span className="font-bold">Cost: </span>${cost}
+              <span className="font-bold">
+                {lang === "fr-ca" ? "Coût: " : "Cost: "}
+              </span>
+              ${cost}
             </span>
           </div>
         )}
@@ -64,7 +72,7 @@ export const SpecCard = ({
             <FaMedal className="h-4 w-6 text-neon-violet" />
             <span>
               <span className="font-bold">Certs: </span>
-              NCCP PD Points
+              {lang === "fr-ca" ? "Points PD (NCCP)" : "NCCP PD Points"}
             </span>
           </div>
         )}
@@ -73,14 +81,19 @@ export const SpecCard = ({
             <FaLaptop className="h-4 w-6 text-neon-violet" />
             <span>
               <span className="font-bold">Format: </span>
-              {format}
+              {getFormatLabel(
+                format.toLowerCase() as ProgramFormat,
+                lang as "en-ca" | "fr-ca"
+              )}
             </span>
           </div>
         )}
       </div>
       {validResources.length > 0 && (
         <div className="w-full flex flex-col mx-auto md:mx-0 gap-2 text-base border-t border-neon-violet pt-3">
-          <h3 className="text-base font-bold">Included:</h3>
+          <h3 className="text-base font-bold">
+            {lang === "fr-ca" ? "Inclus:" : "Included:"}
+          </h3>
           <ul className="list-disc pl-1">
             {validResources.map((item, index) => (
               <li key={index}>

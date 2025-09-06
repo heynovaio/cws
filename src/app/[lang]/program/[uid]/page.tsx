@@ -63,7 +63,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   const pageTypeLabel =
     page.type === "program_page"
-      ? "Support Pathways"
+      ? lang === "fr-ca"
+        ? "Voies de soutien"
+        : "Support Pathways"
+      : lang === "fr-ca"
+      ? "Équité de genre en action"
       : "Gender Equity in Action";
 
   let categoryDoc = null;
@@ -106,6 +110,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       <CategoryFilterProvider>
         <Layout
           locales={locales}
+          lang={lang}
           global={global.data}
           menus={menus.data}
           partners={page.data.include_partners ? partners.data : null}
@@ -113,7 +118,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             page.data.include_newsletter_sign_up_banner
           }
         >
-          <Intro type="program" pageData={page.data} links={links} />
+          <Intro
+            type="program"
+            pageData={page.data}
+            links={links}
+            lang={lang}
+          />
           <SliceZone
             slices={page.data.slices}
             components={components}

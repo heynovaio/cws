@@ -5,9 +5,13 @@ import { useRouter } from "next/navigation";
 
 interface ClearFilterButtonProps {
   styling?: string;
+  lang: string;
 }
 
-export const ClearFilterButton = ({ styling }: ClearFilterButtonProps) => {
+export const ClearFilterButton = ({
+  styling,
+  lang,
+}: ClearFilterButtonProps) => {
   const {
     clearAllFilters,
     searchTerm,
@@ -48,7 +52,7 @@ export const ClearFilterButton = ({ styling }: ClearFilterButtonProps) => {
       as="button"
       type="button"
       buttonType="primary"
-      label="Clear Filters"
+      label={lang === "fr-ca" ? "Effacer les filtres" : "Clear Filters"}
       onClick={handleClearFilters}
       styling={styling}
     />

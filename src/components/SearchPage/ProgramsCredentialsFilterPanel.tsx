@@ -1,7 +1,7 @@
 import { useCategoryFilter } from "@/providers";
 import { FilterPanel } from "./FilterPanel";
 
-export const ProgramsCredentialsFilterPanel = () => {
+export const ProgramsCredentialsFilterPanel = ({ lang }: { lang: string }) => {
   const { hasCredentials, toggleCredentials } = useCategoryFilter();
 
   const handleCredentialsToggle = (itemId: string) => {
@@ -12,12 +12,12 @@ export const ProgramsCredentialsFilterPanel = () => {
 
   return (
     <FilterPanel
-      label="Credentials"
+      label={lang === "fr-ca" ? "Titres de compétences" : "Credentials"}
       filterKey="credentials"
       items={[
         {
           id: "nccp-pd-points",
-          name: "NCCP PD Points",
+          name: lang === "fr-ca" ? "Points PD (NCCP)" : "NCCP PD Points",
         },
       ]}
       selectedItems={hasCredentials ? ["nccp-pd-points"] : []}
