@@ -13,7 +13,6 @@ export const repositoryName =
  *
  * {@link https://prismic.io/docs/route-resolver#route-resolver}
  */
-// TODO: Update the routes array to match your project's route structure.
 const routes: prismic.ClientConfig["routes"] = [
   { type: "page", path: "/:lang?", uid: "home" },
   { type: "page", path: "/:lang?/:uid" },
@@ -24,8 +23,16 @@ const routes: prismic.ClientConfig["routes"] = [
   { type: "campaign_page", path: "/:lang?/campaign/:uid" },
   { type: "search_page", path: "/:lang?/search" },
   { type: "career_hub", path: "/:lang?/:uid" },
-  { type: "career_page", path: "/:lang?/:uid/:careeruid" }, 
+
+  {
+    type: "career_page",
+    path: "/:lang?/:uid/:careeruid",
+    resolvers: {
+      uid: "career_hub",
+    },
+  },
 ];
+
 /**
  * Creates a Prismic client for the project's repository. The client is used to
  * query content from the Prismic API.

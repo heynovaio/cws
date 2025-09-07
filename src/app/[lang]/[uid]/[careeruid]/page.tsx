@@ -14,7 +14,7 @@ import type { BreadcrumbLink } from "@/components/Breadcrumb";
 import { Loading } from "@/components/Loading/Loading";
 
 /**
- * This page renders a Prismic Document dynamically based on the URL.
+ * This page renders individual career entries under a career hub.
  */
 
 type Params = { uid: string; careeruid: string; lang: string };

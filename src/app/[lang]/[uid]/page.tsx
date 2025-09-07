@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 import { SliceZone } from "@prismicio/react";
 import * as prismic from "@prismicio/client";
@@ -13,41 +13,36 @@ import { GeneralHero } from "@/components/Heros/GeneralHero";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
+ * It checks if the uid corresponds to a career_hub or regular page type.
  */
 
 type Params = { uid: string; lang: string };
 
-// Helper function to determine document type and get document
-async function getDocumentByUID(
-  uid: string,
-  lang: string,
-  client: prismic.Client
-) {
+// Helper function to determine page type and fetch data
+async function getPageData(uid: string, lang: string) {
+  const client = createClient();
+
+  // First, try to fetch as career_hub
   try {
-    const page = await client.getByUID("page", uid, { lang }).catch(() => null);
-    if (page) {
-      return {
-        document: page,
-        type: "page",
-      };
-    }
-
-    const careerHub = await client
-      .getByUID("career_hub", uid, { lang })
-      .catch(() => null);
-    if (careerHub) {
-      return {
-        document: careerHub,
-        type: "career_hub",
-      };
-    }
-
+    const careerHub = await client.getByUID("career_hub", uid, { lang });
     return {
-      document: page,
-      type: "page",
+      page: careerHub,
+      type: "career_hub" as const,
     };
   } catch {
-    return null;
+    // Career hub doesn't exist, continue to regular page check
+  }
+
+  // If not career_hub, try to fetch as regular page
+  try {
+    const page = await client.getByUID("page", uid, { lang });
+    return {
+      page,
+      type: "page" as const,
+    };
+  } catch {
+    // Neither type found
+    notFound();
   }
 }
 
@@ -57,32 +52,26 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { uid, lang } = await params;
-  const client = createClient();
 
-  const result = await getDocumentByUID(uid, lang, client);
+  const pageData = await getPageData(uid, lang);
 
-  if (!result) {
+  if (!pageData) {
     notFound();
   }
 
-  const { document, type } = result;
-
-  // If it's a career hub, we shouldn't generate metadata here
-  if (type === "career_hub") {
-    notFound();
-  }
+  const { page } = pageData;
 
   return {
     title:
-      document?.data.meta_title ||
-      prismic.asText(document?.data.title) ||
+      page.data.meta_title ||
+      prismic.asText(page.data.title) ||
       "Canadian Women in Sports",
-    description: document?.data.meta_description,
+    description: page.data.meta_description,
     openGraph: {
-      title: document?.data.meta_title || undefined,
+      title: page.data.meta_title || undefined,
       images: [
         {
-          url: document?.data.meta_image.url || "",
+          url: page.data.meta_image.url || "",
         },
       ],
     },
@@ -91,60 +80,65 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid, lang } = await params;
+
+  const pageData = await getPageData(uid, lang);
+
+  if (!pageData) {
+    notFound();
+  }
+
+  const { page, type } = pageData;
   const client = createClient();
 
-  const result = await getDocumentByUID(uid, lang, client);
-
-  if (!result) {
-    notFound();
-  }
-
-  const { document, type } = result;
-
-  // Ensure document is not null before destructuring data
-  if (!document) {
-    notFound();
-  }
-  const { data } = document;
-
-  // If it's a career hub, redirect to the proper career route
-  if (type === "career_hub") {
-    redirect(`/${lang}/${uid}`);
-  }
-
-  // Continue with regular page logic (type is "page")
+  // Fetch common data
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
   const partners = await client.getSingle("partners", { lang });
+  const locales = await getLocales(page, client);
 
-  // Ensure document is not null before calling getLocales
-  if (!document) {
-    notFound();
+  // Render based on page type
+  if (type === "career_hub") {
+    const heroData = {
+      title: page.data.title,
+      body: page.data.body,
+      button: Array.isArray(page.data.button) ? page.data.button : [],
+    };
+
+    return (
+      <Layout
+        locales={locales}
+        lang={lang}
+        global={global.data}
+        menus={menus.data}
+        partners={page.data.include_partners ? partners.data : null}
+        include_newsletter_sign_up_banner={false}
+      >
+        <GeneralHero data={heroData} shortHero />
+        <SliceZone
+          slices={page.data.slices}
+          components={components}
+          context={{ lang }}
+        />
+      </Layout>
+    );
   }
-  const locales = await getLocales(document, client);
 
+  // Regular page rendering
   return (
     <Layout
       locales={locales}
       lang={lang}
       global={global.data}
       menus={menus.data}
-      partners={document.data.include_partners ? partners.data : null}
+      partners={page.data.include_partners ? partners.data : null}
       include_newsletter_sign_up_banner={
-        document.data.include_newsletter_sign_up_banner
+        page.data.include_newsletter_sign_up_banner
       }
     >
-      <GeneralHero
-        data={{
-          title: data.title,
-          body: data.body,
-          button: data.button,
-          tagline: data.tagline,
-        }}
-      />
+      <GeneralHero data={page.data} />
       <div id="next-section">
         <SliceZone
-          slices={document.data.slices}
+          slices={page.data.slices}
           components={components}
           context={{ lang }}
         />
@@ -155,19 +149,32 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
 export async function generateStaticParams() {
   const client = createClient();
+
+  // Get all regular pages
   const pages = await client
     .getAllByType("page", {
       lang: "*",
     })
     .catch(() => []);
 
-  // Filter out home page since it's handled by root route
-  const filteredPages = pages.filter((page) => page.uid !== "home");
+  // Get career hub pages
+  const careerHubs = await client
+    .getAllByType("career_hub", {
+      lang: "*",
+    })
+    .catch(() => []);
 
-  return filteredPages.map((page) => {
-    return {
+  // Combine both types
+  const allParams = [
+    ...pages.map((page) => ({
       uid: page.uid,
       lang: page.lang,
-    };
-  });
+    })),
+    ...careerHubs.map((careerHub) => ({
+      uid: careerHub.uid,
+      lang: careerHub.lang,
+    })),
+  ];
+
+  return allParams;
 }
