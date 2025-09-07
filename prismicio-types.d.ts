@@ -787,6 +787,23 @@ interface MenusDocumentData {
   meta: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
+   * Twitter (X) field in *Menus*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menus.twitter
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  twitter: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
    * Slice Zone field in *Menus*
    *
    * - **Field Type**: Slice Zone

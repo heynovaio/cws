@@ -7,10 +7,15 @@ import {
 import { ResponsiveImage } from "..";
 import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
-import { FaFacebook, FaInstagram, FaMeta } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaMeta, FaXTwitter } from "react-icons/fa6";
 import { PrismicNextLink } from "@prismicio/next";
-import { FaLinkedin } from "react-icons/fa";
+import { FaLinkedin, FaMinus, FaPlus } from "react-icons/fa";
 import Image from "next/image";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
 
 interface FooterProps {
   global?: GlobalsDocumentData;
@@ -34,53 +39,105 @@ export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
                 {lang === "fr-ca" ? "Suivez-nous" : "Follow Us"}
               </h4>
               <div className="flex  flex-col justify-center items-center md:items-start gap-6 ">
-                {footerData?.instagram.link_type !== "Any" && (
-                  <span className="flex flex-row gap-4 items-center ">
-                    <FaInstagram size={35} />
-                    <PrismicNextLink
-                      field={footerData?.instagram}
-                      className="text-base underline-offset-4 menu-link"
-                    />
-                  </span>
-                )}
-                {footerData?.facebook.link_type !== "Any" && (
-                  <span className="flex flex-row gap-4 items-center">
-                    <FaFacebook size={35} />
-                    <PrismicNextLink
-                      field={footerData?.facebook}
-                      className="text-base underline-offset-4 menu-link"
-                    />
-                  </span>
-                )}
-                {footerData?.linkedin.link_type !== "Any" && (
-                  <span className="flex flex-row gap-4 items-center">
-                    <FaLinkedin size={35} />
-                    <PrismicNextLink
-                      field={footerData?.linkedin}
-                      className="text-base underline-offset-4 menu-link"
-                    />
-                  </span>
-                )}
-                {footerData?.meta.link_type !== "Any" && (
-                  <span className="flex flex-row gap-4 items-center">
-                    <FaMeta size={35} />
-                    <PrismicNextLink
-                      field={footerData?.meta}
-                      className="text-base underline-offset-4 menu-link"
-                    />
-                  </span>
-                )}
+                {footerData?.instagram.text !== "" &&
+                  footerData?.instagram.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center ">
+                      <FaInstagram size={35} />
+                      <PrismicNextLink
+                        field={footerData?.instagram}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
+                {footerData?.facebook.text !== "" &&
+                  footerData?.facebook.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center">
+                      <FaFacebook size={35} />
+                      <PrismicNextLink
+                        field={footerData?.facebook}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
+                {footerData?.linkedin.text !== "" &&
+                  footerData?.linkedin.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center">
+                      <FaLinkedin size={35} />
+                      <PrismicNextLink
+                        field={footerData?.linkedin}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
+                {footerData?.meta.text !== "" &&
+                  footerData?.meta.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center">
+                      <FaMeta size={35} />
+                      <PrismicNextLink
+                        field={footerData?.meta}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
+                {footerData?.twitter.text !== "" &&
+                  footerData?.twitter.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center">
+                      <FaXTwitter size={35} />
+                      <PrismicNextLink
+                        field={footerData?.twitter}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
               </div>
             </div>
           </div>
           <div className="flex flex-row md:flex-col flex-wrap grow justify-between">
             <div className="flex flex-col md:flex-row justify-center md:justify-between gap-x-8 gap-y-12 w-full text-center md:text-left footer-links">
               <SliceZone slices={slices} components={components} />
-              <div className="flex flex-col gap-4">
+              <Disclosure as="div" className="md:hidden">
+                {({ open }) => (
+                  <>
+                    <DisclosureButton
+                      className={`flex items-center justify-center gap-4 pl-2 w-full menu-link  ${open ? "mb-3" : ""}`}
+                    >
+                      <h4 className="footer-header">
+                        {lang === "fr-ca" ? "Contactez-nous" : "Contact Us"}
+                      </h4>
+                      <div>
+                        <FaPlus
+                          className={`h-4 w-4 font-bold ${open ? "hidden" : ""}`}
+                        />
+                        <FaMinus
+                          className={`h-4 w-4 font-bold ${open ? "" : "hidden"}`}
+                        />
+                      </div>
+                    </DisclosureButton>
+                    <DisclosurePanel className="pl-2 flex flex-col gap-5 mb-3 transition duration-200 ease-out text-center">
+                      {global?.email && (
+                        <a href={`mailto:${global?.email}`}>{global?.email}</a>
+                      )}
+                      {global?.phone && (
+                        <a href={`tel:${global?.phone}`}>{global?.phone}</a>
+                      )}
+                      {global?.address && <p>{global?.address}</p>}
+                      {global?.fax_number && <p>{global?.fax_number}</p>}
+                    </DisclosurePanel>
+                  </>
+                )}
+              </Disclosure>
+              <div className="hidden md:flex flex-col gap-4">
                 <h4 className="footer-header">
                   {lang === "fr-ca" ? "Contactez-nous" : "Contact Us"}
                 </h4>
-                <a href={`mailto:${global?.email}`}>{global?.email}</a>
+                {global?.email && (
+                  <a href={`mailto:${global?.email}`}>{global?.email}</a>
+                )}
+                {global?.phone && (
+                  <a href={`tel:${global?.phone}`}>{global?.phone}</a>
+                )}
+                {global?.address && <p>{global?.address}</p>}
+                {global?.fax_number && <p>{global?.fax_number}</p>}
               </div>
             </div>
             {/* Government of Canada Logo */}
