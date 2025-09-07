@@ -7,7 +7,7 @@ import {
 import { ResponsiveImage } from "..";
 import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
-import { FaFacebook, FaInstagram, FaMeta } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaMeta, FaXTwitter } from "react-icons/fa6";
 import { PrismicNextLink } from "@prismicio/next";
 import { FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
@@ -66,6 +66,15 @@ export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
                     <FaMeta size={35} />
                     <PrismicNextLink
                       field={footerData?.meta}
+                      className="text-base underline-offset-4 menu-link"
+                    />
+                  </span>
+                )}
+                {footerData?.twitter.link_type !== "Any" && (
+                  <span className="flex flex-row gap-4 items-center">
+                    <FaXTwitter size={35} />
+                    <PrismicNextLink
+                      field={footerData?.twitter}
                       className="text-base underline-offset-4 menu-link"
                     />
                   </span>
