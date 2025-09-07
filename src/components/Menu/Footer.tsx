@@ -34,51 +34,56 @@ export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
                 {lang === "fr-ca" ? "Suivez-nous" : "Follow Us"}
               </h4>
               <div className="flex  flex-col justify-center items-center md:items-start gap-6 ">
-                {footerData?.instagram.link_type !== "Any" && (
-                  <span className="flex flex-row gap-4 items-center ">
-                    <FaInstagram size={35} />
-                    <PrismicNextLink
-                      field={footerData?.instagram}
-                      className="text-base underline-offset-4 menu-link"
-                    />
-                  </span>
-                )}
-                {footerData?.facebook.link_type !== "Any" && (
-                  <span className="flex flex-row gap-4 items-center">
-                    <FaFacebook size={35} />
-                    <PrismicNextLink
-                      field={footerData?.facebook}
-                      className="text-base underline-offset-4 menu-link"
-                    />
-                  </span>
-                )}
-                {footerData?.linkedin.link_type !== "Any" && (
-                  <span className="flex flex-row gap-4 items-center">
-                    <FaLinkedin size={35} />
-                    <PrismicNextLink
-                      field={footerData?.linkedin}
-                      className="text-base underline-offset-4 menu-link"
-                    />
-                  </span>
-                )}
-                {footerData?.meta.link_type !== "Any" && (
-                  <span className="flex flex-row gap-4 items-center">
-                    <FaMeta size={35} />
-                    <PrismicNextLink
-                      field={footerData?.meta}
-                      className="text-base underline-offset-4 menu-link"
-                    />
-                  </span>
-                )}
-                {footerData?.twitter.link_type !== "Any" && (
-                  <span className="flex flex-row gap-4 items-center">
-                    <FaXTwitter size={35} />
-                    <PrismicNextLink
-                      field={footerData?.twitter}
-                      className="text-base underline-offset-4 menu-link"
-                    />
-                  </span>
-                )}
+                {footerData?.instagram.text !== "" &&
+                  footerData?.instagram.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center ">
+                      <FaInstagram size={35} />
+                      <PrismicNextLink
+                        field={footerData?.instagram}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
+                {footerData?.facebook.text !== "" &&
+                  footerData?.facebook.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center">
+                      <FaFacebook size={35} />
+                      <PrismicNextLink
+                        field={footerData?.facebook}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
+                {footerData?.linkedin.text !== "" &&
+                  footerData?.linkedin.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center">
+                      <FaLinkedin size={35} />
+                      <PrismicNextLink
+                        field={footerData?.linkedin}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
+                {footerData?.meta.text !== "" &&
+                  footerData?.meta.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center">
+                      <FaMeta size={35} />
+                      <PrismicNextLink
+                        field={footerData?.meta}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
+                {footerData?.twitter.text !== "" &&
+                  footerData?.twitter.link_type !== "Any" && (
+                    <span className="flex flex-row gap-4 items-center">
+                      <FaXTwitter size={35} />
+                      <PrismicNextLink
+                        field={footerData?.twitter}
+                        className="text-base underline-offset-4 menu-link"
+                      />
+                    </span>
+                  )}
               </div>
             </div>
           </div>
