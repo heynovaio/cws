@@ -17,18 +17,18 @@ import { Loading } from "@/components/Loading/Loading";
  * This page renders a Prismic Document dynamically based on the URL.
  */
 
-type Params = { uid: string; lang: string };
+type Params = { uid: string; careeruid: string; lang: string };
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { uid, lang } = await params;
+  const { careeruid, lang } = await params;
 
   const client = createClient();
   const page = await client
-    .getByUID("career_page", uid, { lang })
+    .getByUID("career_page", careeruid, { lang })
     .catch(() => notFound());
 
   return {
@@ -49,12 +49,20 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const { uid, lang } = await params;
+  const { uid, careeruid, lang } = await params;
 
   const client = createClient();
+
+  // Get the career page document
   const page = await client
-    .getByUID("career_page", uid, { lang })
+    .getByUID("career_page", careeruid, { lang })
     .catch(() => notFound());
+
+  // Get the career hub using the uid parameter
+  const careerHub = await client
+    .getByUID("career_hub", uid, { lang })
+    .catch(() => notFound());
+
   const global = await client.getSingle("globals", { lang });
   const menus = await client.getSingle("menus", { lang });
   const partners = await client.getSingle("partners", { lang });
@@ -67,6 +75,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       href: "/career",
     },
     {
+      label: prismic.asText(careerHub.data.title),
+      href: `/${uid}`, // Updated to use uid instead of career
+    },
+    {
       label: prismic.asText(page.data.title),
     },
   ];
@@ -76,13 +88,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       <CategoryFilterProvider>
         <Layout
           locales={locales}
-          lang={lang}
           global={global.data}
           menus={menus.data}
           partners={page.data.include_partners ? partners.data : null}
           include_newsletter_sign_up_banner={false}
         >
-          <CareerIntro pageData={page.data} links={links} lang={lang} />
+          <CareerIntro pageData={page.data} links={links} />
           <SliceZone
             slices={page.data.slices}
             components={components}
@@ -96,16 +107,34 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
 export async function generateStaticParams() {
   const client = createClient();
-  const pages = await client
+
+  // Get all career pages
+  const careerPages = await client
     .getAllByType("career_page", {
       lang: "*",
     })
-    .catch(() => notFound());
+    .catch(() => []);
 
-  return pages.map((page) => {
-    return {
-      uid: page.uid,
-      lang: page.lang,
-    };
-  });
+  // Get all career hubs to create the mapping
+  const careerHubs = await client
+    .getAllByType("career_hub", {
+      lang: "*",
+    })
+    .catch(() => []);
+
+  const params = [];
+
+  for (const hub of careerHubs) {
+    for (const page of careerPages) {
+      if (hub.lang === page.lang) {
+        params.push({
+          uid: hub.uid,
+          careeruid: page.uid,
+          lang: page.lang,
+        });
+      }
+    }
+  }
+
+  return params;
 }

@@ -23,11 +23,9 @@ const routes: prismic.ClientConfig["routes"] = [
   { type: "team_members", path: "/:lang?/team" },
   { type: "campaign_page", path: "/:lang?/campaign/:uid" },
   { type: "search_page", path: "/:lang?/search" },
-  { type: "career_hub", path: "/:lang?/career" },
-  { type: "career_page", path: "/:lang?/career/:uid" },
-  // { type: "search_page", path: "/:lang?/search" },
+  { type: "career_hub", path: "/:lang?/:uid" },
+  { type: "career_page", path: "/:lang?/:uid/:careeruid" }, 
 ];
-
 /**
  * Creates a Prismic client for the project's repository. The client is used to
  * query content from the Prismic API.
