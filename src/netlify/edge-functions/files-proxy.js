@@ -1,9 +1,10 @@
+/* eslint-disable import/no-anonymous-default-export */
 // Netlify Edge (Deno). Proxies /files/* to Prismic CDN,
 // preserves range requests, sets cache headers, and cleans filenames.
 
 const REPO = "canadian-women-in-sports"; // Prismic repo slug
 
-const filesProxy = async (req) => {
+export default async (req) => {
   const incoming = new URL(req.url);
 
   // Map /files/<rest> -> https://<repo>.cdn.prismic.io/<repo>/<rest>
@@ -59,7 +60,5 @@ const filesProxy = async (req) => {
     headers,
   });
 };
-
-export default filesProxy;
 
 export const config = { path: "/files/*" };
