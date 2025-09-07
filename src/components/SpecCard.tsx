@@ -82,7 +82,7 @@ export const SpecCard = ({
             <span>
               <span className="font-bold">Format: </span>
               {getFormatLabel(
-                format.toLowerCase() as ProgramFormat,
+                format as ProgramFormat,
                 lang as "en-ca" | "fr-ca"
               )}
             </span>

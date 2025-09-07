@@ -1,18 +1,18 @@
 export const PROGRAM_FORMATS = {
-  VIRTUAL: "virtual",
-  IN_PERSON: "in_person",
+  VIRTUAL: "Virtual",
+  IN_PERSON: "In-Person",
 } as const;
 
 export const PROGRAM_FORMAT_TRANSLATIONS = {
   "en-ca": {
-    virtual: "Virtual",
-    in_person: "In-Person",
-    both: "Both",
+    Virtual: "Virtual",
+    "In-Person": "In-Person",
+    Both: "Virtual & In-Person",
   },
   "fr-ca": {
-    virtual: "Virtuel",
-    in_person: "En Personne",
-    both: "Les Deux",
+    Virtual: "Virtuel",
+    "In-Person": "En Personne",
+    Both: "Virtuel & En Personne",
   },
 } as const;
 
