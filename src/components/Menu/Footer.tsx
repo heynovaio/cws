@@ -10,25 +10,29 @@ import { components } from "@/slices";
 import { FaFacebook, FaInstagram, FaMeta } from "react-icons/fa6";
 import { PrismicNextLink } from "@prismicio/next";
 import { FaLinkedin } from "react-icons/fa";
+import Image from "next/image";
 
 interface FooterProps {
   global?: GlobalsDocumentData;
   footerData?: MenusDocumentData;
   slices: MenusDocumentDataSlices1Slice[] | undefined;
+  lang: string;
 }
 
-export const Footer = ({ global, slices, footerData }: FooterProps) => {
+export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
   return (
     <footer className="bg-neon-violet/50 text-white flex flex-col justify-center items-center">
-      <nav className="py-14 px-5  mx-auto max-w-screen-xl w-full flex flex-col">
-        <div className="flex flex-col md:flex-row flex-wrap justify-center md:justify-between gap-x-8 gap-y-12 w-full text-center md:text-left footer-links">
+      <nav className="py-14 px-5 mx-auto max-w-screen-xl w-full flex flex-col">
+        <div className="flex gap-x-20 gap-y-16 flex-wrap md:flex-nowrap items-center justify-center md:justify-normal md:items-stretch">
           <div className="flex flex-col items-center lg:items-start">
             <ResponsiveImage
               image={global?.site_logo}
               containerClassName="mb-8 max-w-[180px] md:max-w-[220px]"
             />
             <div className="flex flex-col items-center md:items-start">
-              <h4 className="mb-6 footer-header">Follow Us</h4>
+              <h4 className="mb-6 footer-header">
+                {lang === "fr-ca" ? "Suivez-nous" : "Follow Us"}
+              </h4>
               <div className="flex  flex-col justify-center items-center md:items-start gap-6 ">
                 {footerData?.instagram.link_type !== "Any" && (
                   <span className="flex flex-row gap-4 items-center ">
@@ -69,10 +73,56 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
               </div>
             </div>
           </div>
-          <SliceZone slices={slices} components={components} />
-          <div className="flex flex-col gap-4">
-            <h4 className="footer-header">Contact Us</h4>
-            <a href={`mailto:${global?.email}`}>{global?.email}</a>
+          <div className="flex flex-row md:flex-col flex-wrap grow justify-between">
+            <div className="flex flex-col md:flex-row justify-center md:justify-between gap-x-8 gap-y-12 w-full text-center md:text-left footer-links">
+              <SliceZone slices={slices} components={components} />
+              <div className="flex flex-col gap-4">
+                <h4 className="footer-header">
+                  {lang === "fr-ca" ? "Contactez-nous" : "Contact Us"}
+                </h4>
+                <a href={`mailto:${global?.email}`}>{global?.email}</a>
+              </div>
+            </div>
+            {/* Government of Canada Logo */}
+            <div className="hidden md:flex ml-auto flex-grow items-end">
+              {lang === "fr-ca" ? (
+                <Image
+                  src="/GovernmentOfCanadaFR.png"
+                  alt="Gouvernement du Canada"
+                  width={500}
+                  height={100}
+                  className="mx-auto w-auto h-auto max-w-full"
+                  sizes="(max-width: 1040px) 520px, 580px"
+                />
+              ) : (
+                <Image
+                  src="/GovernmentOfCanadaEN.png"
+                  alt="Government of Canada"
+                  width={500}
+                  height={100}
+                  className="mx-auto w-auto h-auto md:max-w-[400px] max-w-[200px]"
+                />
+              )}
+            </div>
+          </div>
+          <div className="md:hidden flex ml-auto flex-grow items-end">
+            {lang === "fr-ca" ? (
+              <Image
+                src="/GovernmentOfCanadaFR.png"
+                alt="Gouvernement du Canada"
+                width={500}
+                height={100}
+                className="mx-auto w-auto h-auto max-w-[400px]"
+              />
+            ) : (
+              <Image
+                src="/GovernmentOfCanadaEN.png"
+                alt="Government of Canada"
+                width={500}
+                height={100}
+                className="mx-auto w-auto h-auto max-w-[400px]"
+              />
+            )}
           </div>
         </div>
       </nav>
@@ -95,7 +145,7 @@ export const Footer = ({ global, slices, footerData }: FooterProps) => {
           href="https://heynova.io/"
           target="_blank"
         >
-          Website By: Hey Nova
+          {lang === "fr-ca" ? "Conçu par Hey Nova" : "Designed by Hey Nova"}
         </a>
       </div>
     </footer>

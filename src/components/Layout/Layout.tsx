@@ -75,7 +75,12 @@ export const Layout = ({
         )}
       </Container>
 
-      <Footer global={global} slices={menus?.slices1} footerData={menus} />
+      <Footer
+        global={global}
+        slices={menus?.slices1}
+        footerData={menus}
+        lang={lang}
+      />
     </div>
   );
 };
