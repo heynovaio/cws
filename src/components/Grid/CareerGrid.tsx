@@ -3,7 +3,9 @@ import React from "react";
 import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { asText, Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+
 
 import GetAllCareers from "@/utils/getAllCareers";
 import { componentsTextSmall } from "@/utils";

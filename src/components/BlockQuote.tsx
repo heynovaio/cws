@@ -1,6 +1,5 @@
 import { RichTextField } from "@prismicio/client";
-import { PrismicRichText } from "@prismicio/react";
-
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 interface BlockQuoteProps {
   quote: string | RichTextField;
 }

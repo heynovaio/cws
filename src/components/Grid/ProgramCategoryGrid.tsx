@@ -4,7 +4,9 @@ import { useProgramCategoryData } from "@/hooks";
 import { componentsTextSmall } from "@/utils";
 import GetAllPrograms from "@/utils/useGetAllPrograms";
 import { asText, Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+
 import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { DefaultCard } from "../Cards";

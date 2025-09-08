@@ -3,7 +3,9 @@ import React, { useMemo } from "react";
 import { useResourceCategoryData } from "@/hooks";
 import { componentsTextSmall } from "@/utils";
 import { asText, Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+
 import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { DefaultCard } from "../Cards";

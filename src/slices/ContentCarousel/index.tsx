@@ -9,7 +9,8 @@ import {
   FilledContentRelationshipField,
   RichTextField,
 } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { SliceComponentProps } from "@prismicio/react";
 
 import Carousel, {
   CarouselInternalState,

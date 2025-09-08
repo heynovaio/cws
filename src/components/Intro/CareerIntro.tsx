@@ -5,7 +5,7 @@ import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { ContentBox } from "../ContentBox/ContentBox";
 import { PrismicNextLink } from "@prismicio/next";
 import { CareerPageDocumentData } from "../../../prismicio-types";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { components } from "@/utils";
 import { Breadcrumb, BreadcrumbProps } from "../Breadcrumb";
 import { isFilled } from "@prismicio/client";

@@ -2,7 +2,8 @@
 import { Button } from "@/components";
 import { Section, Container, ResponsiveImage, ContentBox } from "@/components";
 import { Content, RichTextField } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { SliceComponentProps } from "@prismicio/react";
 import { JSX, useEffect } from "react";
 import { components } from "@/utils";
 import { useInView } from "react-intersection-observer";

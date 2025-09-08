@@ -2,7 +2,7 @@
 import { Container } from "../Layout";
 import { DefaultCard } from "../Cards";
 import { asText } from "@prismicio/client";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import {
   ProgramPageDocument,
   ResourcePageDocument,
