@@ -41,3 +41,6 @@ next-env.d.ts
 
 .DS_Store
 .qodo
+
+# Local Netlify folder
+.netlify

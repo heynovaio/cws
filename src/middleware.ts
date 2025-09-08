@@ -16,6 +16,12 @@ function getLocale(request: NextRequest) {
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  // Skip middleware for files proxied through Netlify edge functions
+  if (pathname.startsWith("/files/")) {
+    return NextResponse.next();
+  }
+
   const pathnameIsMissingLocale = locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
@@ -45,5 +51,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|assets|slice-simulator|auth/.*|.*\\..*|_next).*)"],
+  // Exclude /files/* from middleware processing
+  matcher: ["/((?!api|assets|files/.*|slice-simulator|auth/.*|.*\\..*|_next).*)"],
 };
