@@ -1,16 +1,16 @@
 import { PrismicNextLink as _PrismicNextLink } from "@prismicio/next";
-import type {
-  LinkField,
-  FilledLinkToWebField,
-  FilledLinkToMediaField,
-  PrismicDocument,
-} from "@prismicio/types";
+import { isFilled } from "@prismicio/client";
 import type React from "react";
+import type { UrlObject } from "url";
 
-function getUrlIfWebOrMedia(field?: LinkField | null): string | undefined {
-  if (!field) return;
-  if (field.link_type === "Web") return (field as FilledLinkToWebField).url;
-  if (field.link_type === "Media") return (field as FilledLinkToMediaField).url;
+type BaseProps = React.ComponentProps<typeof _PrismicNextLink>;
+type FieldProp = BaseProps["field"];
+type DocumentProp = BaseProps["document"];
+
+function getUrlIfWebOrMedia(field: FieldProp): string | undefined {
+  if (!field || !isFilled.link(field)) return;
+  if (field.link_type === "Web" && "url" in field)  return field.url;
+  if (field.link_type === "Media" && "url" in field) return field.url;
   return;
 }
 
@@ -28,39 +28,35 @@ export function toFilesMask(href?: string): string | undefined {
   }
 }
 
-type BaseProps = React.ComponentProps<typeof _PrismicNextLink>;
+type Common = Omit<BaseProps, "href" | "field" | "document">;
+type PropsWithHref = Common & { href: string | UrlObject; field?: never; document?: never };
+type PropsWithField = Common & { field: FieldProp; href?: never; document?: never };
+type PropsWithDocument = Common & { document: DocumentProp; href?: never; field?: never };
+export type MaskedPrismicNextLinkProps = PropsWithHref | PropsWithField | PropsWithDocument;
 
-export function PrismicNextLink(props: BaseProps) {
-  const { href: hrefProp, field, document, rel, target, ...rest } = props as BaseProps & {
-    field?: LinkField;
-    document?: PrismicDocument;
-  };
+export function PrismicNextLink(props: MaskedPrismicNextLinkProps) {
+  const normalizedRel =
+    props.rel ?? (props.target === "_blank" ? "noopener noreferrer" : undefined);
 
-  let maskedFromField: string | undefined;
-  if (field) {
+  if ("field" in props) {
+    const { field, ...rest } = props;
     const raw = getUrlIfWebOrMedia(field);
     const masked = toFilesMask(raw);
-    if (masked && masked !== raw) maskedFromField = masked;
+
+    if (masked) {
+      const { ...withoutField } = rest as Omit<BaseProps, "field">;
+      return <_PrismicNextLink {...(withoutField as Common)} href={masked} rel={normalizedRel} />;
+    }
+
+    return <_PrismicNextLink {...props} rel={normalizedRel} />;
   }
 
-  let maskedFromHref: string | undefined;
-  if (typeof hrefProp === "string") {
-    maskedFromHref = toFilesMask(hrefProp);
+  if ("href" in props) {
+    const { href, field, document, ...rest } = props;
+    const finalHref = typeof href === "string" ? toFilesMask(href) ?? href : href;
+    if (finalHref === undefined) return null;
+    return <_PrismicNextLink {...rest} href={finalHref} rel={normalizedRel} />;
   }
 
-  const finalRel = rel ?? (target === "_blank" ? "noopener noreferrer" : undefined);
-
-  if (field && maskedFromField) {
-    return <_PrismicNextLink href={maskedFromField} target={target} rel={finalRel} {...rest} />;
-  }
-
-  if (maskedFromHref) {
-    return <_PrismicNextLink href={maskedFromHref} target={target} rel={finalRel} {...rest} />;
-  }
-
-  if (field)   return <_PrismicNextLink field={field} target={target} rel={finalRel} {...rest} />;
-  if (document) return <_PrismicNextLink document={document} target={target} rel={finalRel} {...rest} />;
-  if (hrefProp !== undefined) return <_PrismicNextLink href={hrefProp as any} target={target} rel={finalRel} {...rest} />;
-
-  return <a target={target} rel={finalRel} {...(rest as any)}>{(rest as any)?.children}</a>;
+  return <_PrismicNextLink {...props} rel={normalizedRel} />;
 }
