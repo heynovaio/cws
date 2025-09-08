@@ -24,8 +24,8 @@ const SUPPORTED = new Set<keyof typeof STRINGS>(["en-ca", "fr-ca"]);
 
 export default function NotFound() {
   const pathname = usePathname() || "/";
-  const first = pathname.split("/").filter(Boolean)[0] ?? "en-ca";
-  const lang = (SUPPORTED.has(first as any) ? first : "en-ca") as keyof typeof STRINGS;
+  const first = (pathname.split("/").filter(Boolean)[0] ?? "en-ca") as keyof typeof STRINGS;
+  const lang = SUPPORTED.has(first) ? first : "en-ca";
   const t = STRINGS[lang];
 
   return (
