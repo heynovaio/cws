@@ -1,0 +1,7 @@
+[dev]
+  framework = "next"
+  command   = "next dev"
+
+[[edge_functions]]
+  function = "files-proxy" 
+  path     = "/files/*"

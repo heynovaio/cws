@@ -52,5 +52,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Exclude /files/* from middleware processing
-  matcher: ["/((?!api|assets|files|slice-simulator|auth/.*|.*\\..*|_next).*)"],
+  matcher: ["/((?!api|assets|files/.*|slice-simulator|auth/.*|.*\\..*|_next).*)"],
 };
