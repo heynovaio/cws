@@ -9,7 +9,8 @@ import {
   FilledContentRelationshipField,
   RichTextField,
 } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { SliceComponentProps } from "@prismicio/react";
 
 import Carousel, {
   CarouselInternalState,
@@ -27,6 +28,7 @@ import {
   ShortCard,
 } from "@/components";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 
 import GetAllPrograms from "@/utils/useGetAllPrograms";
@@ -102,10 +104,16 @@ const ContentCarousel = ({
   const [currentSlide, setCurrentSlide] = useState(0);
   const itemsPerPage = useItemsPerPage(responsive);
 
-  const programPageData = GetAllPrograms("en-ca").data;
-  const resourcePageData = GetAllResources("en-ca").data;
-  const programCategoryData = useProgramCategoryData("en-ca");
-  const resourceCategoryData = useResourceCategoryData("en-ca");
+  // Determine current locale from the URL path
+  const pathname = usePathname();
+  const langSegment = pathname.split("/")[1];
+  const lang = langSegment === "fr-ca" ? "fr-ca" : "en-ca";
+  const learnMoreText = lang === "fr-ca" ? "En savoir plus" : "Learn More";
+
+  const programPageData = GetAllPrograms(lang).data;
+  const resourcePageData = GetAllResources(lang).data;
+  const programCategoryData = useProgramCategoryData(lang);
+  const resourceCategoryData = useResourceCategoryData(lang);
 
   // Sync current slide index
   const handleSlideChange = (_: unknown, state: CarouselInternalState) => {
@@ -156,7 +164,7 @@ const ContentCarousel = ({
       (isFilled.contentRelationship(itemCategory)
         ? (itemCategory.data as { name?: string })?.name
         : undefined) ??
-      "Other";
+      (lang === "fr-ca" ? "Autre" : "Other");
 
     return {
       ...item,
@@ -247,7 +255,7 @@ const ContentCarousel = ({
                       href={item.url ?? ""}
                       className="more-hover btn pl-0 flex flex-row items-center gap-2 underline underline-offset-4"
                     >
-                      <span>Learn More</span>
+                      <span>{learnMoreText}</span>
                       <HiOutlineArrowLongRight className="h-10 w-10" />
                     </Link>,
                   ]}
@@ -263,7 +271,7 @@ const ContentCarousel = ({
                       href={item.url ?? ""}
                       className="more-hover btn p-0 flex flex-row items-center gap-2 focus:outline-offset-4"
                     >
-                      <span>Learn More</span>
+                      <span>{learnMoreText}</span>
                       <HiOutlineArrowLongRight className="h-7 w-7" />
                     </Link>,
                   ]}
@@ -281,7 +289,7 @@ const ContentCarousel = ({
                 typeof slice.primary.redirect_button[0]?.url === "object" &&
                 "text" in slice.primary.redirect_button[0]?.url
                   ? slice.primary.redirect_button[0]?.url.text
-                  : "Learn More"
+                  : learnMoreText
               }
               buttonLink={slice.primary.redirect_button[0]?.url ?? "#"}
             />

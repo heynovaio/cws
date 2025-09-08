@@ -1,5 +1,6 @@
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { Section, Container, ResponsiveImage } from "@/components";
 import { JSX } from "react";
 import { components } from "@/utils";

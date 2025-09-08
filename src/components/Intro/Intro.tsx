@@ -11,7 +11,7 @@ import {
   ProgramPageDocumentData,
   ResourcePageDocumentData,
 } from "../../../prismicio-types";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { components } from "@/utils";
 import { Breadcrumb, BreadcrumbProps } from "../Breadcrumb";
 import { ProgramFormat } from "@/constants";

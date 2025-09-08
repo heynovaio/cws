@@ -8,7 +8,8 @@ import {
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { Content } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import React, { JSX } from "react";
 
 export type MultiLinkColumnProps =

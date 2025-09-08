@@ -1,7 +1,8 @@
 "use client";
 import { FC, useRef, useState } from "react";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import {
   Tab,
   TabGroup,

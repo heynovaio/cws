@@ -1,5 +1,5 @@
 import { useNewsletterSignupData } from "@/hooks/use-newletter-signup-data-hook";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { Container, Button, Section } from "@/components";
 import { useState, useRef } from "react";
 
