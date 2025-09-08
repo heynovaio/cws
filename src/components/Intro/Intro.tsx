@@ -4,7 +4,7 @@ import { Container, Section } from "../Layout";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { SpecCard } from "../SpecCard";
 import { ContentBox } from "../ContentBox/ContentBox";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { useProgramCategoryData } from "@/hooks";
 import { useResourceCategoryData } from "@/hooks/use-all-resource-category-data-hook";
 import {

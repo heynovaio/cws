@@ -1,7 +1,8 @@
 "use client";
 import { components } from "@/slices";
 import { ImageField } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { usePathname } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
 import React, { Fragment } from "react";

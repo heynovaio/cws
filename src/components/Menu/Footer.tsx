@@ -8,7 +8,7 @@ import { ResponsiveImage } from "..";
 import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import { FaFacebook, FaInstagram, FaMeta, FaXTwitter } from "react-icons/fa6";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { FaLinkedin, FaMinus, FaPlus } from "react-icons/fa";
 import Image from "next/image";
 import {

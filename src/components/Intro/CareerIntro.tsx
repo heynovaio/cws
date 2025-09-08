@@ -3,7 +3,7 @@ import React from "react";
 import { Container, Section } from "../Layout";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { ContentBox } from "../ContentBox/ContentBox";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { CareerPageDocumentData } from "../../../prismicio-types";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { components } from "@/utils";

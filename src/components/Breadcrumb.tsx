@@ -1,5 +1,5 @@
 "use client";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { Fragment } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";

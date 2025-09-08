@@ -7,7 +7,7 @@ import {
   RichTextField,
 } from "@prismicio/client";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import React from "react";
 import { FaLaptop, FaMedal } from "react-icons/fa";
 import { MdAccessTimeFilled, MdAttachMoney } from "react-icons/md";
