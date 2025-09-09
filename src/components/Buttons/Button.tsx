@@ -63,6 +63,9 @@ export const Button = ({
 
   return (
     <PrismicNextLink
+      target={
+        buttonLink.link_type === "Media" ? "_blank" : (buttonLink as any).target
+      }
       field={buttonLink}
       className={`flex flex-row w-fit items-center gap-2 hover:gap-4 ${styling} ${buttonStyle} ${linkButtonColorClass}`}
     >
