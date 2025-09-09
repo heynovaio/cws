@@ -6,7 +6,7 @@ import { GlobalsDocumentData } from "../../../prismicio-types";
 
 interface LanguageSwitcherProps {
   locales: PrismicDocument[];
-  global: GlobalsDocumentData | undefined;
+  global?: GlobalsDocumentData | undefined;
   classname?: string;
 }
 

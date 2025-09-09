@@ -1,6 +1,6 @@
 "use client";
 import { components } from "@/slices";
-import { ImageField } from "@prismicio/client";
+import { ImageField, PrismicDocument } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { usePathname } from "next/navigation";
@@ -13,16 +13,18 @@ import {
   Transition,
 } from "@headlessui/react";
 import { MenusDocumentDataSlicesSlice } from "../../../prismicio-types";
+import LanguageSwitcher from "../Layout/LanguageSwitcher";
 
 interface HeaderProps {
   logo: ImageField;
   slices: MenusDocumentDataSlicesSlice[];
-  locales?: unknown;
+  locales: PrismicDocument[];
 }
 
-export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
+export const Header: React.FC<HeaderProps> = ({ logo, slices, locales }) => {
   const pathname = usePathname();
   const currentLang = pathname.split("/")[1] === "fr-ca" ? "fr-ca" : "en-ca";
+
   return (
     <header
       className="sticky top-0 z-50 bg-midnight/70"
@@ -89,6 +91,9 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices }) => {
                   >
                     <div className="flex flex-col pl-4 gap-10 mt-10">
                       <SliceZone slices={slices} components={components} />
+                    </div>
+                    <div className="mt-10 pl-2">
+                      <LanguageSwitcher locales={locales} />
                     </div>
                   </PopoverPanel>
                 </Transition>
