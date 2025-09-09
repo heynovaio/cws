@@ -22,6 +22,27 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (pathname.includes("/careers") || pathname.includes("/carrieres")) {
+    const langMatch = pathname.match(/^\/([a-z]{2}(?:-[a-z]{2})?)\//);
+    const currentLang = langMatch ? langMatch[1] : null;
+
+    if (currentLang) {
+      if (currentLang.startsWith("en") && pathname.includes("/carrieres")) {
+        const newPath = pathname.replace("/carrieres", "/careers");
+        const url = request.nextUrl.clone();
+        url.pathname = newPath;
+        return NextResponse.redirect(url);
+      }
+
+      if (currentLang.startsWith("fr") && pathname.includes("/careers")) {
+        const newPath = pathname.replace("/careers", "/carrieres");
+        const url = request.nextUrl.clone();
+        url.pathname = newPath;
+        return NextResponse.redirect(url);
+      }
+    }
+  }
+
   const pathnameIsMissingLocale = locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
@@ -39,9 +60,21 @@ export function middleware(request: NextRequest) {
       return path;
     }, pathname);
 
+    let finalPathname = strippedPathname;
+    if (
+      strippedPathname.includes("/careers") ||
+      strippedPathname.includes("/carrieres")
+    ) {
+      if (locale.startsWith("fr")) {
+        finalPathname = strippedPathname.replace("/careers", "/carrieres");
+      } else {
+        finalPathname = strippedPathname.replace("/carrieres", "/careers");
+      }
+    }
+
     // Clone request.nextUrl so we keep search params, host, etc.
     const url = request.nextUrl.clone();
-    url.pathname = `/${locale}${strippedPathname}`;
+    url.pathname = `/${locale}${finalPathname}`;
 
     return NextResponse.redirect(url);
   }
@@ -52,5 +85,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Exclude /files/* from middleware processing
-  matcher: ["/((?!api|assets|files/.*|slice-simulator|auth/.*|.*\\..*|_next).*)"],
+  matcher: [
+    "/((?!api|assets|files/.*|slice-simulator|auth/.*|.*\\..*|_next).*)",
+  ],
 };
