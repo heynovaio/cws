@@ -28,7 +28,6 @@ import {
   ShortCard,
 } from "@/components";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 
 import GetAllPrograms from "@/utils/useGetAllPrograms";
@@ -38,6 +37,7 @@ import { useResourceCategoryData } from "@/hooks";
 
 import { components } from "@/utils";
 import { PageDocument } from "../../../prismicio-types";
+import { useLang } from "@/utils/getLang";
 
 export type ContentCarouselProps =
   SliceComponentProps<Content.ContentCarouselSlice>;
@@ -105,9 +105,7 @@ const ContentCarousel = ({
   const itemsPerPage = useItemsPerPage(responsive);
 
   // Determine current locale from the URL path
-  const pathname = usePathname();
-  const langSegment = pathname.split("/")[1];
-  const lang = langSegment === "fr-ca" ? "fr-ca" : "en-ca";
+  const lang = useLang().routeLocale;
   const learnMoreText = lang === "fr-ca" ? "En savoir plus" : "Learn More";
 
   const programPageData = GetAllPrograms(lang).data;

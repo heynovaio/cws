@@ -11,14 +11,16 @@ import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { DefaultCard } from "../Cards";
 import { CustomPagination } from "../CustomPagination";
+import { useLang } from "@/utils/getLang";
 
 export type ProgramCategoryGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
 };
 
 export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
-  const { data } = GetAllPrograms("en-ca");
-  const { programCategoryData } = useProgramCategoryData("en-ca");
+  const lang = useLang();
+  const { data } = GetAllPrograms(lang.routeLocale);
+  const { programCategoryData } = useProgramCategoryData(lang.routeLocale);
 
   const categoryId =
     slice.primary.category && "id" in slice.primary.category

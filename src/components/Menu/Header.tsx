@@ -3,7 +3,6 @@ import { components } from "@/slices";
 import { ImageField, PrismicDocument } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
-import { usePathname } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
 import React, { Fragment } from "react";
 import {
@@ -14,6 +13,7 @@ import {
 } from "@headlessui/react";
 import { MenusDocumentDataSlicesSlice } from "../../../prismicio-types";
 import LanguageSwitcher from "../Layout/LanguageSwitcher";
+import { useLang } from "@/utils/getLang";
 
 interface HeaderProps {
   logo: ImageField;
@@ -22,8 +22,8 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ logo, slices, locales }) => {
-  const pathname = usePathname();
-  const currentLang = pathname.split("/")[1] === "fr-ca" ? "fr-ca" : "en-ca";
+  const lang = useLang();
+  const currentLang = lang.routeLocale;
 
   return (
     <header

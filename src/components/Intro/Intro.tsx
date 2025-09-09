@@ -42,9 +42,8 @@ export const Intro = ({ type, pageData, links, lang }: IntroProps) => {
 
   const buttonsExist = Array.isArray(button) && button.length > 0;
 
-  // TODO: Fix the lang once we have the use context provider set up (future PR for all translations as well)
-  const { programCategoryData } = useProgramCategoryData("en-ca");
-  const { resourceCategoryData } = useResourceCategoryData("en-ca");
+  const { programCategoryData } = useProgramCategoryData(lang || "en-ca");
+  const { resourceCategoryData } = useResourceCategoryData(lang || "en-ca");
 
   let containerStyle;
   switch (type) {

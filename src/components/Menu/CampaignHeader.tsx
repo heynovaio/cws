@@ -3,7 +3,6 @@ import { components } from "@/slices";
 import { ImageField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
-import { usePathname } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
 import React, { Fragment } from "react";
 import {
@@ -13,6 +12,7 @@ import {
   Transition,
 } from "@headlessui/react";
 import { MenusDocumentDataSlicesSlice } from "../../../prismicio-types";
+import { useLang } from "@/utils/getLang";
 
 interface CampaignHeaderProps {
   logo: ImageField;
@@ -24,8 +24,8 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
   logo,
   slices,
 }) => {
-  const pathname = usePathname();
-  const currentLang = pathname.split("/")[1] === "fr-ca" ? "fr-ca" : "en-ca";
+  const lang = useLang();
+  const currentLang = lang.routeLocale;
   return (
     <header
       className="z-50 bg-midnight/70"
