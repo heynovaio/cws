@@ -4,7 +4,7 @@ import { Container, Button, Section } from "@/components";
 import { useState, useRef } from "react";
 
 type Props = {
-  lang: string;
+  lang: string; // "en" | "fr-ca"
 };
 
 type NewsletterField = {
@@ -21,6 +21,24 @@ type ErrorState = {
   invalidFields: string[];
 };
 
+// ---- Helpers ----
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function splitName(full: string) {
+  const parts = full.trim().split(/\s+/);
+  if (parts.length === 0) return { FNAME: "", LNAME: "" };
+  if (parts.length === 1) return { FNAME: parts[0], LNAME: "" };
+  return { FNAME: parts[0], LNAME: parts.slice(1).join(" ") };
+}
+
+// Map various common Prismic field names to a semantic key we’ll use to build Mailchimp fields.
+const NAME_HINTS = new Set([
+  "name", "full_name", "fullname", "full-name",
+  "nom", "prenom_nom"
+]);
+const FNAME_HINTS = new Set(["fname", "first_name", "first-name", "first", "prenom"]);
+const LNAME_HINTS = new Set(["lname", "last_name", "last-name", "last", "surname", "nom_de_famille"]);
+
 const NewsletterSignupBanner = ({ lang }: Props) => {
   const { newsletterSignupData, isLoading } = useNewsletterSignupData(lang);
   const [success, setSuccess] = useState(false);
@@ -30,17 +48,13 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
     emailError: false,
     invalidFields: [],
   });
+  const [submitting, setSubmitting] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   if (isLoading || !newsletterSignupData) return null;
 
   const { title, subtitle, signup_success_message, form_field, submit_button } =
     newsletterSignupData.data;
-
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
   const validateForm = (formData: FormData): ErrorState => {
     const newErrors: ErrorState = {
@@ -50,21 +64,26 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
       invalidFields: [],
     };
 
+    // Validate required text inputs (skip checkboxes entirely)
     form_field.forEach((field: NewsletterField, index: number) => {
+      const rawType = (field.type ?? "text").toLowerCase();
+      if (rawType === "checkbox") return; // we’re not using checkboxes
+
       const fieldName = field.name ?? `field-${index}`;
-      const fieldValue = formData.get(fieldName) as string;
+      const val = (formData.get(fieldName) as string) ?? "";
 
-      if (field.type === "checkbox") {
-        return;
-      }
-
-      if (!fieldValue || fieldValue.trim() === "") {
+      if (!val || val.trim() === "") {
         newErrors.requiredFieldsError = true;
         newErrors.hasErrors = true;
         newErrors.invalidFields.push(fieldName);
       }
 
-      if (field.type === "email" && fieldValue && !validateEmail(fieldValue)) {
+      // Email format check if this field is clearly the email one
+      if (
+        (rawType === "email" || fieldName.toLowerCase() === "email") &&
+        val &&
+        !emailRegex.test(val)
+      ) {
         newErrors.emailError = true;
         newErrors.hasErrors = true;
         if (!newErrors.invalidFields.includes(fieldName)) {
@@ -73,25 +92,37 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
       }
     });
 
+    // Defensive: ensure EMAIL is present and valid even if Prismic mislabels
+    const possibleEmail =
+      (formData.get("EMAIL") as string) ??
+      (formData.get("email") as string) ??
+      "";
+
+    if (!possibleEmail || !emailRegex.test(possibleEmail)) {
+      newErrors.emailError = true;
+      newErrors.hasErrors = true;
+      if (!newErrors.invalidFields.includes("EMAIL")) {
+        newErrors.invalidFields.push("EMAIL");
+      }
+    }
+
     return newErrors;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (submitting) return;
 
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    // Validate form
+    // Validate
     const validationErrors = validateForm(formData);
-
     if (validationErrors.hasErrors) {
       setErrors(validationErrors);
-
       return;
     }
 
-    // Clear errors if validation passes
     setErrors({
       hasErrors: false,
       requiredFieldsError: false,
@@ -99,24 +130,93 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
       invalidFields: [],
     });
 
-    // Mailchimp honeypot field (must be included + left empty)
-    formData.append("b_8ee5619b8ee91b0ddf0ee8e84_bc04ac6cf0", "");
+    // ------ Build payload for API (EMAIL, FNAME, LNAME only) ------
+    // We’ll look through Prismic fields to find email and names.
+    let EMAIL = "";
+    let FNAME = "";
+    let LNAME = "";
 
-    try {
-      await fetch(
-        "https://heynova.us2.list-manage.com/subscribe/post?u=8ee5619b8ee91b0ddf0ee8e84&id=bc04ac6cf0",
-        {
-          method: "POST",
-          mode: "no-cors", // required to bypass CORS but means no readable response
-          body: formData,
+    // First pass: capture explicit FNAME/LNAME if they exist
+    form_field.forEach((field: NewsletterField, index: number) => {
+      const name = (field.name ?? `field-${index}`).toLowerCase();
+      const val = ((formData.get(field.name ?? `field-${index}`) as string) || "").trim();
+      if (!val) return;
+
+      if (name === "email" || (field.type ?? "").toLowerCase() === "email") {
+        EMAIL = val;
+      } else if (FNAME_HINTS.has(name)) {
+        FNAME = val;
+      } else if (LNAME_HINTS.has(name)) {
+        LNAME = val;
+      }
+    });
+
+    // Second pass: if no explicit FNAME/LNAME, look for a single NAME field and split
+    if (!FNAME && !LNAME) {
+      for (let i = 0; i < form_field.length; i++) {
+        const field = form_field[i];
+        const name = (field.name ?? `field-${i}`).toLowerCase();
+        const type = (field.type ?? "text").toLowerCase();
+        if (type === "checkbox") continue;
+
+        if (NAME_HINTS.has(name)) {
+          const full = ((formData.get(field.name ?? `field-${i}`) as string) || "").trim();
+          if (full) {
+            const parts = splitName(full);
+            FNAME = parts.FNAME;
+            LNAME = parts.LNAME;
+          }
+          break;
         }
-      );
+      }
+    }
 
-      // Success is assumed in no-cors mode — no readable response
+    // Final fallback: if still no FNAME but some non-email text fields exist, use the first as FNAME
+    if (!FNAME) {
+      for (let i = 0; i < form_field.length; i++) {
+        const field = form_field[i];
+        const type = (field.type ?? "text").toLowerCase();
+        if (type === "checkbox") continue;
+        const n = field.name ?? `field-${i}`;
+        if (n.toLowerCase() === "email") continue;
+        const val = ((formData.get(n) as string) || "").trim();
+        if (val) {
+          FNAME = val;
+          break;
+        }
+      }
+    }
+
+    // Build final payload – only required Mailchimp fields
+    const payload: Record<string, string> = { EMAIL };
+    if (FNAME) payload.FNAME = FNAME;
+    // include LNAME if present (OK if your audience does not require it)
+    if (LNAME) payload.LNAME = LNAME;
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({ ok: false }));
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data?.error || `Request failed (${res.status})`);
+      }
+
       setSuccess(true);
       form.reset();
     } catch (error) {
       console.error("Mailchimp submission failed", error);
+      setErrors((prev) => ({
+        ...prev,
+        hasErrors: true,
+      }));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -139,7 +239,6 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                 ),
               }}
             />
-
             <div className="mt-6">
               <PrismicRichText field={subtitle} />
             </div>
@@ -158,40 +257,19 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
               aria-describedby={errors.hasErrors ? "form-errors" : undefined}
             >
               {form_field.map((field: NewsletterField, index: number) => {
+                const rawType = (field.type ?? "text").toLowerCase();
+
+                // Skip any checkbox fields coming from Prismic (we removed consent)
+                if (rawType === "checkbox") return null;
+
                 const fieldName = field.name ?? `field-${index}`;
-                const fieldType = field.type ?? "text";
+                const fieldType =
+                  (field.name?.toLowerCase() === "email" || rawType === "email")
+                    ? "email"
+                    : "text";
                 const fieldLabel = field.label ?? "Untitled Field";
                 const hasError = getFieldError(fieldName);
                 const errorId = `${fieldName}-error`;
-
-                if (field.type === "checkbox") {
-                  return (
-                    <div
-                      key={index}
-                      className="flex items-center space-x-3 mt-6"
-                    >
-                      <input
-                        id={fieldName}
-                        name={fieldName}
-                        type="checkbox"
-                        className={`min-w-[1.5rem] min-h-[1.5rem] h-7 w-7 border border-black rounded focus ${
-                          hasError ? "border-ultra-pink" : "border-black"
-                        }`}
-                        required
-                        aria-describedby={hasError ? errorId : undefined}
-                        aria-invalid={hasError}
-                      />
-                      <label
-                        htmlFor={fieldName}
-                        className={`font-semibold ${
-                          hasError ? "text-ultra-pink" : "text-white"
-                        }`}
-                      >
-                        {field.label}
-                      </label>
-                    </div>
-                  );
-                }
 
                 return (
                   <div key={index} className="mb-6">
@@ -216,10 +294,12 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                       required
                       aria-describedby={hasError ? errorId : undefined}
                       aria-invalid={hasError}
+                      autoComplete={fieldType === "email" ? "email" : "on"}
                     />
                   </div>
                 );
               })}
+
               {/* Error Messages */}
               {errors.hasErrors && (
                 <div
