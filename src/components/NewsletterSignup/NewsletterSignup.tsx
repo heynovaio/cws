@@ -328,7 +328,6 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                 as="button"
                 type="submit"
                 buttonType="primary"
-                disabled={submitting}
                 label={
                   submit_button[0]?.button_text ??
                   (lang === "fr-ca" ? "S'inscrire" : "Sign Up")
