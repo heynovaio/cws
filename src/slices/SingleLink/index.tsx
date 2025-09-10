@@ -1,5 +1,6 @@
 import { Content } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 

@@ -1,7 +1,8 @@
 import { Container, Button, Section } from "@/components";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 
 /**

@@ -4,25 +4,28 @@ import { Container, Section } from "../Layout";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { SpecCard } from "../SpecCard";
 import { ContentBox } from "../ContentBox/ContentBox";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { useProgramCategoryData } from "@/hooks";
 import { useResourceCategoryData } from "@/hooks/use-all-resource-category-data-hook";
 import {
   ProgramPageDocumentData,
   ResourcePageDocumentData,
 } from "../../../prismicio-types";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { components } from "@/utils";
 import { Breadcrumb, BreadcrumbProps } from "../Breadcrumb";
+import { ProgramFormat } from "@/constants";
 
 interface IntroProps {
   pageData?: ProgramPageDocumentData | ResourcePageDocumentData;
   type?: "program" | "resource" | string;
   links?: BreadcrumbProps["links"];
+  lang?: string;
 }
 
-export const Intro = ({ type, pageData, links }: IntroProps) => {
-  const { image, title, body, button, include_newsletter_sign_up_banner } = pageData || {};
+export const Intro = ({ type, pageData, links, lang }: IntroProps) => {
+  const { image, title, body, button, include_newsletter_sign_up_banner } =
+    pageData || {};
   const isProgramPage = type === "program";
   const newsLetterSignUp = isProgramPage && include_newsletter_sign_up_banner;
 
@@ -33,15 +36,14 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
     time?: string;
     cost?: number;
     certs?: boolean;
-    format?: string;
+    format?: ProgramFormat | "both";
     included_resources?: [];
   };
 
   const buttonsExist = Array.isArray(button) && button.length > 0;
 
-  // TODO: Fix the lang once we have the use context provider set up (future PR for all translations as well)
-  const { programCategoryData } = useProgramCategoryData("en-ca");
-  const { resourceCategoryData } = useResourceCategoryData("en-ca");
+  const { programCategoryData } = useProgramCategoryData(lang || "en-ca");
+  const { resourceCategoryData } = useResourceCategoryData(lang || "en-ca");
 
   let containerStyle;
   switch (type) {
@@ -126,7 +128,7 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
                 width="full"
               />
             </div>
-            <Breadcrumb links={links} color={breadcrumbColor} />
+            <Breadcrumb links={links} color={breadcrumbColor} lang={lang} />
           </div>
           <div
             className={`md:col-span-6 grid ${isProgramPage ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} gap-4`}
@@ -138,12 +140,13 @@ export const Intro = ({ type, pageData, links }: IntroProps) => {
             />
             {isProgramPage && (
               <SpecCard
-                title="Details: "
+                title={lang === "fr-ca" ? "Détails: " : "Details: "}
                 time={time}
                 cost={cost}
                 certs={certs}
                 format={format}
                 resources={included_resources}
+                lang={lang}
               />
             )}
           </div>

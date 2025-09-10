@@ -95,6 +95,17 @@
           "repeat": false
         }
       },
+      "twitter": {
+        "type": "Link",
+        "config": {
+          "label": "Twitter (X)",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
       "slices1": {
         "type": "Slices",
         "fieldset": "Slice Zone",

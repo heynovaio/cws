@@ -1,9 +1,9 @@
 import React from "react";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { ImageField, LinkField, RichTextField } from "@prismicio/client";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { ContentBox } from "../ContentBox/ContentBox";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { components } from "@/utils";
 

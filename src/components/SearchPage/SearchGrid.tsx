@@ -2,7 +2,7 @@
 import { Container } from "../Layout";
 import { DefaultCard } from "../Cards";
 import { asText } from "@prismicio/client";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import {
   ProgramPageDocument,
   ResourcePageDocument,
@@ -38,9 +38,11 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
 
   // Get category name for an item
   const getCategoryName = (
-    item: ResourcePageDocument | ProgramPageDocument
+    item: ResourcePageDocument | ProgramPageDocument,
+    lang: string = "en-ca"
   ) => {
-    if (!item.data.category) return "Uncategorized";
+    if (!item.data.category)
+      return lang === "fr-ca" ? "Non classé" : "Uncategorized";
 
     // Handle resource category
     if (item.type === "resource_page" && "id" in item.data.category) {
@@ -49,7 +51,7 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
           c.id ===
           ("id" in item.data.category ? item.data.category.id : undefined)
       );
-      return category?.data?.name || "Other";
+      return category?.data?.name || (lang === "fr-ca" ? "Autre" : "Other");
     }
 
     // Handle program category
@@ -59,10 +61,16 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
           c.id ===
           ("id" in item.data.category ? item.data.category.id : undefined)
       );
-      return category?.data?.name || "Other";
+      return category?.data?.name || (lang === "fr-ca" ? "Autre" : "Other");
     }
 
-    return item.type === "program_page" ? "Program" : "Resource";
+    return item.type === "program_page"
+      ? lang === "fr-ca"
+        ? "Programme"
+        : "Program"
+      : lang === "fr-ca"
+        ? "Ressources"
+        : "Resources";
   };
 
   return (
@@ -86,7 +94,7 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
                   />
                 }
                 image={item.data.image}
-                category={getCategoryName(item)}
+                category={getCategoryName(item, lang)}
                 cardType={item.type === "program_page" ? "program" : "resource"}
                 buttons={[
                   <Link
@@ -94,7 +102,7 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
                     href={item.url ?? ""}
                     className="more-hover btn pl-0 flex flex-row items-center gap-2 focus:outline-offset-4"
                   >
-                    Learn More
+                    {lang === "fr-ca" ? "En savoir plus" : "Learn More"}
                     <HiOutlineArrowLongRight className="h-10 w-10" />
                   </Link>,
                 ]}
@@ -105,7 +113,14 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
           <div className="text-center col-span-3 mx-auto md:w-1/2 my-24">
             <PrismicRichText
               field={[
-                { type: "paragraph", text: "No results found", spans: [] },
+                {
+                  type: "paragraph",
+                  text:
+                    lang === "fr-ca"
+                      ? "Aucun résultat trouvé"
+                      : "No results found",
+                  spans: [],
+                },
               ]}
               components={components}
             />

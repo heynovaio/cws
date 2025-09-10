@@ -10,8 +10,9 @@ import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
 import { GeneralHero } from "@/components/Heros/GeneralHero";
 import { Suspense } from "react";
 import { Loading } from "@/components/Loading/Loading";
+import { SupportedLanguage } from "@/constants";
 
-type Params = { uid: string; lang: string };
+type Params = { uid: string; lang: SupportedLanguage };
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const client = createClient();
@@ -28,6 +29,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   return (
     <Layout
       locales={locales}
+      lang={lang}
       global={global.data}
       menus={menus.data}
       partners={page.data.include_partners ? partners.data : null}
@@ -38,7 +40,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       <Suspense fallback={<Loading hasText />}>
         <GeneralHero data={page.data} />
         <CategoryFilterProvider>
-          <SearchLayout />
+          <SearchLayout lang={lang} />
         </CategoryFilterProvider>
         <SliceZone
           slices={page.data.slices}

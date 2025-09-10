@@ -1,5 +1,5 @@
 import { PrismicDocument, RichTextField } from "@prismicio/client";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { GlobalsDocumentData } from "../../../prismicio-types";
 

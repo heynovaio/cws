@@ -8,7 +8,8 @@ import {
 } from "@/components";
 import { components } from "@/utils";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { SliceComponentProps } from "@prismicio/react";
 import "react-multi-carousel/lib/styles.css";
 
 export type TabbedCarouselProps =

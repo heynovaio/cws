@@ -2,14 +2,16 @@
 import { CarouselButton, Container, ContentBox } from "@/components";
 import Carousel, { CarouselInternalState } from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
+
 import {
   ImageField,
   KeyTextField,
   LinkField,
   RichTextField,
 } from "@prismicio/client";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { useRef, useState } from "react";
 import { Button } from "@/components";
 

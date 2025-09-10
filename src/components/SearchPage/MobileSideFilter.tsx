@@ -4,7 +4,8 @@ import { VscSettings } from "react-icons/vsc";
 import { SideFilter } from "./SideFilter";
 import { FaXmark } from "react-icons/fa6";
 import { useCategoryFilter } from "@/providers";
-import { ProgramFormat } from "@/constants";
+import { getFormatLabel, ProgramFormat } from "@/constants";
+import { SupportedLanguage } from "@/constants";
 
 // Applied Filter Tag Component
 type AppliedFilterTagProps = {
@@ -32,7 +33,11 @@ const AppliedFilterTag: React.FC<AppliedFilterTagProps> = ({
 };
 
 // Applied Filters Section Component
-const AppliedFiltersSection = () => {
+const AppliedFiltersSection = ({
+  lang,
+}: {
+  lang: string | SupportedLanguage;
+}) => {
   const {
     activeFilter,
     selectedTags,
@@ -120,7 +125,7 @@ const AppliedFiltersSection = () => {
     ...(activeFilter !== "resource_page"
       ? selectedFormats.map((format) => ({
           type: "format",
-          label: format,
+          label: getFormatLabel(format, lang as "en-ca" | "fr-ca"),
           removeHandler: () => handleRemoveFormat(format as ProgramFormat),
         }))
       : []),
@@ -129,7 +134,7 @@ const AppliedFiltersSection = () => {
       ? [
           {
             type: "credentials",
-            label: "Has Credentials",
+            label: lang === "fr-ca" ? "Points PD (NCCP)" : "PD NCCP Points",
             removeHandler: handleRemoveCredentials,
           },
         ]
@@ -139,7 +144,10 @@ const AppliedFiltersSection = () => {
       ? [
           {
             type: "cost",
-            label: `Under $${maxCostFilter.toLocaleString()}`,
+            label:
+              lang === "fr-ca"
+                ? `Moins de $${maxCostFilter.toLocaleString()}`
+                : `Under $${maxCostFilter.toLocaleString()}`,
             removeHandler: handleResetCostFilter,
           },
         ]
@@ -153,7 +161,7 @@ const AppliedFiltersSection = () => {
   return (
     <div className="mb-4">
       <h3 className="text-sm font-medium text-gray-300 mb-3">
-        Applied Filters
+        {lang === "fr-ca" ? "Filtres appliqués" : "Applied Filters"}
       </h3>
       <div className="flex flex-wrap gap-2">
         {appliedFilters.map((filter, index) => (
@@ -169,7 +177,11 @@ const AppliedFiltersSection = () => {
   );
 };
 
-export const MobileSideFilter = () => {
+type MobileSideFilterProps = {
+  lang: string;
+};
+
+export const MobileSideFilter: React.FC<MobileSideFilterProps> = ({ lang }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleFilterClick = () => {
@@ -184,12 +196,12 @@ export const MobileSideFilter = () => {
           onClick={handleFilterClick}
           className="self-start btn btn-outline border focus flex items-center gap-2 justify-center relative"
         >
-          Filters
+          {lang === "fr-ca" ? "Filtres" : "Filters"}
           <VscSettings className="h-5 w-5" />
         </Button>
       </div>
       <div className="mt-6">
-        <AppliedFiltersSection />
+        <AppliedFiltersSection lang={lang} />
       </div>
       <Dialog
         open={isOpen}
@@ -210,10 +222,10 @@ export const MobileSideFilter = () => {
 
             {/* Applied Filters in Dialog */}
             <div className="my-6">
-              <AppliedFiltersSection />
+              <AppliedFiltersSection lang={lang} />
             </div>
 
-            <SideFilter />
+            <SideFilter lang={lang} />
           </DialogPanel>
         </div>
       </Dialog>

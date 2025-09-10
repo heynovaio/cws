@@ -6,7 +6,7 @@ import { GlobalsDocumentData } from "../../../prismicio-types";
 
 interface LanguageSwitcherProps {
   locales: PrismicDocument[];
-  global: GlobalsDocumentData | undefined;
+  global?: GlobalsDocumentData | undefined;
   classname?: string;
 }
 
@@ -33,7 +33,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     <div className={`print:hidden ${classname}`}>
       <div className="inline-flex text-[1rem] items-center  px-2 pt-1">
         <label htmlFor="language-switcher" className="px-1 py-1 text-sm">
-          Language:
+          {currentLang === "fr-ca" ? "Langue:" : "Language:"}
         </label>
 
         <select

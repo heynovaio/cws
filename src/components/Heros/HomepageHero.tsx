@@ -1,5 +1,5 @@
 import React from "react";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { PrismicNextImage } from "@prismicio/next";
 import { Container } from "../Layout";
 import { ContentBox } from "../ContentBox/ContentBox";
@@ -44,7 +44,7 @@ export const HomepageHero: React.FC<HomepageHeroProps> = ({ data }) => {
               className="w-full h-full max-w-[800px]"
               fallbackAlt=""
               priority={true}
-              imgixParams={{ compress: true }}
+              imgixParams={{ auto: ["compress"] }}
             />
           </div>
         </div>

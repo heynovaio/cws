@@ -1,5 +1,5 @@
 import { ResponsiveImage } from "@/components";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { JSXMapSerializer } from "@prismicio/react";
 
 export const components: JSXMapSerializer = {

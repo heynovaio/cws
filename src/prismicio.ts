@@ -13,7 +13,7 @@ export const repositoryName =
  *
  * {@link https://prismic.io/docs/route-resolver#route-resolver}
  */
-// TODO: Update the routes array to match your project's route structure.
+
 const routes: prismic.ClientConfig["routes"] = [
   { type: "page", path: "/:lang?", uid: "home" },
   { type: "page", path: "/:lang?/:uid" },
@@ -23,9 +23,8 @@ const routes: prismic.ClientConfig["routes"] = [
   { type: "team_members", path: "/:lang?/team" },
   { type: "campaign_page", path: "/:lang?/campaign/:uid" },
   { type: "search_page", path: "/:lang?/search" },
-  { type: "career_hub", path: "/:lang?/career" },
-  { type: "career_page", path: "/:lang?/career/:uid" },
-  // { type: "search_page", path: "/:lang?/search" },
+  { type: "career_hub", path: "/:lang?/(careers|carrieres)" },
+  { type: "career_page", path: "/:lang?/(careers|carrieres)/:uid" },
 ];
 
 /**

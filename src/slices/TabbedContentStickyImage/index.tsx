@@ -1,7 +1,8 @@
 "use client";
 import { FC, useRef, useState } from "react";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import {
   Tab,
   TabGroup,
@@ -194,27 +195,30 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
 
                     <div className="flex-1 flex items-start justify-center">
                       {tab.section_image?.url && (
-                        <div className="my-4 sticky top-0">
-                          <PrismicNextImage field={tab.section_image} alt="" />
+                        <div
+                          className="my-4 sticky flex items-center justify-center"
+                          style={{
+                            top: "160px",
+                            maxHeight: "calc(100vh - 180px)",
+                          }}
+                        >
+                          <div className="relative w-full h-full flex items-center justify-center">
+                            <PrismicNextImage
+                              field={tab.section_image}
+                              alt=""
+                              className="max-h-[calc(100vh-180px)] w-auto h-auto object-contain"
+                            />
 
-                          <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
-                            <button onClick={toggleAudio}>
-                              {isPlaying ? (
-                                <FaPause size="50" color="#DD0748" />
-                              ) : (
-                                <FaPlay size="50" color="#DD0748" />
-                              )}
-                            </button>
+                            <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
+                              <button onClick={toggleAudio}>
+                                {isPlaying ? (
+                                  <FaPause size="50" color="#DD0748" />
+                                ) : (
+                                  <FaPlay size="50" color="#DD0748" />
+                                )}
+                              </button>
+                            </div>
                           </div>
-
-                          {tab.section_audio_clip &&
-                            "url" in tab.section_audio_clip &&
-                            tab.section_audio_clip.url && (
-                              <audio
-                                ref={audioRef}
-                                src={tab.section_audio_clip.url}
-                              />
-                            )}
                         </div>
                       )}
                     </div>

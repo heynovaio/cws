@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { SliceComponentProps } from "@prismicio/react";
 import { Container, ContentBox, Section } from "@/components";
 import Link from "next/link";
 

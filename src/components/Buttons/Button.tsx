@@ -1,5 +1,5 @@
 import { LinkField } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { ReactNode } from "react";
 
 interface ButtonProps {

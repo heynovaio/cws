@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "../Layout";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { Button } from "../Buttons";
 import { KeyTextField, LinkField, RichTextField } from "@prismicio/client";
 import { HiArrowLongDown } from "react-icons/hi2";

@@ -1,6 +1,6 @@
 import { RichTextField } from "@prismicio/client";
 import React, { ReactNode } from "react";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 
 interface ShortCardProps {
   title: string | RichTextField;

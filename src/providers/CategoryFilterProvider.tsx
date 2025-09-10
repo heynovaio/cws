@@ -66,9 +66,9 @@ const CategoryFilterContext = createContext<
 
 export const defaultCategoryFilter: ModuleFilter = "all";
 
-const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const CategoryFilterProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -229,7 +229,7 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
 
       router.replace(`?${newSearchParams.toString()}`, { scroll: false });
     },
-    [searchParams, router, maxCost]
+    [searchParams, router]
   );
 
   // Tag calculations (moved up to avoid initialization issues)
@@ -482,6 +482,10 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
     let items: (ResourcePageDocument | ProgramPageDocument | PageDocument)[] =
       [];
 
+    // Remove these lines - we don't need translated labels for comparison
+    // const virtualLabel = getFormatLabel(PROGRAM_FORMATS.VIRTUAL, lang);
+    // const inPersonLabel = getFormatLabel(PROGRAM_FORMATS.IN_PERSON, lang);
+
     const urlMaxCost = searchParams.get("max_cost");
     const isCostFilterActive = urlMaxCost
       ? parseInt(urlMaxCost, 10) < maxCost
@@ -562,18 +566,15 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
             PROGRAM_FORMATS.IN_PERSON
           );
 
+          // Compare against the raw format values, not translated labels
           if (hasVirtual && !hasInPerson) {
-            if (
-              !(format === PROGRAM_FORMATS.VIRTUAL || format.includes("Both"))
-            ) {
+            if (!(format === "Virtual" || format === "Both")) {
               return false;
             }
           }
 
           if (hasInPerson && !hasVirtual) {
-            if (
-              !(format === PROGRAM_FORMATS.IN_PERSON || format.includes("Both"))
-            ) {
+            if (!(format === "In-Person" || format.includes("Both"))) {
               return false;
             }
           }
@@ -617,7 +618,6 @@ const CategoryFilterProvider: React.FC<{ children: React.ReactNode }> = ({
           }
         }
       } else if (item.type === "resource_page" || item.type === "page") {
-        // For resources and pages, if only cost filter is active (no other filters), hide them
         const hasOtherFilters =
           hasMainFilters || selectedFormats.length > 0 || hasCredentials;
         if (isCostFilterActive && !hasOtherFilters) {

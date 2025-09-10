@@ -1,7 +1,8 @@
 "use client";
 import { components } from "@/slices";
 import { ImageField } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { SliceZone } from "@prismicio/react";
 import React, { Fragment } from "react";
 import {
@@ -11,6 +12,7 @@ import {
   Transition,
 } from "@headlessui/react";
 import { MenusDocumentDataSlicesSlice } from "../../../prismicio-types";
+import { useLang } from "@/utils/getLang";
 
 interface CampaignHeaderProps {
   logo: ImageField;
@@ -22,6 +24,8 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
   logo,
   slices,
 }) => {
+  const lang = useLang();
+  const currentLang = lang.routeLocale;
   return (
     <header
       className="z-50 bg-midnight/70"
@@ -35,7 +39,7 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
           className="flex max-w-[180px] md:max-w-[220px]"
           aria-label="homepage link"
           prefetch={true}
-          href={`/`}
+          href={`/${currentLang}`}
         >
           <PrismicNextImage field={logo} fallbackAlt="" className="pr-4" />
         </PrismicNextLink>

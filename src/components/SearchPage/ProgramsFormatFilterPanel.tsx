@@ -1,8 +1,19 @@
 import { useCategoryFilter } from "@/providers";
 import { FilterPanel } from "./FilterPanel";
-import { PROGRAM_FORMATS, ProgramFormat } from "@/constants";
+import {
+  PROGRAM_FORMATS,
+  ProgramFormat,
+  getFormatLabel,
+  SupportedLanguage,
+} from "@/constants";
 
-export const ProgramsFormatFilterPanel = () => {
+interface ProgramsFormatFilterPanelProps {
+  lang: SupportedLanguage | string;
+}
+
+export const ProgramsFormatFilterPanel = ({
+  lang,
+}: ProgramsFormatFilterPanelProps) => {
   const { selectedFormats, toggleFormat } = useCategoryFilter();
 
   return (
@@ -11,7 +22,7 @@ export const ProgramsFormatFilterPanel = () => {
       filterKey="program_formats"
       items={Object.values(PROGRAM_FORMATS).map((format) => ({
         id: format,
-        name: format,
+        name: getFormatLabel(format, lang as "en-ca" | "fr-ca"),
       }))}
       selectedItems={selectedFormats}
       onItemToggle={(itemId) => toggleFormat(itemId as ProgramFormat)}

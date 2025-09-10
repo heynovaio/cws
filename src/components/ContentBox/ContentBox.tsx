@@ -1,6 +1,6 @@
-import { PrismicRichText } from "@prismicio/react";
 import React, { ReactNode } from "react";
 import clsx from "clsx";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { getWidthClassNames, WidthProp } from "@/utils";
 import { RichTextField } from "@prismicio/client";
 

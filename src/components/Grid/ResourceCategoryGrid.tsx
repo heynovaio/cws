@@ -3,20 +3,24 @@ import React, { useMemo } from "react";
 import { useResourceCategoryData } from "@/hooks";
 import { componentsTextSmall } from "@/utils";
 import { asText, Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+
 import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { DefaultCard } from "../Cards";
 import GetAllResources from "@/utils/getAllResources";
 import { CustomPagination } from "../CustomPagination";
+import { useLang } from "@/utils/getLang";
 
 export type ResourceCategoryGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
 };
 
 export const ResourceCategoryGrid = ({ slice }: ResourceCategoryGridProps) => {
-  const { data } = GetAllResources("en-ca");
-  const { resourceCategoryData } = useResourceCategoryData("en-ca");
+  const lang = useLang();
+  const { data } = GetAllResources(lang.routeLocale);
+  const { resourceCategoryData } = useResourceCategoryData(lang.routeLocale);
 
   const categoryId =
     slice.primary.category && "id" in slice.primary.category

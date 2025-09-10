@@ -9,8 +9,9 @@ import {
   PopoverPanel,
 } from "@headlessui/react";
 import { Content } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 import { FaChevronDown } from "react-icons/fa";
 

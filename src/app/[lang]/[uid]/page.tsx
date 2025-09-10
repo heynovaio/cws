@@ -29,8 +29,6 @@ export async function generateMetadata({
     .getByUID("page", uid, { lang })
     .catch(() => notFound());
 
-  console.log("Page data:", page.data);
-
   return {
     title:
       page.data.meta_title ||
@@ -64,6 +62,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   return (
     <Layout
       locales={locales}
+      lang={lang}
       global={global.data}
       menus={menus.data}
       partners={page.data.include_partners ? partners.data : null}

@@ -5,7 +5,8 @@ import {
 } from "@/components";
 import { components } from "@/utils";
 import { Content} from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 import { CTATile } from "@/components/Tiles/CTATile";
 

@@ -1,7 +1,8 @@
 "use client";
 import { Container, ContentBox, Section } from "@/components";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { JSX } from "react";
 import {
   Disclosure,

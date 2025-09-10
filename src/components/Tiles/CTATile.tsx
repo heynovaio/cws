@@ -1,7 +1,8 @@
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { ImageField, LinkField, RichTextField } from "@prismicio/client";
-import { PrismicRichText } from "@prismicio/react";
-import { PrismicNextLink, PrismicNextImage } from "@prismicio/next";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { PrismicNextImage } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 
 interface CTATileProps {

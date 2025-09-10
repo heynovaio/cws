@@ -1,5 +1,5 @@
 import { useNewsletterSignupData } from "@/hooks/use-newletter-signup-data-hook";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { Container, Button, Section } from "@/components";
 import { useState, useRef } from "react";
 
@@ -229,10 +229,18 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                   className="flex flex-col gap-4"
                 >
                   {errors.requiredFieldsError && (
-                    <label>Please fill out all required sections.</label>
+                    <label>
+                      {lang === "fr-ca"
+                        ? "Veuillez remplir tous les champs obligatoires."
+                        : "Please fill out all required sections."}
+                    </label>
                   )}
                   {errors.emailError && (
-                    <label>Please enter a valid email.</label>
+                    <label>
+                      {lang === "fr-ca"
+                        ? "Veuillez entrer un e-mail valide."
+                        : "Please enter a valid email."}
+                    </label>
                   )}
                 </div>
               )}
@@ -240,7 +248,10 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                 as="button"
                 type="submit"
                 buttonType="primary"
-                label={submit_button[0]?.button_text ?? "Sign Up"}
+                label={
+                  submit_button[0]?.button_text ??
+                  (lang === "fr-ca" ? "S'inscrire" : "Sign Up")
+                }
               />
             </form>
           )}

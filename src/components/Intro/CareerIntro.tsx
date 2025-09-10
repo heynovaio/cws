@@ -3,9 +3,9 @@ import React from "react";
 import { Container, Section } from "../Layout";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { ContentBox } from "../ContentBox/ContentBox";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { CareerPageDocumentData } from "../../../prismicio-types";
-import { PrismicRichText } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { components } from "@/utils";
 import { Breadcrumb, BreadcrumbProps } from "../Breadcrumb";
 import { isFilled } from "@prismicio/client";
@@ -13,9 +13,10 @@ import { isFilled } from "@prismicio/client";
 interface IntroProps {
   pageData?: CareerPageDocumentData;
   links?: BreadcrumbProps["links"];
+  lang?: string;
 }
 
-export const CareerIntro = ({ pageData, links }: IntroProps) => {
+export const CareerIntro = ({ pageData, links, lang }: IntroProps) => {
   const { image, title, body, button } = pageData || {};
 
   const buttonArray = Array.isArray(button)
@@ -55,7 +56,7 @@ export const CareerIntro = ({ pageData, links }: IntroProps) => {
                 width="full"
               />
             </div>
-            <Breadcrumb links={links} color="black" />
+            <Breadcrumb links={links} color="black" lang={lang} />
           </div>
           <div className="md:col-span-6 grid grid-cols-1 gap-4">
             <ResponsiveImage

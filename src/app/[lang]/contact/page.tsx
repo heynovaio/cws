@@ -25,6 +25,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   return (
     <Layout
       locales={locales}
+      lang={lang}
       global={global.data}
       menus={menus.data}
       include_newsletter_sign_up_banner={

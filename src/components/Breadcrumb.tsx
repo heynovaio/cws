@@ -1,5 +1,5 @@
 "use client";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { Fragment } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
@@ -11,9 +11,14 @@ export type BreadcrumbLink = {
 export interface BreadcrumbProps {
   links?: BreadcrumbLink[];
   color: "black" | "white";
+  lang?: string;
 }
 
-export const Breadcrumb = ({ links, color = "black" }: BreadcrumbProps) => {
+export const Breadcrumb = ({
+  links,
+  color = "black",
+  lang,
+}: BreadcrumbProps) => {
   const textColor = color == "black" ? "text-midnight" : "text-white";
   return (
     <nav
@@ -21,7 +26,7 @@ export const Breadcrumb = ({ links, color = "black" }: BreadcrumbProps) => {
       className="print:hidden flex items-center flex-wrap gap-1 text-md mt-7"
     >
       <Link href="/" className={`${textColor} underlined-link-dark text-md`}>
-        Home
+        {lang === "fr-ca" ? "Accueil" : "Home"}
       </Link>
       <span>
         <FaChevronRight size={15} color={color} />

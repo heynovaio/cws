@@ -4,19 +4,23 @@ import { useProgramCategoryData } from "@/hooks";
 import { componentsTextSmall } from "@/utils";
 import GetAllPrograms from "@/utils/useGetAllPrograms";
 import { asText, Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
+import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+
 import Link from "next/link";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { DefaultCard } from "../Cards";
 import { CustomPagination } from "../CustomPagination";
+import { useLang } from "@/utils/getLang";
 
 export type ProgramCategoryGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
 };
 
 export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
-  const { data } = GetAllPrograms("en-ca");
-  const { programCategoryData } = useProgramCategoryData("en-ca");
+  const lang = useLang();
+  const { data } = GetAllPrograms(lang.routeLocale);
+  const { programCategoryData } = useProgramCategoryData(lang.routeLocale);
 
   const categoryId =
     slice.primary.category && "id" in slice.primary.category
