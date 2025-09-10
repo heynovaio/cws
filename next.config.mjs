@@ -1,25 +1,19 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
 
-type RedirectPair = [string, string];
-
-function makeRedirects(pairs: RedirectPair[]) {
-  const out: {
-    source: string;
-    destination: string;
-    permanent: boolean;
-  }[] = [];
-
+// Emit two redirects per pair (with & without trailing slash)
+function makeRedirects(pairs) {
+  const out = [];
   for (const [src, dest] of pairs) {
     const srcNo = src.replace(/\/+$/, "");
     const srcYes = srcNo + "/";
     out.push({ source: srcNo, destination: `/en-ca${dest}`, permanent: true });
     out.push({ source: srcYes, destination: `/en-ca${dest}`, permanent: true });
   }
-
   return out;
 }
 
-const LEGACY_PAIRS: RedirectPair[] = [
+// Legacy → new path pairs (LEFT = old path; RIGHT = new path *without* locale)
+const LEGACY_PAIRS = [
   ["/about/contact-us/", "/connect-with-us"],
   ["/support-us/", "/connect-with-us"],
   ["/work-with-us/", "/how-we-help"],
@@ -209,8 +203,7 @@ const LEGACY_PAIRS: RedirectPair[] = [
   ["/open-call-dei-committee-members/", "/"],
 ];
 
-
-const nextConfig: NextConfig = {
+const nextConfig = {
   async redirects() {
     return makeRedirects(LEGACY_PAIRS);
   },
