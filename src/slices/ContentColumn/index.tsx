@@ -21,7 +21,7 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
       : "";
   const cardStyling =
     slice.primary.card_background === "Purple"
-      ? "bg-gradient-dark text-white divide-soft-purple/25"
+      ? "bg-gradient-primary text-white divide-soft-purple/25"
       : "bg-white text-[#01015E] divide-neon-violet"
 
   const isSingleColumn = slice.primary.column.length === 1;
