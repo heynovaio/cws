@@ -1,24 +1,74 @@
+// /src/app/api/newsletter/route.ts
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 
-function md5(input: string) {
+/** Incoming payload we expect from the client */
+interface NewsletterPayload {
+  EMAIL?: string;
+  FNAME?: string;
+  LANG?: string;
+  // Allow extras; we only pick whitelisted tags
+  [k: string]: unknown;
+}
+
+/** Minimal Mailchimp error structures */
+interface MailchimpErrorItem {
+  field?: string;
+  message?: string;
+}
+
+interface MailchimpErrorBody {
+  detail?: string;
+  title?: string;
+  status?: number;
+  errors?: MailchimpErrorItem[];
+  [k: string]: unknown;
+}
+
+function md5(input: string): string {
   return crypto.createHash("md5").update(input.toLowerCase()).digest("hex");
 }
 
-// Helper: read a list like "LNAME,MMERGE4"
-function parseList(envVal: string | undefined) {
-  return (envVal || "")
-    .split(",")
-    .map((s) => s.trim().toUpperCase())
-    .filter(Boolean);
+function asString(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
+function parsePayload(value: unknown): NewsletterPayload {
+  return value && typeof value === "object" ? (value as NewsletterPayload) : {};
+}
+
+function parseMailchimpError(value: unknown): MailchimpErrorBody {
+  if (!value || typeof value !== "object") return {};
+  const obj = value as Record<string, unknown>;
+  const rawErrors = Array.isArray(obj.errors) ? obj.errors : undefined;
+
+  const errors: MailchimpErrorItem[] | undefined = rawErrors
+    ? rawErrors.map((e) => {
+        if (!e || typeof e !== "object") return {};
+        const item = e as Record<string, unknown>;
+        return {
+          field: asString(item.field),
+          message: asString(item.message),
+        };
+      })
+    : undefined;
+
+  return {
+    detail: asString(obj.detail),
+    title: asString(obj.title),
+    status: typeof obj.status === "number" ? obj.status : undefined,
+    errors,
+  };
 }
 
 export async function POST(req: Request) {
   try {
-    const payload = await req.json().catch(() => ({} as any));
+    // Parse JSON without `any`
+    const raw = (await req.json().catch(() => null)) as unknown;
+    const payload = parsePayload(raw);
 
-    // ---- Required: EMAIL
-    const EMAIL = typeof payload.EMAIL === "string" ? payload.EMAIL.trim() : "";
+    // Required
+    const EMAIL = asString(payload.EMAIL).trim();
     if (!EMAIL) {
       return NextResponse.json(
         { ok: false, error: "Missing or invalid email" },
@@ -26,15 +76,15 @@ export async function POST(req: Request) {
       );
     }
 
-    // ---- Optional: FNAME (first name)
-    const FNAME = typeof payload.FNAME === "string" ? payload.FNAME.trim() : "";
+    // Optional
+    const FNAME = asString(payload.FNAME).trim();
 
-    // ---- Env
-    const API_KEY = process.env.MAILCHIMP_API_KEY;
-    const SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX; // e.g., "us12"
-    const LIST_ID = process.env.MAILCHIMP_AUDIENCE_ID;
+    // Env
+    const API_KEY = asString(process.env.MAILCHIMP_API_KEY);
+    const SERVER_PREFIX = asString(process.env.MAILCHIMP_SERVER_PREFIX); // e.g. "us12"
+    const LIST_ID = asString(process.env.MAILCHIMP_AUDIENCE_ID);
     const DOUBLE_OPT_IN =
-      (process.env.MAILCHIMP_DOUBLE_OPT_IN || "").toLowerCase() === "true";
+      asString(process.env.MAILCHIMP_DOUBLE_OPT_IN).toLowerCase() === "true";
 
     if (!API_KEY || !SERVER_PREFIX || !LIST_ID) {
       return NextResponse.json(
@@ -43,47 +93,38 @@ export async function POST(req: Request) {
       );
     }
 
-    // ---- Build merge_fields we *actually* send
+    // Merge fields
     const merge_fields: Record<string, string> = {};
     if (FNAME) merge_fields.FNAME = FNAME;
 
-    // (Optional) Attach language only if you’ve created that merge tag and want to use it.
-    // Keep disabled by default to avoid “unknown merge tag” errors.
-    const LANG_TAG = (process.env.MAILCHIMP_LANG_MERGE_TAG || "").toUpperCase(); // e.g., "LANG"
-    if (LANG_TAG && typeof payload[LANG_TAG] === "string" && payload[LANG_TAG].trim()) {
-      merge_fields[LANG_TAG] = payload[LANG_TAG].trim();
-    } else if (LANG_TAG && typeof payload.LANG === "string" && payload.LANG.trim()) {
-      // Support client sending { LANG: "en" } while env uses MAILCHIMP_LANG_MERGE_TAG=LANG
-      merge_fields[LANG_TAG] = payload.LANG.trim();
+    // Optional language support (only if you created this tag)
+    const LANG_TAG = asString(process.env.MAILCHIMP_LANG_MERGE_TAG).toUpperCase(); // e.g. "LANG"
+    const LANG_VALUE = asString(payload[LANG_TAG || "LANG"]).trim();
+    if (LANG_TAG && LANG_VALUE) {
+      merge_fields[LANG_TAG] = LANG_VALUE;
     }
 
-    // ---- Fallbacks for required fields you cannot collect (e.g., LNAME, MMERGE4)
-    const required = parseList(process.env.MAILCHIMP_REQUIRED_FIELDS);
-    for (const tag of required) {
-      // use client-sent value if present and non-empty
-      const fromClient =
-        typeof payload[tag] === "string" ? String(payload[tag]).trim() : "";
+    // Support for hidden required fields (if your audience still requires them)
+    // e.g. MAILCHIMP_REQUIRED_FIELDS=LNAME,MMERGE4
+    const required = asString(process.env.MAILCHIMP_REQUIRED_FIELDS)
+      .split(",")
+      .map((s) => s.trim().toUpperCase())
+      .filter(Boolean);
 
+    for (const tag of required) {
+      const fromClient = asString(payload[tag]).trim();
       if (fromClient) {
         merge_fields[tag] = fromClient;
         continue;
       }
-
-      // Otherwise fall back to env-specific fallback, e.g., MAILCHIMP_FALLBACK_LNAME, MAILCHIMP_FALLBACK_MMERGE4
-      const fallbackEnvKey = `MAILCHIMP_FALLBACK_${tag}`;
-      const fallbackVal = (process.env as any)[fallbackEnvKey] as string | undefined;
-
-      if (fallbackVal && fallbackVal.trim()) {
-        merge_fields[tag] = fallbackVal.trim();
-      } else {
-        // Last-resort fallback to a dot for name-ish fields, or "Unknown" otherwise
-        merge_fields[tag] = tag === "LNAME" ? "." : "Unknown";
-      }
+      const fallbackEnvKey = `MAILCHIMP_FALLBACK_${tag}` as keyof NodeJS.ProcessEnv;
+      const fallbackVal = asString(process.env[fallbackEnvKey]).trim();
+      merge_fields[tag] = fallbackVal || (tag === "LNAME" ? "." : "Unknown");
     }
 
-    // ---- Upsert member
-    const subscriberHash = md5(EMAIL);
-    const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${LIST_ID}/members/${subscriberHash}`;
+    // Upsert member
+    const hash = md5(EMAIL);
+    const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${LIST_ID}/members/${hash}`;
 
     const body = {
       email_address: EMAIL,
@@ -102,23 +143,25 @@ export async function POST(req: Request) {
       cache: "no-store",
     });
 
-    const mcData = await mcRes.json().catch(() => ({}));
+    const rawMc = (await mcRes.json().catch(() => null)) as unknown;
+
     if (!mcRes.ok) {
-      // DEBUG: log the entire error payload so you can see *which* field failed
-      console.error("Mailchimp error:", JSON.stringify(mcData, null, 2));
-      const detail =
-        mcData?.detail ||
-        mcData?.title ||
-        (Array.isArray(mcData?.errors) ? mcData.errors.map((e: any) => e?.field + ": " + e?.message).join("; ") : "") ||
-        "Mailchimp request failed";
+      const err = parseMailchimpError(rawMc);
+      // eslint-disable-next-line no-console
+      console.error("Mailchimp error:", JSON.stringify(err, null, 2));
+
+      const listErrors =
+        err.errors && err.errors.length
+          ? err.errors.map((e) => `${e.field ?? "field"}: ${e.message ?? "invalid"}`).join("; ")
+          : undefined;
+
+      const detail = err.detail || err.title || listErrors || "Mailchimp request failed";
       return NextResponse.json({ ok: false, error: detail }, { status: mcRes.status });
     }
 
     return NextResponse.json({ ok: true });
-  } catch (err: any) {
-    return NextResponse.json(
-      { ok: false, error: err?.message || "Unexpected error" },
-      { status: 500 }
-    );
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : "Unexpected error";
+    return NextResponse.json({ ok: false, error: message }, { status: 500 });
   }
 }

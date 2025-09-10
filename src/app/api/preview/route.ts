@@ -7,6 +7,5 @@ export async function GET(request: NextRequest): Promise<never> {
   const client = createClient();
 
   (await draftMode()).enable();
-  /* eslint-disable-next-line no-return-await */
   return await redirectToPreviewURL({ client, request });
 }
