@@ -4288,6 +4288,16 @@ export interface TabbedContentStickyImageSliceDefaultPrimarySectionItem {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   section_audio_clip: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
+   * Jotform URL field in *TabbedContentStickyImage → Default → Primary → Section*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].jotform_url
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  jotform_url: prismic.KeyTextField;
 }
 
 /**

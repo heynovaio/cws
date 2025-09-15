@@ -73,6 +73,13 @@
                   "select": "media",
                   "allowText": true
                 }
+              },
+              "jotform_url": {
+                "type": "Text",
+                "config": {
+                  "label": "Jotform URL",
+                  "placeholder": ""
+                }
               }
             }
           }
