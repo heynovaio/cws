@@ -42,7 +42,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       data-test-id="tabbed-content-sticky-image"
-      className="relative"
+      className="relative py-8 md:py-16"
       ref={topRef}
     >
       <Container>
