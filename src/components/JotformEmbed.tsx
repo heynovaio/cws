@@ -51,7 +51,6 @@ export const JotformEmbed = ({
         className="w-full border-0"
         style={{ minHeight: "540px" }}
         allow="geolocation; microphone; camera; fullscreen"
-        allowTransparency={true}
       ></iframe>
     </div>
   );

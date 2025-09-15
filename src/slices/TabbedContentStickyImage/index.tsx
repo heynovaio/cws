@@ -21,7 +21,6 @@ import { JotformEmbed } from "@/components/JotformEmbed";
 
 export type TabbedContentStickyImageProps =
   SliceComponentProps<Content.TabbedContentStickyImageSlice>;
-
 const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
   slice,
 }) => {
@@ -29,7 +28,6 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const topRef = useRef<HTMLDivElement>(null);
-
   const toggleAudio = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
@@ -39,7 +37,6 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
     }
     setIsPlaying(!isPlaying);
   };
-
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -105,11 +102,13 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                             <PrismicRichText field={tab.section_text} />
                           </div>
                         )}
+
                         {jotformUrl ? (
                           <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
                             <JotformEmbed url={jotformUrl} />
                           </div>
                         ) : null}
+
                         {tab.section_image?.url && (
                           <div className="relative">
                             <PrismicNextImage
@@ -205,44 +204,37 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                             <PrismicRichText field={tab.section_text} />
                           </div>
                         )}
+                        {jotformUrl ? (
+                          <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center xs:mt-10 md:mt-0">
+                            <JotformEmbed url={jotformUrl} />
+                          </div>
+                        ) : null}
                       </div>
 
                       <div className="flex-1 flex flex-col items-center justify-start">
                         {tab.section_image?.url && (
                           <div
-                            className="w-full sticky flex flex-col gap-4"
+                            className="my-4 sticky flex items-center justify-center"
                             style={{
                               top: "160px",
                               maxHeight: "calc(100vh - 180px)",
                             }}
                           >
-                            {jotformUrl ? (
-                              <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
-                                <JotformEmbed url={jotformUrl} />
-                              </div>
-                            ) : null}
-                            <div
-                              className="my-4 sticky flex items-center justify-center"
-                              style={{
-                                top: "160px",
-                                maxHeight: "calc(100vh - 180px)",
-                              }}
-                            >
-                              <div className="relative w-full h-full flex items-center justify-center">
-                                <PrismicNextImage
-                                  field={tab.section_image}
-                                  alt=""
-                                  className="max-h-[500px] w-auto h-auto object-contain"
-                                />
-                                <div className="absolute bottom-2 right-16 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
-                                  <button onClick={toggleAudio}>
-                                    {isPlaying ? (
-                                      <FaPause size="50" color="#DD0748" />
-                                    ) : (
-                                      <FaPlay size="50" color="#DD0748" />
-                                    )}
-                                  </button>
-                                </div>
+                            <div className="relative w-full h-full flex items-center justify-center">
+                              <PrismicNextImage
+                                field={tab.section_image}
+                                alt=""
+                                className="max-h-[calc(100vh-180px)] w-auto h-auto object-contain"
+                              />
+
+                              <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
+                                <button onClick={toggleAudio}>
+                                  {isPlaying ? (
+                                    <FaPause size="50" color="#DD0748" />
+                                  ) : (
+                                    <FaPlay size="50" color="#DD0748" />
+                                  )}
+                                </button>
                               </div>
                             </div>
                           </div>
@@ -259,5 +251,4 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
     </section>
   );
 };
-
 export default TabbedContentStickyImage;

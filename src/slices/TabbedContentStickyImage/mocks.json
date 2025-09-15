@@ -107,8 +107,8 @@
 								"jotform_url",
 								{
 									"__TYPE__": "FieldContent",
-									"value": "parallel",
-									"type": "Text"
+									"type": "Text",
+									"value": "https://form.jotform.com/252575446907063"
 								}
 							]
 						]
