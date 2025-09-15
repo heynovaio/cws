@@ -90,8 +90,8 @@
 							[
 								"section_audio_clip",
 								{
-									"__TYPE__": "LinkContent",
 									"key": "5078b22d-4155-4b7b-bffb-2bf92fb1b993",
+									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "FileLink",
 										"id": "mock_Media_link",
@@ -101,6 +101,14 @@
 										"size": "0",
 										"text": "cattle"
 									}
+								}
+							],
+							[
+								"jotform_url",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "https://form.jotform.com/252575446907063"
 								}
 							]
 						]

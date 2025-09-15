@@ -61,7 +61,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
 
     return (
       <div>
-        <span className="flex flex-row gap-2">
+        <span className="flex flex-row gap-2 justify-center">
           <motion.span className="text-[3.125rem] text-aqua font-extraBold">
             {rounded}
           </motion.span>

@@ -22,7 +22,7 @@ export const Section: React.FC<SectionProps> = ({
       background = "bg-dark-purple-background";
       break;
     case "Transparent":
-      background = "bg-transparent"
+      background = "bg-transparent";
       break;
     default:
       background = "bg-midnight";
@@ -31,11 +31,10 @@ export const Section: React.FC<SectionProps> = ({
   return (
     // Vertical Padding
     <section
-      className={`py-16 print:py-0 print:my-0 w-full ${background} ${styling}`}
+      className={`py-8 md:py-16 print:py-0 print:my-0 w-full ${background} ${styling}`}
       {...props}
     >
       {children}
-
     </section>
   );
 };
