@@ -9,6 +9,8 @@ import React from "react";
 import { Layout } from "@/components";
 import { getLocales } from "@/utils";
 import { GeneralHero } from "@/components/Heros/GeneralHero";
+import { Sharebar } from "@/components/Sharebar";
+import { buildAbsoluteUrl } from "@/utils";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -64,6 +66,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     ? (contactInfoSlice.primary as { section_id: string }).section_id
     : undefined;
 
+  const absoluteUrl = buildAbsoluteUrl(uid, lang);
+
   return (
     <Layout
       locales={locales}
@@ -82,6 +86,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         components={components}
         context={{ lang }}
       />
+      <Sharebar absoluteUrl={absoluteUrl} />
     </Layout>
   );
 }
