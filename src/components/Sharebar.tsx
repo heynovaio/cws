@@ -1,6 +1,7 @@
 "use client";
 
 import { trackShare } from "@/utils";
+import { FaFacebook, FaLinkedin, FaShareSquare } from "react-icons/fa";
 
 interface SharebarProps {
   absoluteUrl: string;
@@ -33,40 +34,14 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
     <div
       className="
         fixed bottom-4 right-4 z-50
-        flex items-center gap-3
-        rounded-full bg-white/95 shadow-lg
-        px-4 py-2
+        flex items-center gap-4
+        rounded-full bg-white/90 shadow-lg
         text-sm font-medium text-gray-800
         border border-gray-200
+        backdrop-blur-md
+        shadow-[0_0_30px_rgba(99,15,249,0.8)]
       "
     >
-      <span className="font-semibold">Share:</span>
-
-      {/* LinkedIn */}
-      <a
-        href={linkedinHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Share on LinkedIn"
-        className="hover:text-blue-700"
-        onClick={() => trackShare("linkedin")}
-      >
-        LI
-      </a>
-
-      {/* Facebook */}
-      <a
-        href={facebookHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Share on Facebook"
-        className="hover:text-blue-600"
-        onClick={() => trackShare("facebook")}
-      >
-        FB
-      </a>
-
-      {/* Native Web Share (mobile) */}
       {canWebShare && (
         <button
           type="button"
@@ -75,11 +50,36 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
             onWebShare();
           }}
           aria-label="Share via device"
-          className="hover:text-gray-600"
+          className="btn btn-primary"
         >
           Share
         </button>
       )}
+      <div className="flex flex-row items-center justify-center gap-3 px-4 py-2">
+        {/* LinkedIn */}
+        <a
+          href={linkedinHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on LinkedIn"
+          onClick={() => trackShare("linkedin")}
+        >
+          <FaLinkedin color="#6D00FF" size="25px" />
+        </a>
+
+        {/* Facebook */}
+        <a
+          href={facebookHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Facebook"
+          onClick={() => trackShare("facebook")}
+        >
+          <FaFacebook color="#6D00FF" size="25px" />
+        </a>
+        <FaShareSquare color="#6D00FF" size="25px" />
+        {/* Native Web Share (mobile) */}
+      </div>
     </div>
   );
 };
