@@ -145,6 +145,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                   audioRefs.current[idx] = el;
                                 }}
                                 src={audioUrl}
+                                onEnded={() => setPlayingIndex(null)}
                               />
                             )}
                           </div>
@@ -259,6 +260,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                     audioRefs.current[idx] = el;
                                   }}
                                   src={audioUrl}
+                                  onEnded={() => setPlayingIndex(null)}
                                 />
                               )}
                             </div>
