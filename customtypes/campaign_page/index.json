@@ -96,6 +96,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "sponsor_list": {
+              "type": "SharedSlice"
+            },
             "tabbed_content_sticky_image": {
               "type": "SharedSlice"
             },

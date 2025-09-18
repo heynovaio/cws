@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type CampaignPageDocumentDataSlicesSlice =
+  | SponsorListSlice
   | TabbedContentStickyImageSlice
   | ContentGridSlice
   | TileGridSlice
@@ -187,7 +188,10 @@ export type CampaignPageDocument<Lang extends string = string> =
     Lang
   >;
 
-type CareerHubDocumentDataSlicesSlice = AccordionSlice | ContentGridSlice;
+type CareerHubDocumentDataSlicesSlice =
+  | SponsorListSlice
+  | AccordionSlice
+  | ContentGridSlice;
 
 /**
  * Content for Career Hub documents
@@ -320,7 +324,10 @@ export type CareerHubDocument<Lang extends string = string> =
     Lang
   >;
 
-type CareerPageDocumentDataSlicesSlice = AccordionSlice | RichTextSlice;
+type CareerPageDocumentDataSlicesSlice =
+  | SponsorListSlice
+  | AccordionSlice
+  | RichTextSlice;
 
 /**
  * Content for Career Page documents
@@ -455,7 +462,10 @@ export type CareerPageDocument<Lang extends string = string> =
     Lang
   >;
 
-type ContactPageDocumentDataSlicesSlice = AccordionSlice | ContactInfoSlice;
+type ContactPageDocumentDataSlicesSlice =
+  | SponsorListSlice
+  | AccordionSlice
+  | ContactInfoSlice;
 
 /**
  * Content for Contact Page documents
@@ -977,6 +987,7 @@ export type NewsletterSignupDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | SponsorListSlice
   | ContactInfoSlice
   | TileGridSlice
   | ContentGridSlice
@@ -1317,6 +1328,7 @@ export type ProgramCategoryDocument<Lang extends string = string> =
   >;
 
 type ProgramPageDocumentDataSlicesSlice =
+  | SponsorListSlice
   | ContactInfoSlice
   | TagCategorySlice
   | TabbedCarouselSlice
@@ -1608,6 +1620,7 @@ export type ResourceCategoryDocument<Lang extends string = string> =
   >;
 
 type ResourcePageDocumentDataSlicesSlice =
+  | SponsorListSlice
   | ContactInfoSlice
   | TabbedCarouselSlice
   | TagCategorySlice
@@ -1766,6 +1779,7 @@ export type ResourcePageDocument<Lang extends string = string> =
   >;
 
 type SearchPageDocumentDataSlicesSlice =
+  | SponsorListSlice
   | AccordionSlice
   | TileGridSlice
   | CallToActionSlice;
@@ -1893,6 +1907,7 @@ export type SearchPageDocument<Lang extends string = string> =
   >;
 
 type TeamMembersDocumentDataSlicesSlice =
+  | SponsorListSlice
   | TabbedCarouselSlice
   | TileGridSlice
   | ContentGridSlice
@@ -3799,6 +3814,126 @@ export type SingleLinkSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *SponsorList → Default → Primary → Logos*
+ */
+export interface SponsorListSliceDefaultPrimarySponsorsItem {
+  /**
+   * CTA Text field in *SponsorList → Default → Primary → Logos*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.sponsors[].cta_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_text: prismic.KeyTextField;
+
+  /**
+   * Title field in *SponsorList → Default → Primary → Logos*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.sponsors[].title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *SponsorList → Default → Primary → Logos*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.sponsors[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Buttons field in *SponsorList → Default → Primary → Logos*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.sponsors[].buttons
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Logo Image field in *SponsorList → Default → Primary → Logos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.sponsors[].logo_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo_image: prismic.ImageField<never>;
+
+  /**
+   * Logo Link field in *SponsorList → Default → Primary → Logos*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.sponsors[].logo_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  logo_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
+
+/**
+ * Primary content in *SponsorList → Default → Primary*
+ */
+export interface SponsorListSliceDefaultPrimary {
+  /**
+   * Logos field in *SponsorList → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.sponsors[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  sponsors: prismic.GroupField<
+    Simplify<SponsorListSliceDefaultPrimarySponsorsItem>
+  >;
+}
+
+/**
+ * Default variation for SponsorList Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SponsorListSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<SponsorListSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *SponsorList*
+ */
+type SponsorListSliceVariation = SponsorListSliceDefault;
+
+/**
+ * SponsorList Shared Slice
+ *
+ * - **API ID**: `sponsor_list`
+ * - **Description**: SponsorList
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SponsorListSlice = prismic.SharedSlice<
+  "sponsor_list",
+  SponsorListSliceVariation
+>;
+
+/**
  * Item in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary → Tab*
  */
 export interface TabbedCarouselSliceDefaultPrimaryTabItem {
@@ -4949,6 +5084,11 @@ declare module "@prismicio/client" {
       SingleLinkSliceVariation,
       SingleLinkSliceDefault,
       SingleLinkSliceSingleLinkButtonIcon,
+      SponsorListSlice,
+      SponsorListSliceDefaultPrimarySponsorsItem,
+      SponsorListSliceDefaultPrimary,
+      SponsorListSliceVariation,
+      SponsorListSliceDefault,
       TabbedCarouselSlice,
       TabbedCarouselSliceDefaultPrimaryTabItem,
       TabbedCarouselSliceDefaultPrimary,
