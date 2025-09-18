@@ -45,7 +45,7 @@ const HashtagBanner = ({ slice }: HashtagBannerProps) => {
         >
           {Array.from({ length: 50 }).map((_, idx) => (
             <h3 key={idx} className="text-3xl font-bold text-white px-4">
-              #{word}
+              {word}
             </h3>
           ))}
         </div>
