@@ -15,6 +15,7 @@ export const components = {
   multi_link_column: dynamic(() => import("./MultiLinkColumn")),
   rich_text: dynamic(() => import("./RichText")),
   single_link: dynamic(() => import("./SingleLink")),
+  sponsor_list: dynamic(() => import("./SponsorList")),
   tabbed_carousel: dynamic(() => import("./TabbedCarousel")),
   tabbed_content_sticky_image: dynamic(
     () => import("./TabbedContentStickyImage"),
