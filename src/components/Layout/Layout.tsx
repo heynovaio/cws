@@ -70,7 +70,7 @@ export const Layout = ({
             <PrismicNextImage
               field={global.site_logo}
               fallbackAlt=""
-              className="max-w-[200px] md:max-w-[400px] w-full h-auto"
+              className="max-w-[200px] md:max-w-[300px] w-full h-auto"
             />
           </PrismicNextLink>
         )}
