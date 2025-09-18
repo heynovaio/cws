@@ -15,6 +15,7 @@ import { TopBar } from "./TopBar";
 import { PrismicDocument } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { CampaignFooter } from "../Menu/CampaignFooter";
 
 interface LayoutProps {
   locales: PrismicDocument[];
@@ -92,13 +93,16 @@ export const Layout = ({
           />
         )}
       </Container>
-
-      <Footer
-        global={global}
-        slices={menus?.slices1}
-        footerData={menus}
-        lang={lang}
-      />
+      {!isCampaignPage ? (
+        <Footer
+          global={global}
+          slices={menus?.slices1}
+          footerData={menus}
+          lang={lang}
+        />
+      ) : (
+        <CampaignFooter global={global} footerData={menus} lang={lang} />
+      )}
     </div>
   );
 };
