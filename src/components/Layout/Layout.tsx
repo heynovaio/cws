@@ -13,7 +13,6 @@ import { Container } from "./Container";
 import { Footer } from "../Menu/Footer";
 import { TopBar } from "./TopBar";
 import { PrismicDocument } from "@prismicio/client";
-import { CampaignHeader } from "../Menu/CampaignHeader";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
