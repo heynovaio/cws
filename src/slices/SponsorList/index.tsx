@@ -20,6 +20,18 @@ const SponsorList: FC<SponsorListProps> = ({ slice }) => {
     (_, i) => slice.primary.sponsors.slice(i * 6, i * 6 + 6)
   );
 
+  // Helper function to get dynamic grid classes based on logo count
+  const getGridClasses = (logoCount: number) => {
+    if (logoCount <= 2) {
+      return "grid-cols-1 md:grid-cols-2";
+    } else if (logoCount <= 4) {
+      return "grid-cols-2 md:grid-cols-2";
+    } else if (logoCount <= 6) {
+      return "grid-cols-2 md:grid-cols-3";
+    }
+    return "grid-cols-2 md:grid-cols-3"; // fallback
+  };
+
   return (
     <Section
       data-slice-type={slice.slice_type}
@@ -60,12 +72,12 @@ const SponsorList: FC<SponsorListProps> = ({ slice }) => {
                     buttonLink={button}
                   />
                 ))}
-                containerClassName="flex basis-1/3"
+                containerClassName="flex basis-1/3 pb-8"
               />
-              {logoTiles.map((tile, index) => (
+              {logoTiles.map((tile, tileIndex) => (
                 <div
-                  key={index}
-                  className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16 p-1 basis-2/3"
+                  key={tileIndex}
+                  className={`grid ${getGridClasses(tile.length)} gap-8 md:gap-16 p-1 basis-2/3`}
                 >
                   {tile.map((logo, i) => (
                     <PrismicNextLink
