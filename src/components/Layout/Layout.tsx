@@ -13,7 +13,8 @@ import { Container } from "./Container";
 import { Footer } from "../Menu/Footer";
 import { TopBar } from "./TopBar";
 import { PrismicDocument } from "@prismicio/client";
-import { CampaignHeader } from "../Menu/CampaignHeader";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface LayoutProps {
   locales: PrismicDocument[];
@@ -42,7 +43,17 @@ export const Layout = ({
         Skip to Content
       </a>
       <div className={isCampaignPage ? "z-50" : "sticky top-0 z-50 "}>
-        <TopBar locales={locales} global={global} text={menus.banner_text} />
+        {!isCampaignPage ? (
+          <TopBar locales={locales} global={global} text={menus.banner_text} />
+        ) : (
+          <div className="flex w-full justify-end flex-row">
+            <LanguageSwitcher
+              locales={locales}
+              global={global}
+              classname=" mt-2"
+            />
+          </div>
+        )}
         {!isCampaignPage ? (
           <Header
             logo={global.site_logo}
@@ -50,11 +61,18 @@ export const Layout = ({
             locales={locales}
           />
         ) : (
-          <CampaignHeader
-            logo={global.site_logo}
-            slices={menus.slices}
-            locales={locales}
-          />
+          <PrismicNextLink
+            className="flex justify-center w-full pt-4 xs:mt-10 md:mt-0"
+            aria-label="homepage link"
+            prefetch={true}
+            href="/"
+          >
+            <PrismicNextImage
+              field={global.site_logo}
+              fallbackAlt=""
+              className="max-w-[200px] md:max-w-[300px] w-full h-auto"
+            />
+          </PrismicNextLink>
         )}
       </div>
       <main id="main-content" className="relative focus:outline-0" tabIndex={0}>
