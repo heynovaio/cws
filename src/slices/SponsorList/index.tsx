@@ -2,7 +2,7 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import { Container, Section } from "@/components";
+import { Container } from "@/components";
 import Partners from "@/components/Menu/Partners";
 
 /**
@@ -13,15 +13,22 @@ export type SponsorListProps = SliceComponentProps<Content.SponsorListSlice>;
 /**
  * Component for "SponsorList" Slices.
  */
-const SponsorList: FC<SponsorListProps> = ({ slice }) => {
+const SponsorList: FC<SponsorListProps> = ({ slice, index, slices }) => {
+  const prevSlice = slices[index - 1];
+  const hasPrevSponsorList = prevSlice?.slice_type === "sponsor_list";
+
   return (
-    <Section
+    <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       data-test-id={slice.id}
-      styling="partners-non-carousel"
+      className="partners-non-carousel"
     >
-      <Container containerClassName="">
+      <Container
+        containerClassName={` py-6 ${
+          hasPrevSponsorList ? "border-t border-white-10 " : ""
+        }`}
+      >
         <Partners
           title={slice.primary.title}
           body={slice.primary.body}
@@ -31,7 +38,7 @@ const SponsorList: FC<SponsorListProps> = ({ slice }) => {
           carousel={false}
         />
       </Container>
-    </Section>
+    </section>
   );
 };
 
