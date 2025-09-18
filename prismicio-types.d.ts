@@ -3818,48 +3818,6 @@ export type SingleLinkSlice = prismic.SharedSlice<
  */
 export interface SponsorListSliceDefaultPrimarySponsorsItem {
   /**
-   * CTA Text field in *SponsorList → Default → Primary → Logos*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: sponsor_list.default.primary.sponsors[].cta_text
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  cta_text: prismic.KeyTextField;
-
-  /**
-   * Title field in *SponsorList → Default → Primary → Logos*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: sponsor_list.default.primary.sponsors[].title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Body field in *SponsorList → Default → Primary → Logos*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: sponsor_list.default.primary.sponsors[].body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Buttons field in *SponsorList → Default → Primary → Logos*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: sponsor_list.default.primary.sponsors[].buttons
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  buttons: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-
-  /**
    * Logo Image field in *SponsorList → Default → Primary → Logos*
    *
    * - **Field Type**: Image
@@ -3890,6 +3848,48 @@ export interface SponsorListSliceDefaultPrimarySponsorsItem {
  * Primary content in *SponsorList → Default → Primary*
  */
 export interface SponsorListSliceDefaultPrimary {
+  /**
+   * CTA Text field in *SponsorList → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.cta_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_text: prismic.KeyTextField;
+
+  /**
+   * Title field in *SponsorList → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *SponsorList → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Buttons field in *SponsorList → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
   /**
    * Logos field in *SponsorList → Default → Primary*
    *

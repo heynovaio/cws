@@ -46,64 +46,52 @@
 										"text": "useful"
 									}
 								}
-							],
-							[
-								"title",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "heading2",
-											"content": {
-												"text": "Older"
-											}
-										}
-									]
-								}
-							],
-							[
-								"cta_text",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "tea",
-									"type": "Text"
-								}
-							],
-							[
-								"body",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Reprehenderit irure aute minim tempor tempor minim tempor aute occaecat voluptate esse mollit ullamco. Eiusmod deserunt eu laboris sunt voluptate consequat enim."
-											}
-										}
-									]
-								}
-							],
-							[
-								"buttons",
-								{
-									"__TYPE__": "RepeatableContent",
-									"type": "Link",
-									"value": [
-										{
-											"key": "91619474-951b-49cd-af8b-29bec2f50cae",
-											"__TYPE__": "LinkContent",
-											"value": {
-												"__TYPE__": "ExternalLink",
-												"url": "https://slicemachine.dev",
-												"text": "number"
-											}
-										}
-									]
-								}
 							]
 						]
 					}
 				]
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Report"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Exercitation consequat commodo et ullamco cillum velit. Aute laborum culpa et proident officia tempor est dolor elit ullamco enim id. Pariatur id velit consectetur."
+						}
+					}
+				]
+			},
+			"buttons": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "afdff490-5e6e-4920-916e-57382c95c441",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "http://twitter.com",
+							"text": "colony"
+						}
+					}
+				]
+			},
+			"cta_text": {
+				"__TYPE__": "FieldContent",
+				"value": "amount",
+				"type": "Text"
 			}
 		},
 		"items": []

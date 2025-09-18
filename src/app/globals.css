@@ -497,3 +497,7 @@ iframe {
   overflow: visible !important;
   margin-left: -1.5em;
 }
+
+.partners-non-carousel:first-child:not(:last-child) {
+  border-bottom: 0.5px solid rgb(255 255 255 / 55%);
+}
