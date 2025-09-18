@@ -15,6 +15,7 @@ import { TopBar } from "./TopBar";
 import { PrismicDocument } from "@prismicio/client";
 import { CampaignHeader } from "../Menu/CampaignHeader";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface LayoutProps {
   locales: PrismicDocument[];
@@ -43,8 +44,16 @@ export const Layout = ({
         Skip to Content
       </a>
       <div className={isCampaignPage ? "z-50" : "sticky top-0 z-50 "}>
-        {!isCampaignPage && (
+        {!isCampaignPage ? (
           <TopBar locales={locales} global={global} text={menus.banner_text} />
+        ) : (
+          <div className="flex w-full justify-end flex-row">
+            <LanguageSwitcher
+              locales={locales}
+              global={global}
+              classname=" mt-2"
+            />
+          </div>
         )}
         {!isCampaignPage ? (
           <Header
@@ -54,7 +63,7 @@ export const Layout = ({
           />
         ) : (
           <PrismicNextLink
-            className="flex justify-center w-full py-4"
+            className="flex justify-center w-full pt-4 xs:mt-10 md:mt-0"
             aria-label="homepage link"
             prefetch={true}
             href="/"
