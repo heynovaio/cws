@@ -205,7 +205,15 @@ const LEGACY_PAIRS = [
 
 const nextConfig = {
   async redirects() {
+    // Middleware owns the campaign→vanity logic (UTM merge + host awareness).
+    // We only return your large legacy redirect table here.
     return makeRedirects(LEGACY_PAIRS);
+  },
+
+  // No rewrites needed for the vanity roots—middleware already rewrites
+  // keepgirlsplaying.ca/ and danslequipedesfilles.ca/ to their campaign pages.
+  async rewrites() {
+    return [];
   },
 };
 

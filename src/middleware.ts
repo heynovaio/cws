@@ -197,6 +197,25 @@ const LEGACY_SOURCES: Set<string> = new Set<string>([
   "/open-call-dei-committee-members",
 ]);
 
+// ---- Vanity campaign mapping (EN) ----
+const EN_CAMPAIGN_PATH = "/en-ca/campaign/keepgirlsplaying";
+const EN_VANITY_HOSTS = new Set(["keepgirlsplaying.ca", "www.keepgirlsplaying.ca"]);
+
+// ---- Vanity campaign mapping (FR) ----
+const FR_CAMPAIGN_PATH =
+  "/fr-ca/campaign/maintenant-continuons-a-faire-jouer-les-filles";
+const FR_VANITY_HOSTS = new Set([
+  "danslequipedesfilles.ca",
+  "www.danslequipedesfilles.ca",
+]);
+
+// ---- Common source host ----
+const SOURCE_HOST = "womenandsport.ca";
+
+function strip(pathname: string) {
+  return pathname !== "/" ? pathname.replace(/\/+$/, "") : pathname;
+}
+
 function getLocale(request: NextRequest) {
   const acceptedLanguage = request.headers.get("accept-language") ?? undefined;
   const headers = { "accept-language": acceptedLanguage };
@@ -204,60 +223,118 @@ function getLocale(request: NextRequest) {
   return match(languages, locales, defaultLocale);
 }
 
-function strip(pathname: string) {
-  return pathname !== "/" ? pathname.replace(/\/+$/, "") : pathname;
+// Fill default UTMs only if missing, preserving any incoming values
+function ensureUtmDefaults(
+  sp: URLSearchParams,
+  defaults: { source: string; medium: string; campaign: string; content: string }
+) {
+  if (!sp.has("utm_source")) sp.set("utm_source", defaults.source);
+  if (!sp.has("utm_medium")) sp.set("utm_medium", defaults.medium);
+  if (!sp.has("utm_campaign")) sp.set("utm_campaign", defaults.campaign);
+  if (!sp.has("utm_content")) sp.set("utm_content", defaults.content);
 }
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  const { pathname } = url;
+  const host = request.headers.get("host") || "";
+  const pathname = strip(url.pathname);
 
   // Optional: if you keep a Netlify rule for fr subdomain, let it be.
-  const host = request.headers.get("host") || "";
   if (host.startsWith("fr.womenandsport.ca")) {
     return NextResponse.next();
   }
 
-  // Careers <-> Carrières swap within a given locale (your existing behavior)
+  // ---- Campaign vanity behavior (host-aware) ----
+
+  // 1) EN: womenandsport.ca long path -> keepgirlsplaying.ca (merge UTMs)
+  if (host === SOURCE_HOST && pathname === EN_CAMPAIGN_PATH) {
+    const target = new URL("https://keepgirlsplaying.ca/");
+    const merged = new URLSearchParams(url.searchParams);
+    ensureUtmDefaults(merged, {
+      source: SOURCE_HOST,
+      medium: "redirect",
+      campaign: "keep_girls_playing",
+      content: "campaign_path_en",
+    });
+    target.search = merged.toString();
+    if (url.hash) target.hash = url.hash;
+    return NextResponse.redirect(target, 308);
+  }
+
+  // 2) FR: womenandsport.ca long path -> danslequipedesfilles.ca (merge UTMs)
+  if (host === SOURCE_HOST && pathname === FR_CAMPAIGN_PATH) {
+    const target = new URL("https://danslequipedesfilles.ca/");
+    const merged = new URLSearchParams(url.searchParams);
+    ensureUtmDefaults(merged, {
+      source: SOURCE_HOST,
+      medium: "redirect",
+      campaign: "dans_lequipe_des_filles",
+      content: "campaign_path_fr",
+    });
+    target.search = merged.toString();
+    if (url.hash) target.hash = url.hash;
+    return NextResponse.redirect(target, 308);
+  }
+
+  // 3) EN vanity root -> serve EN campaign (keep vanity URL)
+  if (
+    EN_VANITY_HOSTS.has(host) &&
+    (pathname === "/" || pathname === "/index.html")
+  ) {
+    const rewriteUrl = request.nextUrl.clone();
+    rewriteUrl.pathname = EN_CAMPAIGN_PATH;
+    return NextResponse.rewrite(rewriteUrl);
+  }
+
+  // 4) FR vanity root -> serve FR campaign (keep vanity URL)
+  if (
+    FR_VANITY_HOSTS.has(host) &&
+    (pathname === "/" || pathname === "/index.html")
+  ) {
+    const rewriteUrl = request.nextUrl.clone();
+    rewriteUrl.pathname = FR_CAMPAIGN_PATH;
+    return NextResponse.rewrite(rewriteUrl);
+  }
+
+  // ---- Careers <-> Carrières swap within a given locale (your existing behavior) ----
   if (pathname.includes("/careers") || pathname.includes("/carrieres")) {
     const langMatch = pathname.match(/^\/([a-z]{2}(?:-[a-z]{2})?)\//);
     const currentLang = langMatch ? langMatch[1] : null;
 
     if (currentLang) {
       if (currentLang.startsWith("en") && pathname.includes("/carrieres")) {
-        url.pathname = pathname.replace("/carrieres", "/careers");
+        url.pathname = url.pathname.replace("/carrieres", "/careers");
         return NextResponse.redirect(url);
       }
       if (currentLang.startsWith("fr") && pathname.includes("/careers")) {
-        url.pathname = pathname.replace("/careers", "/carrieres");
+        url.pathname = url.pathname.replace("/careers", "/carrieres");
         return NextResponse.redirect(url);
       }
     }
   }
 
-  // If already localized, do nothing
+  // ---- If already localized, do nothing ----
   const hasLocalePrefix = locales.some(
-    (loc) => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`)
+    (loc) => url.pathname === `/${loc}` || url.pathname.startsWith(`/${loc}/`)
   );
   if (hasLocalePrefix) {
     return NextResponse.next();
   }
 
-  // ✅ Critical: let your redirect rules handle legacy sources
-  if (LEGACY_SOURCES.has(strip(pathname))) {
+  // ✅ Critical: let your next.config redirects handle legacy sources
+  if (LEGACY_SOURCES.has(pathname)) {
     return NextResponse.next();
   }
 
-  // Compute best locale and prefix it for the rest
+  // ---- Compute best locale and prefix it for the rest ----
   const locale = getLocale(request);
 
   // Preserve careers/carrieres intent when adding locale
-  let finalPath = pathname;
+  let finalPath = url.pathname;
   if (finalPath.includes("/careers") || finalPath.includes("/carrieres")) {
-    finalPath =
-      locale.startsWith("fr")
-        ? finalPath.replace("/careers", "/carrieres")
-        : finalPath.replace("/carrieres", "/careers");
+    finalPath = locale.startsWith("fr")
+      ? finalPath.replace("/careers", "/carrieres")
+      : finalPath.replace("/carrieres", "/careers");
   }
 
   url.pathname = `/${locale}${finalPath}`;
