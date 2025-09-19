@@ -1,6 +1,6 @@
 "use client";
 import { FC, useRef, useState } from "react";
-import { Content } from "@prismicio/client";
+import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 
@@ -62,7 +62,10 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
         <div className="md:hidden flex flex-col gap-4">
           {sections.map((tab, idx) => {
             const jotformUrl = tab.jotform_url;
-            const audioUrl = (tab.section_audio_clip as any)?.url;
+            const audioUrl = isFilled.linkToMedia(tab.section_audio_clip)
+              ? tab.section_audio_clip.url
+              : undefined;
+
             return (
               <Disclosure key={idx}>
                 {({ open }) => (
@@ -194,7 +197,10 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
             <TabPanels className="mt-4">
               {sections.map((tab, idx) => {
                 const jotformUrl = tab.jotform_url;
-                const audioUrl = (tab.section_audio_clip as any)?.url;
+                const audioUrl = isFilled.linkToMedia(tab.section_audio_clip)
+                  ? tab.section_audio_clip.url
+                  : undefined;
+
                 return (
                   <TabPanel
                     key={idx}
