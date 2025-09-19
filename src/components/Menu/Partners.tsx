@@ -94,7 +94,7 @@ export const Partners = ({
               buttonLink={button}
             />
           ))}
-          containerClassName={carousel ? "" : "flex basis-1/3 pb-8"}
+          containerClassName={`${carousel ? "" : "flex basis-1/3 pb-8"} text-center md:text-left`}
         />
 
         {carousel && (
