@@ -3,6 +3,7 @@ import { FC, useRef, useState } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+
 import {
   Tab,
   TabGroup,
@@ -21,22 +22,34 @@ import { JotformEmbed } from "@/components/JotformEmbed";
 
 export type TabbedContentStickyImageProps =
   SliceComponentProps<Content.TabbedContentStickyImageSlice>;
+
 const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
   slice,
 }) => {
   const sections = slice.primary.section || [];
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
+  const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
-  const toggleAudio = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
+
+  const toggleAudio = (idx: number) => {
+    const audio = audioRefs.current[idx];
+    if (!audio) return;
+
+    if (playingIndex === idx && !audio.paused) {
+      audio.pause();
+      setPlayingIndex(null);
     } else {
-      audioRef.current.play();
+      audioRefs.current.forEach((a, i) => {
+        if (a && i !== idx) a.pause();
+      });
+
+      audio
+        .play()
+        .then(() => setPlayingIndex(idx))
+        .catch((err) => console.error("Play failed:", err));
     }
-    setIsPlaying(!isPlaying);
   };
+
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -49,6 +62,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
         <div className="md:hidden flex flex-col gap-4">
           {sections.map((tab, idx) => {
             const jotformUrl = tab.jotform_url;
+            const audioUrl = (tab.section_audio_clip as any)?.url;
             return (
               <Disclosure key={idx}>
                 {({ open }) => (
@@ -73,7 +87,6 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                           </div>
                         )}
                       </div>
-
                       <FaChevronDown
                         className={`transition-transform duration-300 ${
                           open ? "rotate-180" : "rotate-0"
@@ -81,7 +94,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                       />
                     </DisclosureButton>
                     <DisclosurePanel
-                      className="p-6 "
+                      className="p-6"
                       style={{
                         background: "rgba(121, 19, 224, 0.2)",
                         boxShadow: "0 0 30px 0 rgba(99, 15, 249, 0.8)",
@@ -102,12 +115,11 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                             <PrismicRichText field={tab.section_text} />
                           </div>
                         )}
-
-                        {jotformUrl ? (
+                        {jotformUrl && (
                           <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
                             <JotformEmbed url={jotformUrl} />
                           </div>
-                        ) : null}
+                        )}
 
                         {tab.section_image?.url && (
                           <div className="relative">
@@ -115,24 +127,27 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                               field={tab.section_image}
                               alt=""
                             />
-
-                            <div className="absolute bottom-2 right-2 w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
-                              <button onClick={toggleAudio}>
-                                {isPlaying ? (
+                            <div className="absolute bottom-2 right-2 w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition z-50">
+                              <button
+                                onClick={() => toggleAudio(idx)}
+                                type="button"
+                              >
+                                {playingIndex === idx ? (
                                   <FaPause size="32" color="#DD0748" />
                                 ) : (
                                   <FaPlay size="32" color="#DD0748" />
                                 )}
                               </button>
                             </div>
-                            {tab.section_audio_clip &&
-                              "url" in tab.section_audio_clip &&
-                              tab.section_audio_clip.url && (
-                                <audio
-                                  ref={audioRef}
-                                  src={tab.section_audio_clip.url}
-                                />
-                              )}
+                            {audioUrl && (
+                              <audio
+                                ref={(el) => {
+                                  audioRefs.current[idx] = el;
+                                }}
+                                src={audioUrl}
+                                onEnded={() => setPlayingIndex(null)}
+                              />
+                            )}
                           </div>
                         )}
                       </div>
@@ -146,21 +161,21 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
 
         <div className="hidden md:block">
           <TabGroup>
-            <TabList className="flex mb-4 gap-4 sticky top-0 z-50 w-full ">
+            <TabList className="flex mb-4 gap-4 sticky top-0 z-50 w-full">
               {sections.map((tab, idx) => (
                 <Tab
-                  onClick={() => {
+                  key={idx}
+                  onClick={() =>
                     topRef.current?.scrollIntoView({
                       behavior: "smooth",
                       block: "start",
-                    });
-                  }}
-                  key={idx}
+                    })
+                  }
                   className={({ selected }) =>
                     `w-full px-12 py-2 rounded-[12px] focus:outline-none ${
                       selected
                         ? "bg-[#6D00FF] text-white font-bold"
-                        : " bg-midnight border border-white text-white hover:bg-dark-purple-background"
+                        : "bg-midnight border border-white text-white hover:bg-dark-purple-background"
                     }`
                   }
                 >
@@ -179,6 +194,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
             <TabPanels className="mt-4">
               {sections.map((tab, idx) => {
                 const jotformUrl = tab.jotform_url;
+                const audioUrl = (tab.section_audio_clip as any)?.url;
                 return (
                   <TabPanel
                     key={idx}
@@ -204,11 +220,11 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                             <PrismicRichText field={tab.section_text} />
                           </div>
                         )}
-                        {jotformUrl ? (
+                        {jotformUrl && (
                           <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center xs:mt-10 md:mt-0">
                             <JotformEmbed url={jotformUrl} />
                           </div>
-                        ) : null}
+                        )}
                       </div>
 
                       <div className="flex-1 flex flex-col items-center justify-start">
@@ -226,16 +242,27 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                 alt=""
                                 className="max-h-[calc(100vh-180px)] w-auto h-auto object-contain"
                               />
-
-                              <div className="absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
-                                <button onClick={toggleAudio}>
-                                  {isPlaying ? (
+                              <div className="z-50 absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
+                                <button
+                                  onClick={() => toggleAudio(idx)}
+                                  type="button"
+                                >
+                                  {playingIndex === idx ? (
                                     <FaPause size="50" color="#DD0748" />
                                   ) : (
                                     <FaPlay size="50" color="#DD0748" />
                                   )}
                                 </button>
                               </div>
+                              {audioUrl && (
+                                <audio
+                                  ref={(el) => {
+                                    audioRefs.current[idx] = el;
+                                  }}
+                                  src={audioUrl}
+                                  onEnded={() => setPlayingIndex(null)}
+                                />
+                              )}
                             </div>
                           </div>
                         )}
@@ -251,4 +278,5 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
     </section>
   );
 };
+
 export default TabbedContentStickyImage;
