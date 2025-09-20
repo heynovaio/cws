@@ -64,10 +64,6 @@ export const Partners = ({
     setCurrentSlide(state.currentSlide);
   };
 
-  const getGridClasses = (logoCount: number) => {
-    return "grid-cols-2 md:grid-cols-4";
-  };
-
   return (
     <section className={carousel ? "my-16" : ""}>
       <Container className="flex flex-col md:flex-row items-center gap-0 md:gap-6">
@@ -151,7 +147,7 @@ export const Partners = ({
           logoTiles.map((tile, index) => (
             <div
               key={index}
-              className={`grid ${getGridClasses(tile.length)} p-1 gap-4 md:gap-8 md:basis-2/3`}
+              className={`grid grid-cols-2 md:grid-cols-4 p-1 gap-4 md:gap-8 md:basis-2/3`}
             >
               {tile.map((logo, i) => (
                 <PrismicNextLink
