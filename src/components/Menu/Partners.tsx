@@ -65,25 +65,22 @@ export const Partners = ({
   };
 
   const getGridClasses = (logoCount: number) => {
-    if (logoCount <= 2) {
-      return "grid-cols-1 md:grid-cols-2";
-    } else if (logoCount <= 4) {
-      return "grid-cols-2 md:grid-cols-3";
-    }
-    return "grid-cols-2 md:grid-cols-3";
+    return "grid-cols-2 md:grid-cols-4";
   };
 
   return (
     <section className={carousel ? "my-16" : ""}>
-      <Container className="flex flex-col md:flex-row items-center gap-6">
+      <Container className="flex flex-col md:flex-row items-center gap-0 md:gap-6">
         <ContentBox
           title={title}
           content={
             <div className="flex flex-col gap-2 pr-8">
               <PrismicRichText field={body} />
+              {ctaText && (
               <p className="font-extraBold text-[1.625rem] md:text-[2rem] mt-6">
                 {ctaText}
               </p>
+              )}
             </div>
           }
           buttons={buttons.map((button, i) => (
@@ -94,7 +91,7 @@ export const Partners = ({
               buttonLink={button}
             />
           ))}
-          containerClassName={`${carousel ? "" : "flex basis-1/3 pb-8"} text-center md:text-left`}
+          containerClassName={`${carousel ? "" : "flex basis-1/3"} text-center md:text-left`}
         />
 
         {carousel && (
@@ -154,7 +151,7 @@ export const Partners = ({
           logoTiles.map((tile, index) => (
             <div
               key={index}
-              className={`grid ${getGridClasses(tile.length)} p-1 gap-8 md:gap-16 md:basis-2/3`}
+              className={`grid ${getGridClasses(tile.length)} p-1 gap-4 md:gap-8 md:basis-2/3`}
             >
               {tile.map((logo, i) => (
                 <PrismicNextLink

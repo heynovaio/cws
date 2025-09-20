@@ -26,7 +26,7 @@ const SponsorList: FC<SponsorListProps> = ({ slice, index, slices }) => {
     >
       <Container
         containerClassName={` py-6 ${
-          hasPrevSponsorList ? "border-t border-white-10 " : ""
+          hasPrevSponsorList ? "border-t border-white border-opacity-30" : ""
         }`}
       >
         <Partners

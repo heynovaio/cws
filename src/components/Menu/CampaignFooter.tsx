@@ -95,7 +95,7 @@ export const CampaignFooter = ({ global, footerData, lang }: FooterProps) => {
                 alt="Gouvernement du Canada"
                 width={500}
                 height={100}
-                className="mx-auto w-auto h-auto max-w-full md:max-w-[400px]"
+                className="mx-auto w-auto h-auto md:max-w-[300px]"
                 sizes="(max-width: 1040px) 520px, 580px"
               />
             ) : (
@@ -104,7 +104,7 @@ export const CampaignFooter = ({ global, footerData, lang }: FooterProps) => {
                 alt="Government of Canada"
                 width={500}
                 height={100}
-                className="mx-auto w-auto h-auto max-w-full md:max-w-[400px]"
+                className="mx-auto w-auto h-auto max-w-full md:max-w-[300px]"
               />
             )}
           </div>
@@ -115,7 +115,7 @@ export const CampaignFooter = ({ global, footerData, lang }: FooterProps) => {
                 alt="Gouvernement du Canada"
                 width={500}
                 height={100}
-                className="mx-auto w-auto h-auto max-w-[400px]"
+                className="mx-auto w-auto h-auto max-w-[300px]"
               />
             ) : (
               <Image
@@ -123,7 +123,7 @@ export const CampaignFooter = ({ global, footerData, lang }: FooterProps) => {
                 alt="Government of Canada"
                 width={500}
                 height={100}
-                className="mx-auto w-auto h-auto max-w-[400px]"
+                className="mx-auto w-auto h-auto max-w-[300px]"
               />
             )}
           </div>
