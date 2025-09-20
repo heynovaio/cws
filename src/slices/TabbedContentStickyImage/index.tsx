@@ -57,6 +57,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
       data-test-id="tabbed-content-sticky-image"
       className="relative py-8 md:py-16"
       ref={topRef}
+      id="pillars"
     >
       <Container>
         <div className="md:hidden flex flex-col gap-4">
