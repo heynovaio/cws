@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { trackShare } from "@/utils";
-import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaShareSquare } from "react-icons/fa";
 
 interface SharebarProps {
   absoluteUrl: string;
@@ -33,16 +34,14 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
   return (
     <div
       className="
-    fixed bottom-4 right-4 z-50
-    flex items-center
-    rounded-full bg-white/90
-    text-sm font-medium text-gray-800
-    border border-gray-200
-    backdrop-blur-md
-    drop-shadow-glow
-    hover:ring-2
-    hover:ring-dove-grey
-  "
+        fixed bottom-4 right-4 z-50
+        flex items-center gap-4
+        rounded-full bg-white/90 shadow-lg
+        text-sm font-medium text-gray-800
+        border border-gray-200
+        backdrop-blur-md
+        shadow-[0_0_30px_rgba(99,15,249,0.8)]
+      "
     >
       {canWebShare && (
         <button
@@ -52,7 +51,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
             onWebShare();
           }}
           aria-label="Share via device"
-          className="btn btn-primary transform-none hover:translate-x-0 hover:translate-y-0"
+          className="btn btn-primary"
         >
           Share
         </button>
@@ -66,10 +65,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
           aria-label="Share on LinkedIn"
           onClick={() => trackShare("linkedin")}
         >
-          <FaLinkedin
-            size="25px"
-            className="text-dove-grey hover:text-ultra-pink"
-          />
+          <FaLinkedin color="#6D00FF" size="25px" />
         </a>
 
         {/* Facebook */}
@@ -80,26 +76,10 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
           aria-label="Share on Facebook"
           onClick={() => trackShare("facebook")}
         >
-          <FaFacebook
-            size="25px"
-            className="text-dove-grey hover:text-ultra-pink"
-          />
+          <FaFacebook color="#6D00FF" size="25px" />
         </a>
-        {/* <a
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Share"
-          onClick={() => {
-            trackShare("webshare");
-            onWebShare();
-          }}
-          className="md:hidden block"
-        >
-          <FaShareSquare
-            size="25px"
-            className="text-dove-grey hover:text-ultra-pink"
-          />
-        </a> */}
+        <FaShareSquare color="#6D00FF" size="25px" />
+        {/* Native Web Share (mobile) */}
       </div>
     </div>
   );

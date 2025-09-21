@@ -24,7 +24,7 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
     height: 0,
   });
 
-  const tabs = slice.primary.tab || [];
+  const tabs = React.useMemo(() => slice.primary.tab || [], [slice.primary.tab]);
 
   const handleTabChange = (index: number) => {
     setCurrentSlide(index);
