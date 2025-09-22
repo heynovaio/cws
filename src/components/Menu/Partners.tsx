@@ -135,7 +135,7 @@ export const Partners = ({
                       <PrismicNextImage
                         field={logo.logo_image}
                         className="max-h-full w-full object-contain"
-                        fallbackAlt="Partner logo"
+                        /* Use Prismic-provided alt; omit alt prop here by design */
                       />
                     </PrismicNextLink>
                   ))}
@@ -160,7 +160,7 @@ export const Partners = ({
                   <PrismicNextImage
                     field={logo.logo_image}
                     className="max-h-full w-full object-contain"
-                    fallbackAlt="Partner logo"
+                    /* Use Prismic-provided alt; omit alt prop here by design */
                   />
                 </PrismicNextLink>
               ))}
