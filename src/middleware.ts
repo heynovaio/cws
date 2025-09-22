@@ -213,8 +213,8 @@ const FR_VANITY_HOSTS = new Set([
   "dansléquipedesfilles.ca",
   "www.dansléquipedesfilles.ca",
   // punycode (actual Host header on the wire)
-  "xn--danslquipedesfilles-0qb.ca",
-  "www.xn--danslquipedesfilles-0qb.ca",
+  "xn--danslquipedesfilles-fzb.ca",
+  "www.xn--danslquipedesfilles-fzb.ca",
 ]);
 
 // ---- Common source host ----
