@@ -132,14 +132,20 @@ export const CampaignFooter = ({ global, footerData, lang }: FooterProps) => {
         {/* POLICIES */}
         <div className="flex flex-col justify-center items-center footer-links">
           <div className="flex flex-row gap-4">
-            <PrismicNextLink
-              field={footerData?.policy_link}
-              className="text-base md:text-bodyLarge menu-link underline-offset-4"
-            />
-            <PrismicNextLink
-              field={footerData?.helpline}
-              className="text-base md:text-bodyLarge menu-link underline-offset-4"
-            />
+            {footerData?.policy_link.text !== "" &&
+              footerData?.policy_link.link_type !== "Any" && (
+              <PrismicNextLink
+                field={footerData?.policy_link}
+                className="text-base md:text-bodyLarge menu-link underline-offset-4"
+              />
+            )}
+            {footerData?.helpline.text !== "" &&
+              footerData?.helpline.link_type !== "Any" && (
+              <PrismicNextLink
+                field={footerData?.helpline}
+                className="text-base md:text-bodyLarge menu-link underline-offset-4"
+              />
+            )}
           </div>
 
           <p className="mt-4 text-center text-base">{footerData?.copyright}</p>

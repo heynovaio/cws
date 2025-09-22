@@ -73,9 +73,9 @@ export const Partners = ({
             <div className="flex flex-col gap-2 pr-8">
               <PrismicRichText field={body} />
               {ctaText && (
-              <p className="font-extraBold text-[1.625rem] md:text-[2rem] mt-6">
-                {ctaText}
-              </p>
+                <p className="font-extraBold text-[1.625rem] md:text-[2rem] mt-6">
+                  {ctaText}
+                </p>
               )}
             </div>
           }
@@ -87,7 +87,9 @@ export const Partners = ({
               buttonLink={button}
             />
           ))}
-          containerClassName={`${carousel ? "" : "flex basis-1/3"} text-center md:text-left`}
+          containerClassName={`${
+            carousel ? "" : "flex basis-1/3"
+          } text-center md:text-left`}
         />
 
         {carousel && (
@@ -133,7 +135,7 @@ export const Partners = ({
                       <PrismicNextImage
                         field={logo.logo_image}
                         className="max-h-full w-full object-contain"
-                        alt=""
+                        fallbackAlt="Partner logo"
                       />
                     </PrismicNextLink>
                   ))}
@@ -158,7 +160,7 @@ export const Partners = ({
                   <PrismicNextImage
                     field={logo.logo_image}
                     className="max-h-full w-full object-contain"
-                    alt=""
+                    fallbackAlt="Partner logo"
                   />
                 </PrismicNextLink>
               ))}
