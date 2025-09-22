@@ -30,11 +30,22 @@ export async function generateMetadata({
     .getByUID("campaign_page", uid, { lang })
     .catch(() => notFound());
 
+  const absoluteUrl = buildAbsoluteUrl(uid, lang);
+  const ogLocale = lang.includes("-") ? lang.replace("-", "_") : lang;
+
   return {
     title: page.data.meta_title || "Canadian Women in Sports",
     description: page.data.meta_description,
+    alternates: {
+      canonical: absoluteUrl,
+    },
     openGraph: {
+      url: absoluteUrl,
+      siteName: "Canadian Women in Sports",
       title: page.data.meta_title || undefined,
+      description: page.data.meta_description || undefined,
+      type: "website",
+      locale: ogLocale,
       images: [
         {
           url: page.data.meta_image.url || "",
