@@ -201,12 +201,17 @@ const LEGACY_SOURCES: Set<string> = new Set<string>([
 const EN_CAMPAIGN_PATH = "/en-ca/campaign/keepgirlsplaying";
 const EN_VANITY_HOSTS = new Set(["keepgirlsplaying.ca", "www.keepgirlsplaying.ca"]);
 
-// ---- Vanity campaign mapping (FR) ----
-const FR_CAMPAIGN_PATH =
-  "/fr-ca/campaign/maintenant-continuons-a-faire-jouer-les-filles";
+ */
 const FR_VANITY_HOSTS = new Set([
+  // plain (legacy/backup)
   "danslequipedesfilles.ca",
   "www.danslequipedesfilles.ca",
+  // accented IDN
+  "dansléquipedesfilles.ca",
+  "www.dansléquipedesfilles.ca",
+  // punycode (actual Host header on the wire)
+  "xn--danslquipedesfilles-0qb.ca",
+  "www.xn--danslquipedesfilles-0qb.ca",
 ]);
 
 // ---- Common source host ----
