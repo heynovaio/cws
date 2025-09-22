@@ -9,6 +9,8 @@ import React from "react";
 import { Layout } from "@/components";
 import { getLocales } from "@/utils";
 import { GeneralHero } from "@/components/Heros/GeneralHero";
+import { Sharebar } from "@/components/Sharebar";
+import { buildAbsoluteUrl } from "@/utils";
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -28,11 +30,22 @@ export async function generateMetadata({
     .getByUID("campaign_page", uid, { lang })
     .catch(() => notFound());
 
+  const absoluteUrl = buildAbsoluteUrl(uid, lang);
+  const ogLocale = lang.includes("-") ? lang.replace("-", "_") : lang;
+
   return {
     title: page.data.meta_title || "Canadian Women in Sports",
     description: page.data.meta_description,
+    alternates: {
+      canonical: absoluteUrl,
+    },
     openGraph: {
+      url: absoluteUrl,
+      siteName: "Canadian Women in Sports",
       title: page.data.meta_title || undefined,
+      description: page.data.meta_description || undefined,
+      type: "website",
+      locale: ogLocale,
       images: [
         {
           url: page.data.meta_image.url || "",
@@ -64,6 +77,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     ? (contactInfoSlice.primary as { section_id: string }).section_id
     : undefined;
 
+  const absoluteUrl = buildAbsoluteUrl(uid, lang);
+
   return (
     <Layout
       locales={locales}
@@ -82,6 +97,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         components={components}
         context={{ lang }}
       />
+      <Sharebar absoluteUrl={absoluteUrl} />
     </Layout>
   );
 }
