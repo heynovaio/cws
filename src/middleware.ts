@@ -201,7 +201,6 @@ const LEGACY_SOURCES: Set<string> = new Set<string>([
 const EN_CAMPAIGN_PATH = "/en-ca/campaign/keepgirlsplaying";
 const EN_VANITY_HOSTS = new Set(["keepgirlsplaying.ca", "www.keepgirlsplaying.ca"]);
 
- */
 const FR_VANITY_HOSTS = new Set([
   // plain (legacy/backup)
   "danslequipedesfilles.ca",
