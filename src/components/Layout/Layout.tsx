@@ -38,6 +38,11 @@ export const Layout = ({
   include_newsletter_sign_up_banner,
   isCampaignPage = false,
 }: LayoutProps) => {
+  const isFrench = (lang || "en-ca").toLowerCase().startsWith("fr");
+  const campaignHomeHref = isFrench
+    ? "https://womenandsport.ca/fr-ca/"
+    : "https://womenandsport.ca/";
+
   return (
     <div>
       <a href="#main-content" className="skip-to-content-link">
@@ -65,8 +70,8 @@ export const Layout = ({
           <PrismicNextLink
             className="flex justify-center w-full pt-4 xs:mt-10 md:mt-0"
             aria-label="homepage link"
-            prefetch={true}
-            href="/"
+            prefetch={false}
+            href={campaignHomeHref}
           >
             <PrismicNextImage
               field={global.site_logo}

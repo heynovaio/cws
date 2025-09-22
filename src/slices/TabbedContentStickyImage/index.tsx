@@ -131,7 +131,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                               field={tab.section_image}
                               alt=""
                             />
-                            <div className="absolute bottom-2 right-2 w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition z-50">
+                            <div className="absolute bottom-2 left-2 w-20 h-20 rounded-full bg-white/50 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/80 transition z-50">
                               <button
                                 onClick={() => toggleAudio(idx)}
                                 type="button"
@@ -228,7 +228,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                           </div>
                         )}
                         {jotformUrl && (
-                          <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center xs:mt-10 md:mt-0">
+                          <div className="bg-white w-full text-midnight rounded-none border mb-4 border-white flex justify-center items-center xs:mt-10 md:mt-0">
                             <JotformEmbed url={jotformUrl} />
                           </div>
                         )}
@@ -249,7 +249,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                 alt=""
                                 className="max-h-[calc(100vh-180px)] w-auto h-auto object-contain"
                               />
-                              <div className="z-50 absolute bottom-2 right-2 w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/60 transition">
+                              <div className="z-50 absolute bottom-2 left-2 w-32 h-32 rounded-full bg-white/50 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/80 transition">
                                 <button
                                   onClick={() => toggleAudio(idx)}
                                   type="button"

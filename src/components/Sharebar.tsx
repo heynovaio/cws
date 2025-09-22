@@ -198,7 +198,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
             flex items-center
             rounded-full bg-white/90 shadow-lg
             text-sm font-medium text-gray-800
-            border border-gray-200
+            border border-neon-violet
             backdrop-blur-md
             overflow-hidden
           "
@@ -236,6 +236,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
               text-white
               transition-colors duration-300
               select-none
+              text-[1.2rem]
             "
           >
             {t.share}
@@ -249,7 +250,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
               className="px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded-full"
               onClick={handlePopupShare("linkedin", linkedinHref)}
             >
-              <FaLinkedin className={iconBaseClasses} size={24} />
+              <FaLinkedin className={iconBaseClasses} size={30} />
             </a>
 
             {/* Facebook */}
@@ -259,7 +260,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
               className="px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded-full"
               onClick={handlePopupShare("facebook", facebookHref)}
             >
-              <FaFacebook className={iconBaseClasses} size={24} />
+              <FaFacebook className={iconBaseClasses} size={30} />
             </a>
 
             {/* Native Web Share shown only when supported */}
@@ -273,7 +274,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
                   onWebShare();
                 }}
               >
-                <FaShareSquare className={iconBaseClasses} size={24} />
+                <FaShareSquare className={iconBaseClasses} size={30} />
               </a>
             )}
           </div>
