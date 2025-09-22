@@ -60,6 +60,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
       id="pillars"
     >
       <Container>
+        {/* Mobile: Disclosure list */}
         <div className="md:hidden flex flex-col gap-4">
           {sections.map((tab, idx) => {
             const jotformUrl = tab.jotform_url;
@@ -77,7 +78,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                     }}
                   >
                     <DisclosureButton
-                      className={`w-full flex items-center justify-between px-4 py-2 text-left font-semibold ${
+                      className={`w-full flex items-center justify-between px-4 py-2 text-left font-semibold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#3DD2FF] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
                         open ? "bg-[#6D00FF] text-white" : "text-white"
                       }`}
                     >
@@ -95,6 +96,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                         className={`transition-transform duration-300 ${
                           open ? "rotate-180" : "rotate-0"
                         }`}
+                        aria-hidden="true"
                       />
                     </DisclosureButton>
                     <DisclosurePanel
@@ -127,24 +129,39 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
 
                         {tab.section_image?.url && (
                           <div className="relative">
-                            <PrismicNextImage
-                              field={tab.section_image}
-                              alt=""
-                            />
-                            <div className="absolute bottom-2 left-2 w-20 h-20 rounded-full bg-white/50 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/80 transition z-50">
+                            <PrismicNextImage field={tab.section_image} alt="" />
+                            {/* Accessible audio play/pause control (mobile) */}
+                            <div
+                              className="
+                                absolute bottom-2 left-2 w-20 h-20 rounded-full
+                                bg-white/50 backdrop-blur-sm border-2 border-[#DD0748]
+                                flex items-center justify-center hover:bg-white/80 transition z-50
+                                focus-within:ring-4 focus-within:ring-[#DD0748]
+                                focus-within:ring-offset-2 focus-within:ring-offset-white
+                              "
+                            >
                               <button
                                 onClick={() => toggleAudio(idx)}
                                 type="button"
+                                className="inline-flex items-center justify-center rounded-full focus:outline-none"
+                                aria-pressed={playingIndex === idx}
+                                aria-label={
+                                  playingIndex === idx
+                                    ? "Pause audio clip"
+                                    : "Play audio clip"
+                                }
+                                aria-controls={`audio-mobile-${idx}`}
                               >
                                 {playingIndex === idx ? (
-                                  <FaPause size="32" color="#DD0748" />
+                                  <FaPause aria-hidden="true" size="32" color="#DD0748" />
                                 ) : (
-                                  <FaPlay size="32" color="#DD0748" />
+                                  <FaPlay aria-hidden="true" size="32" color="#DD0748" />
                                 )}
                               </button>
                             </div>
                             {audioUrl && (
                               <audio
+                                id={`audio-mobile-${idx}`}
                                 ref={(el) => {
                                   audioRefs.current[idx] = el;
                                 }}
@@ -163,9 +180,13 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
           })}
         </div>
 
+        {/* Desktop: Tabbed content */}
         <div className="hidden md:block">
           <TabGroup>
-            <TabList className="flex mb-4 gap-4 sticky top-0 z-50 w-full">
+            <TabList
+              aria-label="Sections"
+              className="flex mb-4 gap-4 sticky top-0 z-50 w-full"
+            >
               {sections.map((tab, idx) => (
                 <Tab
                   key={idx}
@@ -176,11 +197,13 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                     })
                   }
                   className={({ selected }) =>
-                    `w-full px-12 py-2 rounded-[12px] focus:outline-none ${
+                    [
+                      "w-full px-12 py-2 rounded-[12px]",
+                      "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#3DD2FF] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
                       selected
                         ? "bg-[#6D00FF] text-white font-bold"
-                        : "bg-midnight border border-white text-white hover:bg-dark-purple-background"
-                    }`
+                        : "bg-midnight border border-white text-white hover:bg-dark-purple-background",
+                    ].join(" ")
                   }
                 >
                   <div className="text-[1.25rem] font-[600]">
@@ -249,20 +272,38 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                 alt=""
                                 className="max-h-[calc(100vh-180px)] w-auto h-auto object-contain"
                               />
-                              <div className="z-50 absolute bottom-2 left-2 w-32 h-32 rounded-full bg-white/50 backdrop-blur-sm border-2 border-[#DD0748] flex items-center justify-center hover:bg-white/80 transition">
+                              {/* Accessible audio play/pause control (desktop) */}
+                              <div
+                                className="
+                                  z-50 absolute bottom-2 left-2 w-32 h-32 rounded-full
+                                  bg-white/50 backdrop-blur-sm border-2 border-[#DD0748]
+                                  flex items-center justify-center hover:bg-white/80 transition
+                                  focus-within:ring-4 focus-within:ring-[#DD0748]
+                                  focus-within:ring-offset-2 focus-within:ring-offset-white
+                                "
+                              >
                                 <button
                                   onClick={() => toggleAudio(idx)}
                                   type="button"
+                                  className="inline-flex items-center justify-center rounded-full focus:outline-none"
+                                  aria-pressed={playingIndex === idx}
+                                  aria-label={
+                                    playingIndex === idx
+                                      ? "Pause audio clip"
+                                      : "Play audio clip"
+                                  }
+                                  aria-controls={`audio-desktop-${idx}`}
                                 >
                                   {playingIndex === idx ? (
-                                    <FaPause size="50" color="#DD0748" />
+                                    <FaPause aria-hidden="true" size="50" color="#DD0748" />
                                   ) : (
-                                    <FaPlay size="50" color="#DD0748" />
+                                    <FaPlay aria-hidden="true" size="50" color="#DD0748" />
                                   )}
                                 </button>
                               </div>
                               {audioUrl && (
                                 <audio
+                                  id={`audio-desktop-${idx}`}
                                   ref={(el) => {
                                     audioRefs.current[idx] = el;
                                   }}
