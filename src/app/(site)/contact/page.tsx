@@ -46,7 +46,7 @@ export default async function Page() {
   ]);
   if (!global || !menus) notFound();
 
-  const locales = await getLocales(page, client as any);
+  const locales = await getLocales(page, client);
 
   return (
     <Layout

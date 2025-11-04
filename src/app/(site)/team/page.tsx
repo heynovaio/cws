@@ -1,4 +1,3 @@
-// app/(site)/team/page.tsx
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
@@ -45,7 +44,7 @@ export default async function Page() {
   ]);
   if (!global || !menus) notFound();
 
-  const locales = await getLocales(page, client as any);
+  const locales = await getLocales(page, client);
 
   return (
     <Layout

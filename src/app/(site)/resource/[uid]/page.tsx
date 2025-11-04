@@ -1,4 +1,3 @@
-// app/(site)/resource/[uid]/page.tsx
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
@@ -13,6 +12,7 @@ import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
 import type { BreadcrumbLink } from "@/components/Breadcrumb";
 import { Loading } from "@/components/Loading/Loading";
 import { getServerLocale } from "@/utils/serverLocale";
+import { ResourceCategoryDocument } from "../../../../../prismicio-types";
 
 type Params = { uid: string };
 
@@ -57,7 +57,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   ]);
   if (!global || !menus) notFound();
 
-  const locales = await getLocales(page, client as any);
+  const locales = await getLocales(page, client);
   const resourceTags = page.tags || [];
 
   const pageTypeLabel =
@@ -69,8 +69,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       ? "Voies de soutien"
       : "Support Pathways";
 
-  let categoryDoc: any = null;
-  const category = (page.data as any).category;
+  let categoryDoc: ResourceCategoryDocument | null = null;
+  const category = (page.data).category;
   if (category && category.link_type === "Document" && category.uid) {
     try {
       categoryDoc = await client.getByUID("resource_category", category.uid, { lang });
@@ -87,8 +87,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           label: categoryLabel,
           href:
             page.data.category && "id" in page.data.category
-              ? (page.data.category as any).id &&
-                `/search?filter=resource_page&resource_categories=${(page.data.category as any).id}`
+              ? (page.data.category).id &&
+                `/search?filter=resource_page&resource_categories=${(page.data.category).id}`
               : undefined,
         }
       : null,

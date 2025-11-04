@@ -1,25 +1,28 @@
-// src/middleware.ts
 import { NextRequest, NextResponse } from "next/server";
 import { pairedDomainsFor, localeForHost, normalizeHost } from "@/utils/localeHosts";
 
-/** Locale constants */
 const EN = "en-ca";
 const FR = "fr-ca";
 const LOCALE_PREFIXES = new Set([EN, FR]);
 
-/** Careers <-> Carrières segment swap (boundary-safe) */
 function translateCareers(pathname: string, locale: typeof EN | typeof FR) {
   if (locale === FR) return pathname.replace(/(^|\/)careers(\/|$)/, "$1carrieres$2");
   if (locale === EN) return pathname.replace(/(^|\/)carrieres(\/|$)/, "$1careers$2");
   return pathname;
 }
 
-/** Trim trailing slash except for "/" */
 function strip(pathname: string) {
   return pathname !== "/" ? pathname.replace(/\/+$/, "") : pathname;
 }
 
-/** ---------- Legacy sources list (let next.config redirects/rewrites own these) ---------- */
+function toHostNoPort(h: string) {
+  const idx = h.indexOf(":");
+  return idx === -1 ? h : h.slice(0, idx);
+}
+function protocolForHost(h: string) {
+  return h.includes("localhost") ? "http" : "https";
+}
+
 const LEGACY_SOURCES: Set<string> = new Set([
   "/about/contact-us",
   "/support-us",
@@ -210,28 +213,21 @@ const LEGACY_SOURCES: Set<string> = new Set([
   "/open-call-dei-committee-members",
 ]);
 
-/** ---------- Campaign vanity mapping ---------- */
 const SOURCE_HOSTS = new Set(["womenandsport.ca", "www.womenandsport.ca"]);
 
-// Upstream paths had locale prefixes; with domain-based locales we route to clean internal paths.
 const EN_CAMPAIGN_PATH = "/campaign/keepgirlsplaying";
 const FR_CAMPAIGN_PATH = "/campaign/maintenant-continuons-a-faire-jouer-les-filles";
 
-// Vanity domains
 const EN_VANITY_HOSTS = new Set(["keepgirlsplaying.ca", "www.keepgirlsplaying.ca"]);
 const FR_VANITY_HOSTS = new Set([
-  // plain (legacy)
   "danslequipedesfilles.ca",
   "www.danslequipedesfilles.ca",
-  // accented IDN
   "dansléquipedesfilles.ca",
   "www.dansléquipedesfilles.ca",
-  // punycode (actual Host header)
   "xn--danslquipedesfilles-fzb.ca",
   "www.xn--danslquipedesfilles-fzb.ca",
 ]);
 
-// Fill default UTMs only if missing, preserving any incoming values
 function ensureUtmDefaults(
   sp: URLSearchParams,
   defaults: { source: string; medium: string; campaign: string; content: string }
@@ -245,24 +241,21 @@ function ensureUtmDefaults(
 export function middleware(request: NextRequest) {
   const url = request.nextUrl;
   const hostHeader = (request.headers.get("host") || "").toLowerCase();
-  const host = normalizeHost(hostHeader); // keeps port if present
+  const host = normalizeHost(hostHeader);
+  const hostNoPort = toHostNoPort(host);
   const pathname = strip(url.pathname);
 
-  // Skip middleware for proxied files
   if (pathname.startsWith("/files/")) return NextResponse.next();
 
   const { enHost, frHost } = pairedDomainsFor(host);
-  const targetLocale = localeForHost(host); // "en-ca" or "fr-ca"
+  const targetLocale = localeForHost(host);
 
-  /** ---------------- Campaign vanity (host-aware) ---------------- */
-
-  // 1) womenandsport.ca → vanity domains (long campaign paths)
-  if (SOURCE_HOSTS.has(host)) {
+  if (SOURCE_HOSTS.has(hostNoPort)) {
     if (pathname === `/en-ca${EN_CAMPAIGN_PATH}` || pathname === EN_CAMPAIGN_PATH) {
       const target = new URL(`https://keepgirlsplaying.ca/`);
       const merged = new URLSearchParams(url.searchParams);
       ensureUtmDefaults(merged, {
-        source: host,
+        source: hostNoPort,
         medium: "redirect",
         campaign: "keep_girls_playing",
         content: "campaign_path_en",
@@ -275,7 +268,7 @@ export function middleware(request: NextRequest) {
       const target = new URL(`https://dansléquipedesfilles.ca/`);
       const merged = new URLSearchParams(url.searchParams);
       ensureUtmDefaults(merged, {
-        source: host,
+        source: hostNoPort,
         medium: "redirect",
         campaign: "dans_lequipe_des_filles",
         content: "campaign_path_fr",
@@ -286,33 +279,26 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 2) Vanity roots → rewrite to localized campaign path (keep vanity host)
-  const onEnVanity = EN_VANITY_HOSTS.has(host);
-  const onFrVanity = FR_VANITY_HOSTS.has(host);
+  const onEnVanity = EN_VANITY_HOSTS.has(hostNoPort);
+  const onFrVanity = FR_VANITY_HOSTS.has(hostNoPort);
   if (onEnVanity || onFrVanity) {
     if (pathname === "/" || pathname === "/index.html") {
       const rewriteUrl = request.nextUrl.clone();
-      // Internal routes without locale prefix (domain decides locale)
       rewriteUrl.pathname = onEnVanity ? EN_CAMPAIGN_PATH : FR_CAMPAIGN_PATH;
       return NextResponse.rewrite(rewriteUrl);
     }
-    // Any other path on vanity → bounce to main site, preserve path/query/hash
     const target = request.nextUrl.clone();
     target.protocol = "https:";
     target.host = "womenandsport.ca";
     return NextResponse.redirect(target, 308);
   }
 
-  /** ---------------- Legacy sources ----------------
-   * Let next.config.js `redirects()`/`rewrites()` handle these. Just no-op here.
-   */
   if (LEGACY_SOURCES.has(pathname)) {
     return NextResponse.next();
   }
 
-  /** ---------------- Strip legacy locale prefixes ---------------- */
   const segs = pathname.split("/").filter(Boolean);
-  const hasLegacyPrefix = segs.length > 0 && LOCALE_PREFIXES.has(segs[0] as any);
+  const hasLegacyPrefix = segs.length > 0 && LOCALE_PREFIXES.has(segs[0]);
 
   if (hasLegacyPrefix) {
     const prefixedLocale = segs[0] as typeof EN | typeof FR;
@@ -320,33 +306,28 @@ export function middleware(request: NextRequest) {
     let clean = "/" + rest.join("/");
     if (clean === "/") clean = "/";
 
-    // Respect the *prefixed* locale when deciding careers/carrières on the new path
     clean = translateCareers(clean, prefixedLocale);
 
-    // Bounce to the correct domain for that locale
     const desiredDomain = prefixedLocale === FR ? frHost : enHost;
-    const redirectUrl = new URL(clean, `https://${desiredDomain}`);
+    const desiredProto = protocolForHost(desiredDomain);
+    const redirectUrl = new URL(`${desiredProto}://${desiredDomain}${clean}`);
     redirectUrl.search = url.search;
     redirectUrl.hash = url.hash;
     return NextResponse.redirect(redirectUrl, 301);
   }
 
-  /** ---------------- Domain-based careers/carrières normalization ---------------- */
   const adjusted = translateCareers(pathname, targetLocale);
   if (adjusted !== pathname) {
-    // same host, just fix the path; cloning preserves dev port
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = adjusted;
     return NextResponse.redirect(redirectUrl, 301);
   }
 
-  /** ---------------- Set cookie for server-side usage ---------------- */
   const res = NextResponse.next();
   res.cookies.set("NEXT_LOCALE", targetLocale, { path: "/" });
   return res;
 }
 
-/** Exclude APIs, assets, Next internals, auth, files, slice simulator, static files */
 export const config = {
   matcher: ["/((?!api|assets|files/.*|slice-simulator|auth/.*|.*\\..*|_next).*)"],
 };

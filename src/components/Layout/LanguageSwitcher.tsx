@@ -1,4 +1,3 @@
-// components/LanguageSwitcher.tsx
 "use client";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
@@ -8,8 +7,9 @@ import { translateCareersSegment, stripLeadingLocalePrefix } from "@/utils/i18nD
 
 type Lang = "en-ca" | "fr-ca";
 
-function normalizePathFromPrismicUrl(u: string | undefined): string | null {
-  if (!u) return null;
+// Accept null and return undefined to play nice with ?? chains
+function normalizePathFromPrismicUrl(u?: string | null): string | undefined {
+  if (!u) return undefined;
   try {
     // Works for absolute (https://...) or relative (/fr-ca/about) URLs
     const url = u.startsWith("http") ? new URL(u) : new URL(u, "http://local");
@@ -21,8 +21,8 @@ function normalizePathFromPrismicUrl(u: string | undefined): string | null {
 }
 
 export default function LanguageSwitcher({
-  lang,              // <-- server-provided current lang ("en-ca" | "fr-ca")
-  locales,           // <-- Prismic alt-language docs (array)
+  lang,              // "en-ca" | "fr-ca" from server
+  locales,           // Prismic alt-language docs
   classname,
 }: {
   lang: Lang;
@@ -34,26 +34,37 @@ export default function LanguageSwitcher({
   const searchParams = useSearchParams();
 
   const buildHref = (toLocale: Lang): string => {
-    // 1) Try to use Prismic's alt-language URL for the target locale
+    // 1) Prefer Prismic’s alt URL for the target locale
     const targetDoc = locales.find((d) => d.lang === toLocale);
-    let targetPath =
-      normalizePathFromPrismicUrl(targetDoc?.url) ??
-      // Fallback: use current path (and translate careers segment just in case)
-      translateCareersSegment(stripLeadingLocalePrefix(pathname), toLocale);
+    const prismicPath = normalizePathFromPrismicUrl(targetDoc?.url);
 
-    // 2) Build off current location so protocol + PORT (e.g., :3000) are preserved
+    // 2) Fallback: use current path, translated for careers/carrières,
+    //    and with any leading /en-ca or /fr-ca stripped.
+    const fallbackPath = translateCareersSegment(
+      stripLeadingLocalePrefix(pathname),
+      toLocale
+    );
+
+    const targetPath = prismicPath ?? fallbackPath;
+
+    // 3) Build a full URL off current location so protocol + PORT are preserved
     const current =
       typeof window !== "undefined"
         ? new URL(window.location.href)
         : new URL("http://localhost:3000/");
 
     const hostname = current.hostname; // e.g., 'localhost' or 'fr.localhost' or 'www.womensports.ca'
-    // Pairing logic: if current is FR (fr.*), EN is base; else FR is fr.<host>
-    const enHost = hostname.startsWith("fr.") ? hostname.slice(3) : hostname;
-    const frHost = hostname.startsWith("fr.") ? hostname : `fr.${hostname}`;
+    const isFr = hostname.startsWith("fr.");
+    const enHost = isFr ? hostname.slice(3) : hostname;
+    const frHost = isFr ? hostname : `fr.${hostname}`;
 
     const target = new URL(current.href);
+    // Keep the dev port if present
+    const port = current.port;
+
     target.hostname = toLocale === "fr-ca" ? frHost : enHost;
+    if (port) target.port = port; // explicitly preserve :3000 etc. in dev
+
     target.pathname = targetPath || "/";
     target.search = searchParams?.toString() ? `?${searchParams.toString()}` : "";
 

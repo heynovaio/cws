@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
 import * as prismic from "@prismicio/client";
-import { Content } from "@prismicio/client"; 
+import { Content } from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
@@ -10,6 +10,8 @@ import { Layout } from "@/components";
 import { getLocales } from "@/utils";
 import { GeneralHero } from "@/components/Heros/GeneralHero";
 import { getServerLocale } from "@/utils/serverLocale";
+import { Sharebar } from "@/components/Sharebar";
+import { buildAbsoluteUrl } from "@/utils/buildAbsoluteUrl";
 
 type Params = { uid: string };
 
@@ -19,7 +21,11 @@ function isContactInfoSlice(
   return slice.slice_type === "contact_info";
 }
 
-export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
   const { uid } = await params;
   const lang = await getServerLocale();
   const client = createClient();
@@ -27,11 +33,25 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const page = await client.getByUID("campaign_page", uid, { lang }).catch(() => null);
   if (!page) return {};
 
+  const absoluteUrl = buildAbsoluteUrl(uid, lang);
+  const ogLocale = lang.includes("-") ? (lang.replace("-", "_")) : lang; // en_CA / fr_CA
+
   return {
-    title: page.data.meta_title || prismic.asText(page.data.title) || "Canadian Women in Sports",
+    title:
+      page.data.meta_title ||
+      prismic.asText(page.data.title) ||
+      "Canadian Women in Sports",
     description: page.data.meta_description || undefined,
+    alternates: {
+      canonical: absoluteUrl,
+    },
     openGraph: {
+      url: absoluteUrl,
+      siteName: "Canadian Women in Sports",
       title: page.data.meta_title || undefined,
+      description: page.data.meta_description || undefined,
+      type: "website",
+      locale: ogLocale,
       images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
     },
   };
@@ -52,13 +72,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   ]);
   if (!global || !menus) notFound();
 
-  const locales = await getLocales(page, client as any);
+  const locales = await getLocales(page, client);
 
-  console.log("page data slices:", page.data.slices);
-  const contactInfoSlice = page.data.slices.find(isContactInfoSlice);
-  
-  const scrollID: string =
-    contactInfoSlice?.primary.section_id ?? "";
+  const contactInfoSlice = page.data.slices.find(isContactInfoSlice) as Content.ContactInfoSlice | undefined;
+  const scrollID: string | undefined = contactInfoSlice?.primary?.section_id || undefined;
+
+  const absoluteUrl = buildAbsoluteUrl(uid, lang);
 
   return (
     <Layout
@@ -72,6 +91,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     >
       <GeneralHero data={page.data} shortHero={false} scrollID={scrollID} />
       <SliceZone slices={page.data.slices} components={components} context={{ lang }} />
+      <Sharebar absoluteUrl={absoluteUrl} />
     </Layout>
   );
 }

@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   ]);
   if (!global || !menus) notFound();
 
-  const locales = await getLocales(page, client as any);
+  const locales = await getLocales(page, client);
 
   return (
     <Layout

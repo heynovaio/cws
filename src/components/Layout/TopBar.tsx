@@ -9,7 +9,7 @@ interface TopBarProps {
   global: GlobalsDocumentData | undefined;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ text, locales, global }) => {
+export const TopBar: React.FC<TopBarProps> = ({ text, locales }) => {
   return (
     <div className="bg-midnight bg-gradient-dark w-full text-center px-2 md:px-0 py-2 flex-col">
       <PrismicRichText

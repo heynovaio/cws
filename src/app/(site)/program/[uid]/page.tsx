@@ -12,6 +12,7 @@ import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
 import type { BreadcrumbLink } from "@/components/Breadcrumb";
 import { Loading } from "@/components/Loading/Loading";
 import { getServerLocale } from "@/utils/serverLocale";
+import { ProgramCategoryDocument } from "../../../../../prismicio-types";
 
 type Params = { uid: string };
 
@@ -56,7 +57,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   ]);
   if (!global || !menus) notFound();
 
-  const locales = await getLocales(page, client as any);
+  const locales = await getLocales(page, client);
   const pageTags = page.tags || [];
 
   const pageTypeLabel =
@@ -68,12 +69,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       ? "Équité de genre en action"
       : "Gender Equity in Action";
 
-  let categoryDoc: any = null;
+  let categoryDoc: ProgramCategoryDocument | null = null;
   const category = page.data.category;
 
-  if (category && (category as any).link_type === "Document" && (category as any).uid) {
+  if (category && (category).link_type === "Document" && (category).uid) {
     try {
-      categoryDoc = await client.getByUID("program_category", (category as any).uid, { lang });
+      categoryDoc = await client.getByUID("program_category", (category).uid, { lang });
     } catch {
       console.warn("Not Found:", category);
     }
