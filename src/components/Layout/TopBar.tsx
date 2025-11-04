@@ -24,8 +24,8 @@ export const TopBar: React.FC<TopBarProps> = ({ text, locales, global }) => {
       {locales && (
         <div className="absolute top-0 right-4 z-[60] ">
           <LanguageSwitcher
+            lang={locales[0]?.lang as "en-ca" | "fr-ca"}
             locales={locales}
-            global={global}
             classname="hidden md:block mt-2"
           />
         </div>
