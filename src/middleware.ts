@@ -1,3 +1,4 @@
+// src/middleware.ts
 import { NextRequest, NextResponse } from "next/server";
 import { pairedDomainsFor, localeForHost, normalizeHost } from "@/utils/localeHosts";
 
@@ -6,10 +7,10 @@ const EN = "en-ca";
 const FR = "fr-ca";
 const LOCALE_PREFIXES = new Set([EN, FR]);
 
-/** Careers <-> Carrières segment swap */
+/** Careers <-> Carrières segment swap (boundary-safe) */
 function translateCareers(pathname: string, locale: typeof EN | typeof FR) {
-  if (locale === FR && pathname.includes("/careers")) return pathname.replace("/careers", "/carrieres");
-  if (locale === EN && pathname.includes("/carrieres")) return pathname.replace("/carrieres", "/careers");
+  if (locale === FR) return pathname.replace(/(^|\/)careers(\/|$)/, "$1carrieres$2");
+  if (locale === EN) return pathname.replace(/(^|\/)carrieres(\/|$)/, "$1careers$2");
   return pathname;
 }
 
@@ -18,7 +19,7 @@ function strip(pathname: string) {
   return pathname !== "/" ? pathname.replace(/\/+$/, "") : pathname;
 }
 
-/** ---------- Legacy sources list (let next.config handle these) ---------- */
+/** ---------- Legacy sources list (let next.config redirects/rewrites own these) ---------- */
 const LEGACY_SOURCES: Set<string> = new Set([
   "/about/contact-us",
   "/support-us",
@@ -210,9 +211,9 @@ const LEGACY_SOURCES: Set<string> = new Set([
 ]);
 
 /** ---------- Campaign vanity mapping ---------- */
-const SOURCE_HOST = "womenandsport.ca";
+const SOURCE_HOSTS = new Set(["womenandsport.ca", "www.womenandsport.ca"]);
 
-// Upstream paths had locale prefixes; with domain-based locales we rewrite to clean paths.
+// Upstream paths had locale prefixes; with domain-based locales we route to clean internal paths.
 const EN_CAMPAIGN_PATH = "/campaign/keepgirlsplaying";
 const FR_CAMPAIGN_PATH = "/campaign/maintenant-continuons-a-faire-jouer-les-filles";
 
@@ -256,12 +257,12 @@ export function middleware(request: NextRequest) {
   /** ---------------- Campaign vanity (host-aware) ---------------- */
 
   // 1) womenandsport.ca → vanity domains (long campaign paths)
-  if (host === SOURCE_HOST) {
+  if (SOURCE_HOSTS.has(host)) {
     if (pathname === `/en-ca${EN_CAMPAIGN_PATH}` || pathname === EN_CAMPAIGN_PATH) {
       const target = new URL(`https://keepgirlsplaying.ca/`);
       const merged = new URLSearchParams(url.searchParams);
       ensureUtmDefaults(merged, {
-        source: SOURCE_HOST,
+        source: host,
         medium: "redirect",
         campaign: "keep_girls_playing",
         content: "campaign_path_en",
@@ -274,7 +275,7 @@ export function middleware(request: NextRequest) {
       const target = new URL(`https://dansléquipedesfilles.ca/`);
       const merged = new URLSearchParams(url.searchParams);
       ensureUtmDefaults(merged, {
-        source: SOURCE_HOST,
+        source: host,
         medium: "redirect",
         campaign: "dans_lequipe_des_filles",
         content: "campaign_path_fr",
@@ -291,14 +292,14 @@ export function middleware(request: NextRequest) {
   if (onEnVanity || onFrVanity) {
     if (pathname === "/" || pathname === "/index.html") {
       const rewriteUrl = request.nextUrl.clone();
-      // These are internal routes without locale prefix (domain decides locale)
+      // Internal routes without locale prefix (domain decides locale)
       rewriteUrl.pathname = onEnVanity ? EN_CAMPAIGN_PATH : FR_CAMPAIGN_PATH;
       return NextResponse.rewrite(rewriteUrl);
     }
     // Any other path on vanity → bounce to main site, preserve path/query/hash
     const target = request.nextUrl.clone();
     target.protocol = "https:";
-    target.host = SOURCE_HOST;
+    target.host = "womenandsport.ca";
     return NextResponse.redirect(target, 308);
   }
 
@@ -333,7 +334,7 @@ export function middleware(request: NextRequest) {
   /** ---------------- Domain-based careers/carrières normalization ---------------- */
   const adjusted = translateCareers(pathname, targetLocale);
   if (adjusted !== pathname) {
-    // same host, just fix the path
+    // same host, just fix the path; cloning preserves dev port
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = adjusted;
     return NextResponse.redirect(redirectUrl, 301);

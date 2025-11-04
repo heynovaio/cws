@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
 
 const STRINGS = {
   "en-ca": {
@@ -20,21 +21,43 @@ const STRINGS = {
   },
 } as const;
 
-const SUPPORTED = new Set<keyof typeof STRINGS>(["en-ca", "fr-ca"]);
+type Lang = keyof typeof STRINGS;
+
+
+function getClientLocale(): Lang {
+  if (typeof window === "undefined") return "en-ca";
+  const host = window.location.hostname.toLowerCase();
+  return host.startsWith("fr.") ? "fr-ca" : "en-ca";
+}
 
 export default function NotFound() {
-  const pathname = usePathname() || "/";
-  const first = (pathname.split("/").filter(Boolean)[0] ?? "en-ca") as keyof typeof STRINGS;
-  const lang = SUPPORTED.has(first) ? first : "en-ca";
+  const [lang, setLang] = useState<Lang>("en-ca");
+
+  useEffect(() => {
+    setLang(getClientLocale());
+  }, []);
+
   const t = STRINGS[lang];
 
   return (
     <div className="mx-auto max-w-2xl py-20 text-center">
       <h1 className="text-3xl font-bold mb-4">{t.title}</h1>
       <p className="text-lg mb-6">{t.desc}</p>
+
       <div className="flex flex-col items-center md:flex-row gap-4 justify-center">
-        <Link href={`/${lang}`} className="btn btn-primary w-fit">{t.home}</Link>
-        <Link href={`/${lang}/search`} className="btn btn-primary w-fit">{t.explore}</Link>
+        <Link
+          href="/"
+          className="btn btn-primary w-fit"
+        >
+          {t.home}
+        </Link>
+
+        <Link
+          href="/search"
+          className="btn btn-primary w-fit"
+        >
+          {t.explore}
+        </Link>
       </div>
     </div>
   );
