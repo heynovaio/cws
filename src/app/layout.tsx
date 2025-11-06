@@ -4,8 +4,7 @@ import { repositoryName } from "@/prismicio";
 import { Outfit } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
-import { getServerLocale } from "@/utils/serverLocale";
-
+import { getServerLocale, toHtmlLang } from "@/utils/serverLocale";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -16,10 +15,11 @@ const outfit = Outfit({
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const cookieLocale = await getServerLocale(); 
+  const appLocale = await getServerLocale();      // "en-ca" | "fr-ca"
+  const htmlLang = toHtmlLang(appLocale);         // "en-CA" | "fr-CA"
 
   return (
-    <html lang={cookieLocale} className={`${outfit.variable} font-sans`}>
+    <html lang={htmlLang} className={`${outfit.variable} font-sans`}>
       <head />
       <body>
         <GoogleTagManager gtmId="GTM-PN5JLZD" />
