@@ -1,4 +1,3 @@
-// app/(site)/layout.tsx
 import { PrismicPreview } from "@prismicio/next";
 import { repositoryName } from "@/prismicio";
 import { Outfit } from "next/font/google";
@@ -15,8 +14,8 @@ const outfit = Outfit({
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const appLocale = await getServerLocale();      // "en-ca" | "fr-ca"
-  const htmlLang = toHtmlLang(appLocale);         // "en-CA" | "fr-CA"
+  const appLocale = await getServerLocale();   
+  const htmlLang = toHtmlLang(appLocale);        
 
   return (
     <html lang={htmlLang} className={`${outfit.variable} font-sans`}>
