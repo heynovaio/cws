@@ -6,8 +6,8 @@ function makeRedirects(pairs) {
   for (const [src, dest] of pairs) {
     const srcNo = src.replace(/\/+$/, "");
     const srcYes = srcNo + "/";
-    out.push({ source: srcNo, destination: `/en-ca${dest}`, permanent: true });
-    out.push({ source: srcYes, destination: `/en-ca${dest}`, permanent: true });
+    out.push({ source: srcNo, destination: `/${dest}`, permanent: true });
+    out.push({ source: srcYes, destination: `/${dest}`, permanent: true });
   }
   return out;
 }
@@ -21,7 +21,6 @@ const LEGACY_PAIRS = [
   ["/resources/", "/search"],
   ["/our-impact/", "/our-impact"],
   ["/news/", "/search"],
-  ["/about/", "/about"],
   ["/rally-2024/", "/the-rally-report-2024"],
   ["/learning-opportunities/e-learning/gender-equity-lens/", "/program/gender-equity-lens"],
   ["/learning-opportunities/presentations/long-term-development-for-women-and-girls/", "/program/retaining-girls-in-sport"],

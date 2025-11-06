@@ -93,7 +93,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices, locales }) => {
                       <SliceZone slices={slices} components={components} />
                     </div>
                     <div className="mt-10 pl-2">
-                      <LanguageSwitcher locales={locales} />
+                      <LanguageSwitcher lang={lang.prismicLocale as "en-ca" | "fr-ca"} locales={locales} />
                     </div>
                   </PopoverPanel>
                 </Transition>

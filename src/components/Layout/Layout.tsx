@@ -54,8 +54,8 @@ export const Layout = ({
         ) : (
           <div className="flex w-full justify-end flex-row">
             <LanguageSwitcher
+              lang={lang as "en-ca" | "fr-ca"}
               locales={locales}
-              global={global}
               classname=" mt-2"
             />
           </div>

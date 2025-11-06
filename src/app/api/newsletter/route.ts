@@ -147,7 +147,6 @@ export async function POST(req: Request) {
 
     if (!mcRes.ok) {
       const err = parseMailchimpError(rawMc);
-      // eslint-disable-next-line no-console
       console.error("Mailchimp error:", JSON.stringify(err, null, 2));
 
       const listErrors =
