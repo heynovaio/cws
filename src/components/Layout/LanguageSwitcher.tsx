@@ -4,6 +4,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { fullLangList } from "@/constants/languages";
 import type { PrismicDocument } from "@prismicio/client";
 import { translateCareersSegment, stripLeadingLocalePrefix } from "@/utils/i18nDomains";
+import type { ChangeEvent } from "react";
 
 type Lang = "en-ca" | "fr-ca";
 
@@ -18,6 +19,11 @@ function normalizePathFromPrismicUrl(u?: string | null): string | undefined {
     // Fallback if we got something odd
     return stripLeadingLocalePrefix(u);
   }
+}
+
+// Strip www. only; server/middleware will canonicalize further
+function stripWww(h: string) {
+  return h.replace(/^www\./i, "");
 }
 
 export default function LanguageSwitcher({
@@ -38,40 +44,62 @@ export default function LanguageSwitcher({
     const targetDoc = locales.find((d) => d.lang === toLocale);
     const prismicPath = normalizePathFromPrismicUrl(targetDoc?.url);
 
-    // 2) Fallback: use current path, translated for careers/carrières,
+    // 2) Fallback: current path, translated for careers/carrières,
     //    and with any leading /en-ca or /fr-ca stripped.
     const fallbackPath = translateCareersSegment(
       stripLeadingLocalePrefix(pathname),
       toLocale
     );
 
-    const targetPath = prismicPath ?? fallbackPath;
+    const targetPath = (prismicPath ?? fallbackPath) || "/";
 
-    // 3) Build a full URL off current location so protocol + PORT are preserved
+    // 3) Base current URL (preserves protocol + in-dev port)
     const current =
       typeof window !== "undefined"
         ? new URL(window.location.href)
         : new URL("http://localhost:3000/");
 
-    const hostname = current.hostname; // e.g., 'localhost' or 'fr.localhost' or 'www.womensports.ca'
-    const isFr = hostname.startsWith("fr.");
-    const enHost = isFr ? hostname.slice(3) : hostname;
-    const frHost = isFr ? hostname : `fr.${hostname}`;
+    const curHost = stripWww(current.hostname);
+    const isLocal = curHost === "localhost" || curHost.endsWith(".localhost");
 
+    // 4) Env-aware domain pairing (no fr. fallback in prod)
+    const EN_ENV = stripWww(process.env.NEXT_PUBLIC_DOMAIN_EN || "");
+    const FR_ENV = stripWww(process.env.NEXT_PUBLIC_DOMAIN_FR || "");
+
+    // Defaults
+    let enHost = EN_ENV || curHost;
+    let frHost = FR_ENV || curHost;
+
+    // If both envs are set (prod), lock strictly to them
+    if (EN_ENV && FR_ENV) {
+      enHost = EN_ENV;
+      frHost = FR_ENV;
+    }
+    // In local dev, if only EN is set, simulate fr.localhost for convenience
+    else if (isLocal && EN_ENV && !FR_ENV) {
+      frHost = `fr.${enHost}`;
+    }
+    // If neither env is set (preview), keep same host for both (no fr. fabrication)
+
+    // 5) Build target URL
     const target = new URL(current.href);
-    // Keep the dev port if present
-    const port = current.port;
 
+    // Keep the dev port on localhost; drop it for apex/prod hosts
+    if (isLocal && current.port) {
+      target.port = current.port;
+    } else {
+      target.port = "";
+    }
+
+    target.protocol = current.protocol;
     target.hostname = toLocale === "fr-ca" ? frHost : enHost;
-    if (port) target.port = port; // explicitly preserve :3000 etc. in dev
-
-    target.pathname = targetPath || "/";
+    target.pathname = targetPath;
     target.search = searchParams?.toString() ? `?${searchParams.toString()}` : "";
 
     return target.toString();
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const toLocale = e.target.value as Lang;
     router.push(buildHref(toLocale));
   };

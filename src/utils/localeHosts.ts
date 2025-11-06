@@ -1,33 +1,35 @@
-// Replace your normalizeHost() with this:
 export function normalizeHost(h?: string | null) {
   return (h || "")
     .trim()
     .toLowerCase()
-    .replace(/^https?:\/\//, "") // safety if a full URL ever slips in
-    .replace(/^www\./, "")       // <<< strip www.
-    .replace(/:.*$/, "");        // strip port
+    .replace(/^https?:\/\//, "")
+    .replace(/^www\./, "")
+    .replace(/:.*$/, "");
 }
 
-const EN_ENV = normalizeHost(process.env.NEXT_PUBLIC_DOMAIN_EN);
-const FR_ENV = normalizeHost(process.env.NEXT_PUBLIC_DOMAIN_FR);
+const EN_ENV = normalizeHost(process.env.NEXT_PUBLIC_DOMAIN_EN || process.env.DOMAIN_EN);
+const FR_ENV = normalizeHost(process.env.NEXT_PUBLIC_DOMAIN_FR || process.env.DOMAIN_FR);
 
-// pairedDomainsFor: no changes needed besides relying on normalized values
-export function pairedDomainsFor(hostHeader?: string) {
-  const host = normalizeHost(hostHeader);
 
-  if (host === EN_ENV && FR_ENV) return { enHost: EN_ENV, frHost: FR_ENV };
-  if (host === FR_ENV && EN_ENV) return { enHost: EN_ENV, frHost: FR_ENV };
+// ❌ no more addFrPrefix/stripFrPrefix helpers
 
-  if (host.startsWith("fr.")) {
-    const base = host.slice(3);
-    return { enHost: base, frHost: host };
-  }
+export function pairedDomainsFor(_hostHeader?: string) {
+  // If both envs are set, always pair to those — regardless of the request host
+  if (EN_ENV && FR_ENV) return { enHost: EN_ENV, frHost: FR_ENV };
 
-  return { enHost: host, frHost: `fr.${host}` };
+  // If only one is set, use it for both (no subdomain fallback)
+  if (EN_ENV && !FR_ENV) return { enHost: EN_ENV, frHost: EN_ENV };
+  if (!EN_ENV && FR_ENV) return { enHost: FR_ENV, frHost: FR_ENV };
+
+  // If neither is set, stick to the current host for both (still no fr. prefix)
+  const h = normalizeHost(_hostHeader);
+  return { enHost: h, frHost: h };
 }
 
 export function localeForHost(hostHeader?: string) {
   const host = normalizeHost(hostHeader);
-  if (host === FR_ENV || host.startsWith("fr.")) return "fr-ca" as const;
+  // Only treat requests to the explicit FR domain as French
+  if (FR_ENV && host === FR_ENV) return "fr-ca" as const;
   return "en-ca" as const;
 }
+

@@ -34,7 +34,6 @@ function toCanonicalLocale(app: AppPathLocale): CanonicalLocale {
   return app === FR_L ? "fr-CA" : "en-CA";
 }
 
-// --- Legacy table that should bypass locale-prefix handling but STILL set cookie
 const LEGACY_SOURCES: Set<string> = new Set([
   "/about/contact-us",
   "/support-us",
