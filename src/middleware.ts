@@ -1,19 +1,30 @@
-// middleware.ts
 import { NextRequest, NextResponse } from "next/server";
-import { pairedDomainsFor, localeForHost, normalizeHost } from "@/utils/localeHosts";
+import {
+  EN_L,
+  FR_L,
+  type AppLocale,
+  type CanonicalLocale,
+  LOCALE_PREFIXES,
+  SOURCE_HOSTS,
+  EN_VANITY_HOSTS,
+  FR_VANITY_HOSTS,
+  EN_CAMPAIGN_PATH,
+  FR_CAMPAIGN_PATH,
+  pairedDomainsFor,
+  appLocaleForHost,
+  toCanonicalLocale,
+  normalizeHost,
+} from "@/utils/localeHosts";
 
-const EN_L = "en-ca" as const; // lower for paths
-const FR_L = "fr-ca" as const;
-type AppPathLocale = typeof EN_L | typeof FR_L;
+const LOCALE_PREFIX_SET = LOCALE_PREFIXES;
 
-// Canonical cookie/html values for Intl & <html lang>
-type CanonicalLocale = "en-CA" | "fr-CA";
-
-const LOCALE_PREFIXES = new Set<AppPathLocale>([EN_L, FR_L]);
-
-function translateCareers(pathname: string, locale: AppPathLocale) {
-  if (locale === FR_L) return pathname.replace(/(^|\/)careers(\/|$)/, "$1carrieres$2");
-  if (locale === EN_L) return pathname.replace(/(^|\/)carrieres(\/|$)/, "$1careers$2");
+function translateCareers(pathname: string, locale: AppLocale) {
+  if (locale === FR_L) {
+    return pathname.replace(/(^|\/)careers(\/|$)/, "$1carrieres$2");
+  }
+  if (locale === EN_L) {
+    return pathname.replace(/(^|\/)carrieres(\/|$)/, "$1careers$2");
+  }
   return pathname;
 }
 
@@ -23,15 +34,6 @@ function strip(pathname: string) {
 
 function protocolForHost(h: string) {
   return h.includes("localhost") ? "http" : "https";
-}
-
-function toAppPathLocale(input: unknown): AppPathLocale {
-  const t = (typeof input === "string" ? input : "").trim().toLowerCase();
-  return t === FR_L || t === "fr" ? FR_L : EN_L;
-}
-
-function toCanonicalLocale(app: AppPathLocale): CanonicalLocale {
-  return app === FR_L ? "fr-CA" : "en-CA";
 }
 
 const LEGACY_SOURCES: Set<string> = new Set([
@@ -224,25 +226,6 @@ const LEGACY_SOURCES: Set<string> = new Set([
   "/open-call-dei-committee-members",
 ]);
 
-const SOURCE_HOSTS = new Set([
-  "womenandsport.ca",
-  "www.womenandsport.ca",
-  "femmesetsport.ca",
-  "www.femmesetsport.ca",
-]);
-const EN_CAMPAIGN_PATH = "/campaign/keepgirlsplaying";
-const FR_CAMPAIGN_PATH = "/campaign/maintenant-continuons-a-faire-jouer-les-filles";
-// Vanity domains
-export const EN_VANITY_HOSTS = new Set(["keepgirlsplaying.ca", "www.keepgirlsplaying.ca"]);
-export const FR_VANITY_HOSTS = new Set([
-  "danslequipedesfilles.ca",
-  "www.danslequipedesfilles.ca",
-  "dansléquipedesfilles.ca",
-  "www.dansléquipedesfilles.ca",
-  "xn--danslquipedesfilles-fzb.ca",
-  "www.xn--danslquipedesfilles-fzb.ca",
-]);
-
 function ensureUtmDefaults(
   sp: URLSearchParams,
   defaults: { source: string; medium: string; campaign: string; content: string }
@@ -255,22 +238,19 @@ function ensureUtmDefaults(
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl;
-  const originalPort = url.port; // preserve :3000 in dev
+  const originalPort = url.port;
   const hostHeader = (request.headers.get("host") || "").toLowerCase();
   const host = normalizeHost(hostHeader);
-  const hostNoPort = host.split(":")[0]; // do NOT treat as final host for redirects
+  const hostNoPort = host;
   const pathname = strip(url.pathname);
 
-  // Compute target locale up front
-  const pathLocale: AppPathLocale = toAppPathLocale(localeForHost(host));
+  const pathLocale: AppLocale = appLocaleForHost(host);
   const canonicalLocale: CanonicalLocale = toCanonicalLocale(pathLocale);
 
-  // /files/* passthrough (no cookie needed – static)
   if (pathname.startsWith("/files/")) return NextResponse.next();
 
   const { enHost, frHost } = pairedDomainsFor(host);
 
-  // SOURCE_HOSTS → external campaign redirect with UTM defaults
   if (SOURCE_HOSTS.has(hostNoPort)) {
     if (pathname === `/en-ca${EN_CAMPAIGN_PATH}` || pathname === EN_CAMPAIGN_PATH) {
       const target = new URL(`https://keepgirlsplaying.ca/`);
@@ -286,7 +266,6 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(target, 308);
     }
     if (pathname === `/fr-ca${FR_CAMPAIGN_PATH}` || pathname === FR_CAMPAIGN_PATH) {
-      // Use punycode host for safety across clients
       const target = new URL(`https://xn--danslquipedesfilles-fzb.ca/`);
       const merged = new URLSearchParams(url.searchParams);
       ensureUtmDefaults(merged, {
@@ -301,42 +280,36 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Vanity domains
   const onEnVanity = EN_VANITY_HOSTS.has(hostNoPort);
   const onFrVanity = FR_VANITY_HOSTS.has(hostNoPort);
   if (onEnVanity || onFrVanity) {
     if (pathname === "/" || pathname === "/index.html") {
-      // Rewrite to campaign path on same host
       const rewriteUrl = request.nextUrl.clone();
       rewriteUrl.pathname = onEnVanity ? EN_CAMPAIGN_PATH : FR_CAMPAIGN_PATH;
       const res = NextResponse.rewrite(rewriteUrl);
-      // Set locale cookie even here
       res.cookies.set("NEXT_LOCALE", canonicalLocale, { path: "/" });
       return res;
     }
-    // Redirect all other vanity paths to primary site
     const target = request.nextUrl.clone();
     target.protocol = "https:";
     target.hostname = "womenandsport.ca";
-    // no port for prod
     const res = NextResponse.redirect(target, 308);
     res.cookies.set("NEXT_LOCALE", canonicalLocale, { path: "/" });
     return res;
   }
 
-  // Legacy sources: pass through BUT set the cookie so edge never falls back to Accept-Language
   if (LEGACY_SOURCES.has(pathname)) {
     const res = NextResponse.next();
     res.cookies.set("NEXT_LOCALE", canonicalLocale, { path: "/" });
     return res;
   }
 
-  // Locale-prefixed legacy URLs → strip prefix and redirect to correct domain
   const segs = pathname.split("/").filter(Boolean);
-  const hasLegacyPrefix = segs.length > 0 && LOCALE_PREFIXES.has(segs[0] as AppPathLocale);
+  const hasLegacyPrefix =
+    segs.length > 0 && LOCALE_PREFIX_SET.has(segs[0] as AppLocale);
 
   if (hasLegacyPrefix) {
-    const prefixedLocale = segs[0] as AppPathLocale;
+    const prefixedLocale = segs[0] as AppLocale;
     const [, ...rest] = segs;
     let clean = "/" + rest.join("/");
     if (clean === "/") clean = "/";
@@ -348,17 +321,18 @@ export function middleware(request: NextRequest) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.protocol = protocolForHost(desiredHostname);
     redirectUrl.hostname = desiredHostname;
-    if (originalPort) redirectUrl.port = originalPort; // preserve :3000 in dev
+    if (originalPort) redirectUrl.port = originalPort;
     redirectUrl.pathname = clean;
     redirectUrl.search = url.search;
     redirectUrl.hash = url.hash;
 
     const res = NextResponse.redirect(redirectUrl, 301);
-    res.cookies.set("NEXT_LOCALE", toCanonicalLocale(prefixedLocale), { path: "/" });
+    res.cookies.set("NEXT_LOCALE", toCanonicalLocale(prefixedLocale), {
+      path: "/",
+    });
     return res;
   }
 
-  // Careers/carrières segment harmonization on same host
   const adjusted = translateCareers(pathname, pathLocale);
   if (adjusted !== pathname) {
     const redirectUrl = request.nextUrl.clone();
@@ -369,7 +343,6 @@ export function middleware(request: NextRequest) {
     return res;
   }
 
-  // Default: continue and set cookie
   const res = NextResponse.next();
   res.cookies.set("NEXT_LOCALE", canonicalLocale, { path: "/" });
   return res;

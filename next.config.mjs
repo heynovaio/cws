@@ -12,7 +12,6 @@ function makeRedirects(pairs) {
   return out;
 }
 
-// Legacy → new path pairs (LEFT = old path; RIGHT = new path *without* locale)
 const LEGACY_PAIRS = [
   ["/about/contact-us/", "/connect-with-us"],
   ["/support-us/", "/connect-with-us"],
@@ -21,7 +20,7 @@ const LEGACY_PAIRS = [
   ["/resources/", "/search"],
   ["/our-impact/", "/our-impact"],
   ["/news/", "/search"],
-  ["/rally-2024/", "/the-rally-report-2024"],
+  ["/rally-2024/", "/resource/rally-report-2024"],
   ["/learning-opportunities/e-learning/gender-equity-lens/", "/program/gender-equity-lens"],
   ["/learning-opportunities/presentations/long-term-development-for-women-and-girls/", "/program/retaining-girls-in-sport"],
   ["/canadian-girls-sport-participation-on-the-rise-but-still-lags-behind-boys-according-to-new-research/", "/resource/girls-sport-participation-research"],
@@ -75,9 +74,8 @@ const LEGACY_PAIRS = [
   ["/workshop-booking-form/", "/how-we-help"],
   ["/introducing-canadian-women-and-sport/", "/search"],
   ["/about/facilitator-sign-up/", "/our-facilitators--consultants"],
-  ["/resources/publications/winning-plays-the-gender-equity-playbook-report/", "/resource/the-gender-equity-playbook-report"],
+  ["/resources/publications/she-belongs/", "/resource/she-belongs"],
   ["/resources/publications/engaging-newcomers-handbook/", "/search"],
-  ["/resources/publications/she-belongs/", "/resource/building-social-connection-for-lasting-participation-in-sport"],
   ["/resources/publications/actively-engaging-women-and-girls/", "/search"],
   ["/resources/publications/good-practices-for-gender-equitable-boards/", "/search"],
   ["/resources/publications/women-on-boards-guide-to-getting-involved/", "/program/women-on-boards-workshop"],
@@ -202,6 +200,7 @@ const LEGACY_PAIRS = [
   ["/open-call-dei-committee-members/", "/"],
 ];
 
+
 const nextConfig = {
   async redirects() {
     // Middleware owns the campaign→vanity logic (UTM merge + host awareness).
@@ -209,9 +208,9 @@ const nextConfig = {
     return makeRedirects(LEGACY_PAIRS);
   },
 
-  // No rewrites needed for the vanity roots—middleware already rewrites
-  // keepgirlsplaying.ca/ and danslequipedesfilles.ca/ to their campaign pages.
   async rewrites() {
+    // No rewrites needed for the vanity roots—middleware already rewrites
+    // keepgirlsplaying.ca/ and danslequipedesfilles.ca/ to their campaign pages.
     return [];
   },
 };
