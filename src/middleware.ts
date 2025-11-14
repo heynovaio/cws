@@ -228,8 +228,8 @@ const SOURCE_HOSTS = new Set(["womenandsport.ca", "www.womenandsport.ca"]);
 const EN_CAMPAIGN_PATH = "/campaign/keepgirlsplaying";
 const FR_CAMPAIGN_PATH = "/campaign/maintenant-continuons-a-faire-jouer-les-filles";
 // Vanity domains
-const EN_VANITY_HOSTS = new Set(["keepgirlsplaying.ca", "www.keepgirlsplaying.ca"]);
-const FR_VANITY_HOSTS = new Set([
+export const EN_VANITY_HOSTS = new Set(["keepgirlsplaying.ca", "www.keepgirlsplaying.ca"]);
+export const FR_VANITY_HOSTS = new Set([
   "danslequipedesfilles.ca",
   "www.danslequipedesfilles.ca",
   "dansléquipedesfilles.ca",

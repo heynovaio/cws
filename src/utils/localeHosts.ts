@@ -1,3 +1,5 @@
+import { FR_VANITY_HOSTS } from "@/middleware";
+
 export function normalizeHost(h?: string | null) {
   return (h || "")
     .trim()
@@ -20,6 +22,9 @@ export function pairedDomainsFor(_hostHeader?: string) {
 
 export function localeForHost(hostHeader?: string) {
   const host = normalizeHost(hostHeader);
+
   if (FR_ENV && host === FR_ENV) return "fr-ca" as const;
+  if (FR_VANITY_HOSTS.has(host)) return "fr-ca" as const;
+
   return "en-ca" as const;
 }
