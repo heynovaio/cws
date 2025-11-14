@@ -1,13 +1,11 @@
-/** @type {import('next').NextConfig} */
-
-// Emit two redirects per pair (with & without trailing slash)
 function makeRedirects(pairs) {
   const out = [];
   for (const [src, dest] of pairs) {
     const srcNo = src.replace(/\/+$/, "");
     const srcYes = srcNo + "/";
-    out.push({ source: srcNo, destination: `/${dest}`, permanent: true });
-    out.push({ source: srcYes, destination: `/${dest}`, permanent: true });
+    const cleanDest = dest.startsWith("/") ? dest : `/${dest}`;
+    out.push({ source: srcNo, destination: cleanDest, permanent: true });
+    out.push({ source: srcYes, destination: cleanDest, permanent: true });
   }
   return out;
 }
@@ -200,17 +198,11 @@ const LEGACY_PAIRS = [
   ["/open-call-dei-committee-members/", "/"],
 ];
 
-
 const nextConfig = {
   async redirects() {
-    // Middleware owns the campaign→vanity logic (UTM merge + host awareness).
-    // We only return your large legacy redirect table here.
     return makeRedirects(LEGACY_PAIRS);
   },
-
   async rewrites() {
-    // No rewrites needed for the vanity roots—middleware already rewrites
-    // keepgirlsplaying.ca/ and danslequipedesfilles.ca/ to their campaign pages.
     return [];
   },
 };
