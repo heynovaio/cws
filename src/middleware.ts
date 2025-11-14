@@ -224,7 +224,12 @@ const LEGACY_SOURCES: Set<string> = new Set([
   "/open-call-dei-committee-members",
 ]);
 
-const SOURCE_HOSTS = new Set(["womenandsport.ca", "www.womenandsport.ca"]);
+const SOURCE_HOSTS = new Set([
+  "womenandsport.ca",
+  "www.womenandsport.ca",
+  "femmesetsport.ca",
+  "www.femmesetsport.ca",
+]);
 const EN_CAMPAIGN_PATH = "/campaign/keepgirlsplaying";
 const FR_CAMPAIGN_PATH = "/campaign/maintenant-continuons-a-faire-jouer-les-filles";
 // Vanity domains
