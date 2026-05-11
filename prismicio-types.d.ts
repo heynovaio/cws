@@ -2360,17 +2360,6 @@ export interface ContactInfoSliceDefaultPrimary {
   >;
 
   /**
-   * Form Provider field in *FormEmbed → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: JotForm
-   * - **API ID Path**: contact_info.default.primary.form_provider
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  form_provider: prismic.SelectField<"JotForm" | "Generic iframe", "filled">;
-
-  /**
    * Jotform URL field in *FormEmbed → Default → Primary*
    *
    * - **Field Type**: Text
@@ -2379,16 +2368,6 @@ export interface ContactInfoSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   jotform_url: prismic.KeyTextField;
-
-  /**
-   * Generic Iframe URL field in *FormEmbed → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_info.default.primary.generic_iframe_url
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  generic_iframe_url: prismic.KeyTextField;
 }
 
 /**

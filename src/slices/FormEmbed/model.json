@@ -57,29 +57,10 @@
             "default_value": "Two Column"
           }
         },
-        "form_provider": {
-          "type": "Select",
-          "config": {
-            "label": "Form Provider",
-            "placeholder": "",
-            "options": [
-              "JotForm",
-              "Generic iframe"
-            ],
-            "default_value": "JotForm"
-          }
-        },
         "jotform_url": {
           "type": "Text",
           "config": {
             "label": "Jotform URL",
-            "placeholder": ""
-          }
-        },
-        "generic_iframe_url": {
-          "type": "Text",
-          "config": {
-            "label": "Generic Iframe URL",
             "placeholder": ""
           }
         }

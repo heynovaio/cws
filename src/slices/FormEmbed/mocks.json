@@ -92,16 +92,6 @@
 				"__TYPE__": "FieldContent",
 				"value": "safe",
 				"type": "Text"
-			},
-			"form_provider": {
-				"__TYPE__": "FieldContent",
-				"value": "JotForm",
-				"type": "Select"
-			},
-			"generic_iframe_url": {
-				"__TYPE__": "FieldContent",
-				"value": "dangerous",
-				"type": "Text"
 			}
 		},
 		"items": []
