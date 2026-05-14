@@ -4,19 +4,29 @@ import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 import { Section, Container, ResponsiveImage } from "@/components";
 import { JotformEmbed } from "@/components/JotformEmbed";
+import { GenericIframeEmbed } from "@/components/GenericIframeEmbed";
 
-/**
- * Props for `FormEmbed`.
- */
 export type ContactInfoProps = SliceComponentProps<Content.ContactInfoSlice>;
 
-/**
- * Component for "FormEmbed" Slices.
- */
 const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
   const isTwoColumn = slice.primary.desktop_alignment === "Two Column";
+  const provider = slice.primary.form_provider ?? "JotForm";
   const jotformUrl = slice.primary.jotform_url;
+  const genericUrl = slice.primary.generic_iframe_url;
   const sectionId = slice.primary.section_id ?? undefined;
+
+  const formEmbed =
+    provider === "Generic iframe" ? (
+      genericUrl ? (
+        <GenericIframeEmbed url={genericUrl} />
+      ) : (
+        <p className="text-gray-600">No form URL provided.</p>
+      )
+    ) : jotformUrl ? (
+      <JotformEmbed url={jotformUrl} />
+    ) : (
+      <p className="text-gray-600">Form not available right now.</p>
+    );
 
   return (
     <Section
@@ -39,11 +49,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
               )}
             </div>
             <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
-              {jotformUrl ? (
-                <JotformEmbed url={jotformUrl} />
-              ) : (
-                <p className="text-gray-600">Form not available right now.</p>
-              )}
+              {formEmbed}
             </div>
           </div>
         ) : (
@@ -52,20 +58,14 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
               <PrismicRichText field={slice.primary.title} />
               <PrismicRichText field={slice.primary.description} />
             </div>
-
             {slice.primary.image && (
               <ResponsiveImage
                 image={slice.primary.image}
-                className={`${isTwoColumn ? "mt-6" : "mt-0"} rounded w-full h-[350px] object-cover`}
+                className="mt-0 rounded w-full h-[350px] object-cover"
               />
             )}
-
             <div className="bg-white w-full rounded text-midnight p-6 flex justify-center items-center">
-              {jotformUrl ? (
-                <JotformEmbed url={jotformUrl} />
-              ) : (
-                <p className="text-gray-600">Form not available right now.</p>
-              )}
+              {formEmbed}
             </div>
           </div>
         )}
