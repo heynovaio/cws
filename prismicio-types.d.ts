@@ -2371,7 +2371,7 @@ export interface ContactInfoSliceDefaultPrimary {
   form_provider: prismic.SelectField<"JotForm" | "Generic iframe", "filled">;
 
   /**
-   * Jotform URL field in *FormEmbed → Default → Primary*
+   * Form URL field in *FormEmbed → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -2379,16 +2379,6 @@ export interface ContactInfoSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   jotform_url: prismic.KeyTextField;
-
-  /**
-   * Generic Iframe URL field in *FormEmbed → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_info.default.primary.generic_iframe_url
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  generic_iframe_url: prismic.KeyTextField;
 }
 
 /**

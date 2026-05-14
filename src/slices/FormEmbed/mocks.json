@@ -85,7 +85,7 @@
 			},
 			"jotform_url": {
 				"__TYPE__": "FieldContent",
-				"value": "soap",
+				"value": "purpose",
 				"type": "Text"
 			},
 			"section_id": {
@@ -97,11 +97,6 @@
 				"__TYPE__": "FieldContent",
 				"value": "JotForm",
 				"type": "Select"
-			},
-			"generic_iframe_url": {
-				"__TYPE__": "FieldContent",
-				"value": "dangerous",
-				"type": "Text"
 			}
 		},
 		"items": []

@@ -72,14 +72,7 @@
         "jotform_url": {
           "type": "Text",
           "config": {
-            "label": "Jotform URL",
-            "placeholder": ""
-          }
-        },
-        "generic_iframe_url": {
-          "type": "Text",
-          "config": {
-            "label": "Generic Iframe URL",
+            "label": "Form URL",
             "placeholder": ""
           }
         }

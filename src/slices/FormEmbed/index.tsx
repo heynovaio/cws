@@ -11,22 +11,18 @@ export type ContactInfoProps = SliceComponentProps<Content.ContactInfoSlice>;
 const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
   const isTwoColumn = slice.primary.desktop_alignment === "Two Column";
   const provider = slice.primary.form_provider ?? "JotForm";
-  const jotformUrl = slice.primary.jotform_url;
-  const genericUrl = slice.primary.generic_iframe_url;
+  const formUrl = slice.primary.jotform_url;
   const sectionId = slice.primary.section_id ?? undefined;
 
-  const formEmbed =
+  const formEmbed = formUrl ? (
     provider === "Generic iframe" ? (
-      genericUrl ? (
-        <GenericIframeEmbed url={genericUrl} />
-      ) : (
-        <p className="text-gray-600">No form URL provided.</p>
-      )
-    ) : jotformUrl ? (
-      <JotformEmbed url={jotformUrl} />
+      <GenericIframeEmbed url={formUrl} />
     ) : (
-      <p className="text-gray-600">Form not available right now.</p>
-    );
+      <JotformEmbed url={formUrl} />
+    )
+  ) : (
+    <p className="text-gray-600">Form not available right now.</p>
+  );
 
   return (
     <Section
