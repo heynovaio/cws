@@ -3,7 +3,6 @@ import { FC, useRef, useState } from "react";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
-
 import {
   Tab,
   TabGroup,
@@ -19,9 +18,22 @@ import { BlockQuote } from "@/components/BlockQuote";
 import { PrismicNextImage } from "@prismicio/next";
 import { FaPlay, FaPause, FaChevronDown } from "react-icons/fa6";
 import { JotformEmbed } from "@/components/JotformEmbed";
+import { ZohoFormsEmbed } from "@/components/ZohoFormsEmbed";
+import { GenericIframeEmbed } from "@/components/GenericIframeEmbed";
 
 export type TabbedContentStickyImageProps =
   SliceComponentProps<Content.TabbedContentStickyImageSlice>;
+
+type Section = TabbedContentStickyImageProps["slice"]["primary"]["section"][number];
+
+const getFormEmbed = (tab: Section) => {
+  const formUrl = tab.jotform_url;
+  const provider = tab.form_provider ?? "JotForm";
+  if (!formUrl) return null;
+  if (provider === "Zoho Forms") return <ZohoFormsEmbed url={formUrl} />;
+  if (provider === "Generic iframe") return <GenericIframeEmbed url={formUrl} />;
+  return <JotformEmbed url={formUrl} />;
+};
 
 const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
   slice,
@@ -34,7 +46,6 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
   const toggleAudio = (idx: number) => {
     const audio = audioRefs.current[idx];
     if (!audio) return;
-
     if (playingIndex === idx && !audio.paused) {
       audio.pause();
       setPlayingIndex(null);
@@ -42,7 +53,6 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
       audioRefs.current.forEach((a, i) => {
         if (a && i !== idx) a.pause();
       });
-
       audio
         .play()
         .then(() => setPlayingIndex(idx))
@@ -60,10 +70,9 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
       id="pillars"
     >
       <Container>
-        {/* Mobile: Disclosure list */}
         <div className="md:hidden flex flex-col gap-4">
           {sections.map((tab, idx) => {
-            const jotformUrl = tab.jotform_url;
+            const formEmbed = getFormEmbed(tab);
             const audioUrl = isFilled.linkToMedia(tab.section_audio_clip)
               ? tab.section_audio_clip.url
               : undefined;
@@ -121,16 +130,14 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                             <PrismicRichText field={tab.section_text} />
                           </div>
                         )}
-                        {jotformUrl && (
+                        {formEmbed && (
                           <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
-                            <JotformEmbed url={jotformUrl} />
+                            {formEmbed}
                           </div>
                         )}
-
                         {tab.section_image?.url && (
                           <div className="relative">
                             <PrismicNextImage field={tab.section_image} alt="" />
-                            {/* Accessible audio play/pause control (mobile) */}
                             <div
                               className="
                                 absolute bottom-2 left-2 w-20 h-20 rounded-full
@@ -180,7 +187,6 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
           })}
         </div>
 
-        {/* Desktop: Tabbed content */}
         <div className="hidden md:block">
           <TabGroup>
             <TabList
@@ -220,7 +226,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
 
             <TabPanels className="mt-4">
               {sections.map((tab, idx) => {
-                const jotformUrl = tab.jotform_url;
+                const formEmbed = getFormEmbed(tab);
                 const audioUrl = isFilled.linkToMedia(tab.section_audio_clip)
                   ? tab.section_audio_clip.url
                   : undefined;
@@ -250,9 +256,9 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                             <PrismicRichText field={tab.section_text} />
                           </div>
                         )}
-                        {jotformUrl && (
+                        {formEmbed && (
                           <div className="bg-white w-full text-midnight rounded-none border mb-4 border-white flex justify-center items-center xs:mt-10 md:mt-0">
-                            <JotformEmbed url={jotformUrl} />
+                            {formEmbed}
                           </div>
                         )}
                       </div>
@@ -272,7 +278,6 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                 alt=""
                                 className="max-h-[calc(100vh-180px)] w-auto h-auto object-contain"
                               />
-                              {/* Accessible audio play/pause control (desktop) */}
                               <div
                                 className="
                                   z-50 absolute bottom-2 left-2 w-32 h-32 rounded-full

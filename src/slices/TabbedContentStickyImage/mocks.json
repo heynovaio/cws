@@ -108,7 +108,15 @@
 								{
 									"__TYPE__": "FieldContent",
 									"type": "Text",
-									"value": "https://form.jotform.com/252575446907063"
+									"value": "https://forms.zohopublic.ca/canadianwomensport1/form/GeneralInterestForm/formperma/R5r5AJMjbhJbQfynAw7d7UKVTHPGLlbJoQehLkr8dX4?zf_rszfm=1"
+								}
+							],
+							[
+								"form_provider",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Select",
+									"value": "Zoho Forms"
 								}
 							]
 						]

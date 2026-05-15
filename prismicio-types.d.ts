@@ -2368,7 +2368,10 @@ export interface ContactInfoSliceDefaultPrimary {
    * - **API ID Path**: contact_info.default.primary.form_provider
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  form_provider: prismic.SelectField<"JotForm" | "Generic iframe", "filled">;
+  form_provider: prismic.SelectField<
+    "JotForm" | "Generic iframe" | "Zoho Forms",
+    "filled"
+  >;
 
   /**
    * Form URL field in *FormEmbed → Default → Primary*
@@ -4436,7 +4439,21 @@ export interface TabbedContentStickyImageSliceDefaultPrimarySectionItem {
   section_audio_clip: prismic.LinkToMediaField<prismic.FieldState, never>;
 
   /**
-   * Jotform URL field in *TabbedContentStickyImage → Default → Primary → Section*
+   * Form Provider field in *TabbedContentStickyImage → Default → Primary → Section*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: JotForm
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.section[].form_provider
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  form_provider: prismic.SelectField<
+    "JotForm" | "Zoho Forms" | "Generic iframe",
+    "filled"
+  >;
+
+  /**
+   * Form URL field in *TabbedContentStickyImage → Default → Primary → Section*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*

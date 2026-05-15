@@ -5,6 +5,7 @@ import { JSX } from "react";
 import { Section, Container, ResponsiveImage } from "@/components";
 import { JotformEmbed } from "@/components/JotformEmbed";
 import { GenericIframeEmbed } from "@/components/GenericIframeEmbed";
+import { ZohoFormsEmbed } from "@/components/ZohoFormsEmbed";
 
 export type ContactInfoProps = SliceComponentProps<Content.ContactInfoSlice>;
 
@@ -14,8 +15,11 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
   const formUrl = slice.primary.jotform_url;
   const sectionId = slice.primary.section_id ?? undefined;
 
+  
   const formEmbed = formUrl ? (
-    provider === "Generic iframe" ? (
+    provider === "Zoho Forms" ? (
+      <ZohoFormsEmbed url={formUrl} />
+    ) : provider === "Generic iframe" ? (
       <GenericIframeEmbed url={formUrl} />
     ) : (
       <JotformEmbed url={formUrl} />

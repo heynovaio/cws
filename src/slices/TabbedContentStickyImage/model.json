@@ -74,10 +74,23 @@
                   "allowText": true
                 }
               },
+              "form_provider": {
+                "type": "Select",
+                "config": {
+                  "label": "Form Provider",
+                  "placeholder": "",
+                  "options": [
+                    "JotForm",
+                    "Zoho Forms",
+                    "Generic iframe"
+                  ],
+                  "default_value": "JotForm"
+                }
+              },
               "jotform_url": {
                 "type": "Text",
                 "config": {
-                  "label": "Jotform URL",
+                  "label": "Form URL",
                   "placeholder": ""
                 }
               }

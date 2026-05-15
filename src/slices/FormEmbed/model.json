@@ -64,7 +64,8 @@
             "placeholder": "",
             "options": [
               "JotForm",
-              "Generic iframe"
+              "Generic iframe",
+              "Zoho Forms"
             ],
             "default_value": "JotForm"
           }
