@@ -1,5 +1,5 @@
 "use client";
-import Script from "next/script";
+import { useEffect, useRef } from "react";
 
 interface ZohoFormsEmbedProps {
   url: string;
@@ -7,51 +7,59 @@ interface ZohoFormsEmbedProps {
 }
 
 export const ZohoFormsEmbed = ({ url, minHeight = 900 }: ZohoFormsEmbedProps) => {
-  const divId = "zf_div_cws_general";
-  const iframeId = "zf_ifrm_cws_general";
+  const containerRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
-  const inlineScript = `
-    (function() {
-      try {
-        var existing = document.getElementById("${iframeId}");
-        if (existing) existing.remove();
+  const resizeUrl = url.includes("zf_rszfm=1")
+    ? url
+    : url.includes("?")
+    ? `${url}&zf_rszfm=1`
+    : `${url}?zf_rszfm=1`;
 
-        var f = document.createElement("iframe");
-        f.src = "${url}";
-        f.style.border = "none";
-        f.style.width = "100%";
-        f.style.height = "${minHeight}px";
-        f.id = "${iframeId}";
-        f.setAttribute("scrolling", "no");
-        f.setAttribute("allow", "geolocation; microphone; camera; fullscreen");
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-        var container = document.getElementById("${divId}");
-        if (container) container.appendChild(f);
+    if (iframeRef.current) {
+      iframeRef.current.remove();
+      iframeRef.current = null;
+    }
 
-        window.addEventListener("message", function(event) {
-          var data = event.data;
-          if (!data || typeof data !== "string") return;
-          var parts = data.split("|");
-          if (parts.length === 2) {
-            var newHeight = parseInt(parts[1], 10);
-            if (!isNaN(newHeight) && newHeight > 0) {
-              var iframe = document.getElementById("${iframeId}");
-              if (iframe) iframe.style.height = (newHeight + 15) + "px";
-            }
-          }
-        }, false);
-      } catch(e) {}
-    })();
-  `;
+    const f = document.createElement("iframe");
+    f.src = resizeUrl;
+    f.style.border = "none";
+    f.style.width = "100%";
+    f.style.height = `${minHeight}px`;
+    f.setAttribute("scrolling", "no");
+    f.setAttribute("allow", "geolocation; microphone; camera; fullscreen");
+    containerRef.current.appendChild(f);
+    iframeRef.current = f;
+
+    const handleMessage = (event: MessageEvent) => {
+      const data = event.data;
+      if (!data || typeof data !== "string") return;
+      const parts = data.split("|");
+      if (parts.length === 2) {
+        const newHeight = parseInt(parts[1], 10);
+        if (!isNaN(newHeight) && newHeight > 0 && iframeRef.current) {
+          iframeRef.current.style.height = `${newHeight + 15}px`;
+        }
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+      if (iframeRef.current) {
+        iframeRef.current.remove();
+        iframeRef.current = null;
+      }
+    };
+  }, [resizeUrl, minHeight]);
 
   return (
     <div className="w-full" id="form">
-      <div id={divId} className="w-full" />
-      <Script
-        id="zoho-forms-embed"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: inlineScript }}
-      />
+      <div ref={containerRef} className="w-full" />
     </div>
   );
 };
