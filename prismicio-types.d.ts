@@ -1546,6 +1546,87 @@ export type ProgramPageDocument<Lang extends string = string> =
   >;
 
 /**
+ * Item in *Redirect Rules → Redirect Rules*
+ */
+export interface RedirectRulesDocumentDataRedirectRulesItem {
+  /**
+   * From field in *Redirect Rules → Redirect Rules*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: /resource/rally-report-2024
+   * - **API ID Path**: redirect_rules.redirect_rules[].redirect_from
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  redirect_from: prismic.KeyTextField;
+
+  /**
+   * To field in *Redirect Rules → Redirect Rules*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: /rally-2024
+   * - **API ID Path**: redirect_rules.redirect_rules[].redirect_to
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  redirect_to: prismic.KeyTextField;
+
+  /**
+   * Redirect Type field in *Redirect Rules → Redirect Rules*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: 301
+   * - **API ID Path**: redirect_rules.redirect_rules[].status
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  status: prismic.SelectField<"301" | "302", "filled">;
+
+  /**
+   * Enabled field in *Redirect Rules → Redirect Rules*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: redirect_rules.redirect_rules[].enabled
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  enabled: prismic.BooleanField;
+}
+
+/**
+ * Content for Redirect Rules documents
+ */
+interface RedirectRulesDocumentData {
+  /**
+   * Redirect Rules field in *Redirect Rules*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: redirect_rules.redirect_rules[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  redirect_rules: prismic.GroupField<
+    Simplify<RedirectRulesDocumentDataRedirectRulesItem>
+  >;
+}
+
+/**
+ * Redirect Rules document from Prismic
+ *
+ * - **API ID**: `redirect_rules`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type RedirectRulesDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<RedirectRulesDocumentData>,
+    "redirect_rules",
+    Lang
+  >;
+
+/**
  * Content for Resource Category documents
  */
 interface ResourceCategoryDocumentData {
@@ -2080,6 +2161,7 @@ export type AllDocumentTypes =
   | PartnersDocument
   | ProgramCategoryDocument
   | ProgramPageDocument
+  | RedirectRulesDocument
   | ResourceCategoryDocument
   | ResourcePageDocument
   | SearchPageDocument
@@ -5027,6 +5109,9 @@ declare module "@prismicio/client" {
       ProgramPageDocument,
       ProgramPageDocumentData,
       ProgramPageDocumentDataSlicesSlice,
+      RedirectRulesDocument,
+      RedirectRulesDocumentData,
+      RedirectRulesDocumentDataRedirectRulesItem,
       ResourceCategoryDocument,
       ResourceCategoryDocumentData,
       ResourcePageDocument,

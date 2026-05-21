@@ -198,9 +198,47 @@ const LEGACY_PAIRS = [
   ["/open-call-dei-committee-members/", "/"],
 ];
 
+async function fetchPrismicRedirects() {
+  const { createClient } = await import("./src/prismicio.ts");
+  const client = createClient({ fetchOptions: { cache: "no-store" } });
+
+  let doc;
+  try {
+    doc = await client.getSingle("redirect_rules");
+  } catch {
+    console.warn("[redirects] No redirect_rules document found in Prismic — skipping.");
+    return [];
+  }
+
+  const rules = doc.data?.redirect_rules ?? [];
+  const out = [];
+
+  for (const rule of rules) {
+    const from = String(rule.redirect_from || "").trim();
+    const to = String(rule.redirect_to || "").trim();
+    const enabled = rule.enabled !== false;
+
+    if (!enabled || !from || !to) continue;
+    if (!from.startsWith("/")) {
+      console.warn(`[redirects] Skipping — 'from' must start with /: ${from}`);
+      continue;
+    }
+
+    const permanent = String(rule.status ?? "301") === "301";
+    out.push({ source: from, destination: to, permanent });
+    if (!from.endsWith("/")) {
+      out.push({ source: from + "/", destination: to, permanent });
+    }
+  }
+
+  return out;
+}
+
 const nextConfig = {
   async redirects() {
-    return makeRedirects(LEGACY_PAIRS);
+    const prismicRedirects = await fetchPrismicRedirects();
+    const legacyRedirects = makeRedirects(LEGACY_PAIRS);
+    return [...prismicRedirects, ...legacyRedirects];
   },
   async rewrites() {
     return [];
