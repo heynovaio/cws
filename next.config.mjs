@@ -199,8 +199,12 @@ const LEGACY_PAIRS = [
 ];
 
 async function fetchPrismicRedirects() {
-  const { createClient } = await import("./src/prismicio.ts");
-  const client = createClient({ fetchOptions: { cache: "no-store" } });
+  const prismic = await import("@prismicio/client");
+  const sm = await import("./slicemachine.config.json", { with: { type: "json" } });
+
+  const client = prismic.createClient(sm.default.repositoryName, {
+    fetchOptions: { cache: "no-store" },
+  });
 
   let doc;
   try {
