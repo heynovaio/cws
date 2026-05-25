@@ -5,8 +5,8 @@
 		"primary": {
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"type": "Select",
-				"value": "No Background"
+				"value": "Darker",
+				"type": "Select"
 			},
 			"title": {
 				"__TYPE__": "StructuredTextContent",

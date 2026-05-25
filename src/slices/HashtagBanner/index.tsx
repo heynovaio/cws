@@ -2,17 +2,11 @@
 
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
+import { hasContent } from "@/utils";
+import React, { useEffect, useRef } from "react";
 
-/**
- * Props for `HashtagBanner`.
- */
 export type HashtagBannerProps =
   SliceComponentProps<Content.HashtagBannerSlice>;
-
-/**
- * Component for "HashtagBanner" Slices.
- */
-import React, { useEffect, useRef } from "react";
 
 const HashtagBanner = ({ slice }: HashtagBannerProps) => {
   const word = slice.primary.display_word;
@@ -31,6 +25,8 @@ const HashtagBanner = ({ slice }: HashtagBannerProps) => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  if (!hasContent(word)) return null;
 
   return (
     <section

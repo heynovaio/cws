@@ -3,21 +3,17 @@ import { Container, Section } from "@/components";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
-import { components } from "@/utils";
+import { components, hasContent } from "@/utils";
 
-/**
- * Props for `RichText`.
- */
 export type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
 
-/**
- * Component for "RichText" Slices.
- */
-const RichText = ({ slice }: RichTextProps): JSX.Element => {
+const RichText = ({ slice }: RichTextProps): JSX.Element | null => {
   const leftAligned = slice.primary.text_alignment === false;
   const textAlignment = leftAligned
     ? "items-start text-left"
     : "items-center text-center";
+
+  if (!hasContent(slice.primary.content)) return null;
 
   return (
     <Section

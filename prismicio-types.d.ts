@@ -2220,6 +2220,31 @@ export interface AccordionSliceDefaultPrimary {
   background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
 
   /**
+   * Column Layout field in *Accordion → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Stacked
+   * - **API ID Path**: accordion.default.primary.column_ratio
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  column_ratio: prismic.SelectField<
+    "Stacked" | "50/50" | "25/75" | "75/25",
+    "filled"
+  >;
+
+  /**
+   * Column Order field in *Accordion → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: accordion.default.primary.content_first
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  content_first: prismic.BooleanField;
+
+  /**
    * Title field in *Accordion → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -2418,6 +2443,17 @@ export interface ContactInfoSliceDefaultPrimary {
   image: prismic.ImageField<never>;
 
   /**
+   * Image Fit field in *FormEmbed → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: contact_info.default.primary.image_fit
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  image_fit: prismic.BooleanField;
+
+  /**
    * Description field in *FormEmbed → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -2551,6 +2587,21 @@ export interface ContentCarouselSliceResourceCarouselPrimaryRedirectButtonItem {
    * - **Field Type**: Link
    * - **Placeholder**: *None*
    * - **API ID Path**: content_carousel.resourceCarousel.primary.redirect_button[].url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *ContentCarousel → Manual Carousel → Primary → Redirect Button*
+ */
+export interface ContentCarouselSliceManualCarouselPrimaryRedirectButtonItem {
+  /**
+   * url field in *ContentCarousel → Manual Carousel → Primary → Redirect Button*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.manualCarousel.primary.redirect_button[].url
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
@@ -2705,11 +2756,109 @@ export type ContentCarouselSliceResourceCarousel = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *ContentCarousel → Manual Carousel → Primary*
+ */
+export interface ContentCarouselSliceManualCarouselPrimary {
+  /**
+   * Background Color field in *ContentCarousel → Manual Carousel → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: content_carousel.manualCarousel.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+
+  /**
+   * Title field in *ContentCarousel → Manual Carousel → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Title
+   * - **API ID Path**: content_carousel.manualCarousel.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Redirect Button field in *ContentCarousel → Manual Carousel → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.manualCarousel.primary.redirect_button[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  redirect_button: prismic.GroupField<
+    Simplify<ContentCarouselSliceManualCarouselPrimaryRedirectButtonItem>
+  >;
+}
+
+/**
+ * Primary content in *ContentCarousel → Items*
+ */
+export interface ContentCarouselSliceManualCarouselItem {
+  /**
+   * Image field in *ContentCarousel → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Description field in *ContentCarousel → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.items[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Link field in *ContentCarousel → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_carousel.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Card Style field in *ContentCarousel → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: White
+   * - **API ID Path**: content_carousel.items[].card_style
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  card_style: prismic.SelectField<"Purple" | "White", "filled">;
+}
+
+/**
+ * Manual Carousel variation for ContentCarousel Slice
+ *
+ * - **API ID**: `manualCarousel`
+ * - **Description**: Manual card entry
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContentCarouselSliceManualCarousel = prismic.SharedSliceVariation<
+  "manualCarousel",
+  Simplify<ContentCarouselSliceManualCarouselPrimary>,
+  Simplify<ContentCarouselSliceManualCarouselItem>
+>;
+
+/**
  * Slice variation for *ContentCarousel*
  */
 type ContentCarouselSliceVariation =
   | ContentCarouselSliceProgramsCarousel
-  | ContentCarouselSliceResourceCarousel;
+  | ContentCarouselSliceResourceCarousel
+  | ContentCarouselSliceManualCarousel;
 
 /**
  * ContentCarousel Shared Slice
@@ -3261,6 +3410,17 @@ export interface ImageTextSliceDefaultPrimary {
   image_side: prismic.BooleanField;
 
   /**
+   * Image Fit field in *ImageText → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_text.default.primary.image_fit
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  image_fit: prismic.BooleanField;
+
+  /**
    * Animation field in *ImageText → Default → Primary*
    *
    * - **Field Type**: Boolean
@@ -3354,6 +3514,17 @@ export interface ImageTextSliceVideoPrimary {
   image_side: prismic.BooleanField;
 
   /**
+   * Image Fit field in *ImageText → Video → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_text.video.primary.image_fit
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  image_fit: prismic.BooleanField;
+
+  /**
    * Animation field in *ImageText → Video → Primary*
    *
    * - **Field Type**: Boolean
@@ -3445,6 +3616,17 @@ export interface ImageTextSliceStatsPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   image_side: prismic.BooleanField;
+
+  /**
+   * Image Fit field in *ImageText → Stats → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_text.stats.primary.image_fit
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  image_fit: prismic.BooleanField;
 
   /**
    * Animation field in *ImageText → Stats → Primary*
@@ -5145,9 +5327,13 @@ declare module "@prismicio/client" {
       ContentCarouselSliceResourceCarouselPrimaryContentCardItem,
       ContentCarouselSliceResourceCarouselPrimaryRedirectButtonItem,
       ContentCarouselSliceResourceCarouselPrimary,
+      ContentCarouselSliceManualCarouselPrimaryRedirectButtonItem,
+      ContentCarouselSliceManualCarouselPrimary,
+      ContentCarouselSliceManualCarouselItem,
       ContentCarouselSliceVariation,
       ContentCarouselSliceProgramsCarousel,
       ContentCarouselSliceResourceCarousel,
+      ContentCarouselSliceManualCarousel,
       ContentColumnSlice,
       ContentColumnSliceDefaultPrimaryColumnItem,
       ContentColumnSliceDefaultPrimary,

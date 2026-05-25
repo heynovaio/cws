@@ -1,88 +1,6 @@
 [
 	{
 		"__TYPE__": "SharedSliceContent",
-		"variation": "default",
-		"primary": {
-			"title": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Score"
-						}
-					}
-				]
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Nunc facilisis pellentesque augue vitae vestibulum. Suspendisse aliquet quam arcu, eget sodales eros ullamcorper quis. Aenean rutrum at nulla vitae aliquam. Nunc ligula risus, venenatis tempor laoreet sit amet, sodales id sapien.",
-							"spans": []
-						},
-						"direction": "ltr"
-					}
-				]
-			},
-			"image_side": {
-				"__TYPE__": "BooleanContent",
-				"value": true
-			},
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "No Background",
-				"type": "Select"
-			},
-			"button": {
-				"__TYPE__": "RepeatableContent",
-				"type": "Link",
-				"value": [
-					{
-						"key": "564b0f83-57f5-444a-a3f8-2993f0f52bbe",
-						"__TYPE__": "LinkContent",
-						"value": {
-							"__TYPE__": "ExternalLink",
-							"url": "http://twitter.com",
-							"text": "wonderful"
-						}
-					}
-				]
-			},
-			"image": {
-				"origin": {
-					"id": "main",
-					"url": "https://images.unsplash.com/photo-1560457079-9a6532ccb118",
-					"width": 4160,
-					"height": 3120
-				},
-				"url": "https://images.unsplash.com/photo-1560457079-9a6532ccb118",
-				"width": 4160,
-				"height": 3120,
-				"edit": {
-					"zoom": 1,
-					"crop": {
-						"x": 0,
-						"y": 0
-					},
-					"background": "transparent"
-				},
-				"credits": null,
-				"alt": null,
-				"__TYPE__": "ImageContent",
-				"thumbnails": {}
-			},
-			"animation": {
-				"__TYPE__": "BooleanContent",
-				"value": false
-			}
-		},
-		"items": []
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
 		"variation": "video",
 		"primary": {
 			"background_color": {
@@ -165,6 +83,10 @@
 			"animation": {
 				"__TYPE__": "BooleanContent",
 				"value": false
+			},
+			"image_fit": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": [
@@ -361,5 +283,91 @@
 				"value": []
 			}
 		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Score"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nunc facilisis pellentesque augue vitae vestibulum. Suspendisse aliquet quam arcu, eget sodales eros ullamcorper quis. Aenean rutrum at nulla vitae aliquam. Nunc ligula risus, venenatis tempor laoreet sit amet, sodales id sapien.",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"image_side": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
+			},
+			"button": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "564b0f83-57f5-444a-a3f8-2993f0f52bbe",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "http://twitter.com",
+							"text": "wonderful"
+						}
+					}
+				]
+			},
+			"image": {
+				"__TYPE__": "ImageContent",
+				"provider": "imgix",
+				"url": "https://images.unsplash.com/photo-1610833805553-43556a0f821d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw0fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3Nzk3MTQ2Njd8MA&ixlib=rb-4.1.0&q=85",
+				"alt": "yellow lemon fruit on white surface",
+				"origin": {
+					"id": "2aFE-gUcCvc",
+					"url": "https://images.unsplash.com/photo-1610833805553-43556a0f821d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw0fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3Nzk3MTQ2Njd8MA&ixlib=rb-4.1.0&q=85",
+					"width": 4458,
+					"height": 6413
+				},
+				"width": 4458,
+				"height": 6413,
+				"edit": {
+					"background": "transparent",
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					}
+				},
+				"thumbnails": {}
+			},
+			"animation": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"image_fit": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			}
+		},
+		"items": []
 	}
 ]

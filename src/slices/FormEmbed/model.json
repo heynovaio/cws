@@ -36,6 +36,15 @@
             "thumbnails": []
           }
         },
+        "image_fit": {
+          "type": "Boolean",
+          "config": {
+            "label": "Image Fit",
+            "placeholder_false": "Cover",
+            "placeholder_true": "Contain",
+            "default_value": false
+          }
+        },
         "description": {
           "type": "StructuredText",
           "config": {

@@ -1,4 +1,4 @@
-import { Content } from "@prismicio/client";
+import { Content, isFilled } from "@prismicio/client";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
@@ -6,6 +6,7 @@ import { Section, Container, ResponsiveImage } from "@/components";
 import { JotformEmbed } from "@/components/JotformEmbed";
 import { GenericIframeEmbed } from "@/components/GenericIframeEmbed";
 import { ZohoFormsEmbed } from "@/components/ZohoFormsEmbed";
+import { PrismicNextImage } from "@prismicio/next";
 
 export type ContactInfoProps = SliceComponentProps<Content.ContactInfoSlice>;
 
@@ -14,8 +15,8 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
   const provider = slice.primary.form_provider ?? "JotForm";
   const formUrl = slice.primary.jotform_url;
   const sectionId = slice.primary.section_id ?? undefined;
+  const isContain = slice.primary.image_fit === true;
 
-  
   const formEmbed = formUrl ? (
     provider === "Zoho Forms" ? (
       <ZohoFormsEmbed url={formUrl} />
@@ -27,6 +28,30 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
   ) : (
     <p className="text-gray-600">Form not available right now.</p>
   );
+
+  const renderImage = (className?: string) => {
+    if (!isFilled.image(slice.primary.image)) return null;
+
+    if (isContain) {
+      return (
+        <div className={`relative w-full h-[350px] ${className ?? ""}`}>
+          <PrismicNextImage
+            field={slice.primary.image}
+            fallbackAlt=""
+            fill
+            className="object-contain rounded"
+          />
+        </div>
+      );
+    }
+
+    return (
+      <ResponsiveImage
+        image={slice.primary.image}
+        className={`rounded w-full h-[350px] object-cover ${className ?? ""}`}
+      />
+    );
+  };
 
   return (
     <Section
@@ -41,12 +66,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
             <div className="w-full md:w-2/3 md:mt-10">
               <PrismicRichText field={slice.primary.title} />
               <PrismicRichText field={slice.primary.description} />
-              {slice.primary.image && (
-                <ResponsiveImage
-                  image={slice.primary.image}
-                  className="rounded mt-6 md:mt-10 w-full h-[350px] object-cover"
-                />
-              )}
+              {renderImage("mt-6 md:mt-10")}
             </div>
             <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
               {formEmbed}
@@ -58,12 +78,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
               <PrismicRichText field={slice.primary.title} />
               <PrismicRichText field={slice.primary.description} />
             </div>
-            {slice.primary.image && (
-              <ResponsiveImage
-                image={slice.primary.image}
-                className="mt-0 rounded w-full h-[350px] object-cover"
-              />
-            )}
+            {renderImage("mt-0")}
             <div className="bg-white w-full rounded text-midnight p-6 flex justify-center items-center">
               {formEmbed}
             </div>
