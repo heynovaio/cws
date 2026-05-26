@@ -108,9 +108,9 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
         backgroundColor={slice.primary.background_color}
       >
         <Container>
-          <SplitLayout ratio={ratio as SplitLayoutRatio} flip={!contentFirst}>
-            {introContent}
-            {accordionItems}
+          <SplitLayout ratio={ratio as SplitLayoutRatio}>
+            { contentFirst ? introContent : accordionItems }
+            { contentFirst ? accordionItems : introContent }
           </SplitLayout>
         </Container>
       </Section>
