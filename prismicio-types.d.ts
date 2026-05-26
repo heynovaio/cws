@@ -1431,7 +1431,7 @@ interface ProgramPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  image: prismic.ImageField<never>;
+  image: prismic.ImageField<"Carousel Thumbnail">;
 
   /**
    * Title field in *Program Page*
@@ -1839,7 +1839,7 @@ interface ResourcePageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  image: prismic.ImageField<never>;
+  image: prismic.ImageField<"Carousel Thumbnail">;
 
   /**
    * Include Newsletter Sign Up Banner field in *Resource Page*

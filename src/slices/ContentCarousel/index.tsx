@@ -332,7 +332,13 @@ const ContentCarousel = ({
                     />
                   }
                   category={item.categoryName as string}
-                  image={item.data.image}
+                  image={
+                    item.data.image &&
+                    "Carousel Thumbnail" in item.data.image &&
+                    item.data.image["Carousel Thumbnail"]?.url
+                      ? item.data.image["Carousel Thumbnail"]
+                      : item.data.image
+                  }
                   cardType={
                     slice.variation === "programsCarousel"
                       ? "program"

@@ -26,7 +26,13 @@
         "config": {
           "label": "Image",
           "constraint": {},
-          "thumbnails": []
+          "thumbnails": [
+            {
+              "name": "Carousel Thumbnail",
+              "width": 400,
+              "height": 215
+            }
+          ]
         }
       },
       "title": {
