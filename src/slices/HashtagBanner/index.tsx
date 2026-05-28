@@ -32,7 +32,7 @@ const HashtagBanner = ({ slice }: HashtagBannerProps) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-navy-background pt-20 pb-20 overflow-hidden"
+      className="pt-20 pb-20 overflow-hidden"
     >
       <div className="neon-banner">
         <div
