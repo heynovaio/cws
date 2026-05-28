@@ -17,7 +17,10 @@
           "config": {
             "label": "Background Color",
             "placeholder": "",
-            "options": ["No Background", "Darker"],
+            "options": [
+              "No Background",
+              "Darker"
+            ],
             "default_value": "No Background"
           }
         },
@@ -49,7 +52,9 @@
                   "label": "Content",
                   "select": "document",
                   "repeat": false,
-                  "customtypes": ["program_page"]
+                  "customtypes": [
+                    "program_page"
+                  ]
                 }
               }
             }
@@ -91,7 +96,10 @@
           "config": {
             "label": "Background Color",
             "placeholder": "",
-            "options": ["No Background", "Darker"],
+            "options": [
+              "No Background",
+              "Darker"
+            ],
             "default_value": "No Background"
           }
         },
@@ -123,7 +131,9 @@
                   "label": "Content",
                   "select": "document",
                   "repeat": false,
-                  "customtypes": ["resource_page"]
+                  "customtypes": [
+                    "resource_page"
+                  ]
                 }
               }
             }
@@ -151,6 +161,94 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "manualCarousel",
+      "name": "Manual Carousel",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Manual card entry",
+      "imageUrl": "",
+      "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Darker"
+            ],
+            "default_value": "No Background"
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "Title"
+          }
+        },
+        "redirect_button": {
+          "type": "Group",
+          "config": {
+            "label": "Redirect Button",
+            "repeat": false,
+            "fields": {
+              "url": {
+                "type": "Link",
+                "config": {
+                  "label": "url",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,heading3,heading4,heading5,heading6,strong,em,hyperlink"
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true
+          }
+        },
+        "card_style": {
+          "type": "Select",
+          "config": {
+            "label": "Card Style",
+            "options": [
+              "Purple",
+              "White"
+            ],
+            "default_value": "White"
+          }
+        }
+      }
     }
   ]
 }

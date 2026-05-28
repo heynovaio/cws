@@ -16,10 +16,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.1",
     "@next/third-parties": "^15.4.7",
-    "@prismicio/client": "^7.15.1",
+    "@prismicio/client": "^7.21.8",
     "@prismicio/helpers": "^2.3.9",
     "@prismicio/next": "^1.7.1",
-    "@prismicio/react": "^2.9.1",
+    "@prismicio/react": "^3.4.1",
     "@types/negotiator": "^0.6.4",
     "clsx": "^2.1.1",
     "framer-motion": "^12.12.1",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@slicemachine/adapter-next": "^0.3.65",
+    "@slicemachine/adapter-next": "^0.3.96",
     "@tanstack/react-query": "^5.63.0",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -46,7 +46,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
     "postcss": "^8",
-    "slice-machine-ui": "^2.12.2",
+    "slice-machine-ui": "^2.21.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

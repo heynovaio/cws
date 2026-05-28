@@ -19,11 +19,11 @@ export const ResponsiveImage: React.FC<PrismicImageProps> = ({
     return null;
   }
   return (
-    <div className={clsx("relative", containerClassName)}>
+    <div className={clsx("relative overflow-hidden", containerClassName)}>
       <PrismicNextImage
         field={image}
         fallbackAlt=""
-        className={`object-cover rounded ${imageHeightClassName}`}
+        className={`object-cover object-center rounded ${imageHeightClassName}`}
         {...props}
       />
     </div>

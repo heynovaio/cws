@@ -13,7 +13,7 @@ export type TestimonialsProps = SliceComponentProps<Content.TestimonialsSlice>;
 /**
  * Component for "Testimonials" Slices.
  */
-const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
+const Testimonials = ({ slice }: TestimonialsProps): JSX.Element | null => {
   const isImageRight = slice.primary.image_side == false;
   const imageSide = isImageRight ? "md:flex-row" : "md:flex-row-reverse";
   const backgroundImageSide = !isImageRight
@@ -22,7 +22,8 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element => {
   const allTestimonials = slice.primary.testimonials;
   const displayedTestimonial =
     allTestimonials[Math.floor(Math.random() * allTestimonials.length)];
-
+  if (!allTestimonials || allTestimonials.length === 0) return null;
+  
   return (
     <Section
       data-slice-type={slice.slice_type}

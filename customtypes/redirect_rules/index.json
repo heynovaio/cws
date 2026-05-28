@@ -1,0 +1,50 @@
+{
+  "format": "custom",
+  "id": "redirect_rules",
+  "label": "Redirect Rules",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "redirect_rules": {
+        "type": "Group",
+        "config": {
+          "label": "Redirect Rules",
+          "fields": {
+            "redirect_from": {
+              "type": "Text",
+              "config": {
+                "label": "From",
+                "placeholder": "/resource/rally-report-2024"
+              }
+            },
+            "redirect_to": {
+              "type": "Text",
+              "config": {
+                "label": "To",
+                "placeholder": "/rally-2024"
+              }
+            },
+            "status": {
+              "type": "Select",
+              "config": {
+                "label": "Redirect Type",
+                "options": ["301", "302"],
+                "default_value": "301"
+              }
+            },
+            "enabled": {
+              "type": "Boolean",
+              "config": {
+                "label": "Enabled",
+                "default_value": true,
+                "placeholder_true": "Enabled",
+                "placeholder_false": "Disabled"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
