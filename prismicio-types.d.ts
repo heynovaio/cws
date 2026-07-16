@@ -4286,6 +4286,17 @@ export interface SponsorListSliceDefaultPrimary {
   cta_text: prismic.KeyTextField;
 
   /**
+   * Hide Title field in *SponsorList → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: sponsor_list.default.primary.hide_title
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  hide_title: prismic.BooleanField;
+
+  /**
    * Number of Columns field in *SponsorList → Default → Primary*
    *
    * - **Field Type**: Select

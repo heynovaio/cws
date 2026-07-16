@@ -19,6 +19,15 @@
             "placeholder": ""
           }
         },
+        "hide_title": {
+          "type": "Boolean",
+          "config": {
+            "label": "Hide Title",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
         "number_of_columns": {
           "type": "Select",
           "config": {

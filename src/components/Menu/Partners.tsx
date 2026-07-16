@@ -4,7 +4,6 @@ import Carousel, { CarouselInternalState } from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
-import { isFilled } from "@prismicio/client";
 
 import {
   ImageField,
@@ -29,6 +28,7 @@ interface PartnersProps {
   ctaText?: KeyTextField;
   carousel?: boolean;
   numberOfColumns?: number;
+  hideTitle?: boolean;
 }
 
 export const responsive = {
@@ -54,15 +54,8 @@ export const Partners = ({
   ctaText,
   carousel = true,
   numberOfColumns = 4,
+  hideTitle = false,
 }: PartnersProps) => {
-  const hasContent = Boolean(
-    isFilled.richText(title) ||
-      isFilled.richText(body) ||
-      buttons?.some((button) => isFilled.link(button)) ||
-      isFilled.keyText(ctaText)
-  );
-
-  console.log("Has content:", hasContent);
 
   const logoTiles = Array.from(
     { length: Math.ceil(logos.length / 6) },
@@ -80,10 +73,10 @@ export const Partners = ({
     <section className={carousel ? "my-16" : ""}>
       <Container
         className={`flex flex-col md:flex-row items-center gap-0 md:gap-6 ${
-          !hasContent ? "justify-center" : ""
+          hideTitle ? "justify-center" : ""
         }`}
       >
-        {hasContent && (
+        {!hideTitle && (
           <ContentBox
             title={title}
             content={
@@ -111,7 +104,7 @@ export const Partners = ({
         )}
 
         {carousel && (
-          <div className={hasContent ? "w-full md:w-2/3" : "w-full max-w-4xl mx-auto"}>
+          <div className={!hideTitle ? "w-full md:w-2/3" : "w-full max-w-4xl mx-auto"}>
             <div className="flex justify-end mb-4 mx-2">
               <CarouselButton
                 currentSlide={currentSlide + 1}
@@ -142,7 +135,7 @@ export const Partners = ({
               {logoTiles.map((tile, index) => (
                 <div
                   key={index}
-                  className={`grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16 p-1 ${hasContent ? "" : "flex justify-center"}`}
+                  className={`grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16 p-1 ${!hideTitle ? "" : "flex justify-center"}`}
                 >
                   {tile.map((logo, i) => (
                     <PrismicNextLink
@@ -153,7 +146,7 @@ export const Partners = ({
                       <PrismicNextImage
                         field={logo.logo_image}
                         className="max-h-full w-full object-contain"
-                        /* Use Prismic-provided alt; omit alt prop here by design */
+                        alt=""
                       />
                     </PrismicNextLink>
                   ))}
@@ -166,7 +159,7 @@ export const Partners = ({
         {!carousel && (
           <div
             className={
-              hasContent
+              !hideTitle
                 ? "grid grid-cols-2 md:grid-cols-[repeat(var(--sponsor-cols),minmax(0,1fr))] gap-4 md:gap-8 md:basis-2/3"
                 : "flex flex-wrap justify-center gap-4 md:gap-8 w-full"
             }
@@ -179,7 +172,7 @@ export const Partners = ({
                 key={i}
                 field={logo.logo_link}
                 className={`logo-carousel-tile aspect-square flex items-center justify-center flex-none ${
-                  hasContent
+                  !hideTitle
                     ? ""
                     : "basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-(var(--sponsor-cols)-1)*2rem)/var(--sponsor-cols))]"
                 }`}

@@ -261,6 +261,10 @@
 				"__TYPE__": "FieldContent",
 				"value": "4",
 				"type": "Select"
+			},
+			"hide_title": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": [
