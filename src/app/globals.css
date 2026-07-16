@@ -362,7 +362,7 @@
   }
 
   .logo-carousel-tile {
-    @apply flex items-center justify-center bg-white rounded-2xl p-4 h-40;
+    @apply flex items-center justify-center bg-white rounded-2xl p-4 h-32;
     &:focus {
       @apply ring-4 ring-neon-violet shadow
       outline-none;
