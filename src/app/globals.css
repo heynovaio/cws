@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   body {
     @apply text-[1rem] md:text-base text-white bg-navy-background font-normal font-body;
 
