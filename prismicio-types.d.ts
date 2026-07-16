@@ -21,32 +21,30 @@ type PickContentRelationshipFieldData<
 > =
   // Content relationship fields
   {
-    [TSubRelationship in Extract<
-      TRelationship["fields"][number],
-      prismic.CustomTypeModelFetchContentRelationshipLevel1
-    > as TSubRelationship["id"]]: ContentRelationshipFieldWithData<
-      TSubRelationship["customtypes"],
-      TLang
-    >;
+    [
+      TSubRelationship in Extract<
+        TRelationship["fields"][number],
+        prismic.CustomTypeModelFetchContentRelationshipLevel1
+      > as TSubRelationship["id"]
+    ]: ContentRelationshipFieldWithData<TSubRelationship["customtypes"], TLang>;
   } & // Group
   {
-    [TGroup in Extract<
-      TRelationship["fields"][number],
-      | prismic.CustomTypeModelFetchGroupLevel1
-      | prismic.CustomTypeModelFetchGroupLevel2
-    > as TGroup["id"]]: TData[TGroup["id"]] extends prismic.GroupField<
-      infer TGroupData
-    >
+    [
+      TGroup in Extract<
+        TRelationship["fields"][number],
+        | prismic.CustomTypeModelFetchGroupLevel1
+        | prismic.CustomTypeModelFetchGroupLevel2
+      > as TGroup["id"]
+    ]: TData[TGroup["id"]] extends prismic.GroupField<infer TGroupData>
       ? prismic.GroupField<
           PickContentRelationshipFieldData<TGroup, TGroupData, TLang>
         >
       : never;
   } & // Other fields
   {
-    [TFieldKey in Extract<
-      TRelationship["fields"][number],
-      string
-    >]: TFieldKey extends keyof TData ? TData[TFieldKey] : never;
+    [
+      TFieldKey in Extract<TRelationship["fields"][number], string>
+    ]: TFieldKey extends keyof TData ? TData[TFieldKey] : never;
   };
 
 type ContentRelationshipFieldWithData<
@@ -55,10 +53,9 @@ type ContentRelationshipFieldWithData<
     | readonly (prismic.CustomTypeModelFetchCustomTypeLevel2 | string)[],
   TLang extends string = string,
 > = {
-  [ID in Exclude<
-    TCustomType[number],
-    string
-  >["id"]]: prismic.ContentRelationshipField<
+  [
+    ID in Exclude<TCustomType[number], string>["id"]
+  ]: prismic.ContentRelationshipField<
     ID,
     TLang,
     PickContentRelationshipFieldData<
@@ -203,7 +200,7 @@ interface CampaignPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<CampaignPageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<CampaignPageDocumentDataSlicesSlice>; /**
    * Meta Title field in *Campaign Page*
    *
    * - **Field Type**: Text
@@ -211,7 +208,7 @@ interface CampaignPageDocumentData {
    * - **API ID Path**: campaign_page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -254,9 +251,7 @@ export type CampaignPageDocument<Lang extends string = string> =
   >;
 
 type CareerHubDocumentDataSlicesSlice =
-  | SponsorListSlice
-  | AccordionSlice
-  | ContentGridSlice;
+  SponsorListSlice | AccordionSlice | ContentGridSlice;
 
 /**
  * Content for Career Hub documents
@@ -339,7 +334,7 @@ interface CareerHubDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<CareerHubDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<CareerHubDocumentDataSlicesSlice>; /**
    * Meta Title field in *Career Hub*
    *
    * - **Field Type**: Text
@@ -347,7 +342,7 @@ interface CareerHubDocumentData {
    * - **API ID Path**: career_hub.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -390,9 +385,7 @@ export type CareerHubDocument<Lang extends string = string> =
   >;
 
 type CareerPageDocumentDataSlicesSlice =
-  | SponsorListSlice
-  | AccordionSlice
-  | RichTextSlice;
+  SponsorListSlice | AccordionSlice | RichTextSlice;
 
 /**
  * Content for Career Page documents
@@ -477,7 +470,7 @@ interface CareerPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<CareerPageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<CareerPageDocumentDataSlicesSlice>; /**
    * Meta Title field in *Career Page*
    *
    * - **Field Type**: Text
@@ -485,7 +478,7 @@ interface CareerPageDocumentData {
    * - **API ID Path**: career_page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -528,9 +521,7 @@ export type CareerPageDocument<Lang extends string = string> =
   >;
 
 type ContactPageDocumentDataSlicesSlice =
-  | SponsorListSlice
-  | AccordionSlice
-  | ContactInfoSlice;
+  SponsorListSlice | AccordionSlice | ContactInfoSlice;
 
 /**
  * Content for Contact Page documents
@@ -602,7 +593,7 @@ interface ContactPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<ContactPageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<ContactPageDocumentDataSlicesSlice>; /**
    * Meta Title field in *Contact Page*
    *
    * - **Field Type**: Text
@@ -610,7 +601,7 @@ interface ContactPageDocumentData {
    * - **API ID Path**: contact_page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -676,7 +667,7 @@ interface GlobalsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  site_title: prismic.KeyTextField /**
+  site_title: prismic.KeyTextField; /**
    * Address field in *Globals*
    *
    * - **Field Type**: Text
@@ -684,7 +675,7 @@ interface GlobalsDocumentData {
    * - **API ID Path**: globals.address
    * - **Tab**: Contact
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   address: prismic.KeyTextField;
 
   /**
@@ -754,7 +745,7 @@ interface MenusDocumentData {
    * - **Tab**: Header
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<MenusDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<MenusDocumentDataSlicesSlice>; /**
    * Policy Link field in *Menus*
    *
    * - **Field Type**: Link
@@ -762,7 +753,7 @@ interface MenusDocumentData {
    * - **API ID Path**: menus.policy_link
    * - **Tab**: Footer
    * - **Documentation**: https://prismic.io/docs/fields/link
-   */;
+   */
   policy_link: prismic.LinkField<
     string,
     string,
@@ -887,7 +878,7 @@ interface MenusDocumentData {
    * - **Tab**: Footer
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices1: prismic.SliceZone<MenusDocumentDataSlices1Slice> /**
+  slices1: prismic.SliceZone<MenusDocumentDataSlices1Slice>; /**
    * Banner Text field in *Menus*
    *
    * - **Field Type**: Rich Text
@@ -895,7 +886,7 @@ interface MenusDocumentData {
    * - **API ID Path**: menus.banner_text
    * - **Tab**: Announcement
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */;
+   */
   banner_text: prismic.RichTextField;
 }
 
@@ -1183,7 +1174,7 @@ interface PageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<PageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<PageDocumentDataSlicesSlice>; /**
    * Meta Title field in *Page*
    *
    * - **Field Type**: Text
@@ -1191,7 +1182,7 @@ interface PageDocumentData {
    * - **API ID Path**: page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -1560,7 +1551,7 @@ interface ProgramPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<ProgramPageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<ProgramPageDocumentDataSlicesSlice>; /**
    * Meta Title field in *Program Page*
    *
    * - **Field Type**: Text
@@ -1568,7 +1559,7 @@ interface ProgramPageDocumentData {
    * - **API ID Path**: program_page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -1726,7 +1717,7 @@ interface ResourceCategoryDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
-  body: prismic.RichTextField /**
+  body: prismic.RichTextField; /**
    * Title field in *Resource Category*
    *
    * - **Field Type**: Text
@@ -1734,7 +1725,7 @@ interface ResourceCategoryDocumentData {
    * - **API ID Path**: resource_category.title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   title: prismic.KeyTextField;
 
   /**
@@ -1874,7 +1865,7 @@ interface ResourcePageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<ResourcePageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<ResourcePageDocumentDataSlicesSlice>; /**
    * Meta Title field in *Resource Page*
    *
    * - **Field Type**: Text
@@ -1882,7 +1873,7 @@ interface ResourcePageDocumentData {
    * - **API ID Path**: resource_page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -1925,10 +1916,7 @@ export type ResourcePageDocument<Lang extends string = string> =
   >;
 
 type SearchPageDocumentDataSlicesSlice =
-  | SponsorListSlice
-  | AccordionSlice
-  | TileGridSlice
-  | CallToActionSlice;
+  SponsorListSlice | AccordionSlice | TileGridSlice | CallToActionSlice;
 
 /**
  * Content for Search Page documents
@@ -2002,7 +1990,7 @@ interface SearchPageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<SearchPageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<SearchPageDocumentDataSlicesSlice>; /**
    * Meta Title field in *Search Page*
    *
    * - **Field Type**: Text
@@ -2010,7 +1998,7 @@ interface SearchPageDocumentData {
    * - **API ID Path**: search_page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -2155,7 +2143,7 @@ interface TeamMembersDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<TeamMembersDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<TeamMembersDocumentDataSlicesSlice>; /**
    * Meta Title field in *Team Members*
    *
    * - **Field Type**: Text
@@ -2163,7 +2151,7 @@ interface TeamMembersDocumentData {
    * - **API ID Path**: team_members.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -2186,7 +2174,7 @@ interface TeamMembersDocumentData {
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  meta_image: prismic.ImageField<never> /**
+  meta_image: prismic.ImageField<never>; /**
    * Slice Zone field in *Team Members*
    *
    * - **Field Type**: Slice Zone
@@ -2194,7 +2182,7 @@ interface TeamMembersDocumentData {
    * - **API ID Path**: team_members.slices2[]
    * - **Tab**: Team Members
    * - **Documentation**: https://prismic.io/docs/slices
-   */;
+   */
   slices2: prismic.SliceZone<TeamMembersDocumentDataSlices2Slice>;
 }
 
@@ -3155,8 +3143,7 @@ export type ContentColumnSliceStats = prismic.SharedSliceVariation<
  * Slice variation for *ContentColumn*
  */
 type ContentColumnSliceVariation =
-  | ContentColumnSliceDefault
-  | ContentColumnSliceStats;
+  ContentColumnSliceDefault | ContentColumnSliceStats;
 
 /**
  * ContentColumn Shared Slice
@@ -3774,9 +3761,7 @@ export type ImageTextSliceStats = prismic.SharedSliceVariation<
  * Slice variation for *ImageText*
  */
 type ImageTextSliceVariation =
-  | ImageTextSliceDefault
-  | ImageTextSliceVideo
-  | ImageTextSliceStats;
+  ImageTextSliceDefault | ImageTextSliceVideo | ImageTextSliceStats;
 
 /**
  * ImageText Shared Slice
@@ -4151,8 +4136,7 @@ export type RichTextSliceRichTextWithTable = prismic.SharedSliceVariation<
  * Slice variation for *RichText*
  */
 type RichTextSliceVariation =
-  | RichTextSliceDefault
-  | RichTextSliceRichTextWithTable;
+  RichTextSliceDefault | RichTextSliceRichTextWithTable;
 
 /**
  * RichText Shared Slice
@@ -4242,8 +4226,7 @@ export type SingleLinkSliceSingleLinkButtonIcon = prismic.SharedSliceVariation<
  * Slice variation for *SingleLink*
  */
 type SingleLinkSliceVariation =
-  | SingleLinkSliceDefault
-  | SingleLinkSliceSingleLinkButtonIcon;
+  SingleLinkSliceDefault | SingleLinkSliceSingleLinkButtonIcon;
 
 /**
  * SingleLink Shared Slice
@@ -4301,6 +4284,16 @@ export interface SponsorListSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   cta_text: prismic.KeyTextField;
+
+  /**
+   * Number of Columns field in *SponsorList → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.number_of_columns
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  number_of_columns: prismic.SelectField<"1" | "2" | "3" | "4" | "5">;
 
   /**
    * Title field in *SponsorList → Default → Primary*

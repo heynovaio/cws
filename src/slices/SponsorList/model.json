@@ -19,6 +19,20 @@
             "placeholder": ""
           }
         },
+        "number_of_columns": {
+          "type": "Select",
+          "config": {
+            "label": "Number of Columns",
+            "placeholder": "",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {

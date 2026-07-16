@@ -36,6 +36,7 @@ const SponsorList: FC<SponsorListProps> = ({ slice, index, slices }) => {
           logos={slice.primary.sponsors}
           ctaText={slice.primary.cta_text}
           carousel={false}
+          numberOfColumns={Number(slice.primary.number_of_columns) || 4}
         />
       </Container>
     </section>

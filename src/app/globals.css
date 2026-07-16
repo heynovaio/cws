@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   body {
     @apply text-[1rem] md:text-base text-white bg-navy-background font-normal font-body;
 
@@ -361,7 +362,7 @@
   }
 
   .logo-carousel-tile {
-    @apply flex items-center justify-center bg-white rounded-2xl p-4 h-32;
+    @apply flex items-center justify-center bg-white rounded-2xl p-4 h-40;
     &:focus {
       @apply ring-4 ring-neon-violet shadow
       outline-none;
