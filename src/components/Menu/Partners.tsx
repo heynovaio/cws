@@ -29,6 +29,7 @@ interface PartnersProps {
   carousel?: boolean;
   numberOfColumns?: number;
   hideTitle?: boolean;
+  centerLogo?: boolean;
 }
 
 export const responsive = {
@@ -55,8 +56,8 @@ export const Partners = ({
   carousel = true,
   numberOfColumns = 4,
   hideTitle = false,
+  centerLogo = false,
 }: PartnersProps) => {
-
   const logoTiles = Array.from(
     { length: Math.ceil(logos.length / 6) },
     (_, i) => logos.slice(i * 6, i * 6 + 6)
@@ -73,7 +74,7 @@ export const Partners = ({
     <section className={carousel ? "my-16" : ""}>
       <Container
         className={`flex flex-col md:flex-row items-center gap-0 md:gap-6 ${
-          hideTitle ? "justify-center" : ""
+          hideTitle && centerLogo ? "justify-center" : ""
         }`}
       >
         {!hideTitle && (
@@ -101,6 +102,10 @@ export const Partners = ({
               carousel ? "" : "flex basis-1/3"
             } text-center md:text-left`}
           />
+        )}
+
+        {hideTitle && !centerLogo && (
+          <div className="hidden md:block basis-1/3" aria-hidden="true" />
         )}
 
         {carousel && (
@@ -135,18 +140,17 @@ export const Partners = ({
               {logoTiles.map((tile, index) => (
                 <div
                   key={index}
-                  className={`grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16 p-1 ${!hideTitle ? "" : "flex justify-center"}`}
+                  className={`grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16 p-1 items-start ${!hideTitle ? "" : "flex justify-center"}`}
                 >
                   {tile.map((logo, i) => (
                     <PrismicNextLink
                       key={i}
                       field={logo.logo_link}
-                      className="logo-carousel-tile"
+                      className="logo-carousel-tile aspect-square self-start"
                     >
                       <PrismicNextImage
                         field={logo.logo_image}
                         className="max-h-full w-full object-contain"
-                        alt=""
                       />
                     </PrismicNextLink>
                   ))}
@@ -159,9 +163,9 @@ export const Partners = ({
         {!carousel && (
           <div
             className={
-              !hideTitle
-                ? "grid grid-cols-2 md:grid-cols-[repeat(var(--sponsor-cols),minmax(0,1fr))] gap-4 md:gap-8 md:basis-2/3"
-                : "flex flex-wrap justify-center gap-4 md:gap-8 w-full"
+              hideTitle && centerLogo
+                ? "flex flex-wrap justify-center items-start gap-4 md:gap-8 w-full"
+                : "grid grid-cols-2 md:grid-cols-[repeat(var(--sponsor-cols),minmax(0,1fr))] gap-4 md:gap-8 md:basis-2/3 items-start"
             }
             style={
               { "--sponsor-cols": numberOfColumns } as React.CSSProperties
@@ -171,15 +175,16 @@ export const Partners = ({
               <PrismicNextLink
                 key={i}
                 field={logo.logo_link}
-                className={`logo-carousel-tile aspect-square flex items-center justify-center flex-none ${
-                  !hideTitle
-                    ? ""
+                className={`logo-carousel-tile aspect-square self-start flex items-center justify-center flex-none ${
+                  hideTitle && centerLogo
+                    ? "w-32 md:w-40"
                     : "basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-(var(--sponsor-cols)-1)*2rem)/var(--sponsor-cols))]"
                 }`}
               >
                 <PrismicNextImage
                   field={logo.logo_image}
                   className="max-h-full max-w-full w-full h-full object-contain"
+                  alt=""
                 />
               </PrismicNextLink>
             ))}

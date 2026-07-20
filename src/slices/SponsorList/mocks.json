@@ -265,6 +265,10 @@
 			"hide_title": {
 				"__TYPE__": "BooleanContent",
 				"value": true
+			},
+			"centre_logo": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": [

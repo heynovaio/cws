@@ -4297,6 +4297,17 @@ export interface SponsorListSliceDefaultPrimary {
   hide_title: prismic.BooleanField;
 
   /**
+   * Centre Logo (if title is hidden) field in *SponsorList → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: sponsor_list.default.primary.centre_logo
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  centre_logo: prismic.BooleanField;
+
+  /**
    * Number of Columns field in *SponsorList → Default → Primary*
    *
    * - **Field Type**: Select

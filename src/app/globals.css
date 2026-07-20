@@ -546,6 +546,11 @@ iframe {
   @apply rounded-tr-lg rounded-br-lg;
 }
 
-.partners-non-carousel:first-child:not(:last-child) {
+/* .partners-non-carousel:first-child:not(:last-child) {
   border-bottom: 0.5px solid rgb(255 255 255 / 55%);
+} */
+
+.partners-non-carousel:has(+ .partners-non-carousel) > div {
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
