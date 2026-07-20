@@ -162,11 +162,11 @@ export const Partners = ({
 
         {!carousel && (
           <div
-            className={
+            className={`grid grid-cols-2 gap-4 md:gap-8 items-start ${
               hideTitle && centerLogo
-                ? "flex flex-wrap justify-center items-start gap-4 md:gap-8 w-full"
-                : "grid grid-cols-2 md:grid-cols-[repeat(var(--sponsor-cols),minmax(0,1fr))] gap-4 md:gap-8 md:basis-2/3 items-start"
-            }
+                ? "md:grid-cols-[repeat(var(--sponsor-cols),max-content)] justify-center justify-items-center w-full"
+                : "md:grid-cols-[repeat(var(--sponsor-cols),minmax(0,1fr))] md:basis-2/3"
+            }`}
             style={
               { "--sponsor-cols": numberOfColumns } as React.CSSProperties
             }
@@ -177,7 +177,7 @@ export const Partners = ({
                 field={logo.logo_link}
                 className={`logo-carousel-tile aspect-square self-start flex items-center justify-center flex-none ${
                   hideTitle && centerLogo
-                    ? "w-32 md:w-40"
+                    ? "aspect-square"
                     : "basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-(var(--sponsor-cols)-1)*2rem)/var(--sponsor-cols))]"
                 }`}
               >
