@@ -13,9 +13,7 @@ export type SponsorListProps = SliceComponentProps<Content.SponsorListSlice>;
 /**
  * Component for "SponsorList" Slices.
  */
-const SponsorList: FC<SponsorListProps> = ({ slice, index, slices }) => {
-  const prevSlice = slices[index - 1];
-  const hasPrevSponsorList = prevSlice?.slice_type === "sponsor_list";
+const SponsorList: FC<SponsorListProps> = ({ slice }) => {
 
   return (
     <section
@@ -25,9 +23,7 @@ const SponsorList: FC<SponsorListProps> = ({ slice, index, slices }) => {
       className="partners-non-carousel"
     >
       <Container
-        containerClassName={` py-6 ${
-          hasPrevSponsorList ? "border-t border-white border-opacity-30" : ""
-        }`}
+        containerClassName={`py-6`}
       >
         <Partners
           title={slice.primary.title}
@@ -37,6 +33,8 @@ const SponsorList: FC<SponsorListProps> = ({ slice, index, slices }) => {
           ctaText={slice.primary.cta_text}
           carousel={false}
           numberOfColumns={Number(slice.primary.number_of_columns) || 4}
+          hideTitle={slice.primary.hide_title || false}
+          centerLogo={slice.primary.centre_logo || false}
         />
       </Container>
     </section>

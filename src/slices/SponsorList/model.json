@@ -19,6 +19,24 @@
             "placeholder": ""
           }
         },
+        "hide_title": {
+          "type": "Boolean",
+          "config": {
+            "label": "Hide Title",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "centre_logo": {
+          "type": "Boolean",
+          "config": {
+            "label": "Centre Logo (if title is hidden)",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
         "number_of_columns": {
           "type": "Select",
           "config": {
