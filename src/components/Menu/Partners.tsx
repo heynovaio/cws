@@ -183,7 +183,7 @@ export const Partners = ({
               >
                 <PrismicNextImage
                   field={logo.logo_image}
-                  className="max-h-full max-w-full w-full h-full object-contain"
+                  className="max-h-full max-w-full object-contain"
                   alt=""
                 />
               </PrismicNextLink>
