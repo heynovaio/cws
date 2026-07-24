@@ -175,9 +175,9 @@ export const Partners = ({
               <PrismicNextLink
                 key={i}
                 field={logo.logo_link}
-                className={`logo-carousel-tile aspect-square self-start flex items-center justify-center flex-none ${
+                className={`logo-carousel-tile self-start flex items-center justify-center flex-none ${
                   hideTitle && centerLogo
-                    ? "aspect-square"
+                    ? ""
                     : "basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-(var(--sponsor-cols)-1)*2rem)/var(--sponsor-cols))]"
                 }`}
               >
