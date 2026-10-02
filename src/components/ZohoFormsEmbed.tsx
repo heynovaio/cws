@@ -6,15 +6,18 @@ interface ZohoFormsEmbedProps {
   minHeight?: number;
 }
 
-export const ZohoFormsEmbed = ({ url, minHeight = 900 }: ZohoFormsEmbedProps) => {
+export const ZohoFormsEmbed = ({
+  url,
+  minHeight = 900,
+}: ZohoFormsEmbedProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
   const resizeUrl = url.includes("zf_rszfm=1")
     ? url
     : url.includes("?")
-    ? `${url}&zf_rszfm=1`
-    : `${url}?zf_rszfm=1`;
+      ? `${url}&zf_rszfm=1`
+      : `${url}?zf_rszfm=1`;
 
   useEffect(() => {
     if (!containerRef.current) return;

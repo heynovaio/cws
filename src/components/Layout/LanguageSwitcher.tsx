@@ -3,7 +3,10 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { fullLangList } from "@/constants/languages";
 import type { PrismicDocument } from "@prismicio/client";
-import { translateCareersSegment, stripLeadingLocalePrefix } from "@/utils/i18nDomains";
+import {
+  translateCareersSegment,
+  stripLeadingLocalePrefix,
+} from "@/utils/i18nDomains";
 import type { ChangeEvent } from "react";
 
 import {

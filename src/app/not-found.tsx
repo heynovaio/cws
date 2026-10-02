@@ -3,26 +3,22 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-
 const STRINGS = {
   "en-ca": {
     title: "404 – Page Not Found",
-    desc:
-      "Sorry, the page you're looking for doesn't exist or may have been moved during our recent site update. Try one of the links below to get back on track.",
+    desc: "Sorry, the page you're looking for doesn't exist or may have been moved during our recent site update. Try one of the links below to get back on track.",
     home: "Visit Homepage",
     explore: "Explore & Learn",
   },
   "fr-ca": {
     title: "404 – Page non trouvée",
-    desc:
-      "Désolé, la page que vous recherchez n'existe pas ou a peut-être été déplacée lors de notre récente mise à jour du site. Essayez l'un des liens ci-dessous pour revenir sur la bonne voie.",
+    desc: "Désolé, la page que vous recherchez n'existe pas ou a peut-être été déplacée lors de notre récente mise à jour du site. Essayez l'un des liens ci-dessous pour revenir sur la bonne voie.",
     home: "Visitez la page d'accueil",
     explore: "Explorer et apprendre",
   },
 } as const;
 
 type Lang = keyof typeof STRINGS;
-
 
 function getClientLocale(): Lang {
   if (typeof window === "undefined") return "en-ca";
@@ -45,17 +41,11 @@ export default function NotFound() {
       <p className="text-lg mb-6">{t.desc}</p>
 
       <div className="flex flex-col items-center md:flex-row gap-4 justify-center">
-        <Link
-          href="/"
-          className="btn btn-primary w-fit"
-        >
+        <Link href="/" className="btn btn-primary w-fit">
           {t.home}
         </Link>
 
-        <Link
-          href="/search"
-          className="btn btn-primary w-fit"
-        >
+        <Link href="/search" className="btn btn-primary w-fit">
           {t.explore}
         </Link>
       </div>

@@ -74,7 +74,12 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
           ? (navigator.language || "").toLowerCase()
           : "";
 
-      if (htmlLang.startsWith("fr") || pathLooksFrench || absLooksFrench || navLang.startsWith("fr")) {
+      if (
+        htmlLang.startsWith("fr") ||
+        pathLooksFrench ||
+        absLooksFrench ||
+        navLang.startsWith("fr")
+      ) {
         setLocale("fr");
       } else {
         setLocale("en");
@@ -116,12 +121,23 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
   }, []);
 
   // Open a centered popup; return the window or null if blocked
-  const openCenteredPopup = (url: string, name: string, w = 740, h = 600): Window | null => {
+  const openCenteredPopup = (
+    url: string,
+    name: string,
+    w = 740,
+    h = 600
+  ): Window | null => {
     try {
       const dualLeft = (window as any).screenLeft ?? window.screenX ?? 0;
       const dualTop = (window as any).screenTop ?? window.screenY ?? 0;
-      const width = window.innerWidth ?? document.documentElement.clientWidth ?? screen.width;
-      const height = window.innerHeight ?? document.documentElement.clientHeight ?? screen.height;
+      const width =
+        window.innerWidth ??
+        document.documentElement.clientWidth ??
+        screen.width;
+      const height =
+        window.innerHeight ??
+        document.documentElement.clientHeight ??
+        screen.height;
 
       const left = Math.max(0, dualLeft + (width - w) / 2);
       const top = Math.max(0, dualTop + (height - h) / 2);

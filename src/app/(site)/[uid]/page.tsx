@@ -34,7 +34,9 @@ export async function generateMetadata({
     description: page.data.meta_description || undefined,
     openGraph: {
       title: page.data.meta_title || undefined,
-      images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
+      images: page.data.meta_image?.url
+        ? [{ url: page.data.meta_image.url }]
+        : [],
     },
   };
 }
@@ -63,12 +65,18 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       lang={lang}
       global={global.data}
       menus={menus.data}
-      partners={page.data.include_partners ? partners?.data ?? null : null}
-      include_newsletter_sign_up_banner={!!page.data.include_newsletter_sign_up_banner}
+      partners={page.data.include_partners ? (partners?.data ?? null) : null}
+      include_newsletter_sign_up_banner={
+        !!page.data.include_newsletter_sign_up_banner
+      }
     >
       <GeneralHero data={page.data} />
       <div id="next-section">
-        <SliceZone slices={page.data.slices} components={components} context={{ lang }} />
+        <SliceZone
+          slices={page.data.slices}
+          components={components}
+          context={{ lang }}
+        />
       </div>
     </Layout>
   );
@@ -76,7 +84,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
 export async function generateStaticParams() {
   const client = createClient();
-  const pages = await client.getAllByType("page", { lang: "*" }).catch(() => []);
+  const pages = await client
+    .getAllByType("page", { lang: "*" })
+    .catch(() => []);
 
   const seen = new Set<string>();
   const params: { uid: string }[] = [];
@@ -88,4 +98,3 @@ export async function generateStaticParams() {
   }
   return params;
 }
-

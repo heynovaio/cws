@@ -148,7 +148,11 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
         {hasTextContent && (
           <div className="w-full md:w-1/2 transition-all duration-700">
             <ContentBox
-              title={hasContent(slice.primary.title) ? slice.primary.title : undefined}
+              title={
+                hasContent(slice.primary.title)
+                  ? slice.primary.title
+                  : undefined
+              }
               content={
                 isStats ? (
                   <div className="flex flex-col gap-4 md:mb-4">

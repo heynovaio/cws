@@ -1,8 +1,4 @@
-import {
-  Container,
-  ContentBox,
-  Section,
-} from "@/components";
+import { Container, ContentBox, Section } from "@/components";
 import { components, hasContent } from "@/utils";
 import { Content } from "@prismicio/client";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";

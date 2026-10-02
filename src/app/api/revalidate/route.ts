@@ -18,13 +18,20 @@ export async function POST(req: Request) {
   const expected = process.env.PRISMIC_WEBHOOK_SECRET;
 
   if (expected) {
-    const body = (await req.json().catch(() => null)) as { secret?: unknown } | null;
+    const body = (await req.json().catch(() => null)) as {
+      secret?: unknown;
+    } | null;
     const received = typeof body?.secret === "string" ? body.secret : "";
     if (!secretsMatch(received, expected)) {
-      return NextResponse.json({ revalidated: false, error: "Invalid secret" }, { status: 401 });
+      return NextResponse.json(
+        { revalidated: false, error: "Invalid secret" },
+        { status: 401 }
+      );
     }
   } else {
-    console.warn("PRISMIC_WEBHOOK_SECRET is not set; /api/revalidate is unauthenticated");
+    console.warn(
+      "PRISMIC_WEBHOOK_SECRET is not set; /api/revalidate is unauthenticated"
+    );
   }
 
   revalidateTag("prismic");

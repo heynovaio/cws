@@ -14,7 +14,6 @@ export type SponsorListProps = SliceComponentProps<Content.SponsorListSlice>;
  * Component for "SponsorList" Slices.
  */
 const SponsorList: FC<SponsorListProps> = ({ slice }) => {
-
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -22,9 +21,7 @@ const SponsorList: FC<SponsorListProps> = ({ slice }) => {
       data-test-id={slice.id}
       className="partners-non-carousel"
     >
-      <Container
-        containerClassName={`py-6`}
-      >
+      <Container containerClassName={`py-6`}>
         <Partners
           title={slice.primary.title}
           body={slice.primary.body}

@@ -11,7 +11,9 @@ function normalizeHost(h?: string | null) {
     .replace(/:.*$/, "");
 }
 
-const FR_ENV = normalizeHost(process.env.NEXT_PUBLIC_DOMAIN_FR || process.env.DOMAIN_FR);
+const FR_ENV = normalizeHost(
+  process.env.NEXT_PUBLIC_DOMAIN_FR || process.env.DOMAIN_FR
+);
 
 function toAppLocale(input?: string | null): AppLocale | undefined {
   const t = (input ?? "").trim().toLowerCase();

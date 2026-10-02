@@ -7,7 +7,7 @@ import { hasContent } from "@/utils";
 import Link from "next/link";
 
 export type TagCategoryProps = SliceComponentProps<Content.TagCategorySlice> & {
-  context: { tags?: string[], pageType?: string };
+  context: { tags?: string[]; pageType?: string };
 };
 
 const TagCategory: FC<TagCategoryProps> = ({ slice, context }) => {
@@ -28,14 +28,16 @@ const TagCategory: FC<TagCategoryProps> = ({ slice, context }) => {
       <Container>
         <ContentBox
           title={hasTitle ? slice.primary.title : undefined}
-          content={hasBody ? <PrismicRichText field={slice.primary.body} /> : undefined}
+          content={
+            hasBody ? <PrismicRichText field={slice.primary.body} /> : undefined
+          }
           width="standard"
           buttons={
             hasTags
               ? tags.map((tag, index) => (
                   <Link
                     key={index}
-                    href={'/search?tags=' + tag}
+                    href={"/search?tags=" + tag}
                     className="btn btn-tertiary"
                   >
                     {tag}

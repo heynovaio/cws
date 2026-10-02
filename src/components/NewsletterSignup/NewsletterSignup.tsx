@@ -33,11 +33,28 @@ function splitName(full: string) {
 
 // Map various common Prismic field names to a semantic key we’ll use to build Mailchimp fields.
 const NAME_HINTS = new Set([
-  "name", "full_name", "fullname", "full-name",
-  "nom", "prenom_nom"
+  "name",
+  "full_name",
+  "fullname",
+  "full-name",
+  "nom",
+  "prenom_nom",
 ]);
-const FNAME_HINTS = new Set(["fname", "first_name", "first-name", "first", "prenom"]);
-const LNAME_HINTS = new Set(["lname", "last_name", "last-name", "last", "surname", "nom_de_famille"]);
+const FNAME_HINTS = new Set([
+  "fname",
+  "first_name",
+  "first-name",
+  "first",
+  "prenom",
+]);
+const LNAME_HINTS = new Set([
+  "lname",
+  "last_name",
+  "last-name",
+  "last",
+  "surname",
+  "nom_de_famille",
+]);
 
 const NewsletterSignupBanner = ({ lang }: Props) => {
   const { newsletterSignupData, isLoading } = useNewsletterSignupData(lang);
@@ -139,7 +156,9 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
     // First pass: capture explicit FNAME/LNAME if they exist
     form_field.forEach((field: NewsletterField, index: number) => {
       const name = (field.name ?? `field-${index}`).toLowerCase();
-      const val = ((formData.get(field.name ?? `field-${index}`) as string) || "").trim();
+      const val = (
+        (formData.get(field.name ?? `field-${index}`) as string) || ""
+      ).trim();
       if (!val) return;
 
       if (name === "email" || (field.type ?? "").toLowerCase() === "email") {
@@ -160,7 +179,9 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
         if (type === "checkbox") continue;
 
         if (NAME_HINTS.has(name)) {
-          const full = ((formData.get(field.name ?? `field-${i}`) as string) || "").trim();
+          const full = (
+            (formData.get(field.name ?? `field-${i}`) as string) || ""
+          ).trim();
           if (full) {
             const parts = splitName(full);
             FNAME = parts.FNAME;
@@ -264,7 +285,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
 
                 const fieldName = field.name ?? `field-${index}`;
                 const fieldType =
-                  (field.name?.toLowerCase() === "email" || rawType === "email")
+                  field.name?.toLowerCase() === "email" || rawType === "email"
                     ? "email"
                     : "text";
                 const fieldLabel = field.label ?? "Untitled Field";

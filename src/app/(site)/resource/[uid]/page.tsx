@@ -25,7 +25,9 @@ export async function generateMetadata({
   const lang = await getServerLocale();
   const client = createClient();
 
-  const page = await client.getByUID("resource_page", uid, { lang }).catch(() => null);
+  const page = await client
+    .getByUID("resource_page", uid, { lang })
+    .catch(() => null);
   if (!page) return {};
 
   return {
@@ -36,7 +38,9 @@ export async function generateMetadata({
     description: page.data.meta_description || undefined,
     openGraph: {
       title: page.data.meta_title || undefined,
-      images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
+      images: page.data.meta_image?.url
+        ? [{ url: page.data.meta_image.url }]
+        : [],
     },
   };
 }
@@ -47,7 +51,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   const client = createClient();
 
-  const page = await client.getByUID("resource_page", uid, { lang }).catch(() => null);
+  const page = await client
+    .getByUID("resource_page", uid, { lang })
+    .catch(() => null);
   if (!page) notFound();
 
   const [global, menus, partners] = await Promise.all([
@@ -66,14 +72,16 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         ? "Équité de genre en action"
         : "Gender Equity in Action"
       : lang === "fr-ca"
-      ? "Voies de soutien"
-      : "Support Pathways";
+        ? "Voies de soutien"
+        : "Support Pathways";
 
   let categoryDoc: ResourceCategoryDocument | null = null;
-  const category = (page.data).category;
+  const category = page.data.category;
   if (category && category.link_type === "Document" && category.uid) {
     try {
-      categoryDoc = await client.getByUID("resource_category", category.uid, { lang });
+      categoryDoc = await client.getByUID("resource_category", category.uid, {
+        lang,
+      });
     } catch {
       console.warn("Not Found:", category);
     }
@@ -87,8 +95,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           label: categoryLabel,
           href:
             page.data.category && "id" in page.data.category
-              ? (page.data.category).id &&
-                `/search?filter=resource_page&resource_categories=${(page.data.category).id}`
+              ? page.data.category.id &&
+                `/search?filter=resource_page&resource_categories=${page.data.category.id}`
               : undefined,
         }
       : null,
@@ -103,11 +111,24 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           lang={lang}
           global={global.data}
           menus={menus.data}
-          partners={page.data.include_partners ? partners?.data ?? null : null}
-          include_newsletter_sign_up_banner={!!page.data.include_newsletter_sign_up_banner}
+          partners={
+            page.data.include_partners ? (partners?.data ?? null) : null
+          }
+          include_newsletter_sign_up_banner={
+            !!page.data.include_newsletter_sign_up_banner
+          }
         >
-          <Intro type="resource" pageData={page.data} links={links} lang={lang} />
-          <SliceZone slices={page.data.slices} components={components} context={{ lang, tags: resourceTags }} />
+          <Intro
+            type="resource"
+            pageData={page.data}
+            links={links}
+            lang={lang}
+          />
+          <SliceZone
+            slices={page.data.slices}
+            components={components}
+            context={{ lang, tags: resourceTags }}
+          />
         </Layout>
       </CategoryFilterProvider>
     </Suspense>
@@ -116,7 +137,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
 export async function generateStaticParams() {
   const client = createClient();
-  const pages = await client.getAllByType("resource_page", { lang: "*" }).catch(() => []);
+  const pages = await client
+    .getAllByType("resource_page", { lang: "*" })
+    .catch(() => []);
 
   const seen = new Set<string>();
   const params: { uid: string }[] = [];

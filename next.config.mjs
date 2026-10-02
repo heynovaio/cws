@@ -22,12 +22,27 @@ const LEGACY_PAIRS = [
   ["/our-impact/", "/our-impact"],
   ["/news/", "/search"],
   ["/rally-2024/", "/resource/rally-report-2024"],
-  ["/learning-opportunities/e-learning/gender-equity-lens/", "/program/gender-equity-lens"],
-  ["/learning-opportunities/presentations/long-term-development-for-women-and-girls/", "/program/retaining-girls-in-sport"],
-  ["/canadian-girls-sport-participation-on-the-rise-but-still-lags-behind-boys-according-to-new-research/", "/resource/girls-sport-participation-research"],
+  [
+    "/learning-opportunities/e-learning/gender-equity-lens/",
+    "/program/gender-equity-lens",
+  ],
+  [
+    "/learning-opportunities/presentations/long-term-development-for-women-and-girls/",
+    "/program/retaining-girls-in-sport",
+  ],
+  [
+    "/canadian-girls-sport-participation-on-the-rise-but-still-lags-behind-boys-according-to-new-research/",
+    "/resource/girls-sport-participation-research",
+  ],
   ["/rally-report-2024-virtual-learning-series/", "/the-rally-report-2024"],
-  ["/statement-on-trans-inclusion-in-sport/", "/resource/trans-inclusion-in-sport"],
-  ["/folgers-coffee-launches-bold-moves-bold-coffee-campaign-with-tennis-star-leylah-fernandez/", "/resource/folgers-coffee-launches-campaign-with-leylah-fernandez"],
+  [
+    "/statement-on-trans-inclusion-in-sport/",
+    "/resource/trans-inclusion-in-sport",
+  ],
+  [
+    "/folgers-coffee-launches-bold-moves-bold-coffee-campaign-with-tennis-star-leylah-fernandez/",
+    "/resource/folgers-coffee-launches-campaign-with-leylah-fernandez",
+  ],
   ["/news/newsletter/", "/connect-with-us"],
   ["/privacy-policy/", "/policies-and-bylaws"],
   ["/about/vision-mission-values/", "/about"],
@@ -46,11 +61,17 @@ const LEGACY_PAIRS = [
   ["/work-with-us/workshops-and-presentations/", "/our-programs"],
   ["/learning-opportunities/e-learning/", "/search"],
   ["/learning-opportunities/webinars/", "/search"],
-  ["/learning-opportunities/webinars/gender-equity-in-coaching/", "/program/gender-equity-in-coaching"],
+  [
+    "/learning-opportunities/webinars/gender-equity-in-coaching/",
+    "/program/gender-equity-in-coaching",
+  ],
   ["/work-with-us/consulting/", "/custom-support"],
   ["/work-with-us/gender-equity-playbook/", "/program/gender-equity-playbook"],
   ["/work-with-us/speaking-engagements/", "/our-programs"],
-  ["/canadian-women-sport-appoints-advisory-group-to-ensure-maximum-impact-for-commercial-opportunities-of-professional-womens-sport-in-canada/", "/search"],
+  [
+    "/canadian-women-sport-appoints-advisory-group-to-ensure-maximum-impact-for-commercial-opportunities-of-professional-womens-sport-in-canada/",
+    "/search",
+  ],
   ["/rally-report-2022/", "/resource/the-rally-report-2022"],
   ["/our-impact/impact-report-2023-2024/", "/resource/23-24-impact-report"],
   ["/impact-report/", "/our-impact"],
@@ -60,12 +81,18 @@ const LEGACY_PAIRS = [
   ["/manager-partnerships/", "/career"],
   ["/body-confident-sport-movement/", "/search"],
   ["/director-finance-operations/", "/career"],
-  ["/canadas-women-olympians-and-paralympians-ready-to-grab-the-spotlight/", "/resource/canadas-women-olympians-and-paralympians-ready-to-"],
+  [
+    "/canadas-women-olympians-and-paralympians-ready-to-grab-the-spotlight/",
+    "/resource/canadas-women-olympians-and-paralympians-ready-to-",
+  ],
   ["/manager-partnerships-engagement/", "/career"],
   ["/news/page/2/", "/search"],
   ["/news/page/3/", "/search"],
   ["/news/page/17/", "/search"],
-  ["/resources/tools/maximizing-the-impact-of-gender-equity-diversity-and-inclusion-training/", "/search"],
+  [
+    "/resources/tools/maximizing-the-impact-of-gender-equity-diversity-and-inclusion-training/",
+    "/search",
+  ],
   ["/topic/allyship-and-advocacy/", "/about"],
   ["/topic/best-practices-for-organizations/", "/search"],
   ["/topic/coaching-and-designing-for-girls/", "/search"],
@@ -78,57 +105,153 @@ const LEGACY_PAIRS = [
   ["/resources/publications/she-belongs/", "/resource/she-belongs"],
   ["/resources/publications/engaging-newcomers-handbook/", "/search"],
   ["/resources/publications/actively-engaging-women-and-girls/", "/search"],
-  ["/resources/publications/good-practices-for-gender-equitable-boards/", "/search"],
-  ["/resources/publications/women-on-boards-guide-to-getting-involved/", "/program/women-on-boards-workshop"],
+  [
+    "/resources/publications/good-practices-for-gender-equitable-boards/",
+    "/search",
+  ],
+  [
+    "/resources/publications/women-on-boards-guide-to-getting-involved/",
+    "/program/women-on-boards-workshop",
+  ],
   ["/resources/publications/leading-the-way/", "/search"],
   ["/resources/publications/women-55-70/", "/search"],
   ["/resources/publications/on-the-move-handbook/", "/search"],
-  ["/resources/research-insights/rally-report-2024-a-call-to-reimagine-sport-so-all-girls-can-play/", "/the-rally-report-2024"],
-  ["/resources/research-insights/rally-report-2022-a-call-for-better-safer-sport-for-girls/", "/the-rally-report-2024"],
-  ["/resources/research-insights/the-pandemic-impact-on-girls-in-sport/", "/search"],
-  ["/resources/research-insights/the-sporting-experiences-of-bipoc-women-girls-in-canada/", "/search"],
+  [
+    "/resources/research-insights/rally-report-2024-a-call-to-reimagine-sport-so-all-girls-can-play/",
+    "/the-rally-report-2024",
+  ],
+  [
+    "/resources/research-insights/rally-report-2022-a-call-for-better-safer-sport-for-girls/",
+    "/the-rally-report-2024",
+  ],
+  [
+    "/resources/research-insights/the-pandemic-impact-on-girls-in-sport/",
+    "/search",
+  ],
+  [
+    "/resources/research-insights/the-sporting-experiences-of-bipoc-women-girls-in-canada/",
+    "/search",
+  ],
   ["/resources/research-insights/rally-report/", "/the-rally-report-2024"],
-  ["/resources/research-insights/leadership-snapshot/", "/leadership-spotlight"],
-  ["/resources/research-insights/fuelling-a-lifetime-of-participation/", "/search"],
-  ["/resources/research-insights/trans-inclusion-in-sport/", "/resource/trans-inclusion-in-sport"],
-  ["/resources/research-insights/seeing-the-invisible-homophobia-in-sport/", "/search"],
-  ["/resources/tools/the-experiences-of-elite-athletes-during-pregnancy/", "/search"],
-  ["/resources/tools/gender-equity-in-coaching/", "/program/gender-equity-in-coaching"],
-  ["/resources/tools/using-gender-equity-as-a-tool-to-combat-gender-based-violence-in-sport/", "/search"],
+  [
+    "/resources/research-insights/leadership-snapshot/",
+    "/leadership-spotlight",
+  ],
+  [
+    "/resources/research-insights/fuelling-a-lifetime-of-participation/",
+    "/search",
+  ],
+  [
+    "/resources/research-insights/trans-inclusion-in-sport/",
+    "/resource/trans-inclusion-in-sport",
+  ],
+  [
+    "/resources/research-insights/seeing-the-invisible-homophobia-in-sport/",
+    "/search",
+  ],
+  [
+    "/resources/tools/the-experiences-of-elite-athletes-during-pregnancy/",
+    "/search",
+  ],
+  [
+    "/resources/tools/gender-equity-in-coaching/",
+    "/program/gender-equity-in-coaching",
+  ],
+  [
+    "/resources/tools/using-gender-equity-as-a-tool-to-combat-gender-based-violence-in-sport/",
+    "/search",
+  ],
   ["/resources/tools/same-game/", "/program/same-game-challenge"],
-  ["/resources/tools/what-is-intersectionality/", "/resource/what-is-intersectionality"],
-  ["/resources/tools/what-is-unconscious-bias/", "/resource/what-is-unconscious-bias"],
-  ["/resources/tools/what-is-gender-equity/", "/resource/what-is-gender-equity"],
-  ["/resources/tools/gender-equity-policy-template/", "/resource/gender-equity-policy-template"],
-  ["/resources/tools/how-to-apply-a-gender-lens-to-decision-making/", "/resource/how-to-apply-a-gender-lens-to-decision-making"],
+  [
+    "/resources/tools/what-is-intersectionality/",
+    "/resource/what-is-intersectionality",
+  ],
+  [
+    "/resources/tools/what-is-unconscious-bias/",
+    "/resource/what-is-unconscious-bias",
+  ],
+  [
+    "/resources/tools/what-is-gender-equity/",
+    "/resource/what-is-gender-equity",
+  ],
+  [
+    "/resources/tools/gender-equity-policy-template/",
+    "/resource/gender-equity-policy-template",
+  ],
+  [
+    "/resources/tools/how-to-apply-a-gender-lens-to-decision-making/",
+    "/resource/how-to-apply-a-gender-lens-to-decision-making",
+  ],
   ["/resources/tools/page/2/", "/search"],
-  ["/resources/case-studies/forward-together-sport-leaders-share-their-gender-equity-journeys/", "/search"],
-  ["/resources/case-studies/second-generation-african-canadian-teen-girls-sport-experiences/", "/search"],
+  [
+    "/resources/case-studies/forward-together-sport-leaders-share-their-gender-equity-journeys/",
+    "/search",
+  ],
+  [
+    "/resources/case-studies/second-generation-african-canadian-teen-girls-sport-experiences/",
+    "/search",
+  ],
   ["/resources/case-studies/squash-bc/", "/search"],
   ["/resources/case-studies/coach-nb/", "/search"],
   ["/resources/case-studies/ontario-basketball/", "/search"],
   ["/resources/case-studies/nwt-soccer/", "/search"],
   ["/resources/case-studies/judo-canada/", "/search"],
   ["/resources/case-studies/storm-selects-lacrosse/", "/search"],
-  ["/resources/case-studies/gender-equity-is-good-governance-lessons-from-the-sport-sector/", "/search"],
-  ["/learning-opportunities/presentations/lgbtqi2s-inclusion-in-sport/", "/search"],
-  ["/learning-opportunities/presentations/women-in-sport-leadership/", "/program/women-in-sport-leadership"],
-  ["/learning-opportunities/presentations/gender-equity-lens-debrief-session/", "/program/gender-equity-lens-debrief"],
-  ["/learning-opportunities/presentations/women-on-boards-for-organizations/", "/program/women-on-boards-workshop"],
-  ["/learning-opportunities/e-learning/keeping-girls-in-sport-e-module/", "/our-programs"],
-  ["/learning-opportunities/webinars/the-sporting-experiences-of-bipoc-women-girls-in-canada/", "/search"],
-  ["/learning-opportunities/webinars/sport-leaders-share-gender-equity-journey/", "/search"],
-  ["/learning-opportunities/webinars/understanding-same-game/", "/program/same-game-challenge"],
+  [
+    "/resources/case-studies/gender-equity-is-good-governance-lessons-from-the-sport-sector/",
+    "/search",
+  ],
+  [
+    "/learning-opportunities/presentations/lgbtqi2s-inclusion-in-sport/",
+    "/search",
+  ],
+  [
+    "/learning-opportunities/presentations/women-in-sport-leadership/",
+    "/program/women-in-sport-leadership",
+  ],
+  [
+    "/learning-opportunities/presentations/gender-equity-lens-debrief-session/",
+    "/program/gender-equity-lens-debrief",
+  ],
+  [
+    "/learning-opportunities/presentations/women-on-boards-for-organizations/",
+    "/program/women-on-boards-workshop",
+  ],
+  [
+    "/learning-opportunities/e-learning/keeping-girls-in-sport-e-module/",
+    "/our-programs",
+  ],
+  [
+    "/learning-opportunities/webinars/the-sporting-experiences-of-bipoc-women-girls-in-canada/",
+    "/search",
+  ],
+  [
+    "/learning-opportunities/webinars/sport-leaders-share-gender-equity-journey/",
+    "/search",
+  ],
+  [
+    "/learning-opportunities/webinars/understanding-same-game/",
+    "/program/same-game-challenge",
+  ],
   ["/learning-opportunities/webinars/we-are-sport-mental-health/", "/search"],
-  ["/learning-opportunities/webinars/we-are-sport-diversity-leadership/", "/search"],
-  ["/learning-opportunities/webinars/we-are-sport-lgbtqi2s-inclusion/", "/search"],
+  [
+    "/learning-opportunities/webinars/we-are-sport-diversity-leadership/",
+    "/search",
+  ],
+  [
+    "/learning-opportunities/webinars/we-are-sport-lgbtqi2s-inclusion/",
+    "/search",
+  ],
   ["/learning-opportunities/webinars/redefining-risk-taking/", "/search"],
   ["/learning-opportunities/webinars/creating-a-safe-environment/", "/search"],
   ["/learning-opportunities/webinars/positive-team-culture/", "/search"],
   ["/learning-opportunities/webinars/page/2/", "/search"],
   ["/the-next-play/", "/program/the-next-play"],
   ["/national-same-game-challenge/", "/program/same-game-challenge"],
-  ["/canadian-women-sport-releases-findings-from-women-in-sport-leadership-snapshot-2023/", "/leadership-spotlight"],
+  [
+    "/canadian-women-sport-releases-findings-from-women-in-sport-leadership-snapshot-2023/",
+    "/leadership-spotlight",
+  ],
   ["/spotlight-grant/", "/program/spotlight-grant"],
   ["/25-million-investment-from-government-of-canada/", "/search"],
   ["/pro-sports-2023/", "/pro-sports"],
@@ -137,22 +260,49 @@ const LEGACY_PAIRS = [
   ["/board-of-directors-2024-call-for-nominations/", "/team"],
   ["/position-available-business-operations-internship-co-op/", "/career"],
   ["/job-posting-director-marketing-communications/", "/career"],
-  ["/the-same-game-challenge-applications-now-open-for-sport-organizations/", "/resource/applications-now-open-for-sport-organizations-across-canada"],
-  ["/the-next-play-50-ontario-organizations-commit-to-make-a-difference-for-girls-in-sport/", "/resource/the-next-play-50-ontario-organizations-commit-to-m"],
-  ["/17-million-canadians-consider-themselves-fans-of-womens-sport-according-to-new-research/", "/resource/17-million-canadians-consider-themselves-fans-ofwo"],
-  ["/canadian-women-sport-to-expand-its-program-facilitators-and-consultants-team/", "/our-facilitators--consultants"],
-  ["/ontario-government-invests-in-the-next-play-and-creates-opportunities-for-women-and-girls-in-sport-and-recreation/", "/resource/ontario-government-invests-in-the-next-play-for-20"],
-  ["/inspiring-inclusion-on-international-womens-day/", "/resource/international-womens-day-2025"],
+  [
+    "/the-same-game-challenge-applications-now-open-for-sport-organizations/",
+    "/resource/applications-now-open-for-sport-organizations-across-canada",
+  ],
+  [
+    "/the-next-play-50-ontario-organizations-commit-to-make-a-difference-for-girls-in-sport/",
+    "/resource/the-next-play-50-ontario-organizations-commit-to-m",
+  ],
+  [
+    "/17-million-canadians-consider-themselves-fans-of-womens-sport-according-to-new-research/",
+    "/resource/17-million-canadians-consider-themselves-fans-ofwo",
+  ],
+  [
+    "/canadian-women-sport-to-expand-its-program-facilitators-and-consultants-team/",
+    "/our-facilitators--consultants",
+  ],
+  [
+    "/ontario-government-invests-in-the-next-play-and-creates-opportunities-for-women-and-girls-in-sport-and-recreation/",
+    "/resource/ontario-government-invests-in-the-next-play-for-20",
+  ],
+  [
+    "/inspiring-inclusion-on-international-womens-day/",
+    "/resource/international-womens-day-2025",
+  ],
   ["/news/page/4/", "/search"],
-  ["/52-sport-organizations-make-strides-forward-in-gender-equity-with-the-same-game-challenge/", "/search"],
-  ["/to-transgender-girls-and-women-across-canada-you-belong-in-sport/", "/resource/trans-inclusion-in-sport"],
+  [
+    "/52-sport-organizations-make-strides-forward-in-gender-equity-with-the-same-game-challenge/",
+    "/search",
+  ],
+  [
+    "/to-transgender-girls-and-women-across-canada-you-belong-in-sport/",
+    "/resource/trans-inclusion-in-sport",
+  ],
   ["/position-available-manager-finance-operations/", "/career"],
   ["/job-posting-coordinator-programs/", "/career"],
   ["/job-posting-manager-instructional-design-education-training/", "/career"],
   ["/job-posting-manager-programs/", "/career"],
   ["/job-posting-2023-product-manager-microsoft-365-web/", "/career"],
   ["/job-posting-2023-product-manager-salesforce-bubble/", "/career"],
-  ["/canadian-women-sport-announces-third-cohort-of-same-game-challenge/", "/program/same-game-challenge"],
+  [
+    "/canadian-women-sport-announces-third-cohort-of-same-game-challenge/",
+    "/program/same-game-challenge",
+  ],
   ["/safe-sport-in-canada/", "/"],
   ["/news/page/5/", "/"],
   ["/she-leads-by-sport/", "/search"],
@@ -163,20 +313,35 @@ const LEGACY_PAIRS = [
   ["/news/page/16/", "/search"],
   ["/news/page/15/", "/search"],
   ["/topic/allyship-and-advocacy/page/2/", "/search"],
-  ["/learning-opportunities/webinars/directing-change-dina-bell-laroche/", "/search"],
+  [
+    "/learning-opportunities/webinars/directing-change-dina-bell-laroche/",
+    "/search",
+  ],
   ["/resources/tools/female-coach-mentorship-model/", "/search"],
-  ["/resources/tools/gender-equity-committee-terms-of-reference/", "/resource/gender-equity-committee-terms-of-reference"],
+  [
+    "/resources/tools/gender-equity-committee-terms-of-reference/",
+    "/resource/gender-equity-committee-terms-of-reference",
+  ],
   ["/topic/best-practices-for-organizations/page/2/", "/search"],
   ["/topic/best-practices-for-organizations/page/3/", "/search"],
   ["/topic/best-practices-for-organizations/page/4/", "/search"],
-  ["/learning-opportunities/webinars/empowering-girls-through-positive-coaching/", "/search"],
+  [
+    "/learning-opportunities/webinars/empowering-girls-through-positive-coaching/",
+    "/search",
+  ],
   ["/topic/coaching-and-designing-for-girls/page/2/", "/search"],
-  ["/learning-opportunities/webinars/supporting-newcomer-girls-through-sport/", "/search"],
+  [
+    "/learning-opportunities/webinars/supporting-newcomer-girls-through-sport/",
+    "/search",
+  ],
   ["/topic/diversity-of-girls-and-women/page/2/", "/search"],
   ["/topic/leadership-development/page/2/", "/search"],
   ["/world-rugby-ban-of-trans-women/", "/search"],
   ["/gender-equity/what-is-gender-equity/", "/resource/what-is-gender-equity"],
-  ["/stepping-up-to-get-more-women-into-the-game-what-organizations-can-do-to-support-women-in-coaching/", "/search"],
+  [
+    "/stepping-up-to-get-more-women-into-the-game-what-organizations-can-do-to-support-women-in-coaching/",
+    "/search",
+  ],
   ["/gender-equity/benefits-of-gender-equity/", "/search"],
   ["/how-our-custom-consultations-support-organizations/", "/custom-support"],
   ["/meet-the-2023-disruptor-award-winners/", "/search"],
@@ -186,14 +351,29 @@ const LEGACY_PAIRS = [
   ["/interactive/same-game/story.html", "/"],
   ["/resources/tools/gender-equity-self-assessment-tool-community/", "/search"],
   ["/we-are-sport-conversations-with-bipoc-leaders/", "/"],
-  ["/learning-opportunities/webinars/supporting-newcomer-girls-through-sport-fr/", "/search"],
-  ["/learning-opportunities/webinars/joining-a-board-rochelle-grayson/", "/search"],
+  [
+    "/learning-opportunities/webinars/supporting-newcomer-girls-through-sport-fr/",
+    "/search",
+  ],
+  [
+    "/learning-opportunities/webinars/joining-a-board-rochelle-grayson/",
+    "/search",
+  ],
   ["/about/same-game-challenge-interest/", "/program/same-game-challenge"],
   ["/about/the-next-play/", "/program/the-next-play"],
   ["/year-in-review/", "/resource/2023-year-in-review"],
-  ["/46-sport-organizations-make-gender-equity-a-priority-with-the-same-game-challenge/", "/search"],
-  ["/government-of-canada-announces-new-funding-to-support-womens-professional-sport-movement/", "/search"],
-  ["/book-a-gender-equity-workshop-now-to-secure-2023-pricing/", "/program/gender-equity-playbook"],
+  [
+    "/46-sport-organizations-make-gender-equity-a-priority-with-the-same-game-challenge/",
+    "/search",
+  ],
+  [
+    "/government-of-canada-announces-new-funding-to-support-womens-professional-sport-movement/",
+    "/search",
+  ],
+  [
+    "/book-a-gender-equity-workshop-now-to-secure-2023-pricing/",
+    "/program/gender-equity-playbook",
+  ],
   ["/canadian-women-sport-welcomes-new-board-chair-and-vice-chair/", "/search"],
   ["/fall-2023-programming/", "/"],
   ["/ncw-2023/", "/"],
@@ -203,7 +383,9 @@ const LEGACY_PAIRS = [
 
 async function fetchPrismicRedirects() {
   const prismic = await import("@prismicio/client");
-  const sm = await import("./slicemachine.config.json", { with: { type: "json" } });
+  const sm = await import("./slicemachine.config.json", {
+    with: { type: "json" },
+  });
 
   const client = prismic.createClient(sm.default.repositoryName, {
     fetchOptions: { cache: "no-store" },
@@ -213,7 +395,9 @@ async function fetchPrismicRedirects() {
   try {
     doc = await client.getSingle("redirect_rules");
   } catch {
-    console.warn("[redirects] No redirect_rules document found in Prismic — skipping.");
+    console.warn(
+      "[redirects] No redirect_rules document found in Prismic — skipping."
+    );
     return [];
   }
 

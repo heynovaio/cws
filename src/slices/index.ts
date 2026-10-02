@@ -18,7 +18,7 @@ export const components = {
   sponsor_list: dynamic(() => import("./SponsorList")),
   tabbed_carousel: dynamic(() => import("./TabbedCarousel")),
   tabbed_content_sticky_image: dynamic(
-    () => import("./TabbedContentStickyImage"),
+    () => import("./TabbedContentStickyImage")
   ),
   tag_category: dynamic(() => import("./TagCategory")),
   team_list: dynamic(() => import("./TeamList")),

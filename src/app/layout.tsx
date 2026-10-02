@@ -14,8 +14,8 @@ const outfit = Outfit({
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const appLocale = await getServerLocale();   
-  const htmlLang = toHtmlLang(appLocale);        
+  const appLocale = await getServerLocale();
+  const htmlLang = toHtmlLang(appLocale);
 
   return (
     <html lang={htmlLang} className={`${outfit.variable} font-sans`}>

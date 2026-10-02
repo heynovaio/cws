@@ -7,3 +7,5 @@ public
 customtypes
 src/slices/**/model.json
 src/slices/**/mocks.json
+.claude
+*.md

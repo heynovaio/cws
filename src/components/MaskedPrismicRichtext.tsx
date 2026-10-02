@@ -1,8 +1,14 @@
-import { PrismicRichText, type PrismicRichTextProps, type JSXMapSerializer } from "@prismicio/react";
+import {
+  PrismicRichText,
+  type PrismicRichTextProps,
+  type JSXMapSerializer,
+} from "@prismicio/react";
 import { isFilled, type LinkField } from "@prismicio/client";
 import { PrismicNextLink as MaskedPrismicNextLink } from "@/components/PrismicNextLink";
 
-type Props = Omit<PrismicRichTextProps, "components"> & { components?: JSXMapSerializer };
+type Props = Omit<PrismicRichTextProps, "components"> & {
+  components?: JSXMapSerializer;
+};
 
 export function MaskedPrismicRichText({ components, ...rest }: Props) {
   const hyperlink: JSXMapSerializer["hyperlink"] = ({ node, children }) => {
@@ -22,5 +28,7 @@ export function MaskedPrismicRichText({ components, ...rest }: Props) {
     );
   };
 
-  return <PrismicRichText {...rest} components={{ hyperlink, ...components }} />;
+  return (
+    <PrismicRichText {...rest} components={{ hyperlink, ...components }} />
+  );
 }

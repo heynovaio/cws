@@ -69,8 +69,12 @@ const MultiLinkColumn = ({ slice }: MultiLinkColumnProps): JSX.Element => {
                     components={footerComponentStyling}
                   />
                   <div>
-                    <FaPlus className={`h-4 w-4 font-bold ${open ? "hidden" : ""}`} />
-                    <FaMinus className={`h-4 w-4 font-bold ${open ? "" : "hidden"}`} />
+                    <FaPlus
+                      className={`h-4 w-4 font-bold ${open ? "hidden" : ""}`}
+                    />
+                    <FaMinus
+                      className={`h-4 w-4 font-bold ${open ? "" : "hidden"}`}
+                    />
                   </div>
                 </DisclosureButton>
                 <DisclosurePanel className="pl-2 flex flex-col gap-5 mb-3 transition duration-200 ease-out text-center">

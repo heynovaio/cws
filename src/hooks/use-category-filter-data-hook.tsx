@@ -5,6 +5,6 @@ export const useCategoryFilterData = () => {
 
   return {
     resources,
-    programs
+    programs,
   };
 };

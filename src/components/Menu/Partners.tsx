@@ -109,7 +109,11 @@ export const Partners = ({
         )}
 
         {carousel && (
-          <div className={!hideTitle ? "w-full md:w-2/3" : "w-full max-w-4xl mx-auto"}>
+          <div
+            className={
+              !hideTitle ? "w-full md:w-2/3" : "w-full max-w-4xl mx-auto"
+            }
+          >
             <div className="flex justify-end mb-4 mx-2">
               <CarouselButton
                 currentSlide={currentSlide + 1}
@@ -167,9 +171,7 @@ export const Partners = ({
                 ? "md:grid-cols-[repeat(var(--sponsor-cols),max-content)] justify-center justify-items-center w-full"
                 : "md:grid-cols-[repeat(var(--sponsor-cols),minmax(0,1fr))] md:basis-2/3"
             }`}
-            style={
-              { "--sponsor-cols": numberOfColumns } as React.CSSProperties
-            }
+            style={{ "--sponsor-cols": numberOfColumns } as React.CSSProperties}
           >
             {logos.map((logo, i) => (
               <PrismicNextLink

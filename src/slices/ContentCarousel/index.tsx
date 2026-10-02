@@ -48,8 +48,7 @@ type ProgramDocument = Content.ProgramPageDocument;
 type ResourceDocument = Content.ResourcePageDocument;
 type PrismicItem = ProgramDocument | ResourceDocument | PageDocument;
 type CategoryDocument =
-  | Content.ProgramCategoryDocument
-  | Content.ResourceCategoryDocument;
+  Content.ProgramCategoryDocument | Content.ResourceCategoryDocument;
 
 const responsive: ResponsiveType = {
   desktop: {
@@ -112,7 +111,7 @@ const ContentCarousel = ({
 
   const handleSlideChange: (
     _: unknown,
-    state: CarouselInternalState,
+    state: CarouselInternalState
   ) => void = (_, state) => {
     setCurrentSlide(state.currentSlide);
   };
@@ -127,7 +126,10 @@ const ContentCarousel = ({
 
   if (slice.variation === "manualCarousel") {
     const manualCards = slice.items ?? [];
-    const totalSlidesManual = Math.max(0, manualCards.length - itemsPerPage + 1);
+    const totalSlidesManual = Math.max(
+      0,
+      manualCards.length - itemsPerPage + 1
+    );
 
     return (
       <Section
@@ -138,10 +140,7 @@ const ContentCarousel = ({
       >
         <Container>
           <div className="flex justify-between items-center mb-6">
-            <ContentBox
-              title={slice.primary.title ?? undefined}
-              width="full"
-            />
+            <ContentBox title={slice.primary.title ?? undefined} width="full" />
             {manualCards.length > itemsPerPage && (
               <CarouselButton
                 currentSlide={currentSlide + 1}
@@ -192,7 +191,11 @@ const ContentCarousel = ({
                             <Link
                               key={index}
                               href={linkHref.url ?? ""}
-                              target={"target" in linkHref ? linkHref.target ?? undefined : undefined}
+                              target={
+                                "target" in linkHref
+                                  ? (linkHref.target ?? undefined)
+                                  : undefined
+                              }
                               className="more-hover btn pl-0 flex flex-row items-center gap-2 underline underline-offset-4"
                             >
                               <span>{linkHref.text || learnMoreText}</span>

@@ -24,7 +24,9 @@ export async function generateMetadata({
   const lang = await getServerLocale();
 
   const client = createClient();
-  const page = await client.getByUID("career_page", uid, { lang }).catch(() => null);
+  const page = await client
+    .getByUID("career_page", uid, { lang })
+    .catch(() => null);
   if (!page) return {};
 
   return {
@@ -35,7 +37,9 @@ export async function generateMetadata({
     description: page.data.meta_description || undefined,
     openGraph: {
       title: page.data.meta_title || undefined,
-      images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
+      images: page.data.meta_image?.url
+        ? [{ url: page.data.meta_image.url }]
+        : [],
     },
   };
 }
@@ -45,7 +49,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const lang = await getServerLocale();
 
   const client = createClient();
-  const page = await client.getByUID("career_page", uid, { lang }).catch(() => null);
+  const page = await client
+    .getByUID("career_page", uid, { lang })
+    .catch(() => null);
   if (!page) notFound();
 
   const [global, menus, partners] = await Promise.all([
@@ -59,7 +65,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const pageTags = page.tags || [];
 
   const links: BreadcrumbLink[] = [
-    { label: "Careers", href: "/careers" }, 
+    { label: "Careers", href: "/careers" },
     { label: prismic.asText(page.data.title) },
   ];
 
@@ -71,11 +77,17 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           lang={lang}
           global={global.data}
           menus={menus.data}
-          partners={page.data.include_partners ? partners?.data ?? null : null}
+          partners={
+            page.data.include_partners ? (partners?.data ?? null) : null
+          }
           include_newsletter_sign_up_banner={false}
         >
           <CareerIntro pageData={page.data} links={links} lang={lang} />
-          <SliceZone slices={page.data.slices} components={components} context={{ lang, tags: pageTags }} />
+          <SliceZone
+            slices={page.data.slices}
+            components={components}
+            context={{ lang, tags: pageTags }}
+          />
         </Layout>
       </CategoryFilterProvider>
     </Suspense>
@@ -84,7 +96,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
 export async function generateStaticParams() {
   const client = createClient();
-  const docs = await client.getAllByType("career_page", { lang: "*" }).catch(() => []);
+  const docs = await client
+    .getAllByType("career_page", { lang: "*" })
+    .catch(() => []);
 
   const seen = new Set<string>();
   const params: { uid: string }[] = [];

@@ -13,7 +13,6 @@ export const TagsFilterPanel = ({
   toggleTag,
   onLoad,
 }: TagFilterPanelProps) => {
-
   useEffect(() => {
     onLoad?.();
   }, [onLoad]);

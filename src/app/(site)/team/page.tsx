@@ -14,7 +14,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const lang = await getServerLocale();
   const client = createClient();
 
-  const page = await client.getSingle("team_members", { lang }).catch(() => null);
+  const page = await client
+    .getSingle("team_members", { lang })
+    .catch(() => null);
   if (!page) return {};
 
   return {
@@ -25,7 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     description: page.data.meta_description || undefined,
     openGraph: {
       title: page.data.meta_title || undefined,
-      images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
+      images: page.data.meta_image?.url
+        ? [{ url: page.data.meta_image.url }]
+        : [],
     },
   };
 }
@@ -34,7 +38,9 @@ export default async function Page() {
   const lang = await getServerLocale();
   const client = createClient();
 
-  const page = await client.getSingle("team_members", { lang }).catch(() => null);
+  const page = await client
+    .getSingle("team_members", { lang })
+    .catch(() => null);
   if (!page) notFound();
 
   const [global, menus, partners] = await Promise.all([
@@ -52,11 +58,17 @@ export default async function Page() {
       lang={lang}
       global={global.data}
       menus={menus.data}
-      include_newsletter_sign_up_banner={!!page.data.include_newsletter_sign_up_banner}
-      partners={page.data.include_partners ? partners?.data ?? null : null}
+      include_newsletter_sign_up_banner={
+        !!page.data.include_newsletter_sign_up_banner
+      }
+      partners={page.data.include_partners ? (partners?.data ?? null) : null}
     >
       <GeneralHero data={page.data} />
-      <SliceZone slices={page.data.slices} components={components} context={{ lang }} />
+      <SliceZone
+        slices={page.data.slices}
+        components={components}
+        context={{ lang }}
+      />
     </Layout>
   );
 }

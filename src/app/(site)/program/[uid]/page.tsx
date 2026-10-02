@@ -25,7 +25,9 @@ export async function generateMetadata({
   const lang = await getServerLocale();
 
   const client = createClient();
-  const page = await client.getByUID("program_page", uid, { lang }).catch(() => null);
+  const page = await client
+    .getByUID("program_page", uid, { lang })
+    .catch(() => null);
   if (!page) return {};
 
   return {
@@ -36,7 +38,9 @@ export async function generateMetadata({
     description: page.data.meta_description || undefined,
     openGraph: {
       title: page.data.meta_title || undefined,
-      images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
+      images: page.data.meta_image?.url
+        ? [{ url: page.data.meta_image.url }]
+        : [],
     },
   };
 }
@@ -47,7 +51,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   const client = createClient();
 
-  const page = await client.getByUID("program_page", uid, { lang }).catch(() => null);
+  const page = await client
+    .getByUID("program_page", uid, { lang })
+    .catch(() => null);
   if (!page) notFound();
 
   const [global, menus, partners] = await Promise.all([
@@ -66,15 +72,17 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         ? "Voies de soutien"
         : "Support Pathways"
       : lang === "fr-ca"
-      ? "Équité de genre en action"
-      : "Gender Equity in Action";
+        ? "Équité de genre en action"
+        : "Gender Equity in Action";
 
   let categoryDoc: ProgramCategoryDocument | null = null;
   const category = page.data.category;
 
-  if (category && (category).link_type === "Document" && (category).uid) {
+  if (category && category.link_type === "Document" && category.uid) {
     try {
-      categoryDoc = await client.getByUID("program_category", (category).uid, { lang });
+      categoryDoc = await client.getByUID("program_category", category.uid, {
+        lang,
+      });
     } catch {
       console.warn("Not Found:", category);
     }
@@ -109,21 +117,35 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           lang={lang}
           global={global.data}
           menus={menus.data}
-          partners={page.data.include_partners ? partners?.data ?? null : null}
-          include_newsletter_sign_up_banner={!!page.data.include_newsletter_sign_up_banner}
+          partners={
+            page.data.include_partners ? (partners?.data ?? null) : null
+          }
+          include_newsletter_sign_up_banner={
+            !!page.data.include_newsletter_sign_up_banner
+          }
         >
-          <Intro type="program" pageData={page.data} links={links} lang={lang} />
-          <SliceZone slices={page.data.slices} components={components} context={{ lang, tags: pageTags }} />
+          <Intro
+            type="program"
+            pageData={page.data}
+            links={links}
+            lang={lang}
+          />
+          <SliceZone
+            slices={page.data.slices}
+            components={components}
+            context={{ lang, tags: pageTags }}
+          />
         </Layout>
       </CategoryFilterProvider>
     </Suspense>
   );
 }
 
-
 export async function generateStaticParams() {
   const client = createClient();
-  const pages = await client.getAllByType("program_page", { lang: "*" }).catch(() => []);
+  const pages = await client
+    .getAllByType("program_page", { lang: "*" })
+    .catch(() => []);
 
   const seen = new Set<string>();
   const params: { uid: string }[] = [];

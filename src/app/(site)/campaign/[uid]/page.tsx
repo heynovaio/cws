@@ -30,11 +30,13 @@ export async function generateMetadata({
   const lang = await getServerLocale();
   const client = createClient();
 
-  const page = await client.getByUID("campaign_page", uid, { lang }).catch(() => null);
+  const page = await client
+    .getByUID("campaign_page", uid, { lang })
+    .catch(() => null);
   if (!page) return {};
 
   const absoluteUrl = buildAbsoluteUrl(uid, lang);
-  const ogLocale = lang.includes("-") ? (lang.replace("-", "_")) : lang; // en_CA / fr_CA
+  const ogLocale = lang.includes("-") ? lang.replace("-", "_") : lang; // en_CA / fr_CA
 
   return {
     title:
@@ -52,7 +54,9 @@ export async function generateMetadata({
       description: page.data.meta_description || undefined,
       type: "website",
       locale: ogLocale,
-      images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
+      images: page.data.meta_image?.url
+        ? [{ url: page.data.meta_image.url }]
+        : [],
     },
   };
 }
@@ -62,7 +66,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const lang = await getServerLocale();
   const client = createClient();
 
-  const page = await client.getByUID("campaign_page", uid, { lang }).catch(() => null);
+  const page = await client
+    .getByUID("campaign_page", uid, { lang })
+    .catch(() => null);
   if (!page) notFound();
 
   const [global, menus, partners] = await Promise.all([
@@ -74,8 +80,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   const locales = await getLocales(page, client);
 
-  const contactInfoSlice = page.data.slices.find(isContactInfoSlice) as Content.ContactInfoSlice | undefined;
-  const scrollID: string | undefined = contactInfoSlice?.primary?.section_id || undefined;
+  const contactInfoSlice = page.data.slices.find(isContactInfoSlice) as
+    Content.ContactInfoSlice | undefined;
+  const scrollID: string | undefined =
+    contactInfoSlice?.primary?.section_id || undefined;
 
   const absoluteUrl = buildAbsoluteUrl(uid, lang);
 
@@ -85,12 +93,18 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       global={global.data}
       lang={lang}
       menus={menus.data}
-      partners={page.data.include_partners ? partners?.data ?? null : null}
-      include_newsletter_sign_up_banner={!!page.data.include_newsletter_sign_up_banner}
+      partners={page.data.include_partners ? (partners?.data ?? null) : null}
+      include_newsletter_sign_up_banner={
+        !!page.data.include_newsletter_sign_up_banner
+      }
       isCampaignPage
     >
       <GeneralHero data={page.data} shortHero={false} scrollID={scrollID} />
-      <SliceZone slices={page.data.slices} components={components} context={{ lang }} />
+      <SliceZone
+        slices={page.data.slices}
+        components={components}
+        context={{ lang }}
+      />
       <Sharebar absoluteUrl={absoluteUrl} />
     </Layout>
   );
@@ -98,7 +112,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
 export async function generateStaticParams() {
   const client = createClient();
-  const docs = await client.getAllByType("campaign_page", { lang: "*" }).catch(() => []);
+  const docs = await client
+    .getAllByType("campaign_page", { lang: "*" })
+    .catch(() => []);
 
   const seen = new Set<string>();
   const params: { uid: string }[] = [];

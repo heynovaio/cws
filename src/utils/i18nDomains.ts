@@ -1,15 +1,21 @@
 // utils/i18nDomains.ts
 import { pairedDomainsFor } from "@/utils/localeHosts";
 
-export function translateCareersSegment(pathname: string, to: "en-ca" | "fr-ca") {
-  if (to === "fr-ca" && pathname.includes("/careers")) return pathname.replace("/careers", "/carrieres");
-  if (to === "en-ca" && pathname.includes("/carrieres")) return pathname.replace("/carrieres", "/careers");
+export function translateCareersSegment(
+  pathname: string,
+  to: "en-ca" | "fr-ca"
+) {
+  if (to === "fr-ca" && pathname.includes("/careers"))
+    return pathname.replace("/careers", "/carrieres");
+  if (to === "en-ca" && pathname.includes("/carrieres"))
+    return pathname.replace("/carrieres", "/careers");
   return pathname;
 }
 
 export function stripLeadingLocalePrefix(pathname: string) {
   const segs = pathname.split("/").filter(Boolean);
-  if (segs.length > 0 && (segs[0] === "en-ca" || segs[0] === "fr-ca")) return "/" + segs.slice(1).join("/");
+  if (segs.length > 0 && (segs[0] === "en-ca" || segs[0] === "fr-ca"))
+    return "/" + segs.slice(1).join("/");
   return pathname || "/";
 }
 
@@ -19,11 +25,12 @@ export function buildSwitchHref(opts: {
   search?: string;
 }) {
   // Base off the *current* URL so we keep protocol + port (e.g. :3000 in dev)
-  const current = typeof window !== "undefined"
-    ? new URL(window.location.href)
-    : new URL("http://localhost:3000/");
+  const current =
+    typeof window !== "undefined"
+      ? new URL(window.location.href)
+      : new URL("http://localhost:3000/");
 
-  const hostname = current.hostname;        // e.g. "localhost" or "fr.localhost"
+  const hostname = current.hostname; // e.g. "localhost" or "fr.localhost"
   const { enHost, frHost } = pairedDomainsFor(hostname); // returns hostnames (no port)
 
   let cleanPath = stripLeadingLocalePrefix(opts.pathname);

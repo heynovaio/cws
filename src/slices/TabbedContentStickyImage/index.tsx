@@ -24,14 +24,16 @@ import { GenericIframeEmbed } from "@/components/GenericIframeEmbed";
 export type TabbedContentStickyImageProps =
   SliceComponentProps<Content.TabbedContentStickyImageSlice>;
 
-type Section = TabbedContentStickyImageProps["slice"]["primary"]["section"][number];
+type Section =
+  TabbedContentStickyImageProps["slice"]["primary"]["section"][number];
 
 const getFormEmbed = (tab: Section) => {
   const formUrl = tab.jotform_url;
   const provider = tab.form_provider ?? "JotForm";
   if (!formUrl) return null;
   if (provider === "Zoho Forms") return <ZohoFormsEmbed url={formUrl} />;
-  if (provider === "Generic iframe") return <GenericIframeEmbed url={formUrl} />;
+  if (provider === "Generic iframe")
+    return <GenericIframeEmbed url={formUrl} />;
   return <JotformEmbed url={formUrl} />;
 };
 
@@ -137,7 +139,10 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                         )}
                         {tab.section_image?.url && (
                           <div className="relative">
-                            <PrismicNextImage field={tab.section_image} alt="" />
+                            <PrismicNextImage
+                              field={tab.section_image}
+                              alt=""
+                            />
                             <div
                               className="
                                 absolute bottom-2 left-2 w-20 h-20 rounded-full
@@ -160,9 +165,17 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                 aria-controls={`audio-mobile-${idx}`}
                               >
                                 {playingIndex === idx ? (
-                                  <FaPause aria-hidden="true" size="32" color="#DD0748" />
+                                  <FaPause
+                                    aria-hidden="true"
+                                    size="32"
+                                    color="#DD0748"
+                                  />
                                 ) : (
-                                  <FaPlay aria-hidden="true" size="32" color="#DD0748" />
+                                  <FaPlay
+                                    aria-hidden="true"
+                                    size="32"
+                                    color="#DD0748"
+                                  />
                                 )}
                               </button>
                             </div>
@@ -300,9 +313,17 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                   aria-controls={`audio-desktop-${idx}`}
                                 >
                                   {playingIndex === idx ? (
-                                    <FaPause aria-hidden="true" size="50" color="#DD0748" />
+                                    <FaPause
+                                      aria-hidden="true"
+                                      size="50"
+                                      color="#DD0748"
+                                    />
                                   ) : (
-                                    <FaPlay aria-hidden="true" size="50" color="#DD0748" />
+                                    <FaPlay
+                                      aria-hidden="true"
+                                      size="50"
+                                      color="#DD0748"
+                                    />
                                   )}
                                 </button>
                               </div>

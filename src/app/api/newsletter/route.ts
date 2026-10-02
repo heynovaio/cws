@@ -98,7 +98,9 @@ export async function POST(req: Request) {
     if (FNAME) merge_fields.FNAME = FNAME;
 
     // Optional language support (only if you created this tag)
-    const LANG_TAG = asString(process.env.MAILCHIMP_LANG_MERGE_TAG).toUpperCase(); // e.g. "LANG"
+    const LANG_TAG = asString(
+      process.env.MAILCHIMP_LANG_MERGE_TAG
+    ).toUpperCase(); // e.g. "LANG"
     const LANG_VALUE = asString(payload[LANG_TAG || "LANG"]).trim();
     if (LANG_TAG && LANG_VALUE) {
       merge_fields[LANG_TAG] = LANG_VALUE;
@@ -117,7 +119,8 @@ export async function POST(req: Request) {
         merge_fields[tag] = fromClient;
         continue;
       }
-      const fallbackEnvKey = `MAILCHIMP_FALLBACK_${tag}` as keyof NodeJS.ProcessEnv;
+      const fallbackEnvKey =
+        `MAILCHIMP_FALLBACK_${tag}` as keyof NodeJS.ProcessEnv;
       const fallbackVal = asString(process.env[fallbackEnvKey]).trim();
       merge_fields[tag] = fallbackVal || (tag === "LNAME" ? "." : "Unknown");
     }
@@ -151,11 +154,17 @@ export async function POST(req: Request) {
 
       const listErrors =
         err.errors && err.errors.length
-          ? err.errors.map((e) => `${e.field ?? "field"}: ${e.message ?? "invalid"}`).join("; ")
+          ? err.errors
+              .map((e) => `${e.field ?? "field"}: ${e.message ?? "invalid"}`)
+              .join("; ")
           : undefined;
 
-      const detail = err.detail || err.title || listErrors || "Mailchimp request failed";
-      return NextResponse.json({ ok: false, error: detail }, { status: mcRes.status });
+      const detail =
+        err.detail || err.title || listErrors || "Mailchimp request failed";
+      return NextResponse.json(
+        { ok: false, error: detail },
+        { status: mcRes.status }
+      );
     }
 
     return NextResponse.json({ ok: true });

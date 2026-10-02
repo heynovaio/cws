@@ -91,7 +91,8 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
     </>
   );
 
-  const ratio = (slice.primary.column_ratio ?? "Stacked") as SplitLayoutRatio | "Stacked";
+  const ratio = (slice.primary.column_ratio ?? "Stacked") as
+    SplitLayoutRatio | "Stacked";
   const contentFirst = slice.primary.content_first ?? true;
 
   const hasIntroContent = hasContent(
@@ -109,8 +110,8 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
       >
         <Container>
           <SplitLayout ratio={ratio as SplitLayoutRatio}>
-            { contentFirst ? introContent : accordionItems }
-            { contentFirst ? accordionItems : introContent }
+            {contentFirst ? introContent : accordionItems}
+            {contentFirst ? accordionItems : introContent}
           </SplitLayout>
         </Container>
       </Section>

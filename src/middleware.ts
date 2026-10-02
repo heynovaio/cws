@@ -228,7 +228,12 @@ const LEGACY_SOURCES: Set<string> = new Set([
 
 function ensureUtmDefaults(
   sp: URLSearchParams,
-  defaults: { source: string; medium: string; campaign: string; content: string }
+  defaults: {
+    source: string;
+    medium: string;
+    campaign: string;
+    content: string;
+  }
 ) {
   if (!sp.has("utm_source")) sp.set("utm_source", defaults.source);
   if (!sp.has("utm_medium")) sp.set("utm_medium", defaults.medium);
@@ -252,7 +257,10 @@ export function middleware(request: NextRequest) {
   const { enHost, frHost } = pairedDomainsFor(host);
 
   if (SOURCE_HOSTS.has(hostNoPort)) {
-    if (pathname === `/en-ca${EN_CAMPAIGN_PATH}` || pathname === EN_CAMPAIGN_PATH) {
+    if (
+      pathname === `/en-ca${EN_CAMPAIGN_PATH}` ||
+      pathname === EN_CAMPAIGN_PATH
+    ) {
       const target = new URL(`https://keepgirlsplaying.ca/`);
       const merged = new URLSearchParams(url.searchParams);
       ensureUtmDefaults(merged, {
@@ -265,7 +273,10 @@ export function middleware(request: NextRequest) {
       if (url.hash) target.hash = url.hash;
       return NextResponse.redirect(target, 308);
     }
-    if (pathname === `/fr-ca${FR_CAMPAIGN_PATH}` || pathname === FR_CAMPAIGN_PATH) {
+    if (
+      pathname === `/fr-ca${FR_CAMPAIGN_PATH}` ||
+      pathname === FR_CAMPAIGN_PATH
+    ) {
       const target = new URL(`https://xn--danslquipedesfilles-fzb.ca/`);
       const merged = new URLSearchParams(url.searchParams);
       ensureUtmDefaults(merged, {
@@ -349,5 +360,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|assets|files/.*|slice-simulator|auth/.*|.*\\..*|_next).*)"],
+  matcher: [
+    "/((?!api|assets|files/.*|slice-simulator|auth/.*|.*\\..*|_next).*)",
+  ],
 };
