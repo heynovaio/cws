@@ -63,6 +63,7 @@ Copy `.env.example` to `.env.local`. `.env*` files are gitignored — **never co
 | `MAILCHIMP_LANG_MERGE_TAG` | No | Merge tag that stores the subscriber's language, e.g. `LANG`. |
 | `MAILCHIMP_REQUIRED_FIELDS` | No | Comma-separated merge tags the audience requires, e.g. `LNAME,MMERGE4`. |
 | `MAILCHIMP_FALLBACK_<TAG>` | No | Fallback value for each required field above, e.g. `MAILCHIMP_FALLBACK_LNAME`. |
+| `PRISMIC_WEBHOOK_SECRET` | Prod | Must match the **Secret** on the Prismic publish webhook. `/api/revalidate` rejects requests without it. If unset, the endpoint is open (and logs a warning). |
 
 `NEXT_PUBLIC_*` values are baked in at **build time**, so changing them in Netlify needs a redeploy.
 
@@ -74,12 +75,31 @@ Copy `.env.example` to `.env.local`. `.env*` files are gitignored — **never co
 | `npm run next:dev` | Next.js dev server only |
 | `npm run build` | Production build. `postbuild` then runs `next-sitemap`, which rewrites `public/sitemap*.xml` and `public/robots.txt` |
 | `npm run next:start` | Serve the production build locally |
-| `npm run lint` | ESLint (`next/core-web-vitals` + `next/typescript`) |
+| `npm run lint` | ESLint CLI (`eslint .`, `next/core-web-vitals` + `next/typescript`) |
 | `npm run typecheck` | TypeScript check (`tsc --noEmit`) |
-| `npm run format` / `format:check` | Prettier: format / check. The codebase isn't fully formatted yet, so `format:check` reports existing files |
+| `npm run format` / `format:check` | Prettier: format everything / check only |
 | `npm run slicemachine` | Slice Machine only |
 
-Before opening a PR, run `npm run lint`, `npm run typecheck` and `npm run build`. There is no automated test suite.
+## Code quality checks
+
+There is no automated test suite. These checks run at three stages:
+
+| When | What runs | Where it's configured |
+| --- | --- | --- |
+| **Every commit** | `eslint --fix` + `prettier --write` on staged files (husky + lint-staged). A lint error blocks the commit. | `.husky/pre-commit`, `lint-staged` in `package.json` |
+| **Every PR / push to `develop` or `main`** | GitHub Actions: `npm ci` → lint → format check → typecheck → `next build`, plus `npm audit` (production deps, high+) | `.github/workflows/ci.yml` |
+| **Weekly** | Dependabot opens grouped minor/patch update PRs against `develop`. Majors are ignored and need a planned upgrade. | `.github/dependabot.yml` |
+
+`main` and `develop` are protected: changes go in by PR only, and the **Lint, typecheck & build** check must pass.
+Hooks install automatically on `npm ci` / `npm install` (the `prepare` script). To bypass one in an emergency, use
+`git commit --no-verify`. CI still runs.
+
+Formatting lives in `.prettierrc.json`. The repo was formatted in one commit, which is listed in
+`.git-blame-ignore-revs`. Run `git config blame.ignoreRevsFile .git-blame-ignore-revs` once so local `git blame` skips it.
+
+**Pinned on purpose:** `react-multi-carousel` stays at `2.8.5`. 2.8.6 has identical code but mistakenly depends on
+the whole `npm` CLI, which pulls in 20+ vulnerable packages. `next` is pinned exactly, and its bundled `postcss` is
+forced to the patched version via `overrides` in `package.json`.
 
 ## Project structure
 
@@ -144,7 +164,9 @@ the source path to `LEGACY_SOURCES` in `middleware.ts` so the middleware doesn't
 
 - In production, Prismic fetches are cached with the `prismic` tag. Pages update only when the tag is revalidated.
 - A **Prismic webhook** (already set up) `POST`s to `https://<domain>/api/revalidate` on publish, so published
-  content goes live without a redeploy. If content edits aren't showing up, check this webhook's delivery log in Prismic first.
+  content goes live without a redeploy. The webhook's **Secret** must equal `PRISMIC_WEBHOOK_SECRET` in Netlify.
+  If content edits aren't showing up, check the webhook's delivery log in Prismic first. A `401` there means the
+  secrets don't match.
 - **Previews**: in Prismic's preview settings, the preview URL is `/api/preview` and exit is `/api/exit-preview`.
 
 ### Media URLs
@@ -209,6 +231,8 @@ changes together with the `package.json` change that caused them, and don't add 
 - **Next warns "Found multiple lockfiles"** → a stray `package-lock.json` in a parent folder (e.g. your home
   directory) is confusing it. Delete that one, not ours.
 - **TypeScript errors under `.next/types/...`** → stale build output. Delete `.next/` and rebuild.
-- **Content changes don't appear in production** → check the Prismic → `/api/revalidate` webhook, or redeploy.
+- **Content changes don't appear in production** → check the Prismic → `/api/revalidate` webhook (`401` = secret
+  mismatch), or redeploy.
+- **Commit rejected by the pre-commit hook** → fix the ESLint error it prints. Formatting is fixed for you.
 - **French site shows English locally** → set `NEXT_PUBLIC_DOMAIN_FR=fr.localhost` and browse `fr.localhost:3000`.
 - **Newsletter returns "Mailchimp environment is not configured"** → set the `MAILCHIMP_*` variables.
