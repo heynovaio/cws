@@ -90,7 +90,6 @@ There is no automated test suite. These checks run at three stages:
 | **Every PR / push to `develop` or `main`** | GitHub Actions: `npm ci` → lint → format check → typecheck → `next build`, plus `npm audit` (production deps, high+) | `.github/workflows/ci.yml` |
 | **Weekly** | Dependabot opens grouped minor/patch update PRs against `develop`. Majors are ignored and need a planned upgrade. | `.github/dependabot.yml` |
 
-`main` and `develop` are protected: changes go in by PR only, and the **Lint, typecheck & build** check must pass.
 Hooks install automatically on `npm ci` / `npm install` (the `prepare` script). To bypass one in an emergency, use
 `git commit --no-verify`. CI still runs.
 
