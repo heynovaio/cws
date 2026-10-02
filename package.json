@@ -16,7 +16,8 @@
     "slicemachine": "start-slicemachine",
     "postbuild": "next-sitemap",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.1",
@@ -50,6 +51,8 @@
     "concurrently": "^9.1.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.27",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "postcss": "^8.5.28",
     "prettier": "^3.9.9",
     "slice-machine-ui": "^2.21.3",
@@ -58,5 +61,12 @@
   },
   "overrides": {
     "postcss": "$postcss"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css}": "prettier --write"
   }
 }
