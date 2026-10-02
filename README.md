@@ -63,7 +63,7 @@ Copy `.env.example` to `.env.local`. `.env*` files are gitignored — **never co
 | `MAILCHIMP_LANG_MERGE_TAG` | No | Merge tag that stores the subscriber's language, e.g. `LANG`. |
 | `MAILCHIMP_REQUIRED_FIELDS` | No | Comma-separated merge tags the audience requires, e.g. `LNAME,MMERGE4`. |
 | `MAILCHIMP_FALLBACK_<TAG>` | No | Fallback value for each required field above, e.g. `MAILCHIMP_FALLBACK_LNAME`. |
-| `PRISMIC_WEBHOOK_SECRET` | Prod | Must match the **Secret** on the Prismic publish webhook. `/api/revalidate` rejects requests without it. If unset, the endpoint is open (and logs a warning). |
+| `PRISMIC_WEBHOOK_SECRET` | Optional (not set today) | If set, `/api/revalidate` only accepts requests whose body `secret` matches — set the same value as the **Secret** on the Prismic publish webhook, Prismic first, then Netlify. Unset = endpoint stays open (logs a warning), which is how production runs now. |
 
 `NEXT_PUBLIC_*` values are baked in at **build time**, so changing them in Netlify needs a redeploy.
 
@@ -164,7 +164,7 @@ the source path to `LEGACY_SOURCES` in `middleware.ts` so the middleware doesn't
 
 - In production, Prismic fetches are cached with the `prismic` tag. Pages update only when the tag is revalidated.
 - A **Prismic webhook** (already set up) `POST`s to `https://<domain>/api/revalidate` on publish, so published
-  content goes live without a redeploy. The webhook's **Secret** must equal `PRISMIC_WEBHOOK_SECRET` in Netlify.
+  content goes live without a redeploy. If `PRISMIC_WEBHOOK_SECRET` is ever set in Netlify, the webhook's **Secret** must match it.
   If content edits aren't showing up, check the webhook's delivery log in Prismic first. A `401` there means the
   secrets don't match.
 - **Previews**: in Prismic's preview settings, the preview URL is `/api/preview` and exit is `/api/exit-preview`.
