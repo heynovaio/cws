@@ -161,11 +161,14 @@ the source path to `LEGACY_SOURCES` in `middleware.ts` so the middleware doesn't
 
 ### Caching, previews & revalidation
 
-- In production, Prismic fetches are cached with the `prismic` tag. Pages update only when the tag is revalidated.
-- A **Prismic webhook** (already set up) `POST`s to `https://<domain>/api/revalidate` on publish, so published
-  content goes live without a redeploy. If `PRISMIC_WEBHOOK_SECRET` is ever set in Netlify, the webhook's **Secret** must match it.
-  If content edits aren't showing up, check the webhook's delivery log in Prismic first. A `401` there means the
-  secrets don't match.
+- In production, Prismic fetches are cached with the `prismic` tag, so pages don't change until something refreshes them.
+- **How published content reaches production:** a Prismic webhook calls the Netlify build hook **"Prismic Build"**
+  (Netlify → Project configuration → Build & deploy → Build hooks). That triggers a full production rebuild, which takes
+  about 1–2 minutes. The hook must target the **`main`** branch. If it targets another branch, publishes only update
+  that branch's deploy, not the live site.
+- `/api/revalidate` also exists. It clears the `prismic` cache tag without rebuilding, so a Prismic webhook can point
+  at it for faster updates. If `PRISMIC_WEBHOOK_SECRET` is set in Netlify, the request body's `secret` must match it
+  (otherwise `401`). It isn't set today.
 - **Previews**: in Prismic's preview settings, the preview URL is `/api/preview` and exit is `/api/exit-preview`.
 
 ### Media URLs
@@ -209,7 +212,8 @@ Build details:
 - The Node version comes from `.nvmrc` (22).
 - Environment variables (see above) are set per-context in Netlify. HeyNova changes them. `NEXT_PUBLIC_*` changes
   need a new deploy.
-- Content publishes from Prismic **don't** need a deploy — the webhook revalidates the cache.
+- Content publishes from Prismic trigger a production rebuild automatically, via the "Prismic Build" hook on `main`.
+  No code change or manual deploy is needed.
 - `netlify.toml` registers the `files-proxy` edge function for `/files/*`.
 
 To reproduce Netlify locally, including the `/files/*` edge function:
@@ -230,8 +234,8 @@ changes together with the `package.json` change that caused them, and don't add 
 - **Next warns "Found multiple lockfiles"** → a stray `package-lock.json` in a parent folder (e.g. your home
   directory) is confusing it. Delete that one, not ours.
 - **TypeScript errors under `.next/types/...`** → stale build output. Delete `.next/` and rebuild.
-- **Content changes don't appear in production** → check the Prismic → `/api/revalidate` webhook (`401` = secret
-  mismatch), or redeploy.
+- **Content changes don't appear in production** → in Netlify → Deploys, check for a "Deploy triggered by hook:
+  Prismic Build" deploy on `main`. If it's missing, check the webhook delivery log in Prismic and the build hook's branch.
 - **Commit rejected by the pre-commit hook** → fix the ESLint error it prints. Formatting is fixed for you.
 - **French site shows English locally** → set `NEXT_PUBLIC_DOMAIN_FR=fr.localhost` and browse `fr.localhost:3000`.
 - **Newsletter returns "Mailchimp environment is not configured"** → set the `MAILCHIMP_*` variables.
