@@ -20,7 +20,7 @@ const CONTENT_TYPE: Record<string, string> = {
   webm: "video/webm",
 };
 
-export default async (req: Request) => {
+const filesProxy = async (req: Request) => {
   const incoming = new URL(req.url);
 
   // Extract the filename after /files/ and sanitize
@@ -122,10 +122,12 @@ export default async (req: Request) => {
       statusText: upstreamRes.statusText,
       headers: h,
     });
-  } catch (e: any) {
-    console.error("Proxy error:", e?.message || e);
+  } catch (e: unknown) {
+    console.error("Proxy error:", e instanceof Error ? e.message : e);
     return new Response("Internal server error", { status: 500 });
   }
 };
+
+export default filesProxy;
 
 export const config = { path: "/files/*" };

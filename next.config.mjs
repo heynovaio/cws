@@ -1,3 +1,6 @@
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
 function makeRedirects(pairs) {
   const out = [];
   for (const [src, dest] of pairs) {
@@ -239,6 +242,8 @@ async function fetchPrismicRedirects() {
 }
 
 const nextConfig = {
+  // Pin the workspace root so stray lockfiles in parent folders don't confuse Next.
+  outputFileTracingRoot: dirname(fileURLToPath(import.meta.url)),
   async redirects() {
     const prismicRedirects = await fetchPrismicRedirects();
     const legacyRedirects = makeRedirects(LEGACY_PAIRS);
