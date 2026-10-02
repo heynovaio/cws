@@ -6,7 +6,15 @@
 const REPO = "canadian-women-in-sports"; // Prismic repo slug
 
 const VIEW_INLINE = new Set([
-  "pdf", "jpg", "jpeg", "png", "gif", "webp", "svg", "mp4", "webm"
+  "pdf",
+  "jpg",
+  "jpeg",
+  "png",
+  "gif",
+  "webp",
+  "svg",
+  "mp4",
+  "webm",
 ]);
 const CONTENT_TYPE: Record<string, string> = {
   pdf: "application/pdf",
@@ -20,13 +28,18 @@ const CONTENT_TYPE: Record<string, string> = {
   webm: "video/webm",
 };
 
-export default async (req: Request) => {
+const filesProxy = async (req: Request) => {
   const incoming = new URL(req.url);
 
   // Extract the filename after /files/ and sanitize
   let fileName = incoming.pathname.replace(/^\/files\//, "");
   // Block traversal / Windows-style shenanigans
-  if (!fileName || fileName.includes("..") || fileName.includes("\\") || fileName.startsWith("/")) {
+  if (
+    !fileName ||
+    fileName.includes("..") ||
+    fileName.includes("\\") ||
+    fileName.startsWith("/")
+  ) {
     return new Response("Bad file path", { status: 400 });
   }
 
@@ -62,7 +75,12 @@ export default async (req: Request) => {
       // Read body once for logging; do not return it to user
       try {
         const t = await upstreamRes.text();
-        console.error("Upstream error", upstream, upstreamRes.status, t?.slice(0, 500));
+        console.error(
+          "Upstream error",
+          upstream,
+          upstreamRes.status,
+          t?.slice(0, 500)
+        );
       } catch {}
       return new Response("File not found", { status: 404 });
     }
@@ -71,7 +89,12 @@ export default async (req: Request) => {
     const h = new Headers();
 
     // Pass through server validation / range support
-    for (const name of ["etag", "last-modified", "accept-ranges", "content-range"]) {
+    for (const name of [
+      "etag",
+      "last-modified",
+      "accept-ranges",
+      "content-range",
+    ]) {
       const v = upstreamRes.headers.get(name);
       if (v) h.set(name, v);
     }
@@ -122,10 +145,12 @@ export default async (req: Request) => {
       statusText: upstreamRes.statusText,
       headers: h,
     });
-  } catch (e: any) {
-    console.error("Proxy error:", e?.message || e);
+  } catch (e: unknown) {
+    console.error("Proxy error:", e instanceof Error ? e.message : e);
     return new Response("Internal server error", { status: 500 });
   }
 };
+
+export default filesProxy;
 
 export const config = { path: "/files/*" };

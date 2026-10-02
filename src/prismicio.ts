@@ -1,38 +1,39 @@
+// lib/prismicClient.ts
 import * as prismic from "@prismicio/client";
 import * as prismicNext from "@prismicio/next";
-import config from "../slicemachine.config.json";
+import sm from "../slicemachine.config.json";
 
-/**
- * The project's Prismic repository name.
- */
 export const repositoryName =
-  process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT || config.repositoryName;
+  process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT || sm.repositoryName;
 
 /**
- * A list of Route Resolver objects that define how a document's `url` field is resolved.
- *
- * {@link https://prismic.io/docs/route-resolver#route-resolver}
+ * Route resolver: domain-based locales, so no :lang in path.
+ * Keep career hub bilingual slug handled by middleware redirects,
+ * but expose both slugs in routes for direct linking/preview.
  */
-
 const routes: prismic.ClientConfig["routes"] = [
-  { type: "page", path: "/:lang?", uid: "home" },
-  { type: "page", path: "/:lang?/:uid" },
-  { type: "program_page", path: "/:lang?/program/:uid" },
-  { type: "resource_page", path: "/:lang?/resource/:uid" },
-  { type: "contact_page", path: "/:lang?/contact" },
-  { type: "team_members", path: "/:lang?/team" },
-  { type: "campaign_page", path: "/:lang?/campaign/:uid" },
-  { type: "search_page", path: "/:lang?/search" },
-  { type: "career_hub", path: "/:lang?/(careers|carrieres)" },
-  { type: "career_page", path: "/:lang?/(careers|carrieres)/:uid" },
+  // homepage
+  { type: "page", path: "/", uid: "home" },
+
+  // generic pages (UID at root)
+  { type: "page", path: "/:uid" },
+
+  // specific page types
+  { type: "program_page", path: "/program/:uid" },
+  { type: "resource_page", path: "/resource/:uid" },
+  { type: "contact_page", path: "/contact" },
+  { type: "team_members", path: "/team" },
+  { type: "campaign_page", path: "/campaign/:uid" },
+  { type: "search_page", path: "/search" },
+
+  // Career hub bilingual slugs (both allowed)
+  { type: "career_hub", path: "/careers" },
+  { type: "career_hub", path: "/carrieres" },
+
+  { type: "career_page", path: "/careers/:uid" },
+  { type: "career_page", path: "/carrieres/:uid" },
 ];
 
-/**
- * Creates a Prismic client for the project's repository. The client is used to
- * query content from the Prismic API.
- *
- * @param config - Configuration for the Prismic client.
- */
 export const createClient = (config: prismicNext.CreateClientConfig = {}) => {
   const client = prismic.createClient(repositoryName, {
     routes,

@@ -29,5 +29,133 @@
 			}
 		},
 		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "richTextWithTable",
+		"primary": {
+			"text_alignment": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"content": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Cillum ex in adipisicing reprehenderit aliquip in quis dolor esse laboris dolor. Anim ad elit pariatur laboris dolor ipsum proident ea cillum ad nostrud do ullamco adipisicing aliqua. Commodo anim sunt non voluptate elit voluptate qui enim voluptate nostrud laboris velit incididunt anim."
+						}
+					}
+				]
+			},
+			"button": {
+				"key": "46697f81-6c47-4897-8246-bc06558a264a",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "slipped"
+				}
+			},
+			"table": {
+				"__TYPE__": "TableContent",
+				"content": [
+					{
+						"key": "3135ead3-2cfa-49e4-a28c-6a6f734da48a",
+						"type": "tableRow",
+						"content": [
+							{
+								"key": "47c67b02-f969-451e-afbd-79024efc8caf",
+								"type": "tableHeader",
+								"content": {
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Tempor."
+											}
+										}
+									]
+								}
+							},
+							{
+								"key": "3881112c-7502-4ff3-9adf-cad9064d80c9",
+								"type": "tableHeader",
+								"content": {
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Reprehenderit."
+											}
+										}
+									]
+								}
+							}
+						]
+					},
+					{
+						"key": "93f43b3f-7857-4b1f-aa45-9e61c66fc5c3",
+						"type": "tableRow",
+						"content": [
+							{
+								"key": "61e389c2-bd75-4e02-9b44-a6db7fe92c7b",
+								"type": "tableCell",
+								"content": {
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Sunt adipisicing aliquip ea velit Lorem consequat."
+											}
+										}
+									]
+								}
+							},
+							{
+								"key": "a125b055-b4e5-45ec-b838-9b4ebd5ec4ad",
+								"type": "tableCell",
+								"content": {
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Consequat enim tempor velit non et nulla."
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				]
+			},
+			"column_layout": {
+				"__TYPE__": "FieldContent",
+				"value": "Stacked",
+				"type": "Select"
+			},
+			"column_order": {
+				"__TYPE__": "FieldContent",
+				"value": "Table First",
+				"type": "Select"
+			},
+			"table_style": {
+				"__TYPE__": "FieldContent",
+				"value": "Purple Header + Transparent Background",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

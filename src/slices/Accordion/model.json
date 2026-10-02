@@ -24,6 +24,28 @@
             "default_value": "No Background"
           }
         },
+        "column_ratio": {
+          "type": "Select",
+          "config": {
+            "label": "Column Layout",
+            "options": [
+              "Stacked",
+              "50/50",
+              "25/75",
+              "75/25"
+            ],
+            "default_value": "Stacked"
+          }
+        },
+        "content_first": {
+          "type": "Boolean",
+          "config": {
+            "label": "Column Order",
+            "placeholder_true": "Content First",
+            "placeholder_false": "Accordion First",
+            "default_value": true
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {

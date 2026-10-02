@@ -9,7 +9,7 @@ type DocumentProp = BaseProps["document"];
 
 function getUrlIfWebOrMedia(field: FieldProp): string | undefined {
   if (!field || !isFilled.link(field)) return;
-  if (field.link_type === "Web" && "url" in field)  return field.url;
+  if (field.link_type === "Web" && "url" in field) return field.url;
   if (field.link_type === "Media" && "url" in field) return field.url;
   return;
 }
@@ -37,14 +37,24 @@ function maskHref<T extends string | UrlObject>(href: T): T {
 }
 
 type Common = Omit<BaseProps, "href" | "field" | "document">;
-type PropsWithHref = Common & { href: string | UrlObject; field?: never; document?: never };
-type PropsWithField = Common & { field: FieldProp; href?: never; document?: never };
-type PropsWithDocument = Common & { document: DocumentProp; href?: never; field?: never };
+type PropsWithHref = Common & {
+  href: string | UrlObject;
+  field?: never;
+  document?: never;
+};
+type PropsWithField = Common & {
+  field: FieldProp;
+  href?: never;
+  document?: never;
+};
+type PropsWithDocument = Common & {
+  document: DocumentProp;
+  href?: never;
+  field?: never;
+};
 
 export type MaskedPrismicNextLinkProps =
-  | PropsWithHref
-  | PropsWithField
-  | PropsWithDocument;
+  PropsWithHref | PropsWithField | PropsWithDocument;
 
 function hasField(p: MaskedPrismicNextLinkProps): p is PropsWithField {
   return "field" in p;
@@ -57,7 +67,9 @@ function hasDocument(p: MaskedPrismicNextLinkProps): p is PropsWithDocument {
 }
 
 export function PrismicNextLink(props: MaskedPrismicNextLinkProps) {
-  const rel = props.rel ?? (props.target === "_blank" ? "noopener noreferrer" : undefined);
+  const rel =
+    props.rel ??
+    (props.target === "_blank" ? "noopener noreferrer" : undefined);
 
   if (hasField(props)) {
     const { field, ...rest } = props;
@@ -72,7 +84,9 @@ export function PrismicNextLink(props: MaskedPrismicNextLinkProps) {
   if (hasHref(props)) {
     const { href, ...rest } = props;
     const finalHref = maskHref(href);
-    return <_PrismicNextLink {...(rest as Common)} href={finalHref} rel={rel} />;
+    return (
+      <_PrismicNextLink {...(rest as Common)} href={finalHref} rel={rel} />
+    );
   }
 
   if (hasDocument(props)) {

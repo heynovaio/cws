@@ -5,16 +5,14 @@ import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPri
 import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 import { Section } from "@/components";
+import { hasContent } from "@/utils";
 
-/**
- * Props for `TeamList`.
- */
 export type TeamListProps = SliceComponentProps<Content.TeamListSlice>;
 
-/**
- * Component for "TeamList" Slices.
- */
 const TeamList = ({ slice }: TeamListProps): JSX.Element => {
+  const hasTitle = hasContent(slice.primary.title);
+  const hasBody = hasContent(slice.primary.body);
+
   return (
     <Section
       data-slice-type={slice.slice_type}
@@ -22,17 +20,12 @@ const TeamList = ({ slice }: TeamListProps): JSX.Element => {
       backgroundColor={slice.primary.background_color}
     >
       <Container>
-        {(slice.primary.title || slice.primary.body) && (
+        {(hasTitle || hasBody) && (
           <div className="text-center mb-10">
-            {slice.primary.title && (
-              <PrismicRichText field={slice.primary.title} />
-            )}
-            {slice.primary.body && (
-              <PrismicRichText field={slice.primary.body} />
-            )}
+            {hasTitle && <PrismicRichText field={slice.primary.title} />}
+            {hasBody && <PrismicRichText field={slice.primary.body} />}
           </div>
         )}
-
         <div className="grid gap-10 sm:grid-cols-3 lg:grid-cols-4">
           {slice.primary.team_member.map((team_member, index) => (
             <TeamMemberTile

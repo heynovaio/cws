@@ -26,9 +26,13 @@ interface PartnersProps {
   buttons: LinkField[];
   logos: IndividualLogo[];
   ctaText?: KeyTextField;
+  carousel?: boolean;
+  numberOfColumns?: number;
+  hideTitle?: boolean;
+  centerLogo?: boolean;
 }
 
-const responsive = {
+export const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 1,
@@ -49,6 +53,10 @@ export const Partners = ({
   buttons,
   logos,
   ctaText,
+  carousel = true,
+  numberOfColumns = 4,
+  hideTitle = false,
+  centerLogo = false,
 }: PartnersProps) => {
   const logoTiles = Array.from(
     { length: Math.ceil(logos.length / 6) },
@@ -63,78 +71,127 @@ export const Partners = ({
   };
 
   return (
-    <section className="my-16">
-      <Container className="flex flex-col md:flex-row items-center gap-6">
-        <ContentBox
-          title={title}
-          content={
-            <div className="flex flex-col gap-2 pr-8">
-              <PrismicRichText field={body} />
-              <p className="font-extraBold text-[1.625rem] md:text-[2rem] mt-6">
-                {ctaText}
-              </p>
-            </div>
-          }
-          buttons={buttons.map((button, i) => (
-            <Button
-              key={i}
-              buttonType="primary"
-              label={button.text}
-              buttonLink={button}
-            />
-          ))}
-        />
-
-        <div className="w-full md:w-2/3">
-          <div className="flex justify-end mb-4 mx-2">
-            <CarouselButton
-              currentSlide={currentSlide + 1}
-              totalSlides={logoTiles.length}
-              onSlideChange={(direction) => {
-                if (
-                  direction === "next" &&
-                  currentSlide < logoTiles.length - 1
-                ) {
-                  carouselRef.current?.next(1);
-                } else if (direction === "prev" && currentSlide > 0) {
-                  carouselRef.current?.previous(1);
-                }
-              }}
-              styling="w-fit"
-            />
-          </div>
-
-          <Carousel
-            ref={carouselRef}
-            responsive={responsive}
-            infinite={false}
-            arrows={false}
-            slidesToSlide={1}
-            afterChange={handleSlideChange}
-            containerClass="w-full"
-          >
-            {logoTiles.map((tile, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16 p-1"
-              >
-                {tile.map((logo, i) => (
-                  <PrismicNextLink
-                    key={i}
-                    field={logo.logo_link}
-                    className="logo-carousel-tile"
-                  >
-                    <PrismicNextImage
-                      field={logo.logo_image}
-                      className="max-h-full w-full object-contain"
-                      alt=""
-                    />
-                  </PrismicNextLink>
-                ))}
+    <section className={carousel ? "my-16" : ""}>
+      <Container
+        className={`flex flex-col md:flex-row items-center gap-0 md:gap-6 ${
+          hideTitle && centerLogo ? "justify-center" : ""
+        }`}
+      >
+        {!hideTitle && (
+          <ContentBox
+            title={title}
+            content={
+              <div className="flex flex-col gap-2 pr-8">
+                <PrismicRichText field={body} />
+                {ctaText && (
+                  <p className="font-extraBold text-[1.625rem] md:text-[2rem] mt-6">
+                    {ctaText}
+                  </p>
+                )}
               </div>
+            }
+            buttons={buttons.map((button, i) => (
+              <Button
+                key={i}
+                buttonType="primary"
+                label={button.text}
+                buttonLink={button}
+              />
             ))}
-          </Carousel>
-        </div>
+            containerClassName={`${
+              carousel ? "" : "flex basis-1/3"
+            } text-center md:text-left`}
+          />
+        )}
+
+        {hideTitle && !centerLogo && (
+          <div className="hidden md:block basis-1/3" aria-hidden="true" />
+        )}
+
+        {carousel && (
+          <div
+            className={
+              !hideTitle ? "w-full md:w-2/3" : "w-full max-w-4xl mx-auto"
+            }
+          >
+            <div className="flex justify-end mb-4 mx-2">
+              <CarouselButton
+                currentSlide={currentSlide + 1}
+                totalSlides={logoTiles.length}
+                onSlideChange={(direction) => {
+                  if (
+                    direction === "next" &&
+                    currentSlide < logoTiles.length - 1
+                  ) {
+                    carouselRef.current?.next(1);
+                  } else if (direction === "prev" && currentSlide > 0) {
+                    carouselRef.current?.previous(1);
+                  }
+                }}
+                styling="w-fit"
+              />
+            </div>
+
+            <Carousel
+              ref={carouselRef}
+              responsive={responsive}
+              infinite={false}
+              arrows={false}
+              slidesToSlide={1}
+              afterChange={handleSlideChange}
+              containerClass="w-full"
+            >
+              {logoTiles.map((tile, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 md:gap-16 p-1 items-start ${!hideTitle ? "" : "flex justify-center"}`}
+                >
+                  {tile.map((logo, i) => (
+                    <PrismicNextLink
+                      key={i}
+                      field={logo.logo_link}
+                      className="logo-carousel-tile aspect-square self-start"
+                    >
+                      <PrismicNextImage
+                        field={logo.logo_image}
+                        className="max-h-full w-full object-contain"
+                      />
+                    </PrismicNextLink>
+                  ))}
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        )}
+
+        {!carousel && (
+          <div
+            className={`grid grid-cols-2 gap-4 md:gap-8 items-start ${
+              hideTitle && centerLogo
+                ? "md:grid-cols-[repeat(var(--sponsor-cols),max-content)] justify-center justify-items-center w-full"
+                : "md:grid-cols-[repeat(var(--sponsor-cols),minmax(0,1fr))] md:basis-2/3"
+            }`}
+            style={{ "--sponsor-cols": numberOfColumns } as React.CSSProperties}
+          >
+            {logos.map((logo, i) => (
+              <PrismicNextLink
+                key={i}
+                field={logo.logo_link}
+                className={`logo-carousel-tile self-start flex items-center justify-center flex-none ${
+                  hideTitle && centerLogo
+                    ? ""
+                    : "basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-(var(--sponsor-cols)-1)*2rem)/var(--sponsor-cols))]"
+                }`}
+              >
+                <PrismicNextImage
+                  field={logo.logo_image}
+                  className="max-h-full max-w-full object-contain"
+                  alt=""
+                />
+              </PrismicNextLink>
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );

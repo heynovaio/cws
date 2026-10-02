@@ -72,6 +72,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "sponsor_list": {
+              "type": "SharedSlice"
+            },
             "accordion": {
               "type": "SharedSlice"
             },

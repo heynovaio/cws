@@ -41,7 +41,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
               <PrismicRichText
                 field={slice.primary.body}
                 components={components}
-                />
+              />
             </div>
           }
           width="standard"

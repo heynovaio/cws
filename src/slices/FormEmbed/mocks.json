@@ -80,18 +80,23 @@
 			},
 			"desktop_alignment": {
 				"__TYPE__": "FieldContent",
-				"value": "Center Stacked",
-				"type": "Select"
+				"type": "Select",
+				"value": "Two Column"
 			},
 			"jotform_url": {
 				"__TYPE__": "FieldContent",
-				"value": "soap",
-				"type": "Text"
+				"type": "Text",
+				"value": "https://forms.zohopublic.ca/canadianwomensport1/form/GeneralInterestForm/formperma/R5r5AJMjbhJbQfynAw7d7UKVTHPGLlbJoQehLkr8dX4"
 			},
 			"section_id": {
 				"__TYPE__": "FieldContent",
 				"value": "safe",
 				"type": "Text"
+			},
+			"form_provider": {
+				"__TYPE__": "FieldContent",
+				"type": "Select",
+				"value": "Zoho Forms"
 			}
 		},
 		"items": []

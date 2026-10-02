@@ -55,7 +55,13 @@
         "config": {
           "label": "Image",
           "constraint": {},
-          "thumbnails": []
+          "thumbnails": [
+            {
+              "name": "Carousel Thumbnail",
+              "width": 400,
+              "height": 215
+            }
+          ]
         }
       },
       "include_newsletter_sign_up_banner": {
@@ -81,6 +87,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "sponsor_list": {
+              "type": "SharedSlice"
+            },
             "contact_info": {
               "type": "SharedSlice"
             },

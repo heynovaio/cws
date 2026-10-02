@@ -51,7 +51,7 @@ export default {
       bodyLarge: "1.25rem",
       md: "1.12rem",
       tagline: "1.62rem",
-      sm: "1rem"
+      sm: "1rem",
     },
     lineHeight: {
       h1: "1.3",

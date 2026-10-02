@@ -2,17 +2,11 @@
 
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
+import { hasContent } from "@/utils";
+import React, { useEffect, useRef } from "react";
 
-/**
- * Props for `HashtagBanner`.
- */
 export type HashtagBannerProps =
   SliceComponentProps<Content.HashtagBannerSlice>;
-
-/**
- * Component for "HashtagBanner" Slices.
- */
-import React, { useEffect, useRef } from "react";
 
 const HashtagBanner = ({ slice }: HashtagBannerProps) => {
   const word = slice.primary.display_word;
@@ -32,11 +26,13 @@ const HashtagBanner = ({ slice }: HashtagBannerProps) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  if (!hasContent(word)) return null;
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-navy-background pt-20 pb-20 overflow-hidden"
+      className="pt-20 pb-20 overflow-hidden"
     >
       <div className="neon-banner">
         <div
@@ -45,7 +41,7 @@ const HashtagBanner = ({ slice }: HashtagBannerProps) => {
         >
           {Array.from({ length: 50 }).map((_, idx) => (
             <h3 key={idx} className="text-3xl font-bold text-white px-4">
-              #{word}
+              {word}
             </h3>
           ))}
         </div>

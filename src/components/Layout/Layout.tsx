@@ -13,7 +13,9 @@ import { Container } from "./Container";
 import { Footer } from "../Menu/Footer";
 import { TopBar } from "./TopBar";
 import { PrismicDocument } from "@prismicio/client";
-import { CampaignHeader } from "../Menu/CampaignHeader";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { CampaignFooter } from "../Menu/CampaignFooter";
 
 interface LayoutProps {
   locales: PrismicDocument[];
@@ -36,13 +38,28 @@ export const Layout = ({
   include_newsletter_sign_up_banner,
   isCampaignPage = false,
 }: LayoutProps) => {
+  const isFrench = (lang || "en-ca").toLowerCase().startsWith("fr");
+  const campaignHomeHref = isFrench
+    ? "https://womenandsport.ca/fr-ca/"
+    : "https://womenandsport.ca/";
+
   return (
     <div>
       <a href="#main-content" className="skip-to-content-link">
         Skip to Content
       </a>
       <div className={isCampaignPage ? "z-50" : "sticky top-0 z-50 "}>
-        <TopBar locales={locales} global={global} text={menus.banner_text} />
+        {!isCampaignPage ? (
+          <TopBar locales={locales} global={global} text={menus.banner_text} />
+        ) : (
+          <div className="flex w-full justify-end flex-row">
+            <LanguageSwitcher
+              lang={lang as "en-ca" | "fr-ca"}
+              locales={locales}
+              classname=" mt-2"
+            />
+          </div>
+        )}
         {!isCampaignPage ? (
           <Header
             logo={global.site_logo}
@@ -50,11 +67,18 @@ export const Layout = ({
             locales={locales}
           />
         ) : (
-          <CampaignHeader
-            logo={global.site_logo}
-            slices={menus.slices}
-            locales={locales}
-          />
+          <PrismicNextLink
+            className="flex justify-center w-full pt-4 xs:mt-10 md:mt-0"
+            aria-label="homepage link"
+            prefetch={false}
+            href={campaignHomeHref}
+          >
+            <PrismicNextImage
+              field={global.site_logo}
+              fallbackAlt=""
+              className="max-w-[200px] md:max-w-[300px] w-full h-auto"
+            />
+          </PrismicNextLink>
         )}
       </div>
       <main id="main-content" className="relative focus:outline-0" tabIndex={0}>
@@ -74,13 +98,16 @@ export const Layout = ({
           />
         )}
       </Container>
-
-      <Footer
-        global={global}
-        slices={menus?.slices1}
-        footerData={menus}
-        lang={lang}
-      />
+      {!isCampaignPage ? (
+        <Footer
+          global={global}
+          slices={menus?.slices1}
+          footerData={menus}
+          lang={lang}
+        />
+      ) : (
+        <CampaignFooter global={global} footerData={menus} lang={lang} />
+      )}
     </div>
   );
 };

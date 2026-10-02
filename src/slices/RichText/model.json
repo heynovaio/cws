@@ -43,6 +43,90 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "richTextWithTable",
+      "name": "Rich Text With Table",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Rich text content with a native Prismic table. Supports stacked or side-by-side column layout.",
+      "imageUrl": "",
+      "primary": {
+        "text_alignment": {
+          "type": "Boolean",
+          "config": {
+            "label": "Text Alignment",
+            "placeholder_false": "Left",
+            "placeholder_true": "Center",
+            "default_value": false
+          }
+        },
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Content",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "button": {
+          "type": "Link",
+          "config": {
+            "label": "Button",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "table": {
+          "type": "Table",
+          "config": {
+            "label": "Table"
+          }
+        },
+        "column_layout": {
+          "type": "Select",
+          "config": {
+            "label": "Content Layout",
+            "placeholder": "",
+            "options": [
+              "Stacked",
+              "50/50",
+              "25/75",
+              "75/25"
+            ],
+            "default_value": "Stacked"
+          }
+        },
+        "column_order": {
+          "type": "Select",
+          "config": {
+            "label": "Content Order",
+            "placeholder": "Content First",
+            "options": [
+              "Content First",
+              "Table First"
+            ],
+            "default_value": "Content First"
+          }
+        },
+        "table_style": {
+          "type": "Select",
+          "config": {
+            "label": "Table Style",
+            "placeholder": "Purple Header + White Background",
+            "options": [
+              "Purple Header + White Background",
+              "Purple Header + Transparent Background"
+            ],
+            "default_value": "Purple Header + White Background"
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

@@ -6,7 +6,6 @@ import { asText, Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 
-
 import GetAllCareers from "@/utils/getAllCareers";
 import { componentsTextSmall } from "@/utils";
 import { DefaultCard } from "../Cards";

@@ -90,8 +90,8 @@
 							[
 								"section_audio_clip",
 								{
-									"__TYPE__": "LinkContent",
 									"key": "5078b22d-4155-4b7b-bffb-2bf92fb1b993",
+									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "FileLink",
 										"id": "mock_Media_link",
@@ -101,6 +101,22 @@
 										"size": "0",
 										"text": "cattle"
 									}
+								}
+							],
+							[
+								"jotform_url",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "https://forms.zohopublic.ca/canadianwomensport1/form/GeneralInterestForm/formperma/R5r5AJMjbhJbQfynAw7d7UKVTHPGLlbJoQehLkr8dX4?zf_rszfm=1"
+								}
+							],
+							[
+								"form_provider",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Select",
+									"value": "Zoho Forms"
 								}
 							]
 						]

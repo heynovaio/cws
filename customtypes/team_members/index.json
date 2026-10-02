@@ -67,6 +67,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "sponsor_list": {
+              "type": "SharedSlice"
+            },
             "tabbed_carousel": {
               "type": "SharedSlice"
             },

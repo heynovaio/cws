@@ -1,0 +1,282 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"buttons": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "dfcf871f-614c-4ed2-aa2c-0d383ed23950",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "AnyLink",
+							"kind": "any",
+							"text": ""
+						}
+					}
+				]
+			},
+			"sponsors": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"key": "b1da9ab9-2d28-4cb6-b024-4b16fbb8eba6",
+						"value": [
+							[
+								"logo_image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1593642633279-1796119d5482",
+										"width": 4016,
+										"height": 6016
+									},
+									"width": 4016,
+									"height": 6016,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"url": "https://images.unsplash.com/photo-1593642633279-1796119d5482",
+									"alt": "pure",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"logo_link",
+								{
+									"key": "4f056ead-e173-468e-97fc-622b686e457f",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "cover"
+									}
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"logo_link",
+								{
+									"key": "a5d90ac4-fbcb-4424-9e8b-f7bf0c78f585",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "www.google.com",
+										"target": "_blank",
+										"text": "another"
+									}
+								}
+							],
+							[
+								"logo_image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw5fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3ODQyMDk5NDh8MA&ixlib=rb-4.1.0&q=85",
+									"alt": "assorted sliced citrus fruits on brown wooden chopping board",
+									"origin": {
+										"id": "1CsaVdwfIew",
+										"url": "https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw5fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3ODQyMDk5NDh8MA&ixlib=rb-4.1.0&q=85",
+										"width": 3709,
+										"height": 5563
+									},
+									"width": 3709,
+									"height": 5563,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						],
+						"key": "ffb4a0bf-6034-464d-8f3a-e13d4894b395"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"logo_image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1592187270271-9a4b84faa228?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxMHx8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzg0MjA5OTQ4fDA&ixlib=rb-4.1.0&q=85",
+									"alt": "sliced orange fruit on blue surface",
+									"origin": {
+										"id": "8ZGgg6rhzxs",
+										"url": "https://images.unsplash.com/photo-1592187270271-9a4b84faa228?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxMHx8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzg0MjA5OTQ4fDA&ixlib=rb-4.1.0&q=85",
+										"width": 4000,
+										"height": 6000
+									},
+									"width": 4000,
+									"height": 6000,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"logo_link",
+								{
+									"key": "1d2d36a7-bb4e-4ebc-80b7-583361e641f1",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "AnyLink",
+										"kind": "any",
+										"text": "fbfgbf"
+									}
+								}
+							]
+						],
+						"key": "4edb368a-2d70-442a-a7e8-2a4c0e11a614"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"logo_image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1597714026720-8f74c62310ba?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyfHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3ODQyMDk5NDh8MA&ixlib=rb-4.1.0&q=85",
+									"alt": "orange fruits under blue sky during daytime",
+									"origin": {
+										"id": "eaOjEz8746k",
+										"url": "https://images.unsplash.com/photo-1597714026720-8f74c62310ba?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyfHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3ODQyMDk5NDh8MA&ixlib=rb-4.1.0&q=85",
+										"width": 5688,
+										"height": 3792
+									},
+									"width": 5688,
+									"height": 3792,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						],
+						"key": "6024f9f3-84bd-4399-abc8-224ff4571f45"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"logo_image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1610833805553-43556a0f821d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw0fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3ODQyMDk5NDh8MA&ixlib=rb-4.1.0&q=85",
+									"alt": "yellow lemon fruit on white surface",
+									"origin": {
+										"id": "2aFE-gUcCvc",
+										"url": "https://images.unsplash.com/photo-1610833805553-43556a0f821d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw0fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3ODQyMDk5NDh8MA&ixlib=rb-4.1.0&q=85",
+										"width": 4458,
+										"height": 6413
+									},
+									"width": 4458,
+									"height": 6413,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						],
+						"key": "4eaeacd2-9b36-43b3-953a-9a83a1fb64c6"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"logo_image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1609639643505-3c158a56de42?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw1fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3ODQyMDk5NDh8MA&ixlib=rb-4.1.0&q=85",
+									"alt": "yellow lemon fruit on brown wooden table",
+									"origin": {
+										"id": "4jsmBl30x_A",
+										"url": "https://images.unsplash.com/photo-1609639643505-3c158a56de42?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw1fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3ODQyMDk5NDh8MA&ixlib=rb-4.1.0&q=85",
+										"width": 5815,
+										"height": 4154
+									},
+									"width": 5815,
+									"height": 4154,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						],
+						"key": "e66c6dd6-7946-4006-8e07-0dde0e87d810"
+					}
+				]
+			},
+			"number_of_columns": {
+				"__TYPE__": "FieldContent",
+				"value": "4",
+				"type": "Select"
+			},
+			"hide_title": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"centre_logo": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"key": "f9e6c763-6783-4d7d-92c5-2ae8709d4a33",
+				"value": []
+			}
+		]
+	}
+]

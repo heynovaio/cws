@@ -26,7 +26,13 @@
         "config": {
           "label": "Image",
           "constraint": {},
-          "thumbnails": []
+          "thumbnails": [
+            {
+              "name": "Carousel Thumbnail",
+              "width": 400,
+              "height": 215
+            }
+          ]
         }
       },
       "title": {
@@ -124,6 +130,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "sponsor_list": {
+              "type": "SharedSlice"
+            },
             "contact_info": {
               "type": "SharedSlice"
             },

@@ -323,8 +323,8 @@
   .bg-gradient-primary {
     background: linear-gradient(
       90deg,
-      rgba(99, 15, 249, 0.8) 0%,
-      rgba(51, 23, 153, 0.8) 100%
+      rgba(80, 0, 223, 1) 0%,
+      rgba(51, 23, 153, 1) 100%
     );
   }
   .bg-gradient-tile {
@@ -361,7 +361,7 @@
   }
 
   .logo-carousel-tile {
-    @apply flex items-center justify-center bg-white rounded-2xl p-4 h-40;
+    @apply flex items-center justify-center bg-white rounded-2xl p-4 h-32;
     &:focus {
       @apply ring-4 ring-neon-violet shadow
       outline-none;
@@ -496,4 +496,79 @@ iframe {
   padding: 1em;
   overflow: visible !important;
   margin-left: -1.5em;
+}
+
+/* ─── CWS Table ─────────────────────────────────────────────────────────────── */
+.cws-table-wrapper {
+  @apply border border-neon-violet rounded-lg overflow-x-auto;
+}
+
+.cws-table {
+  width: 100%;
+  min-width: 340px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.cws-table__th {
+  @apply bg-neon-violet text-white;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  min-width: 100px;
+}
+
+.cws-table__th:first-child {
+  @apply rounded-tl-lg;
+}
+.cws-table__th:last-child {
+  @apply rounded-tr-lg;
+}
+.cws-table__th + .cws-table__th {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cws-table__td {
+  padding: 0.75rem 1rem;
+  vertical-align: top;
+  word-break: break-word;
+  min-width: 100px;
+  border-bottom: 1px solid theme("colors.neon-violet");
+}
+.cws-table__th + .cws-table__th {
+  border-left: 1px solid #6d00ff;
+}
+.cws-table__td + .cws-table__td {
+  border-left: 1px solid theme("colors.neon-violet");
+}
+.cws-table tbody tr:last-child .cws-table__td {
+  border-bottom: 0;
+}
+
+.cws-table--white .cws-table__td {
+  background-color: #ffffff;
+  color: #0d0d1a;
+}
+.cws-table--transparent .cws-table__td {
+  background-color: transparent;
+}
+
+.cws-table-fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(91, 33, 182, 0.5));
+  pointer-events: none;
+  @apply rounded-tr-lg rounded-br-lg;
+}
+
+/* .partners-non-carousel:first-child:not(:last-child) {
+  border-bottom: 0.5px solid rgb(255 255 255 / 55%);
+} */
+
+.partners-non-carousel:has(+ .partners-non-carousel) > div {
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
