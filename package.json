@@ -2,6 +2,9 @@
   "name": "cws",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "concurrently \"npm:next:dev\" \"npm:slicemachine\" --names \"next,slicemachine\" --prefix-colors blue,magenta",
     "start": "concurrently \"npm:next:dev\" \"npm:slicemachine\" --names \"next,slicemachine\" --prefix-colors blue,magenta",
@@ -11,7 +14,9 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "slicemachine": "start-slicemachine",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.1",
@@ -46,6 +51,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
     "postcss": "^8",
+    "prettier": "^3.9.9",
     "slice-machine-ui": "^2.21.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
