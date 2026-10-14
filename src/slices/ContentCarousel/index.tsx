@@ -185,6 +185,7 @@ const ContentCarousel = ({
                     image={isFilled.image(item.image) ? item.image : undefined}
                     cardType="manual"
                     cardStyle={cardStyle}
+                    sectionBackground={slice.primary.background_color}
                     buttons={
                       linkHref
                         ? [
@@ -347,6 +348,7 @@ const ContentCarousel = ({
                       ? "program"
                       : "resource"
                   }
+                  sectionBackground={slice.primary.background_color}
                   buttons={[
                     <Link
                       key={index}
@@ -363,6 +365,7 @@ const ContentCarousel = ({
                   title={asText(item.data.title)}
                   category={item.categoryName as string}
                   cardType={cardType}
+                  sectionBackground={slice.primary.background_color}
                   buttons={[
                     <Link
                       key={index}
