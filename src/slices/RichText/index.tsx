@@ -103,6 +103,7 @@ const RichText = ({ slice }: RichTextProps): JSX.Element | null => {
       <Section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
+        backgroundColor={slice.primary.background_color}
       >
         <Container>
           {isStacked || !ratio ? (
@@ -131,6 +132,7 @@ const RichText = ({ slice }: RichTextProps): JSX.Element | null => {
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      backgroundColor={slice.primary.background_color}
     >
       <Container>
         <div className={`text-content max-w-[900px] mx-auto ${textAlignment}`}>
