@@ -27,7 +27,7 @@
 			},
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "Darker",
+				"value": "No Background",
 				"type": "Select"
 			}
 		},
