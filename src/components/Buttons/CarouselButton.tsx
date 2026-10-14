@@ -47,7 +47,7 @@ export const CarouselButton = ({
 
   return (
     <div
-      className={`flex items-center gap-2 rounded-md bg-white text-midnight focus:bg-light-violet shadow focus ${styling}`}
+      className={`flex items-center gap-2 bg-white text-midnight focus:bg-light-violet shadow focus ${styling}`}
       ref={containerRef}
       tabIndex={0}
     >
