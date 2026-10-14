@@ -19,7 +19,10 @@
             "placeholder": "",
             "options": [
               "No Background",
-              "Darker"
+              "Darker",
+              "Purple",
+              "White",
+              "Gradient"
             ]
           }
         },
