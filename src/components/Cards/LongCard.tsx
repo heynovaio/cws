@@ -6,6 +6,7 @@ import { ContentBox } from "../ContentBox/ContentBox";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { components } from "@/utils";
+import { isWhiteSectionCard } from "@/components/Layout/Section";
 
 interface LongCardProps {
   image?: ImageField | undefined;
@@ -13,6 +14,7 @@ interface LongCardProps {
   content?: RichTextField;
   buttons?: LinkField[];
   links?: LinkField[];
+  sectionBackground?: string | null;
 }
 
 export const LongCard = ({
@@ -21,12 +23,20 @@ export const LongCard = ({
   content,
   buttons,
   links,
+  sectionBackground,
 }: LongCardProps) => {
   const buttonsExist = buttons && buttons.length > 0;
   const linksExist = links && links.length > 0;
+  const onWhiteSection = isWhiteSectionCard(sectionBackground);
 
   return (
-    <div className="card-white flex flex-col md:flex-row items-center md:!p-2 p-4 gap-12 hover-shadow text-midnight h-full">
+    <div
+      className={`card-white flex flex-col md:flex-row items-center md:!p-2 p-4 gap-12 text-midnight h-full ${
+        onWhiteSection
+          ? "card-on-white-section border border-solid border-[#124b99]"
+          : "hover-shadow"
+      }`}
+    >
       <ResponsiveImage
         image={image}
         containerClassName="md:w-1/3 w-full h-full"

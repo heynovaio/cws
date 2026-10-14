@@ -1,12 +1,14 @@
 import { RichTextField } from "@prismicio/client";
 import React, { ReactNode } from "react";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
+import { isWhiteSectionCard } from "@/components/Layout/Section";
 
 interface ShortCardProps {
   title: string | RichTextField;
   buttons?: ReactNode[] | undefined;
   category?: string;
   cardType?: "program" | "resource" | string;
+  sectionBackground?: string | null;
 }
 
 export const ShortCard = ({
@@ -14,7 +16,9 @@ export const ShortCard = ({
   buttons,
   category,
   cardType,
+  sectionBackground,
 }: ShortCardProps) => {
+  const onWhiteSection = isWhiteSectionCard(sectionBackground);
   let cardBackground;
   let categoryChipColor;
 
@@ -33,14 +37,18 @@ export const ShortCard = ({
       break;
   }
 
+  if (onWhiteSection) {
+    cardBackground = "card-white card-on-white-section";
+  }
+
   return (
     <div
-      className={`flex flex-col gap-2 w-full hover-shadow ${cardBackground} justify-between flex-grow`}
+      className={`flex flex-col gap-2 w-full p-4 ${onWhiteSection ? "" : "hover-shadow"} ${cardBackground} justify-between flex-grow`}
     >
       {category && (
         <div className="flex gap-2">
           <span
-            className={`self-start rounded-full px-2 py-1 items-center font-accent font-medium border-[1.5px] ${categoryChipColor}`}
+            className={`self-start px-2 py-1 items-center font-accent font-medium border-[1.5px] ${categoryChipColor}`}
           >
             {category}
           </span>

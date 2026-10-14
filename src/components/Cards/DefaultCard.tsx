@@ -3,6 +3,7 @@ import React, { ReactNode } from "react";
 import { ContentBox } from "../ContentBox/ContentBox";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { HiOutlinePhoto } from "react-icons/hi2";
+import { isWhiteSectionCard } from "@/components/Layout/Section";
 
 export type CardStyle = "purple" | "white";
 
@@ -14,6 +15,7 @@ interface DefaultCardProps {
   category?: string;
   cardType?: "program_page" | "resource_page" | "manual" | string;
   cardStyle?: CardStyle;
+  sectionBackground?: string | null;
 }
 
 const CARD_STYLES: Record<CardStyle, { background: string; chip: string }> = {
@@ -35,7 +37,9 @@ export const DefaultCard = ({
   buttons,
   cardType,
   cardStyle,
+  sectionBackground,
 }: DefaultCardProps) => {
+  const onWhiteSection = isWhiteSectionCard(sectionBackground);
   let cardBackground: string;
   let categoryChipColor: string;
 
@@ -58,39 +62,45 @@ export const DefaultCard = ({
     }
   }
 
+  if (onWhiteSection) {
+    cardBackground = "card-white card-on-white-section";
+  }
+
   return (
     <div
-      className={`flex flex-col gap-5 w-full hover-shadow ${cardBackground}`}
+      className={`flex flex-col gap-5 w-full ${onWhiteSection ? "" : "hover-shadow"} ${cardBackground}`}
     >
       {image?.url ? (
         <ResponsiveImage
           image={image}
           imageHeightClassName="h-full w-full"
-          containerClassName="w-full max-h-[215px] h-full"
+          containerClassName="w-full max-h-[235px] h-full"
         />
       ) : cardType === "manual" ? (
-        <div className="w-full max-h-[215px] h-[215px] flex items-center justify-center bg-black/5">
+        <div className="w-full max-h-[235px] h-[235px] flex items-center justify-center bg-black/5">
           <HiOutlinePhoto className="w-12 h-12 opacity-30" />
         </div>
       ) : null}
-      {category && (
-        <div className="flex gap-2">
-          <span
-            className={`self-start rounded-full px-2 py-1 items-center font-medium border-[1.5px] ${categoryChipColor}`}
-          >
-            {category}
-          </span>
-        </div>
-      )}
-      <ContentBox
-        title={title}
-        titleLevel={3}
-        titleClassName="text-h4"
-        content={content}
-        buttons={buttons}
-        width="full"
-        containerClassName="justify-between flex-grow"
-      />
+      <div className="p-4 flex flex-col gap-5 h-full">
+        {category && (
+          <div className="flex gap-2">
+            <span
+              className={`self-start px-2 py-1 items-center font-medium border-[1.5px] ${categoryChipColor}`}
+            >
+              {category}
+            </span>
+          </div>
+        )}
+        <ContentBox
+          title={title}
+          titleLevel={3}
+          titleClassName="text-h4"
+          content={content}
+          buttons={buttons}
+          width="full"
+          containerClassName="justify-between flex-grow"
+        />
+      </div>
     </div>
   );
 };
