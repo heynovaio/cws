@@ -28,7 +28,7 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
     >
       <Container>
         <div
-          className={`rounded bg-gradient-dark p-6 md:p-24 ${textAlignment} flex flex-col gap-6`}
+          className={`bg-gradient-dark text-white p-6 md:p-24 ${textAlignment} flex flex-col gap-6`}
         >
           <ContentBox
             title={hasTitle ? slice.primary.title : undefined}
