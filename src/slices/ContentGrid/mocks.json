@@ -3,51 +3,9 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"title": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Thought"
-						}
-					}
-				]
-			},
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "No Background",
-				"type": "Select"
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Non laborum nisi proident aliqua reprehenderit fugiat aute adipisicing consequat nulla veniam dolor nulla consequat sint."
-						}
-					}
-				]
-			},
-			"category": {
-				"key": "697445e0-d84a-49f8-8098-015c9c0521d2",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "DocumentLink",
-					"id": "mock_document_id"
-				}
-			}
-		},
-		"items": []
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "resourceGrid",
-		"primary": {
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "No Background",
+				"value": "Darker",
 				"type": "Select"
 			},
 			"title": {
@@ -56,7 +14,7 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "South"
+							"text": "Whether"
 						}
 					}
 				]
@@ -67,13 +25,13 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Eiusmod officia ea voluptate deserunt exercitation eu in pariatur dolore. Laboris ut sunt nulla duis id voluptate aliqua fugiat laborum id amet incididunt aute veniam. Pariatur anim commodo elit Lorem mollit fugiat excepteur esse do dolor velit sit qui ex."
+							"text": "Minim enim dolor elit dolor magna cupidatat adipisicing consequat laborum Lorem eu in. Ex adipisicing mollit deserunt veniam. Enim exercitation voluptate elit velit officia laboris dolore veniam ipsum in adipisicing."
 						}
 					}
 				]
 			},
 			"category": {
-				"key": "c69c3350-9192-4e10-8ace-5b9b20ee27b2",
+				"key": "fbeac884-a385-47d6-9b60-640511bf2b8b",
 				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "DocumentLink",
@@ -84,6 +42,55 @@
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
+				"key": "fa736b11-d8dd-44ef-b2a5-16a9222c3421",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "resourceGrid",
+		"primary": {
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Gradient",
+				"type": "Select"
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Subject"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Enim cupidatat adipisicing voluptate voluptate. Occaecat consequat est nisi pariatur ut excepteur ipsum eu fugiat irure aliqua. Voluptate sunt elit exercitation occaecat."
+						}
+					}
+				]
+			},
+			"category": {
+				"key": "f84d4d7a-eec5-4105-9db7-c8dc9e68b224",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"key": "24bcbb9f-0c90-49f6-915f-986fe9ab8af5",
 				"value": []
 			}
 		]
@@ -103,7 +110,7 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "Society"
+							"text": "Future"
 						}
 					}
 				]
@@ -114,13 +121,13 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Pariatur deserunt labore anim aliquip sit amet dolor amet deserunt sunt esse eiusmod velit voluptate. Occaecat reprehenderit aliqua ex eiusmod excepteur. Exercitation incididunt cillum dolor elit eu culpa consectetur aliquip ut dolore quis eu elit cillum."
+							"text": "Consectetur proident magna magna enim minim nulla quis aliquip nisi elit cillum id."
 						}
 					}
 				]
 			},
 			"category": {
-				"key": "4acc0191-447f-4d0c-9049-99f7650c6bcf",
+				"key": "b32420f7-8c4e-4a71-a630-639ac052aaee",
 				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "DocumentLink",
@@ -131,6 +138,7 @@
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
+				"key": "83365ad8-bb59-4e90-b4ea-cac59e8f432c",
 				"value": []
 			}
 		]
