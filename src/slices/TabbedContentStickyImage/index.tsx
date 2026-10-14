@@ -13,7 +13,12 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { Container } from "@/components";
+import {
+  Container,
+  isLightSectionBackground,
+  isWhiteSectionCard,
+  sectionBackgroundClass,
+} from "@/components";
 import { BlockQuote } from "@/components/BlockQuote";
 import { PrismicNextImage } from "@prismicio/next";
 import { FaPlay, FaPause, FaChevronDown } from "react-icons/fa6";
@@ -41,6 +46,10 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
   slice,
 }) => {
   const sections = slice.primary.section || [];
+  const lightSection = isLightSectionBackground(slice.primary.background_color);
+  const onWhiteSection = isWhiteSectionCard(
+    slice.primary.background_color ?? ""
+  );
   const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
@@ -67,7 +76,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       data-test-id="tabbed-content-sticky-image"
-      className="relative py-8 md:py-16"
+      className={`relative py-8 md:py-16 ${sectionBackgroundClass(slice.primary.background_color)}`}
       ref={topRef}
       id="pillars"
     >
@@ -84,13 +93,19 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                 {({ open }) => (
                   <div
                     className="border border-[#6D00FF] rounded-[12px] overflow-hidden"
-                    style={{
-                      boxShadow: "0 0 12px 0 rgba(99, 15, 249, 0.8)",
-                    }}
+                    style={
+                      onWhiteSection
+                        ? undefined
+                        : { boxShadow: "0 0 12px 0 rgba(99, 15, 249, 0.8)" }
+                    }
                   >
                     <DisclosureButton
                       className={`w-full flex items-center justify-between px-4 py-2 text-left font-semibold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#3DD2FF] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-                        open ? "bg-[#6D00FF] text-white" : "text-white"
+                        open
+                          ? "bg-[#6D00FF] text-white"
+                          : lightSection
+                            ? "text-midnight"
+                            : "text-white"
                       }`}
                     >
                       <div>
@@ -114,7 +129,9 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                       className="p-6"
                       style={{
                         background: "rgba(121, 19, 224, 0.2)",
-                        boxShadow: "0 0 30px 0 rgba(99, 15, 249, 0.8)",
+                        ...(onWhiteSection
+                          ? {}
+                          : { boxShadow: "0 0 30px 0 rgba(99, 15, 249, 0.8)" }),
                         backdropFilter: "blur(8px)",
                       }}
                     >
@@ -133,7 +150,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                           </div>
                         )}
                         {formEmbed && (
-                          <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
+                          <div className="bg-white w-full text-midnight p-4 flex justify-center items-center">
                             {formEmbed}
                           </div>
                         )}
@@ -250,7 +267,9 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                     className="p-6 rounded-[20px] flex border border-[#6D00FF]"
                     style={{
                       background: "rgba(121, 19, 224, 0.2)",
-                      boxShadow: "0 0 30px 0 rgba(99, 15, 249, 0.8)",
+                      ...(onWhiteSection
+                        ? {}
+                        : { boxShadow: "0 0 30px 0 rgba(99, 15, 249, 0.8)" }),
                       backdropFilter: "blur(8px)",
                     }}
                   >
