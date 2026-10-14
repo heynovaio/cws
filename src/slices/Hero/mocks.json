@@ -1,0 +1,68 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"link": {
+				"key": "e9af9a49-efcf-40f6-abce-0b1bae9aa5be",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com",
+					"text": "father"
+				}
+			},
+			"link_label": {
+				"__TYPE__": "FieldContent",
+				"value": "both",
+				"type": "Text"
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nostrud mollit ea Lorem consectetur cupidatat pariatur duis excepteur exercitation incididunt voluptate dolore cupidatat occaecat."
+						}
+					}
+				]
+			},
+			"content_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Middle",
+				"type": "Select"
+			},
+			"horizontal_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Right",
+				"type": "Select"
+			},
+			"media": {
+				"key": "98dafa00-ddbc-49e4-a3aa-b0c44714b908",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "may"
+				}
+			},
+			"height": {
+				"__TYPE__": "FieldContent",
+				"value": "Screen",
+				"type": "Select"
+			},
+			"text_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Black",
+				"type": "Select"
+			},
+			"overlay_opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "10%",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
+]
