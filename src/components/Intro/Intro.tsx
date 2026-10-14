@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Container, Section } from "../Layout";
+import { Container, Section, sectionBackgroundValue } from "../Layout";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { SpecCard } from "../SpecCard";
 import { ContentBox } from "../ContentBox/ContentBox";
@@ -21,9 +21,16 @@ interface IntroProps {
   type?: "program" | "resource" | string;
   links?: BreadcrumbProps["links"];
   lang?: string;
+  pageBackground?: string | null;
 }
 
-export const Intro = ({ type, pageData, links, lang }: IntroProps) => {
+export const Intro = ({
+  type,
+  pageData,
+  links,
+  lang,
+  pageBackground,
+}: IntroProps) => {
   const { image, title, body, button, include_newsletter_sign_up_banner } =
     pageData || {};
   const isProgramPage = type === "program";
@@ -57,11 +64,32 @@ export const Intro = ({ type, pageData, links, lang }: IntroProps) => {
   }
 
   const breadcrumbColor = isProgramPage ? "white" : "black";
+  const pageBg = sectionBackgroundValue(pageBackground);
+  const introIsWhitePage = !isProgramPage && pageBg === "white";
+  const introOnColoredPage =
+    !isProgramPage && (pageBg === "purple" || pageBg === "gradient");
+  const coloredIntroClass =
+    pageBg === "purple"
+      ? "!bg-[#6153a3] !text-white"
+      : pageBg === "gradient"
+        ? "!bg-gradient-section !text-white"
+        : undefined;
+
   return (
-    <Section data-test-id="intro">
-      <Container>
+    <Section
+      data-test-id="intro"
+      backgroundColor={
+        introIsWhitePage
+          ? "White"
+          : introOnColoredPage
+            ? "transparent"
+            : undefined
+      }
+      className={introOnColoredPage ? coloredIntroClass : undefined}
+    >
+      <Container className="!max-w-none">
         <div
-          className={`grid grid-cols-1 md:grid-cols-12 gap-4 rounded p-6 md:p-12 border border-neon-violet shadow backdrop-blur-3xl ${containerStyle}`}
+          className={`grid grid-cols-1 md:grid-cols-12 gap-4 p-6 md:p-12 border border-neon-violet shadow backdrop-blur-3xl ${containerStyle}`}
         >
           <div className="md:col-span-6 flex flex-col h-full">
             <div className="flex-grow flex flex-col justify-center">
