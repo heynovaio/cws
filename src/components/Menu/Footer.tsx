@@ -4,7 +4,6 @@ import {
   MenusDocumentData,
   MenusDocumentDataSlices1Slice,
 } from "../../../prismicio-types";
-import { ResponsiveImage } from "..";
 import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import { FaFacebook, FaInstagram, FaMeta, FaXTwitter } from "react-icons/fa6";
@@ -26,13 +25,23 @@ interface FooterProps {
 
 export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
   return (
-    <footer className="bg-neon-violet/50 text-white flex flex-col justify-center items-center">
-      <nav className="py-14 px-5 mx-auto max-w-screen-xl w-full flex flex-col">
+    <footer className="relative overflow-hidden bg-gradient-section text-white flex flex-col justify-center items-center min-h-[1000px]">
+      <img
+        src="/footer-bg.svg"
+        alt=""
+        aria-hidden
+        //  max width 145% and margin left -13%
+        className="pointer-events-none absolute inset-x-0 top-1/2 z-0 h-auto -translate-y-1/2 w-[3160px] max-w-[3160px] -ml-[270px]"
+      />
+      <nav className="relative z-10 py-14 px-5 mx-auto max-w-screen-xl w-full flex flex-col">
         <div className="flex gap-x-20 gap-y-16 flex-wrap md:flex-nowrap items-center justify-center md:justify-normal md:items-stretch">
           <div className="flex flex-col items-center lg:items-start">
-            <ResponsiveImage
-              image={global?.site_logo}
-              containerClassName="mb-8 max-w-[180px] md:max-w-[220px]"
+            <img
+              src="/cws-logo-white.svg"
+              alt="Canadian Women & Sport"
+              width={338}
+              height={108}
+              className="mb-8 h-auto w-full max-w-[180px] md:max-w-[220px]"
             />
             <div className="flex flex-col items-center md:items-start">
               <h4 className="mb-6 footer-header">
@@ -183,7 +192,7 @@ export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-col justify-center items-center mt-6 footer-links">
+      <div className="relative z-10 flex flex-col justify-center items-center mt-6 footer-links">
         <div className="flex flex-row">
           <PrismicNextLink
             field={footerData?.policy_link}

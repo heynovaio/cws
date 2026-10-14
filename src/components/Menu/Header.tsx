@@ -1,7 +1,6 @@
 "use client";
 import { components } from "@/slices";
-import { ImageField, PrismicDocument } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
+import { PrismicDocument } from "@prismicio/client";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { SliceZone } from "@prismicio/react";
 import React, { Fragment } from "react";
@@ -16,12 +15,11 @@ import LanguageSwitcher from "../Layout/LanguageSwitcher";
 import { useLang } from "@/utils/getLang";
 
 interface HeaderProps {
-  logo: ImageField;
   slices: MenusDocumentDataSlicesSlice[];
   locales: PrismicDocument[];
 }
 
-export const Header: React.FC<HeaderProps> = ({ logo, slices, locales }) => {
+export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
   const lang = useLang();
   const currentLang = lang.routeLocale;
 
@@ -35,12 +33,18 @@ export const Header: React.FC<HeaderProps> = ({ logo, slices, locales }) => {
         className="flex justify-between items-center px-5 lg:py-2 py-1 "
       >
         <PrismicNextLink
-          className="flex max-w-[180px] md:max-w-[220px]"
+          className="flex w-full max-w-[180px] md:max-w-[220px]"
           aria-label="homepage link"
           prefetch={true}
           href={`/${currentLang}`}
         >
-          <PrismicNextImage field={logo} fallbackAlt="" className="pr-4" />
+          <img
+            src="/cws-logo-color.svg"
+            alt=""
+            width={338}
+            height={108}
+            className="h-auto w-full pr-4"
+          />
         </PrismicNextLink>
 
         {/* Desktop Menu */}
