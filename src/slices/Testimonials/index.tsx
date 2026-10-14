@@ -32,7 +32,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element | null => {
     >
       <Container containerClassName="flex flex-col gap-12 items-center">
         <div
-          className="bg-neon-violet hover-shadow rounded py-4 px-6 lg:py-16 lg:px-28  bg-no-repeat "
+          className="bg-neon-violet text-white hover-shadow py-4 px-6 lg:py-16 lg:px-28  bg-no-repeat "
           style={{
             backgroundImage: "url('/LogoBig.png')",
             backgroundPosition: backgroundImageSide,
@@ -45,7 +45,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element | null => {
             <div className="w-full md:w-1/3 aspect-square flex-shrink-0 max-h-60 md:max-h-none">
               <PrismicNextImage
                 field={displayedTestimonial.image}
-                className="w-full h-full object-cover rounded"
+                className="w-full h-full object-cover"
                 alt=""
               />
             </div>
