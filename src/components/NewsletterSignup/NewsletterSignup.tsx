@@ -1,6 +1,11 @@
 import { useNewsletterSignupData } from "@/hooks/use-newletter-signup-data-hook";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
-import { Container, Button, Section } from "@/components";
+import {
+  Container,
+  Button,
+  Section,
+  sectionBackgroundValue,
+} from "@/components";
 import { useState, useRef } from "react";
 
 type Props = {
@@ -70,8 +75,21 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
 
   if (isLoading || !newsletterSignupData) return null;
 
-  const { title, subtitle, signup_success_message, form_field, submit_button } =
-    newsletterSignupData.data;
+  const {
+    title,
+    subtitle,
+    signup_success_message,
+    form_field,
+    submit_button,
+    background_color,
+  } = newsletterSignupData.data;
+
+  const newsletterBackground = sectionBackgroundValue(
+    background_color ?? "No Background"
+  );
+  const isDarkNewsletterPanel =
+    newsletterBackground === "no background" ||
+    newsletterBackground === "darker";
 
   const validateForm = (formData: FormData): ErrorState => {
     const newErrors: ErrorState = {
@@ -246,15 +264,25 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
   };
 
   return (
-    <Section data-slice-type="newsletter_signup" id="newsletter">
-      <Container className="newsletter-signup hover-shadow">
+    <Section
+      data-slice-type="newsletter_signup"
+      id="newsletter"
+      backgroundColor={background_color}
+    >
+      <Container
+        className={
+          isDarkNewsletterPanel
+            ? "newsletter-signup newsletter-signup-dark hover-shadow"
+            : "newsletter-signup"
+        }
+      >
         <div className="p-8 max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <PrismicRichText
               field={title}
               components={{
                 heading2: ({ children }) => (
-                  <h2 className="text-[2.875rem] font-extrabold text-white text-center leading-tight">
+                  <h2 className="text-[2.875rem] font-extrabold text-center leading-tight">
                     {children}
                   </h2>
                 ),
@@ -297,7 +325,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                     <label
                       htmlFor={fieldName}
                       className={`block mb-4 font-semibold ${
-                        hasError ? "text-ultra-pink" : "text-white"
+                        hasError ? "text-ultra-pink" : ""
                       }`}
                     >
                       {fieldLabel}
@@ -307,7 +335,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                       name={fieldName}
                       type={fieldType}
                       placeholder={field.placeholder ?? ""}
-                      className={`w-full p-4 rounded-xl border-2 focus ${
+                      className={`w-full p-4 border-2 focus ${
                         hasError
                           ? "border-ultra-pink focus:ring-ultra-p-500 focus:border-red-500"
                           : "border-transparent focus:ring-blue-500 focus:border-blue-500"
