@@ -82,6 +82,15 @@
           "default_value": true
         }
       },
+      "background": {
+        "type": "Select",
+        "config": {
+          "label": "Background",
+          "placeholder": "",
+          "options": ["Darker", "Purple", "White", "Gradient"],
+          "default_value": "Darker"
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
