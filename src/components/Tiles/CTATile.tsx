@@ -16,7 +16,7 @@ export const CTATile = ({ bg_image, image, title, link }: CTATileProps) => {
   return (
     <PrismicNextLink
       field={link}
-      className="hover-zoom hover-shadow md:p-4 lg:p-8 relative bg-gradient-tile h-[430px] border border-neon-violet rounded overflow-hidden text-midnight w-full flex flex-col no-underline"
+      className="hover-zoom hover-shadow md:p-4 lg:p-8 relative bg-gradient-tile h-[430px] border border-neon-violet overflow-hidden text-midnight w-full flex flex-col no-underline"
     >
       {image && (
         <PrismicNextImage
