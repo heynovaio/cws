@@ -16,7 +16,7 @@ export type CareerGridProps = {
   slice: SliceComponentProps<Content.ContentGridSlice>["slice"];
 };
 
-export const CareerGrid = ({}: CareerGridProps) => {
+export const CareerGrid = ({ slice }: CareerGridProps) => {
   const lang = useLang();
   const { data } = GetAllCareers(lang.routeLocale);
 
@@ -32,6 +32,7 @@ export const CareerGrid = ({}: CareerGridProps) => {
       }
       image={item.data.image}
       cardType={item.type}
+      sectionBackground={slice.primary.background_color}
       buttons={[
         <Link
           key={index}
