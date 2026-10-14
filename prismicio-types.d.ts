@@ -967,6 +967,21 @@ export interface NewsletterSignupDocumentDataSubmitButtonItem {
  */
 interface NewsletterSignupDocumentData {
   /**
+   * Background Color field in *Newsletter SignUp*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: newsletter_signup.background_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
+
+  /**
    * Title field in *Newsletter SignUp*
    *
    * - **Field Type**: Rich Text
@@ -1857,6 +1872,21 @@ interface ResourcePageDocumentData {
   include_partners: prismic.BooleanField;
 
   /**
+   * Background field in *Resource Page*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Darker
+   * - **API ID Path**: resource_page.background
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background: prismic.SelectField<
+    "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
+
+  /**
    * Slice Zone field in *Resource Page*
    *
    * - **Field Type**: Slice Zone
@@ -2270,7 +2300,10 @@ export interface AccordionSliceDefaultPrimary {
    * - **API ID Path**: accordion.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Column Layout field in *Accordion → Default → Primary*
@@ -2385,7 +2418,10 @@ export interface CallToActionSliceDefaultPrimary {
    * - **API ID Path**: call_to_action.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Text Alignment field in *CallToAction → Default → Primary*
@@ -2465,6 +2501,20 @@ export type CallToActionSlice = prismic.SharedSlice<
  * Primary content in *FormEmbed → Default → Primary*
  */
 export interface ContactInfoSliceDefaultPrimary {
+  /**
+   * Background Color field in *FormEmbed → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: No Background
+   * - **API ID Path**: contact_info.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
+
   /**
    * Section ID field in *FormEmbed → Default → Primary*
    *
@@ -2673,7 +2723,10 @@ export interface ContentCarouselSliceProgramsCarouselPrimary {
    * - **API ID Path**: content_carousel.programsCarousel.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Photo field in *ContentCarousel → Programs Carousel → Primary*
@@ -2747,7 +2800,10 @@ export interface ContentCarouselSliceResourceCarouselPrimary {
    * - **API ID Path**: content_carousel.resourceCarousel.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Photo field in *ContentCarousel → Resource Carousel → Primary*
@@ -2821,7 +2877,10 @@ export interface ContentCarouselSliceManualCarouselPrimary {
    * - **API ID Path**: content_carousel.manualCarousel.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Title field in *ContentCarousel → Manual Carousel → Primary*
@@ -3008,7 +3067,10 @@ export interface ContentColumnSliceDefaultPrimary {
    * - **API ID Path**: content_column.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"Purple" | "Transparent", "filled">;
+  background_color: prismic.SelectField<
+    "Purple" | "Transparent" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Title field in *ContentColumn → Default → Primary*
@@ -3072,6 +3134,20 @@ export type ContentColumnSliceDefault = prismic.SharedSliceVariation<
  */
 export interface ContentColumnSliceStatsPrimary {
   /**
+   * Section Background field in *ContentColumn → Stats → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Purple
+   * - **API ID Path**: content_column.stats.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "Purple" | "Transparent" | "White" | "Gradient",
+    "filled"
+  >;
+
+  /**
    * Title field in *ContentColumn → Stats → Primary*
    *
    * - **Field Type**: Rich Text
@@ -3113,17 +3189,6 @@ export interface ContentColumnSliceStatsPrimary {
   column: prismic.GroupField<
     Simplify<ContentColumnSliceStatsPrimaryColumnItem>
   >;
-
-  /**
-   * Section Background field in *ContentColumn → Stats → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: Purple
-   * - **API ID Path**: content_column.stats.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/fields/select
-   */
-  background_color: prismic.SelectField<"Purple" | "Transparent", "filled">;
 }
 
 /**
@@ -3170,7 +3235,10 @@ export interface ContentGridSliceDefaultPrimary {
    * - **API ID Path**: content_grid.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Title field in *ContentGrid → Program Grid → Primary*
@@ -3229,7 +3297,10 @@ export interface ContentGridSliceResourceGridPrimary {
    * - **API ID Path**: content_grid.resourceGrid.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Title field in *ContentGrid → Resource Grid → Primary*
@@ -3288,7 +3359,10 @@ export interface ContentGridSliceCareersGridPrimary {
    * - **API ID Path**: content_grid.careersGrid.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Title field in *ContentGrid → Careers Grid → Primary*
@@ -3367,6 +3441,18 @@ export interface HashtagBannerSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   display_word: prismic.KeyTextField;
+
+  /**
+   * Background Color field in *HashtagBanner → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hashtag_banner.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Purple" | "White" | "Gradient"
+  >;
 }
 
 /**
@@ -3398,6 +3484,144 @@ export type HashtagBannerSlice = prismic.SharedSlice<
   "hashtag_banner",
   HashtagBannerSliceVariation
 >;
+
+/**
+ * Primary content in *Hero → Default → Primary*
+ */
+export interface HeroSliceDefaultPrimary {
+  /**
+   * Media field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.media
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  media: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Description field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Text Color field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.text_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  text_color: prismic.SelectField<"White" | "Black">;
+
+  /**
+   * Link field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Link Label field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.link_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  link_label: prismic.KeyTextField;
+
+  /**
+   * Content Vertical Placement field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.content_vertical_placement
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  content_vertical_placement: prismic.SelectField<"Top" | "Middle" | "Bottom">;
+
+  /**
+   * Horizontal Vertical Placement field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.horizontal_vertical_placement
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  horizontal_vertical_placement: prismic.SelectField<
+    "Left" | "Center" | "Right"
+  >;
+
+  /**
+   * Height field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.height
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  height: prismic.SelectField<"Screen" | "75%" | "50%" | "33%">;
+
+  /**
+   * Overlay opacity field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: 10%
+   * - **API ID Path**: hero.default.primary.overlay_opacity
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  overlay_opacity: prismic.SelectField<
+    | "10%"
+    | "20%"
+    | "30%"
+    | "40%"
+    | "50%"
+    | "60%"
+    | "70%"
+    | "80%"
+    | "90%"
+    | "100%"
+    | "0%",
+    "filled"
+  >;
+}
+
+/**
+ * Default variation for Hero Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeroSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Hero*
+ */
+type HeroSliceVariation = HeroSliceDefault;
+
+/**
+ * Hero Shared Slice
+ *
+ * - **API ID**: `hero`
+ * - **Description**: Hero
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
  * Item in *ImageText → Stats → Primary → Stats*
@@ -3448,7 +3672,10 @@ export interface ImageTextSliceDefaultPrimary {
    * - **API ID Path**: image_text.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Image Side field in *ImageText → Default → Primary*
@@ -3552,7 +3779,10 @@ export interface ImageTextSliceVideoPrimary {
    * - **API ID Path**: image_text.video.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Image Side field in *ImageText → Video → Primary*
@@ -3656,7 +3886,10 @@ export interface ImageTextSliceStatsPrimary {
    * - **API ID Path**: image_text.stats.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Image Side field in *ImageText → Stats → Primary*
@@ -3989,6 +4222,18 @@ export type MultiLinkColumnSlice = prismic.SharedSlice<
  */
 export interface RichTextSliceDefaultPrimary {
   /**
+   * Background Color field in *RichText → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Purple" | "White" | "Gradient"
+  >;
+
+  /**
    * Text Alignment field in *RichText → Default → Primary*
    *
    * - **Field Type**: Boolean
@@ -4037,6 +4282,18 @@ export type RichTextSliceDefault = prismic.SharedSliceVariation<
  * Primary content in *RichText → Rich Text With Table → Primary*
  */
 export interface RichTextSliceRichTextWithTablePrimary {
+  /**
+   * Background Color field in *RichText → Rich Text With Table → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.richTextWithTable.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Purple" | "White" | "Gradient"
+  >;
+
   /**
    * Text Alignment field in *RichText → Rich Text With Table → Primary*
    *
@@ -4275,6 +4532,18 @@ export interface SponsorListSliceDefaultPrimarySponsorsItem {
  * Primary content in *SponsorList → Default → Primary*
  */
 export interface SponsorListSliceDefaultPrimary {
+  /**
+   * Background Color field in *SponsorList → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sponsor_list.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Purple" | "White" | "Gradient"
+  >;
+
   /**
    * CTA Text field in *SponsorList → Default → Primary*
    *
@@ -4644,6 +4913,18 @@ export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimaryTabItem {
  */
 export interface TabbedCarouselSliceDefaultPrimary {
   /**
+   * Background Color field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Purple" | "White" | "Gradient"
+  >;
+
+  /**
    * Title field in *TabbedCarousel → TabbedCarousel - Card per Tab → Primary*
    *
    * - **Field Type**: Rich Text
@@ -4691,6 +4972,18 @@ export type TabbedCarouselSliceDefault = prismic.SharedSliceVariation<
  * Primary content in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
  */
 export interface TabbedCarouselSliceTabbedCarouselCampaignPrimary {
+  /**
+   * Background Color field in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselCampaign.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Purple" | "White" | "Gradient"
+  >;
+
   /**
    * Title field in *TabbedCarousel → TabbedCarousel - Campaign → Primary*
    *
@@ -4742,6 +5035,18 @@ export type TabbedCarouselSliceTabbedCarouselCampaign =
  * Primary content in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary*
  */
 export interface TabbedCarouselSliceTabbedCarouselMultiCardPrimary {
+  /**
+   * Background Color field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_carousel.tabbedCarouselMultiCard.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Purple" | "White" | "Gradient"
+  >;
+
   /**
    * Title field in *TabbedCarousel → TabbedCarousel - MultiCard per Tab → Primary*
    *
@@ -4913,6 +5218,18 @@ export interface TabbedContentStickyImageSliceDefaultPrimarySectionItem {
  */
 export interface TabbedContentStickyImageSliceDefaultPrimary {
   /**
+   * Background Color field in *TabbedContentStickyImage → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabbed_content_sticky_image.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "No Background" | "Purple" | "White" | "Gradient"
+  >;
+
+  /**
    * Section field in *TabbedContentStickyImage → Default → Primary*
    *
    * - **Field Type**: Group
@@ -4969,7 +5286,10 @@ export interface TagCategorySliceDefaultPrimary {
    * - **API ID Path**: tag_category.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Title field in *TagCategory → Default → Primary*
@@ -5079,7 +5399,9 @@ export interface TeamListSliceDefaultPrimary {
    * - **API ID Path**: team_list.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient"
+  >;
 
   /**
    * Title field in *TeamList → Default → Primary*
@@ -5202,7 +5524,10 @@ export interface TestimonialsSliceDefaultPrimary {
    * - **API ID Path**: testimonials.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Image Side field in *Testimonials → Default → Primary*
@@ -5344,7 +5669,10 @@ export interface TileGridSliceIconTilePrimary {
    * - **API ID Path**: tile_grid.iconTile.primary.background_color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  background_color: prismic.SelectField<"No Background" | "Darker", "filled">;
+  background_color: prismic.SelectField<
+    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "filled"
+  >;
 
   /**
    * Columns field in *TileGrid → Icon Tile → Primary*
@@ -5422,14 +5750,14 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig,
+      options?: prismic.ClientConfig
     ): prismic.Client<AllDocumentTypes>;
   }
 
   interface CreateWriteClient {
     (
       repositoryNameOrEndpoint: string,
-      options: prismic.WriteClientConfig,
+      options: prismic.WriteClientConfig
     ): prismic.WriteClient<AllDocumentTypes>;
   }
 
@@ -5535,6 +5863,10 @@ declare module "@prismicio/client" {
       HashtagBannerSliceDefaultPrimary,
       HashtagBannerSliceVariation,
       HashtagBannerSliceDefault,
+      HeroSlice,
+      HeroSliceDefaultPrimary,
+      HeroSliceVariation,
+      HeroSliceDefault,
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
       ImageTextSliceVideoPrimary,
