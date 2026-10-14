@@ -9,7 +9,6 @@ import {
 import { Header } from "../Menu/Header";
 import Partners from "../Menu/Partners";
 import NewsletterSignupBanner from "../NewsletterSignup/NewsletterSignup";
-import { Container } from "./Container";
 import { Footer } from "../Menu/Footer";
 import { TopBar } from "./TopBar";
 import { PrismicDocument } from "@prismicio/client";
@@ -61,11 +60,7 @@ export const Layout = ({
           </div>
         )}
         {!isCampaignPage ? (
-          <Header
-            logo={global.site_logo}
-            slices={menus.slices}
-            locales={locales}
-          />
+          <Header slices={menus.slices} locales={locales} />
         ) : (
           <PrismicNextLink
             className="flex justify-center w-full pt-4 xs:mt-10 md:mt-0"
@@ -84,20 +79,18 @@ export const Layout = ({
       <main id="main-content" className="relative focus:outline-0" tabIndex={0}>
         {children}
       </main>
-      <Container>
-        {include_newsletter_sign_up_banner && (
-          <NewsletterSignupBanner lang={lang} />
-        )}
-        {partners && (
-          <Partners
-            title={partners.title}
-            body={partners.body}
-            buttons={partners.button}
-            logos={partners.logos}
-            ctaText={partners.cta_text}
-          />
-        )}
-      </Container>
+      {include_newsletter_sign_up_banner && (
+        <NewsletterSignupBanner lang={lang} />
+      )}
+      {partners && (
+        <Partners
+          title={partners.title}
+          body={partners.body}
+          buttons={partners.button}
+          logos={partners.logos}
+          ctaText={partners.cta_text}
+        />
+      )}
       {!isCampaignPage ? (
         <Footer
           global={global}
@@ -106,7 +99,7 @@ export const Layout = ({
           lang={lang}
         />
       ) : (
-        <CampaignFooter global={global} footerData={menus} lang={lang} />
+        <CampaignFooter footerData={menus} lang={lang} />
       )}
     </div>
   );
