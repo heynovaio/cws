@@ -18,6 +18,19 @@
             "label": "Display Word",
             "placeholder": ""
           }
+        },
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Purple",
+              "White",
+              "Gradient"
+            ]
+          }
         }
       },
       "items": {}

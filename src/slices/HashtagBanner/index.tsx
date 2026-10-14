@@ -2,6 +2,7 @@
 
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
+import { sectionBackgroundClass } from "@/components";
 import { hasContent } from "@/utils";
 import React, { useEffect, useRef } from "react";
 
@@ -32,7 +33,7 @@ const HashtagBanner = ({ slice }: HashtagBannerProps) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="pt-20 pb-20 overflow-hidden"
+      className={`pt-20 pb-20 overflow-hidden ${sectionBackgroundClass(slice.primary.background_color)}`}
     >
       <div className="neon-banner">
         <div
