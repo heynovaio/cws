@@ -78,6 +78,7 @@ export default {
         narrow: "452px",
       },
       backgroundImage: {
+        "gradient-section": "linear-gradient(90deg, #6951a2 0%, #007ec3 100%)",
         "gradient-primary":
           "linear-gradient(90deg, #3802a7 0%, #3c1253 98.73%)",
         "gradient-dark":
