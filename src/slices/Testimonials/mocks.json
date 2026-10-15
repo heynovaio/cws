@@ -28,8 +28,8 @@
 				"type": "Link",
 				"value": [
 					{
-						"__TYPE__": "LinkContent",
 						"key": "01337f71-ad46-452f-99a6-25da08c0e5ea",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "https://slicemachine.dev",
@@ -48,7 +48,6 @@
 							[
 								"image",
 								{
-									"__TYPE__": "ImageContent",
 									"origin": {
 										"id": "main",
 										"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a",
@@ -67,6 +66,8 @@
 									},
 									"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a",
 									"alt": "jet",
+									"credits": null,
+									"__TYPE__": "ImageContent",
 									"thumbnails": {}
 								}
 							],
@@ -103,6 +104,10 @@
 						]
 					}
 				]
+			},
+			"hide_background_image": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": [

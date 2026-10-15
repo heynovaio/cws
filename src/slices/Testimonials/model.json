@@ -95,6 +95,15 @@
               }
             }
           }
+        },
+        "hide_background_image": {
+          "type": "Boolean",
+          "config": {
+            "label": "Hide background image",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {}

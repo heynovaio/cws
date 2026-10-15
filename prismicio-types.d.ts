@@ -1058,6 +1058,7 @@ export type NewsletterSignupDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | HeroSlice
   | SponsorListSlice
   | ContactInfoSlice
   | TileGridSlice
@@ -5573,6 +5574,17 @@ export interface TestimonialsSliceDefaultPrimary {
   testimonials: prismic.GroupField<
     Simplify<TestimonialsSliceDefaultPrimaryTestimonialsItem>
   >;
+
+  /**
+   * Hide background image field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: testimonials.default.primary.hide_background_image
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  hide_background_image: prismic.BooleanField;
 }
 
 /**

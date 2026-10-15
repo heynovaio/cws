@@ -22,6 +22,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element | null => {
   const allTestimonials = slice.primary.testimonials;
   const displayedTestimonial =
     allTestimonials[Math.floor(Math.random() * allTestimonials.length)];
+  const hideBackgroundImage = slice.primary.hide_background_image === true;
   if (!allTestimonials || allTestimonials.length === 0) return null;
 
   return (
@@ -32,12 +33,20 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element | null => {
     >
       <Container containerClassName="flex flex-col gap-12 items-center">
         <div
-          className="bg-neon-violet text-white hover-shadow py-4 px-6 lg:py-16 lg:px-28  bg-no-repeat "
-          style={{
-            backgroundImage: "url('/LogoBig.png')",
-            backgroundPosition: backgroundImageSide,
-            backgroundSize: "cover",
-          }}
+          className={`hover-shadow py-4 px-6 lg:py-16 lg:px-28 bg-no-repeat ${
+            hideBackgroundImage
+              ? "bg-white text-midnight"
+              : "bg-neon-violet text-white"
+          }`}
+          style={
+            hideBackgroundImage
+              ? undefined
+              : {
+                  backgroundImage: "url('/LogoBig.png')",
+                  backgroundPosition: backgroundImageSide,
+                  backgroundSize: "cover",
+                }
+          }
         >
           <div
             className={`flex flex-col ${imageSide} gap-4 md:gap-12 md:items-center`}
