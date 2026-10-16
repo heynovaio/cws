@@ -50,6 +50,8 @@ type PrismicItem = ProgramDocument | ResourceDocument | PageDocument;
 type CategoryDocument =
   Content.ProgramCategoryDocument | Content.ResourceCategoryDocument;
 
+const SLIDER_MIN_ITEMS = 4;
+
 const responsive: ResponsiveType = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -141,7 +143,7 @@ const ContentCarousel = ({
         <Container>
           <div className="flex justify-between items-center mb-6">
             <ContentBox title={slice.primary.title ?? undefined} width="full" />
-            {manualCards.length > itemsPerPage && (
+            {manualCards.length >= SLIDER_MIN_ITEMS && (
               <CarouselButton
                 currentSlide={currentSlide + 1}
                 totalSlides={totalSlidesManual}
@@ -152,64 +154,118 @@ const ContentCarousel = ({
           </div>
         </Container>
         <Container>
-          <Carousel
-            ref={carouselRef}
-            responsive={responsive}
-            infinite={false}
-            arrows={false}
-            draggable
-            swipeable
-            keyBoardControl
-            afterChange={handleSlideChange}
-            containerClass="content-carousel"
-            itemClass="react-multi-carousel-item !mt-0 flex"
-          >
-            {manualCards.map((item, index) => {
-              const cardStyle =
-                (item.card_style?.toLowerCase() as CardStyle) ?? "white";
-              const linkHref = isFilled.link(item.link) ? item.link : null;
+          {manualCards.length >= SLIDER_MIN_ITEMS ? (
+            <Carousel
+              ref={carouselRef}
+              responsive={responsive}
+              infinite={false}
+              arrows={false}
+              draggable
+              swipeable
+              keyBoardControl
+              afterChange={handleSlideChange}
+              containerClass="content-carousel"
+              itemClass="react-multi-carousel-item !mt-0 flex"
+            >
+              {manualCards.map((item, index) => {
+                const cardStyle =
+                  (item.card_style?.toLowerCase() as CardStyle) ?? "white";
+                const linkHref = isFilled.link(item.link) ? item.link : null;
 
-              return (
-                <div
-                  key={index}
-                  className="flex h-full w-full p-3 overflow-visible"
-                >
-                  <DefaultCard
-                    title=""
-                    content={
-                      <PrismicRichText
-                        field={item.description}
-                        components={components}
-                      />
-                    }
-                    image={isFilled.image(item.image) ? item.image : undefined}
-                    cardType="manual"
-                    cardStyle={cardStyle}
-                    sectionBackground={slice.primary.background_color}
-                    buttons={
-                      linkHref
-                        ? [
-                            <Link
-                              key={index}
-                              href={linkHref.url ?? ""}
-                              target={
-                                "target" in linkHref
-                                  ? (linkHref.target ?? undefined)
-                                  : undefined
-                              }
-                              className="more-hover btn pl-0 flex flex-row items-center gap-2 underline underline-offset-4"
-                            >
-                              <span>{linkHref.text || learnMoreText}</span>
-                              <HiOutlineArrowLongRight className="h-10 w-10" />
-                            </Link>,
-                          ]
-                        : undefined
-                    }
-                  />
-                </div>
-              );
-            })}
-          </Carousel>
+                return (
+                  <div
+                    key={index}
+                    className="flex h-full w-full p-3 overflow-visible"
+                  >
+                    <DefaultCard
+                      title=""
+                      content={
+                        <PrismicRichText
+                          field={item.description}
+                          components={components}
+                        />
+                      }
+                      image={
+                        isFilled.image(item.image) ? item.image : undefined
+                      }
+                      cardType="manual"
+                      cardStyle={cardStyle}
+                      sectionBackground={slice.primary.background_color}
+                      buttons={
+                        linkHref
+                          ? [
+                              <Link
+                                key={index}
+                                href={linkHref.url ?? ""}
+                                target={
+                                  "target" in linkHref
+                                    ? (linkHref.target ?? undefined)
+                                    : undefined
+                                }
+                                className="more-hover btn pl-0 flex flex-row items-center gap-2 underline underline-offset-4"
+                              >
+                                <span>{linkHref.text || learnMoreText}</span>
+                                <HiOutlineArrowLongRight className="h-10 w-10" />
+                              </Link>,
+                            ]
+                          : undefined
+                      }
+                    />
+                  </div>
+                );
+              })}
+            </Carousel>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {manualCards.map((item, index) => {
+                const cardStyle =
+                  (item.card_style?.toLowerCase() as CardStyle) ?? "white";
+                const linkHref = isFilled.link(item.link) ? item.link : null;
+
+                return (
+                  <div
+                    key={index}
+                    className="flex h-full w-full p-3 overflow-visible"
+                  >
+                    <DefaultCard
+                      title=""
+                      content={
+                        <PrismicRichText
+                          field={item.description}
+                          components={components}
+                        />
+                      }
+                      image={
+                        isFilled.image(item.image) ? item.image : undefined
+                      }
+                      cardType="manual"
+                      cardStyle={cardStyle}
+                      sectionBackground={slice.primary.background_color}
+                      buttons={
+                        linkHref
+                          ? [
+                              <Link
+                                key={index}
+                                href={linkHref.url ?? ""}
+                                target={
+                                  "target" in linkHref
+                                    ? (linkHref.target ?? undefined)
+                                    : undefined
+                                }
+                                className="more-hover btn pl-0 flex flex-row items-center gap-2 underline underline-offset-4"
+                              >
+                                <span>{linkHref.text || learnMoreText}</span>
+                                <HiOutlineArrowLongRight className="h-10 w-10" />
+                              </Link>,
+                            ]
+                          : undefined
+                      }
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
           {slice.primary.redirect_button?.[0] && (
             <div className="mt-10">
               <Button
@@ -278,6 +334,58 @@ const ContentCarousel = ({
 
   const totalSlides = Math.max(0, filteredData.length - itemsPerPage + 1);
   const hasPhoto = slice.primary.photo == true;
+  const useSlider = filteredDataWithCategory.length >= SLIDER_MIN_ITEMS;
+  const carouselItems = filteredDataWithCategory.map((item, index) => (
+    <div key={item.id} className="flex h-full w-full p-3 overflow-visible">
+      {hasPhoto ? (
+        <DefaultCard
+          title={asText(item.data.title)}
+          content={
+            <PrismicRichText field={item.data.body} components={components} />
+          }
+          category={item.categoryName as string}
+          image={
+            item.data.image &&
+            "Carousel Thumbnail" in item.data.image &&
+            item.data.image["Carousel Thumbnail"]?.url
+              ? item.data.image["Carousel Thumbnail"]
+              : item.data.image
+          }
+          cardType={
+            slice.variation === "programsCarousel" ? "program" : "resource"
+          }
+          sectionBackground={slice.primary.background_color}
+          buttons={[
+            <Link
+              key={index}
+              href={item.url ?? ""}
+              className="more-hover btn pl-0 flex flex-row items-center gap-2 underline underline-offset-4"
+            >
+              <span>{learnMoreText}</span>
+              <HiOutlineArrowLongRight className="h-10 w-10" />
+            </Link>,
+          ]}
+        />
+      ) : (
+        <ShortCard
+          title={asText(item.data.title)}
+          category={item.categoryName as string}
+          cardType={cardType}
+          sectionBackground={slice.primary.background_color}
+          buttons={[
+            <Link
+              key={index}
+              href={item.url ?? ""}
+              className="more-hover btn p-0 flex flex-row items-center gap-2 focus:outline-offset-4"
+            >
+              <span>{learnMoreText}</span>
+              <HiOutlineArrowLongRight className="h-7 w-7" />
+            </Link>,
+          ]}
+        />
+      )}
+    </div>
+  ));
 
   return (
     <Section
@@ -298,7 +406,7 @@ const ContentCarousel = ({
             }
             width="full"
           />
-          {filteredDataWithCategory.length > itemsPerPage && (
+          {useSlider && (
             <CarouselButton
               currentSlide={currentSlide + 1}
               totalSlides={totalSlides}
@@ -309,78 +417,26 @@ const ContentCarousel = ({
         </div>
       </Container>
       <Container>
-        <Carousel
-          ref={carouselRef}
-          responsive={responsive}
-          infinite={false}
-          arrows={false}
-          draggable
-          swipeable
-          keyBoardControl
-          afterChange={handleSlideChange}
-          containerClass="content-carousel"
-          itemClass="react-multi-carousel-item !mt-0 flex "
-        >
-          {filteredDataWithCategory.map((item, index) => (
-            <div
-              key={item.id}
-              className="flex h-full w-full p-3 overflow-visible"
-            >
-              {hasPhoto ? (
-                <DefaultCard
-                  title={asText(item.data.title)}
-                  content={
-                    <PrismicRichText
-                      field={item.data.body}
-                      components={components}
-                    />
-                  }
-                  category={item.categoryName as string}
-                  image={
-                    item.data.image &&
-                    "Carousel Thumbnail" in item.data.image &&
-                    item.data.image["Carousel Thumbnail"]?.url
-                      ? item.data.image["Carousel Thumbnail"]
-                      : item.data.image
-                  }
-                  cardType={
-                    slice.variation === "programsCarousel"
-                      ? "program"
-                      : "resource"
-                  }
-                  sectionBackground={slice.primary.background_color}
-                  buttons={[
-                    <Link
-                      key={index}
-                      href={item.url ?? ""}
-                      className="more-hover btn pl-0 flex flex-row items-center gap-2 underline underline-offset-4"
-                    >
-                      <span>{learnMoreText}</span>
-                      <HiOutlineArrowLongRight className="h-10 w-10" />
-                    </Link>,
-                  ]}
-                />
-              ) : (
-                <ShortCard
-                  title={asText(item.data.title)}
-                  category={item.categoryName as string}
-                  cardType={cardType}
-                  sectionBackground={slice.primary.background_color}
-                  buttons={[
-                    <Link
-                      key={index}
-                      href={item.url ?? ""}
-                      className="more-hover btn p-0 flex flex-row items-center gap-2 focus:outline-offset-4"
-                    >
-                      <span>{learnMoreText}</span>
-                      <HiOutlineArrowLongRight className="h-7 w-7" />
-                    </Link>,
-                  ]}
-                />
-              )}
-            </div>
-          ))}
-        </Carousel>
+        {useSlider ? (
+          <Carousel
+            ref={carouselRef}
+            responsive={responsive}
+            infinite={false}
+            arrows={false}
+            draggable
+            swipeable
+            keyBoardControl
+            afterChange={handleSlideChange}
+            containerClass="content-carousel"
+            itemClass="react-multi-carousel-item !mt-0 flex "
+          >
+            {carouselItems}
+          </Carousel>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {carouselItems}
+          </div>
+        )}
         {slice.primary.redirect_button?.[0] && (
           <div className="mt-10">
             <Button
