@@ -51,7 +51,6 @@ type CategoryDocument =
   Content.ProgramCategoryDocument | Content.ResourceCategoryDocument;
 
 const SLIDER_MIN_ITEMS = 5;
-
 function staticGridClass(count: number): string {
   if (count >= 4) return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
   if (count === 3) return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
