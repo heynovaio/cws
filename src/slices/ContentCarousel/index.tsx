@@ -50,7 +50,14 @@ type PrismicItem = ProgramDocument | ResourceDocument | PageDocument;
 type CategoryDocument =
   Content.ProgramCategoryDocument | Content.ResourceCategoryDocument;
 
-const SLIDER_MIN_ITEMS = 4;
+const SLIDER_MIN_ITEMS = 5;
+
+function staticGridClass(count: number): string {
+  if (count >= 4) return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
+  if (count === 3) return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+  if (count === 2) return "grid grid-cols-1 sm:grid-cols-2";
+  return "grid grid-cols-1";
+}
 
 const responsive: ResponsiveType = {
   desktop: {
@@ -216,7 +223,7 @@ const ContentCarousel = ({
               })}
             </Carousel>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <div className={staticGridClass(manualCards.length)}>
               {manualCards.map((item, index) => {
                 const cardStyle =
                   (item.card_style?.toLowerCase() as CardStyle) ?? "white";
@@ -433,7 +440,7 @@ const ContentCarousel = ({
             {carouselItems}
           </Carousel>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div className={staticGridClass(filteredDataWithCategory.length)}>
             {carouselItems}
           </div>
         )}
