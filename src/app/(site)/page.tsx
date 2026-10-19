@@ -67,7 +67,7 @@ export default async function Page() {
       }
     >
       <div className="relative">
-        <HomepageHero data={page.data} />
+        {!page.data.hide_hero && <HomepageHero data={page.data} />}
         <SliceZone
           slices={page.data.slices}
           components={components}
