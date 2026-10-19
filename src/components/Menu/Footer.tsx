@@ -33,7 +33,7 @@ export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
         //  max width 145% and margin left -13%
         className="pointer-events-none absolute inset-x-0 top-1/2 z-0 h-auto -translate-y-1/2 w-[3160px] max-w-[3160px] -ml-[270px]"
       />
-      <nav className="relative z-10 py-14 px-5 mx-auto max-w-screen-xl w-full flex flex-col">
+      <nav className="relative z-10 pt-[14rem] pb-14 px-5 mx-auto max-w-screen-xl w-full flex flex-col">
         <div className="flex gap-x-20 gap-y-16 flex-wrap md:flex-nowrap items-center justify-center md:justify-normal md:items-stretch">
           <div className="flex flex-col items-center lg:items-start">
             <img
