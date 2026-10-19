@@ -20,7 +20,7 @@ export const TeamMemberTile = ({
   return (
     <div className="bg-white border border-neon-violet p-4 text-midnight w-full flex flex-col hover-shadow">
       {image && (
-        <div className="mb-4 overflow-hidden border border-neon-violet aspect-square">
+        <div className="mb-4 overflow-hidden aspect-square">
           <ResponsiveImage
             image={image}
             className="w-full object-cover aspect-square rounded-none"
