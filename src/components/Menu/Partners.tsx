@@ -73,7 +73,9 @@ export const Partners = ({
 
   return (
     <section
-      className={carousel ? `w-full py-16 ${sectionBackgroundClass()}` : ""}
+      className={
+        carousel ? `w-full py-16 ${sectionBackgroundClass("White")}` : ""
+      }
     >
       <Container
         className={`flex flex-col md:flex-row items-center gap-0 md:gap-6 ${
