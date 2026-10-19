@@ -6,7 +6,10 @@ import { ContentBox } from "../ContentBox/ContentBox";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { components } from "@/utils";
-import { isWhiteSectionCard } from "@/components/Layout/Section";
+import {
+  isWhiteSectionCard,
+  sectionBackgroundValue,
+} from "@/components/Layout/Section";
 
 interface LongCardProps {
   image?: ImageField | undefined;
@@ -28,14 +31,16 @@ export const LongCard = ({
   const buttonsExist = buttons && buttons.length > 0;
   const linksExist = links && links.length > 0;
   const onWhiteSection = isWhiteSectionCard(sectionBackground);
+  const onWhiteBackground =
+    sectionBackgroundValue(sectionBackground) === "white";
 
   return (
     <div
-      className={`card-white flex flex-col md:flex-row items-center md:!p-2 p-4 gap-12 text-midnight h-full ${
-        onWhiteSection
-          ? "card-on-white-section border border-solid border-[#124b99]"
-          : "hover-shadow"
-      }`}
+      className={`card-white flex flex-col md:flex-row items-center md:!p-2 p-4 gap-12 text-midnight h-full border border-solid ${
+        onWhiteBackground
+          ? "!border-black"
+          : "card-on-white-section border-[#6153a3]"
+      } ${onWhiteSection ? "" : "hover-shadow"}`}
     >
       <ResponsiveImage
         image={image}
@@ -59,7 +64,7 @@ export const LongCard = ({
                           <PrismicNextLink
                             key={index}
                             field={item}
-                            className={`more-hover flex items-center gap-2 px-0 btn btn-text text-neon-violet`}
+                            className={`more-hover flex items-center gap-2 px-0 btn btn-text text-[#6153a3]`}
                           >
                             <span>{item.text}</span>
                             <HiOutlineArrowLongRight className="h-10 w-10" />
@@ -71,7 +76,7 @@ export const LongCard = ({
               : []
           }
           width="full"
-          titleClassName="text-neon-violet"
+          titleClassName="text-[#6153a3]"
           containerClassName="flex-1 md:my-12"
         />
         {/* Link Fields */}

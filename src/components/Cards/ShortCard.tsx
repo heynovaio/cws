@@ -19,27 +19,11 @@ export const ShortCard = ({
   sectionBackground,
 }: ShortCardProps) => {
   const onWhiteSection = isWhiteSectionCard(sectionBackground);
-  let cardBackground;
-  let categoryChipColor;
-
-  switch (cardType) {
-    case "program":
-      cardBackground = "card-gradient";
-      categoryChipColor = "bg-light-violet text-midnight border-midnight";
-      break;
-    case "resource":
-      cardBackground = "card-white";
-      categoryChipColor = "text-dark border-neon-violet";
-      break;
-    default:
-      cardBackground = "card-white";
-      categoryChipColor = "text-dark border-neon-violet";
-      break;
-  }
-
-  if (onWhiteSection) {
-    cardBackground = "card-white card-on-white-section";
-  }
+  const cardBackground = "card-white card-on-white-section";
+  const categoryChipColor =
+    cardType === "program"
+      ? "bg-light-violet text-midnight border-midnight"
+      : "text-dark border-neon-violet";
 
   return (
     <div

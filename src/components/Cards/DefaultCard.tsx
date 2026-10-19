@@ -18,13 +18,11 @@ interface DefaultCardProps {
   sectionBackground?: string | null;
 }
 
-const CARD_STYLES: Record<CardStyle, { background: string; chip: string }> = {
+const CARD_STYLES: Record<CardStyle, { chip: string }> = {
   purple: {
-    background: "card-gradient",
     chip: "bg-light-violet text-midnight border-midnight",
   },
   white: {
-    background: "card-white",
     chip: "text-dark border-neon-violet",
   },
 };
@@ -40,30 +38,23 @@ export const DefaultCard = ({
   sectionBackground,
 }: DefaultCardProps) => {
   const onWhiteSection = isWhiteSectionCard(sectionBackground);
-  let cardBackground: string;
+  const cardBackground = "card-white card-on-white-section";
   let categoryChipColor: string;
 
   if (cardType === "manual" && cardStyle && CARD_STYLES[cardStyle]) {
-    cardBackground = CARD_STYLES[cardStyle].background;
     categoryChipColor = CARD_STYLES[cardStyle].chip;
   } else {
     switch (cardType) {
       case "program":
       case "program_page":
-        cardBackground = "card-gradient";
         categoryChipColor = "bg-light-violet text-midnight border-midnight";
         break;
       case "resource":
       case "resource_page":
       default:
-        cardBackground = "card-white";
         categoryChipColor = "text-dark border-neon-violet";
         break;
     }
-  }
-
-  if (onWhiteSection) {
-    cardBackground = "card-white card-on-white-section";
   }
 
   return (
@@ -73,11 +64,11 @@ export const DefaultCard = ({
       {image?.url ? (
         <ResponsiveImage
           image={image}
-          imageHeightClassName="h-full w-full"
-          containerClassName="w-full max-h-[235px] h-full"
+          imageHeightClassName="absolute inset-0 h-full w-full"
+          containerClassName="w-full min-h-[235px]"
         />
       ) : cardType === "manual" ? (
-        <div className="w-full max-h-[235px] h-[235px] flex items-center justify-center bg-black/5">
+        <div className="w-full min-h-[235px] flex items-center justify-center bg-black/5">
           <HiOutlinePhoto className="w-12 h-12 opacity-30" />
         </div>
       ) : null}
