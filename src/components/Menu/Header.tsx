@@ -25,15 +25,15 @@ export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
 
   return (
     <header
-      className="sticky top-0 z-50 bg-midnight/70"
+      className="sticky top-0 z-50 bg-white/70"
       style={{ backdropFilter: "blur(35px)" }}
     >
       <nav
         aria-label="Main Nav"
-        className="flex justify-between items-center px-5 lg:py-2 py-1 "
+        className="flex justify-between items-center px-5 py-4 lg:py-4"
       >
         <PrismicNextLink
-          className="flex w-full max-w-[180px] md:max-w-[220px]"
+          className="flex w-full max-w-[170px] md:max-w-[170px]"
           aria-label="homepage link"
           prefetch={true}
           href={`/${currentLang}`}
@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
 
         {/* Desktop Menu */}
 
-        <div className="hidden lg:flex items-center xl:gap-10 gap-3 z-50">
+        <div className="hidden lg:flex items-center xl:gap-10 gap-3 z-50 text-midnight">
           <SliceZone slices={slices} components={components} />
         </div>
 
@@ -64,17 +64,17 @@ export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
                 >
                   <div className="flex flex-col justify-center items-center w-8 h-8">
                     <span
-                      className={`block absolute h-0.5 w-8 bg-white transform transition duration-300 ease-in-out ${
+                      className={`block absolute h-0.5 w-8 bg-midnight transform transition duration-300 ease-in-out ${
                         open ? "rotate-45 translate-y-0" : "-translate-y-2"
                       }`}
                     ></span>
                     <span
-                      className={`block absolute h-0.5 w-8 bg-white transform transition duration-300 ease-in-out ${
+                      className={`block absolute h-0.5 w-8 bg-midnight transform transition duration-300 ease-in-out ${
                         open ? "opacity-0" : "opacity-100"
                       }`}
                     ></span>
                     <span
-                      className={`block absolute h-0.5 w-8 bg-white transform transition duration-300 ease-in-out ${
+                      className={`block absolute h-0.5 w-8 bg-midnight transform transition duration-300 ease-in-out ${
                         open ? "-rotate-45 translate-y-0" : "translate-y-2"
                       }`}
                     ></span>
@@ -91,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
                 >
                   <PopoverPanel
                     anchor="bottom"
-                    className="w-screen h-screen bg-midnight bg-gradient-dark lg:mt-4 pb-10 z-40"
+                    className="w-screen h-screen bg-midnight bg-gradient-dark text-white lg:mt-4 pb-10 z-40"
                   >
                     <div className="flex flex-col pl-4 gap-10 mt-10">
                       <SliceZone slices={slices} components={components} />
