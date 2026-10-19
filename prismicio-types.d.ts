@@ -1182,6 +1182,18 @@ interface PageDocumentData {
   include_partners: prismic.BooleanField;
 
   /**
+   * Hide Hero field in *Page*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: page.hide_hero
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  hide_hero: prismic.BooleanField;
+
+  /**
    * Slice Zone field in *Page*
    *
    * - **Field Type**: Slice Zone
@@ -3611,9 +3623,133 @@ export type HeroSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Hero → Hero - Stacked → Primary*
+ */
+export interface HeroSliceHeroStackedPrimary {
+  /**
+   * Media field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroStacked.primary.media
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  media: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Description field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroStacked.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Text Color field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroStacked.primary.text_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  text_color: prismic.SelectField<"White" | "Black">;
+
+  /**
+   * Link field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroStacked.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Link Label field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroStacked.primary.link_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  link_label: prismic.KeyTextField;
+
+  /**
+   * Content Vertical Placement field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroStacked.primary.content_vertical_placement
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  content_vertical_placement: prismic.SelectField<"Top" | "Middle" | "Bottom">;
+
+  /**
+   * Horizontal Vertical Placement field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroStacked.primary.horizontal_vertical_placement
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  horizontal_vertical_placement: prismic.SelectField<
+    "Left" | "Center" | "Right"
+  >;
+
+  /**
+   * Height field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroStacked.primary.height
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  height: prismic.SelectField<"Screen" | "75%" | "50%" | "33%">;
+
+  /**
+   * Overlay opacity field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: 10%
+   * - **API ID Path**: hero.heroStacked.primary.overlay_opacity
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  overlay_opacity: prismic.SelectField<
+    | "10%"
+    | "20%"
+    | "30%"
+    | "40%"
+    | "50%"
+    | "60%"
+    | "70%"
+    | "80%"
+    | "90%"
+    | "100%"
+    | "0%",
+    "filled"
+  >;
+}
+
+/**
+ * Hero - Stacked variation for Hero Slice
+ *
+ * - **API ID**: `heroStacked`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceHeroStacked = prismic.SharedSliceVariation<
+  "heroStacked",
+  Simplify<HeroSliceHeroStackedPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Hero*
  */
-type HeroSliceVariation = HeroSliceDefault;
+type HeroSliceVariation = HeroSliceDefault | HeroSliceHeroStacked;
 
 /**
  * Hero Shared Slice
@@ -3674,7 +3810,7 @@ export interface ImageTextSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   background_color: prismic.SelectField<
-    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "No Background" | "Darker" | "Purple" | "White",
     "filled"
   >;
 
@@ -3781,7 +3917,7 @@ export interface ImageTextSliceVideoPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   background_color: prismic.SelectField<
-    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "No Background" | "Darker" | "Purple" | "White",
     "filled"
   >;
 
@@ -3888,7 +4024,7 @@ export interface ImageTextSliceStatsPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   background_color: prismic.SelectField<
-    "No Background" | "Darker" | "Purple" | "White" | "Gradient",
+    "No Background" | "Darker" | "Purple" | "White",
     "filled"
   >;
 
@@ -5877,8 +6013,10 @@ declare module "@prismicio/client" {
       HashtagBannerSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
+      HeroSliceHeroStackedPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      HeroSliceHeroStacked,
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
       ImageTextSliceVideoPrimary,
