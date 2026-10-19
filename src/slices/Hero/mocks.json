@@ -64,5 +64,77 @@
 			}
 		},
 		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "heroStacked",
+		"primary": {
+			"media": {
+				"key": "21b74612-5e7a-4f15-8663-53e71d7409ab",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "noted"
+				}
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Quis qui velit quis velit. Incididunt veniam elit fugiat nostrud tempor reprehenderit."
+						}
+					}
+				]
+			},
+			"text_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Black",
+				"type": "Select"
+			},
+			"link": {
+				"key": "90fa53b8-ed05-4792-bc93-fa9297279533",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "loss"
+				}
+			},
+			"link_label": {
+				"__TYPE__": "FieldContent",
+				"value": "were",
+				"type": "Text"
+			},
+			"content_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Middle",
+				"type": "Select"
+			},
+			"horizontal_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Right",
+				"type": "Select"
+			},
+			"height": {
+				"__TYPE__": "FieldContent",
+				"value": "Screen",
+				"type": "Select"
+			},
+			"overlay_opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "10%",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"key": "a7639df8-6705-483a-9fec-55da5c646b72",
+				"value": []
+			}
+		]
 	}
 ]

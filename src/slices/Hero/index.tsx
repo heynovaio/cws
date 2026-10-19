@@ -88,6 +88,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
 
   if (!media && !hasDescription && !hasLink) return null;
 
+  const isStacked = slice.variation === "heroStacked";
   const textClass =
     primary.text_color === "Black" ? "text-midnight" : "text-white";
   const heightClass = HEIGHT_CLASS[primary.height ?? ""] ?? "min-h-[75vh]";
@@ -100,29 +101,77 @@ const Hero: FC<HeroProps> = ({ slice }) => {
   const overlayClass =
     OVERLAY_CLASS[primary.overlay_opacity ?? "10%"] ?? "bg-midnight/10";
 
+  const mediaElement =
+    media && isVideoMedia(media) ? (
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src={mediaSrc(media)}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+    ) : media ? (
+      <img
+        className="absolute inset-0 h-full w-full object-cover"
+        src={mediaSrc(media)}
+        alt=""
+      />
+    ) : null;
+
+  const copy = (
+    <div
+      className={`flex w-full max-w-[900px] flex-col gap-6 ${horizontalClass}`}
+    >
+      {hasDescription && (
+        <PrismicRichText field={primary.description} components={components} />
+      )}
+      {hasLink && (
+        <Button
+          buttonType="primary"
+          buttonLink={primary.link}
+          label={linkLabel}
+        />
+      )}
+    </div>
+  );
+
+  if (isStacked) {
+    return (
+      <section
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+        className={`relative w-full ${textClass}`}
+      >
+        {mediaElement && (
+          <div className={`relative w-full overflow-hidden ${heightClass}`}>
+            {mediaElement}
+            {overlayClass && (
+              <div
+                aria-hidden
+                className={`pointer-events-none absolute inset-0 ${overlayClass}`}
+              />
+            )}
+          </div>
+        )}
+        {(hasDescription || hasLink) && (
+          <Container
+            containerClassName={`flex flex-col py-12 ${horizontalClass}`}
+          >
+            {copy}
+          </Container>
+        )}
+      </section>
+    );
+  }
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className={`relative flex w-full overflow-hidden ${heightClass} ${textClass}`}
     >
-      {media && isVideoMedia(media) ? (
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src={mediaSrc(media)}
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-      ) : media ? (
-        <img
-          className="absolute inset-0 h-full w-full object-cover"
-          src={mediaSrc(media)}
-          alt=""
-        />
-      ) : null}
-
+      {mediaElement}
       {overlayClass && (
         <div
           aria-hidden
@@ -133,23 +182,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       <Container
         containerClassName={`relative z-10 flex flex-1 flex-col py-16 ${verticalClass} ${horizontalClass}`}
       >
-        <div
-          className={`flex w-full max-w-[900px] flex-col gap-6 ${horizontalClass}`}
-        >
-          {hasDescription && (
-            <PrismicRichText
-              field={primary.description}
-              components={components}
-            />
-          )}
-          {hasLink && (
-            <Button
-              buttonType="primary"
-              buttonLink={primary.link}
-              label={linkLabel}
-            />
-          )}
-        </div>
+        {copy}
       </Container>
     </section>
   );
