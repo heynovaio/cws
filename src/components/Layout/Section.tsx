@@ -8,7 +8,7 @@ interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const LIGHT_BACKGROUNDS = new Set(["white", "lighter", "light"]);
-const WHITE_SECTION_CARDS = new Set(["white", "purple"]);
+const WHITE_SECTION_CARDS = new Set(["white", "purple", "gradient"]);
 
 export function sectionBackgroundValue(
   backgroundColor?: string | null
@@ -39,7 +39,7 @@ export function sectionBackgroundClass(
   const value = sectionBackgroundValue(backgroundColor);
 
   if (value === "gradient") {
-    return "bg-gradient-section text-white";
+    return "bg-gradient-section text-white section-bg-gradient";
   }
 
   if (value === "transparent") {
@@ -47,11 +47,11 @@ export function sectionBackgroundClass(
   }
 
   if (value === "purple") {
-    return "bg-[#6153a3] text-white section-no-shadow";
+    return "bg-[#6153a3] text-white section-no-shadow section-bg-purple";
   }
 
   if (value === "white") {
-    return "bg-white text-midnight section-no-shadow";
+    return "bg-white text-midnight section-no-shadow section-bg-white";
   }
 
   if (LIGHT_BACKGROUNDS.has(value)) {
