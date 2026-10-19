@@ -89,7 +89,7 @@ export const Intro = ({
     >
       <Container className="!max-w-none">
         <div
-          className={`grid grid-cols-1 md:grid-cols-12 gap-4 p-6 md:p-12 border border-neon-violet shadow backdrop-blur-3xl ${containerStyle}`}
+          className={`grid grid-cols-1 md:grid-cols-12 gap-4 p-6 md:p-12 border border-neon-violet backdrop-blur-3xl ${containerStyle}`}
         >
           <div className="md:col-span-6 flex flex-col h-full">
             <div className="flex-grow flex flex-col justify-center">

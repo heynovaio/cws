@@ -57,7 +57,7 @@ export const SearchFilterButtons = ({ lang }: SearchFilterButtonsProps) => {
           key={filterKey}
           onClick={() => handleFilterClick(filterKey)}
           className={`
-            ${activeFilter === filterKey ? "bg-white !text-midnight shadow font-bold" : ""} btn btn-outline focus border`}
+            ${activeFilter === filterKey ? "bg-white !text-midnight font-bold" : ""} btn btn-outline focus border`}
         >
           <span className="text-base font-normal hover:text-current flex gap-2 items-center">
             {getModuleFilterLabel(filterKey, lang)}{" "}

@@ -58,7 +58,7 @@
   .focus:focus,
   .btn:focus {
     @apply outline -outline-offset-1 outline-4 outline-ultra-pink
-    ring-ultra-pink overflow-hidden;
+    ring-ultra-pink overflow-hidden rounded-none;
   }
 
   a:focus {
@@ -77,7 +77,6 @@
 
   .btn {
     @apply inline-block
-      rounded-full 
       text-button	
       font-bold
       px-8 py-2
@@ -91,12 +90,11 @@
 
     &:hover {
       @apply bg-neon-violet text-white border-ultra-pink -translate-y-1;
-      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
 
     &:active,
     &:focus {
-      @apply ring-4 ring-aqua shadow
+      @apply ring-4 ring-aqua
       outline-none;
     }
   }
@@ -106,12 +104,11 @@
 
     &:hover {
       @apply bg-aqua/80 text-white border-aqua -translate-y-1;
-      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
 
     &:active,
     &:focus {
-      @apply ring-4 ring-neon-violet shadow
+      @apply ring-4 ring-neon-violet
       outline-none;
     }
   }
@@ -121,12 +118,11 @@
     @apply text-white bg-electric-blue border border-electric-blue transition-transform duration-200;
     &:hover {
       @apply bg-electric-blue/80 text-white border-electric-blue -translate-y-1;
-      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
 
     &:active,
     &:focus {
-      @apply ring-4 ring-neon-violet shadow
+      @apply ring-4 ring-neon-violet
       outline-none;
     }
   }
@@ -137,11 +133,10 @@
         border-white;
     &:hover {
       @apply text-white -translate-y-1;
-      box-shadow: 0 0 12px rgba(164, 120, 255, 0.6);
     }
     &:active,
     &:focus {
-      @apply ring-4 ring-neon-violet shadow
+      @apply ring-4 ring-neon-violet
       outline-none;
     }
   }
@@ -154,7 +149,7 @@
 
     &:active,
     &:focus {
-      @apply ring-4 ring-neon-violet shadow
+      @apply ring-4 ring-neon-violet
       outline-none;
     }
   }
@@ -282,14 +277,9 @@
   }
 
   .hover-shadow {
-    box-shadow: 0 0 21px 0 #630ff9cc;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px); /* Safari */
     transition: all 0.5s;
-
-    &:hover {
-      box-shadow: 0 0 40px 0 #630ff9cc;
-    }
   }
 
   .backdrop-blur-default {
@@ -306,7 +296,7 @@
     background-color: #e6e7e8;
   }
   .card-gradient {
-    @apply bg-gradient-primary text-white backdrop-blur border border-neon-violet;
+    @apply bg-gradient-primary text-white backdrop-blur border border-[#6153a3];
   }
   .card-overlay {
     @apply border-2
@@ -333,8 +323,8 @@
   .bg-gradient-tile {
     background: linear-gradient(
       180deg,
-      rgba(51, 23, 153, 0.65) 0%,
-      rgba(65, 0, 152, 0.65) 100%
+      rgba(97, 83, 163, 0.65) 0%,
+      rgba(97, 83, 163, 0.65) 100%
     );
   }
   /* Carousel Styling Below - Helps with making sure the cards are the same size */
@@ -355,10 +345,10 @@
   }
 
   .carousel-button {
-    @apply flex flex-row items-center gap-2 bg-white text-bodyLarge text-midnight border border-midnight rounded-md px-4 py-2 shadow transition;
+    @apply flex flex-row items-center gap-2 bg-white text-bodyLarge text-midnight border border-midnight px-4 py-2 transition;
     &:active,
     &:focus {
-      @apply ring-4 ring-neon-violet shadow
+      @apply ring-4 ring-neon-violet
       outline-none;
     }
   }
@@ -366,26 +356,25 @@
   .logo-carousel-tile {
     @apply flex items-center justify-center bg-white p-4 h-32;
     &:focus {
-      @apply ring-4 ring-neon-violet shadow
+      @apply ring-4 ring-neon-violet
       outline-none;
     }
   }
 
   .neon-banner {
-    @apply w-[105%] -ml-[2.5%] border-t-2 border-b-2 border-neon-violet bg-gradient-dark overflow-hidden py-10;
+    @apply w-[105%] -ml-[2.5%] border-t-2 border-b-2 border-[#6153a3] bg-gradient-dark overflow-hidden py-10;
 
     transform: rotate(-2.79deg);
     transform-origin: center;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px); /* Safari */
-    box-shadow: 0 0 30px 0 #630ff9cc;
   }
 
   .newsletter-signup-dark {
     @apply gap-[0.625rem]
            rounded-[1.5rem]
            border
-           border-neon-violet
+           border-[#6153a3]
            pt-[1.875rem]
            pb-[4.375rem]
            bg-gradient-dark
@@ -393,7 +382,7 @@
   }
 
   .pagination-button {
-    @apply text-midnight bg-aqua px-2 py-2 rounded-full;
+    @apply text-midnight bg-aqua px-2 py-2;
   }
   .backdrop-blur {
     backdrop-filter: blur(3px);
@@ -503,7 +492,7 @@ iframe {
 
 /* ─── CWS Table ─────────────────────────────────────────────────────────────── */
 .cws-table-wrapper {
-  @apply border border-neon-violet rounded-lg overflow-x-auto;
+  @apply border border-[#6153a3] rounded-lg overflow-x-auto;
 }
 
 .cws-table {
@@ -536,13 +525,13 @@ iframe {
   vertical-align: top;
   word-break: break-word;
   min-width: 100px;
-  border-bottom: 1px solid theme("colors.neon-violet");
+  border-bottom: 1px solid #6153a3;
 }
 .cws-table__th + .cws-table__th {
-  border-left: 1px solid #6d00ff;
+  border-left: 1px solid #6153a3;
 }
 .cws-table__td + .cws-table__td {
-  border-left: 1px solid theme("colors.neon-violet");
+  border-left: 1px solid #6153a3;
 }
 .cws-table tbody tr:last-child .cws-table__td {
   border-bottom: 0;
@@ -593,4 +582,58 @@ iframe {
 .section-no-shadow
   :is(.btn-primary, .btn-secondary, .btn-tertiary, .btn-outline):hover {
   box-shadow: none;
+}
+
+/* Drop shadows are off site-wide. Focus rings use a separate shadow layer. */
+*,
+*::before,
+*::after {
+  --tw-shadow: 0 0 #0000 !important;
+  --tw-shadow-colored: 0 0 #0000 !important;
+}
+
+.border-neon-violet,
+.divide-neon-violet > :not([hidden]) ~ :not([hidden]) {
+  border-color: #6153a3;
+}
+
+.section-bg-white,
+.section-bg-purple,
+.section-bg-gradient,
+.section-bg-white :where(*),
+.section-bg-purple :where(*),
+.section-bg-gradient :where(*) {
+  border-color: #6153a3;
+}
+
+.section-bg-white
+  :is(.btn-primary, .btn-secondary, .btn-tertiary, .btn-outline) {
+  background-color: #6153a3;
+  color: #fff;
+  border-color: #6153a3;
+}
+
+.section-bg-white
+  :is(.btn-primary, .btn-secondary, .btn-tertiary, .btn-outline):hover {
+  background-color: #4f4284;
+  color: #fff;
+  border-color: #6153a3;
+}
+
+.section-bg-purple
+  :is(.btn-primary, .btn-secondary, .btn-tertiary, .btn-outline),
+.section-bg-gradient
+  :is(.btn-primary, .btn-secondary, .btn-tertiary, .btn-outline) {
+  background-color: #fff;
+  color: #6153a3;
+  border-color: #6153a3;
+}
+
+.section-bg-purple
+  :is(.btn-primary, .btn-secondary, .btn-tertiary, .btn-outline):hover,
+.section-bg-gradient
+  :is(.btn-primary, .btn-secondary, .btn-tertiary, .btn-outline):hover {
+  background-color: #f4f2fa;
+  color: #6153a3;
+  border-color: #6153a3;
 }

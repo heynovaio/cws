@@ -23,7 +23,7 @@ const AppliedFilterTag: React.FC<AppliedFilterTagProps> = ({
       <span className="truncate max-w-32">{label}</span>
       <button
         onClick={onRemove}
-        className="flex-shrink-0 hover:bg-purple-500/30 rounded-full p-0.5 transition-colors duration-200"
+        className="flex-shrink-0 hover:bg-purple-500/30 p-0.5 transition-colors duration-200"
         aria-label={`Remove ${label} filter`}
       >
         <FaXmark className="h-3 w-3" />
@@ -214,7 +214,7 @@ export const MobileSideFilter: React.FC<MobileSideFilterProps> = ({ lang }) => {
             className="w-full rounded-xl px-5 py-8 duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
           >
             <CloseButton
-              className="z-20 fixed top-4 right-4 p-5 btn-primary rounded-full duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
+              className="z-20 fixed top-4 right-4 p-5 btn-primary duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
               onClick={() => setIsOpen(false)}
             >
               <FaXmark className="h-5 w-5" />

@@ -212,7 +212,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
           className="
             relative z-10
             flex items-center
-            rounded-full bg-white/90 shadow-lg
+            rounded-full bg-white/90
             text-sm font-medium text-gray-800
             border border-neon-violet
             backdrop-blur-md
