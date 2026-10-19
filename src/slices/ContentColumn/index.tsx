@@ -17,10 +17,7 @@ export type ContentColumnProps =
 const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
   const backBlur =
     slice.primary.background_color === "Transparent" ? "backdrop-blur" : "";
-  const cardStyling =
-    slice.primary.card_background === "Purple"
-      ? "bg-gradient-primary text-white divide-soft-purple/25"
-      : "bg-white text-[#01015E] divide-neon-violet";
+  const cardStyling = "bg-[#6153a3] text-white";
 
   const isSingleColumn = slice.primary.column.length === 1;
 
@@ -54,7 +51,7 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
         containerClassName={isSingleColumn ? "flex justify-center" : ""}
       >
         <div
-          className={`${cardStyling} ${backBlur} relative z-10 flex flex-col md:flex-row items-center justify-center shadow border border-neon-violet items-stretch ${
+          className={`${cardStyling} ${backBlur} relative z-10 flex flex-col md:flex-row items-center justify-center border border-neon-violet items-stretch ${
             isSingleColumn ? "max-w-[860px] w-full" : "w-full"
           }`}
         >
@@ -62,10 +59,13 @@ const ContentColumn = ({ slice }: ContentColumnProps): JSX.Element => {
             <div
               key={index}
               className={`flex flex-col items-center justify-center p-10 w-full ${
-                index !== 0
-                  ? "border-t md:border-t-0 md:border-l border-neon-violet"
-                  : ""
+                index !== 0 ? "border-t md:border-t-0 md:border-l" : ""
               }`}
+              style={
+                index !== 0
+                  ? { borderColor: "rgba(255, 255, 255, 0.35)" }
+                  : undefined
+              }
             >
               {item.icon && (
                 <ResponsiveImage
