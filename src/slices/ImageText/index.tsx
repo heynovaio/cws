@@ -26,9 +26,11 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
 
   const isVideo = slice.variation === "video";
   const isStats = slice.variation === "stats";
+  const statsBackground = sectionBackgroundValue(
+    slice.primary.background_color
+  );
   const statsAreWhite =
-    isStats &&
-    sectionBackgroundValue(slice.primary.background_color) === "purple";
+    isStats && (statsBackground === "purple" || statsBackground === "gradient");
   const statNumberColor = statsAreWhite ? "text-white" : "text-aqua";
   const animation = slice.primary.animation !== false;
   const isContain =
@@ -78,33 +80,41 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     }, [inView, targetNumber, count, duration, rounded]);
 
     return (
-      <div>
-        <span className="flex flex-row gap-2 justify-center">
-          <motion.span
-            className={`text-[3.125rem] ${statNumberColor} font-extraBold`}
-          >
-            {rounded}
-          </motion.span>
-          {isPercentage && (
-            <span
+      <div className="flex items-stretch gap-5 text-left">
+        <span
+          className={`w-[15px] shrink-0 bg-current ${statNumberColor}`}
+          aria-hidden="true"
+        />
+        <div>
+          <span className="flex flex-row gap-2 justify-start">
+            <motion.span
               className={`text-[3.125rem] ${statNumberColor} font-extraBold`}
             >
-              %
-            </span>
+              {rounded}
+            </motion.span>
+            {isPercentage && (
+              <span
+                className={`text-[3.125rem] ${statNumberColor} font-extraBold`}
+              >
+                %
+              </span>
+            )}
+          </span>
+          {rounded && (
+            <PrismicRichText
+              field={description}
+              components={{
+                paragraph: ({ children }) => (
+                  <p
+                    className={`text-base ${statsAreWhite ? "text-white" : ""}`}
+                  >
+                    {children}
+                  </p>
+                ),
+              }}
+            />
           )}
-        </span>
-        {rounded && (
-          <PrismicRichText
-            field={description}
-            components={{
-              paragraph: ({ children }) => (
-                <p className={`text-base ${statsAreWhite ? "text-white" : ""}`}>
-                  {children}
-                </p>
-              ),
-            }}
-          />
-        )}
+        </div>
       </div>
     );
   };
@@ -189,7 +199,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
                       className={
                         hasMedia
                           ? "flex flex-col gap-4 md:mb-4"
-                          : "grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-6 items-start text-center md:text-left"
+                          : "grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-6 items-start text-left"
                       }
                     >
                       <div className="flex flex-col gap-4">
@@ -209,7 +219,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
                         )}
                       </div>
                       {hasMedia ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-center md:text-left">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-left">
                           {slice.primary.stats.map((item, index) => (
                             <StatItem
                               key={index}

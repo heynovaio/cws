@@ -5,7 +5,7 @@
 		"primary": {
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "No Background",
+				"value": "White",
 				"type": "Select"
 			},
 			"image_side": {
@@ -95,7 +95,7 @@
 		"primary": {
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "No Background",
+				"value": "Purple",
 				"type": "Select"
 			},
 			"image_side": {
