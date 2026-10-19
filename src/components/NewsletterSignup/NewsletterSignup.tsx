@@ -1,11 +1,6 @@
 import { useNewsletterSignupData } from "@/hooks/use-newletter-signup-data-hook";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
-import {
-  Container,
-  Button,
-  Section,
-  sectionBackgroundValue,
-} from "@/components";
+import { Container, Button, Section } from "@/components";
 import { useState, useRef } from "react";
 
 type Props = {
@@ -75,21 +70,8 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
 
   if (isLoading || !newsletterSignupData) return null;
 
-  const {
-    title,
-    subtitle,
-    signup_success_message,
-    form_field,
-    submit_button,
-    background_color,
-  } = newsletterSignupData.data;
-
-  const newsletterBackground = sectionBackgroundValue(
-    background_color ?? "No Background"
-  );
-  const isDarkNewsletterPanel =
-    newsletterBackground === "no background" ||
-    newsletterBackground === "darker";
+  const { title, subtitle, signup_success_message, form_field, submit_button } =
+    newsletterSignupData.data;
 
   const validateForm = (formData: FormData): ErrorState => {
     const newErrors: ErrorState = {
@@ -267,15 +249,9 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
     <Section
       data-slice-type="newsletter_signup"
       id="newsletter"
-      backgroundColor={background_color}
+      backgroundColor="Purple"
     >
-      <Container
-        className={
-          isDarkNewsletterPanel
-            ? "newsletter-signup newsletter-signup-dark hover-shadow"
-            : "newsletter-signup"
-        }
-      >
+      <Container className="newsletter-signup">
         <div className="p-8 max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <PrismicRichText
