@@ -61,6 +61,17 @@ export function sectionBackgroundClass(
   return "bg-midnight text-white";
 }
 
+/** White, Purple, and Gradient only. An empty value adds no background. */
+export function optionalBannerBackground(
+  backgroundColor?: string | null
+): string {
+  const value = sectionBackgroundValue(backgroundColor);
+  if (value === "white" || value === "purple" || value === "gradient") {
+    return sectionBackgroundClass(backgroundColor);
+  }
+  return "";
+}
+
 export const Section: React.FC<SectionProps> = ({
   children,
   styling,
