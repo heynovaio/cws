@@ -46,7 +46,7 @@ const MenuPanel = ({ slice }: MenuPanelProps): JSX.Element => {
             <PopoverPanel
               transition
               anchor="bottom"
-              className="bg-midnight bg-gradient-dark z-10 w-full transition duration-200 ease-in-out [--anchor-gap:var(--spacing-5)] translate-y-6 data-[closed]:-translate-y-1 data-[closed]:opacity-0"
+              className="bg-[#6153a3] text-white z-10 w-full transition duration-200 ease-in-out [--anchor-gap:var(--spacing-5)] translate-y-6 data-[closed]:-translate-y-1 data-[closed]:opacity-0"
             >
               <div className="px-16 py-10 lg:px-28 lg:py-20 flex ">
                 <ContentBox
