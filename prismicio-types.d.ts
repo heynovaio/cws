@@ -1194,6 +1194,17 @@ interface PageDocumentData {
   hide_hero: prismic.BooleanField;
 
   /**
+   * Hero Background Color field in *Page*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.hero_background_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  hero_background_color: prismic.SelectField<"White" | "Purple" | "Gradient">;
+
+  /**
    * Slice Zone field in *Page*
    *
    * - **Field Type**: Slice Zone
@@ -3731,6 +3742,16 @@ export interface HeroSliceHeroStackedPrimary {
     | "0%",
     "filled"
   >;
+
+  /**
+   * Background Color field in *Hero → Hero - Stacked → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroStacked.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<"White" | "Purple" | "Gradient">;
 }
 
 /**
