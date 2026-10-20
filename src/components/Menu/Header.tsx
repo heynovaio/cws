@@ -3,7 +3,7 @@ import { components } from "@/slices";
 import { PrismicDocument } from "@prismicio/client";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { SliceZone } from "@prismicio/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Popover,
   PopoverButton,
@@ -22,11 +22,19 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
   const lang = useLang();
   const currentLang = lang.routeLocale;
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 0);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
 
   return (
     <header
-      className="sticky top-0 z-50 bg-white/70"
-      style={{ backdropFilter: "blur(35px)" }}
+      className={`sticky top-0 z-50 ${scrolled ? "bg-white/70" : "bg-white"}`}
+      style={scrolled ? { backdropFilter: "blur(35px)" } : undefined}
     >
       <nav
         aria-label="Main Nav"
