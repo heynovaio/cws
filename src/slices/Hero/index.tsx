@@ -3,6 +3,7 @@ import { Content, isFilled, LinkField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { Button, Container } from "@/components";
+import { optionalBannerBackground } from "@/components/Layout/Section";
 import { components, hasContent } from "@/utils";
 import { maskPrismicUrl } from "@/utils/maskPrismicMediaUrl";
 
@@ -155,11 +156,15 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           </div>
         )}
         {(hasDescription || hasLink) && (
-          <Container
-            containerClassName={`flex flex-col py-12 ${horizontalClass}`}
+          <div
+            className={`w-full ${optionalBannerBackground(slice.primary.background_color)}`}
           >
-            {copy}
-          </Container>
+            <Container
+              containerClassName={`flex flex-col py-12 ${horizontalClass}`}
+            >
+              {copy}
+            </Container>
+          </div>
         )}
       </section>
     );

@@ -127,6 +127,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "10%",
 				"type": "Select"
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "White",
+				"type": "Select"
 			}
 		},
 		"items": [
