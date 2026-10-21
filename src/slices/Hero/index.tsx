@@ -143,30 +143,46 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     </div>
   );
 
-  if (isAnimated) {
+  if (slice.variation === "animatedHero") {
     const animatedHeight = HEIGHT_CLASS[primary.height ?? ""] ?? "min-h-screen";
+    const mobileStackBackground = optionalBannerBackground(
+      slice.primary.background_color
+    );
 
     return (
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className={`relative flex w-full overflow-hidden bg-[#0b0a24] section-bg-gradient ${animatedHeight} ${textClass}`}
+        className={`relative flex w-full flex-col overflow-hidden bg-[#0b0a24] md:block ${animatedHeight} ${textClass}`}
       >
-        {mediaElement}
-        {overlayClass && (
-          <div
-            aria-hidden
-            className={`pointer-events-none absolute inset-0 ${overlayClass}`}
-          />
-        )}
-        <HeroLogoAnimation />
-        <HeroPlayers src="/cws-volleyball-players.png" />
+        <div className="relative h-[70vh] w-full shrink-0 md:absolute md:inset-0 md:h-auto">
+          {mediaElement}
+          {overlayClass && (
+            <div
+              aria-hidden
+              className={`pointer-events-none absolute inset-0 ${overlayClass}`}
+            />
+          )}
+          <HeroLogoAnimation />
+          <HeroPlayers src="/cws-volleyball-players.png" />
+        </div>
         {(hasDescription || hasLink) && (
-          <Container
-            containerClassName={`relative z-20 flex flex-1 flex-col py-16 ${verticalClass} ${horizontalClass}`}
-          >
-            <HeroCopyReveal>{copy}</HeroCopyReveal>
-          </Container>
+          <>
+            <div
+              className={`md:hidden ${mobileStackBackground || "section-bg-gradient"}`}
+            >
+              <Container
+                containerClassName={`relative z-20 flex flex-col py-16 ${verticalClass} ${horizontalClass}`}
+              >
+                <HeroCopyReveal>{copy}</HeroCopyReveal>
+              </Container>
+            </div>
+            <Container
+              containerClassName={`section-bg-gradient relative z-20 hidden flex-col py-16 md:absolute md:inset-0 md:flex md:min-h-full ${verticalClass} ${horizontalClass}`}
+            >
+              <HeroCopyReveal>{copy}</HeroCopyReveal>
+            </Container>
+          </>
         )}
       </section>
     );

@@ -274,9 +274,13 @@ export const HeroPlayers = ({ src }: { src: string }) => {
       <motion.img
         src={src}
         alt=""
-        className="h-full w-auto max-w-none object-contain object-bottom"
-        initial={settled ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
+        className="h-full w-auto max-w-none origin-bottom object-contain object-bottom"
+        initial={
+          settled
+            ? { opacity: 1, y: 0, x: "10%", scale: 1.35 }
+            : { opacity: 0, y: 40, x: "10%", scale: 1.35 }
+        }
+        animate={{ opacity: 1, y: 0, x: "10%", scale: 1.35 }}
         transition={timing(
           settled,
           TIMELINE.players.delay,
