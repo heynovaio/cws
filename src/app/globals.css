@@ -556,13 +556,13 @@ iframe {
   @apply rounded-tr-lg rounded-br-lg;
 }
 
-/* .partners-non-carousel:first-child:not(:last-child) {
-  border-bottom: 0.5px solid rgb(255 255 255 / 55%);
-} */
+.partners-non-carousel + .partners-non-carousel {
+  border-top: 0.5px solid rgb(255 255 255 / 30%);
+}
 
-.partners-non-carousel:has(+ .partners-non-carousel) > div {
-  padding-bottom: 0;
-  margin-bottom: 0;
+.partners-non-carousel.section-bg-white
+  + .partners-non-carousel.section-bg-white {
+  border-top-color: rgb(0 0 45 / 15%);
 }
 
 /* White section backgrounds have no decorative drop shadows. Focus rings stay. */
@@ -636,4 +636,93 @@ iframe {
   background-color: #f4f2fa;
   color: #6153a3;
   border-color: #6153a3;
+}
+
+/* Dark sections (No Background, Darker) and pages without a section colour. */
+.pagination-page {
+  border-width: 2px;
+  border-style: solid;
+  background-color: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.pagination-page-active {
+  background-color: #6153a3;
+  color: #fff;
+  border-color: #6153a3;
+}
+
+.pagination-page-active:hover {
+  background-color: #4f4284;
+  color: #fff;
+  border-color: #6153a3;
+}
+
+.pagination-page-inactive:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.pagination-truncable {
+  color: #fff;
+}
+
+.section-bg-white .pagination-page {
+  background-color: #fff;
+  color: #6153a3;
+  border-color: #6153a3;
+}
+
+.section-bg-white .pagination-page-active {
+  background-color: #6153a3;
+  color: #fff;
+  border-color: #6153a3;
+}
+
+.section-bg-white .pagination-page-active:hover {
+  background-color: #4f4284;
+  color: #fff;
+  border-color: #6153a3;
+}
+
+.section-bg-white .pagination-page-inactive:hover {
+  background-color: #f4f2fa;
+  color: #6153a3;
+}
+
+.section-bg-white .pagination-truncable {
+  color: #00002d;
+}
+
+.section-bg-purple .pagination-page,
+.section-bg-gradient .pagination-page {
+  background-color: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.section-bg-purple .pagination-page-active,
+.section-bg-gradient .pagination-page-active {
+  background-color: #fff;
+  color: #6153a3;
+  border-color: #6153a3;
+}
+
+.section-bg-purple .pagination-page-active:hover,
+.section-bg-gradient .pagination-page-active:hover {
+  background-color: #f4f2fa;
+  color: #6153a3;
+  border-color: #6153a3;
+}
+
+.section-bg-purple .pagination-page-inactive:hover,
+.section-bg-gradient .pagination-page-inactive:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border-color: #fff;
+}
+
+.section-bg-purple .pagination-truncable,
+.section-bg-gradient .pagination-truncable {
+  color: #fff;
 }
