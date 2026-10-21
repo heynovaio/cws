@@ -192,6 +192,17 @@ interface CampaignPageDocumentData {
   >;
 
   /**
+   * Hero Background Color field in *Campaign Page*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: campaign_page.hero_background_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  hero_background_color: prismic.SelectField<"White" | "Purple" | "Gradient">;
+
+  /**
    * Slice Zone field in *Campaign Page*
    *
    * - **Field Type**: Slice Zone
@@ -460,6 +471,17 @@ interface CareerPageDocumentData {
   button: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
+
+  /**
+   * Hero Background Color field in *Career Page*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: career_page.hero_background_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  hero_background_color: prismic.SelectField<"White" | "Purple" | "Gradient">;
 
   /**
    * Slice Zone field in *Career Page*
@@ -1582,6 +1604,17 @@ interface ProgramPageDocumentData {
   include_partners: prismic.BooleanField;
 
   /**
+   * Hero Background Color field in *Program Page*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program_page.hero_background_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  hero_background_color: prismic.SelectField<"White" | "Purple" | "Gradient">;
+
+  /**
    * Slice Zone field in *Program Page*
    *
    * - **Field Type**: Slice Zone
@@ -2187,6 +2220,17 @@ interface TeamMembersDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/boolean
    */
   include_partners: prismic.BooleanField;
+
+  /**
+   * Hero Background Color field in *Team Members*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_members.hero_background_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  hero_background_color: prismic.SelectField<"White" | "Purple" | "Gradient">;
 
   /**
    * Slice Zone field in *Team Members*
@@ -3768,9 +3812,134 @@ export type HeroSliceHeroStacked = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Hero → Animated Hero → Primary*
+ */
+export interface HeroSliceAnimatedHeroPrimary {
+  /**
+   * Media field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.animatedHero.primary.media
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  media: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Description field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.animatedHero.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Text Color field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.animatedHero.primary.text_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  text_color: prismic.SelectField<"White" | "Black">;
+
+  /**
+   * Link field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.animatedHero.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Link Label field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.animatedHero.primary.link_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  link_label: prismic.KeyTextField;
+
+  /**
+   * Content Vertical Placement field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.animatedHero.primary.content_vertical_placement
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  content_vertical_placement: prismic.SelectField<"Top" | "Middle" | "Bottom">;
+
+  /**
+   * Horizontal Vertical Placement field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.animatedHero.primary.horizontal_vertical_placement
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  horizontal_vertical_placement: prismic.SelectField<
+    "Left" | "Center" | "Right"
+  >;
+
+  /**
+   * Height field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.animatedHero.primary.height
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  height: prismic.SelectField<"Screen" | "75%" | "50%" | "33%">;
+
+  /**
+   * Overlay opacity field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: 10%
+   * - **API ID Path**: hero.animatedHero.primary.overlay_opacity
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  overlay_opacity: prismic.SelectField<
+    | "10%"
+    | "20%"
+    | "30%"
+    | "40%"
+    | "50%"
+    | "60%"
+    | "70%"
+    | "80%"
+    | "90%"
+    | "100%"
+    | "0%",
+    "filled"
+  >;
+}
+
+/**
+ * Animated Hero variation for Hero Slice
+ *
+ * - **API ID**: `animatedHero`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceAnimatedHero = prismic.SharedSliceVariation<
+  "animatedHero",
+  Simplify<HeroSliceAnimatedHeroPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Hero*
  */
-type HeroSliceVariation = HeroSliceDefault | HeroSliceHeroStacked;
+type HeroSliceVariation =
+  HeroSliceDefault | HeroSliceHeroStacked | HeroSliceAnimatedHero;
 
 /**
  * Hero Shared Slice
@@ -6035,9 +6204,11 @@ declare module "@prismicio/client" {
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceHeroStackedPrimary,
+      HeroSliceAnimatedHeroPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceHeroStacked,
+      HeroSliceAnimatedHero,
       ImageTextSlice,
       ImageTextSliceDefaultPrimary,
       ImageTextSliceVideoPrimary,
