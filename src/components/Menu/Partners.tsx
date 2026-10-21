@@ -78,9 +78,9 @@ export const Partners = ({
       }
     >
       <Container
-        className={`flex flex-col md:flex-row items-center gap-0 md:gap-6 ${
-          hideTitle && centerLogo ? "justify-center" : ""
-        }`}
+        className={`flex flex-col md:flex-row gap-0 md:gap-6 ${
+          carousel ? "items-center" : "items-start"
+        } ${hideTitle && centerLogo ? "justify-center" : ""}`}
       >
         {!hideTitle && (
           <ContentBox
