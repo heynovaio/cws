@@ -251,6 +251,124 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "animatedHero",
+      "name": "Animated Hero",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "media": {
+          "type": "Link",
+          "config": {
+            "label": "Media",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "text_color": {
+          "type": "Select",
+          "config": {
+            "label": "Text Color",
+            "placeholder": "",
+            "options": [
+              "White",
+              "Black"
+            ]
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "link_label": {
+          "type": "Text",
+          "config": {
+            "label": "Link Label",
+            "placeholder": ""
+          }
+        },
+        "content_vertical_placement": {
+          "type": "Select",
+          "config": {
+            "label": "Content Vertical Placement",
+            "placeholder": "",
+            "options": [
+              "Top",
+              "Middle",
+              "Bottom"
+            ]
+          }
+        },
+        "horizontal_vertical_placement": {
+          "type": "Select",
+          "config": {
+            "label": "Horizontal Vertical Placement",
+            "placeholder": "",
+            "options": [
+              "Left",
+              "Center",
+              "Right"
+            ]
+          }
+        },
+        "height": {
+          "type": "Select",
+          "config": {
+            "label": "Height",
+            "placeholder": "",
+            "options": [
+              "Screen",
+              "75%",
+              "50%",
+              "33%"
+            ]
+          }
+        },
+        "overlay_opacity": {
+          "type": "Select",
+          "config": {
+            "label": "Overlay opacity",
+            "placeholder": "",
+            "options": [
+              "10%",
+              "20%",
+              "30%",
+              "40%",
+              "50%",
+              "60%",
+              "70%",
+              "80%",
+              "90%",
+              "100%",
+              "0%"
+            ],
+            "default_value": "10%"
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

@@ -141,5 +141,77 @@
 				"value": []
 			}
 		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "animatedHero",
+		"primary": {
+			"media": {
+				"key": "18fb9ed3-0ecf-472e-8554-c525e1cc7b3c",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "afternoon"
+				}
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ad fugiat cupidatat nostrud nostrud adipisicing aliqua incididunt aliquip enim esse culpa labore occaecat. Aute dolor consectetur occaecat culpa ad laborum fugiat in labore laboris qui. Laboris sint minim pariatur sit sint quis qui officia mollit eiusmod ea."
+						}
+					}
+				]
+			},
+			"text_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Black",
+				"type": "Select"
+			},
+			"link": {
+				"key": "825fba3d-ffc5-45ad-a02f-eb8df24453d8",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev",
+					"text": "entirely"
+				}
+			},
+			"link_label": {
+				"__TYPE__": "FieldContent",
+				"value": "paid",
+				"type": "Text"
+			},
+			"content_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Top",
+				"type": "Select"
+			},
+			"horizontal_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Left",
+				"type": "Select"
+			},
+			"height": {
+				"__TYPE__": "FieldContent",
+				"value": "50%",
+				"type": "Select"
+			},
+			"overlay_opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "10%",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"key": "6f35d845-6e5d-4624-bafc-b6df301c94d2",
+				"value": []
+			}
+		]
 	}
 ]

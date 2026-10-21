@@ -3,6 +3,11 @@ import { Content, isFilled, LinkField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { Button, Container } from "@/components";
+import {
+  HeroCopyReveal,
+  HeroLogoAnimation,
+  HeroPlayers,
+} from "@/components/AnimatedLogo/HeroLogoAnimation";
 import { optionalBannerBackground } from "@/components/Layout/Section";
 import { components, hasContent } from "@/utils";
 import { maskPrismicUrl } from "@/utils/maskPrismicMediaUrl";
@@ -87,9 +92,10 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     "";
   const hasLink = isFilled.link(primary.link) && Boolean(linkLabel);
 
-  if (!media && !hasDescription && !hasLink) return null;
-
   const isStacked = slice.variation === "heroStacked";
+  const isAnimated = slice.variation === "animatedHero";
+
+  if (!isAnimated && !media && !hasDescription && !hasLink) return null;
   const textClass =
     primary.text_color === "Black" ? "text-midnight" : "text-white";
   const heightClass = HEIGHT_CLASS[primary.height ?? ""] ?? "min-h-[75vh]";
@@ -136,6 +142,35 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       )}
     </div>
   );
+
+  if (isAnimated) {
+    const animatedHeight = HEIGHT_CLASS[primary.height ?? ""] ?? "min-h-screen";
+
+    return (
+      <section
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+        className={`relative flex w-full overflow-hidden bg-[#0b0a24] section-bg-gradient ${animatedHeight} ${textClass}`}
+      >
+        {mediaElement}
+        {overlayClass && (
+          <div
+            aria-hidden
+            className={`pointer-events-none absolute inset-0 ${overlayClass}`}
+          />
+        )}
+        <HeroLogoAnimation />
+        <HeroPlayers src="/cws-volleyball-players.png" />
+        {(hasDescription || hasLink) && (
+          <Container
+            containerClassName={`relative z-20 flex flex-1 flex-col py-16 ${verticalClass} ${horizontalClass}`}
+          >
+            <HeroCopyReveal>{copy}</HeroCopyReveal>
+          </Container>
+        )}
+      </section>
+    );
+  }
 
   if (isStacked) {
     return (
