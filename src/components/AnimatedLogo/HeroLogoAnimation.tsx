@@ -270,24 +270,25 @@ export const HeroPlayers = ({ src }: { src: string }) => {
   const settled = Boolean(useReducedMotion());
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-[86%] justify-center">
-      <motion.img
-        src={src}
-        alt=""
-        className="h-full w-auto max-w-none origin-bottom object-contain object-bottom"
-        initial={
-          settled
-            ? { opacity: 1, y: 0, x: "10%", scale: 1.35 }
-            : { opacity: 0, y: 40, x: "10%", scale: 1.35 }
-        }
-        animate={{ opacity: 1, y: 0, x: "10%", scale: 1.35 }}
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-[78%] justify-center">
+      <motion.div
+        className="h-full"
+        initial={settled ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={timing(
           settled,
           TIMELINE.players.delay,
           TIMELINE.players.duration,
           arrive
         )}
-      />
+      >
+        <img
+          src={src}
+          alt=""
+          className="h-full w-auto max-w-none origin-bottom object-contain object-bottom"
+          style={{ transform: "translateX(51%) scale(1.35) translateY(9px)" }}
+        />
+      </motion.div>
     </div>
   );
 };
