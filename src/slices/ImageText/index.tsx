@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@/components";
 import { Section, Container, ResponsiveImage, ContentBox } from "@/components";
-import { sectionBackgroundValue } from "@/components/Layout/Section";
 import { Content, RichTextField } from "@prismicio/client";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import { SliceComponentProps } from "@prismicio/react";
@@ -26,12 +25,6 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
 
   const isVideo = slice.variation === "video";
   const isStats = slice.variation === "stats";
-  const statsBackground = sectionBackgroundValue(
-    slice.primary.background_color
-  );
-  const statsAreWhite =
-    isStats && (statsBackground === "purple" || statsBackground === "gradient");
-  const statNumberColor = statsAreWhite ? "text-white" : "text-aqua";
   const animation = slice.primary.animation !== false;
   const isContain =
     slice.variation !== "video" && slice.primary.image_fit === true;
@@ -82,20 +75,16 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     return (
       <div className="flex items-stretch gap-5 text-left">
         <span
-          className={`w-[15px] shrink-0 bg-current ${statNumberColor}`}
+          className="w-[15px] shrink-0 bg-current text-current"
           aria-hidden="true"
         />
-        <div>
+        <div className="text-current">
           <span className="flex flex-row gap-2 justify-start">
-            <motion.span
-              className={`text-[3.125rem] ${statNumberColor} font-extraBold`}
-            >
+            <motion.span className="text-[3.125rem] text-current font-extraBold">
               {rounded}
             </motion.span>
             {isPercentage && (
-              <span
-                className={`text-[3.125rem] ${statNumberColor} font-extraBold`}
-              >
+              <span className="text-[3.125rem] text-current font-extraBold">
                 %
               </span>
             )}
@@ -105,11 +94,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
               field={description}
               components={{
                 paragraph: ({ children }) => (
-                  <p
-                    className={`text-base ${statsAreWhite ? "text-white" : ""}`}
-                  >
-                    {children}
-                  </p>
+                  <p className="text-base text-current">{children}</p>
                 ),
               }}
             />
