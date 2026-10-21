@@ -62,6 +62,21 @@ export const SOURCE_HOSTS = new Set<string>(
   ].map(normalizeHost)
 );
 
+/**
+ * Production and campaign domains choose the language by domain. Every other
+ * host (Netlify staging, branch deploys, deploy previews, localhost) serves
+ * French under a /fr-ca path prefix instead, so it can be reviewed in place.
+ */
+export function usesDomainLocale(hostHeader?: string | null): boolean {
+  const h = normalizeHost(hostHeader);
+  return (
+    SOURCE_HOSTS.has(h) || EN_VANITY_HOSTS.has(h) || FR_VANITY_HOSTS.has(h)
+  );
+}
+
+/** Request header the middleware sets with the path locale on non-domain hosts. */
+export const PATH_LOCALE_HEADER = "x-cws-locale";
+
 export function isCampaignVanityHost(hostHeader?: string): boolean {
   const h = normalizeHost(hostHeader);
   return EN_VANITY_HOSTS.has(h) || FR_VANITY_HOSTS.has(h);

@@ -1,4 +1,5 @@
 import { cookies, headers } from "next/headers";
+import { usesDomainLocale, PATH_LOCALE_HEADER } from "@/utils/localeHosts";
 
 export type AppLocale = "en-ca" | "fr-ca";
 
@@ -31,6 +32,13 @@ export function toHtmlLang(app: AppLocale): "en-CA" | "fr-CA" {
 }
 
 export async function getServerLocale(): Promise<AppLocale> {
+  const headerList = await headers();
+  // Non-production hosts: the middleware passes the /fr-ca path locale.
+  if (!usesDomainLocale(headerList.get("host"))) {
+    const fromPath = toAppLocale(headerList.get(PATH_LOCALE_HEADER));
+    if (fromPath) return fromPath;
+  }
+
   const cookieStore = await Promise.resolve(cookies());
   const rawCookie = cookieStore?.get?.("NEXT_LOCALE")?.value ?? null;
 

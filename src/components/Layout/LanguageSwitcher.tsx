@@ -15,6 +15,7 @@ import {
   pairedDomainsFor,
   EN_ENV,
   FR_ENV,
+  usesDomainLocale,
   type AppLocale,
 } from "@/utils/localeHosts";
 
@@ -75,6 +76,14 @@ export default function LanguageSwitcher({
       return target.toString();
     }
 
+    // Non-production hosts keep both languages on one host: /fr-ca/* for
+    // French, /en-ca/* to switch back (the middleware strips the prefix).
+    if (!usesDomainLocale(curHost)) {
+      const prefix = toLocale === "fr-ca" ? "/fr-ca" : "/en-ca";
+      const search = searchParams?.toString() ? `?${searchParams}` : "";
+      return `${prefix}${targetPath === "/" ? "" : targetPath}${search}`;
+    }
+
     let { enHost, frHost } = pairedDomainsFor(curHost);
 
     if (EN_ENV && FR_ENV) {
@@ -105,7 +114,10 @@ export default function LanguageSwitcher({
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const toLocale = e.target.value as Lang;
-    router.push(buildHref(toLocale));
+    const href = buildHref(toLocale);
+    // Same-host switches need a full load so the root layout's <html lang> updates.
+    if (href.startsWith("/")) window.location.assign(href);
+    else router.push(href);
   };
 
   return (

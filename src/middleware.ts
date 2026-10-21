@@ -14,6 +14,8 @@ import {
   appLocaleForHost,
   toCanonicalLocale,
   normalizeHost,
+  usesDomainLocale,
+  PATH_LOCALE_HEADER,
 } from "@/utils/localeHosts";
 
 const LOCALE_PREFIX_SET = LOCALE_PREFIXES;
@@ -241,6 +243,56 @@ function ensureUtmDefaults(
   if (!sp.has("utm_content")) sp.set("utm_content", defaults.content);
 }
 
+/**
+ * Staging, deploy previews and localhost: French lives under /fr-ca on the same
+ * host instead of on femmesetsport.ca. /fr-ca/* is rewritten to the unprefixed
+ * route with the locale passed in a request header. Unprefixed links (Prismic
+ * resolves URLs without a locale) are redirected back under /fr-ca while the
+ * NEXT_LOCALE cookie says French, so browsing stays in French. /en-ca/* sets
+ * English and redirects to the unprefixed path.
+ */
+function pathLocaleMiddleware(request: NextRequest, pathname: string) {
+  const url = request.nextUrl;
+  const segs = pathname.split("/").filter(Boolean);
+  const prefix = LOCALE_PREFIX_SET.has(segs[0] as AppLocale)
+    ? (segs[0] as AppLocale)
+    : undefined;
+  const rest = prefix ? "/" + segs.slice(1).join("/") : pathname;
+
+  const redirectTo = (path: string, locale: AppLocale) => {
+    const target = url.clone();
+    target.pathname = path;
+    const res = NextResponse.redirect(target, 307);
+    res.cookies.set("NEXT_LOCALE", toCanonicalLocale(locale), { path: "/" });
+    return res;
+  };
+
+  const cookieLocale = (
+    request.cookies.get("NEXT_LOCALE")?.value || ""
+  ).toLowerCase();
+  const locale: AppLocale = prefix ?? (cookieLocale === "fr-ca" ? FR_L : EN_L);
+  const translated = translateCareers(rest, locale);
+
+  if (locale === FR_L) {
+    if (prefix !== FR_L || translated !== rest) {
+      return redirectTo(`/fr-ca${translated === "/" ? "" : translated}`, FR_L);
+    }
+  } else if (prefix === EN_L || translated !== rest) {
+    return redirectTo(translated, EN_L);
+  }
+
+  const headers = new Headers(request.headers);
+  headers.set(PATH_LOCALE_HEADER, locale);
+  const rewriteUrl = url.clone();
+  rewriteUrl.pathname = rest;
+  const res =
+    locale === FR_L
+      ? NextResponse.rewrite(rewriteUrl, { request: { headers } })
+      : NextResponse.next({ request: { headers } });
+  res.cookies.set("NEXT_LOCALE", toCanonicalLocale(locale), { path: "/" });
+  return res;
+}
+
 export function middleware(request: NextRequest) {
   const url = request.nextUrl;
   const originalPort = url.port;
@@ -253,6 +305,8 @@ export function middleware(request: NextRequest) {
   const canonicalLocale: CanonicalLocale = toCanonicalLocale(pathLocale);
 
   if (pathname.startsWith("/files/")) return NextResponse.next();
+
+  if (!usesDomainLocale(host)) return pathLocaleMiddleware(request, pathname);
 
   const { enHost, frHost } = pairedDomainsFor(host);
 
