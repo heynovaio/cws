@@ -337,6 +337,17 @@ interface CareerHubDocumentData {
   button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
+   * Background Color field in *Career Hub*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: career_hub.background_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<"White" | "Purple" | "Gradient">;
+
+  /**
    * Slice Zone field in *Career Hub*
    *
    * - **Field Type**: Slice Zone
@@ -3920,6 +3931,16 @@ export interface HeroSliceAnimatedHeroPrimary {
     | "0%",
     "filled"
   >;
+
+  /**
+   * Background Color field in *Hero → Animated Hero → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.animatedHero.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<"White" | "Purple" | "Gradient">;
 }
 
 /**
