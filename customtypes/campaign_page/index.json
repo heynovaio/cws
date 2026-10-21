@@ -91,6 +91,14 @@
           "repeat": true
         }
       },
+      "hero_background_color": {
+        "type": "Select",
+        "config": {
+          "label": "Hero Background Color",
+          "placeholder": "",
+          "options": ["White", "Purple", "Gradient"]
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

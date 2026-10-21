@@ -1,6 +1,11 @@
 "use client";
 import React from "react";
-import { Container, Section, sectionBackgroundValue } from "../Layout";
+import {
+  Container,
+  optionalBannerBackground,
+  Section,
+  sectionBackgroundValue,
+} from "../Layout";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { SpecCard } from "../SpecCard";
 import { ContentBox } from "../ContentBox/ContentBox";
@@ -52,10 +57,16 @@ export const Intro = ({
   const { programCategoryData } = useProgramCategoryData(lang || "en-ca");
   const { resourceCategoryData } = useResourceCategoryData(lang || "en-ca");
 
+  const programHeroBackground = isProgramPage
+    ? optionalBannerBackground(
+        (pageData as ProgramPageDocumentData | undefined)?.hero_background_color
+      )
+    : "";
+
   let containerStyle;
   switch (type) {
     case "program":
-      containerStyle = "bg-gradient-primary";
+      containerStyle = programHeroBackground || "bg-gradient-primary";
       break;
     case "resource":
     default:
@@ -63,7 +74,16 @@ export const Intro = ({
       break;
   }
 
-  const breadcrumbColor = isProgramPage ? "white" : "black";
+  const programHeroIsWhite =
+    isProgramPage &&
+    sectionBackgroundValue(
+      (pageData as ProgramPageDocumentData | undefined)?.hero_background_color
+    ) === "white";
+  const breadcrumbColor = isProgramPage
+    ? programHeroIsWhite
+      ? "black"
+      : "white"
+    : "black";
   const pageBg = sectionBackgroundValue(pageBackground);
   const introIsWhitePage = !isProgramPage && pageBg === "white";
   const introOnColoredPage =

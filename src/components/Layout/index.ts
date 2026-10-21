@@ -2,6 +2,7 @@ export {
   Section,
   isLightSectionBackground,
   isWhiteSectionCard,
+  optionalBannerBackground,
   sectionBackgroundClass,
   sectionBackgroundValue,
 } from "./Section";
