@@ -99,7 +99,7 @@ export const Intro = ({
     <Section
       data-test-id="intro"
       backgroundColor={
-        introIsWhitePage
+        programHeroIsWhite || introIsWhitePage
           ? "White"
           : introOnColoredPage
             ? "transparent"
