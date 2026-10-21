@@ -96,6 +96,7 @@ export const SearchGrid: React.FC<SearchGridProps> = ({ lang }) => {
                 image={item.data.image}
                 category={getCategoryName(item, lang)}
                 cardType={item.type === "program_page" ? "program" : "resource"}
+                sectionBackground="White"
                 buttons={[
                   <Link
                     key={index}

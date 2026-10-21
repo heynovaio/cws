@@ -59,7 +59,7 @@ export const SideFilter = ({ lang }: { lang: string }) => {
       <SearchPanelContainer
         panel={
           loadingStage < 1 ? (
-            <div className="h-32 bg-white/10 animate-pulse rounded"></div>
+            <div className="h-32 bg-midnight/10 animate-pulse rounded"></div>
           ) : (
             <TagsFilterPanel
               availableTags={availableTags}
@@ -78,7 +78,7 @@ export const SideFilter = ({ lang }: { lang: string }) => {
           }
           panel={
             loadingStage < 2 ? (
-              <div className="h-48 bg-white/10 animate-pulse rounded"></div>
+              <div className="h-48 bg-midnight/10 animate-pulse rounded"></div>
             ) : (
               <ResourcesCategoriesFilterPanel />
             )
@@ -94,7 +94,7 @@ export const SideFilter = ({ lang }: { lang: string }) => {
           label={lang === "fr-ca" ? "Filtres de programmes" : "Program Filters"}
           panel={
             loadingStage < 3 ? (
-              <div className="h-64 bg-white/10 animate-pulse rounded"></div>
+              <div className="h-64 bg-midnight/10 animate-pulse rounded"></div>
             ) : (
               <div className="flex flex-col gap-5">
                 <ProgramsCategoriesFilterPanel lang={lang} />
