@@ -60,7 +60,7 @@ const Testimonials = ({ slice }: TestimonialsProps): JSX.Element | null => {
             </div>
             <div className="flex flex-col gap-4">
               <PrismicRichText field={slice.primary.title} />
-              <div className="text-bodyLarge">
+              <div className="[&_p]:mb-2 [&_p]:text-[2.125rem] [&_p]:leading-[1.3]">
                 <PrismicRichText field={displayedTestimonial.quote} />
               </div>
               <div className="flex flex-col">
