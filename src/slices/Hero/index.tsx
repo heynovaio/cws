@@ -148,14 +148,23 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     const mobileStackBackground = optionalBannerBackground(
       slice.primary.background_color
     );
+    const hasCopy = hasDescription || hasLink;
 
     return (
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className={`relative flex w-full flex-col overflow-hidden bg-[#0b0a24] md:block ${animatedHeight} ${textClass}`}
+        className={`relative w-full overflow-hidden bg-[#0b0a24] ${animatedHeight} ${textClass} ${
+          hasCopy ? "flex flex-col md:block" : ""
+        }`}
       >
-        <div className="relative h-[70vh] w-full shrink-0 md:absolute md:inset-0 md:h-auto">
+        <div
+          className={
+            hasCopy
+              ? "relative h-[70vh] w-full shrink-0 md:absolute md:inset-0 md:h-auto"
+              : "absolute inset-0"
+          }
+        >
           {mediaElement}
           {overlayClass && (
             <div
@@ -166,7 +175,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           <HeroLogoAnimation />
           <HeroPlayers src="/cws-volleyball-players.png" />
         </div>
-        {(hasDescription || hasLink) && (
+        {hasCopy && (
           <>
             <div
               className={`md:hidden ${mobileStackBackground || "section-bg-gradient"}`}
