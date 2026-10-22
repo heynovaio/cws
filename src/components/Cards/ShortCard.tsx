@@ -22,8 +22,8 @@ export const ShortCard = ({
   const cardBackground = "card-white card-on-white-section";
   const categoryChipColor =
     cardType === "program"
-      ? "bg-light-violet text-midnight border-midnight"
-      : "text-dark border-neon-violet";
+      ? "bg-[#e6e7e8] text-midnight border-midnight"
+      : "bg-[#e6e7e8] text-dark border-neon-violet";
 
   return (
     <div
