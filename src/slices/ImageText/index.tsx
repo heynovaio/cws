@@ -49,6 +49,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     description: RichTextField;
     inView: boolean;
     isPercentage: boolean;
+    showBar?: boolean;
   };
 
   const StatItem = ({
@@ -56,6 +57,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     description,
     inView,
     isPercentage,
+    showBar = true,
   }: StatItemProps) => {
     const targetNumber = parseInt(asText(statistic) || "0", 10);
     const count = useMotionValue(0);
@@ -73,18 +75,20 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     }, [inView, targetNumber, count, duration, rounded]);
 
     return (
-      <div className="flex items-stretch gap-5 text-left">
-        <span
-          className="w-[15px] shrink-0 bg-current text-current"
-          aria-hidden="true"
-        />
+      <div className="flex h-full items-stretch gap-5 text-left">
+        {showBar && (
+          <span
+            className="w-[15px] shrink-0 self-stretch bg-current text-current"
+            aria-hidden="true"
+          />
+        )}
         <div className="text-current">
           <span className="flex flex-row gap-2 justify-start">
-            <motion.span className="text-[3.125rem] text-current font-extraBold">
+            <motion.span className="text-[4.46875rem] leading-none text-current font-extraBold">
               {rounded}
             </motion.span>
             {isPercentage && (
-              <span className="text-[3.125rem] text-current font-extraBold">
+              <span className="text-[4.46875rem] leading-none text-current font-extraBold">
                 %
               </span>
             )}
@@ -183,11 +187,11 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
                     <div
                       className={
                         hasMedia
-                          ? "flex flex-col gap-4 md:mb-4"
-                          : "grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-6 items-start text-left"
+                          ? "grid grid-cols-1 items-stretch gap-x-8 gap-y-6 text-left md:grid-cols-2"
+                          : "grid grid-cols-1 items-stretch gap-x-8 gap-y-6 text-left md:grid-cols-3"
                       }
                     >
-                      <div className="flex flex-col gap-4">
+                      <div className="flex h-full flex-col gap-4">
                         {hasContent(slice.primary.title) && (
                           <PrismicRichText
                             field={slice.primary.title}
@@ -204,16 +208,23 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
                         )}
                       </div>
                       {hasMedia ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-left">
-                          {slice.primary.stats.map((item, index) => (
-                            <StatItem
-                              key={index}
-                              statistic={item.statistic}
-                              description={item.description}
-                              inView={inView}
-                              isPercentage={item.percentage}
-                            />
-                          ))}
+                        <div className="flex h-full items-stretch gap-5 text-left">
+                          <span
+                            className="w-[15px] shrink-0 self-stretch bg-current"
+                            aria-hidden="true"
+                          />
+                          <div className="flex flex-1 flex-col justify-center gap-6">
+                            {slice.primary.stats.map((item, index) => (
+                              <StatItem
+                                key={index}
+                                statistic={item.statistic}
+                                description={item.description}
+                                inView={inView}
+                                isPercentage={item.percentage}
+                                showBar={false}
+                              />
+                            ))}
+                          </div>
                         </div>
                       ) : (
                         slice.primary.stats.map((item, index) => (
