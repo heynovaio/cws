@@ -25,7 +25,7 @@ interface FooterProps {
 
 export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
   return (
-    <footer className="relative overflow-hidden bg-gradient-section text-white flex flex-col justify-center items-center min-h-[1000px]">
+    <footer className="section-bg-gradient relative overflow-hidden bg-gradient-section text-white flex flex-col justify-center items-center min-h-[1000px]">
       <img
         src="/footer-bg.svg"
         alt=""

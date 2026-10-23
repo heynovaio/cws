@@ -311,10 +311,8 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                       name={fieldName}
                       type={fieldType}
                       placeholder={field.placeholder ?? ""}
-                      className={`w-full bg-[#e6e7e8] p-4 text-midnight border-2 focus ${
-                        hasError
-                          ? "border-ultra-pink focus:ring-ultra-p-500 focus:border-red-500"
-                          : "border-transparent focus:ring-blue-500 focus:border-blue-500"
+                      className={`w-full bg-[#e6e7e8] p-4 text-midnight border-2 ${
+                        hasError ? "border-ultra-pink" : "border-transparent"
                       }`}
                       required
                       aria-describedby={hasError ? errorId : undefined}

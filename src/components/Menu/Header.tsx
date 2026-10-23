@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
 
   return (
     <header
-      className={`sticky top-0 z-50 ${scrolled ? "bg-white/70" : "bg-white"}`}
+      className={`section-bg-white sticky top-0 z-50 ${scrolled ? "bg-white/70" : "bg-white"}`}
       style={scrolled ? { backdropFilter: "blur(35px)" } : undefined}
     >
       <nav
@@ -99,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
                 >
                   <PopoverPanel
                     anchor="bottom"
-                    className="w-screen h-screen bg-midnight bg-gradient-dark text-white lg:mt-4 pb-10 z-40"
+                    className="section-bg-gradient w-screen h-screen bg-midnight bg-gradient-dark text-white lg:mt-4 pb-10 z-40"
                   >
                     <div className="flex flex-col pl-4 gap-10 mt-10">
                       <SliceZone slices={slices} components={components} />
