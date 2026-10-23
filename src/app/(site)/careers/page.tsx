@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
 import * as prismic from "@prismicio/client";
+import { isFilled } from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
@@ -48,10 +49,16 @@ export default async function Page() {
 
   const locales = await getLocales(page, client);
 
+  const button = page.data.button;
   const heroData = {
     title: page.data.title,
     body: page.data.body,
-    button: Array.isArray(page.data.button) ? page.data.button : [],
+    button: Array.isArray(button)
+      ? button
+      : isFilled.link(button)
+        ? [button]
+        : [],
+    hero_background_color: page.data.background_color,
   };
 
   return (

@@ -1,5 +1,10 @@
 import { Button } from "@/components/Buttons/Button";
-import { Container, ContentBox, Section } from "@/components";
+import {
+  Container,
+  ContentBox,
+  Section,
+  sectionBackgroundValue,
+} from "@/components";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
@@ -20,6 +25,9 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
 
   if (!hasTitle && !hasBody && !hasButtons) return <></>;
 
+  const isWhite =
+    sectionBackgroundValue(slice.primary.background_color) === "white";
+
   return (
     <Section
       data-slice-type={slice.slice_type}
@@ -28,7 +36,7 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
     >
       <Container>
         <div
-          className={`rounded bg-gradient-dark p-6 md:p-24 ${textAlignment} flex flex-col gap-6`}
+          className={`${isWhite ? "text-midnight" : "text-white"} p-6 md:p-24 ${textAlignment} flex flex-col gap-6`}
         >
           <ContentBox
             title={hasTitle ? slice.primary.title : undefined}

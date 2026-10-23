@@ -269,6 +269,11 @@
 			"centre_logo": {
 				"__TYPE__": "BooleanContent",
 				"value": true
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "White",
+				"type": "Select"
 			}
 		},
 		"items": [

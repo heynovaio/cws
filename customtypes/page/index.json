@@ -95,11 +95,31 @@
           "default_value": true
         }
       },
+      "hide_hero": {
+        "type": "Boolean",
+        "config": {
+          "label": "Hide Hero",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
+      "hero_background_color": {
+        "type": "Select",
+        "config": {
+          "label": "Hero Background Color",
+          "placeholder": "",
+          "options": ["White", "Purple", "Gradient"]
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "hero": {
+              "type": "SharedSlice"
+            },
             "sponsor_list": {
               "type": "SharedSlice"
             },

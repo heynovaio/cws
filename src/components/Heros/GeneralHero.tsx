@@ -4,6 +4,10 @@ import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPri
 import { Button } from "../Buttons";
 import { KeyTextField, LinkField, RichTextField } from "@prismicio/client";
 import { HiArrowLongDown } from "react-icons/hi2";
+import {
+  optionalBannerBackground,
+  sectionBackgroundValue,
+} from "../Layout/Section";
 
 interface GeneralHeroProps {
   data: {
@@ -11,6 +15,7 @@ interface GeneralHeroProps {
     body: RichTextField;
     button?: (LinkField & { text?: string })[];
     tagline?: string | KeyTextField;
+    hero_background_color?: string | null;
   };
   scrollID?: string;
   shortHero?: boolean;
@@ -21,10 +26,16 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
   shortHero = true,
   scrollID,
 }) => {
+  const bannerBackground = optionalBannerBackground(data.hero_background_color);
+  const lightCopy =
+    sectionBackgroundValue(data.hero_background_color) === "white";
+
   return (
     <section
       data-test-id="default-hero"
-      className={`relative flex items-center w-full bg-quadrant-gradient   ${
+      className={`relative flex items-center w-full ${
+        bannerBackground || "bg-quadrant-gradient"
+      } ${
         shortHero
           ? "md:min-h-[500px] min-h-[400px]"
           : "md:min-h-[500px] min-h-[400px]"
@@ -37,7 +48,9 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
           </p>
         )}
 
-        <div className="text-white flex flex-col items-center text-center justify-between gap-8 mx-auto max-w-[900px]">
+        <div
+          className={`${lightCopy ? "text-midnight" : "text-white"} flex flex-col items-center text-center justify-between gap-8 mx-auto max-w-[900px]`}
+        >
           <PrismicRichText field={data.title} />
           <PrismicRichText field={data.body} />
           {(data.button ?? []).map((link, index) => (
@@ -52,7 +65,9 @@ export const GeneralHero: React.FC<GeneralHeroProps> = ({
           {!shortHero && scrollID && (
             <div className="mt-12 flex justify-center">
               <a href={`#${scrollID}`} aria-label="Scroll to next section">
-                <HiArrowLongDown className="w-8 h-8 text-white animate-bounce" />
+                <HiArrowLongDown
+                  className={`w-8 h-8 animate-bounce ${lightCopy ? "text-midnight" : "text-white"}`}
+                />
               </a>
             </div>
           )}

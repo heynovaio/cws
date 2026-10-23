@@ -7,6 +7,7 @@ import { LongCard } from "../Cards";
 import Carousel from "react-multi-carousel";
 import { responsive } from "@/slices/TabbedCarousel/responsive";
 import { Container } from "../Layout";
+import { sectionBackgroundValue } from "../Layout/Section";
 import { motion } from "motion/react";
 
 export type SingleCardPerTabProps = {
@@ -24,11 +25,13 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
     height: 0,
   });
 
+  const onWhiteBackground =
+    sectionBackgroundValue(slice.primary.background_color) === "white";
+
   const tabs = React.useMemo(
     () => slice.primary.tab || [],
     [slice.primary.tab]
   );
-
   const handleTabChange = (index: number) => {
     setCurrentSlide(index);
     if (carouselRef.current) {
@@ -52,9 +55,13 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
     <TabGroup selectedIndex={currentSlide} onChange={handleTabChange}>
       <Container>
         <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
-          <TabList className="relative rounded-3xl md:rounded-full bg-white flex flex-wrap md:flex-nowrap gap-2 p-1 shadow justify-center mx-auto w-fit max-w-full overflow-x-auto">
+          <TabList
+            className={`relative bg-white flex flex-wrap md:flex-nowrap gap-2 p-1 justify-center mx-auto w-fit max-w-full overflow-x-auto ${
+              onWhiteBackground ? "border !border-black" : ""
+            }`}
+          >
             <motion.div
-              className="absolute bg-neon-violet rounded-full z-0"
+              className="absolute bg-[#6153a3] z-0"
               animate={{
                 left: indicatorPosition.left,
                 top: indicatorPosition.top,
@@ -70,7 +77,7 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
                     ref={(reffedTab) => {
                       tabRefs.current[index] = reffedTab;
                     }}
-                    className={`relative z-10 whitespace-nowrap rounded-full px-4 py-2 font-semibold cursor-pointer duration-300 ${
+                    className={`relative z-10 whitespace-nowrap px-4 py-2 font-semibold cursor-pointer duration-300 ${
                       selected ? "text-white" : "text-midnight"
                     }`}
                   >
@@ -104,6 +111,7 @@ export const SingleCardPerTab = ({ slice }: SingleCardPerTabProps) => {
                     content={item?.card_description}
                     buttons={item?.card_button}
                     links={item?.card_link}
+                    sectionBackground={slice.primary.background_color ?? ""}
                   />
                 ) : (
                   <div className="text-center py-8 h-full flex items-center justify-center">

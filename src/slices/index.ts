@@ -10,6 +10,7 @@ export const components = {
   content_column: dynamic(() => import("./ContentColumn")),
   content_grid: dynamic(() => import("./ContentGrid")),
   hashtag_banner: dynamic(() => import("./HashtagBanner")),
+  hero: dynamic(() => import("./Hero")),
   image_text: dynamic(() => import("./ImageText")),
   menu_panel: dynamic(() => import("./MenuPanel")),
   multi_link_column: dynamic(() => import("./MultiLinkColumn")),

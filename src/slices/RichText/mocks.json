@@ -3,32 +3,43 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
+			"text_alignment": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
 			"content": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Culpa cupidatat laborum culpa id ad ipsum nostrud."
+							"text": "Officia ea labore do adipisicing fugiat elit ipsum et laborum ex ad."
 						}
 					}
 				]
 			},
-			"text_alignment": {
-				"__TYPE__": "BooleanContent",
-				"value": true
-			},
 			"button": {
-				"key": "5182144f-c8c7-469c-990d-b464b77d2a75",
+				"key": "79682758-5d6b-4023-b419-875b05aa975a",
 				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "ExternalLink",
-					"url": "https://prismic.io",
-					"text": "division"
+					"url": "http://google.com",
+					"text": "studied"
 				}
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Purple",
+				"type": "Select"
 			}
 		},
-		"items": []
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"key": "4eb59c24-fa65-4c9e-b53a-3b11be9338d2",
+				"value": []
+			}
+		]
 	},
 	{
 		"__TYPE__": "SharedSliceContent",
@@ -36,7 +47,7 @@
 		"primary": {
 			"text_alignment": {
 				"__TYPE__": "BooleanContent",
-				"value": true
+				"value": false
 			},
 			"content": {
 				"__TYPE__": "StructuredTextContent",
@@ -44,29 +55,29 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Cillum ex in adipisicing reprehenderit aliquip in quis dolor esse laboris dolor. Anim ad elit pariatur laboris dolor ipsum proident ea cillum ad nostrud do ullamco adipisicing aliqua. Commodo anim sunt non voluptate elit voluptate qui enim voluptate nostrud laboris velit incididunt anim."
+							"text": "Pariatur do amet irure cupidatat aliquip dolor."
 						}
 					}
 				]
 			},
 			"button": {
-				"key": "46697f81-6c47-4897-8246-bc06558a264a",
+				"key": "1e37b559-64d2-4b22-b2f6-0c925a3d3ce3",
 				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "ExternalLink",
-					"url": "https://prismic.io",
-					"text": "slipped"
+					"url": "http://twitter.com",
+					"text": "believed"
 				}
 			},
 			"table": {
 				"__TYPE__": "TableContent",
 				"content": [
 					{
-						"key": "3135ead3-2cfa-49e4-a28c-6a6f734da48a",
+						"key": "833f8a3a-196f-4cba-8758-2da1df5bc5a2",
 						"type": "tableRow",
 						"content": [
 							{
-								"key": "47c67b02-f969-451e-afbd-79024efc8caf",
+								"key": "d24da32c-a5cd-4979-a3d4-ead8c45035cd",
 								"type": "tableHeader",
 								"content": {
 									"__TYPE__": "StructuredTextContent",
@@ -74,14 +85,14 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Tempor."
+												"text": "Amet est."
 											}
 										}
 									]
 								}
 							},
 							{
-								"key": "3881112c-7502-4ff3-9adf-cad9064d80c9",
+								"key": "59208698-d280-47c1-81d4-86d9aec5c2ba",
 								"type": "tableHeader",
 								"content": {
 									"__TYPE__": "StructuredTextContent",
@@ -89,7 +100,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Reprehenderit."
+												"text": "Occaecat."
 											}
 										}
 									]
@@ -98,11 +109,11 @@
 						]
 					},
 					{
-						"key": "93f43b3f-7857-4b1f-aa45-9e61c66fc5c3",
+						"key": "e3b56b4c-cd63-49ff-9677-4e08ac4ff6c7",
 						"type": "tableRow",
 						"content": [
 							{
-								"key": "61e389c2-bd75-4e02-9b44-a6db7fe92c7b",
+								"key": "bbc14e9f-6d27-49a6-a333-541de3b90ac3",
 								"type": "tableCell",
 								"content": {
 									"__TYPE__": "StructuredTextContent",
@@ -110,14 +121,14 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Sunt adipisicing aliquip ea velit Lorem consequat."
+												"text": "Proident velit officia duis dolor et aute Lorem."
 											}
 										}
 									]
 								}
 							},
 							{
-								"key": "a125b055-b4e5-45ec-b838-9b4ebd5ec4ad",
+								"key": "288a0118-a724-4bcc-900a-4c55f1ff36dc",
 								"type": "tableCell",
 								"content": {
 									"__TYPE__": "StructuredTextContent",
@@ -125,7 +136,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Consequat enim tempor velit non et nulla."
+												"text": "Exercitation fugiat adipisicing ea."
 											}
 										}
 									]
@@ -137,23 +148,29 @@
 			},
 			"column_layout": {
 				"__TYPE__": "FieldContent",
-				"value": "Stacked",
+				"value": "75/25",
 				"type": "Select"
 			},
 			"column_order": {
 				"__TYPE__": "FieldContent",
-				"value": "Table First",
+				"value": "Content First",
 				"type": "Select"
 			},
 			"table_style": {
 				"__TYPE__": "FieldContent",
 				"value": "Purple Header + Transparent Background",
 				"type": "Select"
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Purple",
+				"type": "Select"
 			}
 		},
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
+				"key": "75330d7a-ac7a-4c84-be2d-b57f50bdeda8",
 				"value": []
 			}
 		]

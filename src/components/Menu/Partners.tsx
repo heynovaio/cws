@@ -1,5 +1,6 @@
 "use client";
 import { CarouselButton, Container, ContentBox } from "@/components";
+import { sectionBackgroundClass } from "@/components/Layout/Section";
 import Carousel, { CarouselInternalState } from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { PrismicNextImage } from "@prismicio/next";
@@ -71,11 +72,15 @@ export const Partners = ({
   };
 
   return (
-    <section className={carousel ? "my-16" : ""}>
+    <section
+      className={
+        carousel ? `w-full py-16 ${sectionBackgroundClass("White")}` : ""
+      }
+    >
       <Container
-        className={`flex flex-col md:flex-row items-center gap-0 md:gap-6 ${
-          hideTitle && centerLogo ? "justify-center" : ""
-        }`}
+        className={`flex flex-col md:flex-row gap-0 md:gap-6 ${
+          carousel ? "items-center" : "items-start"
+        } ${hideTitle && centerLogo ? "justify-center" : ""}`}
       >
         {!hideTitle && (
           <ContentBox

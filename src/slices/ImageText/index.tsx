@@ -35,11 +35,21 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
       : "motion-safe:opacity-10 motion-safe:translate-y-[150px] lg:motion-safe:translate-y-[300px]"
     : "";
 
+  const hasMedia =
+    slice.variation === "video"
+      ? isFilled.embed(slice.primary.video)
+      : isFilled.image(slice.primary.image);
+
+  const columnedTextClass = hasMedia
+    ? ""
+    : "md:columns-3 md:gap-x-12 md:[column-fill:balance-all] [&_p]:md:!w-auto [&_p]:md:!max-w-none [&_p]:md:!mx-0 [&_p]:md:[orphans:1] [&_p]:md:[widows:1] [&_ul]:md:!w-auto [&_ul]:md:!max-w-none [&_ul]:md:!mx-0 [&_ol]:md:!w-auto [&_ol]:md:!max-w-none [&_ol]:md:!mx-0 [&_li]:md:[orphans:1] [&_li]:md:[widows:1] [&_li]:break-inside-avoid [&_img]:break-inside-avoid";
+
   type StatItemProps = {
     statistic: RichTextField;
     description: RichTextField;
     inView: boolean;
     isPercentage: boolean;
+    showBar?: boolean;
   };
 
   const StatItem = ({
@@ -47,6 +57,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     description,
     inView,
     isPercentage,
+    showBar = true,
   }: StatItemProps) => {
     const targetNumber = parseInt(asText(statistic) || "0", 10);
     const count = useMotionValue(0);
@@ -64,25 +75,35 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     }, [inView, targetNumber, count, duration, rounded]);
 
     return (
-      <div>
-        <span className="flex flex-row gap-2 justify-center">
-          <motion.span className="text-[3.125rem] text-aqua font-extraBold">
-            {rounded}
-          </motion.span>
-          {isPercentage && (
-            <span className="text-[3.125rem] text-aqua font-extraBold">%</span>
-          )}
-        </span>
-        {rounded && (
-          <PrismicRichText
-            field={description}
-            components={{
-              paragraph: ({ children }) => (
-                <p className="text-base">{children}</p>
-              ),
-            }}
+      <div className="flex h-full items-stretch gap-5 text-left">
+        {showBar && (
+          <span
+            className="w-[15px] shrink-0 self-stretch bg-current text-current"
+            aria-hidden="true"
           />
         )}
+        <div className="text-current">
+          <span className="flex flex-row gap-2 justify-start">
+            <motion.span className="text-[4.46875rem] leading-none text-current font-extraBold">
+              {rounded}
+            </motion.span>
+            {isPercentage && (
+              <span className="text-[4.46875rem] leading-none text-current font-extraBold">
+                %
+              </span>
+            )}
+          </span>
+          {rounded && (
+            <PrismicRichText
+              field={description}
+              components={{
+                paragraph: ({ children }) => (
+                  <p className="text-base text-current">{children}</p>
+                ),
+              }}
+            />
+          )}
+        </div>
       </div>
     );
   };
@@ -91,7 +112,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     if (isVideo) {
       return (
         <div
-          className={`w-full h-[250px] md:h-[400px] overflow-hidden rounded-xl transition-all duration-700 ${animationClass}`}
+          className={`w-full h-[250px] md:h-[400px] overflow-hidden transition-all duration-700 ${animationClass}`}
         >
           <div
             className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:absolute [&>iframe]:top-0 [&>iframe]:left-0 relative"
@@ -121,7 +142,7 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
     return (
       <ResponsiveImage
         image={slice.primary.image}
-        className={`rounded w-full h-[250px] md:h-[400px] object-cover mb-4 md:mb-0 transition-all duration-700 ease-in-out ${animationClass}`}
+        className={`w-full h-[250px] md:h-[400px] object-cover mb-4 md:mb-0 transition-all duration-700 ease-in-out ${animationClass}`}
       />
     );
   };
@@ -138,64 +159,110 @@ const ImageText = ({ slice }: ImageTextProps): JSX.Element => {
       data-slice-variation={slice.variation}
       backgroundColor={slice.primary.background_color}
     >
-      <Container
-        containerClassName={`flex flex-col ${imageSide} gap-4 md:gap-16 w-full items-center`}
-      >
-        <div ref={ref} className="w-full md:w-1/2 overflow-hidden">
-          {renderImage()}
-        </div>
+      <Container>
+        <div
+          ref={ref}
+          className={`flex flex-col w-full items-center ${
+            hasMedia ? `${imageSide} gap-4 md:gap-16` : ""
+          }`}
+        >
+          {hasMedia && (
+            <div className="w-full md:w-1/2 overflow-hidden">
+              {renderImage()}
+            </div>
+          )}
 
-        {hasTextContent && (
-          <div className="w-full md:w-1/2 transition-all duration-700">
-            <ContentBox
-              title={
-                hasContent(slice.primary.title)
-                  ? slice.primary.title
-                  : undefined
-              }
-              content={
-                isStats ? (
-                  <div className="flex flex-col gap-4 md:mb-4">
-                    <div className="text-bodyLarge">
+          {hasTextContent && (
+            <div
+              className={`${hasMedia ? "w-full md:w-1/2" : "w-full"} transition-all duration-700`}
+            >
+              <ContentBox
+                title={
+                  !isStats && hasContent(slice.primary.title)
+                    ? slice.primary.title
+                    : undefined
+                }
+                content={
+                  isStats ? (
+                    <div
+                      className={
+                        hasMedia
+                          ? "grid grid-cols-1 items-stretch gap-x-8 gap-y-6 text-left md:grid-cols-2"
+                          : "grid grid-cols-1 items-stretch gap-x-8 gap-y-6 text-left md:grid-cols-3"
+                      }
+                    >
+                      <div className="flex h-full flex-col gap-4">
+                        {hasContent(slice.primary.title) && (
+                          <PrismicRichText
+                            field={slice.primary.title}
+                            components={components}
+                          />
+                        )}
+                        {hasContent(slice.primary.body) && (
+                          <div className="text-bodyLarge [&_p]:!mx-0 [&_p]:!w-auto [&_p]:!max-w-none">
+                            <PrismicRichText
+                              field={slice.primary.body}
+                              components={components}
+                            />
+                          </div>
+                        )}
+                      </div>
+                      {hasMedia ? (
+                        <div className="flex h-full items-stretch gap-5 text-left">
+                          <span
+                            className="w-[15px] shrink-0 self-stretch bg-current"
+                            aria-hidden="true"
+                          />
+                          <div className="flex flex-1 flex-col justify-center gap-6">
+                            {slice.primary.stats.map((item, index) => (
+                              <StatItem
+                                key={index}
+                                statistic={item.statistic}
+                                description={item.description}
+                                inView={inView}
+                                isPercentage={item.percentage}
+                                showBar={false}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        slice.primary.stats.map((item, index) => (
+                          <StatItem
+                            key={index}
+                            statistic={item.statistic}
+                            description={item.description}
+                            inView={inView}
+                            isPercentage={item.percentage}
+                          />
+                        ))
+                      )}
+                    </div>
+                  ) : hasContent(slice.primary.body) ? (
+                    <div className={columnedTextClass || undefined}>
                       <PrismicRichText
                         field={slice.primary.body}
                         components={components}
                       />
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-center md:text-left">
-                      {slice.primary.stats.map((item, index) => (
-                        <StatItem
+                  ) : undefined
+                }
+                buttons={
+                  hasContent(slice.primary.button)
+                    ? slice.primary.button.map((link, index) => (
+                        <Button
                           key={index}
-                          statistic={item.statistic}
-                          description={item.description}
-                          inView={inView}
-                          isPercentage={item.percentage}
+                          buttonType="primary"
+                          buttonLink={link}
+                          label={link.text}
                         />
-                      ))}
-                    </div>
-                  </div>
-                ) : hasContent(slice.primary.body) ? (
-                  <PrismicRichText
-                    field={slice.primary.body}
-                    components={components}
-                  />
-                ) : undefined
-              }
-              buttons={
-                hasContent(slice.primary.button)
-                  ? slice.primary.button.map((link, index) => (
-                      <Button
-                        key={index}
-                        buttonType="primary"
-                        buttonLink={link}
-                        label={link.text}
-                      />
-                    ))
-                  : undefined
-              }
-            />
-          </div>
-        )}
+                      ))
+                    : undefined
+                }
+              />
+            </div>
+          )}
+        </div>
       </Container>
     </Section>
   );

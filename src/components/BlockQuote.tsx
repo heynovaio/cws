@@ -8,8 +8,8 @@ export const BlockQuote = ({ quote }: BlockQuoteProps) => {
   const isString = typeof quote === "string";
 
   return (
-    <blockquote className="relative rounded bg-[#4202a9] text-white text-[1.25rem] font-semibold p-6 ">
-      <span className="absolute -top-11 -left-0 text-[6rem] text-[#3DD2FF] font-bold select-none pointer-events-none leading-none rotate-6">
+    <blockquote className="relative bg-[#6153a3] text-white text-[1.25rem] font-semibold p-6 ">
+      <span className="absolute -top-11 -left-0 text-[6rem] text-[#007Ec3] font-bold select-none pointer-events-none leading-none rotate-6">
         “
       </span>
 

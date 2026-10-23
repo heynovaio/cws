@@ -19,7 +19,10 @@
             "placeholder": "",
             "options": [
               "No Background",
-              "Darker"
+              "Darker",
+              "Purple",
+              "White",
+              "Gradient"
             ],
             "default_value": "No Background"
           }
@@ -71,7 +74,10 @@
             "placeholder": "",
             "options": [
               "No Background",
-              "Darker"
+              "Darker",
+              "Purple",
+              "White",
+              "Gradient"
             ],
             "default_value": "No Background"
           }
@@ -123,7 +129,10 @@
             "placeholder": "",
             "options": [
               "No Background",
-              "Darker"
+              "Darker",
+              "Purple",
+              "White",
+              "Gradient"
             ],
             "default_value": "No Background"
           }

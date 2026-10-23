@@ -48,7 +48,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
     return (
       <ResponsiveImage
         image={slice.primary.image}
-        className={`rounded w-full h-[350px] object-cover ${className ?? ""}`}
+        className={`w-full h-[350px] object-cover ${className ?? ""}`}
       />
     );
   };
@@ -58,6 +58,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
       id={sectionId}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      backgroundColor={slice.primary.background_color}
       className="scroll-mt-32"
     >
       <Container>
@@ -68,7 +69,7 @@ const FormEmbed = ({ slice }: ContactInfoProps): JSX.Element => {
               <PrismicRichText field={slice.primary.description} />
               {renderImage("mt-6 md:mt-10")}
             </div>
-            <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
+            <div className="bg-white w-full text-midnight p-4 flex justify-center items-center">
               {formEmbed}
             </div>
           </div>

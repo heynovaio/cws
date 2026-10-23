@@ -61,6 +61,7 @@ export const ProgramCategoryGrid = ({ slice }: ProgramCategoryGridProps) => {
       image={item.data.image}
       category={categoryName as string}
       cardType={item.type}
+      sectionBackground={slice.primary.background_color}
       buttons={[
         <Link
           key={index}

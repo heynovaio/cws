@@ -6,7 +6,7 @@ Bilingual (EN/FR) marketing site for Canadian Women & Sport, live at
 Built with **Next.js 15 (App Router)**, **Prismic** (headless CMS + Slice Machine), **Tailwind CSS**, and
 deployed on **Netlify**. Based on [The HN Prismic Boilerplate](https://github.com/heynovaio/hn-prismic-boilerplate-2025).
 
----
+--
 
 ## Prerequisites
 

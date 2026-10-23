@@ -1,16 +1,24 @@
 [
 	{
 		"__TYPE__": "SharedSliceContent",
-		"variation": "video",
+		"variation": "default",
 		"primary": {
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "No Background",
+				"value": "White",
 				"type": "Select"
 			},
 			"image_side": {
 				"__TYPE__": "BooleanContent",
 				"value": true
+			},
+			"image_fit": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"animation": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			},
 			"title": {
 				"__TYPE__": "StructuredTextContent",
@@ -18,7 +26,7 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "Recently"
+							"text": "Rubbed"
 						}
 					}
 				]
@@ -29,7 +37,7 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Duis cillum esse culpa deserunt sunt proident et adipisicing dolor deserunt sit nulla fugiat id Lorem. Proident aute in ex pariatur irure fugiat tempor dolore."
+							"text": "Id fugiat et veniam anim nostrud sit in adipisicing aliquip nulla. Ipsum nulla dolore commodo."
 						}
 					}
 				]
@@ -39,59 +47,136 @@
 				"type": "Link",
 				"value": [
 					{
-						"key": "30802e01-4691-4128-87c5-63239e60520e",
+						"key": "be92d24f-5d86-405a-91a7-69a444607bce",
 						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
-							"url": "http://twitter.com",
-							"text": "maybe"
+							"url": "https://slicemachine.dev",
+							"text": "pay"
 						}
 					}
 				]
 			},
-			"video": {
-				"embed_url": "https://www.youtube.com/watch?v=G52dUQLxPzg&list=RDG52dUQLxPzg&start_radio=1",
-				"type": "video",
-				"version": "1.0",
-				"title": "11 HOURS Stunning 4K Underwater footage + Music | Nature Relaxation™ Rare & Colorful Sea Life Video",
-				"author_name": "Nature Relaxation Films",
-				"author_url": "https://www.youtube.com/@naturerelaxationfilms",
-				"provider_name": "YouTube",
-				"provider_url": "https://www.youtube.com/",
-				"thumbnail_url": "https://i.ytimg.com/vi/G52dUQLxPzg/hqdefault.jpg",
-				"thumbnail_width": 480,
-				"thumbnail_height": 360,
-				"html": "<iframe width=\"200\" height=\"113\" src=\"https://www.youtube.com/embed/G52dUQLxPzg?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen title=\"11 HOURS Stunning 4K Underwater footage + Music | Nature Relaxation™ Rare &amp; Colorful Sea Life Video\"></iframe>",
-				"__TYPE__": "EmbedContent",
-				"all": {
-					"embed_url": "https://www.youtube.com/watch?v=G52dUQLxPzg&list=RDG52dUQLxPzg&start_radio=1",
-					"type": "video",
-					"version": "1.0",
-					"title": "11 HOURS Stunning 4K Underwater footage + Music | Nature Relaxation™ Rare & Colorful Sea Life Video",
-					"author_name": "Nature Relaxation Films",
-					"author_url": "https://www.youtube.com/@naturerelaxationfilms",
-					"provider_name": "YouTube",
-					"provider_url": "https://www.youtube.com/",
-					"thumbnail_url": "https://i.ytimg.com/vi/G52dUQLxPzg/hqdefault.jpg",
-					"thumbnail_width": 480,
-					"thumbnail_height": 360,
-					"html": "<iframe width=\"200\" height=\"113\" src=\"https://www.youtube.com/embed/G52dUQLxPzg?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen title=\"11 HOURS Stunning 4K Underwater footage + Music | Nature Relaxation™ Rare &amp; Colorful Sea Life Video\"></iframe>",
-					"height": 113,
-					"width": 200
-				}
-			},
-			"animation": {
-				"__TYPE__": "BooleanContent",
-				"value": false
-			},
-			"image_fit": {
-				"__TYPE__": "BooleanContent",
-				"value": true
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+					"width": 4076,
+					"height": 2712
+				},
+				"width": 4076,
+				"height": 2712,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"url": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+				"alt": "blew",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
 			}
 		},
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
+				"key": "1775f73b-e034-406d-9bd7-72745dcbd529",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "video",
+		"primary": {
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Purple",
+				"type": "Select"
+			},
+			"image_side": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"image_fit": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"animation": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Plastic"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ut ullamco pariatur amet mollit ullamco amet nulla in excepteur veniam veniam laborum ex. Do labore do magna dolore ex."
+						}
+					}
+				]
+			},
+			"button": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "e1e4bd2f-26dd-4290-b365-17b18576b3ca",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "http://google.com",
+							"text": "fifty"
+						}
+					}
+				]
+			},
+			"video": {
+				"embed_url": "https://twitter.com/timbenniks/status/1304146886832594944",
+				"author_name": "Tim Benniks",
+				"author_url": "https://twitter.com/timbenniks",
+				"html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">I’ve been diving deep on <a href=\"https://twitter.com/prismicio?ref_src=twsrc%5Etfw\">@prismicio</a> <a href=\"https://twitter.com/hashtag/slicemachine?src=hash&amp;ref_src=twsrc%5Etfw\">#slicemachine</a> today. I made all my own components and I used custom slices. It works like a charm with <a href=\"https://twitter.com/nuxt_js?ref_src=twsrc%5Etfw\">@nuxt_js</a>. Also\": I’m coding with this view. <a href=\"https://t.co/F0I8X9gz39\">pic.twitter.com/F0I8X9gz39</a></p>&mdash; Tim Benniks (@timbenniks) <a href=\"https://twitter.com/timbenniks/status/1304146886832594944?ref_src=twsrc%5Etfw\">September 10, 2020</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n",
+				"type": "rich",
+				"cache_age": "3153600000",
+				"provider_name": "Twitter",
+				"provider_url": "http://www.twitter.com/",
+				"version": "1.0",
+				"all": {
+					"embed_url": "https://twitter.com/timbenniks/status/1304146886832594944",
+					"author_name": "Tim Benniks",
+					"author_url": "https://twitter.com/timbenniks",
+					"html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">I’ve been diving deep on <a href=\"https://twitter.com/prismicio?ref_src=twsrc%5Etfw\">@prismicio</a> <a href=\"https://twitter.com/hashtag/slicemachine?src=hash&amp;ref_src=twsrc%5Etfw\">#slicemachine</a> today. I made all my own components and I used custom slices. It works like a charm with <a href=\"https://twitter.com/nuxt_js?ref_src=twsrc%5Etfw\">@nuxt_js</a>. Also\": I’m coding with this view. <a href=\"https://t.co/F0I8X9gz39\">pic.twitter.com/F0I8X9gz39</a></p>&mdash; Tim Benniks (@timbenniks) <a href=\"https://twitter.com/timbenniks/status/1304146886832594944?ref_src=twsrc%5Etfw\">September 10, 2020</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n",
+					"width": 550,
+					"height": null,
+					"type": "rich",
+					"cache_age": "3153600000",
+					"provider_name": "Twitter",
+					"provider_url": "http://www.twitter.com/",
+					"version": "1.0"
+				},
+				"__TYPE__": "EmbedContent"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"key": "592e439b-3256-40ea-b4ca-e46109d92137",
 				"value": []
 			}
 		]
@@ -102,12 +187,20 @@
 		"primary": {
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"type": "Select",
-				"value": "No Background"
+				"value": "No Background",
+				"type": "Select"
 			},
 			"image_side": {
 				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"image_fit": {
+				"__TYPE__": "BooleanContent",
 				"value": false
+			},
+			"animation": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			},
 			"title": {
 				"__TYPE__": "StructuredTextContent",
@@ -115,7 +208,7 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "Already"
+							"text": "Worker"
 						}
 					}
 				]
@@ -126,10 +219,8 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Nunc facilisis pellentesque augue vitae vestibulum. Suspendisse aliquet quam arcu, eget sodales eros ullamcorper quis. Aenean rutrum at nulla vitae aliquam. Nunc ligula risus, venenatis tempor laoreet sit amet, sodales id sapien.",
-							"spans": []
-						},
-						"direction": "ltr"
+							"text": "Ut et ullamco laboris. Enim consectetur dolor eiusmod laboris aute id in labore magna Lorem cillum voluptate ullamco."
+						}
 					}
 				]
 			},
@@ -138,12 +229,12 @@
 				"type": "Link",
 				"value": [
 					{
-						"key": "f94f7c1f-3d2f-4d3e-bd59-3a0de186cdf7",
+						"key": "fae77208-512d-4d78-b7db-5c666539bb58",
 						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "http://google.com",
-							"text": "clothing"
+							"text": "writing"
 						}
 					}
 				]
@@ -151,13 +242,12 @@
 			"image": {
 				"origin": {
 					"id": "main",
-					"url": "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b",
-					"width": 3560,
-					"height": 5340
+					"url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c",
+					"width": 3424,
+					"height": 3424
 				},
-				"url": "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b",
-				"width": 3560,
-				"height": 5340,
+				"width": 3424,
+				"height": 3424,
 				"edit": {
 					"zoom": 1,
 					"crop": {
@@ -166,8 +256,9 @@
 					},
 					"background": "transparent"
 				},
+				"url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c",
+				"alt": "common",
 				"credits": null,
-				"alt": null,
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			},
@@ -176,31 +267,8 @@
 				"value": [
 					{
 						"__TYPE__": "GroupItemContent",
+						"key": "db00dca8-0fa9-41b9-93bd-1e5234c6c68c",
 						"value": [
-							[
-								"description",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Do nisi veniam incididunt nulla aliqua ad reprehenderit labore consectetur eiusmod laboris. ",
-												"spans": []
-											},
-											"direction": "ltr"
-										}
-									]
-								}
-							],
-							[
-								"stat",
-								{
-									"__TYPE__": "FieldContent",
-									"type": "Text",
-									"value": "24%"
-								}
-							],
 							[
 								"statistic",
 								{
@@ -209,10 +277,22 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "24%",
-												"spans": []
-											},
-											"direction": "ltr"
+												"text": "Irure mollit sit nisi nisi velit duis nulla fugiat consectetur do eu."
+											}
+										}
+									]
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Ex deserunt aliqua elit est dolor. Nulla dolor ut eiusmod dolor velit consequat officia. Sunt commodo eiusmod ad pariatur pariatur."
+											}
 										}
 									]
 								}
@@ -225,149 +305,16 @@
 								}
 							]
 						]
-					},
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"statistic",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "67",
-												"spans": []
-											},
-											"direction": "ltr"
-										}
-									]
-								}
-							],
-							[
-								"description",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "test test tes t test setes tset st set set ",
-												"spans": []
-											},
-											"direction": "ltr"
-										}
-									]
-								}
-							],
-							[
-								"percentage",
-								{
-									"__TYPE__": "BooleanContent",
-									"value": false
-								}
-							]
-						]
 					}
 				]
-			},
-			"animation": {
-				"__TYPE__": "BooleanContent",
-				"value": false
 			}
 		},
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
+				"key": "6956af24-eab3-497a-8815-91047e632a09",
 				"value": []
 			}
 		]
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "default",
-		"primary": {
-			"title": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Score"
-						}
-					}
-				]
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Nunc facilisis pellentesque augue vitae vestibulum. Suspendisse aliquet quam arcu, eget sodales eros ullamcorper quis. Aenean rutrum at nulla vitae aliquam. Nunc ligula risus, venenatis tempor laoreet sit amet, sodales id sapien.",
-							"spans": []
-						},
-						"direction": "ltr"
-					}
-				]
-			},
-			"image_side": {
-				"__TYPE__": "BooleanContent",
-				"value": true
-			},
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "No Background",
-				"type": "Select"
-			},
-			"button": {
-				"__TYPE__": "RepeatableContent",
-				"type": "Link",
-				"value": [
-					{
-						"key": "564b0f83-57f5-444a-a3f8-2993f0f52bbe",
-						"__TYPE__": "LinkContent",
-						"value": {
-							"__TYPE__": "ExternalLink",
-							"url": "http://twitter.com",
-							"text": "wonderful"
-						}
-					}
-				]
-			},
-			"image": {
-				"__TYPE__": "ImageContent",
-				"provider": "imgix",
-				"url": "https://images.unsplash.com/photo-1610833805553-43556a0f821d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw0fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3Nzk3MTQ2Njd8MA&ixlib=rb-4.1.0&q=85",
-				"alt": "yellow lemon fruit on white surface",
-				"origin": {
-					"id": "2aFE-gUcCvc",
-					"url": "https://images.unsplash.com/photo-1610833805553-43556a0f821d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw0fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3Nzk3MTQ2Njd8MA&ixlib=rb-4.1.0&q=85",
-					"width": 4458,
-					"height": 6413
-				},
-				"width": 4458,
-				"height": 6413,
-				"edit": {
-					"background": "transparent",
-					"zoom": 1,
-					"crop": {
-						"x": 0,
-						"y": 0
-					}
-				},
-				"thumbnails": {}
-			},
-			"animation": {
-				"__TYPE__": "BooleanContent",
-				"value": false
-			},
-			"image_fit": {
-				"__TYPE__": "BooleanContent",
-				"value": false
-			}
-		},
-		"items": []
 	}
 ]

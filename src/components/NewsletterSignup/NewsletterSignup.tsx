@@ -246,15 +246,19 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
   };
 
   return (
-    <Section data-slice-type="newsletter_signup" id="newsletter">
-      <Container className="newsletter-signup hover-shadow">
+    <Section
+      data-slice-type="newsletter_signup"
+      id="newsletter"
+      backgroundColor="Purple"
+    >
+      <Container className="newsletter-signup">
         <div className="p-8 max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <PrismicRichText
               field={title}
               components={{
                 heading2: ({ children }) => (
-                  <h2 className="text-[2.875rem] font-extrabold text-white text-center leading-tight">
+                  <h2 className="text-[2.875rem] font-extrabold text-center leading-tight">
                     {children}
                   </h2>
                 ),
@@ -297,7 +301,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                     <label
                       htmlFor={fieldName}
                       className={`block mb-4 font-semibold ${
-                        hasError ? "text-ultra-pink" : "text-white"
+                        hasError ? "text-ultra-pink" : ""
                       }`}
                     >
                       {fieldLabel}
@@ -307,7 +311,7 @@ const NewsletterSignupBanner = ({ lang }: Props) => {
                       name={fieldName}
                       type={fieldType}
                       placeholder={field.placeholder ?? ""}
-                      className={`w-full p-4 rounded-xl border-2 focus ${
+                      className={`w-full bg-[#e6e7e8] p-4 text-midnight border-2 focus ${
                         hasError
                           ? "border-ultra-pink focus:ring-ultra-p-500 focus:border-red-500"
                           : "border-transparent focus:ring-blue-500 focus:border-blue-500"

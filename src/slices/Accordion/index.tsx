@@ -44,9 +44,13 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
         return (
           <Disclosure key={index}>
             {({ open }) => (
-              <div className="group focus-within:ring-4 focus-within:ring-neon-violet shadow rounded border border-neon-violet my-4 p-4 bg-white text-midnight">
+              <div
+                className={`group my-4 p-4 bg-white text-midnight border focus-within:ring-0 focus-within:!border-transparent has-[:active]:!border-transparent ${
+                  open ? "!border-transparent" : "border-neon-violet"
+                }`}
+              >
                 <DisclosureButton
-                  className="py-2 w-full text-left flex flex-row justify-between items-center font-extraBold focus:outline-none"
+                  className="py-2 w-full text-left flex flex-row justify-between items-center font-extraBold focus:outline-none focus:ring-0 active:ring-0 focus:border-0 active:border-0"
                   aria-expanded={open}
                   aria-controls={panelId}
                   id={buttonId}

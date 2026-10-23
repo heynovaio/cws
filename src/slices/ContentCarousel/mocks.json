@@ -3,9 +3,18 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "programsCarousel",
 		"primary": {
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "White",
+				"type": "Select"
+			},
+			"photo": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
 			"title": {
 				"__TYPE__": "FieldContent",
-				"value": "printed",
+				"value": "exciting",
 				"type": "Text"
 			},
 			"content_card": {
@@ -13,11 +22,12 @@
 				"value": [
 					{
 						"__TYPE__": "GroupItemContent",
+						"key": "8ffaad9b-6d81-4065-be96-ac9af24e5ad0",
 						"value": [
 							[
 								"content",
 								{
-									"key": "992e21a1-7cde-4f14-bcf8-026b3ae4150d",
+									"key": "0b17a973-adf9-47f7-8c72-a69cea144480",
 									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "DocumentLink",
@@ -34,36 +44,29 @@
 				"value": [
 					{
 						"__TYPE__": "GroupItemContent",
+						"key": "778817c2-8589-4991-8d3b-84e3baef9fbb",
 						"value": [
 							[
 								"url",
 								{
-									"key": "4bc7e906-5661-43bb-bc95-9d36453a7ef8",
+									"key": "d8556b70-33d4-434a-a226-3e8f68367202",
 									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "ExternalLink",
-										"url": "http://twitter.com",
-										"text": "girl"
+										"url": "http://google.com",
+										"text": "automobile"
 									}
 								}
 							]
 						]
 					}
 				]
-			},
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "No Background",
-				"type": "Select"
-			},
-			"photo": {
-				"__TYPE__": "BooleanContent",
-				"value": true
 			}
 		},
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
+				"key": "666c4dfc-f752-4ede-983c-809368eaf5cf",
 				"value": []
 			}
 		]
@@ -72,9 +75,18 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "resourceCarousel",
 		"primary": {
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
+			},
+			"photo": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
 			"title": {
 				"__TYPE__": "FieldContent",
-				"value": "somewhere",
+				"value": "chair",
 				"type": "Text"
 			},
 			"content_card": {
@@ -82,11 +94,12 @@
 				"value": [
 					{
 						"__TYPE__": "GroupItemContent",
+						"key": "54f1f260-507e-4d33-86d9-05f6948636b6",
 						"value": [
 							[
 								"content",
 								{
-									"key": "5812578d-1590-4001-a809-624f4399011d",
+									"key": "4b4564ba-53ec-4823-9f96-bc2c61663afb",
 									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "DocumentLink",
@@ -103,36 +116,29 @@
 				"value": [
 					{
 						"__TYPE__": "GroupItemContent",
+						"key": "723c8e52-4b8e-442d-bdcf-b8e04ac367e5",
 						"value": [
 							[
 								"url",
 								{
-									"key": "2ab91bfc-818c-4951-a955-8f49117110c1",
+									"key": "dcdc6424-cc42-463c-b4e3-32a5cf328ab3",
 									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "ExternalLink",
-										"url": "http://google.com",
-										"text": "aid"
+										"url": "http://twitter.com",
+										"text": "chosen"
 									}
 								}
 							]
 						]
 					}
 				]
-			},
-			"background_color": {
-				"__TYPE__": "FieldContent",
-				"value": "No Background",
-				"type": "Select"
-			},
-			"photo": {
-				"__TYPE__": "BooleanContent",
-				"value": false
 			}
 		},
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
+				"key": "c3da30f5-871c-4231-86d2-2f7a2334785e",
 				"value": []
 			}
 		]
@@ -148,7 +154,7 @@
 			},
 			"title": {
 				"__TYPE__": "FieldContent",
-				"value": "major",
+				"value": "dug",
 				"type": "Text"
 			},
 			"redirect_button": {
@@ -156,16 +162,17 @@
 				"value": [
 					{
 						"__TYPE__": "GroupItemContent",
+						"key": "05035290-c31e-4998-b3f8-5e4fa8e9d67c",
 						"value": [
 							[
 								"url",
 								{
-									"key": "177dc22c-554c-43ec-9399-5e1c8ec073e0",
+									"key": "bc40e49e-1511-400d-bfe8-d59e12b8639c",
 									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "ExternalLink",
-										"url": "https://slicemachine.dev",
-										"text": "biggest"
+										"url": "http://twitter.com",
+										"text": "metal"
 									}
 								}
 							]
@@ -177,19 +184,19 @@
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
+				"key": "d53216c4-e6c7-44a7-9ab0-ceecd064af5b",
 				"value": [
 					[
 						"image",
 						{
 							"origin": {
 								"id": "main",
-								"url": "https://images.unsplash.com/photo-1504198070170-4ca53bb1c1fa",
-								"width": 2747,
-								"height": 4120
+								"url": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+								"width": 4076,
+								"height": 2712
 							},
-							"url": "https://images.unsplash.com/photo-1504198070170-4ca53bb1c1fa",
-							"width": 2747,
-							"height": 4120,
+							"width": 4076,
+							"height": 2712,
 							"edit": {
 								"zoom": 1,
 								"crop": {
@@ -198,8 +205,9 @@
 								},
 								"background": "transparent"
 							},
+							"url": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+							"alt": "uncle",
 							"credits": null,
-							"alt": null,
 							"__TYPE__": "ImageContent",
 							"thumbnails": {}
 						}
@@ -212,7 +220,7 @@
 								{
 									"type": "paragraph",
 									"content": {
-										"text": "Aute irure incididunt veniam anim sit deserunt. Enim qui laborum occaecat duis enim incididunt duis excepteur nisi fugiat id."
+										"text": "Ipsum Lorem consequat esse voluptate sit enim excepteur proident ad ex enim id. Ut ex consequat excepteur sint cillum duis ad. Culpa consectetur culpa sint qui pariatur proident non fugiat."
 									}
 								}
 							]
@@ -221,12 +229,12 @@
 					[
 						"link",
 						{
-							"key": "e3182ef9-75bb-4702-8ae0-d52935463c01",
+							"key": "80d1cf5c-a74e-4d64-9109-a566c0470a1e",
 							"__TYPE__": "LinkContent",
 							"value": {
 								"__TYPE__": "ExternalLink",
-								"url": "https://prismic.io",
-								"text": "particularly"
+								"url": "https://slicemachine.dev",
+								"text": "instead"
 							}
 						}
 					],
@@ -234,7 +242,7 @@
 						"card_style",
 						{
 							"__TYPE__": "FieldContent",
-							"value": "Purple",
+							"value": "White",
 							"type": "Select"
 						}
 					]

@@ -45,7 +45,7 @@ const TagCategory: FC<TagCategoryProps> = ({ slice, context }) => {
                 ))
               : undefined
           }
-          containerClassName="flex !rounded-full gap-5 text-center mx-auto flex-col items-center justify-center"
+          containerClassName="flex gap-5 text-center mx-auto flex-col items-center justify-center"
         />
       </Container>
     </Section>

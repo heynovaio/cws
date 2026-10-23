@@ -27,7 +27,7 @@ export const SearchBar = ({ lang }: { lang: string }) => {
         value={searchTerm}
         onChange={handleSearchChange}
         placeholder={lang === "fr-ca" ? "Recherche..." : "Search..."}
-        className={`bg-white px-4 py-1 rounded-full focus flex w-full`}
+        className="bg-white text-midnight border border-[#6153a3] px-4 py-1 rounded-full focus flex w-full"
       />
     </Field>
   );

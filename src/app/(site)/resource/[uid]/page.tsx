@@ -6,7 +6,7 @@ import * as prismic from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import React, { Suspense } from "react";
-import { Intro, Layout } from "@/components";
+import { Intro, Layout, sectionBackgroundValue } from "@/components";
 import { getLocales } from "@/utils";
 import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
 import type { BreadcrumbLink } from "@/components/Breadcrumb";
@@ -15,6 +15,32 @@ import { getServerLocale } from "@/utils/serverLocale";
 import { ResourceCategoryDocument } from "../../../../../prismicio-types";
 
 type Params = { uid: string };
+
+const DEFAULT_PAGE_BACKGROUNDS = new Set(["", "no background", "darker"]);
+
+function resourcePageSlices<T extends { primary: object }>(
+  slices: readonly T[],
+  pageBackground: string | null | undefined
+): T[] {
+  const pageValue = sectionBackgroundValue(pageBackground);
+  if (DEFAULT_PAGE_BACKGROUNDS.has(pageValue)) return [...slices];
+
+  return slices.map((slice) => {
+    const primary = slice.primary as { background_color?: string | null };
+    const own =
+      "background_color" in slice.primary
+        ? sectionBackgroundValue(primary.background_color)
+        : "";
+    if (own && !DEFAULT_PAGE_BACKGROUNDS.has(own)) return slice;
+    return {
+      ...slice,
+      primary: {
+        ...slice.primary,
+        background_color: pageBackground,
+      },
+    };
+  });
+}
 
 export async function generateMetadata({
   params,
@@ -88,6 +114,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   }
   const categoryLabel = categoryDoc?.data?.name as string | undefined;
 
+  const pageBackground = page.data.background;
+
   const links = [
     { label: pageTypeLabel, href: "/search?filter=resource_page" },
     categoryLabel
@@ -123,9 +151,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             pageData={page.data}
             links={links}
             lang={lang}
+            pageBackground={pageBackground}
           />
           <SliceZone
-            slices={page.data.slices}
+            slices={resourcePageSlices(page.data.slices, pageBackground)}
             components={components}
             context={{ lang, tags: resourceTags }}
           />

@@ -7,12 +7,35 @@ import * as prismic from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import { getLocales } from "@/utils";
-import { Layout, SearchLayout } from "@/components";
+import {
+  Layout,
+  SearchLayout,
+  sectionBackgroundClass,
+  sectionBackgroundValue,
+} from "@/components";
 import CategoryFilterProvider from "@/providers/CategoryFilterProvider";
 import { GeneralHero } from "@/components/Heros/GeneralHero";
 import { Suspense } from "react";
 import { Loading } from "@/components/Loading/Loading";
 import { getServerLocale } from "@/utils/serverLocale";
+
+const DEFAULT_PAGE_BACKGROUNDS = new Set(["", "no background", "darker"]);
+
+function searchPageSlices<T extends { primary: object }>(
+  slices: readonly T[]
+): T[] {
+  return slices.map((slice) => {
+    if (!("background_color" in slice.primary)) return slice;
+    const own = sectionBackgroundValue(
+      (slice.primary as { background_color?: string | null }).background_color
+    );
+    if (own && !DEFAULT_PAGE_BACKGROUNDS.has(own)) return slice;
+    return {
+      ...slice,
+      primary: { ...slice.primary, background_color: "White" },
+    };
+  });
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getServerLocale();
@@ -68,15 +91,17 @@ export default async function Page() {
       }
     >
       <Suspense fallback={<Loading hasText />}>
-        <GeneralHero data={page.data} />
-        <CategoryFilterProvider>
-          <SearchLayout lang={lang} />
-        </CategoryFilterProvider>
-        <SliceZone
-          slices={page.data.slices}
-          components={components}
-          context={{ lang }}
-        />
+        <GeneralHero data={{ ...page.data, hero_background_color: "White" }} />
+        <div className={sectionBackgroundClass("White")}>
+          <CategoryFilterProvider>
+            <SearchLayout lang={lang} />
+          </CategoryFilterProvider>
+          <SliceZone
+            slices={searchPageSlices(page.data.slices)}
+            components={components}
+            context={{ lang }}
+          />
+        </div>
       </Suspense>
     </Layout>
   );

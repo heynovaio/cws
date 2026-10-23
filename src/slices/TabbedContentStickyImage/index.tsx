@@ -13,7 +13,11 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { Container } from "@/components";
+import {
+  Container,
+  sectionBackgroundClass,
+  sectionBackgroundValue,
+} from "@/components";
 import { BlockQuote } from "@/components/BlockQuote";
 import { PrismicNextImage } from "@prismicio/next";
 import { FaPlay, FaPause, FaChevronDown } from "react-icons/fa6";
@@ -41,6 +45,21 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
   slice,
 }) => {
   const sections = slice.primary.section || [];
+  const background = sectionBackgroundValue(slice.primary.background_color);
+  const isWhiteSection = background === "white";
+  const isColoredSection = background === "purple" || background === "gradient";
+  const selectedTabClass = isWhiteSection
+    ? "!bg-[#6153a3] !text-white"
+    : isColoredSection
+      ? "!bg-white !text-[#000]"
+      : "bg-[#6D00FF] text-white";
+  const idleTabClass = isWhiteSection
+    ? "!bg-white !text-[#6153a3] border !border-[#6153a3]"
+    : isColoredSection
+      ? "bg-transparent !text-white border border-white"
+      : "bg-midnight border border-white text-white hover:bg-dark-purple-background";
+  const playButtonClass =
+    "absolute bottom-2 left-2 z-50 flex items-center justify-center rounded-full border-2 !border-white bg-white transition hover:bg-white";
   const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
@@ -67,7 +86,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       data-test-id="tabbed-content-sticky-image"
-      className="relative py-8 md:py-16"
+      className={`relative py-8 md:py-16 ${sectionBackgroundClass(slice.primary.background_color)}`}
       ref={topRef}
       id="pillars"
     >
@@ -82,15 +101,10 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
             return (
               <Disclosure key={idx}>
                 {({ open }) => (
-                  <div
-                    className="border border-[#6D00FF] rounded-[12px] overflow-hidden"
-                    style={{
-                      boxShadow: "0 0 12px 0 rgba(99, 15, 249, 0.8)",
-                    }}
-                  >
+                  <div className="overflow-hidden">
                     <DisclosureButton
                       className={`w-full flex items-center justify-between px-4 py-2 text-left font-semibold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#3DD2FF] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-                        open ? "bg-[#6D00FF] text-white" : "text-white"
+                        open ? `${selectedTabClass} font-bold` : idleTabClass
                       }`}
                     >
                       <div>
@@ -110,14 +124,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                         aria-hidden="true"
                       />
                     </DisclosureButton>
-                    <DisclosurePanel
-                      className="p-6"
-                      style={{
-                        background: "rgba(121, 19, 224, 0.2)",
-                        boxShadow: "0 0 30px 0 rgba(99, 15, 249, 0.8)",
-                        backdropFilter: "blur(8px)",
-                      }}
-                    >
+                    <DisclosurePanel className="p-6">
                       <div className="flex flex-col gap-6">
                         {tab.section_title && (
                           <h3 className="text-[2rem] font-[600]">
@@ -133,7 +140,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                           </div>
                         )}
                         {formEmbed && (
-                          <div className="bg-white w-full rounded text-midnight p-4 flex justify-center items-center">
+                          <div className="bg-white w-full text-midnight p-4 flex justify-center items-center">
                             {formEmbed}
                           </div>
                         )}
@@ -143,15 +150,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                               field={tab.section_image}
                               alt=""
                             />
-                            <div
-                              className="
-                                absolute bottom-2 left-2 w-20 h-20 rounded-full
-                                bg-white/50 backdrop-blur-sm border-2 border-[#DD0748]
-                                flex items-center justify-center hover:bg-white/80 transition z-50
-                                focus-within:ring-4 focus-within:ring-[#DD0748]
-                                focus-within:ring-offset-2 focus-within:ring-offset-white
-                              "
-                            >
+                            <div className={`${playButtonClass} h-20 w-20`}>
                               <button
                                 onClick={() => toggleAudio(idx)}
                                 type="button"
@@ -168,13 +167,13 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                   <FaPause
                                     aria-hidden="true"
                                     size="32"
-                                    color="#DD0748"
+                                    color="#000"
                                   />
                                 ) : (
                                   <FaPlay
                                     aria-hidden="true"
                                     size="32"
-                                    color="#DD0748"
+                                    color="#000"
                                   />
                                 )}
                               </button>
@@ -219,9 +218,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                     [
                       "w-full px-12 py-2 rounded-[12px]",
                       "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#3DD2FF] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
-                      selected
-                        ? "bg-[#6D00FF] text-white font-bold"
-                        : "bg-midnight border border-white text-white hover:bg-dark-purple-background",
+                      selected ? `${selectedTabClass} font-bold` : idleTabClass,
                     ].join(" ")
                   }
                 >
@@ -245,15 +242,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                   : undefined;
 
                 return (
-                  <TabPanel
-                    key={idx}
-                    className="p-6 rounded-[20px] flex border border-[#6D00FF]"
-                    style={{
-                      background: "rgba(121, 19, 224, 0.2)",
-                      boxShadow: "0 0 30px 0 rgba(99, 15, 249, 0.8)",
-                      backdropFilter: "blur(8px)",
-                    }}
-                  >
+                  <TabPanel key={idx} className="p-6 flex">
                     <div className="flex flex-col md:flex-row gap-6">
                       <div className="flex-1 flex flex-col gap-8">
                         {tab.section_title && (
@@ -291,15 +280,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                 alt=""
                                 className="max-h-[calc(100vh-180px)] w-auto h-auto object-contain"
                               />
-                              <div
-                                className="
-                                  z-50 absolute bottom-2 left-2 w-32 h-32 rounded-full
-                                  bg-white/50 backdrop-blur-sm border-2 border-[#DD0748]
-                                  flex items-center justify-center hover:bg-white/80 transition
-                                  focus-within:ring-4 focus-within:ring-[#DD0748]
-                                  focus-within:ring-offset-2 focus-within:ring-offset-white
-                                "
-                              >
+                              <div className={`${playButtonClass} h-32 w-32`}>
                                 <button
                                   onClick={() => toggleAudio(idx)}
                                   type="button"
@@ -316,13 +297,13 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                     <FaPause
                                       aria-hidden="true"
                                       size="50"
-                                      color="#DD0748"
+                                      color="#000"
                                     />
                                   ) : (
                                     <FaPlay
                                       aria-hidden="true"
                                       size="50"
-                                      color="#DD0748"
+                                      color="#000"
                                     />
                                   )}
                                 </button>

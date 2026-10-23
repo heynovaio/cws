@@ -97,6 +97,11 @@
 				"__TYPE__": "FieldContent",
 				"type": "Select",
 				"value": "Zoho Forms"
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "No Background",
+				"type": "Select"
 			}
 		},
 		"items": []

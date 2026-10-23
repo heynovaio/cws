@@ -1,6 +1,11 @@
 "use client";
 import React from "react";
-import { Container, Section } from "../Layout";
+import {
+  Container,
+  optionalBannerBackground,
+  Section,
+  sectionBackgroundValue,
+} from "../Layout";
 import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
 import { ContentBox } from "../ContentBox/ContentBox";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
@@ -25,13 +30,21 @@ export const CareerIntro = ({ pageData, links, lang }: IntroProps) => {
       ? [button]
       : [];
 
-  const containerStyle = "bg-white text-midnight";
+  const heroBackground = optionalBannerBackground(
+    pageData?.hero_background_color
+  );
+  const containerStyle = heroBackground || "bg-white text-midnight";
+  const breadcrumbColor =
+    !heroBackground ||
+    sectionBackgroundValue(pageData?.hero_background_color) === "white"
+      ? "black"
+      : "white";
 
   return (
     <Section data-test-id="intro">
       <Container>
         <div
-          className={`grid grid-cols-1 md:grid-cols-12 gap-4 rounded p-12 border border-neon-violet shadow backdrop-blur-3xl ${containerStyle}`}
+          className={`grid grid-cols-1 md:grid-cols-12 gap-4 rounded p-12 border border-neon-violet backdrop-blur-3xl ${containerStyle}`}
         >
           <div className="md:col-span-6 flex flex-col h-full">
             <div className="flex-grow flex flex-col justify-center">
@@ -56,7 +69,7 @@ export const CareerIntro = ({ pageData, links, lang }: IntroProps) => {
                 width="full"
               />
             </div>
-            <Breadcrumb links={links} color="black" lang={lang} />
+            <Breadcrumb links={links} color={breadcrumbColor} lang={lang} />
           </div>
           <div className="md:col-span-6 grid grid-cols-1 gap-4">
             <ResponsiveImage
