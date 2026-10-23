@@ -597,13 +597,41 @@ iframe {
   border-color: #6153a3;
 }
 
+/* White surfaces use purple borders. Purple and gradient surfaces use white. */
 .section-bg-white,
+.section-bg-white :where(*) {
+  border-color: #6153a3;
+}
+
 .section-bg-purple,
 .section-bg-gradient,
-.section-bg-white :where(*),
 .section-bg-purple :where(*),
 .section-bg-gradient :where(*) {
-  border-color: #6153a3;
+  border-color: #fff;
+}
+
+.section-bg-white :focus,
+.section-bg-white :focus-visible {
+  outline: 3px solid #6153a3;
+  outline-offset: 3px;
+  overflow: visible;
+}
+
+.section-bg-purple :focus,
+.section-bg-purple :focus-visible,
+.section-bg-gradient :focus,
+.section-bg-gradient :focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+  overflow: visible;
+}
+
+/* White pages need a purple ring; light controls on white cards do too. */
+.section-bg-white :is(input, textarea, select):is(:focus, :focus-visible),
+.surface-focus:is(:focus, :focus-visible) {
+  outline: 3px solid #6153a3;
+  outline-offset: 3px;
+  overflow: visible;
 }
 
 .section-bg-white

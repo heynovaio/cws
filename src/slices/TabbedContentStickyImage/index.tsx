@@ -154,7 +154,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                               <button
                                 onClick={() => toggleAudio(idx)}
                                 type="button"
-                                className="inline-flex items-center justify-center rounded-full focus:outline-none"
+                                className="surface-focus inline-flex items-center justify-center rounded-full"
                                 aria-pressed={playingIndex === idx}
                                 aria-label={
                                   playingIndex === idx
@@ -284,7 +284,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                 <button
                                   onClick={() => toggleAudio(idx)}
                                   type="button"
-                                  className="inline-flex items-center justify-center rounded-full focus:outline-none"
+                                  className="surface-focus inline-flex items-center justify-center rounded-full"
                                   aria-pressed={playingIndex === idx}
                                   aria-label={
                                     playingIndex === idx

@@ -12,7 +12,7 @@ interface FooterProps {
 
 export const CampaignFooter = ({ footerData, lang }: FooterProps) => {
   return (
-    <footer className="relative overflow-hidden bg-gradient-section text-white flex flex-col justify-center items-center">
+    <footer className="section-bg-gradient relative overflow-hidden bg-gradient-section text-white flex flex-col justify-center items-center">
       <img
         src="/footer-bg.svg"
         alt=""
