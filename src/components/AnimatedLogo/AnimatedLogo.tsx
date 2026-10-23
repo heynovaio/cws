@@ -51,6 +51,19 @@ export const BLUE_ARCH: { d: string; fill: string }[] = [
   },
 ];
 
+/** Shared edge overlap so abutting pieces don't leave a hairline of background. */
+export const ARCH_SEAM = 0.55;
+
+export const ArchPath = ({ d, fill }: { d: string; fill: string }) => (
+  <path
+    d={d}
+    fill={fill}
+    stroke={fill}
+    strokeWidth={ARCH_SEAM}
+    strokeLinejoin="round"
+  />
+);
+
 export const PURPLE_ARCH: string[] = [
   "M29.9,54.2c0,7,1.5,13.6,4.2,19.5-1.6,1.7-3.4,3.2-5.3,4.5-3.6-7.2-5.6-15.4-5.6-24s2-16.8,5.6-24c2,1.3,3.8,2.8,5.3,4.5-2.7,6-4.2,12.6-4.2,19.5Z",
   "M45.3,89.1c-1.7,1.5-3.5,2.9-5.4,4.2-2.9-2.8-5.6-5.9-7.8-9.3,1.9-1.2,3.7-2.6,5.3-4.2,2.2,3.4,4.8,6.5,7.8,9.2Z",
@@ -215,12 +228,12 @@ export const AnimatedLogo = () => {
           </defs>
           <g mask={`url(#${blueMask})`}>
             {BLUE_ARCH.map(({ d, fill }, i) => (
-              <path key={i} d={d} fill={fill} />
+              <ArchPath key={i} d={d} fill={fill} />
             ))}
           </g>
           <g mask={`url(#${purpleMask})`}>
             {PURPLE_ARCH.map((d, i) => (
-              <path key={i} d={d} fill={PURPLE} />
+              <ArchPath key={i} d={d} fill={PURPLE} />
             ))}
           </g>
           <motion.g

@@ -2,7 +2,7 @@
 
 import { useId } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { BLUE_ARCH, PURPLE_ARCH } from "./AnimatedLogo";
+import { ARCH_SEAM, ArchPath, BLUE_ARCH, PURPLE_ARCH } from "./AnimatedLogo";
 
 const PURPLE = "#6153a3";
 const BLUE = "#1c83c6";
@@ -202,7 +202,7 @@ export const HeroLogoAnimation = () => {
 
         {ARMS.map(({ row, side, color }, index) => {
           const y = LOGO_Y + row * LOGO_SCALE;
-          const x1 = side === "left" ? LOGO_X + 4 : LOGO_X + LOGO_WIDTH - 4;
+          const x1 = side === "left" ? LOGO_X + 18 : LOGO_X + LOGO_WIDTH - 18;
           const x2 = side === "left" ? -40 : 1480;
           return (
             <motion.line
@@ -212,7 +212,7 @@ export const HeroLogoAnimation = () => {
               y1={y}
               y2={y}
               stroke={color}
-              strokeWidth={6.8 * LOGO_SCALE}
+              strokeWidth={(6.8 + ARCH_SEAM) * LOGO_SCALE}
               initial={{ pathLength: settled ? 1 : 0 }}
               animate={{ pathLength: 1 }}
               transition={timing(
@@ -228,17 +228,17 @@ export const HeroLogoAnimation = () => {
         <g transform={`translate(${LOGO_X} ${LOGO_Y}) scale(${LOGO_SCALE})`}>
           <g mask={`url(#${purpleMask})`}>
             {PURPLE_ARCH.map((d, index) => (
-              <path key={index} d={d} fill={PURPLE} />
+              <ArchPath key={index} d={d} fill={PURPLE} />
             ))}
           </g>
           <g mask={`url(#${blueMask})`}>
             {OUTER_BLUE.map(({ d, fill }, index) => (
-              <path key={index} d={d} fill={fill} />
+              <ArchPath key={index} d={d} fill={fill} />
             ))}
           </g>
           <g mask={`url(#${middleMask})`}>
             {MIDDLE_BLUE.map(({ d, fill }, index) => (
-              <path key={index} d={d} fill={fill} />
+              <ArchPath key={index} d={d} fill={fill} />
             ))}
           </g>
         </g>
