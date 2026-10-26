@@ -65,9 +65,9 @@ const Accordion = ({ slice }: AccordionProps): JSX.Element => {
                     }}
                   />
                   {open ? (
-                    <FaMinus color="6D00FF" />
+                    <FaMinus color="#6153a3" />
                   ) : (
-                    <FaPlus color="6D00FF" />
+                    <FaPlus color="#6153a3" />
                   )}
                 </DisclosureButton>
                 <DisclosurePanel

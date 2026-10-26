@@ -29,7 +29,7 @@ export const FilterPanel = ({
   items = [],
   selectedItems = [],
   onItemToggle,
-  className = "rounded bg-light-violet text-midnight p-4 flex flex-col gap-6",
+  className = "rounded bg-[#6153a3]/10 text-midnight p-4 flex flex-col gap-6",
   initialVisibleCount = 4,
   slider = false,
   sliderMax = 100,
@@ -86,7 +86,7 @@ export const FilterPanel = ({
   return (
     <>
       {isLoading ? (
-        <div className="rounded bg-light-violet/20 p-4 flex flex-col gap-6 h-56 flex-grow animate-pulse w-full"></div>
+        <div className="rounded bg-[#6153a3]/10 p-4 flex flex-col gap-6 h-56 flex-grow animate-pulse w-full"></div>
       ) : (
         <>
           {(slider || (items && items.length > 0)) && (

@@ -20,10 +20,10 @@ interface DefaultCardProps {
 
 const CARD_STYLES: Record<CardStyle, { chip: string }> = {
   purple: {
-    chip: "bg-[#e6e7e8] text-midnight border-midnight",
+    chip: "card-tag bg-[#e6e7e8] text-midnight",
   },
   white: {
-    chip: "bg-[#e6e7e8] text-dark border-neon-violet",
+    chip: "card-tag bg-[#e6e7e8] text-dark",
   },
 };
 
@@ -47,12 +47,12 @@ export const DefaultCard = ({
     switch (cardType) {
       case "program":
       case "program_page":
-        categoryChipColor = "bg-[#e6e7e8] text-midnight border-midnight";
+        categoryChipColor = "card-tag bg-[#e6e7e8] text-midnight";
         break;
       case "resource":
       case "resource_page":
       default:
-        categoryChipColor = "bg-[#e6e7e8] text-dark border-neon-violet";
+        categoryChipColor = "card-tag bg-[#e6e7e8] text-dark";
         break;
     }
   }

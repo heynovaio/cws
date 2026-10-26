@@ -31,7 +31,7 @@ export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
         alt=""
         aria-hidden
         //  max width 145% and margin left -13%
-        className="pointer-events-none absolute inset-x-0 top-1/2 z-0 h-auto -translate-y-1/2 w-[3160px] max-w-[3160px] -ml-[270px]"
+        className="pointer-events-none absolute inset-x-0 top-1/2 z-0 h-auto -translate-y-1/2 w-[3160px] max-w-[3160px] -ml-[340px]"
       />
       <nav className="relative z-10 pt-[14rem] pb-14 px-5 mx-auto max-w-screen-xl w-full flex flex-col">
         <div className="flex gap-x-20 gap-y-16 flex-wrap md:flex-nowrap items-center justify-center md:justify-normal md:items-stretch">
@@ -206,13 +206,23 @@ export const Footer = ({ global, slices, footerData, lang }: FooterProps) => {
 
         <p className="mt-4 text-center text-base">{footerData?.copyright}</p>
 
-        <a
-          className="mt-2 text-center text-base no-underline mb-4"
-          href="https://heynova.io/"
-          target="_blank"
-        >
-          {lang === "fr-ca" ? "Conçu par Hey Nova" : "Designed by Hey Nova"}
-        </a>
+        <div className="mt-2 mb-4 flex flex-row items-center justify-center gap-4 text-center text-base">
+          <a
+            className="no-underline"
+            href="https://heynova.io/"
+            target="_blank"
+          >
+            {lang === "fr-ca" ? "Conçu par Hey Nova" : "Designed by Hey Nova"}
+          </a>
+          &
+          <a
+            className="no-underline"
+            href="https://www.archerandco.co/"
+            target="_blank"
+          >
+            Archer&Co
+          </a>
+        </div>
       </div>
     </footer>
   );

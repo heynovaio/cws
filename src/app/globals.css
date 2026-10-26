@@ -199,7 +199,7 @@
     &:hover {
       > span:after {
         width: 100%;
-        background: #6d00ff;
+        background: #6153a3;
       }
     }
   }
@@ -608,6 +608,13 @@ iframe {
 .section-bg-purple :where(*),
 .section-bg-gradient :where(*) {
   border-color: #fff;
+}
+
+.card-tag,
+.section-bg-white .card-tag,
+.section-bg-purple .card-tag,
+.section-bg-gradient .card-tag {
+  border-color: #000;
 }
 
 .section-bg-white :focus,
