@@ -6,6 +6,21 @@
   "status": true,
   "json": {
     "Main": {
+      "background_color": {
+        "type": "Select",
+        "config": {
+          "label": "Background Color",
+          "placeholder": "",
+          "options": [
+            "No Background",
+            "Darker",
+            "Purple",
+            "White",
+            "Gradient"
+          ],
+          "default_value": "No Background"
+        }
+      },
       "title": {
         "type": "StructuredText",
         "config": {

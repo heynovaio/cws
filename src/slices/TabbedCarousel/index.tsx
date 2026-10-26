@@ -31,6 +31,7 @@ const TabbedCarousel = ({ slice }: TabbedCarouselProps) => {
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      backgroundColor={slice.primary.background_color}
       styling="overflow-x-hidden"
     >
       <Container containerClassName="flex flex-col items-center">

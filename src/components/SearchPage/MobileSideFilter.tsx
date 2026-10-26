@@ -19,11 +19,11 @@ const AppliedFilterTag: React.FC<AppliedFilterTagProps> = ({
   onRemove,
 }) => {
   return (
-    <div className="inline-flex items-center gap-2 bg-purple-600/20 border border-purple-400/30 rounded-full px-3 py-1.5 text-sm text-purple-200">
+    <div className="inline-flex items-center gap-2 bg-[#6153a3]/10 border border-[#6153a3]/40 rounded-full px-3 py-1.5 text-sm text-[#6153a3]">
       <span className="truncate max-w-32">{label}</span>
       <button
         onClick={onRemove}
-        className="flex-shrink-0 hover:bg-purple-500/30 rounded-full p-0.5 transition-colors duration-200"
+        className="flex-shrink-0 hover:bg-purple-500/30 p-0.5 transition-colors duration-200"
         aria-label={`Remove ${label} filter`}
       >
         <FaXmark className="h-3 w-3" />
@@ -160,7 +160,7 @@ const AppliedFiltersSection = ({
 
   return (
     <div className="mb-4">
-      <h3 className="text-sm font-medium text-gray-300 mb-3">
+      <h3 className="text-sm font-medium text-midnight mb-3">
         {lang === "fr-ca" ? "Filtres appliqués" : "Applied Filters"}
       </h3>
       <div className="flex flex-wrap gap-2">
@@ -208,13 +208,13 @@ export const MobileSideFilter: React.FC<MobileSideFilterProps> = ({ lang }) => {
         onClose={() => setIsOpen(false)}
         className="relative z-50"
       >
-        <div className="fixed bg-dark-purple-background pb-6 inset-0 flex w-full overflow-auto">
+        <div className="fixed bg-white text-midnight section-bg-white section-no-shadow pb-6 inset-0 flex w-full overflow-auto">
           <DialogPanel
             transition
             className="w-full rounded-xl px-5 py-8 duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
           >
             <CloseButton
-              className="z-20 fixed top-4 right-4 p-5 btn-primary rounded-full duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
+              className="z-20 fixed top-4 right-4 p-5 btn-primary duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
               onClick={() => setIsOpen(false)}
             >
               <FaXmark className="h-5 w-5" />

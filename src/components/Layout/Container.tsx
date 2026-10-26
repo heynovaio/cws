@@ -8,12 +8,13 @@ interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Container: React.FC<ContainerProps> = ({
   children,
   containerClassName,
+  className,
   ...props
 }) => {
   return (
     // Horizontal padding
     <div
-      className={`px-5 mx-auto max-w-screen-xl w-full ${containerClassName}`}
+      className={`px-5 mx-auto max-w-screen-xl w-full ${containerClassName ?? ""} ${className ?? ""}`}
       {...props}
     >
       {children}

@@ -1,34 +1,38 @@
 import React from "react";
-import {
-  GlobalsDocumentData,
-  MenusDocumentData,
-} from "../../../prismicio-types";
-import { ResponsiveImage } from "..";
+import { MenusDocumentData } from "../../../prismicio-types";
 import { FaFacebook, FaInstagram, FaMeta, FaXTwitter } from "react-icons/fa6";
 import { PrismicNextLink } from "@/components/PrismicNextLink";
 import { FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
 
 interface FooterProps {
-  global?: GlobalsDocumentData;
   footerData?: MenusDocumentData;
   lang: string;
 }
 
-export const CampaignFooter = ({ global, footerData, lang }: FooterProps) => {
+export const CampaignFooter = ({ footerData, lang }: FooterProps) => {
   return (
-    <footer className="bg-neon-violet/50 text-white flex flex-col justify-center items-center">
-      <nav className="py-10 px-5 mx-auto max-w-screen-xl w-full flex flex-col gap-10">
+    <footer className="section-bg-gradient relative overflow-hidden bg-gradient-section text-white flex flex-col justify-center items-center">
+      <img
+        src="/footer-bg.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-1/2 z-0 h-auto w-full -translate-y-1/2"
+      />
+      <nav className="relative z-10 py-10 px-5 mx-auto max-w-screen-xl w-full flex flex-col gap-10">
         {/* IMAGE */}
         <div className="w-full flex justify-center">
-          <ResponsiveImage
-            image={global?.site_logo}
-            containerClassName="mb-8 max-w-[180px] md:max-w-[220px]"
+          <img
+            src="/cws-logo-white.svg"
+            alt="Canadian Women & Sport"
+            width={338}
+            height={108}
+            className="mb-8 h-auto w-full max-w-[180px] md:max-w-[220px]"
           />
         </div>
 
         {/*SOCIALS */}
-        <div className="flex flex-col items-center">
+        {/* <div className="flex flex-col items-center">
           <h4 className="mb-6">
             {lang === "fr-ca" ? "Suivez-nous" : "Follow Us"}
           </h4>
@@ -84,10 +88,10 @@ export const CampaignFooter = ({ global, footerData, lang }: FooterProps) => {
                 </span>
               )}
           </div>
-        </div>
+        </div> */}
 
         {/* Government of Canada Logo */}
-        <div className="my-4 w-full">
+        {/* <div className="my-4 w-full">
           <div className="hidden md:flex justify-center">
             {lang === "fr-ca" ? (
               <Image
@@ -127,10 +131,10 @@ export const CampaignFooter = ({ global, footerData, lang }: FooterProps) => {
               />
             )}
           </div>
-        </div>
+        </div> */}
 
         {/* POLICIES */}
-        <div className="flex flex-col justify-center items-center footer-links">
+        {/* <div className="flex flex-col justify-center items-center footer-links">
           <div className="flex flex-row gap-4">
             {footerData?.policy_link.text !== "" &&
               footerData?.policy_link.link_type !== "Any" && (
@@ -157,7 +161,7 @@ export const CampaignFooter = ({ global, footerData, lang }: FooterProps) => {
           >
             {lang === "fr-ca" ? "Conçu par Hey Nova" : "Designed by Hey Nova"}
           </a>
-        </div>
+        </div> */}
       </nav>
     </footer>
   );

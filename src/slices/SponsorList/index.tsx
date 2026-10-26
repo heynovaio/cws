@@ -2,7 +2,7 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import { Container } from "@/components";
+import { Container, sectionBackgroundClass } from "@/components";
 import Partners from "@/components/Menu/Partners";
 
 /**
@@ -19,7 +19,7 @@ const SponsorList: FC<SponsorListProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       data-test-id={slice.id}
-      className="partners-non-carousel"
+      className={`partners-non-carousel ${sectionBackgroundClass(slice.primary.background_color)}`}
     >
       <Container containerClassName={`py-6`}>
         <Partners

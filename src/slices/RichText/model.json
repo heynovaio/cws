@@ -12,6 +12,19 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Purple",
+              "White",
+              "Gradient"
+            ]
+          }
+        },
         "text_alignment": {
           "type": "Boolean",
           "config": {
@@ -52,6 +65,19 @@
       "description": "Rich text content with a native Prismic table. Supports stacked or side-by-side column layout.",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Purple",
+              "White",
+              "Gradient"
+            ]
+          }
+        },
         "text_alignment": {
           "type": "Boolean",
           "config": {

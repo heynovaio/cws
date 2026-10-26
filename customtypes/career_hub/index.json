@@ -68,6 +68,14 @@
           "repeat": false
         }
       },
+      "background_color": {
+        "type": "Select",
+        "config": {
+          "label": "Background Color",
+          "placeholder": "",
+          "options": ["White", "Purple", "Gradient"]
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

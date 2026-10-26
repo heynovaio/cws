@@ -23,7 +23,7 @@ export const ResponsiveImage: React.FC<PrismicImageProps> = ({
       <PrismicNextImage
         field={image}
         fallbackAlt=""
-        className={`object-cover object-center rounded ${imageHeightClassName}`}
+        className={`object-cover object-center ${imageHeightClassName}`}
         {...props}
       />
     </div>

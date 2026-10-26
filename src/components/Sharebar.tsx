@@ -185,7 +185,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
   // Icons: keep color change on bar hover; enlarge ONLY the hovered icon
   const iconBaseClasses =
     "block transform origin-center will-change-transform transition-transform transition-colors duration-300 ease-out " +
-    "text-[#6D00FF] group-hover:text-white " + // color flips when bar hover
+    "text-[#6153a3] group-hover:text-white " + // color flips when bar hover
     "hover:scale-[1.3] focus-visible:scale-[1.3]"; // specific icon emphasis
 
   return (
@@ -201,7 +201,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
             blur-3xl
             opacity-95
             transition-transform duration-300 ease-out
-            bg-[radial-gradient(ellipse_at_center,rgba(253,52,151,0.5),rgba(109,0,255,0.4)_55%,transparent_75%)]
+            bg-[radial-gradient(ellipse_at_center,rgba(253,52,151,0.5),rgba(97,83,163,0.4)_55%,transparent_75%)]
             group-hover:scale-[1.03]
           "
         />
@@ -212,7 +212,7 @@ export const Sharebar = ({ absoluteUrl }: SharebarProps) => {
           className="
             relative z-10
             flex items-center
-            rounded-full bg-white/90 shadow-lg
+            rounded-full bg-white/90
             text-sm font-medium text-gray-800
             border border-neon-violet
             backdrop-blur-md

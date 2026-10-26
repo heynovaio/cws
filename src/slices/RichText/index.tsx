@@ -1,6 +1,6 @@
 "use client";
 import { Content, isFilled } from "@prismicio/client";
-import { Container, Section } from "@/components";
+import { Container, Section, sectionBackgroundValue } from "@/components";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
 import {
   PrismicLink,
@@ -16,14 +16,17 @@ export type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
 function TableWrapper({
   children,
   styleClass,
+  hideEdgeFade = false,
 }: {
   children: React.ReactNode;
   styleClass: string;
+  hideEdgeFade?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [showFade, setShowFade] = useState(false);
 
   useEffect(() => {
+    if (hideEdgeFade) return;
     const el = ref.current;
     if (!el) return;
     const check = () =>
@@ -38,14 +41,16 @@ function TableWrapper({
       el.removeEventListener("scroll", check);
       window.removeEventListener("resize", check);
     };
-  }, []);
+  }, [hideEdgeFade]);
 
   return (
     <div className="relative">
       <div ref={ref} className={`cws-table-wrapper ${styleClass}`}>
         {children}
       </div>
-      {showFade && <div className="cws-table-fade" aria-hidden="true" />}
+      {!hideEdgeFade && showFade && (
+        <div className="cws-table-fade" aria-hidden="true" />
+      )}
     </div>
   );
 }
@@ -66,6 +71,9 @@ const RichText = ({ slice }: RichTextProps): JSX.Element | null => {
       p.table_style === "Purple Header + Transparent Background"
         ? "cws-table--transparent"
         : "cws-table--white";
+    const pageBg = sectionBackgroundValue(p.background_color);
+    const hideTableFade =
+      pageBg === "white" || pageBg === "purple" || pageBg === "gradient";
 
     const contentBlock = (
       <div className={`flex flex-col gap-4 ${textAlignment}`}>
@@ -79,7 +87,7 @@ const RichText = ({ slice }: RichTextProps): JSX.Element | null => {
     );
 
     const tableBlock = hasContent(p.table) ? (
-      <TableWrapper styleClass={styleClass}>
+      <TableWrapper styleClass={styleClass} hideEdgeFade={hideTableFade}>
         <PrismicTable
           field={p.table}
           components={{
@@ -103,6 +111,7 @@ const RichText = ({ slice }: RichTextProps): JSX.Element | null => {
       <Section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
+        backgroundColor={slice.primary.background_color}
       >
         <Container>
           {isStacked || !ratio ? (
@@ -131,6 +140,7 @@ const RichText = ({ slice }: RichTextProps): JSX.Element | null => {
     <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      backgroundColor={slice.primary.background_color}
     >
       <Container>
         <div className={`text-content max-w-[900px] mx-auto ${textAlignment}`}>

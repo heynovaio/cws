@@ -6,7 +6,7 @@ Bilingual (EN/FR) marketing site for Canadian Women & Sport, live at
 Built with **Next.js 15 (App Router)**, **Prismic** (headless CMS + Slice Machine), **Tailwind CSS**, and
 deployed on **Netlify**. Based on [The HN Prismic Boilerplate](https://github.com/heynovaio/hn-prismic-boilerplate-2025).
 
----
+--
 
 ## Prerequisites
 
@@ -37,14 +37,8 @@ Run Next.js alone with `npm run next:dev`.
 
 ### Viewing the French site locally
 
-The locale is chosen by **domain**, not by URL path. To see French locally, set these in `.env.local`:
-
-```
-NEXT_PUBLIC_DOMAIN_EN=localhost
-NEXT_PUBLIC_DOMAIN_FR=fr.localhost
-```
-
-Then open <http://fr.localhost:3000> (Chrome and Firefox resolve `*.localhost` automatically). The language switcher swaps between the two hosts.
+Open <http://localhost:3000/fr-ca>. Off the production domains, French is served under `/fr-ca`, and the
+language switcher stays on the same host (see [Routing & locales](#routing--locales)).
 
 ## Environment variables
 
@@ -148,8 +142,19 @@ Routes live in `src/app/(site)` and match the route resolver in `src/prismicio.t
 | `career_hub` / `career_page` | `/careers[/:uid]` (EN) · `/carrieres[/:uid]` (FR) |
 | `contact_page`, `team_members`, `search_page` | `/contact`, `/team`, `/search` |
 
-**The locale comes from the domain** (`womenandsport.ca` = EN, `femmesetsport.ca` = FR), worked out in
-`src/utils/localeHosts.ts`. `src/middleware.ts` also:
+**On production, the locale comes from the domain** (`womenandsport.ca` = EN, `femmesetsport.ca` = FR), worked out
+in `src/utils/localeHosts.ts`.
+
+**Everywhere else** (Netlify staging, branch deploys, Deploy Previews, localhost), French is served under
+**`/fr-ca`** on the same host, so it can be reviewed without leaving staging. `usesDomainLocale()` in
+`localeHosts.ts` decides which mode a host uses: the production and campaign domains use the domain, all others
+use the path.
+- `/fr-ca/<page>` renders `<page>` in French. Prismic links have no locale, so while the `NEXT_LOCALE` cookie
+  is French, unprefixed links redirect back under `/fr-ca`.
+- `/en-ca/<page>` switches to English and redirects to `/<page>`.
+- The language switcher and Prismic previews (`/api/preview`) follow the same rule.
+
+On production domains, `src/middleware.ts` also:
 
 - redirects old `/en-ca/...` and `/fr-ca/...` URLs to the matching domain;
 - swaps `/careers` ↔ `/carrieres` for the active language;
@@ -237,5 +242,9 @@ changes together with the `package.json` change that caused them, and don't add 
 - **Content changes don't appear in production** → in Netlify → Deploys, check for a "Deploy triggered by hook:
   Prismic Build" deploy on `main`. If it's missing, check the webhook delivery log in Prismic and the build hook's branch.
 - **Commit rejected by the pre-commit hook** → fix the ESLint error it prints. Formatting is fixed for you.
-- **French site shows English locally** → set `NEXT_PUBLIC_DOMAIN_FR=fr.localhost` and browse `fr.localhost:3000`.
+- **French site shows English locally or on staging** → use the `/fr-ca` path (e.g. `localhost:3000/fr-ca`).
+- **Stuck in French on staging after typing an English URL** → that's the `NEXT_LOCALE` cookie. Switch with the
+  language switcher, or visit `/en-ca`.
+- **A French page 404s** → it needs an `fr-ca` version in Prismic, and French pages usually have their own UID
+  (e.g. `/fr-ca/a-propos-de-nous`, not `/fr-ca/about`).
 - **Newsletter returns "Mailchimp environment is not configured"** → set the `MAILCHIMP_*` variables.

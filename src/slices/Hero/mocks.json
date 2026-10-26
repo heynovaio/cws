@@ -1,0 +1,222 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"link": {
+				"key": "e9af9a49-efcf-40f6-abce-0b1bae9aa5be",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com",
+					"text": "father"
+				}
+			},
+			"link_label": {
+				"__TYPE__": "FieldContent",
+				"value": "both",
+				"type": "Text"
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nostrud mollit ea Lorem consectetur cupidatat pariatur duis excepteur exercitation incididunt voluptate dolore cupidatat occaecat."
+						}
+					}
+				]
+			},
+			"content_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Middle",
+				"type": "Select"
+			},
+			"horizontal_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Right",
+				"type": "Select"
+			},
+			"media": {
+				"key": "98dafa00-ddbc-49e4-a3aa-b0c44714b908",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "may"
+				}
+			},
+			"height": {
+				"__TYPE__": "FieldContent",
+				"value": "Screen",
+				"type": "Select"
+			},
+			"text_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Black",
+				"type": "Select"
+			},
+			"overlay_opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "10%",
+				"type": "Select"
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "heroStacked",
+		"primary": {
+			"media": {
+				"key": "21b74612-5e7a-4f15-8663-53e71d7409ab",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "noted"
+				}
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Quis qui velit quis velit. Incididunt veniam elit fugiat nostrud tempor reprehenderit."
+						}
+					}
+				]
+			},
+			"text_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Black",
+				"type": "Select"
+			},
+			"link": {
+				"key": "90fa53b8-ed05-4792-bc93-fa9297279533",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "loss"
+				}
+			},
+			"link_label": {
+				"__TYPE__": "FieldContent",
+				"value": "were",
+				"type": "Text"
+			},
+			"content_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Middle",
+				"type": "Select"
+			},
+			"horizontal_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Right",
+				"type": "Select"
+			},
+			"height": {
+				"__TYPE__": "FieldContent",
+				"value": "Screen",
+				"type": "Select"
+			},
+			"overlay_opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "10%",
+				"type": "Select"
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "White",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"key": "a7639df8-6705-483a-9fec-55da5c646b72",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "animatedHero",
+		"primary": {
+			"media": {
+				"key": "18fb9ed3-0ecf-472e-8554-c525e1cc7b3c",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "afternoon"
+				}
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ad fugiat cupidatat nostrud nostrud adipisicing aliqua incididunt aliquip enim esse culpa labore occaecat. Aute dolor consectetur occaecat culpa ad laborum fugiat in labore laboris qui. Laboris sint minim pariatur sit sint quis qui officia mollit eiusmod ea."
+						}
+					}
+				]
+			},
+			"text_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Black",
+				"type": "Select"
+			},
+			"link": {
+				"key": "825fba3d-ffc5-45ad-a02f-eb8df24453d8",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev",
+					"text": "entirely"
+				}
+			},
+			"link_label": {
+				"__TYPE__": "FieldContent",
+				"value": "paid",
+				"type": "Text"
+			},
+			"content_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Top",
+				"type": "Select"
+			},
+			"horizontal_vertical_placement": {
+				"__TYPE__": "FieldContent",
+				"value": "Left",
+				"type": "Select"
+			},
+			"height": {
+				"__TYPE__": "FieldContent",
+				"value": "50%",
+				"type": "Select"
+			},
+			"overlay_opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "10%",
+				"type": "Select"
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Gradient",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"key": "6f35d845-6e5d-4624-bafc-b6df301c94d2",
+				"value": []
+			}
+		]
+	}
+]

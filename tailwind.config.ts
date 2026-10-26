@@ -23,13 +23,13 @@ export default {
       current: "currentColor",
       dark: colors.midnight,
       white: "#FFFFFF",
-      "dove-grey": "#6D00FF",
+      "dove-grey": "#6153a3",
       "ultra-pink": "#DD0748",
       aqua: "#02BBFF",
       "electric-blue": "#0300E9",
       midnight: "#00002D",
-      "neon-violet": "#6D00FF",
-      "light-violet": "#E5D8FF",
+      "neon-violet": "#6153a3",
+      "light-violet": "#6153a3",
       "navy-background": "#00002D",
       "dark-purple-background": "#180451",
       "soft-purple": "#D4C6FD40",
@@ -78,6 +78,7 @@ export default {
         narrow: "452px",
       },
       backgroundImage: {
+        "gradient-section": "linear-gradient(90deg, #6951a2 0%, #007ec3 100%)",
         "gradient-primary":
           "linear-gradient(90deg, #3802a7 0%, #3c1253 98.73%)",
         "gradient-dark":

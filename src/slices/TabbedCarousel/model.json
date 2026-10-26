@@ -12,6 +12,19 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Purple",
+              "White",
+              "Gradient"
+            ]
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -107,6 +120,19 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Purple",
+              "White",
+              "Gradient"
+            ]
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -235,6 +261,19 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Purple",
+              "White",
+              "Gradient"
+            ]
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {

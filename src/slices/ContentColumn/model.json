@@ -19,7 +19,9 @@
             "placeholder": "",
             "options": [
               "Purple",
-              "Transparent"
+              "Transparent",
+              "White",
+              "Gradient"
             ],
             "default_value": "Purple"
           }
@@ -100,6 +102,20 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Section Background",
+            "placeholder": "",
+            "options": [
+              "Purple",
+              "Transparent",
+              "White",
+              "Gradient"
+            ],
+            "default_value": "Purple"
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -161,18 +177,6 @@
                 }
               }
             }
-          }
-        },
-        "background_color": {
-          "type": "Select",
-          "config": {
-            "label": "Section Background",
-            "placeholder": "",
-            "options": [
-              "Purple",
-              "Transparent"
-            ],
-            "default_value": "Purple"
           }
         }
       },

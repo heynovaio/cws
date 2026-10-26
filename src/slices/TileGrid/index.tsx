@@ -1,4 +1,9 @@
-import { Container, ContentBox, Section } from "@/components";
+import {
+  Container,
+  ContentBox,
+  Section,
+  sectionBackgroundValue,
+} from "@/components";
 import { components, hasContent } from "@/utils";
 import { Content } from "@prismicio/client";
 import { MaskedPrismicRichText as PrismicRichText } from "@/components/MaskedPrismicRichtext";
@@ -22,6 +27,14 @@ const TileGrid = ({ slice }: TileGridProps): JSX.Element => {
             : "grid-cols-1",
   };
 
+  const background = sectionBackgroundValue(slice.primary.background_color);
+  const tileStyle =
+    background === "white"
+      ? { borderClassName: "!border-[#000]", textClassName: "text-[#000]" }
+      : background === "purple" || background === "gradient"
+        ? { borderClassName: "!border-white", textClassName: "text-white" }
+        : {};
+
   const hasTitle = hasContent(slice.primary.title);
   const hasBody = hasContent(slice.primary.body);
 
@@ -30,7 +43,7 @@ const TileGrid = ({ slice }: TileGridProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       backgroundColor={slice.primary.background_color}
-      styling="pb-12 mb-12"
+      styling="pb-12"
     >
       <Container containerClassName="flex flex-col gap-12 text-center">
         {(hasTitle || hasBody) && (
@@ -54,6 +67,7 @@ const TileGrid = ({ slice }: TileGridProps): JSX.Element => {
               title={tile.tile_title}
               image={tile.tile_image}
               link={tile.tile_link}
+              {...tileStyle}
             />
           ))}
         </div>

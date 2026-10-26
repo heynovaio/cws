@@ -11,7 +11,7 @@ interface TopBarProps {
 
 export const TopBar: React.FC<TopBarProps> = ({ text, locales }) => {
   return (
-    <div className="bg-midnight bg-gradient-dark w-full text-center px-2 md:px-0 py-2 flex-col">
+    <div className="bg-gradient-section text-white w-full text-center px-2 md:px-0 py-2 flex-col">
       <PrismicRichText
         field={text}
         components={{

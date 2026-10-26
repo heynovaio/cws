@@ -47,7 +47,7 @@ export const CarouselButton = ({
 
   return (
     <div
-      className={`flex items-center gap-2 rounded-md bg-white text-midnight focus:bg-light-violet shadow focus ${styling}`}
+      className={`flex items-center gap-2 bg-white text-midnight focus:bg-[#6153a3]/10 focus ${styling}`}
       ref={containerRef}
       tabIndex={0}
     >
@@ -56,10 +56,10 @@ export const CarouselButton = ({
         aria-label="Previous slide"
         aria-disabled={currentSlide === 1}
         tabIndex={0}
-        className={`rounded-md p-2 focus ${
+        className={`p-2 focus ${
           currentSlide === 1
             ? "opacity-50 cursor-not-allowed"
-            : "hover:text-neon-violet rounded-md"
+            : "hover:text-neon-violet"
         }`}
       >
         <HiOutlineArrowLongRight className="h-5 w-5 rotate-180" />
@@ -72,7 +72,7 @@ export const CarouselButton = ({
         aria-label="Next slide"
         aria-disabled={currentSlide === totalSlides}
         tabIndex={0}
-        className={`rounded-md p-2 focus ${
+        className={`p-2 focus ${
           currentSlide === totalSlides
             ? "opacity-50 cursor-not-allowed"
             : "hover:text-neon-violet"

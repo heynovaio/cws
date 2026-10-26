@@ -12,6 +12,20 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "No Background",
+              "Purple",
+              "White",
+              "Gradient"
+            ],
+            "default_value": "No Background"
+          }
+        },
         "section_id": {
           "type": "Text",
           "config": {
