@@ -52,7 +52,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
     ? "!bg-[#6153a3] !text-white"
     : isColoredSection
       ? "!bg-white !text-[#000]"
-      : "bg-[#6D00FF] text-white";
+      : "bg-[#6153a3] text-white";
   const idleTabClass = isWhiteSection
     ? "!bg-white !text-[#6153a3] border !border-[#6153a3]"
     : isColoredSection
@@ -154,7 +154,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                               <button
                                 onClick={() => toggleAudio(idx)}
                                 type="button"
-                                className="inline-flex items-center justify-center rounded-full focus:outline-none"
+                                className="surface-focus inline-flex items-center justify-center rounded-full"
                                 aria-pressed={playingIndex === idx}
                                 aria-label={
                                   playingIndex === idx
@@ -284,7 +284,7 @@ const TabbedContentStickyImage: FC<TabbedContentStickyImageProps> = ({
                                 <button
                                   onClick={() => toggleAudio(idx)}
                                   type="button"
-                                  className="inline-flex items-center justify-center rounded-full focus:outline-none"
+                                  className="surface-focus inline-flex items-center justify-center rounded-full"
                                   aria-pressed={playingIndex === idx}
                                   aria-label={
                                     playingIndex === idx

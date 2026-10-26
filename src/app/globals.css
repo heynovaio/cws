@@ -199,7 +199,7 @@
     &:hover {
       > span:after {
         width: 100%;
-        background: #6d00ff;
+        background: #6153a3;
       }
     }
   }
@@ -597,13 +597,62 @@ iframe {
   border-color: #6153a3;
 }
 
+/* White surfaces use purple borders. Purple and gradient surfaces use white. */
 .section-bg-white,
+.section-bg-white :where(*) {
+  border-color: #6153a3;
+}
+
 .section-bg-purple,
 .section-bg-gradient,
-.section-bg-white :where(*),
 .section-bg-purple :where(*),
 .section-bg-gradient :where(*) {
-  border-color: #6153a3;
+  border-color: #fff;
+}
+
+.card-tag,
+.section-bg-white .card-tag,
+.section-bg-purple .card-tag,
+.section-bg-gradient .card-tag {
+  border-color: #000;
+}
+
+.section-bg-white :focus,
+.section-bg-white :focus-visible {
+  outline: 3px solid #6153a3;
+  outline-offset: 3px;
+  overflow: visible;
+}
+
+.section-bg-purple :focus,
+.section-bg-purple :focus-visible,
+.section-bg-gradient :focus,
+.section-bg-gradient :focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+  overflow: visible;
+}
+
+/* White pages need a purple ring; light controls on white cards do too. */
+.section-bg-white :is(input, textarea, select):is(:focus, :focus-visible),
+.surface-focus:is(:focus, :focus-visible) {
+  outline: 3px solid #6153a3;
+  outline-offset: 3px;
+  overflow: visible;
+}
+
+.field-error,
+.section-bg-white .field-error,
+.section-bg-purple .field-error,
+.section-bg-gradient .field-error,
+.section-bg-white .field-error:is(:focus, :focus-visible),
+.section-bg-purple .field-error:is(:focus, :focus-visible),
+.section-bg-gradient .field-error:is(:focus, :focus-visible) {
+  border-color: transparent;
+  border-width: 0;
+  outline: 3px solid #dd0748;
+  outline-offset: 3px;
+  overflow: visible;
 }
 
 .section-bg-white
