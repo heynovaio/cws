@@ -641,6 +641,20 @@ iframe {
   overflow: visible;
 }
 
+.field-error,
+.section-bg-white .field-error,
+.section-bg-purple .field-error,
+.section-bg-gradient .field-error,
+.section-bg-white .field-error:is(:focus, :focus-visible),
+.section-bg-purple .field-error:is(:focus, :focus-visible),
+.section-bg-gradient .field-error:is(:focus, :focus-visible) {
+  border-color: transparent;
+  border-width: 0;
+  outline: 3px solid #dd0748;
+  outline-offset: 3px;
+  overflow: visible;
+}
+
 .section-bg-white
   :is(.btn-primary, .btn-secondary, .btn-tertiary, .btn-outline) {
   background-color: #6153a3;
