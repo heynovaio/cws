@@ -3,6 +3,7 @@ import { repositoryName } from "@/prismicio";
 import { Outfit } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import LocaleProvider from "@/providers/LocaleProvider";
 import { getServerLocale, toHtmlLang } from "@/utils/serverLocale";
 import "./globals.css";
 
@@ -22,7 +23,9 @@ export default async function RootLayout({
       <head />
       <body>
         <GoogleTagManager gtmId="GTM-PN5JLZD" />
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <LocaleProvider locale={appLocale}>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </LocaleProvider>
         <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
