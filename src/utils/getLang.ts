@@ -1,5 +1,6 @@
 import { usePathname } from "next/navigation";
 import { fullLangList } from "@/constants/languages";
+import { useServerLocale } from "@/providers/LocaleProvider";
 
 export type RouteLocale = keyof typeof fullLangList;
 export const SUPPORTED_ROUTE_LOCALES = Object.keys(
@@ -46,5 +47,15 @@ export function getLangFromPath(pathname: string) {
 
 export function useLang() {
   const pathname = usePathname() || "/";
-  return getLangFromPath(pathname);
+  const serverLocale = useServerLocale();
+  const fromPath = getLangFromPath(pathname);
+  // Prefer the server-resolved locale: on production the language comes from
+  // the domain (femmesetsport.ca), which the path alone can't tell us.
+  if (!serverLocale) return fromPath;
+  return {
+    ...fromPath,
+    routeLocale: serverLocale,
+    prismicLocale: serverLocale,
+    hrefPrefix: `/${serverLocale}` as const,
+  };
 }

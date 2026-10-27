@@ -21,7 +21,6 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
   const lang = useLang();
-  const currentLang = lang.routeLocale;
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -44,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({ slices, locales }) => {
           className="flex w-full max-w-[170px] md:max-w-[170px]"
           aria-label="homepage link"
           prefetch={true}
-          href={`/${currentLang}`}
+          href="/"
         >
           <img
             src="/cws-logo-color.svg"
